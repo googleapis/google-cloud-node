@@ -31,7 +31,8 @@ import {
 import {encodeURI, formatAsUTCISO, qsStringify} from '../src/util.js';
 import {ExceptionMessages, Storage} from '../src/storage.js';
 import {OutgoingHttpHeaders} from 'http';
-import {GoogleAuth} from 'google-auth-library';
+import {Gaxios} from 'gaxios';
+import {Compute, gcpMetadata, GoogleAuth, JWT} from 'google-auth-library';
 
 interface SignedUrlArgs {
   bucket: string;
@@ -50,7 +51,10 @@ describe('signer', () => {
 
   let sandbox: sinon.SinonSandbox;
   beforeEach(() => (sandbox = sinon.createSandbox()));
-  afterEach(() => sandbox.restore());
+  afterEach(() => {
+    sandbox.restore();
+    gcpMetadata.resetIsAvailableCache();
+  });
 
   describe('URLSigner', () => {
     let authClient: GoogleAuth | AuthClient;
@@ -1068,6 +1072,183 @@ describe('signer', () => {
       it('returns expiration date in seconds', () => {
         const expires = signer.parseExpires(NOW);
         assert.strictEqual(expires, Math.floor(NOW.valueOf() / 1000));
+      });
+    });
+
+    describe('universe domain validation and signingEndpoint defaults', () => {
+      const customUniverse = 'example-universe.invalid';
+
+      it('should reject getSignedUrl v2 before sign or HTTP calls on universe mismatch', async () => {
+        const gaxiosSpy = sandbox
+          .stub(Gaxios.prototype, 'request')
+          .rejects(new Error('Unexpected HTTP request'));
+        const googleAuth = new GoogleAuth({
+          authClient: new JWT({
+            email: CLIENT_EMAIL,
+            universeDomain: 'googleapis.com',
+          }),
+        });
+        const signSpy = sandbox.spy(googleAuth, 'sign');
+        const getCredentialsSpy = sandbox.spy(googleAuth, 'getCredentials');
+
+        const customStorage = new Storage({universeDomain: customUniverse});
+        const signer = new URLSigner(googleAuth, bucket, file, customStorage);
+
+        await assert.rejects(
+          signer.getSignedUrl({
+            version: 'v2',
+            method: 'GET',
+            expires: NOW.valueOf() + 2000,
+          }),
+          (err: Error) => {
+            assert.strictEqual(err instanceof SigningError, false);
+            assert.strictEqual(err.name, 'Error');
+            assert.strictEqual(
+              err.message,
+              'The configured universe domain (example-universe.invalid) does not match the universe domain found in the credentials (googleapis.com). Please check your universe domain configuration.',
+            );
+            return true;
+          },
+        );
+        assert.strictEqual(signSpy.called, false);
+        assert.strictEqual(getCredentialsSpy.called, false);
+        assert.strictEqual(gaxiosSpy.called, false);
+      });
+
+      it('should reject getSignedUrl v4 before sign or getCredentials or HTTP calls on universe mismatch', async () => {
+        const gaxiosSpy = sandbox
+          .stub(Gaxios.prototype, 'request')
+          .rejects(new Error('Unexpected HTTP request'));
+        const googleAuth = new GoogleAuth({
+          authClient: new JWT({
+            email: CLIENT_EMAIL,
+            universeDomain: 'googleapis.com',
+          }),
+        });
+        const signSpy = sandbox.spy(googleAuth, 'sign');
+        const getCredentialsSpy = sandbox.spy(googleAuth, 'getCredentials');
+
+        const customStorage = new Storage({universeDomain: customUniverse});
+        const signer = new URLSigner(googleAuth, bucket, file, customStorage);
+
+        await assert.rejects(
+          signer.getSignedUrl({
+            version: 'v4',
+            method: 'GET',
+            expires: NOW.valueOf() + 2000,
+          }),
+          (err: Error) => {
+            assert.strictEqual(err instanceof SigningError, false);
+            assert.strictEqual(err.name, 'Error');
+            assert.strictEqual(
+              err.message,
+              'The configured universe domain (example-universe.invalid) does not match the universe domain found in the credentials (googleapis.com). Please check your universe domain configuration.',
+            );
+            return true;
+          },
+        );
+        assert.strictEqual(signSpy.called, false);
+        assert.strictEqual(getCredentialsSpy.called, false);
+        assert.strictEqual(gaxiosSpy.called, false);
+      });
+
+      it('should succeed when JWT universeDomain matches Storage universeDomain and reject when Storage uses default universe', async () => {
+        const matchingAuth = new GoogleAuth({
+          authClient: new JWT({
+            email: CLIENT_EMAIL,
+            universeDomain: customUniverse,
+          }),
+        });
+        sandbox.stub(matchingAuth, 'getCredentials').resolves({
+          client_email: CLIENT_EMAIL,
+          universe_domain: customUniverse,
+        });
+        sandbox
+          .stub(matchingAuth, 'sign')
+          .resolves(Buffer.from('sig').toString('base64'));
+
+        const customStorage = new Storage({universeDomain: customUniverse});
+        const matchingSigner = new URLSigner(
+          matchingAuth,
+          bucket,
+          file,
+          customStorage,
+        );
+
+        const v2Url = await matchingSigner.getSignedUrl({
+          version: 'v2',
+          method: 'GET',
+          expires: NOW.valueOf() + 2000,
+        });
+        assert.ok(v2Url.startsWith(`https://storage.${customUniverse}/`));
+
+        const v4Url = await matchingSigner.getSignedUrl({
+          version: 'v4',
+          method: 'GET',
+          expires: NOW.valueOf() + 2000,
+        });
+        assert.ok(v4Url.startsWith(`https://storage.${customUniverse}/`));
+
+        const defaultStorage = new Storage();
+        const mismatchedSigner = new URLSigner(
+          matchingAuth,
+          bucket,
+          file,
+          defaultStorage,
+        );
+        await assert.rejects(
+          mismatchedSigner.getSignedUrl({
+            version: 'v4',
+            method: 'GET',
+            expires: NOW.valueOf() + 2000,
+          }),
+          {
+            name: 'Error',
+            message:
+              'The configured universe domain (googleapis.com) does not match the universe domain found in the credentials (example-universe.invalid). Please check your universe domain configuration.',
+          },
+        );
+      });
+
+      it('should default signingEndpoint to storage.universeDomain in getSignedUrl v2 and v4 (including GCE Compute)', async () => {
+        sandbox.stub(gcpMetadata, 'isAvailable').resolves(true);
+        const metaStub = sandbox
+          .stub(gcpMetadata, 'universe')
+          .resolves(customUniverse);
+        const compute = new Compute();
+        const googleAuth = new GoogleAuth({authClient: compute});
+        sandbox.stub(googleAuth, 'getCredentials').resolves({
+          client_email: CLIENT_EMAIL,
+          universe_domain: customUniverse,
+        });
+        const signStub = sandbox
+          .stub(googleAuth, 'sign')
+          .resolves(Buffer.from('sig').toString('base64'));
+
+        const customStorage = new Storage({universeDomain: customUniverse});
+        const signer = new URLSigner(googleAuth, bucket, file, customStorage);
+        const expectedSigningEndpoint = `https://iamcredentials.${customUniverse}/v1/projects/-/serviceAccounts/`;
+
+        await signer.getSignedUrl({
+          version: 'v2',
+          method: 'GET',
+          expires: NOW.valueOf() + 2000,
+        });
+        assert.strictEqual(
+          signStub.getCall(0).args[1],
+          expectedSigningEndpoint,
+        );
+
+        await signer.getSignedUrl({
+          version: 'v4',
+          method: 'GET',
+          expires: NOW.valueOf() + 2000,
+        });
+        assert.strictEqual(
+          signStub.getCall(1).args[1],
+          expectedSigningEndpoint,
+        );
+        assert.strictEqual(metaStub.calledOnceWith('universe-domain'), true);
       });
     });
   });

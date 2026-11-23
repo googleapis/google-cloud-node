@@ -30,6 +30,10 @@ import {
   RETRYABLE_ERR_FN_DEFAULT,
   RetryOptions,
 } from './storage.js';
+import {
+  resolveUniverseDomain,
+  validateUniverseDomain,
+} from './universe-domain.js';
 
 export interface StandardStorageQueryParams {
   alt?: 'json' | 'media';
@@ -91,6 +95,7 @@ export interface StorageTransportCallback<T> {
 
 export class StorageTransport {
   authClient: GoogleAuth<AuthClient>;
+  universeDomain: string;
   private providedUserAgent?: string;
   private packageJson: PackageJson;
   private retryOptions: RetryOptions;
@@ -104,6 +109,7 @@ export class StorageTransport {
   constructor(options: TransportParameters) {
     this.gaxiosInstance = options.gaxiosInstance || new Gaxios();
     this.sharedInterceptors = options.interceptors;
+    this.universeDomain = resolveUniverseDomain(options.universeDomain);
     if (options.authClient instanceof GoogleAuth) {
       this.authClient = options.authClient;
     } else {
@@ -130,6 +136,8 @@ export class StorageTransport {
     reqOpts: StorageRequestOptions,
     callback?: StorageTransportCallback<T>,
   ): Promise<GaxiosResponse<T>> {
+    await validateUniverseDomain(this.authClient, this.universeDomain);
+
     // Project ID Resolution
     if (!this.projectId) {
       this.projectId =

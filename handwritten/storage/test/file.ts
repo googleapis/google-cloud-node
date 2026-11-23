@@ -27,7 +27,7 @@ import {
   StorageTransport,
 } from '../src/storage-transport.js';
 import sinon, {createSandbox} from 'sinon';
-import {GoogleAuth} from 'google-auth-library';
+import {GoogleAuth, JWT} from 'google-auth-library';
 import {
   FileExceptionMessages,
   FileMetadata,
@@ -56,7 +56,7 @@ import {ExceptionMessages, IdempotencyStrategy} from '../src/storage.js';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as tmp from 'tmp';
-import {formatAsUTCISO} from '../src/util.js';
+import {formatAsUTCISO, getDirName} from '../src/util.js';
 import {Gaxios, GaxiosResponse} from 'gaxios';
 import {proxyquire} from 'google-test-utils';
 import * as zlib from 'zlib';
@@ -6150,6 +6150,282 @@ describe('File', () => {
       const invalidUrl = 'https://storage.com/mybucket/myfile';
 
       assert.throws(() => File.from(invalidUrl, STORAGE));
+    });
+  });
+
+  describe('universe domain validation across signing and upload methods', () => {
+    const customUniverse = 'example-universe.invalid';
+    const keyFile = path.join(getDirName(), '../../../test/fixtures/keys.json');
+    const defaultUniverseCreds = JSON.parse(fs.readFileSync(keyFile, 'utf-8'));
+
+    it('should reject generateSignedPostPolicyV2 in both Promise and callback modes with plain Error and zero sign or HTTP calls on universe mismatch', async () => {
+      const gaxiosSpy = sandbox
+        .stub(Gaxios.prototype, 'request')
+        .rejects(new Error('Unexpected HTTP request'));
+      const mismatchedAuth = new GoogleAuth({
+        authClient: new JWT({
+          email: 'sa@project.iam.gserviceaccount.com',
+          universeDomain: 'googleapis.com',
+        }),
+      });
+      const signSpy = sandbox.spy(mismatchedAuth, 'sign');
+
+      const customStorage = new Storage({
+        projectId: PROJECT_ID,
+        universeDomain: customUniverse,
+        authClient: mismatchedAuth,
+      });
+      const customFile = customStorage.bucket('bucket-name').file(FILE_NAME);
+      const expectedMsg =
+        'The configured universe domain (example-universe.invalid) does not match the universe domain found in the credentials (googleapis.com). Please check your universe domain configuration.';
+
+      await assert.rejects(
+        customFile.generateSignedPostPolicyV2({
+          expires: Date.now() + 60000,
+        }),
+        (err: Error) => {
+          assert.strictEqual(err.name, 'Error');
+          assert.strictEqual(err.message, expectedMsg);
+          return true;
+        },
+      );
+
+      const cbErr = await new Promise<Error | null>(resolve => {
+        customFile.generateSignedPostPolicyV2(
+          {expires: Date.now() + 60000},
+          err => resolve(err),
+        );
+      });
+      assert.ok(cbErr);
+      assert.strictEqual(cbErr.name, 'Error');
+      assert.strictEqual(cbErr.message, expectedMsg);
+
+      assert.strictEqual(signSpy.called, false);
+      assert.strictEqual(gaxiosSpy.called, false);
+    });
+
+    it('should default signingEndpoint to storage.universeDomain in generateSignedPostPolicyV2 and not re-invoke callback if callback throws', async () => {
+      const matchingAuth = new GoogleAuth({
+        authClient: new JWT({
+          email: 'sa@project.iam.gserviceaccount.com',
+          universeDomain: customUniverse,
+        }),
+      });
+      const signStub = sandbox.stub(matchingAuth, 'sign').resolves('signature');
+
+      const customStorage = new Storage({
+        projectId: PROJECT_ID,
+        universeDomain: customUniverse,
+        authClient: matchingAuth,
+      });
+      const customFile = customStorage.bucket('bucket-name').file(FILE_NAME);
+      const expectedEndpoint = `https://iamcredentials.${customUniverse}/v1/projects/-/serviceAccounts/`;
+
+      await customFile.generateSignedPostPolicyV2({
+        expires: Date.now() + 60000,
+      });
+      assert.strictEqual(signStub.calledOnce, true);
+      assert.strictEqual(signStub.getCall(0).args[1], expectedEndpoint);
+
+      let callbackCalls = 0;
+      const caughtRejection = await new Promise<Error>(resolve => {
+        process.once('unhandledRejection', reason => resolve(reason as Error));
+        customFile.generateSignedPostPolicyV2(
+          {expires: Date.now() + 60000},
+          () => {
+            callbackCalls++;
+            throw new Error('Caller callback failure');
+          },
+        );
+      });
+      assert.strictEqual(callbackCalls, 1);
+      assert.strictEqual(caughtRejection.message, 'Caller callback failure');
+    });
+
+    it('should reject generateSignedPostPolicyV4 in both Promise and callback modes with plain Error, zero unhandled rejections, and zero sign/getCredentials/HTTP calls on universe mismatch', async () => {
+      const unhandled: unknown[] = [];
+      const onUnhandled = (reason: unknown) => unhandled.push(reason);
+      process.on('unhandledRejection', onUnhandled);
+
+      try {
+        const gaxiosSpy = sandbox
+          .stub(Gaxios.prototype, 'request')
+          .rejects(new Error('Unexpected HTTP request'));
+        const mismatchedAuth = new GoogleAuth({
+          authClient: new JWT({
+            email: 'sa@project.iam.gserviceaccount.com',
+            universeDomain: 'googleapis.com',
+          }),
+        });
+        const signSpy = sandbox.spy(mismatchedAuth, 'sign');
+        const credsSpy = sandbox.spy(mismatchedAuth, 'getCredentials');
+
+        const customStorage = new Storage({
+          projectId: PROJECT_ID,
+          universeDomain: customUniverse,
+          authClient: mismatchedAuth,
+        });
+        const customFile = customStorage.bucket('bucket-name').file(FILE_NAME);
+        const expectedMsg =
+          'The configured universe domain (example-universe.invalid) does not match the universe domain found in the credentials (googleapis.com). Please check your universe domain configuration.';
+
+        await assert.rejects(
+          customFile.generateSignedPostPolicyV4({
+            expires: Date.now() + 60000,
+          }),
+          (err: Error) => {
+            assert.strictEqual(err.name, 'Error');
+            assert.strictEqual(err.message, expectedMsg);
+            return true;
+          },
+        );
+
+        const cbErr = await new Promise<Error | null>(resolve => {
+          customFile.generateSignedPostPolicyV4(
+            {expires: Date.now() + 60000},
+            err => resolve(err),
+          );
+        });
+        assert.ok(cbErr);
+        assert.strictEqual(cbErr.name, 'Error');
+        assert.strictEqual(cbErr.message, expectedMsg);
+
+        await new Promise(resolve => setImmediate(resolve));
+        assert.strictEqual(unhandled.length, 0);
+        assert.strictEqual(signSpy.called, false);
+        assert.strictEqual(credsSpy.called, false);
+        assert.strictEqual(gaxiosSpy.called, false);
+      } finally {
+        process.removeListener('unhandledRejection', onUnhandled);
+      }
+    });
+
+    it('should default signingEndpoint to storage.universeDomain in generateSignedPostPolicyV4', async () => {
+      const matchingAuth = new GoogleAuth({
+        authClient: new JWT({
+          email: 'sa@project.iam.gserviceaccount.com',
+          universeDomain: customUniverse,
+        }),
+      });
+      sandbox.stub(matchingAuth, 'getCredentials').resolves({
+        client_email: 'sa@project.iam.gserviceaccount.com',
+        universe_domain: customUniverse,
+      });
+      const signStub = sandbox
+        .stub(matchingAuth, 'sign')
+        .resolves(Buffer.from('sig').toString('base64'));
+
+      const customStorage = new Storage({
+        projectId: PROJECT_ID,
+        universeDomain: customUniverse,
+        authClient: matchingAuth,
+      });
+      const customFile = customStorage.bucket('bucket-name').file(FILE_NAME);
+      const expectedEndpoint = `https://iamcredentials.${customUniverse}/v1/projects/-/serviceAccounts/`;
+
+      await customFile.generateSignedPostPolicyV4({
+        expires: Date.now() + 60000,
+      });
+      assert.strictEqual(signStub.calledOnce, true);
+      assert.strictEqual(signStub.getCall(0).args[1], expectedEndpoint);
+    });
+
+    it('should reject createResumableUpload and createWriteStream with zero HTTP calls on universe mismatch', async () => {
+      const gaxiosSpy = sandbox
+        .stub(Gaxios.prototype, 'request')
+        .rejects(new Error('Unexpected HTTP request'));
+
+      const customStorage = new Storage({
+        projectId: PROJECT_ID,
+        universeDomain: customUniverse,
+        credentials: defaultUniverseCreds,
+      });
+      const requestSpy = sandbox.spy(
+        customStorage.storageTransport.authClient,
+        'request',
+      );
+      const customFile = customStorage.bucket('bucket-name').file(FILE_NAME);
+
+      await assert.rejects(customFile.createResumableUpload(), {
+        message:
+          'The configured universe domain (example-universe.invalid) does not match the universe domain found in the credentials (googleapis.com). Please check your universe domain configuration.',
+      });
+
+      await assert.rejects(
+        new Promise<void>((resolve, reject) => {
+          const ws = customFile.createWriteStream({validation: false});
+          ws.on('error', reject);
+          ws.on('finish', resolve);
+          ws.end('hello');
+        }),
+        {
+          message:
+            'The configured universe domain (example-universe.invalid) does not match the universe domain found in the credentials (googleapis.com). Please check your universe domain configuration.',
+        },
+      );
+
+      assert.strictEqual(requestSpy.called, false);
+      assert.strictEqual(gaxiosSpy.called, false);
+    });
+
+    it('should NOT send Authorization headers for createResumableUpload or createWriteStream when universeDomain is non-default and apiEndpoint is storage.googleapis.com', async () => {
+      const capturedHeaders: Array<Record<string, unknown> | Headers> = [];
+      const gaxiosStub = sandbox
+        .stub(Gaxios.prototype, 'request')
+        .callsFake(async (opts = {}) => {
+          capturedHeaders.push(
+            (opts.headers as Record<string, unknown> | Headers) || {},
+          );
+          if (opts.body && typeof (opts.body as Readable).on === 'function') {
+            await new Promise<void>(resolve => {
+              (opts.body as Readable).on('data', () => {});
+              (opts.body as Readable).on('end', resolve);
+            });
+          }
+          return {
+            status: 200,
+            statusText: 'OK',
+            headers: new Headers({
+              location:
+                'https://storage.googleapis.com/upload/storage/v1/b/bucket-name/o?uploadType=resumable&upload_id=abc',
+            }),
+            data: {name: FILE_NAME, bucket: 'bucket-name', size: '5'},
+            config: opts,
+          } as unknown as GaxiosResponse;
+        });
+
+      const customStorage = new Storage({
+        projectId: PROJECT_ID,
+        universeDomain: customUniverse,
+        apiEndpoint: 'https://storage.googleapis.com',
+        credentials: defaultUniverseCreds,
+      });
+      const authRequestSpy = sandbox.spy(
+        customStorage.storageTransport.authClient,
+        'request',
+      );
+      const customFile = customStorage.bucket('bucket-name').file(FILE_NAME);
+
+      const [uri] = await customFile.createResumableUpload();
+      assert.ok(uri.startsWith('https://storage.googleapis.com/'));
+
+      await new Promise<void>((resolve, reject) => {
+        const ws = customFile.createWriteStream({validation: false});
+        ws.on('error', reject);
+        ws.on('finish', resolve);
+        ws.end('hello');
+      });
+
+      assert.strictEqual(authRequestSpy.called, false);
+      assert.ok(gaxiosStub.callCount >= 2);
+      for (const hdrs of capturedHeaders) {
+        if (hdrs instanceof Headers) {
+          assert.strictEqual(hdrs.get('authorization'), null);
+        } else {
+          assert.strictEqual(hdrs['Authorization'], undefined);
+          assert.strictEqual(hdrs['authorization'], undefined);
+        }
+      }
     });
   });
 });

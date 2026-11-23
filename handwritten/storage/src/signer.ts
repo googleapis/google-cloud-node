@@ -17,6 +17,10 @@ import * as http from 'http';
 import * as url from 'url';
 import {ExceptionMessages, Storage} from './storage.js';
 import {encodeURI, qsStringify, objectEntries, formatAsUTCISO} from './util.js';
+import {
+  resolveSigningEndpoint,
+  validateUniverseDomain,
+} from './universe-domain.js';
 import {GoogleAuth} from 'google-auth-library';
 
 type GoogleAuthLike = Pick<GoogleAuth, 'getCredentials' | 'sign'>;
@@ -244,11 +248,13 @@ export class URLSigner {
 
     const sign = async () => {
       const auth = this.auth;
+      await validateUniverseDomain(auth, this.storage.universeDomain);
+      const signingEndpoint = resolveSigningEndpoint(
+        config.signingEndpoint,
+        this.storage.universeDomain,
+      );
       try {
-        const signature = await auth.sign(
-          blobToSign,
-          config.signingEndpoint?.toString(),
-        );
+        const signature = await auth.sign(blobToSign, signingEndpoint);
         const credentials = await auth.getCredentials();
 
         return {
@@ -318,6 +324,7 @@ export class URLSigner {
     const credentialScope = `${datestamp}/auto/storage/goog4_request`;
 
     const sign = async () => {
+      await validateUniverseDomain(this.auth, this.storage.universeDomain);
       const credentials = await this.auth.getCredentials();
       const credential = `${credentials.client_email}/${credentialScope}`;
       const dateISO = formatAsUTCISO(
@@ -356,11 +363,13 @@ export class URLSigner {
         hash,
       ].join('\n');
 
+      const signingEndpoint = resolveSigningEndpoint(
+        config.signingEndpoint,
+        this.storage.universeDomain,
+      );
+
       try {
-        const signature = await this.auth.sign(
-          blobToSign,
-          config.signingEndpoint?.toString(),
-        );
+        const signature = await this.auth.sign(blobToSign, signingEndpoint);
         const signatureHex = Buffer.from(signature, 'base64').toString('hex');
         const signedQuery: Query = Object.assign({}, queryParams, {
           'X-Goog-Signature': signatureHex,

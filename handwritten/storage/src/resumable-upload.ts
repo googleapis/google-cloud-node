@@ -19,11 +19,7 @@ import {
   GaxiosError,
 } from 'gaxios';
 import * as gaxios from 'gaxios';
-import {
-  DEFAULT_UNIVERSE,
-  GoogleAuth,
-  GoogleAuthOptions,
-} from 'google-auth-library';
+import {GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 import {Readable, Writable, WritableOptions} from 'stream';
 import AsyncRetry from 'async-retry';
 import {RetryOptions, PreconditionOptions} from './storage.js';
@@ -31,6 +27,10 @@ import * as crypto from 'crypto';
 import {GCCL_GCS_CMD_KEY, decorateHeaders} from './nodejs-common/util.js';
 import {FileExceptionMessages, FileMetadata, RequestError} from './file.js';
 import {HashStreamValidator} from './hash-stream-validator.js';
+import {
+  resolveUniverseDomain,
+  validateUniverseDomain,
+} from './universe-domain.js';
 
 const NOT_FOUND_STATUS_CODE = 404;
 const RESUMABLE_INCOMPLETE_STATUS_CODE = 308;
@@ -301,6 +301,7 @@ export class Upload extends Writable {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
     request<T = any>(opts: any): Promise<any>;
   };
+  universeDomain: string;
   cacheKey: string;
   chunkSize?: number;
   customRequestOptions: GaxiosOptions;
@@ -380,7 +381,8 @@ export class Upload extends Writable {
     ];
     this.authClient = cfg.authClient || new GoogleAuth(cfg.authConfig);
 
-    const universe = cfg.universeDomain || DEFAULT_UNIVERSE;
+    const universe = resolveUniverseDomain(cfg.universeDomain);
+    this.universeDomain = universe;
 
     this.apiEndpoint = `https://storage.${universe}`;
     if (cfg.apiEndpoint && cfg.apiEndpoint !== this.apiEndpoint) {
@@ -388,24 +390,11 @@ export class Upload extends Writable {
 
       const hostname = new URL(this.apiEndpoint).hostname;
 
-      // check if it is a domain of a known universe
+      // check if it is a domain or subdomain of the configured universe
       const isDomain = hostname === universe;
-      const isDefaultUniverseDomain = hostname === DEFAULT_UNIVERSE;
+      const isSubDomainOfUniverse = hostname.endsWith(`.${universe}`);
 
-      // check if it is a subdomain of a known universe
-      // by checking a last (universe's length + 1) of a hostname
-      const isSubDomainOfUniverse =
-        hostname.slice(-(universe.length + 1)) === `.${universe}`;
-      const isSubDomainOfDefaultUniverse =
-        hostname.slice(-(DEFAULT_UNIVERSE.length + 1)) ===
-        `.${DEFAULT_UNIVERSE}`;
-
-      if (
-        !isDomain &&
-        !isDefaultUniverseDomain &&
-        !isSubDomainOfUniverse &&
-        !isSubDomainOfDefaultUniverse
-      ) {
+      if (!isDomain && !isSubDomainOfUniverse) {
         // a custom, non-universe domain,
         // use gaxios only if useAuthWithCustomEndpoint is not true
         if (cfg.useAuthWithCustomEndpoint !== true) {
@@ -1370,6 +1359,10 @@ export class Upload extends Writable {
       }
     }
 
+    if (this.authClient !== gaxios) {
+      await validateUniverseDomain(this.authClient, this.universeDomain);
+    }
+
     const res = await this.authClient.request<{error?: object}>(
       combinedReqOpts,
     );
@@ -1383,6 +1376,15 @@ export class Upload extends Writable {
     const controller = new AbortController();
     const errorCallback = () => controller.abort();
     this.once('error', errorCallback);
+
+    if (this.authClient !== gaxios) {
+      try {
+        await validateUniverseDomain(this.authClient, this.universeDomain);
+      } catch (err) {
+        this.removeListener('error', errorCallback);
+        throw err;
+      }
+    }
 
     if (this.userProject) {
       reqOpts.params = reqOpts.params || {};

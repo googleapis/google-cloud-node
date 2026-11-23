@@ -38,6 +38,10 @@ import {
   getUserAgentString,
   getPLimit,
 } from './util.js';
+import {
+  resolveUniverseDomain,
+  validateUniverseDomain,
+} from './universe-domain.js';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import {getPackageJSON} from './package-json-helper.cjs';
@@ -197,6 +201,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
   public fileName;
 
   private authClient;
+  private universeDomain: string;
   private xmlParser;
   private xmlBuilder;
   private baseUrl;
@@ -208,6 +213,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     uploadId?: string,
     partsMap?: Map<number, string>,
   ) {
+    this.universeDomain = resolveUniverseDomain(bucket.storage.universeDomain);
     this.authClient =
       bucket.storage.storageTransport.authClient || new GoogleAuth();
     this.uploadId = uploadId || '';
@@ -260,6 +266,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
    * @returns {Promise<void>}
    */
   async initiateUpload(headers?: {[key: string]: string}): Promise<void> {
+    await validateUniverseDomain(this.authClient, this.universeDomain);
     const headersObject = new Headers(headers);
     const url = `${this.baseUrl}?uploads`;
     return AsyncRetry(async bail => {
@@ -302,6 +309,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     chunk: Buffer,
     validation?: 'md5' | 'crc32c' | false,
   ): Promise<void> {
+    await validateUniverseDomain(this.authClient, this.universeDomain);
     const url = `${this.baseUrl}?partNumber=${partNumber}&uploadId=${this.uploadId}`;
     const headers: Headers = this.#setGoogApiClientHeaders();
 
@@ -341,6 +349,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
    * @returns {Promise<void>}
    */
   async completeUpload(): Promise<GaxiosResponse | undefined> {
+    await validateUniverseDomain(this.authClient, this.universeDomain);
     const url = `${this.baseUrl}?uploadId=${this.uploadId}`;
     const sortedMap = new Map(
       [...this.partsMap.entries()].sort((a, b) => a[0] - b[0]),
@@ -380,6 +389,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
    * @returns {Promise<void>}
    */
   async abortUpload(): Promise<void> {
+    await validateUniverseDomain(this.authClient, this.universeDomain);
     const url = `${this.baseUrl}?uploadId=${this.uploadId}`;
     return AsyncRetry(async bail => {
       try {

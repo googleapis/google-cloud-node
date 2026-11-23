@@ -45,6 +45,7 @@ import {
 import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
 import {getDirName} from '../src/util.js';
 import {FileExceptionMessages} from '../src/file.js';
+import {GoogleAuth, JWT, PassThroughClient} from 'google-auth-library';
 
 nock.disableNetConnect();
 
@@ -4113,6 +4114,226 @@ describe('resumable-upload', () => {
         });
         upstreamBuffer.pipe(up);
       });
+    });
+  });
+
+  describe('universe domain validation', () => {
+    const customUniverse = 'example-universe.invalid';
+    const originalEnvUniverse = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+    let sandbox: sinon.SinonSandbox;
+
+    beforeEach(() => {
+      sandbox = sinon.createSandbox();
+    });
+
+    afterEach(() => {
+      sandbox.restore();
+      if (originalEnvUniverse === undefined) {
+        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+      } else {
+        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = originalEnvUniverse;
+      }
+    });
+
+    it('should reject standalone Upload createURI and stream writes with zero HTTP calls on mismatched authClient', async () => {
+      const mismatchedAuth = new GoogleAuth({
+        authClient: new JWT({
+          email: 'sa@project.iam.gserviceaccount.com',
+          key: 'fake-key',
+          universeDomain: 'googleapis.com',
+        }),
+      });
+      const requestSpy = sandbox.spy(mismatchedAuth, 'request');
+
+      const mismatchedUp: Upload = upload({
+        bucket: BUCKET,
+        file: FILE,
+        universeDomain: customUniverse,
+        authClient: mismatchedAuth,
+        retryOptions: {...RETRY_OPTIONS, autoRetry: false, maxRetries: 0},
+      });
+
+      await assert.rejects(mismatchedUp.createURI(), {
+        message:
+          'The configured universe domain (example-universe.invalid) does not match the universe domain found in the credentials (googleapis.com). Please check your universe domain configuration.',
+      });
+
+      const streamUp: Upload = upload({
+        bucket: BUCKET,
+        file: FILE,
+        universeDomain: customUniverse,
+        uri: `https://storage.${customUniverse}/upload-session`,
+        offset: 0,
+        authClient: mismatchedAuth,
+        retryOptions: {...RETRY_OPTIONS, autoRetry: false, maxRetries: 0},
+      });
+
+      await assert.rejects(
+        new Promise<void>((resolve, reject) => {
+          streamUp.on('error', reject);
+          streamUp.on('finish', resolve);
+          streamUp.end(Buffer.from('data'));
+        }),
+        {
+          message:
+            'The configured universe domain (example-universe.invalid) does not match the universe domain found in the credentials (googleapis.com). Please check your universe domain configuration.',
+        },
+      );
+
+      assert.strictEqual(requestSpy.called, false);
+    });
+
+    it('should preserve GoogleAuth clientOptions.universeDomain while still rejecting mismatched keyFile credentials', async () => {
+      const authConfig = {
+        keyFile,
+        universeDomain: customUniverse,
+        clientOptions: {
+          universeDomain: customUniverse,
+        },
+      };
+
+      const mismatchedUp: Upload = upload({
+        bucket: BUCKET,
+        file: FILE,
+        universeDomain: customUniverse,
+        authConfig,
+        retryOptions: {...RETRY_OPTIONS, autoRetry: false, maxRetries: 0},
+      });
+
+      assert.strictEqual(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (mismatchedUp.authClient as any).clientOptions.universeDomain,
+        customUniverse,
+      );
+
+      await assert.rejects(mismatchedUp.createURI(), {
+        message:
+          'The configured universe domain (example-universe.invalid) does not match the universe domain found in the credentials (googleapis.com). Please check your universe domain configuration.',
+      });
+    });
+
+    it('should fall back to GOOGLE_CLOUD_UNIVERSE_DOMAIN and reject mismatched credentials', async () => {
+      process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = customUniverse;
+
+      const envUp: Upload = upload({
+        bucket: BUCKET,
+        file: FILE,
+        authConfig: {keyFile},
+        retryOptions: {...RETRY_OPTIONS, autoRetry: false, maxRetries: 0},
+      });
+
+      assert.strictEqual(envUp.universeDomain, customUniverse);
+      await assert.rejects(envUp.createURI(), {
+        message:
+          'The configured universe domain (example-universe.invalid) does not match the universe domain found in the credentials (googleapis.com). Please check your universe domain configuration.',
+      });
+    });
+
+    it('should allow PassThroughClient on non-default universeDomain', async () => {
+      const passThrough = new PassThroughClient();
+      const scope = nock(`https://storage.${customUniverse}`)
+        .post(`/upload/storage/v1/b/${BUCKET}/o`)
+        .query(true)
+        .reply(200, '', {
+          location: `https://storage.${customUniverse}/session-123`,
+        });
+
+      const passThroughUp: Upload = upload({
+        bucket: BUCKET,
+        file: FILE,
+        universeDomain: customUniverse,
+        authClient: passThrough,
+        retryOptions: {...RETRY_OPTIONS, autoRetry: false, maxRetries: 0},
+      });
+
+      const uri = await passThroughUp.createURI();
+      assert.strictEqual(uri, `https://storage.${customUniverse}/session-123`);
+      scope.done();
+    });
+
+    it('should treat storage.googleapis.com as a custom endpoint when universeDomain is non-default and NOT send Authorization headers', async () => {
+      const scope = nock('https://storage.googleapis.com')
+        .post(`/upload/storage/v1/b/${BUCKET}/o`)
+        .query(true)
+        .reply(function () {
+          assert.strictEqual(this.req.headers['authorization'], undefined);
+          return [
+            200,
+            '',
+            {location: 'https://storage.googleapis.com/session-no-auth'},
+          ];
+        });
+
+      const customEndpointUp: Upload = upload({
+        bucket: BUCKET,
+        file: FILE,
+        universeDomain: customUniverse,
+        apiEndpoint: 'https://storage.googleapis.com',
+        authConfig: {keyFile},
+        retryOptions: {...RETRY_OPTIONS, autoRetry: false, maxRetries: 0},
+      });
+
+      const uri = await customEndpointUp.createURI();
+      assert.strictEqual(uri, 'https://storage.googleapis.com/session-no-auth');
+      scope.done();
+    });
+
+    it('should reject when universeDomain is non-default, apiEndpoint is storage.googleapis.com, and useAuthWithCustomEndpoint is true with default-universe credentials', async () => {
+      const authCustomUp: Upload = upload({
+        bucket: BUCKET,
+        file: FILE,
+        universeDomain: customUniverse,
+        apiEndpoint: 'https://storage.googleapis.com',
+        useAuthWithCustomEndpoint: true,
+        authConfig: {keyFile},
+        retryOptions: {...RETRY_OPTIONS, autoRetry: false, maxRetries: 0},
+      });
+
+      await assert.rejects(authCustomUp.createURI(), {
+        message:
+          'The configured universe domain (example-universe.invalid) does not match the universe domain found in the credentials (googleapis.com). Please check your universe domain configuration.',
+      });
+    });
+
+    it('should succeed when custom universeDomain matches credentials and prefer explicit universeDomain over GOOGLE_CLOUD_UNIVERSE_DOMAIN', async () => {
+      process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'other-universe.invalid';
+      const fs = await import('fs');
+      const rawKeyJson = JSON.parse(fs.readFileSync(keyFile, 'utf-8'));
+
+      const scopeCreate = nock(`https://storage.${customUniverse}`)
+        .post(`/upload/storage/v1/b/${BUCKET}/o`)
+        .matchHeader('authorization', /^Bearer eyJ/)
+        .query(true)
+        .reply(200, '', {
+          location: `https://storage.${customUniverse}/session-match`,
+        });
+      const scopePut = nock(`https://storage.${customUniverse}`)
+        .put('/session-match')
+        .matchHeader('authorization', /^Bearer eyJ/)
+        .reply(200, {name: FILE, bucket: BUCKET, size: '4'});
+
+      const matchingUp: Upload = upload({
+        bucket: BUCKET,
+        file: FILE,
+        universeDomain: customUniverse,
+        authConfig: {
+          credentials: {
+            ...rawKeyJson,
+            universe_domain: customUniverse,
+          },
+        },
+        retryOptions: {...RETRY_OPTIONS, autoRetry: false, maxRetries: 0},
+      });
+
+      assert.strictEqual(matchingUp.universeDomain, customUniverse);
+      await new Promise<void>((resolve, reject) => {
+        matchingUp.on('error', reject);
+        matchingUp.on('finish', resolve);
+        matchingUp.end(Buffer.from('data'));
+      });
+
+      scopeCreate.done();
+      scopePut.done();
     });
   });
 });

@@ -38,6 +38,10 @@ import {
 import {AvailableServiceObjectMethods, Bucket} from './bucket.js';
 import {Acl, AclMetadata} from './acl.js';
 import {
+  resolveSigningEndpoint,
+  validateUniverseDomain,
+} from './universe-domain.js';
+import {
   GetSignedUrlResponse,
   SigningError,
   GetSignedUrlCallback,
@@ -3078,24 +3082,39 @@ class File extends ServiceObject<File, FileMetadata> {
     const policyString = JSON.stringify(policy);
     const policyBase64 = Buffer.from(policyString).toString('base64');
 
-    // eslint-disable-next-line promise/catch-or-return
-    this.storage.storageTransport.authClient
-      .sign(policyBase64, options.signingEndpoint)
-      .then(
-        // eslint-disable-next-line promise/always-return
-        signature => {
-          // eslint-disable-next-line promise/no-callback-in-promise
-          callback(null, {
-            string: policyString,
-            base64: policyBase64,
-            signature,
-          });
-        },
-        err => {
-          // eslint-disable-next-line promise/no-callback-in-promise
-          callback(new SigningError(err.message));
-        },
-      );
+    const signingEndpoint = resolveSigningEndpoint(
+      options.signingEndpoint,
+      this.storage.universeDomain,
+    );
+
+    void (async () => {
+      try {
+        await validateUniverseDomain(
+          this.storage.storageTransport.authClient,
+          this.storage.universeDomain,
+        );
+      } catch (err) {
+        callback(err as Error);
+        return;
+      }
+
+      let signature: string;
+      try {
+        signature = await this.storage.storageTransport.authClient.sign(
+          policyBase64,
+          signingEndpoint,
+        );
+      } catch (err) {
+        callback(new SigningError((err as Error).message));
+        return;
+      }
+
+      callback(null, {
+        string: policyString,
+        base64: policyBase64,
+        signature,
+      });
+    })();
   }
 
   generateSignedPostPolicyV4(
@@ -3233,6 +3252,10 @@ class File extends ServiceObject<File, FileMetadata> {
     const todayISO = formatAsUTCISO(now);
 
     const sign = async () => {
+      await validateUniverseDomain(
+        this.storage.storageTransport.authClient,
+        this.storage.universeDomain,
+      );
       const {client_email} =
         await this.storage.storageTransport.authClient.getCredentials();
       const credential = `${client_email}/${todayISO}/auto/storage/goog4_request`;
@@ -3265,11 +3288,15 @@ class File extends ServiceObject<File, FileMetadata> {
 
       const policyString = unicodeJSONStringify(policy);
       const policyBase64 = Buffer.from(policyString).toString('base64');
+      const signingEndpoint = resolveSigningEndpoint(
+        options.signingEndpoint,
+        this.storage.universeDomain,
+      );
 
       try {
         const signature = await this.storage.storageTransport.authClient.sign(
           policyBase64,
-          options.signingEndpoint,
+          signingEndpoint,
         );
         const signatureHex = Buffer.from(signature, 'base64').toString('hex');
         const universe = this.parent.storage.universeDomain;

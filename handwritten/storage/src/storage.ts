@@ -28,12 +28,8 @@ import {
   CRC32CValidatorGenerator,
   CRC32C_DEFAULT_VALIDATOR_GENERATOR,
 } from './crc32c.js';
-import {
-  AuthClient,
-  DEFAULT_UNIVERSE,
-  GoogleAuth,
-  GoogleAuthOptions,
-} from 'google-auth-library';
+import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
+import {resolveUniverseDomain} from './universe-domain.js';
 import {
   StorageQueryParameters,
   StorageRequestOptions,
@@ -852,7 +848,7 @@ export class Storage {
    * @param {StorageOptions} [options] Configuration options.
    */
   constructor(options: StorageOptions = {}) {
-    const universe = options.universeDomain || DEFAULT_UNIVERSE;
+    const universe = resolveUniverseDomain(options.universeDomain);
 
     let apiEndpoint = `https://storage.${universe}`;
     this.projectId = options.projectId;
@@ -931,9 +927,10 @@ export class Storage {
     this.storageTransport = new StorageTransport({
       ...config,
       ...options,
+      universeDomain: universe,
       interceptors: this.interceptors,
     });
-    this.universeDomain = options.universeDomain || DEFAULT_UNIVERSE;
+    this.universeDomain = universe;
 
     this.getBucketsStream = paginator.streamify('getBuckets');
     this.getHmacKeysStream = paginator.streamify('getHmacKeys');

@@ -33,9 +33,9 @@ import {
 import assert from 'assert';
 import {describe, it, beforeEach, before, afterEach, after} from 'mocha';
 import * as path from 'path';
-import {GaxiosError, GaxiosResponse} from 'gaxios';
+import {Gaxios, GaxiosError, GaxiosResponse} from 'gaxios';
 import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
-import {AuthClient, GoogleAuth} from 'google-auth-library';
+import {AuthClient, GoogleAuth, JWT} from 'google-auth-library';
 import {tmpdir} from 'os';
 import fs, {promises as fsp, Stats} from 'fs';
 import * as sinon from 'sinon';
@@ -1125,6 +1125,206 @@ describe('Transfer Manager', () => {
 
       assert.strictEqual(fakeHelper.uploadPart.calledOnce, true);
       assert.strictEqual(assertionMade, true);
+    });
+
+    describe('XMLMultiPartUploadHelper universe domain validation', () => {
+      const customUniverse = 'example-universe.invalid';
+      const originalEnvUniverse = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+      const originalAdcEnv = process.env['GOOGLE_APPLICATION_CREDENTIALS'];
+      const mismatchMessage =
+        'The configured universe domain (example-universe.invalid) does not match the universe domain found in the credentials (googleapis.com). Please check your universe domain configuration.';
+
+      afterEach(() => {
+        if (originalEnvUniverse === undefined) {
+          delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+        } else {
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = originalEnvUniverse;
+        }
+        if (originalAdcEnv === undefined) {
+          delete process.env['GOOGLE_APPLICATION_CREDENTIALS'];
+        } else {
+          process.env['GOOGLE_APPLICATION_CREDENTIALS'] = originalAdcEnv;
+        }
+      });
+
+      it('should reject initiateUpload, uploadPart, completeUpload, and abortUpload with zero HTTP calls on mismatched authClient', async () => {
+        const gaxiosSpy = sandbox
+          .stub(Gaxios.prototype, 'request')
+          .rejects(new Error('Unexpected HTTP request'));
+        const mismatchedAuth = new GoogleAuth({
+          authClient: new JWT({
+            email: 'sa@project.iam.gserviceaccount.com',
+            key: 'fake-key',
+            universeDomain: 'googleapis.com',
+          }),
+        });
+        const requestSpy = sandbox.spy(mismatchedAuth, 'request');
+
+        const customStorage = new Storage({
+          universeDomain: customUniverse,
+          authClient: mismatchedAuth,
+          retryOptions: {
+            autoRetry: false,
+            maxRetries: 0,
+            retryDelayMultiplier: 2,
+            totalTimeout: 600,
+            maxRetryDelay: 60,
+          },
+        });
+        const tm = new TransferManager(new Bucket(customStorage, BUCKET_NAME));
+
+        // 1. initiateUpload path (uploadId undefined)
+        await assert.rejects(
+          tm.uploadFileInChunks(filePath, {autoAbortFailure: false}),
+          new MultiPartUploadError(mismatchMessage, '', new Map()),
+        );
+
+        // 2. uploadPart + abortUpload paths (uploadId set + autoAbortFailure: true -> both fail with mismatchMessage)
+        await assert.rejects(
+          tm.uploadFileInChunks(filePath, {
+            uploadId: 'upload-123',
+            autoAbortFailure: true,
+          }),
+          new MultiPartUploadError(
+            `${mismatchMessage}\n${mismatchMessage}`,
+            'upload-123',
+            new Map(),
+          ),
+        );
+
+        // 3. completeUpload path (uploadId set + partsMap covering file size -> 0 chunks read -> completeUpload)
+        await assert.rejects(
+          tm.uploadFileInChunks(filePath, {
+            uploadId: 'upload-123',
+            partsMap: new Map([[1, 'etag-1']]),
+            autoAbortFailure: false,
+          }),
+          new MultiPartUploadError(
+            mismatchMessage,
+            'upload-123',
+            new Map([[1, 'etag-1']]),
+          ),
+        );
+
+        assert.strictEqual(requestSpy.called, false);
+        assert.strictEqual(gaxiosSpy.called, false);
+      });
+
+      it('should resolve GOOGLE_CLOUD_UNIVERSE_DOMAIN and fallback GoogleAuth ADC when storage.universeDomain is empty', async () => {
+        const adcFilePath = path.join(directory, 'adc.json');
+        await fsp.writeFile(
+          adcFilePath,
+          JSON.stringify({
+            type: 'service_account',
+            project_id: 'test-project',
+            private_key_id: 'key-id',
+            private_key:
+              '-----BEGIN PRIVATE KEY-----\nfake\n-----END PRIVATE KEY-----\n',
+            client_email: 'sa@test-project.iam.gserviceaccount.com',
+          }),
+        );
+        process.env['GOOGLE_APPLICATION_CREDENTIALS'] = adcFilePath;
+        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = customUniverse;
+        const gaxiosSpy = sandbox
+          .stub(Gaxios.prototype, 'request')
+          .rejects(new Error('Unexpected HTTP request'));
+        const authRequestSpy = sandbox.spy(GoogleAuth.prototype, 'request');
+
+        const fakeStorage = {
+          universeDomain: '',
+          apiEndpoint: `https://storage.${customUniverse}`,
+          storageTransport: {},
+          retryOptions: {
+            autoRetry: false,
+            maxRetries: 0,
+            retryDelayMultiplier: 2,
+            totalTimeout: 600,
+            maxRetryDelay: 60,
+          },
+        } as unknown as Storage;
+        const fakeBucket = {
+          name: BUCKET_NAME,
+          storage: fakeStorage,
+        } as unknown as Bucket;
+
+        const tm = new TransferManager(fakeBucket);
+        await assert.rejects(
+          tm.uploadFileInChunks(filePath, {autoAbortFailure: false}),
+          new MultiPartUploadError(mismatchMessage, '', new Map()),
+        );
+        assert.strictEqual(authRequestSpy.called, false);
+        assert.strictEqual(gaxiosSpy.called, false);
+      });
+
+      it('should succeed across initiateUpload, uploadPart, completeUpload, and abortUpload when credentials match custom universeDomain', async () => {
+        const matchingJwt = new JWT({
+          email: 'sa@project.iam.gserviceaccount.com',
+          key: 'fake-key',
+          universeDomain: customUniverse,
+        });
+        const matchingAuth = new GoogleAuth({authClient: matchingJwt});
+        const requestStub = sandbox
+          .stub(matchingAuth, 'request')
+          .onCall(0)
+          .resolves({
+            status: 200,
+            headers: new Headers(),
+            data: '<InitiateMultipartUploadResult><UploadId>up-1</UploadId></InitiateMultipartUploadResult>',
+          } as unknown as GaxiosResponse)
+          .onCall(1)
+          .resolves({
+            status: 200,
+            headers: new Headers({etag: '"etag-part-1"'}),
+            data: '',
+          } as unknown as GaxiosResponse)
+          .onCall(2)
+          .resolves({
+            status: 200,
+            headers: new Headers(),
+            data: '<CompleteMultipartUploadResult/>',
+          } as unknown as GaxiosResponse)
+          .onCall(3)
+          .rejects(new Error('Simulated part upload failure'))
+          .onCall(4)
+          .resolves({
+            status: 204,
+            headers: new Headers(),
+            data: '',
+          } as unknown as GaxiosResponse);
+
+        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'ignored-env.invalid';
+        const customStorage = new Storage({
+          universeDomain: customUniverse,
+          authClient: matchingAuth,
+          retryOptions: {
+            autoRetry: false,
+            maxRetries: 0,
+            retryDelayMultiplier: 2,
+            totalTimeout: 600,
+            maxRetryDelay: 60,
+          },
+        });
+        const tm = new TransferManager(new Bucket(customStorage, BUCKET_NAME));
+
+        // Exercises initiateUpload (call 0), uploadPart (call 1), and completeUpload (call 2)
+        await tm.uploadFileInChunks(filePath);
+        assert.strictEqual(requestStub.callCount, 3);
+
+        // Exercises uploadPart failure (call 3) followed by abortUpload success (call 4)
+        await assert.rejects(
+          tm.uploadFileInChunks(filePath, {
+            uploadId: 'up-2',
+            autoAbortFailure: true,
+          }),
+          new MultiPartUploadError(
+            'Simulated part upload failure',
+            'up-2',
+            new Map(),
+          ),
+        );
+        assert.strictEqual(requestStub.callCount, 5);
+        assert.strictEqual(requestStub.getCall(4).args[0].method, 'DELETE');
+      });
     });
   });
 });
