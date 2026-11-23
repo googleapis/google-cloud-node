@@ -123,18 +123,21 @@ describe('http2', () => {
       pathParams: [],
       context,
     });
-    assert.ok(result.data);
-    assert.strictEqual(result.status, 200);
-    await createAPIRequest<FakeParams>({
-      options: {
-        url: `${url}/${name}`,
-        http2: true,
-        method: 'DELETE',
-      },
-      params: {},
-      requiredParams: [],
-      pathParams: [],
-      context,
-    });
+    try {
+      assert.ok(result.data);
+      assert.strictEqual(result.status, 200);
+    } finally {
+      await createAPIRequest<FakeParams>({
+        options: {
+          url: `${url}/${name}`,
+          http2: true,
+          method: 'DELETE',
+        },
+        params: {},
+        requiredParams: [],
+        pathParams: [],
+        context,
+      });
+    }
   });
 });
