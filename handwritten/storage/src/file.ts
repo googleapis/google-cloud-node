@@ -3105,7 +3105,7 @@ class File extends ServiceObject<File, FileMetadata> {
           signingEndpoint,
         );
       } catch (err) {
-        callback(new SigningError((err as Error).message));
+        callback(new SigningError((err as Error)?.message ?? String(err)));
         return;
       }
 
