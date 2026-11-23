@@ -37,6 +37,19 @@ steps:
   #   - name: 'sa-keys'
   #     path: '/secrets'
 
+# 3. Run ESM system tests
+- name: 'node:24'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    corepack enable pnpm && pnpm run system-test:esm
+  dir: 'handwritten/storage'
+  env:
+  - 'GCLOUD_PROJECT=${_GCP_PROJECT_ID}'
+  id: 'run-system-tests-esm'
+  waitFor: ['run-system-tests']
+
 # If you use Secret Manager for credentials, uncomment and configure:
 # availableSecrets:
 #   secretManager:
