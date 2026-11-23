@@ -3089,14 +3089,24 @@ describe('resumable-upload', () => {
       });
 
       describe('exponential back off', () => {
+        let sandbox: sinon.SinonSandbox;
         let clock: sinon.SinonFakeTimers;
         let setTimeoutSpy: sinon.SinonSpy;
         beforeEach(() => {
-          clock = sinon.useFakeTimers({toFake: ['setTimeout']});
-          setTimeoutSpy = sinon.spy(global, 'setTimeout');
+          sandbox = sinon.createSandbox();
+          clock = sandbox.useFakeTimers({toFake: ['setTimeout']});
+          setTimeoutSpy = sandbox.spy(global, 'setTimeout');
         });
         afterEach(() => {
-          clock.restore();
+          sandbox.restore();
+        });
+
+        it('should restore global setTimeout without leaking to the default sinon sandbox', async () => {
+          sandbox.restore();
+          sinon.restore();
+          await new Promise<void>(resolve => {
+            setTimeout(resolve, 1);
+          });
         });
 
         it('should continue uploading after retry count^2 * random', done => {
