@@ -21,6 +21,7 @@ import {
   CallOptions,
   grpc as gaxVendoredGrpc,
   ClientOptions,
+  ServiceError,
 } from 'google-gax';
 import * as gax from 'google-gax';
 import {protos} from '@google-cloud/bigtable-api';
@@ -37,7 +38,6 @@ import {
   IInstance,
   ClusterInfo,
 } from './instance';
-import {ServiceError} from 'google-gax';
 import * as v2 from './v2';
 import * as admin from './admin';
 import {PassThrough, Duplex} from 'stream';
@@ -594,8 +594,18 @@ export class Bigtable {
     this.projectName = `projects/${this.projectId}`;
     this.shouldReplaceProjectIdToken = this.projectId === '{{projectId}}';
 
+    const metricsUniverseOptions = getUniverseDomainOptions(
+      options,
+      options.BigtableClient ??
+        options.BigtableInstanceAdminClient ??
+        options.BigtableTableAdminClient,
+    );
     const handlers = !(options.metricsEnabled === false)
-      ? [new GCPMetricsHandler(Object.assign({}, options) as ClientOptions)]
+      ? [
+          new GCPMetricsHandler(
+            Object.assign({}, options, metricsUniverseOptions) as ClientOptions,
+          ),
+        ]
       : [];
     this._metricsConfigManager = new ClientSideMetricsConfigManager(handlers);
   }
