@@ -42,7 +42,7 @@ import {EventEmitter} from 'events';
 import {CLOUD_RESOURCE_HEADER, AFE_SERVER_TIMING_HEADER} from '../src/common';
 import {MetricsTracerFactory} from '../src/metrics/metrics-tracer-factory';
 import {ExporterOptions} from '../src/metrics/external-types';
-import {parseMonitoringEndpoint} from '../src/metrics/spanner-metrics-exporter';
+import {resolveExporterConfig} from '../src/metrics/spanner-metrics-exporter';
 import IsolationLevel = protos.google.spanner.v1.TransactionOptions.IsolationLevel;
 import ReadLockMode = protos.google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode;
 const singer = require('./data/singer');
@@ -245,7 +245,7 @@ describe('Spanner', () => {
       './instance-config.js': {InstanceConfig: FakeInstanceConfig},
       './metrics/spanner-metrics-exporter': {
         CloudMonitoringMetricsExporter: RecordingCloudMonitoringMetricsExporter,
-        parseMonitoringEndpoint,
+        resolveExporterConfig,
       },
       './v1': fakeV1,
     }).Spanner;
@@ -986,6 +986,111 @@ describe('Spanner', () => {
         /must not include a protocol scheme/,
       );
       assert.throws(() => new Spanner(), /must not include a protocol scheme/);
+    });
+
+    it('should keep built-in metrics active for an enabled client when a sibling disables metrics', async () => {
+      const defaultClient = new Spanner({projectId: 'default-project'});
+      const disabledSibling = new Spanner({
+        projectId: 'disabled-project',
+        disableBuiltInMetrics: true,
+      });
+
+      assert.strictEqual(asAny(defaultClient)._metricsEnabled, true);
+      assert.strictEqual(asAny(disabledSibling)._metricsEnabled, false);
+
+      const getInstanceSpy = sandbox.spy(MetricsTracerFactory, 'getInstance');
+      sandbox
+        .stub(defaultClient, 'prepareGapicRequest_')
+        .callsFake((_cfg, cb) => cb(null, () => Promise.resolve('ok')));
+
+      await defaultClient.request({
+        client: 'SpannerClient',
+        method: 'executeSql',
+        reqOpts: {database: 'projects/default-project/instances/i/databases/d'},
+        headers: {},
+      });
+
+      assert.ok(getInstanceSpy.calledOnce);
+      assert.notStrictEqual(getInstanceSpy.firstCall.returnValue, null);
+    });
+
+    it('should set _metricsEnabled to false when async auth.getProjectId fails', () => {
+      const errorStub = sandbox.stub(console, 'error');
+      getProjectIdOverride = cb => {
+        cb?.(new Error('project lookup failed'));
+      };
+
+      const client = new Spanner();
+      assert.strictEqual(asAny(client)._metricsEnabled, false);
+      assert.strictEqual(errorStub.calledOnce, true);
+      assert.ok(
+        (errorStub.getCall(0).args[0] as string).includes(
+          'side metrics: project lookup failed',
+        ),
+      );
+
+      errorStub.resetHistory();
+      getProjectIdOverride = cb => {
+        cb?.(null, '');
+      };
+
+      const emptyProjectClient = new Spanner();
+      assert.strictEqual(asAny(emptyProjectClient)._metricsEnabled, false);
+      assert.strictEqual(errorStub.calledOnce, true);
+      assert.ok(
+        !(errorStub.getCall(0).args[0] as string).includes('undefined'),
+      );
+    });
+
+    it('should disable built-in metrics when custom port is configured without SPANNER_MONITORING_HOST', () => {
+      const portClient = new Spanner({
+        projectId: 'custom-port-project',
+        port: 9010,
+      });
+      assert.strictEqual(asAny(portClient)._metricsEnabled, false);
+      assert.strictEqual(recordedExporterCalls.length, 0);
+    });
+
+    it('should trim universeDomain consistently on Spanner and exporter options', () => {
+      const client = new Spanner({
+        projectId: 'tpc-project',
+        universeDomain: '  my-tpc.example  ',
+      });
+      assert.strictEqual(client.universeDomain, 'my-tpc.example');
+      assert.strictEqual(client.options.universeDomain, 'my-tpc.example');
+      assert.strictEqual(
+        getFake(client).calledWith_[0].baseUrl,
+        'spanner.my-tpc.example',
+      );
+      assert.strictEqual(
+        recordedExporterCalls[0].options.universeDomain,
+        'my-tpc.example',
+      );
+    });
+
+    it('should resolve the universe- and monitoring-host-scoped factory during Spanner.request()', async () => {
+      process.env.SPANNER_MONITORING_HOST = 'monitoring.my-tpc.example:8443';
+      const client = new Spanner({
+        projectId: 'tpc-project',
+        universeDomain: 'my-tpc.example',
+      });
+      const getInstanceSpy = sandbox.spy(MetricsTracerFactory, 'getInstance');
+      sandbox
+        .stub(client, 'prepareGapicRequest_')
+        .callsFake((_cfg, cb) => cb(null, () => Promise.resolve('ok')));
+
+      await client.request({
+        client: 'SpannerClient',
+        method: 'executeSql',
+        reqOpts: {database: 'projects/tpc-project/instances/i/databases/d'},
+        headers: {},
+      });
+
+      assert.deepStrictEqual(getInstanceSpy.firstCall.args, [
+        'tpc-project',
+        'my-tpc.example',
+        'monitoring.my-tpc.example:8443',
+      ]);
     });
   });
 

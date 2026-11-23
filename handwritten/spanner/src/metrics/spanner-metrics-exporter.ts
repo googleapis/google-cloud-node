@@ -38,6 +38,53 @@ function validatePort(port: number): number {
 }
 
 /**
+ * Parses and validates a decimal port string within the TCP/UDP range 1–65535.
+ *
+ * @param portStr The port string extracted from a monitoring endpoint.
+ * @returns The validated numeric port.
+ */
+function parsePortString(portStr: string): number {
+  if (!/^\d+$/.test(portStr)) {
+    throw new Error(`Invalid monitoring endpoint port: ${portStr}`);
+  }
+  return validatePort(Number(portStr));
+}
+
+/**
+ * Trims and validates a configured universe domain string.
+ *
+ * @param universeDomain The universe domain string to normalize.
+ * @returns The trimmed non-empty universe domain.
+ */
+export function normalizeUniverseDomain(universeDomain: string): string {
+  if (typeof universeDomain !== 'string' || universeDomain.trim() === '') {
+    throw new Error('universeDomain cannot be empty.');
+  }
+  return universeDomain.trim();
+}
+
+/**
+ * Formats a parsed monitoring endpoint into a canonical `host` or `host:port` key.
+ *
+ * @param parsed Parsed endpoint containing `apiEndpoint` and optional `port`.
+ * @returns Canonical monitoring target key string.
+ */
+export function formatMonitoringTargetKey(parsed: {
+  apiEndpoint: string;
+  port?: number;
+}): string {
+  return parsed.port !== undefined
+    ? `${parsed.apiEndpoint}:${parsed.port}`
+    : parsed.apiEndpoint;
+}
+
+export interface ResolvedExporterConfig {
+  clientOptions: Record<string, unknown>;
+  universeDomain?: string;
+  monitoringEndpoint?: string;
+}
+
+/**
  * Parses and validates a Cloud Monitoring endpoint string (`host`, `host:port`,
  * `[ipv6]`, or `[ipv6]:port`) into separate `apiEndpoint` and optional `port`
  * fields suitable for `MetricServiceClient` / `google-gax`.
@@ -103,10 +150,7 @@ export function parseMonitoringEndpoint(endpoint: string): {
         );
       }
       const portStr = remainder.slice(1);
-      if (!/^\d+$/.test(portStr)) {
-        throw new Error(`Invalid monitoring endpoint port: ${portStr}`);
-      }
-      embeddedPort = validatePort(Number(portStr));
+      embeddedPort = parsePortString(portStr);
     }
   } else {
     if (endpoint.includes('[') || endpoint.includes(']')) {
@@ -125,10 +169,7 @@ export function parseMonitoringEndpoint(endpoint: string): {
       if (host.length === 0) {
         throw new Error('Monitoring endpoint host cannot be empty.');
       }
-      if (!/^\d+$/.test(portStr)) {
-        throw new Error(`Invalid monitoring endpoint port: ${portStr}`);
-      }
-      embeddedPort = validatePort(Number(portStr));
+      embeddedPort = parsePortString(portStr);
     } else {
       host = endpoint;
     }
@@ -137,6 +178,73 @@ export function parseMonitoringEndpoint(endpoint: string): {
   return embeddedPort !== undefined
     ? {apiEndpoint: host, port: embeddedPort}
     : {apiEndpoint: host};
+}
+
+/**
+ * Resolves and validates Cloud Monitoring exporter options into
+ * `MetricServiceClient` options plus canonical `universeDomain` and
+ * `monitoringEndpoint` keys.
+ *
+ * @param options Exporter options passed by the caller or `Spanner`.
+ * @returns Resolved client options and normalized scope identifiers.
+ */
+export function resolveExporterConfig(
+  options: ExporterOptions,
+): ResolvedExporterConfig {
+  const {auth, universeDomain, apiEndpoint} = options;
+  let resolvedUniverseDomain: string | undefined;
+  if (universeDomain !== undefined) {
+    resolvedUniverseDomain = normalizeUniverseDomain(universeDomain);
+  } else {
+    const authUniverseDomain = (
+      auth as unknown as {clientOptions?: {universeDomain?: string}}
+    )?.clientOptions?.universeDomain;
+    if (
+      typeof authUniverseDomain === 'string' &&
+      authUniverseDomain.trim() !== ''
+    ) {
+      resolvedUniverseDomain = authUniverseDomain.trim();
+    }
+  }
+
+  const clientOptions: Record<string, unknown> = {auth};
+  if (resolvedUniverseDomain !== undefined) {
+    clientOptions.universeDomain = resolvedUniverseDomain;
+  }
+
+  // Only fall back to SPANNER_MONITORING_HOST when apiEndpoint was omitted;
+  // explicit `apiEndpoint: undefined` keeps the caller's synchronous snapshot.
+  const hasApiEndpointOption = Object.prototype.hasOwnProperty.call(
+    options,
+    'apiEndpoint',
+  );
+  const rawEndpoint = hasApiEndpointOption
+    ? apiEndpoint
+    : typeof process === 'object'
+      ? process.env?.SPANNER_MONITORING_HOST?.trim() || undefined
+      : undefined;
+
+  let monitoringEndpoint: string | undefined;
+  if (rawEndpoint !== undefined) {
+    const parsed = parseMonitoringEndpoint(rawEndpoint);
+    clientOptions.apiEndpoint = parsed.apiEndpoint;
+    if (parsed.port !== undefined) {
+      clientOptions.port = parsed.port;
+    }
+    monitoringEndpoint = formatMonitoringTargetKey(parsed);
+  }
+
+  const effectiveUniverseDomain =
+    resolvedUniverseDomain ??
+    (typeof process === 'object'
+      ? process.env?.GOOGLE_CLOUD_UNIVERSE_DOMAIN?.trim() || undefined
+      : undefined);
+
+  return {
+    clientOptions,
+    universeDomain: effectiveUniverseDomain,
+    monitoringEndpoint,
+  };
 }
 
 /**
@@ -150,61 +258,16 @@ export class CloudMonitoringMetricsExporter implements PushMetricExporter {
   private readonly _monitoringEndpoint?: string;
   private _metricsExportFailureLogged = false;
 
-  constructor(options: ExporterOptions, projectId: string) {
-    const {auth, universeDomain, apiEndpoint} = options;
-    let resolvedUniverseDomain: string | undefined;
-    if (universeDomain !== undefined) {
-      if (typeof universeDomain !== 'string' || universeDomain.trim() === '') {
-        throw new Error('universeDomain cannot be empty.');
-      }
-      resolvedUniverseDomain = universeDomain.trim();
-    } else {
-      const authUniverseDomain = (
-        auth as unknown as {clientOptions?: {universeDomain?: string}}
-      )?.clientOptions?.universeDomain;
-      if (
-        typeof authUniverseDomain === 'string' &&
-        authUniverseDomain.trim() !== ''
-      ) {
-        resolvedUniverseDomain = authUniverseDomain.trim();
-      }
-    }
-
-    const clientOptions: Record<string, unknown> = {auth};
-    if (resolvedUniverseDomain !== undefined) {
-      clientOptions.universeDomain = resolvedUniverseDomain;
-    }
-
-    // Only fall back to SPANNER_MONITORING_HOST when apiEndpoint was omitted;
-    // explicit `apiEndpoint: undefined` keeps the caller's synchronous snapshot.
-    const hasApiEndpointOption = Object.prototype.hasOwnProperty.call(
-      options,
-      'apiEndpoint',
-    );
-    const rawEndpoint = hasApiEndpointOption
-      ? apiEndpoint
-      : typeof process === 'object'
-        ? process.env?.SPANNER_MONITORING_HOST?.trim() || undefined
-        : undefined;
-    if (rawEndpoint !== undefined) {
-      const parsed = parseMonitoringEndpoint(rawEndpoint);
-      clientOptions.apiEndpoint = parsed.apiEndpoint;
-      if (parsed.port !== undefined) {
-        clientOptions.port = parsed.port;
-      }
-      this._monitoringEndpoint =
-        parsed.port !== undefined
-          ? `${parsed.apiEndpoint}:${parsed.port}`
-          : parsed.apiEndpoint;
-    }
-
+  constructor(
+    options: ExporterOptions,
+    projectId: string,
+    resolvedConfig?: ResolvedExporterConfig,
+  ) {
+    const resolved = resolvedConfig ?? resolveExporterConfig(options);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    this._client = new MetricServiceClient(clientOptions as any);
-    this._universeDomain =
-      resolvedUniverseDomain ??
-      (typeof process === 'object'
-        ? process.env?.GOOGLE_CLOUD_UNIVERSE_DOMAIN?.trim() || undefined
-        : undefined);
+    this._client = new MetricServiceClient(resolved.clientOptions as any);
+    this._universeDomain = resolved.universeDomain;
+    this._monitoringEndpoint = resolved.monitoringEndpoint;
     this._projectId = projectId;
   }
 
@@ -275,7 +338,7 @@ export class CloudMonitoringMetricsExporter implements PushMetricExporter {
         if (error?.code === status.PERMISSION_DENIED) {
           msg += ` Need monitoring metric writer permission on project ${this._projectId}. Follow https://cloud.google.com/spanner/docs/view-manage-client-side-metrics#access-client-side-metrics to set up permissions`;
         } else {
-          const errorMessage = asError(e).message;
+          const errorMessage = sanitizeLogMessage(asError(e).message);
           if (errorMessage) {
             msg += ` ${errorMessage}`;
           }
@@ -320,4 +383,16 @@ export class CloudMonitoringMetricsExporter implements PushMetricExporter {
 
 function asError(error: unknown): Error {
   return error instanceof Error ? error : new Error(String(error));
+}
+
+/**
+ * Collapses ASCII control characters (including CR/LF/tabs) into single spaces
+ * so untrusted error messages cannot inject multi-line log entries.
+ *
+ * @param message Raw error message string.
+ * @returns Sanitized single-line message.
+ */
+function sanitizeLogMessage(message: string): string {
+  // eslint-disable-next-line no-control-regex
+  return message.replace(/[\x00-\x1f\x7f]+/g, ' ').trim();
 }

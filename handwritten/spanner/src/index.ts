@@ -106,7 +106,8 @@ import {PeriodicExportingMetricReader} from '@opentelemetry/sdk-metrics';
 import {MetricInterceptor} from './metrics/interceptor';
 import {
   CloudMonitoringMetricsExporter,
-  parseMonitoringEndpoint,
+  ResolvedExporterConfig,
+  resolveExporterConfig,
 } from './metrics/spanner-metrics-exporter';
 import {ExporterOptions} from './metrics/external-types';
 import {MetricsTracerFactory} from './metrics/metrics-tracer-factory';
@@ -272,19 +273,27 @@ function getUniverseDomain(options: SpannerOptions): string {
     typeof process === 'object' && typeof process.env === 'object'
       ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
       : undefined;
-  const universeDomain =
+  const rawUniverseDomain =
     options?.universeDomain ??
     options?.universe_domain ??
     universeDomainEnvVar ??
     'googleapis.com';
-  // if the options.universe_domain/GOOGLE_CLOUD_UNIVERSE_DOMAIN env variable is set,
-  // set its value to the Spanner `universeDomain` options
-  // to match it with the universe from Auth Client
+  const universeDomain =
+    typeof rawUniverseDomain === 'string'
+      ? rawUniverseDomain.trim()
+      : rawUniverseDomain;
+  // Sync the trimmed universe domain onto options whenever configured explicitly
+  // (via universeDomain, universe_domain, or GOOGLE_CLOUD_UNIVERSE_DOMAIN) so
+  // Spanner, GAX clients, and GoogleAuth observe the same normalized value.
   if (
-    !options?.universeDomain &&
-    (options?.universe_domain || process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN)
+    options?.universeDomain !== undefined ||
+    options?.universe_domain !== undefined ||
+    universeDomainEnvVar
   ) {
     options.universeDomain = universeDomain;
+  }
+  if (options?.universe_domain !== undefined) {
+    options.universe_domain = universeDomain;
   }
   return universeDomain;
 }
@@ -463,10 +472,18 @@ class Spanner extends GrpcService {
         };
     delete options.defaultTransactionOptions;
 
+    const trimmedSnakeUniverse =
+      typeof options?.universe_domain === 'string'
+        ? options.universe_domain.trim()
+        : options?.universe_domain;
+    const trimmedCamelUniverse =
+      typeof options?.universeDomain === 'string'
+        ? options.universeDomain.trim()
+        : options?.universeDomain;
     if (
-      options?.universe_domain &&
-      options?.universeDomain &&
-      options?.universe_domain !== options?.universeDomain
+      trimmedSnakeUniverse &&
+      trimmedCamelUniverse &&
+      trimmedSnakeUniverse !== trimmedCamelUniverse
     ) {
       throw new Error(
         'Please set either universe_domain or universeDomain, but not both.',
@@ -1693,7 +1710,9 @@ class Spanner extends GrpcService {
       !!disableBuiltInMetrics;
     const spannerOptions = this.options as SpannerOptions;
     const hasCustomEndpoint = Boolean(
-      spannerOptions.apiEndpoint || spannerOptions.servicePath,
+      spannerOptions.apiEndpoint ||
+      spannerOptions.servicePath ||
+      spannerOptions.port,
     );
     const monitoringHost =
       process.env.SPANNER_MONITORING_HOST?.trim() || undefined;
@@ -1704,15 +1723,12 @@ class Spanner extends GrpcService {
       !this._isInSecureCredentials &&
       !disabledByCustomEndpoint;
 
-    const disabledSolelyByCustomEndpoint =
-      !metricsExplicitlyDisabled &&
-      !this._isInSecureCredentials &&
-      disabledByCustomEndpoint;
-
-    // Do not clear the global static flag when disabled solely due to a custom
-    // Spanner endpoint so sibling default-endpoint clients remain unaffected.
-    if (!disabledSolelyByCustomEndpoint) {
-      MetricsTracerFactory.enabled = this._metricsEnabled;
+    // Only enable the process-wide flag when this client has metrics enabled;
+    // never clear it from a disabled client constructor because each Spanner
+    // instance checks its own `this._metricsEnabled` and clearing the global
+    // flag would break sibling clients with active metrics.
+    if (this._metricsEnabled) {
+      MetricsTracerFactory.enabled = true;
     }
 
     if (!this._metricsEnabled) {
@@ -1733,20 +1749,26 @@ class Spanner extends GrpcService {
     try {
       this.auth.getProjectId((err, projectId) => {
         if (err || !projectId) {
+          this._metricsEnabled = false;
+          const errMsg = err
+            ? ((err as Error)?.message ?? String(err))
+            : 'empty project ID';
           console.error(
             'Unable to get Project Id for client side metrics, will skip exporting client' +
-              ' side metrics' +
-              err,
+              ' side metrics: ' +
+              errMsg,
           );
           return;
         }
         this._initializeMetricsForProject(projectId, exporterConfig);
       });
     } catch (err) {
+      this._metricsEnabled = false;
+      const errMsg = (err as Error)?.message ?? String(err);
       console.error(
         'Unable to configure client side metrics, will skip exporting client' +
-          ' side metrics' +
-          err,
+          ' side metrics: ' +
+          errMsg,
       );
     }
   }
@@ -1755,36 +1777,29 @@ class Spanner extends GrpcService {
    * Synchronously validates and builds the exporter configuration for built-in metrics.
    *
    * @param monitoringHost Optional trimmed `SPANNER_MONITORING_HOST` override.
-   * @returns Validated exporter options and normalized target key for singleton matching.
+   * @returns Validated exporter options, pre-resolved client config, and normalized target key.
    */
   private _buildMetricsExporterConfig(monitoringHost?: string): {
     exporterOptions: ExporterOptions;
+    resolvedConfig: ResolvedExporterConfig;
     universeDomain: string;
     monitoringTargetKey?: string;
   } {
-    const universeDomain = this._universeDomain?.trim() ?? '';
-    if (!universeDomain) {
-      throw new Error('universeDomain cannot be empty.');
-    }
-
-    const parsedEndpoint = monitoringHost
-      ? parseMonitoringEndpoint(monitoringHost)
-      : undefined;
-    const monitoringTargetKey = parsedEndpoint
-      ? parsedEndpoint.port !== undefined
-        ? `${parsedEndpoint.apiEndpoint}:${parsedEndpoint.port}`
-        : parsedEndpoint.apiEndpoint
-      : undefined;
-
     const exporterOptions: ExporterOptions = {
       auth: this.auth,
-      universeDomain,
+      universeDomain: this._universeDomain,
       // Explicitly pass apiEndpoint (even when undefined) so delayed async
       // initialization cannot drift if SPANNER_MONITORING_HOST changes later.
       apiEndpoint: monitoringHost,
     };
+    const resolvedConfig = resolveExporterConfig(exporterOptions);
 
-    return {exporterOptions, universeDomain, monitoringTargetKey};
+    return {
+      exporterOptions,
+      resolvedConfig,
+      universeDomain: resolvedConfig.universeDomain!,
+      monitoringTargetKey: resolvedConfig.monitoringEndpoint,
+    };
   }
 
   /**
@@ -1798,6 +1813,7 @@ class Spanner extends GrpcService {
     projectId: string,
     config: {
       exporterOptions: ExporterOptions;
+      resolvedConfig: ResolvedExporterConfig;
       universeDomain: string;
       monitoringTargetKey?: string;
     },
@@ -1818,6 +1834,7 @@ class Spanner extends GrpcService {
             exporter: new CloudMonitoringMetricsExporter(
               config.exporterOptions,
               projectId,
+              config.resolvedConfig,
             ),
             exportIntervalMillis: 60000,
           });

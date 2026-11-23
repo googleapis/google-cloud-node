@@ -21,6 +21,7 @@ import {
   MAX_BATCH_EXPORT_SIZE,
   parseMonitoringEndpoint,
 } from '../../src/metrics/spanner-metrics-exporter';
+import * as transform from '../../src/metrics/transform';
 import {status} from '@grpc/grpc-js';
 import {
   SPANNER_METER_NAME,
@@ -536,6 +537,100 @@ describe('Export', () => {
       );
     } finally {
       warnStub.restore();
+    }
+  });
+
+  it('should forward non-default universeDomain and monitoringEndpoint to transformResourceMetricToTimeSeriesArray during export', async () => {
+    const scopedExporter = new CloudMonitoringMetricsExporter(
+      {
+        auth,
+        universeDomain: 'my-tpc.example',
+        apiEndpoint: 'monitoring.my-tpc.example:8443',
+      },
+      PROJECT_ID,
+    );
+    attempt_counter.add(1, metricAttributes);
+    const {resourceMetrics} = await reader.collect();
+
+    const transformSpy = sinon.spy(
+      transform,
+      'transformResourceMetricToTimeSeriesArray',
+    );
+    const sendStub = sinon
+      .stub(scopedExporter as any, '_sendTimeSeries')
+      .resolves();
+    try {
+      const result = await new Promise<ExportResult>(resolve => {
+        scopedExporter.export(resourceMetrics, resolve);
+      });
+      assert.strictEqual(result.code, ExportResultCode.SUCCESS);
+      assert.strictEqual(transformSpy.calledOnce, true);
+      assert.strictEqual(transformSpy.firstCall.args[1], PROJECT_ID);
+      assert.strictEqual(transformSpy.firstCall.args[2], 'my-tpc.example');
+      assert.strictEqual(
+        transformSpy.firstCall.args[3],
+        'monitoring.my-tpc.example:8443',
+      );
+      assert.strictEqual(sendStub.calledOnce, true);
+    } finally {
+      transformSpy.restore();
+      sendStub.restore();
+    }
+  });
+
+  it('should sanitize control characters, suppress repeated export failure warnings, and re-warn after recovery', async () => {
+    const warnStub = sinon.stub(console, 'warn');
+    const sendStub = sinon.stub(exporter as any, '_sendTimeSeries');
+    try {
+      attempt_counter.add(1, metricAttributes);
+      const {resourceMetrics} = await reader.collect();
+
+      sendStub.rejects(new Error('first failure\r\nwith\tcontrol\x00chars'));
+      const firstResult = await new Promise<ExportResult>(resolve => {
+        exporter.export(resourceMetrics, resolve);
+      });
+      assert.strictEqual(firstResult.code, ExportResultCode.FAILED);
+      assert.strictEqual(warnStub.calledOnce, true);
+      const firstWarn = warnStub.getCall(0).args[0] as string;
+      assert.strictEqual(
+        firstWarn,
+        'Send TimeSeries failed: first failure with control chars',
+      );
+
+      // Consecutive failure should be suppressed while already logged.
+      (exporter as any)._lastExported = new Date(0);
+      sendStub.rejects(new Error('second consecutive failure'));
+      const secondResult = await new Promise<ExportResult>(resolve => {
+        exporter.export(resourceMetrics, resolve);
+      });
+      assert.strictEqual(secondResult.code, ExportResultCode.FAILED);
+      assert.strictEqual(warnStub.calledOnce, true);
+
+      // Successful export resets failure warning suppression.
+      (exporter as any)._lastExported = new Date(0);
+      sendStub.resolves();
+      const recoveryResult = await new Promise<ExportResult>(resolve => {
+        exporter.export(resourceMetrics, resolve);
+      });
+      assert.strictEqual(recoveryResult.code, ExportResultCode.SUCCESS);
+      assert.strictEqual(warnStub.calledOnce, true);
+
+      // Failure after recovery logs again.
+      (exporter as any)._lastExported = new Date(0);
+      sendStub.rejects(new Error('failure after recovery'));
+      const postRecoveryResult = await new Promise<ExportResult>(resolve => {
+        exporter.export(resourceMetrics, resolve);
+      });
+      assert.strictEqual(postRecoveryResult.code, ExportResultCode.FAILED);
+      assert.strictEqual(warnStub.calledTwice, true);
+      assert.ok(
+        (warnStub.getCall(1).args[0] as string).includes(
+          'failure after recovery',
+        ),
+      );
+    } finally {
+      warnStub.restore();
+      sendStub.restore();
     }
   });
 });
