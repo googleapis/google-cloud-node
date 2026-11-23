@@ -439,6 +439,20 @@ function universeDomainOfVm(client: object) {
 }
 
 /**
+ * Whether `client` is an instance of `type`. An instance created by another
+ * copy of the auth library is recognised by the name of its class.
+ *
+ * @param client The client to look at.
+ * @param type The class of the auth library.
+ */
+function isA(
+  client: object | undefined,
+  type: typeof Compute | typeof PassThroughClient,
+) {
+  return client instanceof type || client?.constructor?.name === type.name;
+}
+
+/**
  * Verifies that the credentials of `auth` belong to `universeDomain`. An
  * absent auth object has no credentials to verify.
  *
@@ -462,9 +476,8 @@ export async function assertUniverseDomain(
     client = await nested.getClient();
   }
   // A pass-through client sends no credentials.
-  if (client instanceof PassThroughClient) return;
-  const isVm =
-    client instanceof Compute || client?.constructor?.name === Compute.name;
+  if (isA(client, PassThroughClient)) return;
+  const isVm = isA(client, Compute);
   const found = [
     universeDomainOfFile(googleAuth?.jsonContent as CredentialFile | null),
     // Credentials of a VM report the default universe domain wherever the VM

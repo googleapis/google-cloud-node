@@ -409,6 +409,18 @@ describe('universe domain', () => {
       await assertUniverseDomain(auth, OTHER_UNIVERSE);
     });
 
+    it('should accept a client that sends no credentials created by another copy of the auth library', async () => {
+      // Has the name of the class, without being an instance of it.
+      const client = new (class PassThroughClient {
+        universeDomain = DEFAULT_UNIVERSE;
+      })();
+
+      await assertUniverseDomain(
+        {getClient: async () => client},
+        OTHER_UNIVERSE,
+      );
+    });
+
     describe('credentials of a VM', () => {
       let lookup: sinon.SinonStub;
 
