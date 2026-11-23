@@ -16,7 +16,13 @@ import * as crypto from 'crypto';
 import * as http from 'http';
 import * as url from 'url';
 import {ExceptionMessages, Storage} from './storage.js';
-import {encodeURI, qsStringify, objectEntries, formatAsUTCISO} from './util.js';
+import {
+  encodeURI,
+  qsStringify,
+  objectEntries,
+  formatAsUTCISO,
+  signBlob,
+} from './util.js';
 import {GoogleAuth} from 'google-auth-library';
 
 type GoogleAuthLike = Pick<GoogleAuth, 'getCredentials' | 'sign'>;
@@ -245,7 +251,9 @@ export class URLSigner {
     const sign = async () => {
       const auth = this.auth;
       try {
-        const signature = await auth.sign(
+        const signature = await signBlob(
+          auth,
+          this.storage.universeDomain,
           blobToSign,
           config.signingEndpoint?.toString(),
         );
@@ -357,7 +365,9 @@ export class URLSigner {
       ].join('\n');
 
       try {
-        const signature = await this.auth.sign(
+        const signature = await signBlob(
+          this.auth,
+          this.storage.universeDomain,
           blobToSign,
           config.signingEndpoint?.toString(),
         );

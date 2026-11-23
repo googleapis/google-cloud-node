@@ -996,6 +996,55 @@ describe('Transfer Manager', () => {
       assert(called);
     });
 
+    describe('universe domain', () => {
+      const OTHER_UNIVERSE = 'example-universe.test';
+      let authClient: GoogleAuth;
+      let requestStub: sinon.SinonStub;
+
+      beforeEach(() => {
+        authClient = new GoogleAuth({
+          credentials: {
+            type: 'service_account',
+            client_email: 'test@example.iam.gserviceaccount.com',
+            private_key: 'not-a-real-key',
+            universe_domain: OTHER_UNIVERSE,
+          },
+        });
+        requestStub = sandbox.stub(authClient, 'request');
+        transferManager.bucket.storage.storageTransport.authClient = authClient;
+      });
+
+      // Each step makes its own requests: the first one starts the upload,
+      // the second one uploads a part, the third one completes the upload.
+      // The last two also abort the upload once they fail.
+      const steps = {
+        starting: {},
+        resuming: {uploadId: '123', partsMap: new Map<number, string>()},
+        completing: {uploadId: '123', partsMap: new Map([[1, 'etag']])},
+      };
+
+      for (const [step, options] of Object.entries(steps)) {
+        it(`should not send a request with credentials of another universe domain when ${step} an upload`, async () => {
+          await assert.rejects(
+            transferManager.uploadFileInChunks(filePath, options),
+            /does not match the universe domain found in the credentials/,
+          );
+          assert.strictEqual(requestStub.called, false);
+        });
+      }
+
+      it('should send a request with credentials of the configured universe domain', async () => {
+        requestStub.rejects(new Error('request sent'));
+        transferManager.bucket.storage.universeDomain = OTHER_UNIVERSE;
+
+        await assert.rejects(
+          transferManager.uploadFileInChunks(filePath),
+          /request sent/,
+        );
+        assert.strictEqual(requestStub.called, true);
+      });
+    });
+
     it('should set User-Agent correctly based on package.json', async () => {
       let called = false;
       class TestAuthClient extends AuthClient {
