@@ -317,6 +317,24 @@ describe('universe domain', () => {
       );
     });
 
+    it('should read a universe domain named in camel case', async () => {
+      const credentials = {
+        type: 'external_account',
+        audience:
+          '//iam.googleapis.com/projects/1/locations/global/workloadIdentityPools/pool/providers/provider',
+        subject_token_type: 'urn:ietf:params:oauth:token-type:jwt',
+        token_url: `https://sts.${OTHER_UNIVERSE}/v1/token`,
+        credential_source: {file: '/path/to/token'},
+        universeDomain: OTHER_UNIVERSE,
+      };
+
+      await assertUniverseDomain(authFor(credentials), OTHER_UNIVERSE);
+      await assert.rejects(
+        assertUniverseDomain(authFor(credentials), DEFAULT_UNIVERSE),
+        MISMATCH,
+      );
+    });
+
     it('should use the universe domain reported by the auth client', async () => {
       const auth = new GoogleAuth({
         authClient: new OAuth2Client({universeDomain: OTHER_UNIVERSE}),

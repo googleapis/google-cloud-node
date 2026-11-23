@@ -391,12 +391,14 @@ export function getPLimit(): Promise<PLimit> {
 interface CredentialFile {
   type?: string;
   universe_domain?: string;
+  universeDomain?: string;
   source_credentials?: CredentialFile;
 }
 
 /**
  * Returns the universe domain a credential file belongs to. A file that does
- * not name one belongs to the default universe domain.
+ * not name one belongs to the default universe domain. Credentials given in
+ * code may name it in camel case.
  *
  * @param file The parsed credential file, if one was loaded.
  */
@@ -404,7 +406,8 @@ function universeDomainOfFile(
   file?: CredentialFile | null,
 ): string | undefined {
   if (!file) return undefined;
-  if (file.universe_domain) return file.universe_domain;
+  const universeDomain = file.universe_domain || file.universeDomain;
+  if (universeDomain) return universeDomain;
   return file.type === 'impersonated_service_account'
     ? universeDomainOfFile(file.source_credentials)
     : DEFAULT_UNIVERSE;
