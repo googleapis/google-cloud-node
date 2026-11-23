@@ -56,6 +56,10 @@ export class MetricsTracerFactory {
   private _location = 'global';
   private _locationPromise: Promise<string> | null = null;
   private _metricReaders: MetricReader[] = [];
+  private _exporterTarget: {
+    universeDomain: string;
+    monitoringEndpoint?: string;
+  } | null = null;
   private _projectId: string;
   private _attributesCache: Map<string, Map<string, Record<string, string>>> =
     new Map();
@@ -184,6 +188,7 @@ export class MetricsTracerFactory {
     }
     this._meterProvider = null;
     this._metricReaders = [];
+    this._exporterTarget = null;
     this._attributesCache = new Map();
   }
 
@@ -255,6 +260,41 @@ export class MetricsTracerFactory {
    */
   public hasMetricReaders(): boolean {
     return this._metricReaders.length > 0;
+  }
+
+  /**
+   * Records the active Cloud Monitoring exporter target bound to this singleton.
+   *
+   * @param universeDomain Resolved universe domain for the attached exporter.
+   * @param monitoringEndpoint Optional normalized monitoring endpoint override.
+   */
+  public setExporterTarget(
+    universeDomain: string,
+    monitoringEndpoint?: string,
+  ): void {
+    this._exporterTarget = {universeDomain, monitoringEndpoint};
+  }
+
+  /**
+   * Returns true if the active exporter target matches the given universe domain
+   * and monitoring endpoint override. Fails closed (returns false) when no
+   * exporter target has been recorded.
+   *
+   * @param universeDomain Resolved universe domain to check.
+   * @param monitoringEndpoint Optional normalized monitoring endpoint override.
+   * @returns True only when a recorded exporter target matches exactly.
+   */
+  public matchesExporterTarget(
+    universeDomain: string,
+    monitoringEndpoint?: string,
+  ): boolean {
+    if (this._exporterTarget === null) {
+      return false;
+    }
+    return (
+      this._exporterTarget.universeDomain === universeDomain &&
+      this._exporterTarget.monitoringEndpoint === monitoringEndpoint
+    );
   }
 
   /**

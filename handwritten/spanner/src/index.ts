@@ -104,7 +104,11 @@ import {
 } from './request_id_header';
 import {PeriodicExportingMetricReader} from '@opentelemetry/sdk-metrics';
 import {MetricInterceptor} from './metrics/interceptor';
-import {CloudMonitoringMetricsExporter} from './metrics/spanner-metrics-exporter';
+import {
+  CloudMonitoringMetricsExporter,
+  parseMonitoringEndpoint,
+} from './metrics/spanner-metrics-exporter';
+import {ExporterOptions} from './metrics/external-types';
 import {MetricsTracerFactory} from './metrics/metrics-tracer-factory';
 import {MetricsTracer} from './metrics/metrics-tracer';
 import {RequestStreamCoordinator} from './request-stream-coordinator';
@@ -1677,29 +1681,93 @@ class Spanner extends GrpcService {
    * Setup the OpenTelemetry metrics capturing for service metrics to Google Cloud Monitoring.
    */
   configureMetrics_(disableBuiltInMetrics?: boolean) {
-    // Only enable metrics if not explicitly disabled and we are not using
-    // insecure credentials.
+    // Only enable metrics if not explicitly disabled, using secure credentials,
+    // and not confined to a custom Spanner endpoint without an explicit monitoring host.
     const metricsExplicitlyDisabled =
       process.env.SPANNER_DISABLE_BUILTIN_METRICS === 'true' ||
       !!disableBuiltInMetrics;
+    const spannerOptions = this.options as SpannerOptions;
+    const hasCustomEndpoint = Boolean(
+      spannerOptions.apiEndpoint || spannerOptions.servicePath,
+    );
+    const rawMonitoringHost = process.env.SPANNER_MONITORING_HOST?.trim();
+    const monitoringHost = rawMonitoringHost ? rawMonitoringHost : undefined;
+    const disabledByCustomEndpoint = hasCustomEndpoint && !monitoringHost;
+
     this._metricsEnabled =
-      !metricsExplicitlyDisabled && !this._isInSecureCredentials;
-    MetricsTracerFactory.enabled = this._metricsEnabled;
+      !metricsExplicitlyDisabled &&
+      !this._isInSecureCredentials &&
+      !disabledByCustomEndpoint;
+
+    const disabledSolelyByCustomEndpoint =
+      !metricsExplicitlyDisabled &&
+      !this._isInSecureCredentials &&
+      disabledByCustomEndpoint;
+
+    // Do not clear the global static flag when disabled solely due to a custom
+    // Spanner endpoint so sibling default-endpoint clients remain unaffected.
+    if (!disabledSolelyByCustomEndpoint) {
+      MetricsTracerFactory.enabled = this._metricsEnabled;
+    }
+
     if (this._metricsEnabled) {
+      // Validate universeDomain and SPANNER_MONITORING_HOST synchronously before
+      // any async getProjectId lookup so invalid configs fail closed at construction.
+      const universeDomain = this._universeDomain?.trim() ?? '';
+      if (!universeDomain) {
+        throw new Error('universeDomain cannot be empty.');
+      }
+      const parsedMonitoringEndpoint = monitoringHost
+        ? parseMonitoringEndpoint(monitoringHost)
+        : undefined;
+      const monitoringTargetKey = parsedMonitoringEndpoint
+        ? parsedMonitoringEndpoint.port !== undefined
+          ? `${parsedMonitoringEndpoint.apiEndpoint}:${parsedMonitoringEndpoint.port}`
+          : parsedMonitoringEndpoint.apiEndpoint
+        : undefined;
+      const exporterOptions: ExporterOptions = {
+        auth: this.auth,
+        universeDomain,
+        ...(parsedMonitoringEndpoint ?? {}),
+      };
+
       const initializeMetrics = (projectId: string) => {
-        this.projectId_ = projectId;
-        const factory = MetricsTracerFactory.getInstance(projectId);
-        if (factory && !factory.hasMetricReaders()) {
-          context.with(ROOT_CONTEXT, () => {
-            const periodicReader = new PeriodicExportingMetricReader({
-              exporter: new CloudMonitoringMetricsExporter(
-                {auth: this.auth},
-                projectId,
-              ),
-              exportIntervalMillis: 60000,
+        try {
+          const factory = MetricsTracerFactory.getInstance(projectId);
+          if (!factory) {
+            return;
+          }
+          if (!factory.hasMetricReaders()) {
+            context.with(ROOT_CONTEXT, () => {
+              const periodicReader = new PeriodicExportingMetricReader({
+                exporter: new CloudMonitoringMetricsExporter(
+                  exporterOptions,
+                  projectId,
+                ),
+                exportIntervalMillis: 60000,
+              });
+              factory.getMeterProvider([periodicReader]);
+              factory.setExporterTarget(universeDomain, monitoringTargetKey);
             });
-            factory.getMeterProvider([periodicReader]);
-          });
+          } else if (
+            !factory.matchesExporterTarget(universeDomain, monitoringTargetKey)
+          ) {
+            // Prevent cross-universe telemetry export on the shared singleton
+            // without disrupting the client that initialized the active exporter.
+            this._metricsEnabled = false;
+            console.warn(
+              'Built-in metrics disabled for this Spanner client because the process-wide metrics exporter is already initialized for a different universe domain or monitoring endpoint.',
+            );
+            return;
+          }
+          this.projectId_ = projectId;
+        } catch (err) {
+          this._metricsEnabled = false;
+          console.error(
+            'Unable to configure client side metrics, will skip exporting client' +
+              ' side metrics' +
+              err,
+          );
         }
       };
 

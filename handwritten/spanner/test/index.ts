@@ -41,6 +41,8 @@ import {Duplex} from 'stream';
 import {EventEmitter} from 'events';
 import {CLOUD_RESOURCE_HEADER, AFE_SERVER_TIMING_HEADER} from '../src/common';
 import {MetricsTracerFactory} from '../src/metrics/metrics-tracer-factory';
+import {ExporterOptions} from '../src/metrics/external-types';
+import {parseMonitoringEndpoint} from '../src/metrics/spanner-metrics-exporter';
 import IsolationLevel = protos.google.spanner.v1.TransactionOptions.IsolationLevel;
 import ReadLockMode = protos.google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode;
 const singer = require('./data/singer');
@@ -136,10 +138,19 @@ const fakeV1: any = {
   SpannerClient: fakeGapicClient,
 };
 
+let getProjectIdOverride:
+  | ((
+      callback?: (err: Error | null, projectId?: string) => void,
+    ) => void | Promise<string>)
+  | null = null;
+
 function fakeGoogleAuth() {
   return {
     calledWith_: arguments,
     getProjectId: function (callback) {
+      if (getProjectIdOverride) {
+        return getProjectIdOverride(callback);
+      }
       if (callback) {
         callback(null, 'project-id');
         return;
@@ -148,6 +159,27 @@ function fakeGoogleAuth() {
       }
     },
   };
+}
+
+let recordedExporterCalls: Array<{
+  options: ExporterOptions;
+  projectId: string;
+}> = [];
+let exporterConstructorOverride:
+  ((options: ExporterOptions, projectId: string) => void) | null = null;
+
+class RecordingCloudMonitoringMetricsExporter {
+  constructor(options: ExporterOptions, projectId: string) {
+    if (exporterConstructorOverride) {
+      exporterConstructorOverride(options, projectId);
+    }
+    recordedExporterCalls.push({options, projectId});
+  }
+  export(_metrics, resultCallback: (result: {code: number}) => void) {
+    resultCallback({code: 0});
+  }
+  async shutdown() {}
+  async forceFlush() {}
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -211,6 +243,10 @@ describe('Spanner', () => {
       './codec.js': {codec: fakeCodec},
       './instance.js': {Instance: FakeInstance},
       './instance-config.js': {InstanceConfig: FakeInstanceConfig},
+      './metrics/spanner-metrics-exporter': {
+        CloudMonitoringMetricsExporter: RecordingCloudMonitoringMetricsExporter,
+        parseMonitoringEndpoint,
+      },
       './v1': fakeV1,
     }).Spanner;
   });
@@ -229,6 +265,9 @@ describe('Spanner', () => {
     spanner = new Spanner(OPTIONS);
     spanner.projectId = OPTIONS.projectId;
     replaceProjectIdTokenOverride = null;
+    getProjectIdOverride = null;
+    recordedExporterCalls = [];
+    exporterConstructorOverride = null;
   });
 
   afterEach(() => sandbox.restore());
@@ -592,6 +631,340 @@ describe('Spanner', () => {
         assert.deepStrictEqual(err, fakeError);
       }
       delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+    });
+  });
+
+  describe('built-in metrics endpoint and universe domain configuration', () => {
+    let savedUniverseDomain: string | undefined;
+    let savedMonitoringHost: string | undefined;
+    let savedEmulatorHost: string | undefined;
+    let savedDisableMetrics: string | undefined;
+
+    beforeEach(async () => {
+      savedUniverseDomain = process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+      savedMonitoringHost = process.env.SPANNER_MONITORING_HOST;
+      savedEmulatorHost = process.env.SPANNER_EMULATOR_HOST;
+      savedDisableMetrics = process.env.SPANNER_DISABLE_BUILTIN_METRICS;
+      delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+      delete process.env.SPANNER_MONITORING_HOST;
+      delete process.env.SPANNER_EMULATOR_HOST;
+      recordedExporterCalls = [];
+      exporterConstructorOverride = null;
+      getProjectIdOverride = null;
+      await enableMetrics(sandbox);
+    });
+
+    afterEach(async () => {
+      await MetricsTracerFactory.resetInstance();
+      if (savedUniverseDomain === undefined) {
+        delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+      } else {
+        process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = savedUniverseDomain;
+      }
+      if (savedMonitoringHost === undefined) {
+        delete process.env.SPANNER_MONITORING_HOST;
+      } else {
+        process.env.SPANNER_MONITORING_HOST = savedMonitoringHost;
+      }
+      if (savedEmulatorHost === undefined) {
+        delete process.env.SPANNER_EMULATOR_HOST;
+      } else {
+        process.env.SPANNER_EMULATOR_HOST = savedEmulatorHost;
+      }
+      if (savedDisableMetrics === undefined) {
+        delete process.env.SPANNER_DISABLE_BUILTIN_METRICS;
+      } else {
+        process.env.SPANNER_DISABLE_BUILTIN_METRICS = savedDisableMetrics;
+      }
+    });
+
+    // T6: universeDomain, universe_domain, and GOOGLE_CLOUD_UNIVERSE_DOMAIN are forwarded to exporter.
+    it('should forward universeDomain from option, universe_domain alias, and env var to exporter', async () => {
+      new Spanner({
+        projectId: 'tpc-project',
+        universeDomain: 'my-tpc.example',
+      });
+      assert.strictEqual(recordedExporterCalls.length, 1);
+      assert.strictEqual(
+        recordedExporterCalls[0].options.universeDomain,
+        'my-tpc.example',
+      );
+      assert.strictEqual(
+        recordedExporterCalls[0].options.apiEndpoint,
+        undefined,
+      );
+      assert.strictEqual(recordedExporterCalls[0].options.port, undefined);
+
+      await MetricsTracerFactory.resetInstance();
+      recordedExporterCalls = [];
+
+      new Spanner({
+        projectId: 'tpc-project',
+        universe_domain: 'my-tpc-snake.example',
+      });
+      assert.strictEqual(recordedExporterCalls.length, 1);
+      assert.strictEqual(
+        recordedExporterCalls[0].options.universeDomain,
+        'my-tpc-snake.example',
+      );
+
+      await MetricsTracerFactory.resetInstance();
+      recordedExporterCalls = [];
+
+      process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = 'env-tpc.example';
+      new Spanner({projectId: 'tpc-project'});
+      assert.strictEqual(recordedExporterCalls.length, 1);
+      assert.strictEqual(
+        recordedExporterCalls[0].options.universeDomain,
+        'env-tpc.example',
+      );
+    });
+
+    // T7: Custom apiEndpoint or servicePath disables built-in metrics without affecting sibling clients.
+    it('should disable built-in metrics for custom apiEndpoint or servicePath without clearing global flag for siblings', async () => {
+      const apiEndpointClient = new Spanner({
+        projectId: 'tpc-project',
+        apiEndpoint: 'spanner.custom-universe.example',
+      });
+      assert.strictEqual(asAny(apiEndpointClient)._metricsEnabled, false);
+      assert.strictEqual(recordedExporterCalls.length, 0);
+
+      const servicePathClient = new Spanner({
+        projectId: 'tpc-project',
+        servicePath: 'spanner.custom-universe.example',
+      });
+      assert.strictEqual(asAny(servicePathClient)._metricsEnabled, false);
+      assert.strictEqual(recordedExporterCalls.length, 0);
+
+      // Verify a custom-endpoint client does not disable a pending default-universe sibling.
+      const pendingCallbacks: Array<
+        (err: Error | null, projectId?: string) => void
+      > = [];
+      getProjectIdOverride = cb => {
+        if (cb) {
+          pendingCallbacks.push(cb);
+        }
+      };
+      const defaultClient = new Spanner();
+      const siblingCustomClient = new Spanner({
+        projectId: 'tpc-project',
+        apiEndpoint: 'spanner.custom-universe.example',
+      });
+      assert.strictEqual(asAny(siblingCustomClient)._metricsEnabled, false);
+      assert.strictEqual(MetricsTracerFactory.enabled, true);
+
+      assert.strictEqual(pendingCallbacks.length, 1);
+      pendingCallbacks[0](null, 'default-project');
+      assert.strictEqual(asAny(defaultClient)._metricsEnabled, true);
+      assert.strictEqual(recordedExporterCalls.length, 1);
+      assert.strictEqual(
+        recordedExporterCalls[0].options.universeDomain,
+        'googleapis.com',
+      );
+    });
+
+    // T8: SPANNER_MONITORING_HOST enables metrics on custom endpoint, ignores whitespace, and rejects malformed values.
+    it('should honor SPANNER_MONITORING_HOST on custom endpoints and fail closed on malformed values', async () => {
+      process.env.SPANNER_MONITORING_HOST =
+        'monitoring.custom-universe.example:8443';
+      const enabledClient = new Spanner({
+        projectId: 'tpc-project',
+        apiEndpoint: 'spanner.custom-universe.example',
+      });
+      assert.strictEqual(asAny(enabledClient)._metricsEnabled, true);
+      assert.strictEqual(recordedExporterCalls.length, 1);
+      assert.strictEqual(
+        recordedExporterCalls[0].options.apiEndpoint,
+        'monitoring.custom-universe.example',
+      );
+      assert.strictEqual(recordedExporterCalls[0].options.port, 8443);
+      assert.strictEqual(
+        recordedExporterCalls[0].options.universeDomain,
+        'googleapis.com',
+      );
+
+      await MetricsTracerFactory.resetInstance();
+      recordedExporterCalls = [];
+
+      process.env.SPANNER_MONITORING_HOST = '   ';
+      const whitespaceClient = new Spanner({
+        projectId: 'tpc-project',
+        apiEndpoint: 'spanner.custom-universe.example',
+      });
+      assert.strictEqual(asAny(whitespaceClient)._metricsEnabled, false);
+      assert.strictEqual(recordedExporterCalls.length, 0);
+
+      process.env.SPANNER_MONITORING_HOST = 'https://bad-host';
+      assert.throws(() => new Spanner({projectId: 'tpc-project'}), Error);
+      assert.throws(() => new Spanner(), Error);
+    });
+
+    // T9: Emulator, insecure creds, and explicit disable flags take precedence over SPANNER_MONITORING_HOST.
+    it('should keep metrics disabled for emulator, insecure creds, or explicit disable flags even with SPANNER_MONITORING_HOST', async () => {
+      process.env.SPANNER_MONITORING_HOST =
+        'monitoring.custom-universe.example:8443';
+
+      process.env.SPANNER_EMULATOR_HOST = 'localhost:9010';
+      const emulatorClient = new Spanner({projectId: 'emulator-project'});
+      assert.strictEqual(asAny(emulatorClient)._metricsEnabled, false);
+      assert.strictEqual(recordedExporterCalls.length, 0);
+      delete process.env.SPANNER_EMULATOR_HOST;
+
+      const insecureClient = new Spanner({
+        projectId: 'insecure-project',
+        sslCreds: grpc.credentials.createInsecure(),
+      });
+      assert.strictEqual(asAny(insecureClient)._metricsEnabled, false);
+      assert.strictEqual(recordedExporterCalls.length, 0);
+
+      const optionDisabledClient = new Spanner({
+        projectId: 'disabled-project',
+        disableBuiltInMetrics: true,
+      });
+      assert.strictEqual(asAny(optionDisabledClient)._metricsEnabled, false);
+      assert.strictEqual(recordedExporterCalls.length, 0);
+
+      sandbox
+        .stub(process.env, 'SPANNER_DISABLE_BUILTIN_METRICS')
+        .value('true');
+      const envDisabledClient = new Spanner({projectId: 'env-disabled'});
+      assert.strictEqual(asAny(envDisabledClient)._metricsEnabled, false);
+      assert.strictEqual(recordedExporterCalls.length, 0);
+    });
+
+    // T10: Synchronous universeDomain validation and async getProjectId callback error containment.
+    it('should validate empty universeDomain synchronously when enabled and catch exporter throws in async getProjectId', () => {
+      assert.throws(
+        () => new Spanner({projectId: 'p', universeDomain: '   '}),
+        /universeDomain cannot be empty/,
+      );
+      assert.throws(
+        () => new Spanner({universeDomain: '   '}),
+        /universeDomain cannot be empty/,
+      );
+      assert.doesNotThrow(
+        () => new Spanner({universeDomain: '   ', disableBuiltInMetrics: true}),
+      );
+
+      let capturedCallback:
+        ((err: Error | null, projectId?: string) => void) | undefined;
+      getProjectIdOverride = cb => {
+        capturedCallback = cb;
+      };
+      exporterConstructorOverride = () => {
+        throw new Error('exporter init failure');
+      };
+      const errorStub = sandbox.stub(console, 'error');
+      const client = new Spanner();
+      assert.ok(capturedCallback);
+      assert.doesNotThrow(() => capturedCallback!(null, 'async-project'));
+      assert.strictEqual(asAny(client)._metricsEnabled, false);
+      assert.strictEqual(errorStub.calledOnce, true);
+    });
+
+    // T11: Sync mixed-universe process disables metrics on mismatched second client without affecting first.
+    it('should disable metrics on a second client with a mismatched universeDomain in the same process', () => {
+      const warnStub = sandbox.stub(console, 'warn');
+      const clientA = new Spanner({projectId: 'project-a'});
+      assert.strictEqual(asAny(clientA)._metricsEnabled, true);
+      assert.strictEqual(recordedExporterCalls.length, 1);
+
+      const clientB = new Spanner({
+        projectId: 'project-b',
+        universeDomain: 'custom-universe.example',
+      });
+      assert.strictEqual(asAny(clientB)._metricsEnabled, false);
+      assert.strictEqual(asAny(clientA)._metricsEnabled, true);
+      assert.strictEqual(MetricsTracerFactory.enabled, true);
+      assert.strictEqual(recordedExporterCalls.length, 1);
+      assert.strictEqual(warnStub.calledOnce, true);
+    });
+
+    // T11b: Async mixed-universe process (no projectId) guards against mismatch in both callback orders.
+    it('should guard mixed-universe clients resolving getProjectId asynchronously in both orders', async () => {
+      const runAsyncOrder = async (resolveFirstIndex: 0 | 1) => {
+        await MetricsTracerFactory.resetInstance();
+        MetricsTracerFactory.enabled = true;
+        recordedExporterCalls = [];
+        const callbacks: Array<
+          (err: Error | null, projectId?: string) => void
+        > = [];
+        getProjectIdOverride = cb => {
+          if (cb) {
+            callbacks.push(cb);
+          }
+        };
+        const warnStub = sandbox.stub(console, 'warn');
+        try {
+          const clientA = new Spanner();
+          const clientB = new Spanner({
+            universeDomain: 'custom-universe.example',
+          });
+          assert.strictEqual(callbacks.length, 2);
+
+          const secondIndex = resolveFirstIndex === 0 ? 1 : 0;
+          callbacks[resolveFirstIndex](null, `project-${resolveFirstIndex}`);
+          callbacks[secondIndex](null, `project-${secondIndex}`);
+
+          const firstClient = resolveFirstIndex === 0 ? clientA : clientB;
+          const secondClient = resolveFirstIndex === 0 ? clientB : clientA;
+          const expectedUniverse =
+            resolveFirstIndex === 0
+              ? 'googleapis.com'
+              : 'custom-universe.example';
+
+          assert.strictEqual(recordedExporterCalls.length, 1);
+          assert.strictEqual(
+            recordedExporterCalls[0].options.universeDomain,
+            expectedUniverse,
+          );
+          assert.strictEqual(asAny(firstClient)._metricsEnabled, true);
+          assert.strictEqual(asAny(secondClient)._metricsEnabled, false);
+          assert.strictEqual(MetricsTracerFactory.enabled, true);
+          assert.strictEqual(warnStub.calledOnce, true);
+        } finally {
+          warnStub.restore();
+        }
+      };
+
+      await runAsyncOrder(0);
+      await runAsyncOrder(1);
+    });
+
+    // T12: Same-universe clients share the active exporter and keep metrics enabled (sync and async).
+    it('should keep metrics enabled for same-universe clients sharing the exporter (sync and async)', () => {
+      const warnStub = sandbox.stub(console, 'warn');
+      const clientA = new Spanner({projectId: 'project-a'});
+      const clientB = new Spanner({projectId: 'project-b'});
+      assert.strictEqual(asAny(clientA)._metricsEnabled, true);
+      assert.strictEqual(asAny(clientB)._metricsEnabled, true);
+      assert.strictEqual(asAny(clientB).projectId_, 'project-b');
+      assert.strictEqual(recordedExporterCalls.length, 1);
+
+      const callbacks: Array<(err: Error | null, projectId?: string) => void> =
+        [];
+      getProjectIdOverride = cb => {
+        if (cb) {
+          callbacks.push(cb);
+        }
+      };
+      const clientC = new Spanner();
+      assert.strictEqual(callbacks.length, 1);
+      callbacks[0](null, 'project-c');
+      assert.strictEqual(asAny(clientC)._metricsEnabled, true);
+      assert.strictEqual(asAny(clientC).projectId_, 'project-c');
+      assert.strictEqual(recordedExporterCalls.length, 1);
+      assert.strictEqual(warnStub.called, false);
+    });
+
+    // F3: Pin exact error message regex for malformed SPANNER_MONITORING_HOST.
+    it('should reject malformed SPANNER_MONITORING_HOST with protocol scheme error message', () => {
+      process.env.SPANNER_MONITORING_HOST = 'https://bad-host';
+      assert.throws(
+        () => new Spanner({projectId: 'tpc-project'}),
+        /must not include a protocol scheme/,
+      );
+      assert.throws(() => new Spanner(), /must not include a protocol scheme/);
     });
   });
 

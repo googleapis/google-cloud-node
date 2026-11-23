@@ -97,6 +97,8 @@ const spanner = new Spanner({
 
 You can also disable these metrics by setting `SPANNER_DISABLE_BUILTIN_METRICS` to `true`.
 
+When a custom Spanner `apiEndpoint` or `servicePath` is configured, built-in metrics are automatically disabled to avoid sending telemetry or credentials to the default Cloud Monitoring endpoint. To export built-in metrics to a specific Cloud Monitoring endpoint (for example, with a custom endpoint or override), set the `SPANNER_MONITORING_HOST` environment variable using `host`, `host:port`, `[ipv6]`, or `[ipv6]:port` format (without a protocol scheme). Malformed `SPANNER_MONITORING_HOST` values fail closed by throwing an error during `Spanner` client construction when metrics are enabled.
+
 > Note: Client-side metrics needs `monitoring.timeSeries.create` IAM permission to export metrics data. Ask your administrator to grant your service account the [Monitoring Metric Writer](https://cloud.google.com/iam/docs/roles-permissions/monitoring#monitoring.metricWriter) (roles/monitoring.metricWriter) IAM role on the project.
 
 ## Traces

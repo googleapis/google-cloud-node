@@ -25,6 +25,136 @@ import {MIN_EXPORT_FREQUENCY_MS} from './constants';
 export const MAX_BATCH_EXPORT_SIZE = 200;
 
 /**
+ * Validates that a port number is an integer within the TCP/UDP range 1–65535.
+ *
+ * @param port The numeric port value to validate.
+ * @returns The validated port number.
+ */
+function validatePort(port: number): number {
+  if (!Number.isInteger(port) || port < 1 || port > 65535) {
+    throw new Error(`Invalid monitoring endpoint port: ${port}`);
+  }
+  return port;
+}
+
+/**
+ * Parses and validates a Cloud Monitoring endpoint string (`host`, `host:port`,
+ * `[ipv6]`, or `[ipv6]:port`) into separate `apiEndpoint` and optional `port`
+ * fields suitable for `MetricServiceClient` / `google-gax`.
+ *
+ * Brackets around IPv6 addresses are preserved on `apiEndpoint` because
+ * `google-gax` builds the gRPC target as `${servicePath}:${port}`.
+ *
+ * @param endpoint The monitoring endpoint string to parse.
+ * @param explicitPort Optional explicit port number.
+ * @returns Parsed `{apiEndpoint, port}` object.
+ */
+export function parseMonitoringEndpoint(
+  endpoint: string,
+  explicitPort?: number,
+): {apiEndpoint: string; port?: number} {
+  if (typeof endpoint !== 'string' || endpoint.trim() === '') {
+    throw new Error('Monitoring endpoint cannot be empty.');
+  }
+  if (endpoint !== endpoint.trim() || /\s/.test(endpoint)) {
+    throw new Error('Monitoring endpoint must not contain whitespace.');
+  }
+  if (
+    /^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(endpoint) ||
+    endpoint.startsWith('http:') ||
+    endpoint.startsWith('https:')
+  ) {
+    throw new Error(
+      'Monitoring endpoint must not include a protocol scheme (http/https).',
+    );
+  }
+  if (
+    endpoint.includes('/') ||
+    endpoint.includes('?') ||
+    endpoint.includes('#')
+  ) {
+    throw new Error(
+      'Monitoring endpoint must not contain path, query, or fragment components.',
+    );
+  }
+
+  let host: string;
+  let embeddedPort: number | undefined;
+
+  if (endpoint.startsWith('[')) {
+    const closeIdx = endpoint.indexOf(']');
+    if (closeIdx === -1) {
+      throw new Error('Monitoring endpoint has an unclosed IPv6 bracket.');
+    }
+    const innerHost = endpoint.slice(1, closeIdx);
+    if (
+      innerHost.length === 0 ||
+      innerHost.includes('[') ||
+      innerHost.includes(']')
+    ) {
+      throw new Error('Monitoring endpoint has an invalid IPv6 host.');
+    }
+    // Preserve brackets so google-gax builds `[ipv6]:port`.
+    host = endpoint.slice(0, closeIdx + 1);
+    const remainder = endpoint.slice(closeIdx + 1);
+    if (remainder.length > 0) {
+      if (!remainder.startsWith(':')) {
+        throw new Error(
+          'Monitoring endpoint has unexpected characters after IPv6 bracket.',
+        );
+      }
+      const portStr = remainder.slice(1);
+      if (!/^\d+$/.test(portStr)) {
+        throw new Error(`Invalid monitoring endpoint port: ${portStr}`);
+      }
+      embeddedPort = validatePort(Number(portStr));
+    }
+  } else {
+    if (endpoint.includes('[') || endpoint.includes(']')) {
+      throw new Error('Monitoring endpoint has malformed IPv6 brackets.');
+    }
+    const firstColon = endpoint.indexOf(':');
+    const lastColon = endpoint.lastIndexOf(':');
+    if (firstColon !== lastColon) {
+      throw new Error(
+        'IPv6 monitoring endpoints must be enclosed in brackets, e.g. [::1] or [::1]:443.',
+      );
+    }
+    if (firstColon !== -1) {
+      host = endpoint.slice(0, firstColon);
+      const portStr = endpoint.slice(firstColon + 1);
+      if (host.length === 0) {
+        throw new Error('Monitoring endpoint host cannot be empty.');
+      }
+      if (!/^\d+$/.test(portStr)) {
+        throw new Error(`Invalid monitoring endpoint port: ${portStr}`);
+      }
+      embeddedPort = validatePort(Number(portStr));
+    } else {
+      host = endpoint;
+    }
+  }
+
+  if (explicitPort !== undefined) {
+    validatePort(explicitPort);
+  }
+  if (
+    embeddedPort !== undefined &&
+    explicitPort !== undefined &&
+    embeddedPort !== explicitPort
+  ) {
+    throw new Error(
+      `Conflicting monitoring endpoint ports: ${embeddedPort} and ${explicitPort}.`,
+    );
+  }
+
+  const resolvedPort = explicitPort ?? embeddedPort;
+  return resolvedPort !== undefined
+    ? {apiEndpoint: host, port: resolvedPort}
+    : {apiEndpoint: host};
+}
+
+/**
  * Format and sends metrics information to Google Cloud Monitoring.
  */
 export class CloudMonitoringMetricsExporter implements PushMetricExporter {
@@ -33,8 +163,45 @@ export class CloudMonitoringMetricsExporter implements PushMetricExporter {
   private readonly _client: MetricServiceClient;
   private _metricsExportFailureLogged = false;
 
-  constructor({auth}: ExporterOptions, projectId: string) {
-    this._client = new MetricServiceClient({auth: auth as any});
+  constructor(
+    {auth, universeDomain, apiEndpoint, port}: ExporterOptions,
+    projectId: string,
+  ) {
+    let resolvedUniverseDomain: string | undefined;
+    if (universeDomain !== undefined) {
+      if (typeof universeDomain !== 'string' || universeDomain.trim() === '') {
+        throw new Error('universeDomain cannot be empty.');
+      }
+      resolvedUniverseDomain = universeDomain.trim();
+    } else {
+      const authUniverseDomain = (
+        auth as unknown as {clientOptions?: {universeDomain?: string}}
+      )?.clientOptions?.universeDomain;
+      if (
+        typeof authUniverseDomain === 'string' &&
+        authUniverseDomain.trim() !== ''
+      ) {
+        resolvedUniverseDomain = authUniverseDomain.trim();
+      }
+    }
+
+    const clientOptions: Record<string, unknown> = {auth};
+    if (resolvedUniverseDomain !== undefined) {
+      clientOptions.universeDomain = resolvedUniverseDomain;
+    }
+
+    if (apiEndpoint !== undefined) {
+      const parsed = parseMonitoringEndpoint(apiEndpoint, port);
+      clientOptions.apiEndpoint = parsed.apiEndpoint;
+      if (parsed.port !== undefined) {
+        clientOptions.port = parsed.port;
+      }
+    } else if (port !== undefined) {
+      clientOptions.port = validatePort(port);
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this._client = new MetricServiceClient(clientOptions as any);
 
     this._projectId = projectId;
   }
@@ -99,10 +266,15 @@ export class CloudMonitoringMetricsExporter implements PushMetricExporter {
       ),
     ).catch(e => {
       if (!this._metricsExportFailureLogged) {
-        const error = e as {code: number};
+        const error = e as {code?: number};
         let msg = 'Send TimeSeries failed:';
-        if (error.code === status.PERMISSION_DENIED) {
+        if (error?.code === status.PERMISSION_DENIED) {
           msg += ` Need monitoring metric writer permission on project ${this._projectId}. Follow https://cloud.google.com/spanner/docs/view-manage-client-side-metrics#access-client-side-metrics to set up permissions`;
+        } else {
+          const errorMessage = asError(e).message;
+          if (errorMessage) {
+            msg += ` ${errorMessage}`;
+          }
         }
         console.warn(msg);
         this._metricsExportFailureLogged = true;
