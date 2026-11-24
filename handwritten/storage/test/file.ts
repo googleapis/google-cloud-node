@@ -2327,7 +2327,7 @@ describe('File', () => {
       assert.strictEqual(writable.writableHighWaterMark, highWaterMark);
       writable.write('data');
     });
-      
+
     it('should not load credentials before a resumable upload', done => {
       const getClient = sandbox.stub().rejects(new Error('no credentials'));
       sandbox.define(file.storageTransport, 'authClient', {getClient});
