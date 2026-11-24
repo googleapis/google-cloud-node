@@ -38,7 +38,6 @@ jobs:
   remove_label:
     if: >-
       github.event_name == 'issue_comment' &&
-      !github.event.issue.pull_request &&
       github.event.issue.user.login == github.actor &&
       contains(github.event.issue.labels.*.name, 'needs more info')
     runs-on: ubuntu-latest
