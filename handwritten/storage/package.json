@@ -85,7 +85,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.27.0",
-    "@babel/core": "^7.26.10",
+    "@babel/core": "^7.29.6",
     "@google-cloud/pubsub": "^6.0.0",
     "@types/async-retry": "^1.4.9",
     "@types/duplexify": "^3.6.4",
