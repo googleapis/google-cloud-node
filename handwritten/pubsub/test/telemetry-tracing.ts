@@ -536,6 +536,51 @@ describe('OpenTelemetryTracer', () => {
         'gcp_pubsub',
       );
     });
+
+    it('does not link an ended message span to an ack rpc span', () => {
+      const messageSpan = otel.PubsubSpans.createPublisherSpan(
+        {},
+        'projects/test/topics/topicfoo',
+        'test',
+      ) as trace.Span;
+      messageSpan.end();
+      const addLink = sinon.spy(messageSpan, 'addLink');
+
+      const span = otel.PubsubSpans.createAckRpcSpan(
+        [messageSpan],
+        'subTest',
+        'tests',
+      );
+      assert.ok(span);
+      span.end();
+
+      assert.strictEqual(addLink.callCount, 0);
+      assert.strictEqual(exporter.getFinishedSpans().pop()?.links.length, 1);
+    });
+
+    it('does not link an ended message span to a modack rpc span', () => {
+      const messageSpan = otel.PubsubSpans.createPublisherSpan(
+        {},
+        'projects/test/topics/topicfoo',
+        'test',
+      ) as trace.Span;
+      messageSpan.end();
+      const addLink = sinon.spy(messageSpan, 'addLink');
+
+      const span = otel.PubsubSpans.createModackRpcSpan(
+        [messageSpan],
+        'subTest',
+        'modack',
+        'test',
+        Duration.from({seconds: 1}),
+        true,
+      );
+      assert.ok(span);
+      span.end();
+
+      assert.strictEqual(addLink.callCount, 0);
+      assert.strictEqual(exporter.getFinishedSpans().pop()?.links.length, 1);
+    });
   });
 
   describe('PubsubEvents', () => {
