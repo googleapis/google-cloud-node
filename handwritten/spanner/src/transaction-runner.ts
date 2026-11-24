@@ -27,9 +27,7 @@ import google = protos.google;
 import IRequestOptions = google.spanner.v1.IRequestOptions;
 import IsolationLevel = google.spanner.v1.TransactionOptions.IsolationLevel;
 import ReadLockMode = google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode;
-import {getRetryInfo} from './protos';
-
-const RETRY_INFO = 'google.rpc.retryinfo-bin';
+import {getRetryInfo, RETRY_INFO_BIN} from './protos';
 
 const RETRYABLE: grpc.status[] = [grpc.status.ABORTED];
 
@@ -157,7 +155,7 @@ export abstract class Runner<T> {
    * @returns {number} Delay in milliseconds.
    */
   getNextDelay(err: grpc.ServiceError): number {
-    const retryInfo = err.metadata && err.metadata.get(RETRY_INFO);
+    const retryInfo = err.metadata && err.metadata.get(RETRY_INFO_BIN);
 
     if (retryInfo && retryInfo.length) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

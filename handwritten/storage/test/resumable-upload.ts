@@ -2833,6 +2833,45 @@ describe('resumable-upload', () => {
       assert.ok(res.headers);
     });
 
+    it('should treat a googleapis.com endpoint as a custom endpoint when another universe domain is configured', async () => {
+      up = upload({
+        bucket: BUCKET,
+        file: FILE,
+        userProject: USER_PROJECT,
+        authConfig: {keyFile},
+        universeDomain: 'example-universe.test',
+        apiEndpoint: 'https://storage.googleapis.com',
+        retryOptions: RETRY_OPTIONS,
+      });
+
+      const scopes = [
+        nock(REQ_OPTS.url!).get(queryPath).reply(200, undefined, {}),
+      ];
+      const res = await up.makeRequest(REQ_OPTS);
+      scopes.forEach(x => x.done());
+      assert.strictEqual(
+        getHeader(res.config.headers, 'Authorization'),
+        undefined,
+      );
+    });
+
+    it('should not make a request with credentials of another universe domain', async () => {
+      up = upload({
+        bucket: BUCKET,
+        file: FILE,
+        userProject: USER_PROJECT,
+        authConfig: {keyFile},
+        universeDomain: 'example-universe.test',
+        retryOptions: RETRY_OPTIONS,
+      });
+      const mismatch =
+        /does not match the universe domain found in the credentials/;
+
+      await assert.rejects(up.makeRequest(REQ_OPTS), mismatch);
+      await assert.rejects(up.makeRequestStream(REQ_OPTS), mismatch);
+      await assert.rejects(up.createURI(), mismatch);
+    });
+
     it('should combine customRequestOptions', done => {
       const up = upload({
         bucket: BUCKET,
@@ -3089,14 +3128,24 @@ describe('resumable-upload', () => {
       });
 
       describe('exponential back off', () => {
+        let sandbox: sinon.SinonSandbox;
         let clock: sinon.SinonFakeTimers;
         let setTimeoutSpy: sinon.SinonSpy;
         beforeEach(() => {
-          clock = sinon.useFakeTimers({toFake: ['setTimeout']});
-          setTimeoutSpy = sinon.spy(global, 'setTimeout');
+          sandbox = sinon.createSandbox();
+          clock = sandbox.useFakeTimers({toFake: ['setTimeout']});
+          setTimeoutSpy = sandbox.spy(global, 'setTimeout');
         });
         afterEach(() => {
-          clock.restore();
+          sandbox.restore();
+        });
+
+        it('should restore global setTimeout without leaking to the default sinon sandbox', async () => {
+          sandbox.restore();
+          sinon.restore();
+          await new Promise<void>(resolve => {
+            setTimeout(resolve, 1);
+          });
         });
 
         it('should continue uploading after retry count^2 * random', done => {

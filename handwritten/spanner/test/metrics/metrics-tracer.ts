@@ -281,6 +281,44 @@ describe('MetricsTracer', () => {
       );
     });
 
+    it('should override operation status when finalStatus is passed to recordOperationCompletion', () => {
+      tracer.recordOperationStart();
+      tracer.recordAttemptStart();
+      tracer.recordAttemptCompletion(Status.UNAVAILABLE);
+      tracer.recordOperationCompletion(Status.DEADLINE_EXCEEDED);
+
+      assert.strictEqual(fakeAttemptCounter.add.calledOnce, true);
+      assert.strictEqual(fakeOperationCounter.add.calledOnce, true);
+      const [[, operationCounterAttributes]] = fakeOperationCounter.add.args;
+      assert.strictEqual(
+        operationCounterAttributes[Constants.METRIC_LABEL_KEY_STATUS],
+        'DEADLINE_EXCEEDED',
+      );
+    });
+
+    it('should finalize an in-flight uncompleted attempt when finalStatus is passed to recordOperationCompletion', () => {
+      tracer.recordOperationStart();
+      tracer.recordAttemptStart();
+      // Stream cancelled before recordAttemptCompletion was called by interceptor
+      tracer.recordOperationCompletion(Status.CANCELLED);
+
+      assert.strictEqual(fakeAttemptCounter.add.calledOnce, true);
+      assert.strictEqual(fakeAttemptLatency.record.calledOnce, true);
+      assert.strictEqual(fakeOperationCounter.add.calledOnce, true);
+      assert.strictEqual(fakeOperationLatency.record.calledOnce, true);
+
+      const [[, attemptAttrs]] = fakeAttemptCounter.add.args;
+      const [[, operationAttrs]] = fakeOperationCounter.add.args;
+      assert.strictEqual(
+        attemptAttrs[Constants.METRIC_LABEL_KEY_STATUS],
+        'CANCELLED',
+      );
+      assert.strictEqual(
+        operationAttrs[Constants.METRIC_LABEL_KEY_STATUS],
+        'CANCELLED',
+      );
+    });
+
     it('should safely do nothing if recordOperationCompletion is called without active operation', () => {
       tracer.currentOperation = null;
       assert.doesNotThrow(() => {

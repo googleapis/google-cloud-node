@@ -41,6 +41,7 @@ describe('Storage Transport', () => {
 
     authClientStub = new GoogleAuth();
     sandbox.stub(authClientStub, 'request');
+    sandbox.stub(authClientStub, 'getClient').resolves();
     sandbox.stub(authClientStub, 'getProjectId').resolves('project-id');
 
     transport = new StorageTransport({
@@ -864,6 +865,81 @@ describe('Storage Transport', () => {
           return true;
         },
       );
+    });
+  });
+
+  describe('universe domain', () => {
+    const OTHER_UNIVERSE = 'example-universe.test';
+    const credentials = {
+      type: 'service_account',
+      client_email: 'test@example.iam.gserviceaccount.com',
+      private_key: 'not-a-real-key',
+      universe_domain: OTHER_UNIVERSE,
+    };
+
+    function createTransport(authClient: GoogleAuth, universeDomain?: string) {
+      return new StorageTransport({
+        apiEndpoint: baseUrl,
+        baseUrl,
+        authClient,
+        universeDomain,
+        retryOptions: {
+          maxRetries: 3,
+          retryDelayMultiplier: 2,
+          maxRetryDelay: 100,
+          totalTimeout: 1000,
+          retryableErrorFn: RETRYABLE_ERR_FN_DEFAULT,
+        },
+        scopes: ['https://www.googleapis.com/auth/could-platform'],
+        packageJson: {name: 'test-package', version: '1.0.0'},
+      });
+    }
+
+    function createAuth() {
+      const auth = new GoogleAuth({credentials});
+      const requestStub = sandbox.stub(auth, 'request') as sinon.SinonStub;
+      requestStub.resolves({data: {}, headers: new Map()});
+      const projectIdStub = sandbox
+        .stub(auth, 'getProjectId')
+        .resolves('project-id');
+      return {auth, requestStub, projectIdStub};
+    }
+
+    it('should not use credentials of another universe domain', async () => {
+      const {auth, requestStub, projectIdStub} = createAuth();
+
+      await assert.rejects(
+        createTransport(auth).makeRequest({url: '/bucket/object'}),
+        /The configured universe domain \(googleapis\.com\) does not match the universe domain found in the credentials \(example-universe\.test\)/,
+      );
+      assert.strictEqual(projectIdStub.called, false);
+      assert.strictEqual(requestStub.called, false);
+    });
+
+    it('should send a request with credentials of the configured universe domain', async () => {
+      const {auth, requestStub} = createAuth();
+
+      await createTransport(auth, OTHER_UNIVERSE).makeRequest({
+        url: '/bucket/object',
+      });
+
+      assert.strictEqual(requestStub.calledOnce, true);
+    });
+
+    it('should verify the credentials on every request', async () => {
+      const {auth, requestStub} = createAuth();
+      const transport = createTransport(auth, OTHER_UNIVERSE);
+      await transport.makeRequest({url: '/bucket/object'});
+
+      transport.authClient = new GoogleAuth({
+        credentials: {...credentials, universe_domain: 'googleapis.com'},
+      });
+
+      await assert.rejects(
+        transport.makeRequest({url: '/bucket/object'}),
+        /does not match the universe domain found in the credentials/,
+      );
+      assert.strictEqual(requestStub.calledOnce, true);
     });
   });
 });

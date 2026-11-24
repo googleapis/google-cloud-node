@@ -1,7 +1,3 @@
-handleGHRelease: true
-manifest: true
-tagPullRequestNumber: true
-
 branches:
   - branch: main
     handleGHRelease: true
@@ -10,6 +6,12 @@ branches:
     manifestFile: .release-please-manifest.json
     manifestConfig: release-please-config.json
   - branch: main
+    handleGHRelease: true
+    tagPullRequestNumber: true
+    manifest: true
+    manifestFile: .release-please-manifest.json
+    manifestConfig: release-please-submodules.json
+  - branch: release-spanner-9.1.1
     handleGHRelease: true
     tagPullRequestNumber: true
     manifest: true

@@ -2964,6 +2964,7 @@ describe('Bucket', () => {
 
         const authClient = new GoogleAuth();
         sandbox.stub(authClient, 'request');
+        sandbox.stub(authClient, 'getClient').resolves();
 
         const realTransport = new StorageTransport({
           apiEndpoint: 'https://storage.googleapis.com',
@@ -3053,11 +3054,18 @@ describe('Bucket', () => {
     it('should destroy the local read stream if write stream fails', done => {
       const fakeFile = new File(bucket, 'file-name');
       const options = {destination: fakeFile, resumable: false};
+      const textfilepath = path.join(
+        getDirName(),
+        '../../../test/testdata/textfile.txt',
+      );
       const originalCreateReadStream = fs.createReadStream;
-      let readStream: fs.ReadStream;
-      sandbox.stub(fs, 'createReadStream').callsFake((path, opts) => {
-        readStream = originalCreateReadStream(path, opts);
-        return readStream;
+      let readStream: fs.ReadStream | undefined;
+      sandbox.stub(fs, 'createReadStream').callsFake((filePath, opts) => {
+        const streamInstance = originalCreateReadStream(filePath, opts);
+        if (filePath === textfilepath) {
+          readStream = streamInstance;
+        }
+        return streamInstance;
       });
 
       fakeFile.createWriteStream = () => {
@@ -3068,11 +3076,6 @@ describe('Bucket', () => {
         });
         return ws;
       };
-
-      const textfilepath = path.join(
-        getDirName(),
-        '../../../test/testdata/textfile.txt',
-      );
 
       bucket.upload(textfilepath, options, (err: Error | null) => {
         try {

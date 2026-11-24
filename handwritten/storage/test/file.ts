@@ -26,7 +26,7 @@ import {
   StorageRequestOptions,
   StorageTransport,
 } from '../src/storage-transport.js';
-import sinon, {createSandbox, stub, spy, restore, useFakeTimers} from 'sinon';
+import sinon, {createSandbox} from 'sinon';
 import {GoogleAuth} from 'google-auth-library';
 import {
   FileExceptionMessages,
@@ -103,6 +103,14 @@ describe('File', () => {
   let directoryFile: File;
 
   const DATA = 'test data';
+  const MISMATCH =
+    /does not match the universe domain found in the credentials/;
+  const OTHER_UNIVERSE_CREDENTIALS = {
+    type: 'service_account',
+    client_email: 'test@example.iam.gserviceaccount.com',
+    private_key: 'not-a-real-key',
+    universe_domain: 'example-universe.test',
+  };
   // crc32c hash of 'test data'
   const CRC32C_HASH = 'M3m0yg==';
   // md5 hash of 'test data'
@@ -1393,9 +1401,9 @@ describe('File', () => {
           const rawResponseStream = new PassThrough();
           const gunzipStream = new PassThrough();
           createGunzipOverride = () => gunzipStream;
-          const destroySpy = spy(rawResponseStream, 'destroy');
-          const gunzipDestroySpy = spy(gunzipStream, 'destroy');
-          const pipelineSpy = spy();
+          const destroySpy = sandbox.spy(rawResponseStream, 'destroy');
+          const gunzipDestroySpy = sandbox.spy(gunzipStream, 'destroy');
+          const pipelineSpy = sandbox.spy();
           pipelineOverride = pipelineSpy;
 
           proxiedFile.storageTransport.makeRequest = sandbox
@@ -1426,8 +1434,8 @@ describe('File', () => {
         it('should destroy rawResponseStream and return early if throughStream is closed', done => {
           const proxiedFile = new ProxiedFile(BUCKET, FILE_NAME);
           const rawResponseStream = new PassThrough();
-          const destroySpy = spy(rawResponseStream, 'destroy');
-          const pipelineSpy = spy();
+          const destroySpy = sandbox.spy(rawResponseStream, 'destroy');
+          const pipelineSpy = sandbox.spy();
           pipelineOverride = pipelineSpy;
 
           proxiedFile.storageTransport.makeRequest = sandbox
@@ -1458,8 +1466,8 @@ describe('File', () => {
         it('should destroy rawResponseStream and return early if throughStream is already writableEnded', done => {
           const proxiedFile = new ProxiedFile(BUCKET, FILE_NAME);
           const rawResponseStream = new PassThrough();
-          const destroySpy = spy(rawResponseStream, 'destroy');
-          const pipelineSpy = spy();
+          const destroySpy = sandbox.spy(rawResponseStream, 'destroy');
+          const pipelineSpy = sandbox.spy();
           pipelineOverride = pipelineSpy;
 
           proxiedFile.storageTransport.makeRequest = sandbox
@@ -1495,8 +1503,8 @@ describe('File', () => {
           const rawResponseStream = new PassThrough();
           const gunzipStream = new PassThrough();
           createGunzipOverride = () => gunzipStream;
-          const destroySpy = spy(rawResponseStream, 'destroy');
-          const gunzipDestroySpy = spy(gunzipStream, 'destroy');
+          const destroySpy = sandbox.spy(rawResponseStream, 'destroy');
+          const gunzipDestroySpy = sandbox.spy(gunzipStream, 'destroy');
 
           pipelineOverride = (...args: unknown[]) => {
             const onComplete = args[args.length - 1] as (
@@ -2076,24 +2084,37 @@ describe('File', () => {
             idempotencyStrategy: IdempotencyStrategy.RetryConditional,
           },
         },
-        getRequestInterceptors: stub().returns([
-          (reqOpts: object) => ({...reqOpts, customOption: 'custom-value'}),
-        ]),
+        getRequestInterceptors: sandbox
+          .stub()
+          .returns([
+            (reqOpts: object) => ({...reqOpts, customOption: 'custom-value'}),
+          ]),
         generation: 123,
         encryptionKey: 'test-encryption-key',
         kmsKeyName: 'test-kms-key-name',
         userProject: 'test-user-project',
         instancePreconditionOpts: {ifGenerationMatch: 123},
-        createResumableUpload: spy(),
+        createResumableUpload: sandbox.spy(),
       };
 
-      resumableUploadStub = stub();
+      resumableUploadStub = sandbox.stub();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (global as any).resumableUpload = {createURI: resumableUploadStub};
     });
 
     afterEach(() => {
-      restore();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      delete (global as any).resumableUpload;
+    });
+
+    it('should reject credentials of another universe domain', async () => {
+      const storage = new Storage({
+        projectId: PROJECT_ID,
+        credentials: OTHER_UNIVERSE_CREDENTIALS,
+      });
+      const otherFile = new File(new Bucket(storage, 'bucket-name'), FILE_NAME);
+
+      await assert.rejects(otherFile.createResumableUpload(), MISMATCH);
     });
 
     it('should not require options', () => {
@@ -2253,6 +2274,19 @@ describe('File', () => {
       });
 
       file.startResumableUpload_ = sandbox.stub().callsFake(() => {
+        done();
+      });
+
+      writable.write('data');
+    });
+
+    it('should not load credentials before a resumable upload', done => {
+      const getClient = sandbox.stub().rejects(new Error('no credentials'));
+      sandbox.define(file.storageTransport, 'authClient', {getClient});
+      const writable = file.createWriteStream({metadata: METADATA});
+
+      file.startResumableUpload_ = sandbox.stub().callsFake(() => {
+        assert.strictEqual(getClient.called, false);
         done();
       });
 
@@ -2745,7 +2779,7 @@ describe('File', () => {
       };
 
       originalSetEncryptionKey = file.setEncryptionKey;
-      file.setEncryptionKey = stub();
+      file.setEncryptionKey = sandbox.stub();
     });
 
     afterEach(() => {
@@ -3134,6 +3168,41 @@ describe('File', () => {
       });
     });
 
+    it('should return an error for credentials of another universe domain', done => {
+      const authClient = new GoogleAuth({
+        credentials: OTHER_UNIVERSE_CREDENTIALS,
+      });
+      const sign = sandbox.stub(authClient, 'sign').resolves('signature');
+      file.storage.storageTransport.authClient = authClient;
+
+      file.generateSignedPostPolicyV2(CONFIG, err => {
+        assert.strictEqual(err?.name, 'SigningError');
+        assert.match(err!.message, MISMATCH);
+        assert.strictEqual(sign.called, false);
+        done();
+      });
+    });
+
+    it('should sign with the IAM endpoint of the configured universe domain', async () => {
+      const universeDomain = OTHER_UNIVERSE_CREDENTIALS.universe_domain;
+      const storage = new Storage({
+        projectId: PROJECT_ID,
+        credentials: OTHER_UNIVERSE_CREDENTIALS,
+        universeDomain,
+      });
+      const sign = sandbox
+        .stub(storage.storageTransport.authClient, 'sign')
+        .resolves('signature');
+      const otherFile = new File(new Bucket(storage, 'bucket-name'), FILE_NAME);
+
+      await otherFile.generateSignedPostPolicyV2(CONFIG);
+
+      assert.strictEqual(
+        sign.firstCall.args[1],
+        `https://iamcredentials.${universeDomain}/v1/projects/-/serviceAccounts/`,
+      );
+    });
+
     it('should add key equality condition', done => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       file.generateSignedPostPolicyV2(CONFIG, (err, signedPolicy: any) => {
@@ -3465,12 +3534,11 @@ describe('File', () => {
     const CLIENT_EMAIL = 'test@domain.com';
     const SIGNATURE = 'signature';
 
-    let fakeTimer: sinon.SinonFakeTimers;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let BUCKET: any;
 
     beforeEach(() => {
-      fakeTimer = useFakeTimers(NOW);
+      sandbox.useFakeTimers(NOW);
       CONFIG = {
         expires: NOW.valueOf() + 2000,
       };
@@ -3488,10 +3556,6 @@ describe('File', () => {
           },
         },
       };
-    });
-
-    afterEach(() => {
-      fakeTimer.restore();
     });
 
     const fieldsToConditions = (fields: object) =>
@@ -3565,6 +3629,39 @@ describe('File', () => {
         assert.strictEqual(err?.name, 'SigningError');
         assert.strictEqual(err?.message, error.message);
       });
+    });
+
+    it('should return an error for credentials of another universe domain', async () => {
+      const storage = new Storage({
+        projectId: PROJECT_ID,
+        credentials: OTHER_UNIVERSE_CREDENTIALS,
+      });
+      const otherFile = new File(new Bucket(storage, 'bucket-name'), FILE_NAME);
+
+      await assert.rejects(
+        otherFile.generateSignedPostPolicyV4(CONFIG),
+        MISMATCH,
+      );
+    });
+
+    it('should sign with the IAM endpoint of the configured universe domain', async () => {
+      const universeDomain = OTHER_UNIVERSE_CREDENTIALS.universe_domain;
+      const storage = new Storage({
+        projectId: PROJECT_ID,
+        credentials: OTHER_UNIVERSE_CREDENTIALS,
+        universeDomain,
+      });
+      const sign = sandbox
+        .stub(storage.storageTransport.authClient, 'sign')
+        .resolves('signature');
+      const otherFile = new File(new Bucket(storage, 'bucket-name'), FILE_NAME);
+
+      await otherFile.generateSignedPostPolicyV4(CONFIG);
+
+      assert.strictEqual(
+        sign.firstCall.args[1],
+        `https://iamcredentials.${universeDomain}/v1/projects/-/serviceAccounts/`,
+      );
     });
 
     it('should add key condition', () => {
@@ -5223,6 +5320,7 @@ describe('File', () => {
 
       const authClient = new GoogleAuth();
       sandbox.stub(authClient, 'request');
+      sandbox.stub(authClient, 'getClient').resolves();
 
       const realTransport = new StorageTransport({
         apiEndpoint: 'https://storage.googleapis.com',
@@ -5300,6 +5398,29 @@ describe('File', () => {
       }
       assert.strictEqual(retryCount, 2);
     });
+
+    for (const resumable of [false, true]) {
+      it(`should reject credentials of another universe domain (resumable: ${resumable})`, async () => {
+        const storage = new Storage({
+          projectId: PROJECT_ID,
+          credentials: OTHER_UNIVERSE_CREDENTIALS,
+        });
+        const requestStub = sandbox.stub(
+          storage.storageTransport.authClient,
+          'request',
+        );
+        const otherFile = new File(
+          new Bucket(storage, 'bucket-name'),
+          FILE_NAME,
+        );
+
+        await assert.rejects(
+          otherFile.save(DATA, {resumable, validation: false}),
+          MISMATCH,
+        );
+        assert.strictEqual(requestStub.called, false);
+      });
+    }
   });
 
   describe('setMetadata', () => {
@@ -5751,7 +5872,7 @@ describe('File', () => {
         };
 
         const resumableUpload = {
-          upload: stub().callsFake(opts => {
+          upload: sandbox.stub().callsFake(opts => {
             const bucket = file.bucket;
             const storage = bucket.storage;
             const authClient = storage.storageTransport.authClient;
@@ -5780,7 +5901,7 @@ describe('File', () => {
         const uploadStream = new PassThrough();
 
         const resumableUpload = {
-          upload: stub().callsFake(() => {
+          upload: sandbox.stub().callsFake(() => {
             uploadStream.emit('response', resp);
             done();
             return uploadStream;
@@ -5801,7 +5922,7 @@ describe('File', () => {
         const metadata = {};
         const uploadStream = new PassThrough();
         const resumableUpload = {
-          upload: stub().callsFake(() => {
+          upload: sandbox.stub().callsFake(() => {
             uploadStream.emit('metadata', metadata);
             setImmediate(() => {
               assert.deepStrictEqual(file.metadata, metadata);
@@ -5821,7 +5942,7 @@ describe('File', () => {
         dup.on('complete', done);
 
         const resumableUpload = {
-          upload: stub().callsFake(() => {
+          upload: sandbox.stub().callsFake(() => {
             const uploadStream = new Transform();
             setImmediate(() => {
               uploadStream.end();
@@ -5845,7 +5966,7 @@ describe('File', () => {
         };
 
         const resumableUpload = {
-          upload: stub().callsFake(() => {
+          upload: sandbox.stub().callsFake(() => {
             done();
             return uploadStream;
           }),
@@ -5864,7 +5985,7 @@ describe('File', () => {
         });
 
         const resumableUpload = {
-          upload: stub().callsFake(() => {
+          upload: sandbox.stub().callsFake(() => {
             const uploadStream = new Transform();
             setImmediate(() => {
               uploadStream.emit('progress', progress);
@@ -5888,7 +6009,7 @@ describe('File', () => {
         });
 
         const resumableUpload = {
-          upload: stub().callsFake(() => {
+          upload: sandbox.stub().callsFake(() => {
             done();
             return uploadStream;
           }),
