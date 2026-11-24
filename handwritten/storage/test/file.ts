@@ -265,6 +265,10 @@ describe('File', () => {
 
       it('should return 204 No Content if delete receives a 404 on retry', async () => {
         const authClient = new GoogleAuth();
+        sandbox.stub(authClient, 'getClient').resolves({
+          getUniverseDomain: async () => 'googleapis.com',
+        } as never);
+
         const requestStub = sandbox.stub(authClient, 'request');
         requestStub.callsFake(async opts => {
           return (
