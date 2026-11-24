@@ -1,0 +1,77 @@
+permissions:
+  contents: read
+
+name: Renovate Bot Config Validation
+
+on:
+  pull_request:
+    paths:
+      - '**/renovate.json'
+      - '**/renovate.json5'
+      - '**/.renovaterc*'
+      - '.github/renovate.json*'
+      - '.github/workflows/renovate_config_check.yaml'
+  push:
+    branches:
+      - main
+    paths:
+      - '**/renovate.json'
+      - '**/renovate.json5'
+      - '**/.renovaterc*'
+      - '.github/renovate.json*'
+      - '.github/workflows/renovate_config_check.yaml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  renovate_bot_config_validation:
+    name: Validate Renovate configuration
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Use Node.js 24
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: 24
+
+      # Install pnpm >= 10.18.0 before checkout so minimum-release-age is enforced
+      # in pnpm dlx without conflicting with package.json#packageManager.
+      - name: Set up pnpm
+        uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+        with:
+          version: 10.34.6
+          run_install: false
+
+      - name: Checkout code
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+
+      - name: Run Renovate Config Validator
+        env:
+          NPM_CONFIG_USERCONFIG: /dev/null
+        run: |
+          mapfile -t files < <(
+            git -C "$GITHUB_WORKSPACE" ls-files \
+              ':(glob)**/renovate.json' \
+              ':(glob)**/renovate.json5' \
+              ':(glob)**/.renovaterc*' \
+              ':(glob).github/renovate.json*'
+          )
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "No Renovate configuration files found."
+            exit 0
+          fi
+          targets=()
+          for f in "${files[@]}"; do
+            targets+=("$GITHUB_WORKSPACE/$f")
+          done
+          cd "$(mktemp -d)"
+          pnpm \
+            --config.registry=https://registry.npmjs.org/ \
+            --config.ignore-scripts=true \
+            --config.minimum-release-age=30240 \
+            --package=renovate@44.181.6 \
+            dlx renovate-config-validator --no-global "${targets[@]}"

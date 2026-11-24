@@ -24,6 +24,7 @@ import {
   GaxiosOptionsPrepared,
 } from '../src/index.js';
 import {GaxiosResponse} from 'gaxios';
+import {OAuth2Client} from 'google-auth-library';
 import * as sinon from 'sinon';
 import {HmacKeyOptions} from '../src/hmacKey.js';
 import {
@@ -1453,6 +1454,53 @@ describe('Storage', () => {
           assert.strictEqual(apiResponse, API_RESPONSE);
         });
       });
+    });
+  });
+
+  describe('universe domain', () => {
+    const MISMATCH =
+      /does not match the universe domain found in the credentials/;
+    let otherStorage: Storage;
+
+    beforeEach(() => {
+      otherStorage = new Storage({
+        projectId: PROJECT_ID,
+        credentials: {
+          type: 'service_account',
+          client_email: 'test@example.iam.gserviceaccount.com',
+          private_key: 'not-a-real-key',
+          universe_domain: 'example-universe.test',
+        },
+      });
+    });
+
+    it('should reject a request with credentials of another universe domain', async () => {
+      await assert.rejects(otherStorage.getBuckets(), MISMATCH);
+    });
+
+    it('should reject a request with a client that was not created for the configured universe domain', async () => {
+      const storage = new Storage({
+        projectId: PROJECT_ID,
+        authClient: new OAuth2Client(),
+        universeDomain: 'example-universe.test',
+      });
+
+      await assert.rejects(storage.getBuckets(), MISMATCH);
+    });
+
+    it('should report the error to a callback', done => {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      otherStorage.bucket(BUCKET_NAME).getMetadata((err: Error | null) => {
+        assert.match(err!.message, MISMATCH);
+        done();
+      });
+    });
+
+    it('should report the error when reading a file', async () => {
+      await assert.rejects(
+        otherStorage.bucket(BUCKET_NAME).file('file-name').download(),
+        MISMATCH,
+      );
     });
   });
 });

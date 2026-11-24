@@ -31,7 +31,7 @@ import {
 import {encodeURI, formatAsUTCISO, qsStringify} from '../src/util.js';
 import {ExceptionMessages, Storage} from '../src/storage.js';
 import {OutgoingHttpHeaders} from 'http';
-import {GoogleAuth} from 'google-auth-library';
+import {Compute, DEFAULT_UNIVERSE, GoogleAuth} from 'google-auth-library';
 
 interface SignedUrlArgs {
   bucket: string;
@@ -102,6 +102,50 @@ describe('signer', () => {
           method: 'GET',
           expires: new Date().valueOf() + 2000,
         };
+      });
+
+      describe('universe domain', () => {
+        const OTHER_UNIVERSE = 'example-universe.test';
+        let auth: GoogleAuth;
+        let sign: sinon.SinonStub;
+        let lookup: sinon.SinonStub;
+
+        beforeEach(() => {
+          auth = new GoogleAuth({authClient: new Compute()});
+          sign = sandbox.stub(auth, 'sign').resolves('signature');
+          (sandbox.stub(auth, 'getCredentials') as sinon.SinonStub).resolves({
+            client_email: CLIENT_EMAIL,
+          });
+          lookup = sandbox.stub(
+            GoogleAuth.prototype,
+            'getUniverseDomainFromMetadataServer',
+          );
+          storage.universeDomain = OTHER_UNIVERSE;
+          signer = new URLSigner(auth, bucket, file, storage);
+        });
+
+        for (const version of ['v2', 'v4'] as const) {
+          it(`should sign ${version} URLs with the IAM endpoint of the configured universe domain`, async () => {
+            lookup.resolves(OTHER_UNIVERSE);
+
+            await signer.getSignedUrl({...CONFIG, version});
+
+            assert.strictEqual(
+              sign.firstCall.args[1],
+              `https://iamcredentials.${OTHER_UNIVERSE}/v1/projects/-/serviceAccounts/`,
+            );
+          });
+
+          it(`should not sign ${version} URLs with credentials of another universe domain`, async () => {
+            lookup.resolves(DEFAULT_UNIVERSE);
+
+            await assert.rejects(
+              signer.getSignedUrl({...CONFIG, version}),
+              /does not match the universe domain found in the credentials/,
+            );
+            assert.strictEqual(sign.called, false);
+          });
+        }
       });
 
       describe('version', () => {

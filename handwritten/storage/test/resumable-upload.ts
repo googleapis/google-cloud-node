@@ -2833,6 +2833,45 @@ describe('resumable-upload', () => {
       assert.ok(res.headers);
     });
 
+    it('should treat a googleapis.com endpoint as a custom endpoint when another universe domain is configured', async () => {
+      up = upload({
+        bucket: BUCKET,
+        file: FILE,
+        userProject: USER_PROJECT,
+        authConfig: {keyFile},
+        universeDomain: 'example-universe.test',
+        apiEndpoint: 'https://storage.googleapis.com',
+        retryOptions: RETRY_OPTIONS,
+      });
+
+      const scopes = [
+        nock(REQ_OPTS.url!).get(queryPath).reply(200, undefined, {}),
+      ];
+      const res = await up.makeRequest(REQ_OPTS);
+      scopes.forEach(x => x.done());
+      assert.strictEqual(
+        getHeader(res.config.headers, 'Authorization'),
+        undefined,
+      );
+    });
+
+    it('should not make a request with credentials of another universe domain', async () => {
+      up = upload({
+        bucket: BUCKET,
+        file: FILE,
+        userProject: USER_PROJECT,
+        authConfig: {keyFile},
+        universeDomain: 'example-universe.test',
+        retryOptions: RETRY_OPTIONS,
+      });
+      const mismatch =
+        /does not match the universe domain found in the credentials/;
+
+      await assert.rejects(up.makeRequest(REQ_OPTS), mismatch);
+      await assert.rejects(up.makeRequestStream(REQ_OPTS), mismatch);
+      await assert.rejects(up.createURI(), mismatch);
+    });
+
     it('should combine customRequestOptions', done => {
       const up = upload({
         bucket: BUCKET,

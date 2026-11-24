@@ -40,7 +40,7 @@ const version = require('../../../package.json').version;
  * globally via the static `enabled` property, that is set from the SpannerClient.
  */
 export class MetricsTracerFactory {
-  private static _instance: MetricsTracerFactory | null = null;
+  private static _instances: Map<string, MetricsTracerFactory> = new Map();
   private _meterProvider: MeterProvider | null = null;
   private _instrumentAttemptCounter!: Counter;
   private _instrumentAttemptLatency!: Histogram;
@@ -94,27 +94,53 @@ export class MetricsTracerFactory {
   }
 
   /**
-   * Returns the singleton instance of MetricsTracerFactory.
-   * If metrics are disabled, returns null.
-   * The instance is created only once, and enabling/disabling metrics can only be done on the initial call.
-   * @param projectId Optional GCP project ID for the factory instantiation. Does nothing for subsequent calls.
-   * @returns The singleton MetricsTracerFactory instance or null if disabled.
+   * Builds a deterministic cache key for scoping factory instances by universe
+   * domain and optional monitoring endpoint override.
+   *
+   * @param universeDomain Resolved universe domain.
+   * @param monitoringEndpoint Optional normalized monitoring endpoint override.
+   * @returns Cache key string.
    */
-  public static getInstance(projectId?: string): MetricsTracerFactory | null {
+  private static _getInstanceKey(
+    universeDomain = 'googleapis.com',
+    monitoringEndpoint?: string,
+  ): string {
+    return monitoringEndpoint
+      ? `${universeDomain}|${monitoringEndpoint}`
+      : universeDomain;
+  }
+
+  /**
+   * Returns the MetricsTracerFactory instance scoped to the given universe domain
+   * and optional monitoring endpoint override. Returns null if metrics are disabled.
+   *
+   * @param projectId Optional GCP project ID for factory instantiation.
+   * @param universeDomain Optional universe domain (defaults to `'googleapis.com'`).
+   * @param monitoringEndpoint Optional normalized monitoring endpoint override.
+   * @returns The scoped MetricsTracerFactory instance or null if disabled.
+   */
+  public static getInstance(
+    projectId?: string,
+    universeDomain = 'googleapis.com',
+    monitoringEndpoint?: string,
+  ): MetricsTracerFactory | null {
     if (!MetricsTracerFactory.enabled) {
       return null;
     }
 
-    // Create a singleton instance, enabling/disabling metrics can only be done on the initial call
-    if (MetricsTracerFactory._instance === null) {
-      MetricsTracerFactory._instance = new MetricsTracerFactory(
-        projectId || '',
-      );
-    } else if (projectId && !MetricsTracerFactory._instance._projectId) {
-      MetricsTracerFactory._instance._projectId = projectId;
+    const key = MetricsTracerFactory._getInstanceKey(
+      universeDomain,
+      monitoringEndpoint,
+    );
+    let instance = MetricsTracerFactory._instances.get(key);
+    if (!instance) {
+      instance = new MetricsTracerFactory(projectId || '');
+      MetricsTracerFactory._instances.set(key, instance);
+    } else if (projectId && !instance._projectId) {
+      instance._projectId = projectId;
     }
 
-    return MetricsTracerFactory._instance;
+    return instance;
   }
 
   /**
@@ -168,11 +194,13 @@ export class MetricsTracerFactory {
   }
 
   /**
-   * Resets the singleton instance of the MetricsTracerFactory.
+   * Resets all cached MetricsTracerFactory instances.
    */
   public static async resetInstance() {
-    await MetricsTracerFactory._instance?.resetMeterProvider();
-    MetricsTracerFactory._instance = null;
+    for (const instance of MetricsTracerFactory._instances.values()) {
+      await instance.resetMeterProvider();
+    }
+    MetricsTracerFactory._instances.clear();
   }
 
   /**
