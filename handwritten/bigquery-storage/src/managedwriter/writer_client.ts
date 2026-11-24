@@ -291,13 +291,8 @@ export class WriterClient {
         streamType,
         destinationTable,
       );
-      const streamConnection = new StreamConnection(
-        fullStreamId,
-        this,
-        options,
-      );
-      this._connections.connectionList.push(streamConnection);
-      return streamConnection;
+      // The connection registers itself with this client when it opens.
+      return new StreamConnection(fullStreamId, this, options);
     } catch (err) {
       throw new Error('managed stream connection failed:' + err);
     }
@@ -333,13 +328,37 @@ export class WriterClient {
     );
   }
 
+  /**
+   * Tracks an open connection, so that close() can close it.
+   * @private
+   * @internal
+   */
+  _addConnection(conn: StreamConnection): void {
+    if (!this._connections.connectionList.includes(conn)) {
+      this._connections.connectionList.push(conn);
+    }
+  }
+
+  /**
+   * Stops tracking a connection once it is closed.
+   * @private
+   * @internal
+   */
+  _removeConnection(conn: StreamConnection): void {
+    const index = this._connections.connectionList.indexOf(conn);
+    if (index !== -1) {
+      this._connections.connectionList.splice(index, 1);
+    }
+  }
+
   close() {
-    this._connections.connectionList.map(conn => {
-      conn.close();
-    });
+    const connectionList = this._connections.connectionList;
     this._connections = {
       connectionList: [],
     };
+    connectionList.map(conn => {
+      conn.close();
+    });
     this._open = false;
   }
 

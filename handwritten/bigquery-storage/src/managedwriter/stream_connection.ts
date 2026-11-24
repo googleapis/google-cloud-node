@@ -84,10 +84,12 @@ export class StreamConnection extends EventEmitter {
     const client = this._writeClient.getClient();
     const connection = client.appendRows(callOptions);
     this._connection = connection;
+    this._writeClient._addConnection(this);
     this._connection.on('data', this.handleData);
     this._connection.on('error', this.handleError);
     this._connection.on('close', () => {
       this.trace('connection closed', this._lastConnectionError);
+      this._writeClient._removeConnection(this);
       if (this.hasPendingWrites()) {
         const retrySettings = this._writeClient._retrySettings;
         if (
@@ -374,6 +376,7 @@ export class StreamConnection extends EventEmitter {
    * Close the bi-directional stream connection.
    */
   close() {
+    this._writeClient._removeConnection(this);
     if (this.isConnectionClosed() || !this._connection) {
       return;
     }
