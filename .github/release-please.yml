@@ -11,9 +11,3 @@ branches:
     manifest: true
     manifestFile: .release-please-manifest.json
     manifestConfig: release-please-submodules.json
-  - branch: release-spanner-9.1.1
-    handleGHRelease: true
-    tagPullRequestNumber: true
-    manifest: true
-    manifestFile: .release-please-manifest.json
-    manifestConfig: release-please-submodules.json
