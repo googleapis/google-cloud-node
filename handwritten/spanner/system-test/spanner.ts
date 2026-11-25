@@ -273,8 +273,10 @@ describe('Spanner', () => {
     await MetricsTracerFactory.resetInstance();
     try {
       if (generateInstanceForTest) {
-        // Sleep for 30 seconds before cleanup, just in case
-        await new Promise(resolve => setTimeout(resolve, 30000));
+        if (!IS_EMULATOR_ENABLED) {
+          // Sleep for 30 seconds before cleanup, just in case
+          await new Promise(resolve => setTimeout(resolve, 30000));
+        }
         // Deleting all backups before an instance can be deleted.
         await Promise.all(
           RESOURCES_TO_CLEAN.filter(resource => resource instanceof Backup).map(
@@ -8531,6 +8533,11 @@ describe('Spanner', () => {
             assert.ok(err, 'Transaction is aborted');
           }
         } finally {
+          try {
+            await transaction.rollback();
+          } catch {
+            // Ignore rollback errors (e.g., if the transaction was already aborted).
+          }
           transaction.end();
         }
       });
@@ -8585,7 +8592,13 @@ describe('Spanner', () => {
           });
         }
 
-        it('should insert and commit transaction when running parallely', async () => {
+        it('should insert and commit transaction when running parallely', async function () {
+          if (IS_EMULATOR_ENABLED) {
+            // The Spanner emulator only supports one active read-write
+            // transaction at a time, so two barrier-synchronized transactions
+            // deadlock waiting for each other.
+            this.skip();
+          }
           const promises: Promise<void>[] = [];
           let resolvePromise;
           const commitPromise = new Promise(
@@ -8976,7 +8989,13 @@ describe('Spanner', () => {
         });
       };
 
-      it('GOOGLE_STANDARD_SQL should handle commit retry based on multiplexed enable or not', async () => {
+      it('GOOGLE_STANDARD_SQL should handle commit retry based on multiplexed enable or not', async function () {
+        if (IS_EMULATOR_ENABLED) {
+          // The Spanner emulator applies mutations before returning the
+          // precommit_token retry response, causing the retried Commit with
+          // the same insert mutation to fail with ALREADY_EXISTS.
+          this.skip();
+        }
         await handleReadAndMutation(DATABASE);
       });
     });
@@ -9164,8 +9183,10 @@ function deleteInstanceArray(instanceArray) {
   );
 }
 async function deleteInstance(instance: Instance) {
-  const [backups] = await instance.getBackups();
-  await Promise.all(backups.map(backup => backup.delete(GAX_OPTIONS)));
+  if (typeof process.env.SPANNER_EMULATOR_HOST === 'undefined') {
+    const [backups] = await instance.getBackups();
+    await Promise.all(backups.map(backup => backup.delete(GAX_OPTIONS)));
+  }
   return instance.delete(GAX_OPTIONS);
 }
 
