@@ -64,6 +64,8 @@ const fs = require('fs');
 const SKIP_BACKUPS = process.env.SKIP_BACKUPS;
 const TRIGGER_NAME = process.env.TRIGGER_NAME;
 const SKIP_FGAC_TESTS = (process.env.SKIP_FGAC_TESTS || 'false').toLowerCase();
+const IS_EMULATOR_ENABLED =
+  typeof process.env.SPANNER_EMULATOR_HOST !== 'undefined';
 
 const IAM_MEMBER = process.env.IAM_MEMBER;
 const PREFIX = 'gcloud-tests-';
@@ -98,8 +100,6 @@ describe('Spanner', () => {
   const envInstanceName = process.env.SPANNERTEST_INSTANCE;
   // True if a new instance has been created for this test run, false if reusing an existing instance
   const generateInstanceForTest = !envInstanceName;
-  const IS_EMULATOR_ENABLED =
-    typeof process.env.SPANNER_EMULATOR_HOST !== 'undefined';
   const RESOURCES_TO_CLEAN: Array<Instance | Backup | Database> = [];
   const INSTANCE_CONFIGS_TO_CLEAN: Array<InstanceConfig> = [];
   const instanceId = generateInstanceForTest
