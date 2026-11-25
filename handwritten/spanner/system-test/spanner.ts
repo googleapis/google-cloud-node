@@ -9183,7 +9183,7 @@ function deleteInstanceArray(instanceArray) {
   );
 }
 async function deleteInstance(instance: Instance) {
-  if (typeof process.env.SPANNER_EMULATOR_HOST === 'undefined') {
+  if (!IS_EMULATOR_ENABLED) {
     const [backups] = await instance.getBackups();
     await Promise.all(backups.map(backup => backup.delete(GAX_OPTIONS)));
   }
