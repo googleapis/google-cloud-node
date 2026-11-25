@@ -21,14 +21,15 @@
 set -eo pipefail
 
 echo "change directory to the project root"
-export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
-pushd ${PROJECT_ROOT}
+export PROJECT_ROOT="$(realpath "$(dirname "${BASH_SOURCE[0]}")/..")"
+pushd "${PROJECT_ROOT}"
 pwd
 
 echo "exporting Cloud Build triggers"
 
 for file in ci/export/*.yaml; do
+    [[ -f "$file" ]] || continue
     trigger_name=$(basename "$file" .yaml)
     echo "exporting trigger $trigger_name to $file"
-    gcloud beta builds triggers export "$trigger_name" --destination "$file"
+    gcloud beta builds triggers export "$trigger_name" --project=long-door-651 --destination "$file"
 done

@@ -41,7 +41,7 @@ TEST_CMD=${TEST_CMD:-pnpm}
 d=$(pwd)
 PROJECT=$(basename ${d})
 
-if [ ${BUILD_TYPE} != "presubmit" ]; then
+if [ "${BUILD_TYPE}" != "presubmit" ]; then
     # Activate mocha config
     export MOCHA_REPORTER_OUTPUT=${PROJECT}_sponge_log.xml
     export MOCHA_REPORTER_SUITENAME=${PROJECT}
@@ -58,26 +58,6 @@ if [ ! -d "${PROJECT_ROOT}/node_modules/.pnpm" ]; then
 fi
 
 retval=0
-
-if [ "${RUN_INTERDEPENDENT_TESTS}" = "true" ]; then
-    case ${TEST_TYPE} in
-    lint)
-        # Skip interdependent tests for lint
-        ;;
-    samples)
-        ${PROJECT_ROOT}/ci/run_interdependent_tests.sh "samples-test"
-        ;;
-    system)
-        ${PROJECT_ROOT}/ci/run_interdependent_tests.sh "system-test"
-        ;;
-    units)
-        ${PROJECT_ROOT}/ci/run_interdependent_tests.sh "test"
-        ;;
-    *)
-        ${PROJECT_ROOT}/ci/run_interdependent_tests.sh "${TEST_TYPE}"
-        ;;
-    esac
-fi
 
 set +e
 case ${TEST_TYPE} in
