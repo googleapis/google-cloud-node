@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-spanner?activeTab=versions
 
+## [9.1.1](https://github.com/googleapis/google-cloud-node/compare/spanner-v9.1.0...spanner-v9.1.1) (2026-11-23)
+
+
+### Bug Fixes
+
+* **spanner:** Respect universeDomain and custom endpoints in metrics ([#9957](https://github.com/googleapis/google-cloud-node/issues/9957)) ([#9964](https://github.com/googleapis/google-cloud-node/issues/9964)) ([441be8a](https://github.com/googleapis/google-cloud-node/commit/441be8ae6dc8dd0692174ba6cd4251abec522ca1))
+
 ## [9.1.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v9.0.0...spanner-v9.1.0) (2026-10-13)
 
 
