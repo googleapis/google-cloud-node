@@ -252,22 +252,16 @@ describe('File', () => {
         assert.strictEqual(options.ignoreNotFound, true);
         assert.strictEqual(requestStub.calledOnce, true);
         const gaxiosOpts = requestStub.firstCall.args[0];
-        const serializedQuery = gaxiosOpts.paramsSerializer!(
-          gaxiosOpts.params as Record<string, string | number>,
-        );
-        const parsedUrl = new URL(`${gaxiosOpts.url}?${serializedQuery}`);
-
+        const params = gaxiosOpts.params as Record<string, unknown>;
         assert.strictEqual(
-          parsedUrl.searchParams.get('ifGenerationMatch'),
-          '100',
+          gaxiosOpts.url,
+          'https://storage.googleapis.com/storage/v1/b/bucket-name/o/file-name.png',
         );
-        assert.strictEqual(
-          parsedUrl.searchParams.get('userProject'),
-          'user-project',
-        );
-        assert.strictEqual(parsedUrl.searchParams.has('responseType'), false);
-        assert.strictEqual(parsedUrl.searchParams.has('validateStatus'), false);
-        assert.strictEqual(parsedUrl.searchParams.has('ignoreNotFound'), false);
+        assert.strictEqual(params.ifGenerationMatch, 100);
+        assert.strictEqual(params.userProject, 'user-project');
+        assert.strictEqual('responseType' in params, false);
+        assert.strictEqual('validateStatus' in params, false);
+        assert.strictEqual('ignoreNotFound' in params, false);
       });
 
       it('should resolve without error on 404 when ignoreNotFound is true', async () => {
@@ -340,10 +334,13 @@ describe('File', () => {
           .stub(localStorage.storageTransport.authClient, 'request')
           .rejects(error);
 
-        await assert.rejects(localFile.delete(), (err: GaxiosError) => {
-          assert.strictEqual(err.code, 404);
-          return true;
-        });
+        await assert.rejects(
+          localFile.delete(),
+          (err: Error & {code?: number}) => {
+            assert.strictEqual(err.code, 404);
+            return true;
+          },
+        );
         assert.strictEqual(localStorage.retryOptions.autoRetry, true);
       });
 
