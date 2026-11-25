@@ -190,62 +190,173 @@ describe('File', () => {
     });
 
     describe('delete', () => {
-      it('should set the correct query string with options', async done => {
+      let localStorage: Storage;
+      let localBucket: Bucket;
+      let localFile: File;
+
+      beforeEach(() => {
+        localStorage = new Storage({projectId: PROJECT_ID});
+        localBucket = new Bucket(localStorage, 'bucket-name');
+        localFile = new File(localBucket, FILE_NAME);
+      });
+
+      it('should set the correct query string with options and omit transport options', async () => {
         const options = {
           generation: 2,
           userProject: 'user-project',
-          preconditionOpts: {
-            ifGenerationMatch: 100,
-            ifGenerationNotMatch: 100,
-            ifMetagenerationMatch: 100,
-            ifMetagenerationNotMatch: 100,
-          },
+          ifGenerationMatch: 100,
+          ifGenerationNotMatch: 101,
+          ifMetagenerationMatch: 102,
+          ifMetagenerationNotMatch: 103,
         };
+        const apiResponse = {status: 204, data: ''} as GaxiosResponse;
 
-        STORAGE.storageTransport.makeRequest = sandbox
-          .stub()
-          .callsFake(reqOpts => {
-            assert.strictEqual(reqOpts.method, 'DELETE');
-            assert.strictEqual(
-              reqOpts.url,
-              '/storage/v1/b/bucket-name/o/file-name.png',
-            );
-            assert.deepStrictEqual(
-              reqOpts.queryParameters.generation,
-              options.generation,
-            );
-            assert.deepStrictEqual(
-              reqOpts.queryParameters.userProject,
-              options.userProject,
-            );
-            assert.deepStrictEqual(
-              reqOpts.queryParameters.preconditionOpts.ifGenerationMatch,
-              options.preconditionOpts.ifGenerationMatch,
-            );
-            assert.deepStrictEqual(
-              reqOpts.queryParameters.preconditionOpts.ifGenerationNotMatch,
-              options.preconditionOpts.ifGenerationNotMatch,
-            );
-            assert.deepStrictEqual(
-              reqOpts.queryParameters.preconditionOpts.ifMetagenerationMatch,
-              options.preconditionOpts.ifMetagenerationMatch,
-            );
-            assert.deepStrictEqual(
-              reqOpts.queryParameters.preconditionOpts.ifMetagenerationNotMatch,
-              options.preconditionOpts.ifMetagenerationNotMatch,
-            );
-            done();
-            return Promise.resolve({data: {}});
+        const makeRequestStub = sandbox
+          .stub(localStorage.storageTransport, 'makeRequest')
+          .callsFake((reqOpts, cb) => {
+            cb?.(null, null, apiResponse);
+            return Promise.resolve(apiResponse);
           });
-        await file.delete(options);
+
+        const [resp] = await localFile.delete(options);
+        assert.strictEqual(resp, apiResponse);
+        assert.strictEqual(makeRequestStub.calledOnce, true);
+
+        const reqOpts = makeRequestStub.firstCall.args[0];
+        assert.strictEqual(reqOpts.method, 'DELETE');
+        assert.strictEqual(
+          reqOpts.url,
+          '/storage/v1/b/bucket-name/o/file-name.png',
+        );
+        assert.deepStrictEqual(reqOpts.queryParameters, options);
+        assert.strictEqual('responseType' in reqOpts.queryParameters!, false);
+        assert.strictEqual('validateStatus' in reqOpts.queryParameters!, false);
       });
 
-      it('should return an error if the request fails', async () => {
+      it('should not include responseType or validateStatus in the outgoing request URL', async () => {
+        const apiResponse = {status: 204, data: ''} as GaxiosResponse;
+        const options = {
+          ifGenerationMatch: 100,
+          userProject: 'user-project',
+          ignoreNotFound: true,
+        };
+        sandbox
+          .stub(localStorage.storageTransport.authClient, 'getClient')
+          .resolves();
+        const requestStub = sandbox
+          .stub(localStorage.storageTransport.authClient, 'request')
+          .resolves(apiResponse);
+
+        await localFile.delete(options);
+
+        assert.strictEqual(options.ignoreNotFound, true);
+        assert.strictEqual(requestStub.calledOnce, true);
+        const gaxiosOpts = requestStub.firstCall.args[0];
+        const serializedQuery = gaxiosOpts.paramsSerializer!(
+          gaxiosOpts.params as Record<string, string | number>,
+        );
+        const parsedUrl = new URL(`${gaxiosOpts.url}?${serializedQuery}`);
+
+        assert.strictEqual(
+          parsedUrl.searchParams.get('ifGenerationMatch'),
+          '100',
+        );
+        assert.strictEqual(
+          parsedUrl.searchParams.get('userProject'),
+          'user-project',
+        );
+        assert.strictEqual(parsedUrl.searchParams.has('responseType'), false);
+        assert.strictEqual(parsedUrl.searchParams.has('validateStatus'), false);
+        assert.strictEqual(parsedUrl.searchParams.has('ignoreNotFound'), false);
+      });
+
+      it('should resolve without error on 404 when ignoreNotFound is true', async () => {
+        const notFoundResponse = {status: 404, data: {}} as GaxiosResponse;
+        const error = new GaxiosError(
+          'Not Found',
+          {} as GaxiosOptionsPrepared,
+          notFoundResponse,
+        );
+        sandbox
+          .stub(localStorage.storageTransport.authClient, 'getClient')
+          .resolves();
+        sandbox
+          .stub(localStorage.storageTransport.authClient, 'request')
+          .rejects(error);
+
+        const [resp] = await localFile.delete({ignoreNotFound: true});
+        assert.strictEqual(resp, notFoundResponse);
+        assert.strictEqual(localStorage.retryOptions.autoRetry, true);
+      });
+
+      it('should resolve without error on 404 without response when ignoreNotFound is true', async () => {
+        const error = new GaxiosError('Not Found', {} as GaxiosOptionsPrepared);
+        error.status = 404;
+        sandbox
+          .stub(localStorage.storageTransport.authClient, 'getClient')
+          .resolves();
+        sandbox
+          .stub(localStorage.storageTransport.authClient, 'request')
+          .rejects(error);
+
+        const [resp] = await localFile.delete({ignoreNotFound: true});
+        assert.strictEqual(resp, undefined);
+        assert.strictEqual(localStorage.retryOptions.autoRetry, true);
+      });
+
+      it('should resolve without error on 404 when ignoreNotFound is true with callback', done => {
+        const notFoundResponse = {status: 404, data: {}} as GaxiosResponse;
+        const error = new GaxiosError(
+          'Not Found',
+          {} as GaxiosOptionsPrepared,
+          notFoundResponse,
+        );
+        sandbox
+          .stub(localStorage.storageTransport.authClient, 'getClient')
+          .resolves();
+        sandbox
+          .stub(localStorage.storageTransport.authClient, 'request')
+          .rejects(error);
+
+        localFile.delete({ignoreNotFound: true}, (err, resp) => {
+          assert.ifError(err);
+          assert.strictEqual(resp, notFoundResponse);
+          assert.strictEqual(localStorage.retryOptions.autoRetry, true);
+          done();
+        });
+      });
+
+      it('should reject on 404 when ignoreNotFound is not set', async () => {
+        const notFoundResponse = {status: 404, data: {}} as GaxiosResponse;
+        const error = new GaxiosError(
+          'Not Found',
+          {} as GaxiosOptionsPrepared,
+          notFoundResponse,
+        );
+        sandbox
+          .stub(localStorage.storageTransport.authClient, 'getClient')
+          .resolves();
+        sandbox
+          .stub(localStorage.storageTransport.authClient, 'request')
+          .rejects(error);
+
+        await assert.rejects(localFile.delete(), (err: GaxiosError) => {
+          assert.strictEqual(err.code, 404);
+          return true;
+        });
+        assert.strictEqual(localStorage.retryOptions.autoRetry, true);
+      });
+
+      it('should return an error if the request fails', done => {
         const error = new GaxiosError('err', {} as GaxiosOptionsPrepared);
 
-        STORAGE.storageTransport.makeRequest = sandbox.stub().rejects(error);
-        await file.delete((err: GaxiosError | null) => {
+        sandbox
+          .stub(localStorage.storageTransport, 'makeRequest')
+          .rejects(error);
+        localFile.delete((err: Error | null) => {
           assert.strictEqual(err, error);
+          assert.strictEqual(localStorage.retryOptions.autoRetry, true);
+          done();
         });
       });
     });
