@@ -24,7 +24,8 @@ export interface ExporterOptions {
    */
   universeDomain?: string;
   /**
-   * Optional custom Cloud Monitoring API endpoint hostname (or `host:port`, `[ipv6]`, `[ipv6]:port`).
+   * Optional custom Cloud Monitoring API endpoint (`host`, `host:port`, `[ipv6]`,
+   * `[ipv6]:port`, `https://host[:port]`, or `dns://[authority]/host[:port]`).
    */
   apiEndpoint?: string;
 }

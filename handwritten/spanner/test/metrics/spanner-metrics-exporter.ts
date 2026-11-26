@@ -19,6 +19,7 @@ import {GoogleAuth} from 'google-auth-library';
 import {
   CloudMonitoringMetricsExporter,
   MAX_BATCH_EXPORT_SIZE,
+  formatMonitoringTargetKey,
   parseMonitoringEndpoint,
 } from '../../src/metrics/spanner-metrics-exporter';
 import * as transform from '../../src/metrics/transform';
@@ -193,8 +194,26 @@ describe('CustomExporter', () => {
     const invalidEndpoints = [
       '',
       '   ',
-      'https://monitoring.custom-universe.example',
       'http://monitoring.custom-universe.example',
+      'HTTP://monitoring.custom-universe.example',
+      'ftp://monitoring.custom-universe.example',
+      'unix:///tmp/monitoring.sock',
+      'https://',
+      'https:///',
+      'https://monitoring.custom-universe.example//',
+      'https://monitoring.custom-universe.example/v3',
+      'https://user@monitoring.custom-universe.example',
+      'user@monitoring.custom-universe.example:443',
+      'dns://monitoring.custom-universe.example',
+      'dns:///',
+      'dns:///monitoring.custom-universe.example/',
+      'dns:///monitoring.custom-universe.example/v3',
+      'dns://8.8.8.8/',
+      'dns://dns.google/monitoring.custom-universe.example',
+      'dns://8.8.8.8:0/monitoring.custom-universe.example',
+      'dns://8.8.8.8:abc/monitoring.custom-universe.example',
+      'dns://[::1/monitoring.custom-universe.example',
+      'dns://::1/monitoring.custom-universe.example',
       ':443',
       'monitoring.custom-universe.example:',
       '::1',
@@ -283,6 +302,153 @@ describe('CustomExporter', () => {
       } else {
         process.env.SPANNER_MONITORING_HOST = prevHost;
       }
+    }
+  });
+
+  // T1: https:// scheme normalization (host, host:port, trailing slash, case-insensitive, IPv6).
+  it('should normalize https:// monitoring endpoints for MetricServiceClient', () => {
+    assert.deepStrictEqual(
+      parseMonitoringEndpoint('https://monitoring.custom-universe.example'),
+      {apiEndpoint: 'monitoring.custom-universe.example'},
+    );
+    assert.deepStrictEqual(
+      parseMonitoringEndpoint(
+        'https://monitoring.custom-universe.example:8443',
+      ),
+      {apiEndpoint: 'monitoring.custom-universe.example', port: 8443},
+    );
+    assert.deepStrictEqual(
+      parseMonitoringEndpoint('HTTPS://monitoring.custom-universe.example/'),
+      {apiEndpoint: 'monitoring.custom-universe.example'},
+    );
+    assert.deepStrictEqual(parseMonitoringEndpoint('https://[::1]:8443'), {
+      apiEndpoint: '[::1]',
+      port: 8443,
+    });
+
+    const exporter = new CloudMonitoringMetricsExporter(
+      {auth, apiEndpoint: 'https://monitoring.custom-universe.example:8443'},
+      PROJECT_ID,
+    );
+    assert.strictEqual(
+      (exporter as any)._client._opts.servicePath,
+      'monitoring.custom-universe.example',
+    );
+    assert.strictEqual((exporter as any)._client._opts.port, 8443);
+  });
+
+  // T2: dns:/// target syntax normalizes to canonical host[:port] and matches bare target keys.
+  it('should normalize dns:/// monitoring endpoints to canonical host and port', () => {
+    const bare = parseMonitoringEndpoint(
+      'monitoring.custom-universe.example:8443',
+    );
+    const dnsNoPort = parseMonitoringEndpoint(
+      'dns:///monitoring.custom-universe.example',
+    );
+    const dnsWithPort = parseMonitoringEndpoint(
+      'dns:///monitoring.custom-universe.example:8443',
+    );
+    const dnsIpv6 = parseMonitoringEndpoint('DNS:///[::1]:8443');
+
+    assert.deepStrictEqual(dnsNoPort, {
+      apiEndpoint: 'monitoring.custom-universe.example',
+    });
+    assert.deepStrictEqual(dnsWithPort, {
+      apiEndpoint: 'monitoring.custom-universe.example',
+      port: 8443,
+    });
+    assert.deepStrictEqual(dnsIpv6, {
+      apiEndpoint: '[::1]',
+      port: 8443,
+    });
+    assert.strictEqual(
+      formatMonitoringTargetKey(dnsWithPort),
+      formatMonitoringTargetKey(bare),
+    );
+
+    const exporter = new CloudMonitoringMetricsExporter(
+      {auth, apiEndpoint: 'dns:///monitoring.custom-universe.example:8443'},
+      PROJECT_ID,
+    );
+    assert.strictEqual(
+      (exporter as any)._client._opts.servicePath,
+      'monitoring.custom-universe.example',
+    );
+    assert.strictEqual((exporter as any)._client._opts.port, 8443);
+  });
+
+  // T3: dns://<authority>/ preserves validated IP-literal authority prefix on apiEndpoint.
+  it('should preserve validated IP authority in dns://<authority>/ monitoring endpoints', () => {
+    assert.deepStrictEqual(
+      parseMonitoringEndpoint(
+        'dns://8.8.8.8/monitoring.custom-universe.example',
+      ),
+      {apiEndpoint: 'dns://8.8.8.8/monitoring.custom-universe.example'},
+    );
+    assert.deepStrictEqual(
+      parseMonitoringEndpoint(
+        'dns://8.8.8.8:53/monitoring.custom-universe.example:8443',
+      ),
+      {
+        apiEndpoint: 'dns://8.8.8.8:53/monitoring.custom-universe.example',
+        port: 8443,
+      },
+    );
+    assert.deepStrictEqual(
+      parseMonitoringEndpoint(
+        'dns://[2001:4860:4860::8888]/monitoring.custom-universe.example',
+      ),
+      {
+        apiEndpoint:
+          'dns://[2001:4860:4860::8888]/monitoring.custom-universe.example',
+      },
+    );
+    assert.deepStrictEqual(
+      parseMonitoringEndpoint('dns://[2001:4860:4860::8888]:53/[::1]:8443'),
+      {
+        apiEndpoint: 'dns://[2001:4860:4860::8888]:53/[::1]',
+        port: 8443,
+      },
+    );
+  });
+
+  // F1: Pin malformed bracketed IPv6 dns://<authority>/ rejection branches.
+  it('should reject malformed bracketed IPv6 dns://<authority>/ endpoints', () => {
+    assert.throws(
+      () =>
+        parseMonitoringEndpoint(
+          'dns://[zzz]/monitoring.custom-universe.example',
+        ),
+      /invalid DNS authority: \[zzz\]/,
+    );
+    assert.throws(
+      () =>
+        parseMonitoringEndpoint(
+          'dns://[2001:4860:4860::8888]:0/monitoring.custom-universe.example',
+        ),
+      /Invalid monitoring endpoint port: 0/,
+    );
+    assert.throws(
+      () =>
+        parseMonitoringEndpoint(
+          'dns://[2001:4860:4860::8888]x53/monitoring.custom-universe.example',
+        ),
+      /unexpected characters after IPv6 bracket/,
+    );
+  });
+
+  // F2: Pin bare http:/https: prefix rejection without // (case-insensitive).
+  it('should reject bare http:/https: prefixes without // case-insensitively', () => {
+    for (const bad of [
+      'http:8080',
+      'HTTPS:443',
+      'Http:monitoring.custom-universe.example',
+    ]) {
+      assert.throws(
+        () => parseMonitoringEndpoint(bad),
+        /Unsupported monitoring endpoint scheme/,
+        `Expected ${bad} to be rejected as an unsupported scheme`,
+      );
     }
   });
 });

@@ -800,7 +800,7 @@ describe('Spanner', () => {
       assert.strictEqual(asAny(whitespaceClient)._metricsEnabled, false);
       assert.strictEqual(recordedExporterCalls.length, 0);
 
-      process.env.SPANNER_MONITORING_HOST = 'https://bad-host';
+      process.env.SPANNER_MONITORING_HOST = 'http://bad-host';
       assert.throws(() => new Spanner({projectId: 'tpc-project'}), Error);
       assert.throws(() => new Spanner(), Error);
     });
@@ -979,13 +979,46 @@ describe('Spanner', () => {
     });
 
     // F3: Pin exact error message regex for malformed SPANNER_MONITORING_HOST.
-    it('should reject malformed SPANNER_MONITORING_HOST with protocol scheme error message', () => {
-      process.env.SPANNER_MONITORING_HOST = 'https://bad-host';
+    it('should reject malformed SPANNER_MONITORING_HOST with unsupported scheme error message', () => {
+      process.env.SPANNER_MONITORING_HOST = 'http://bad-host';
       assert.throws(
         () => new Spanner({projectId: 'tpc-project'}),
-        /must not include a protocol scheme/,
+        /Unsupported monitoring endpoint scheme/,
       );
-      assert.throws(() => new Spanner(), /must not include a protocol scheme/);
+      assert.throws(
+        () => new Spanner(),
+        /Unsupported monitoring endpoint scheme/,
+      );
+    });
+
+    // T5: Accept https:// and dns:/// SPANNER_MONITORING_HOST end-to-end and deduplicate factory keys.
+    it('should accept https:// and dns:/// SPANNER_MONITORING_HOST and deduplicate MetricsTracerFactory key', () => {
+      process.env.SPANNER_MONITORING_HOST =
+        'https://monitoring.custom-universe.example:8443';
+      const httpsClient = new Spanner({
+        projectId: 'tpc-project',
+        apiEndpoint: 'spanner.custom-universe.example',
+      });
+      assert.strictEqual(asAny(httpsClient)._metricsEnabled, true);
+      assert.strictEqual(
+        asAny(httpsClient)._monitoringTargetKey,
+        'monitoring.custom-universe.example:8443',
+      );
+      assert.strictEqual(recordedExporterCalls.length, 1);
+
+      process.env.SPANNER_MONITORING_HOST =
+        'dns:///monitoring.custom-universe.example:8443';
+      const dnsClient = new Spanner({
+        projectId: 'tpc-project',
+        apiEndpoint: 'spanner.custom-universe.example',
+      });
+      assert.strictEqual(asAny(dnsClient)._metricsEnabled, true);
+      assert.strictEqual(
+        asAny(dnsClient)._monitoringTargetKey,
+        'monitoring.custom-universe.example:8443',
+      );
+      // Same normalized target key reuses the existing MetricsTracerFactory reader.
+      assert.strictEqual(recordedExporterCalls.length, 1);
     });
 
     it('should keep built-in metrics active for an enabled client when a sibling disables metrics', async () => {
