@@ -27,6 +27,7 @@ import {PreciseDate} from '@google-cloud/precise-date';
 import {hasProjectIdToken, replaceProjectIdToken} from '../src/helper';
 import * as pfy from '@google-cloud/promisify';
 import {grpc} from 'google-gax';
+import {JWT} from 'google-auth-library';
 import * as sinon from 'sinon';
 import * as spnr from '../src';
 import {
@@ -848,8 +849,9 @@ describe('Spanner', () => {
         () => new Spanner({universeDomain: '   '}),
         /universeDomain cannot be empty/,
       );
-      assert.doesNotThrow(
+      assert.throws(
         () => new Spanner({universeDomain: '   ', disableBuiltInMetrics: true}),
+        /universeDomain cannot be empty/,
       );
 
       let capturedCallback:
@@ -1091,6 +1093,240 @@ describe('Spanner', () => {
         'my-tpc.example',
         'monitoring.my-tpc.example:8443',
       ]);
+    });
+
+    // Verify caller-supplied GoogleAuth isolation for built-in metrics.
+    it('should create a dedicated GoogleAuth for metrics when options.auth is provided and reuse this.auth otherwise', async () => {
+      const callerAuth = Object.create(fakeGoogleAuth.prototype);
+      callerAuth.getProjectId = cb => cb && cb(null, 'caller-project');
+      const client = new Spanner(
+        asAny({
+          projectId: 'caller-project',
+          universeDomain: 'my-tpc.example',
+          auth: callerAuth,
+        }),
+      );
+
+      assert.strictEqual(client.auth, callerAuth);
+      assert.strictEqual(recordedExporterCalls.length, 1);
+      const metricsAuth = recordedExporterCalls[0].options.auth;
+      assert.notStrictEqual(metricsAuth, callerAuth);
+      const metricsAuthOpts = getFake(metricsAuth).calledWith_[0];
+      assert.strictEqual(metricsAuthOpts.auth, undefined);
+      assert.strictEqual(metricsAuthOpts.universeDomain, 'my-tpc.example');
+      assert.deepStrictEqual(metricsAuthOpts.scopes, [
+        'https://www.googleapis.com/auth/cloud-platform',
+        'https://www.googleapis.com/auth/monitoring.write',
+      ]);
+
+      await MetricsTracerFactory.resetInstance();
+      recordedExporterCalls = [];
+
+      const defaultClient = new Spanner({projectId: 'default-project'});
+      assert.strictEqual(recordedExporterCalls.length, 1);
+      assert.strictEqual(
+        recordedExporterCalls[0].options.auth,
+        defaultClient.auth,
+      );
+    });
+
+    it('should keep built-in metrics enabled for explicit default Spanner endpoints and port 443, and disable for non-default endpoints or ports', async () => {
+      const enabledConfigs = [
+        {projectId: 'p', apiEndpoint: 'spanner.googleapis.com'},
+        {projectId: 'p', apiEndpoint: 'spanner.googleapis.com:443'},
+        {projectId: 'p', apiEndpoint: '  SPANNER.GOOGLEAPIS.COM:443  '},
+        {projectId: 'p', servicePath: 'spanner.googleapis.com'},
+        {projectId: 'p', servicePath: 'spanner.googleapis.com:443'},
+        {projectId: 'p', port: 443},
+        {projectId: 'p', port: asAny('443')},
+        {
+          projectId: 'p',
+          universeDomain: 'my-tpc.example',
+          apiEndpoint: 'spanner.my-tpc.example',
+        },
+        {
+          projectId: 'p',
+          universeDomain: 'my-tpc.example',
+          apiEndpoint: 'spanner.my-tpc.example:443',
+          port: 443,
+        },
+        {projectId: 'p', apiEndpoint: ''},
+        {projectId: 'p', servicePath: ''},
+        {projectId: 'p', port: asAny('')},
+      ];
+      for (const cfg of enabledConfigs) {
+        await MetricsTracerFactory.resetInstance();
+        recordedExporterCalls = [];
+        const client = new Spanner(cfg);
+        assert.strictEqual(
+          asAny(client)._metricsEnabled,
+          true,
+          `Expected metrics enabled for ${JSON.stringify(cfg)}`,
+        );
+      }
+
+      const disabledConfigs = [
+        {projectId: 'p', port: 9010},
+        {projectId: 'p', port: 0},
+        {projectId: 'p', port: asAny('abc')},
+        {projectId: 'p', apiEndpoint: 'spanner.googleapis.com:8443'},
+        {
+          projectId: 'p',
+          universeDomain: 'my-tpc.example',
+          apiEndpoint: 'spanner.googleapis.com',
+        },
+      ];
+      for (const cfg of disabledConfigs) {
+        await MetricsTracerFactory.resetInstance();
+        recordedExporterCalls = [];
+        const client = new Spanner(cfg);
+        assert.strictEqual(
+          asAny(client)._metricsEnabled,
+          false,
+          `Expected metrics disabled for ${JSON.stringify(cfg)}`,
+        );
+        assert.strictEqual(recordedExporterCalls.length, 0);
+      }
+    });
+
+    it('should throw conflict error when universeDomain and universe_domain conflict with empty or whitespace values', () => {
+      const conflictCases = [
+        {universeDomain: '', universe_domain: 'my-tpc.example'},
+        {universeDomain: '   ', universe_domain: 'my-tpc.example'},
+        {universeDomain: 'my-tpc.example', universe_domain: ''},
+        {universeDomain: 'my-tpc.example', universe_domain: '   '},
+      ];
+      for (const cfg of conflictCases) {
+        assert.throws(
+          () => new Spanner(cfg),
+          /Please set either universe_domain or universeDomain, but not both\./,
+          `Expected conflict error for ${JSON.stringify(cfg)}`,
+        );
+      }
+      assert.throws(
+        () => new Spanner({universeDomain: '', universe_domain: ''}),
+        /universeDomain cannot be empty/,
+      );
+    });
+
+    it('should treat exported empty or whitespace GOOGLE_CLOUD_UNIVERSE_DOMAIN as unset and fail closed on explicit empty options regardless of metrics flag', () => {
+      const prevEnv = process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+      try {
+        for (const envVal of ['', '   ']) {
+          process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = envVal;
+          const client = new Spanner({projectId: 'env-empty-proj'});
+          assert.strictEqual(client.universeDomain, 'googleapis.com');
+          assert.strictEqual(client.options.universeDomain, undefined);
+          assert.strictEqual(asAny(client)._metricsEnabled, true);
+        }
+      } finally {
+        if (prevEnv === undefined) {
+          delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+        } else {
+          process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = prevEnv;
+        }
+      }
+
+      assert.throws(
+        () => new Spanner({universeDomain: '', disableBuiltInMetrics: true}),
+        /universeDomain cannot be empty/,
+      );
+      assert.throws(
+        () =>
+          new Spanner({universe_domain: '   ', disableBuiltInMetrics: true}),
+        /universeDomain cannot be empty/,
+      );
+    });
+
+    it('should treat a null universeDomain option as unset and fall back to googleapis.com', () => {
+      const prevEnv = process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+      try {
+        delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+        const client = new Spanner(
+          asAny({projectId: 'null-universe', universeDomain: null}),
+        );
+        assert.strictEqual(client.universeDomain, 'googleapis.com');
+      } finally {
+        if (prevEnv === undefined) {
+          delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+        } else {
+          process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = prevEnv;
+        }
+      }
+    });
+
+    it('should isolate an unscoped JWT passed via opts.authClient using createScoped', () => {
+      const unscopedJwt = new JWT({
+        email: 'sa@proj.iam.gserviceaccount.com',
+        key: 'fake-key',
+      });
+      new Spanner(asAny({projectId: 'jwt-proj', authClient: unscopedJwt}));
+
+      assert.strictEqual(recordedExporterCalls.length, 1);
+      const metricsAuthOpts = getFake(recordedExporterCalls[0].options.auth)
+        .calledWith_[0];
+      assert.ok(metricsAuthOpts.authClient instanceof JWT);
+      assert.notStrictEqual(metricsAuthOpts.authClient, unscopedJwt);
+      assert.strictEqual(unscopedJwt.defaultServicePath, undefined);
+      assert.deepStrictEqual(metricsAuthOpts.authClient.scopes, [
+        'https://www.googleapis.com/auth/cloud-platform',
+        'https://www.googleapis.com/auth/monitoring.write',
+      ]);
+    });
+
+    it('should always scope an isolated opts.authClient JWT with metrics scopes even when Spanner-only scopes are configured', () => {
+      const unscopedJwt = new JWT({
+        email: 'sa@proj.iam.gserviceaccount.com',
+        key: 'fake-key',
+      });
+      new Spanner(
+        asAny({
+          projectId: 'jwt-spanner-scopes',
+          authClient: unscopedJwt,
+          scopes: ['https://www.googleapis.com/auth/spanner.data'],
+        }),
+      );
+      assert.strictEqual(recordedExporterCalls.length, 1);
+      const metricsAuthOpts = getFake(recordedExporterCalls[0].options.auth)
+        .calledWith_[0];
+      const expectedScopes = [
+        'https://www.googleapis.com/auth/cloud-platform',
+        'https://www.googleapis.com/auth/monitoring.write',
+      ];
+      assert.deepStrictEqual(metricsAuthOpts.scopes, expectedScopes);
+      assert.deepStrictEqual(metricsAuthOpts.authClient.scopes, expectedScopes);
+      assert.notStrictEqual(metricsAuthOpts.authClient, unscopedJwt);
+    });
+
+    it('should preserve keyFile, subject, additionalClaims, and quotaProjectId via JWT.createScoped', async () => {
+      const keyFileJwt = new JWT({keyFile: '/tmp/sa.json'});
+      new Spanner(asAny({projectId: 'jwt-keyfile', authClient: keyFileJwt}));
+      assert.strictEqual(recordedExporterCalls.length, 1);
+      const keyFileMetricsJwt = getFake(recordedExporterCalls[0].options.auth)
+        .calledWith_[0].authClient as JWT;
+      assert.notStrictEqual(keyFileMetricsJwt, keyFileJwt);
+      assert.strictEqual(keyFileMetricsJwt.keyFile, '/tmp/sa.json');
+
+      await MetricsTracerFactory.resetInstance();
+      recordedExporterCalls = [];
+
+      const richJwt = new JWT({
+        email: 'sa@proj.iam.gserviceaccount.com',
+        key: 'fake-key',
+        subject: 'delegated@example.com',
+        additionalClaims: {custom: 'claim'},
+        quotaProjectId: 'billing-proj',
+      });
+      new Spanner(asAny({projectId: 'jwt-rich', authClient: richJwt}));
+      assert.strictEqual(recordedExporterCalls.length, 1);
+      const richMetricsJwt = getFake(recordedExporterCalls[0].options.auth)
+        .calledWith_[0].authClient as JWT;
+      assert.notStrictEqual(richMetricsJwt, richJwt);
+      assert.strictEqual(richMetricsJwt.subject, 'delegated@example.com');
+      assert.deepStrictEqual(richMetricsJwt.additionalClaims, {
+        custom: 'claim',
+      });
+      assert.strictEqual(richMetricsJwt.quotaProjectId, 'billing-proj');
     });
   });
 

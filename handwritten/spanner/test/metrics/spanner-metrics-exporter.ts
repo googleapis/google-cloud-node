@@ -15,12 +15,15 @@
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {MeterProvider, MetricReader} from '@opentelemetry/sdk-metrics';
-import {GoogleAuth} from 'google-auth-library';
+import {GoogleAuth, JWT} from 'google-auth-library';
 import {
   CloudMonitoringMetricsExporter,
   MAX_BATCH_EXPORT_SIZE,
   parseMonitoringEndpoint,
+  resolveExporterConfig,
 } from '../../src/metrics/spanner-metrics-exporter';
+import {Spanner} from '../../src';
+import {MetricsTracerFactory} from '../../src/metrics/metrics-tracer-factory';
 import * as transform from '../../src/metrics/transform';
 import {status} from '@grpc/grpc-js';
 import {
@@ -282,6 +285,133 @@ describe('CustomExporter', () => {
         delete process.env.SPANNER_MONITORING_HOST;
       } else {
         process.env.SPANNER_MONITORING_HOST = prevHost;
+      }
+    }
+  });
+
+  it('should write trimmed effectiveUniverseDomain to clientOptions and handle empty GOOGLE_CLOUD_UNIVERSE_DOMAIN', () => {
+    const prevEnv = process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+    try {
+      process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = '  env-tpc.example  ';
+      const trimmedResolved = resolveExporterConfig({auth: new GoogleAuth()});
+      assert.strictEqual(trimmedResolved.universeDomain, 'env-tpc.example');
+      assert.strictEqual(
+        trimmedResolved.clientOptions.universeDomain,
+        'env-tpc.example',
+      );
+      const trimmedExporter = new CloudMonitoringMetricsExporter(
+        {auth: new GoogleAuth()},
+        PROJECT_ID,
+      );
+      assert.strictEqual(
+        (trimmedExporter as any)._client._universeDomain,
+        'env-tpc.example',
+      );
+      assert.strictEqual(
+        (trimmedExporter as any)._client._servicePath,
+        'monitoring.env-tpc.example',
+      );
+
+      for (const emptyEnv of ['', '   ']) {
+        process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = emptyEnv;
+        const emptyResolved = resolveExporterConfig({auth: new GoogleAuth()});
+        assert.strictEqual(emptyResolved.universeDomain, 'googleapis.com');
+        assert.strictEqual(
+          emptyResolved.clientOptions.universeDomain,
+          'googleapis.com',
+        );
+        const emptyExporter = new CloudMonitoringMetricsExporter(
+          {auth: new GoogleAuth()},
+          PROJECT_ID,
+        );
+        assert.strictEqual(
+          (emptyExporter as any)._client._universeDomain,
+          'googleapis.com',
+        );
+        assert.strictEqual(
+          (emptyExporter as any)._client._servicePath,
+          'monitoring.googleapis.com',
+        );
+      }
+    } finally {
+      if (prevEnv === undefined) {
+        delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+      } else {
+        process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = prevEnv;
+      }
+    }
+  });
+
+  it('should not clobber caller GoogleAuth or JWT defaultServicePath end-to-end through Spanner and MetricServiceClient', async () => {
+    const prevDisable = process.env.SPANNER_DISABLE_BUILTIN_METRICS;
+    const prevEmulator = process.env.SPANNER_EMULATOR_HOST;
+    const prevMonitoring = process.env.SPANNER_MONITORING_HOST;
+    try {
+      process.env.SPANNER_DISABLE_BUILTIN_METRICS = 'false';
+      delete process.env.SPANNER_EMULATOR_HOST;
+      delete process.env.SPANNER_MONITORING_HOST;
+      await MetricsTracerFactory.resetInstance();
+
+      // T7a: opts.authClient (unscoped JWT) clones via createScoped without ADC.
+      const callerJwt = new JWT({
+        email: 'sa@proj.iam.gserviceaccount.com',
+        key: 'fake-key',
+      });
+      const jwtSpanner = new Spanner({
+        projectId: PROJECT_ID,
+        authClient: callerJwt,
+      });
+
+      const jwtFactory = MetricsTracerFactory.getInstance(
+        PROJECT_ID,
+        'googleapis.com',
+      );
+      assert.ok(jwtFactory);
+      const jwtReaders = (jwtFactory as any)._metricReaders;
+      assert.strictEqual(jwtReaders.length, 1);
+      const jwtExporter = jwtReaders[0]
+        ._exporter as CloudMonitoringMetricsExporter;
+      const jwtMetricsClient = (jwtExporter as any)._client;
+      assert.notStrictEqual(jwtMetricsClient.auth, jwtSpanner.auth);
+      const resolvedMetricsClient = await jwtMetricsClient.auth.getClient();
+      assert.ok(resolvedMetricsClient instanceof JWT);
+      assert.notStrictEqual(resolvedMetricsClient, callerJwt);
+      assert.strictEqual(callerJwt.defaultServicePath, undefined);
+
+      // T7b: opts.auth (shared GoogleAuth) isolates metrics auth without calling
+      // getClient() (which would hit ADC on CI runners without credentials).
+      await MetricsTracerFactory.resetInstance();
+      const callerAuth = new GoogleAuth({authClient: callerJwt});
+      new Spanner({projectId: PROJECT_ID, auth: callerAuth});
+
+      const authFactory = MetricsTracerFactory.getInstance(
+        PROJECT_ID,
+        'googleapis.com',
+      );
+      assert.ok(authFactory);
+      const authReaders = (authFactory as any)._metricReaders;
+      assert.strictEqual(authReaders.length, 1);
+      const authExporter = authReaders[0]
+        ._exporter as CloudMonitoringMetricsExporter;
+      const authMetricsClient = (authExporter as any)._client;
+      assert.notStrictEqual(authMetricsClient.auth, callerAuth);
+      assert.strictEqual(callerAuth.defaultServicePath, undefined);
+    } finally {
+      await MetricsTracerFactory.resetInstance();
+      if (prevDisable === undefined) {
+        delete process.env.SPANNER_DISABLE_BUILTIN_METRICS;
+      } else {
+        process.env.SPANNER_DISABLE_BUILTIN_METRICS = prevDisable;
+      }
+      if (prevEmulator === undefined) {
+        delete process.env.SPANNER_EMULATOR_HOST;
+      } else {
+        process.env.SPANNER_EMULATOR_HOST = prevEmulator;
+      }
+      if (prevMonitoring === undefined) {
+        delete process.env.SPANNER_MONITORING_HOST;
+      } else {
+        process.env.SPANNER_MONITORING_HOST = prevMonitoring;
       }
     }
   });

@@ -106,6 +106,7 @@ import {PeriodicExportingMetricReader} from '@opentelemetry/sdk-metrics';
 import {MetricInterceptor} from './metrics/interceptor';
 import {
   CloudMonitoringMetricsExporter,
+  normalizeUniverseDomain,
   ResolvedExporterConfig,
   resolveExporterConfig,
 } from './metrics/spanner-metrics-exporter';
@@ -116,6 +117,90 @@ import {RequestStreamCoordinator} from './request-stream-coordinator';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const gcpApiConfig = require('./spanner_grpc_config.json');
+
+const METRICS_DEFAULT_SCOPES = [
+  'https://www.googleapis.com/auth/cloud-platform',
+  'https://www.googleapis.com/auth/monitoring.write',
+];
+
+/**
+ * Returns whether an auth scopes option contains at least one non-empty scope.
+ *
+ * @param scopes Candidate scopes value from options, GoogleAuth, or AuthClient.
+ * @returns True when explicit scopes are configured.
+ */
+function hasExplicitScopes(scopes: unknown): boolean {
+  if (typeof scopes === 'string') {
+    return scopes.trim().length > 0;
+  }
+  if (Array.isArray(scopes)) {
+    return scopes.some(s => typeof s === 'string' && s.trim().length > 0);
+  }
+  return false;
+}
+
+/**
+ * Checks whether an auth client supports `JWT.createScoped(scopes)` cloning.
+ *
+ * @param client Candidate auth client.
+ * @returns True when `client` is a JWT-like client supporting `createScoped`.
+ */
+function isJwtLike(client: unknown): client is {
+  scopes?: string | string[];
+  createScoped: (scopes?: string | string[]) => unknown;
+} {
+  return Boolean(
+    client &&
+    typeof client === 'object' &&
+    typeof (client as {createScoped?: unknown}).createScoped === 'function',
+  );
+}
+
+/**
+ * Checks whether a Spanner endpoint string matches the default endpoint for
+ * `universeDomain` (`spanner.<universeDomain>` with or without `:443`).
+ *
+ * @param endpoint Raw `apiEndpoint` or `servicePath` value.
+ * @param defaultEndpoint Lowercased `spanner.<universeDomain>` string.
+ * @returns True when the endpoint matches the default Spanner host/port.
+ */
+function isDefaultSpannerEndpoint(
+  endpoint: string,
+  defaultEndpoint: string,
+): boolean {
+  const normalized = endpoint.trim().toLowerCase();
+  return (
+    normalized === defaultEndpoint || normalized === `${defaultEndpoint}:443`
+  );
+}
+
+/**
+ * Determines whether Spanner options configure a non-default endpoint or port.
+ *
+ * @param options Resolved Spanner client options.
+ * @param universeDomain Normalized universe domain for this Spanner client.
+ * @returns True when `apiEndpoint`, `servicePath`, or `port` overrides the default.
+ */
+function isCustomSpannerEndpoint(
+  options: SpannerOptions,
+  universeDomain: string,
+): boolean {
+  const defaultEndpoint = `spanner.${universeDomain.toLowerCase()}`;
+  const hasCustomApiEndpoint =
+    typeof options.apiEndpoint === 'string' &&
+    options.apiEndpoint.trim() !== '' &&
+    !isDefaultSpannerEndpoint(options.apiEndpoint, defaultEndpoint);
+  const hasCustomServicePath =
+    typeof options.servicePath === 'string' &&
+    options.servicePath.trim() !== '' &&
+    !isDefaultSpannerEndpoint(options.servicePath, defaultEndpoint);
+  const hasCustomPort =
+    options.port !== undefined &&
+    options.port !== null &&
+    String(options.port).trim() !== '' &&
+    Number(options.port) !== 443;
+  return hasCustomApiEndpoint || hasCustomServicePath || hasCustomPort;
+}
 
 export type IOperation = instanceAdmin.longrunning.IOperation;
 
@@ -269,33 +354,24 @@ export type TranslateEnumKeys<
  * @returns {string} The universe domain.
  */
 function getUniverseDomain(options: SpannerOptions): string {
-  const universeDomainEnvVar =
-    typeof process === 'object' && typeof process.env === 'object'
-      ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-      : undefined;
-  const rawUniverseDomain =
-    options?.universeDomain ??
-    options?.universe_domain ??
-    universeDomainEnvVar ??
-    'googleapis.com';
-  const universeDomain =
-    typeof rawUniverseDomain === 'string'
-      ? rawUniverseDomain.trim()
-      : rawUniverseDomain;
-  // Sync the trimmed universe domain onto options whenever configured explicitly
-  // (via universeDomain, universe_domain, or GOOGLE_CLOUD_UNIVERSE_DOMAIN) so
-  // Spanner, GAX clients, and GoogleAuth observe the same normalized value.
-  if (
-    options?.universeDomain !== undefined ||
-    options?.universe_domain !== undefined ||
-    universeDomainEnvVar
-  ) {
-    options.universeDomain = universeDomain;
+  const explicitOption = options?.universeDomain ?? options?.universe_domain;
+  const configured =
+    explicitOption !== undefined && explicitOption !== null
+      ? normalizeUniverseDomain(explicitOption)
+      : typeof process === 'object'
+        ? process.env?.GOOGLE_CLOUD_UNIVERSE_DOMAIN?.trim() || undefined
+        : undefined;
+
+  if (configured !== undefined) {
+    if (options) {
+      options.universeDomain = configured;
+      if (options.universe_domain !== undefined) {
+        options.universe_domain = configured;
+      }
+    }
+    return configured;
   }
-  if (options?.universe_domain !== undefined) {
-    options.universe_domain = universeDomain;
-  }
-  return universeDomain;
+  return 'googleapis.com';
 }
 
 /**
@@ -481,8 +557,8 @@ class Spanner extends GrpcService {
         ? options.universeDomain.trim()
         : options?.universeDomain;
     if (
-      trimmedSnakeUniverse &&
-      trimmedCamelUniverse &&
+      trimmedSnakeUniverse !== undefined &&
+      trimmedCamelUniverse !== undefined &&
       trimmedSnakeUniverse !== trimmedCamelUniverse
     ) {
       throw new Error(
@@ -1709,10 +1785,9 @@ class Spanner extends GrpcService {
       process.env.SPANNER_DISABLE_BUILTIN_METRICS === 'true' ||
       !!disableBuiltInMetrics;
     const spannerOptions = this.options as SpannerOptions;
-    const hasCustomEndpoint = Boolean(
-      spannerOptions.apiEndpoint ||
-      spannerOptions.servicePath ||
-      spannerOptions.port,
+    const hasCustomEndpoint = isCustomSpannerEndpoint(
+      spannerOptions,
+      this._universeDomain,
     );
     const monitoringHost =
       process.env.SPANNER_MONITORING_HOST?.trim() || undefined;
@@ -1803,6 +1878,42 @@ class Spanner extends GrpcService {
   }
 
   /**
+   * Returns a `GoogleAuth` instance safe to pass to `MetricServiceClient`
+   * without clobbering `defaultServicePath` / `defaultScopes` on a shared
+   * caller `GoogleAuth` or unscoped `JWT`.
+   *
+   * @returns A safe `GoogleAuth` instance for `CloudMonitoringMetricsExporter`.
+   */
+  private _createMetricsAuth(): GoogleAuth {
+    const opts = this.options as SpannerOptions;
+    if (opts.auth instanceof GoogleAuth) {
+      // Dedicated GoogleAuth for MetricServiceClient so it cannot mutate
+      // defaultServicePath/defaultScopes on the caller's shared instance.
+      const rest = {...opts};
+      delete rest.auth;
+      return new GoogleAuth({
+        ...rest,
+        universeDomain: this._universeDomain,
+        scopes: METRICS_DEFAULT_SCOPES,
+      });
+    }
+    if (
+      isJwtLike(opts.authClient) &&
+      !hasExplicitScopes(opts.authClient.scopes)
+    ) {
+      return new GoogleAuth({
+        ...opts,
+        universeDomain: this._universeDomain,
+        scopes: METRICS_DEFAULT_SCOPES,
+        authClient: opts.authClient.createScoped(
+          METRICS_DEFAULT_SCOPES,
+        ) as GoogleAuthOptions['authClient'],
+      });
+    }
+    return this.auth;
+  }
+
+  /**
    * Attaches the Cloud Monitoring exporter to the `MetricsTracerFactory`
    * scoped to the resolved `(universeDomain, monitoringTargetKey)`.
    *
@@ -1829,12 +1940,27 @@ class Spanner extends GrpcService {
       }
 
       if (!factory.hasMetricReaders()) {
+        const metricsAuth = this._createMetricsAuth();
+        const exporterOptions =
+          metricsAuth === config.exporterOptions.auth
+            ? config.exporterOptions
+            : {...config.exporterOptions, auth: metricsAuth};
+        const resolvedConfig =
+          metricsAuth === config.resolvedConfig.clientOptions.auth
+            ? config.resolvedConfig
+            : {
+                ...config.resolvedConfig,
+                clientOptions: {
+                  ...config.resolvedConfig.clientOptions,
+                  auth: metricsAuth,
+                },
+              };
         context.with(ROOT_CONTEXT, () => {
           const periodicReader = new PeriodicExportingMetricReader({
             exporter: new CloudMonitoringMetricsExporter(
-              config.exporterOptions,
+              exporterOptions,
               projectId,
-              config.resolvedConfig,
+              resolvedConfig,
             ),
             exportIntervalMillis: 60000,
           });

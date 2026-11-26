@@ -208,9 +208,6 @@ export function resolveExporterConfig(
   }
 
   const clientOptions: Record<string, unknown> = {auth};
-  if (resolvedUniverseDomain !== undefined) {
-    clientOptions.universeDomain = resolvedUniverseDomain;
-  }
 
   // Only fall back to SPANNER_MONITORING_HOST when apiEndpoint was omitted;
   // explicit `apiEndpoint: undefined` keeps the caller's synchronous snapshot.
@@ -238,7 +235,9 @@ export function resolveExporterConfig(
     resolvedUniverseDomain ??
     (typeof process === 'object'
       ? process.env?.GOOGLE_CLOUD_UNIVERSE_DOMAIN?.trim() || undefined
-      : undefined);
+      : undefined) ??
+    'googleapis.com';
+  clientOptions.universeDomain = effectiveUniverseDomain;
 
   return {
     clientOptions,
