@@ -1238,6 +1238,23 @@ describe('Spanner', () => {
       );
     });
 
+    it('should treat a null universeDomain option as unset and fall back to googleapis.com', () => {
+      const prevEnv = process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+      try {
+        delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+        const client = new Spanner(
+          asAny({projectId: 'null-universe', universeDomain: null}),
+        );
+        assert.strictEqual(client.universeDomain, 'googleapis.com');
+      } finally {
+        if (prevEnv === undefined) {
+          delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+        } else {
+          process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = prevEnv;
+        }
+      }
+    });
+
     it('should isolate an unscoped JWT passed via opts.authClient using createScoped', () => {
       const unscopedJwt = new JWT({
         email: 'sa@proj.iam.gserviceaccount.com',

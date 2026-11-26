@@ -106,6 +106,7 @@ import {PeriodicExportingMetricReader} from '@opentelemetry/sdk-metrics';
 import {MetricInterceptor} from './metrics/interceptor';
 import {
   CloudMonitoringMetricsExporter,
+  normalizeUniverseDomain,
   ResolvedExporterConfig,
   resolveExporterConfig,
 } from './metrics/spanner-metrics-exporter';
@@ -353,38 +354,24 @@ export type TranslateEnumKeys<
  * @returns {string} The universe domain.
  */
 function getUniverseDomain(options: SpannerOptions): string {
-  const universeDomainEnvVar =
-    typeof process === 'object' && typeof process.env === 'object'
-      ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']?.trim() || undefined
-      : undefined;
-  const hasExplicitOption =
-    options?.universeDomain !== undefined ||
-    options?.universe_domain !== undefined;
-  const rawUniverseDomain =
-    options?.universeDomain ??
-    options?.universe_domain ??
-    universeDomainEnvVar ??
-    'googleapis.com';
-  const universeDomain =
-    typeof rawUniverseDomain === 'string'
-      ? rawUniverseDomain.trim()
-      : rawUniverseDomain;
-  if (
-    hasExplicitOption &&
-    (typeof universeDomain !== 'string' || universeDomain === '')
-  ) {
-    throw new Error('universeDomain cannot be empty.');
+  const explicitOption = options?.universeDomain ?? options?.universe_domain;
+  const configured =
+    explicitOption !== undefined && explicitOption !== null
+      ? normalizeUniverseDomain(explicitOption)
+      : typeof process === 'object'
+        ? process.env?.GOOGLE_CLOUD_UNIVERSE_DOMAIN?.trim() || undefined
+        : undefined;
+
+  if (configured !== undefined) {
+    if (options) {
+      options.universeDomain = configured;
+      if (options.universe_domain !== undefined) {
+        options.universe_domain = configured;
+      }
+    }
+    return configured;
   }
-  // Sync the trimmed universe domain onto options whenever configured explicitly
-  // (via universeDomain, universe_domain, or GOOGLE_CLOUD_UNIVERSE_DOMAIN) so
-  // Spanner, GAX clients, and GoogleAuth observe the same normalized value.
-  if (options && (hasExplicitOption || universeDomainEnvVar)) {
-    options.universeDomain = universeDomain;
-  }
-  if (options?.universe_domain !== undefined) {
-    options.universe_domain = universeDomain;
-  }
-  return universeDomain;
+  return 'googleapis.com';
 }
 
 /**
