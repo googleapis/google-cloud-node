@@ -208,9 +208,6 @@ export function resolveExporterConfig(
   }
 
   const clientOptions: Record<string, unknown> = {auth};
-  if (resolvedUniverseDomain !== undefined) {
-    clientOptions.universeDomain = resolvedUniverseDomain;
-  }
 
   // Only fall back to SPANNER_MONITORING_HOST when apiEndpoint was omitted;
   // explicit `apiEndpoint: undefined` keeps the caller's synchronous snapshot.
@@ -234,21 +231,13 @@ export function resolveExporterConfig(
     monitoringEndpoint = formatMonitoringTargetKey(parsed);
   }
 
-  const rawEnvUniverseDomain =
-    typeof process === 'object'
-      ? process.env?.GOOGLE_CLOUD_UNIVERSE_DOMAIN
-      : undefined;
-  const trimmedEnvUniverseDomain = rawEnvUniverseDomain?.trim() || undefined;
   const effectiveUniverseDomain =
     resolvedUniverseDomain ??
-    trimmedEnvUniverseDomain ??
-    // When GOOGLE_CLOUD_UNIVERSE_DOMAIN is exported as empty/whitespace, pin
-    // the default explicitly so MetricServiceClient's `??` cannot read `""`.
-    (rawEnvUniverseDomain !== undefined ? 'googleapis.com' : undefined);
-
-  if (effectiveUniverseDomain !== undefined) {
-    clientOptions.universeDomain = effectiveUniverseDomain;
-  }
+    (typeof process === 'object'
+      ? process.env?.GOOGLE_CLOUD_UNIVERSE_DOMAIN?.trim() || undefined
+      : undefined) ??
+    'googleapis.com';
+  clientOptions.universeDomain = effectiveUniverseDomain;
 
   return {
     clientOptions,
