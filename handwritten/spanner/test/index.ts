@@ -1257,6 +1257,30 @@ describe('Spanner', () => {
       ]);
     });
 
+    it('should always scope an isolated opts.authClient JWT with metrics scopes even when Spanner-only scopes are configured', () => {
+      const unscopedJwt = new JWT({
+        email: 'sa@proj.iam.gserviceaccount.com',
+        key: 'fake-key',
+      });
+      new Spanner(
+        asAny({
+          projectId: 'jwt-spanner-scopes',
+          authClient: unscopedJwt,
+          scopes: ['https://www.googleapis.com/auth/spanner.data'],
+        }),
+      );
+      assert.strictEqual(recordedExporterCalls.length, 1);
+      const metricsAuthOpts = getFake(recordedExporterCalls[0].options.auth)
+        .calledWith_[0];
+      const expectedScopes = [
+        'https://www.googleapis.com/auth/cloud-platform',
+        'https://www.googleapis.com/auth/monitoring.write',
+      ];
+      assert.deepStrictEqual(metricsAuthOpts.scopes, expectedScopes);
+      assert.deepStrictEqual(metricsAuthOpts.authClient.scopes, expectedScopes);
+      assert.notStrictEqual(metricsAuthOpts.authClient, unscopedJwt);
+    });
+
     it('should preserve keyFile, subject, additionalClaims, and quotaProjectId via JWT.createScoped', async () => {
       const keyFileJwt = new JWT({keyFile: '/tmp/sa.json'});
       new Spanner(asAny({projectId: 'jwt-keyfile', authClient: keyFileJwt}));

@@ -378,7 +378,7 @@ function getUniverseDomain(options: SpannerOptions): string {
   // Sync the trimmed universe domain onto options whenever configured explicitly
   // (via universeDomain, universe_domain, or GOOGLE_CLOUD_UNIVERSE_DOMAIN) so
   // Spanner, GAX clients, and GoogleAuth observe the same normalized value.
-  if (hasExplicitOption || universeDomainEnvVar) {
+  if (options && (hasExplicitOption || universeDomainEnvVar)) {
     options.universeDomain = universeDomain;
   }
   if (options?.universe_domain !== undefined) {
@@ -1914,15 +1914,12 @@ class Spanner extends GrpcService {
       isJwtLike(opts.authClient) &&
       !hasExplicitScopes(opts.authClient.scopes)
     ) {
-      const scopes = hasExplicitScopes(opts.scopes)
-        ? opts.scopes
-        : METRICS_DEFAULT_SCOPES;
       return new GoogleAuth({
         ...opts,
         universeDomain: this._universeDomain,
-        scopes,
+        scopes: METRICS_DEFAULT_SCOPES,
         authClient: opts.authClient.createScoped(
-          scopes,
+          METRICS_DEFAULT_SCOPES,
         ) as GoogleAuthOptions['authClient'],
       });
     }
