@@ -526,6 +526,7 @@ export class StorageTransport {
         },
       },
       ...reqOpts,
+      queryParameters,
       hasPrecondition, // Pass flag to Gaxios / AuthClient options
       params: hasDefinedQueryParams ? queryParameters : undefined,
       paramsSerializer: this.#paramsSerializer,

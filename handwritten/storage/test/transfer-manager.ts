@@ -33,7 +33,13 @@ import {
 import assert from 'assert';
 import {describe, it, beforeEach, before, afterEach, after} from 'mocha';
 import * as path from 'path';
-import {Gaxios, GaxiosError, GaxiosOptions, GaxiosResponse} from 'gaxios';
+import {
+  Gaxios,
+  GaxiosError,
+  GaxiosOptions,
+  GaxiosOptionsPrepared,
+  GaxiosResponse,
+} from 'gaxios';
 import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
 import {
   AuthClient,
@@ -1623,6 +1629,84 @@ describe('Transfer Manager', () => {
         for (const hdr of seenDefaultHeaders) {
           assert.strictEqual(hdr, 'inherited-header');
         }
+      });
+
+      it('should copy request and response interceptors from storageTransport.gaxiosInstance and strip defaults.adapter on unauthenticated custom endpoints', async () => {
+        const seenInterceptorHeaders: Array<string | null> = [];
+        const requestInterceptorSpy = sandbox.spy(
+          async (config: GaxiosOptionsPrepared) => {
+            config.headers.set('x-tm-req-interceptor', 'applied');
+            return config;
+          },
+        );
+        const responseInterceptorSpy = sandbox.spy(
+          async (res: GaxiosResponse) => res,
+        );
+        const recursiveAdapterSpy = sandbox.spy(async () => {
+          throw new Error(
+            'defaults.adapter should not be copied to XMLMultiPartUploadHelper',
+          );
+        });
+
+        const mockFetch: GaxiosOptions['fetchImplementation'] = async (
+          url,
+          init,
+        ) => {
+          const headers = new Headers(init?.headers);
+          assert.strictEqual(headers.get('authorization'), null);
+          seenInterceptorHeaders.push(headers.get('x-tm-req-interceptor'));
+          const urlStr = String(url);
+          if (init?.method === 'POST' && urlStr.includes('?uploads')) {
+            return new Response(
+              '<InitiateMultipartUploadResult><UploadId>upload-inter-1</UploadId></InitiateMultipartUploadResult>',
+              {status: 200},
+            );
+          }
+          if (init?.method === 'PUT') {
+            return new Response('', {
+              status: 200,
+              headers: {etag: '"etag-1"'},
+            });
+          }
+          return new Response('<CompleteMultipartUploadResult/>', {
+            status: 200,
+          });
+        };
+
+        const customStorage = new Storage({
+          apiEndpoint: CUSTOM_ENDPOINT,
+          retryOptions: {autoRetry: false},
+        });
+        customStorage.storageTransport.gaxiosInstance.defaults = {
+          fetchImplementation: mockFetch,
+          adapter: recursiveAdapterSpy,
+        };
+        customStorage.storageTransport.gaxiosInstance.interceptors.request.add({
+          resolved: requestInterceptorSpy,
+        });
+        customStorage.storageTransport.gaxiosInstance.interceptors.response.add(
+          {
+            resolved: responseInterceptorSpy,
+          },
+        );
+
+        const customTm = new TransferManager(customStorage.bucket(BUCKET_NAME));
+        await customTm.uploadFileInChunks(filePath);
+
+        // initiateUpload (POST) + uploadPart (PUT) + completeUpload (POST)
+        assert.strictEqual(requestInterceptorSpy.callCount, 3);
+        assert.strictEqual(responseInterceptorSpy.callCount, 3);
+        assert.deepStrictEqual(seenInterceptorHeaders, [
+          'applied',
+          'applied',
+          'applied',
+        ]);
+        assert.strictEqual(recursiveAdapterSpy.called, false);
+        // Original transport defaults were not mutated
+        assert.strictEqual(
+          customStorage.storageTransport.gaxiosInstance.defaults.adapter,
+          recursiveAdapterSpy,
+        );
       });
     });
   });

@@ -1518,5 +1518,95 @@ describe('Storage Transport', () => {
       assert.strictEqual(falsyUrl.searchParams.get('prefix'), '');
       assert.strictEqual(falsyUrl.searchParams.get('ifGenerationMatch'), '0');
     });
+
+    it('should expose resolved and stripped queryParameters to interceptors on config.queryParameters', async () => {
+      const {auth, getProjectIdStub} = createNoAdcAuth();
+      const observedQueryParameters: Array<
+        Record<string, unknown> | undefined
+      > = [];
+
+      const mockFetch: GaxiosOptions['fetchImplementation'] = async () =>
+        new Response(JSON.stringify({ok: true}), {
+          status: 200,
+          headers: {'content-type': 'application/json'},
+        });
+      const gaxios = new Gaxios({fetchImplementation: mockFetch});
+
+      const inspectInterceptor = sandbox.spy(
+        async (
+          config: GaxiosOptionsPrepared & {
+            queryParameters?: Record<string, unknown>;
+          },
+        ) => {
+          observedQueryParameters.push(
+            config.queryParameters ? {...config.queryParameters} : undefined,
+          );
+          return config;
+        },
+      );
+
+      // 1. Explicit projectId resolves {{projectId}} tokens in config.queryParameters
+      const withProjectTransport = new StorageTransport({
+        apiEndpoint: CUSTOM_ENDPOINT,
+        baseUrl: `${CUSTOM_ENDPOINT}/storage/v1`,
+        authClient: auth,
+        customEndpoint: true,
+        projectId: 'explicit-project',
+        gaxiosInstance: gaxios,
+        retryOptions: defaultRetryOptions,
+        scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+        packageJson: {name: 'test-package', version: '1.0.0'},
+      });
+
+      const rawWithProjectParams = {
+        project: '{{projectId}}',
+        userProject: '{{projectId}}',
+        scope: 'projects/{{projectId}}/buckets',
+      };
+      await withProjectTransport.makeRequest({
+        url: '/storage/v1/b',
+        queryParameters: rawWithProjectParams,
+        interceptors: [{resolved: inspectInterceptor}],
+      });
+
+      // Raw caller object was not mutated, while interceptor observed resolved values
+      assert.strictEqual(rawWithProjectParams.project, '{{projectId}}');
+      assert.deepStrictEqual(observedQueryParameters[0], {
+        project: 'explicit-project',
+        userProject: 'explicit-project',
+        scope: 'projects/explicit-project/buckets',
+      });
+
+      // 2. Omitted projectId strips placeholder keys from config.queryParameters
+      const withoutProjectTransport = new StorageTransport({
+        apiEndpoint: CUSTOM_ENDPOINT,
+        baseUrl: `${CUSTOM_ENDPOINT}/storage/v1`,
+        authClient: auth,
+        customEndpoint: true,
+        projectIdRequired: false,
+        gaxiosInstance: gaxios,
+        retryOptions: defaultRetryOptions,
+        scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+        packageJson: {name: 'test-package', version: '1.0.0'},
+      });
+
+      const rawWithoutProjectParams = {
+        project: '{{projectId}}',
+        userProject: '{{projectId}}',
+        prefix: 'logs/',
+      };
+      await withoutProjectTransport.makeRequest({
+        url: '/storage/v1/b',
+        queryParameters: rawWithoutProjectParams,
+        interceptors: [{resolved: inspectInterceptor}],
+      });
+
+      assert.strictEqual(rawWithoutProjectParams.project, '{{projectId}}');
+      assert.deepStrictEqual(observedQueryParameters[1], {
+        prefix: 'logs/',
+      });
+      assert.strictEqual(inspectInterceptor.calledTwice, true);
+      assert.strictEqual(getProjectIdStub.called, false);
+    });
   });
 });

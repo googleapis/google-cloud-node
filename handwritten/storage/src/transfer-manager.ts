@@ -219,11 +219,29 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
         bucket.storage.storageTransport?.authClient || new GoogleAuth();
       this.requester = this.authClient;
     } else {
-      const gaxiosDefaults =
-        bucket.storage.storageTransport?.gaxiosInstance?.defaults;
-      this.requester = new Gaxios(
-        gaxiosDefaults ? {...gaxiosDefaults} : undefined,
-      );
+      const transport = bucket.storage.storageTransport;
+      const gaxiosDefaults = transport?.gaxiosInstance?.defaults
+        ? {...transport.gaxiosInstance.defaults}
+        : undefined;
+      if (gaxiosDefaults) {
+        delete gaxiosDefaults.adapter;
+      }
+      const requester = new Gaxios(gaxiosDefaults);
+      if (transport?.gaxiosInstance?.interceptors?.request) {
+        for (const inter of transport.gaxiosInstance.interceptors.request.values()) {
+          if (inter) {
+            requester.interceptors.request.add(inter);
+          }
+        }
+      }
+      if (transport?.gaxiosInstance?.interceptors?.response) {
+        for (const inter of transport.gaxiosInstance.interceptors.response.values()) {
+          if (inter) {
+            requester.interceptors.response.add(inter);
+          }
+        }
+      }
+      this.requester = requester;
     }
     this.universeDomain = bucket.storage.universeDomain || DEFAULT_UNIVERSE;
     this.uploadId = uploadId || '';
