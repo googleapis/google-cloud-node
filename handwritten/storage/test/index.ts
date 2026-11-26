@@ -23,8 +23,14 @@ import {
   GaxiosError,
   GaxiosOptionsPrepared,
 } from '../src/index.js';
-import {GaxiosResponse} from 'gaxios';
-import {OAuth2Client} from 'google-auth-library';
+import {
+  Gaxios,
+  GaxiosOptions,
+  GaxiosResponse,
+  instance as defaultGaxios,
+} from 'gaxios';
+import {GoogleAuth, OAuth2Client, PassThroughClient} from 'google-auth-library';
+import {Readable} from 'stream';
 import * as sinon from 'sinon';
 import {HmacKeyOptions} from '../src/hmacKey.js';
 import {
@@ -1464,6 +1470,547 @@ describe('Storage', () => {
         otherStorage.bucket(BUCKET_NAME).file('file-name').download(),
         MISMATCH,
       );
+    });
+  });
+
+  describe('custom endpoint authentication', () => {
+    const CUSTOM_ENDPOINT = 'http://localhost:4443';
+    const OTHER_UNIVERSE = 'example-universe.test';
+    const OTHER_UNIVERSE_CREDENTIALS = {
+      type: 'service_account',
+      client_email: 'test@example.iam.gserviceaccount.com',
+      private_key: 'not-a-real-key',
+      universe_domain: OTHER_UNIVERSE,
+    };
+    const MISMATCH =
+      /does not match the universe domain found in the credentials/;
+    let savedEmulatorHost: string | undefined;
+    let savedDefaultFetch: GaxiosOptions['fetchImplementation'];
+
+    beforeEach(() => {
+      savedEmulatorHost = process.env.STORAGE_EMULATOR_HOST;
+      delete process.env.STORAGE_EMULATOR_HOST;
+      savedDefaultFetch = defaultGaxios.defaults.fetchImplementation;
+    });
+
+    afterEach(() => {
+      if (savedEmulatorHost === undefined) {
+        delete process.env.STORAGE_EMULATOR_HOST;
+      } else {
+        process.env.STORAGE_EMULATOR_HOST = savedEmulatorHost;
+      }
+      if (savedDefaultFetch === undefined) {
+        delete defaultGaxios.defaults.fetchImplementation;
+      } else {
+        defaultGaxios.defaults.fetchImplementation = savedDefaultFetch;
+      }
+    });
+
+    function stubNoAdc() {
+      const adcError = new Error('Could not load the default credentials');
+      const authRequestStub = sandbox
+        .stub(GoogleAuth.prototype, 'request')
+        .rejects(adcError);
+      const getClientStub = sandbox
+        .stub(GoogleAuth.prototype, 'getClient')
+        .rejects(adcError);
+      const getProjectIdStub = sandbox
+        .stub(GoogleAuth.prototype, 'getProjectId')
+        .rejects(adcError);
+      return {authRequestStub, getClientStub, getProjectIdStub};
+    }
+
+    for (const useAuthWithCustomEndpoint of [undefined, false]) {
+      it(`should bypass auth on JSON API operations without ADC when apiEndpoint is set and useAuthWithCustomEndpoint is ${String(useAuthWithCustomEndpoint)}`, async () => {
+        const {authRequestStub, getClientStub, getProjectIdStub} = stubNoAdc();
+
+        const gaxiosRequestStub = sandbox
+          .stub(Gaxios.prototype, 'request')
+          .callsFake(async (opts?: GaxiosOptions) => {
+            assert.strictEqual(
+              new Headers(opts?.headers).get('authorization'),
+              null,
+            );
+
+            const url = opts?.url?.toString() || '';
+            if (opts?.responseType === 'stream') {
+              return {
+                data: Readable.from(['file-content']),
+                headers: new Headers({'content-length': '12'}),
+                status: 200,
+                statusText: 'OK',
+              } as unknown as GaxiosResponse;
+            }
+            if (url.endsWith('/storage/v1/b')) {
+              return {
+                data: {items: [{id: BUCKET_NAME}]},
+                headers: new Headers(),
+                status: 200,
+                statusText: 'OK',
+              } as unknown as GaxiosResponse;
+            }
+            if (url.endsWith(`/storage/v1/b/${BUCKET_NAME}/o`)) {
+              return {
+                data: {items: [{name: 'test.txt'}]},
+                headers: new Headers(),
+                status: 200,
+                statusText: 'OK',
+              } as unknown as GaxiosResponse;
+            }
+            if (url.includes('/rewriteTo/')) {
+              return {
+                data: {done: true, resource: {name: 'dest.txt'}},
+                headers: new Headers(),
+                status: 200,
+                statusText: 'OK',
+              } as unknown as GaxiosResponse;
+            }
+            return {
+              data: {name: 'test.txt', bucket: BUCKET_NAME},
+              headers: new Headers(),
+              status: 200,
+              statusText: 'OK',
+            } as unknown as GaxiosResponse;
+          });
+
+        const customStorage = new Storage({
+          apiEndpoint: CUSTOM_ENDPOINT,
+          useAuthWithCustomEndpoint,
+        });
+        const customBucket = customStorage.bucket(BUCKET_NAME);
+        const customFile = customBucket.file('test.txt');
+
+        const [exists] = await customFile.exists();
+        assert.strictEqual(exists, true);
+
+        const [buckets] = await customStorage.getBuckets();
+        assert.strictEqual(buckets.length, 1);
+        assert.strictEqual(buckets[0].name, BUCKET_NAME);
+
+        const [metadata] = await customFile.getMetadata();
+        assert.strictEqual(metadata.name, 'test.txt');
+
+        await customFile.delete();
+
+        const streamChunks: Buffer[] = [];
+        await new Promise<void>((resolve, reject) => {
+          customFile
+            .createReadStream({validation: false})
+            .on('data', chunk => streamChunks.push(Buffer.from(chunk)))
+            .on('error', reject)
+            .on('end', resolve);
+        });
+        assert.strictEqual(
+          Buffer.concat(streamChunks).toString(),
+          'file-content',
+        );
+
+        await customFile.save('hello', {resumable: false, validation: false});
+
+        const [downloaded] = await customFile.download({validation: false});
+        assert.strictEqual(downloaded.toString(), 'file-content');
+
+        const [files] = await customBucket.getFiles();
+        assert.strictEqual(files.length, 1);
+
+        await customFile.copy('dest.txt');
+
+        assert.strictEqual(gaxiosRequestStub.callCount, 9);
+        assert.strictEqual(authRequestStub.called, false);
+        assert.strictEqual(getClientStub.called, false);
+        assert.strictEqual(getProjectIdStub.called, false);
+      });
+    }
+
+    it('should bypass auth without ADC when STORAGE_EMULATOR_HOST is set', async () => {
+      process.env.STORAGE_EMULATOR_HOST = CUSTOM_ENDPOINT;
+      const {authRequestStub, getClientStub, getProjectIdStub} = stubNoAdc();
+      const gaxiosRequestStub = sandbox
+        .stub(Gaxios.prototype, 'request')
+        .resolves({
+          data: {name: 'emulator.txt'},
+          headers: new Headers(),
+          status: 200,
+          statusText: 'OK',
+        } as unknown as GaxiosResponse);
+
+      const emulatorStorage = new Storage();
+      const [exists] = await emulatorStorage
+        .bucket(BUCKET_NAME)
+        .file('emulator.txt')
+        .exists();
+
+      assert.strictEqual(exists, true);
+      assert.strictEqual(gaxiosRequestStub.calledOnce, true);
+      const calledOpts = gaxiosRequestStub.firstCall.args[0];
+      assert.strictEqual(
+        calledOpts?.url,
+        `${CUSTOM_ENDPOINT}/storage/v1/b/${BUCKET_NAME}/o/emulator.txt`,
+      );
+      assert.strictEqual(authRequestStub.called, false);
+      assert.strictEqual(getClientStub.called, false);
+      assert.strictEqual(getProjectIdStub.called, false);
+    });
+
+    it('should not attach Authorization header on custom endpoint when credentials exist and useAuthWithCustomEndpoint is false', async () => {
+      const oauthClient = new OAuth2Client();
+      oauthClient.setCredentials({
+        access_token: 'leaked-token',
+        expiry_date: Date.now() + 3_600_000,
+      });
+      const getRequestHeadersSpy = sandbox.spy(
+        oauthClient,
+        'getRequestHeaders',
+      );
+      let capturedHeaders: Headers | undefined;
+
+      const customStorage = new Storage({
+        apiEndpoint: CUSTOM_ENDPOINT,
+        authClient: oauthClient,
+        useAuthWithCustomEndpoint: false,
+      });
+      const mockFetch: GaxiosOptions['fetchImplementation'] = async (
+        _url,
+        init,
+      ) => {
+        capturedHeaders = new Headers(init?.headers);
+        return new Response(JSON.stringify({name: 'obj'}), {
+          status: 200,
+          headers: {'content-type': 'application/json'},
+        });
+      };
+      customStorage.storageTransport.gaxiosInstance.defaults.fetchImplementation =
+        mockFetch;
+
+      await customStorage.bucket(BUCKET_NAME).file('obj').getMetadata();
+
+      assert.strictEqual(getRequestHeadersSpy.called, false);
+      assert.ok(capturedHeaders);
+      assert.strictEqual(capturedHeaders.get('authorization'), null);
+    });
+
+    it('should use authClient.request and attach Authorization header when STORAGE_EMULATOR_HOST and useAuthWithCustomEndpoint: true are set', async () => {
+      process.env.STORAGE_EMULATOR_HOST = CUSTOM_ENDPOINT;
+      const oauthClient = new OAuth2Client();
+      oauthClient.setCredentials({
+        access_token: 'emulator-token',
+        expiry_date: Date.now() + 3_600_000,
+      });
+      let capturedHeaders: Headers | undefined;
+
+      const emulatorStorage = new Storage({
+        authClient: oauthClient,
+        useAuthWithCustomEndpoint: true,
+      });
+      const authRequestSpy = sandbox.spy(
+        emulatorStorage.storageTransport.authClient,
+        'request',
+      );
+      const mockFetch: GaxiosOptions['fetchImplementation'] = async (
+        _url,
+        init,
+      ) => {
+        capturedHeaders = new Headers(init?.headers);
+        return new Response(JSON.stringify({name: 'obj'}), {
+          status: 200,
+          headers: {'content-type': 'application/json'},
+        });
+      };
+      emulatorStorage.storageTransport.gaxiosInstance.defaults.fetchImplementation =
+        mockFetch;
+
+      await emulatorStorage.bucket(BUCKET_NAME).file('obj').getMetadata();
+
+      assert.strictEqual(authRequestSpy.calledOnce, true);
+      assert.strictEqual(
+        capturedHeaders?.get('authorization'),
+        'Bearer emulator-token',
+      );
+    });
+
+    it('should skip universe domain validation on custom endpoint when useAuthWithCustomEndpoint is false (including simple save)', async () => {
+      const gaxiosRequestStub = sandbox
+        .stub(Gaxios.prototype, 'request')
+        .resolves({
+          data: {name: 'obj'},
+          headers: new Headers(),
+          status: 200,
+          statusText: 'OK',
+        } as unknown as GaxiosResponse);
+
+      const customStorage = new Storage({
+        apiEndpoint: CUSTOM_ENDPOINT,
+        useAuthWithCustomEndpoint: false,
+        credentials: OTHER_UNIVERSE_CREDENTIALS,
+      });
+      const file = customStorage.bucket(BUCKET_NAME).file('obj');
+
+      await file.getMetadata();
+      await file.save('data', {resumable: false, validation: false});
+      assert.strictEqual(gaxiosRequestStub.calledTwice, true);
+    });
+
+    it('should enforce universe domain validation on custom endpoint when useAuthWithCustomEndpoint is true', async () => {
+      const customStorage = new Storage({
+        apiEndpoint: CUSTOM_ENDPOINT,
+        useAuthWithCustomEndpoint: true,
+        credentials: OTHER_UNIVERSE_CREDENTIALS,
+      });
+      const file = customStorage.bucket(BUCKET_NAME).file('obj');
+
+      await assert.rejects(file.getMetadata(), MISMATCH);
+      await assert.rejects(
+        file.save('data', {resumable: false, validation: false}),
+        MISMATCH,
+      );
+
+      const oauthCustomStorage = new Storage({
+        apiEndpoint: CUSTOM_ENDPOINT,
+        useAuthWithCustomEndpoint: true,
+        authClient: new OAuth2Client(),
+        universeDomain: OTHER_UNIVERSE,
+      });
+      await assert.rejects(
+        oauthCustomStorage.bucket(BUCKET_NAME).file('obj').getMetadata(),
+        MISMATCH,
+      );
+    });
+
+    it('should allow PassThroughClient on custom endpoint with useAuthWithCustomEndpoint: true and non-default universeDomain', async () => {
+      const getProjectIdStub = sandbox
+        .stub(GoogleAuth.prototype, 'getProjectId')
+        .rejects(new Error('Could not load the default credentials'));
+      const customStorage = new Storage({
+        apiEndpoint: CUSTOM_ENDPOINT,
+        useAuthWithCustomEndpoint: true,
+        authClient: new PassThroughClient(),
+        universeDomain: OTHER_UNIVERSE,
+      });
+      const mockFetch: GaxiosOptions['fetchImplementation'] = async () =>
+        new Response(JSON.stringify({name: 'obj'}), {
+          status: 200,
+          headers: {'content-type': 'application/json'},
+        });
+      customStorage.storageTransport.gaxiosInstance.defaults.fetchImplementation =
+        mockFetch;
+
+      const [metadata] = await customStorage
+        .bucket(BUCKET_NAME)
+        .file('obj')
+        .getMetadata();
+      assert.strictEqual(metadata.name, 'obj');
+      assert.strictEqual(getProjectIdStub.called, false);
+    });
+
+    it('should not send Authorization header to storage.googleapis.com when a non-default universeDomain is configured without useAuthWithCustomEndpoint', async () => {
+      const oauthClient = new OAuth2Client();
+      oauthClient.setCredentials({
+        access_token: 'other-universe-token',
+        expiry_date: Date.now() + 3_600_000,
+      });
+      let capturedHeaders: Headers | undefined;
+
+      const customStorage = new Storage({
+        apiEndpoint: 'https://storage.googleapis.com',
+        universeDomain: OTHER_UNIVERSE,
+        authClient: oauthClient,
+      });
+      assert.strictEqual(customStorage.customEndpoint, true);
+      const mockFetch: GaxiosOptions['fetchImplementation'] = async (
+        _url,
+        init,
+      ) => {
+        capturedHeaders = new Headers(init?.headers);
+        return new Response(JSON.stringify({name: 'obj'}), {
+          status: 200,
+          headers: {'content-type': 'application/json'},
+        });
+      };
+      customStorage.storageTransport.gaxiosInstance.defaults.fetchImplementation =
+        mockFetch;
+
+      await customStorage.bucket(BUCKET_NAME).file('obj').getMetadata();
+      assert.ok(capturedHeaders);
+      assert.strictEqual(capturedHeaders.get('authorization'), null);
+    });
+
+    it('should replace {{projectId}} with explicit Storage projectId and omit placeholder cleanly when projectId is omitted without calling getProjectId', async () => {
+      const {authRequestStub, getClientStub, getProjectIdStub} = stubNoAdc();
+      const capturedUrls: string[] = [];
+      const mockFetch: GaxiosOptions['fetchImplementation'] = async url => {
+        capturedUrls.push(String(url));
+        return new Response(
+          JSON.stringify({items: [{id: BUCKET_NAME}], name: BUCKET_NAME}),
+          {
+            status: 200,
+            headers: {'content-type': 'application/json'},
+          },
+        );
+      };
+
+      // Explicit projectId on Storage replaces {{projectId}} in URLs and query params
+      const withProjectStorage = new Storage({
+        apiEndpoint: CUSTOM_ENDPOINT,
+        projectId: 'explicit-proj',
+      });
+      withProjectStorage.storageTransport.gaxiosInstance.defaults.fetchImplementation =
+        mockFetch;
+
+      await withProjectStorage.getBuckets();
+      await withProjectStorage.createBucket(BUCKET_NAME);
+      await withProjectStorage.storageTransport.makeRequest({
+        url: '/storage/v1/projects/{{projectId}}/hmacKeys',
+        queryParameters: {
+          project: '{{projectId}}',
+          userProject: '{{projectId}}',
+        },
+      });
+
+      assert.strictEqual(
+        capturedUrls[0],
+        `${CUSTOM_ENDPOINT}/storage/v1/b?project=explicit-proj`,
+      );
+      assert.strictEqual(
+        capturedUrls[1],
+        `${CUSTOM_ENDPOINT}/storage/v1/b?project=explicit-proj`,
+      );
+      assert.strictEqual(
+        capturedUrls[2],
+        `${CUSTOM_ENDPOINT}/storage/v1/projects/explicit-proj/hmacKeys?project=explicit-proj&userProject=explicit-proj`,
+      );
+
+      // Omitted projectId on Storage omits project query param cleanly without trailing '?' or literal {{projectId}}
+      const withoutProjectStorage = new Storage({
+        apiEndpoint: CUSTOM_ENDPOINT,
+      });
+      withoutProjectStorage.storageTransport.gaxiosInstance.defaults.fetchImplementation =
+        mockFetch;
+
+      await withoutProjectStorage.getBuckets();
+      await withoutProjectStorage.createBucket(BUCKET_NAME);
+
+      assert.strictEqual(capturedUrls[3], `${CUSTOM_ENDPOINT}/storage/v1/b`);
+      assert.strictEqual(capturedUrls[4], `${CUSTOM_ENDPOINT}/storage/v1/b`);
+
+      for (const sentUrl of capturedUrls) {
+        assert.strictEqual(sentUrl.includes('{{projectId}}'), false);
+        assert.strictEqual(
+          sentUrl.includes(encodeURIComponent('{{projectId}}')),
+          false,
+        );
+      }
+      assert.strictEqual(authRequestStub.called, false);
+      assert.strictEqual(getClientStub.called, false);
+      assert.strictEqual(getProjectIdStub.called, false);
+    });
+
+    it('should bypass ADC, Authorization, and universe domain checks for resumable uploads (resumable omitted/true), createResumableUpload, and bucket.iam on unauthenticated custom endpoints', async () => {
+      const {authRequestStub, getClientStub, getProjectIdStub} = stubNoAdc();
+      const capturedRequests: Array<{
+        url: string;
+        method?: string;
+        authorization: string | null;
+      }> = [];
+
+      const mockFetch: GaxiosOptions['fetchImplementation'] = async (
+        url,
+        init,
+      ) => {
+        const urlStr = String(url);
+        const headers = new Headers(init?.headers);
+        capturedRequests.push({
+          url: urlStr,
+          method: init?.method,
+          authorization: headers.get('authorization'),
+        });
+
+        if (
+          init?.body &&
+          typeof (init.body as AsyncIterable<unknown>)[Symbol.asyncIterator] ===
+            'function'
+        ) {
+          for await (const chunk of init.body as AsyncIterable<unknown>) {
+            void chunk;
+          }
+        }
+
+        if (urlStr.includes('uploadType=resumable')) {
+          return new Response('', {
+            status: 200,
+            headers: {
+              location: `${CUSTOM_ENDPOINT}/upload/session/123`,
+            },
+          });
+        }
+        if (urlStr.includes('/upload/session/123')) {
+          return new Response(
+            JSON.stringify({name: 'resumable.txt', bucket: BUCKET_NAME}),
+            {
+              status: 200,
+              headers: {'content-type': 'application/json'},
+            },
+          );
+        }
+        if (urlStr.includes('/iam/testPermissions')) {
+          return new Response(
+            JSON.stringify({permissions: ['storage.buckets.get']}),
+            {
+              status: 200,
+              headers: {'content-type': 'application/json'},
+            },
+          );
+        }
+        if (urlStr.endsWith('/iam')) {
+          return new Response(JSON.stringify({bindings: []}), {
+            status: 200,
+            headers: {'content-type': 'application/json'},
+          });
+        }
+        return new Response(JSON.stringify({}), {
+          status: 200,
+          headers: {'content-type': 'application/json'},
+        });
+      };
+
+      defaultGaxios.defaults.fetchImplementation = mockFetch;
+      const customStorage = new Storage({
+        apiEndpoint: CUSTOM_ENDPOINT,
+        credentials: OTHER_UNIVERSE_CREDENTIALS,
+      });
+      customStorage.storageTransport.gaxiosInstance.defaults.fetchImplementation =
+        mockFetch;
+
+      const customBucket = customStorage.bucket(BUCKET_NAME);
+      const customFile = customBucket.file('resumable.txt');
+
+      // 1. Default resumable upload (resumable omitted)
+      await customFile.save('hello resumable', {validation: false});
+
+      // 2. Explicit resumable: true upload
+      await customFile.save('hello explicit resumable', {
+        resumable: true,
+        validation: false,
+      });
+
+      // 3. Explicit createResumableUpload()
+      const [sessionUri] = await customFile.createResumableUpload();
+      assert.strictEqual(sessionUri, `${CUSTOM_ENDPOINT}/upload/session/123`);
+
+      // 4. Bucket IAM operations (getPolicy + testPermissions)
+      const [policy] = await customBucket.iam.getPolicy();
+      assert.deepStrictEqual(policy.bindings, []);
+      const [permissions] = await customBucket.iam.testPermissions([
+        'storage.buckets.get',
+      ]);
+      assert.deepStrictEqual(permissions, {'storage.buckets.get': true});
+
+      assert.strictEqual(capturedRequests.length, 7);
+      for (const req of capturedRequests) {
+        assert.strictEqual(req.authorization, null);
+      }
+      assert.strictEqual(authRequestStub.called, false);
+      assert.strictEqual(getClientStub.called, false);
+      assert.strictEqual(getProjectIdStub.called, false);
     });
   });
 });

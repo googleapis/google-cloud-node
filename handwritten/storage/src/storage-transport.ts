@@ -65,6 +65,8 @@ export interface StorageRequestOptions extends GaxiosOptions {
   hasPrecondition?: boolean;
 }
 
+const DEFAULT_PROJECT_ID_TOKEN = '{{projectId}}';
+
 interface TransportParameters extends Omit<GoogleAuthOptions, 'authClient'> {
   apiEndpoint: string;
   authClient?: GoogleAuth | AuthClient;
@@ -72,6 +74,7 @@ interface TransportParameters extends Omit<GoogleAuthOptions, 'authClient'> {
   customEndpoint?: boolean;
   email?: string;
   packageJson: PackageJson;
+  projectIdRequired?: boolean;
   retryOptions: RetryOptions;
   scopes: string | string[];
   timeout?: number;
@@ -103,7 +106,9 @@ export class StorageTransport {
   private baseUrl: string;
   private timeout?: number;
   private projectId?: string;
-  private useAuthWithCustomEndpoint?: boolean;
+  private projectIdRequired: boolean;
+  private customEndpoint: boolean;
+  private useAuthWithCustomEndpoint: boolean;
   gaxiosInstance: Gaxios;
   private sharedInterceptors?: GaxiosInterceptor<GaxiosOptionsPrepared>[];
   private universeDomain: string;
@@ -114,11 +119,15 @@ export class StorageTransport {
     if (options.authClient instanceof GoogleAuth) {
       this.authClient = options.authClient;
     } else {
-      this.authClient = new GoogleAuth({
+      const authOptions: GoogleAuthOptions = {
         ...options,
         authClient: options.authClient,
         clientOptions: options.clientOptions,
-      });
+      };
+      if (authOptions.projectId === DEFAULT_PROJECT_ID_TOKEN) {
+        delete authOptions.projectId;
+      }
+      this.authClient = new GoogleAuth(authOptions);
     }
     this.providedUserAgent = options.userAgent;
     this.packageJson = getPackageJSON();
@@ -129,8 +138,13 @@ export class StorageTransport {
     };
     this.baseUrl = options.baseUrl;
     this.timeout = options.timeout;
-    this.projectId = options.projectId;
-    this.useAuthWithCustomEndpoint = options.useAuthWithCustomEndpoint;
+    this.projectId =
+      options.projectId === DEFAULT_PROJECT_ID_TOKEN
+        ? undefined
+        : options.projectId;
+    this.projectIdRequired = options.projectIdRequired !== false;
+    this.customEndpoint = Boolean(options.customEndpoint);
+    this.useAuthWithCustomEndpoint = Boolean(options.useAuthWithCustomEndpoint);
     this.universeDomain = options.universeDomain || DEFAULT_UNIVERSE;
   }
 
@@ -138,16 +152,169 @@ export class StorageTransport {
     reqOpts: StorageRequestOptions,
     callback?: StorageTransportCallback<T>,
   ): Promise<GaxiosResponse<T>> {
-    await assertUniverseDomain(this.authClient, this.universeDomain);
+    const useAuth = !this.customEndpoint || this.useAuthWithCustomEndpoint;
 
-    // Project ID Resolution
-    if (!this.projectId) {
-      this.projectId =
-        reqOpts.projectId || (await this.authClient.getProjectId());
+    if (useAuth) {
+      await assertUniverseDomain(this.authClient, this.universeDomain);
     }
 
-    if (reqOpts.queryParameters && 'project' in reqOpts.queryParameters) {
-      reqOpts.queryParameters.project = this.projectId;
+    const queryParameters = reqOpts.queryParameters
+      ? {...reqOpts.queryParameters}
+      : undefined;
+    let urlString = reqOpts.url?.toString() || '';
+
+    const encodedProjectIdToken = encodeURIComponent(DEFAULT_PROJECT_ID_TOKEN);
+    const hasProjectParamPlaceholder = Boolean(
+      queryParameters &&
+      'project' in queryParameters &&
+      (queryParameters.project === undefined ||
+        queryParameters.project === null ||
+        queryParameters.project === '' ||
+        queryParameters.project === DEFAULT_PROJECT_ID_TOKEN),
+    );
+    const hasProjectIdTokenInUrl =
+      urlString.includes(DEFAULT_PROJECT_ID_TOKEN) ||
+      urlString.includes(encodedProjectIdToken);
+    const hasProjectIdTokenInParams = Boolean(
+      queryParameters &&
+      Object.values(queryParameters).some(value => {
+        if (typeof value === 'string') {
+          return value.includes(DEFAULT_PROJECT_ID_TOKEN);
+        }
+        if (Array.isArray(value)) {
+          return value.some(
+            item =>
+              typeof item === 'string' &&
+              item.includes(DEFAULT_PROJECT_ID_TOKEN),
+          );
+        }
+        return false;
+      }),
+    );
+
+    // Project ID Resolution
+    const explicitReqProjectId =
+      reqOpts.projectId && reqOpts.projectId !== DEFAULT_PROJECT_ID_TOKEN
+        ? reqOpts.projectId
+        : undefined;
+    let resolvedProjectId = explicitReqProjectId || this.projectId;
+
+    const needsProjectId =
+      this.projectIdRequired ||
+      hasProjectParamPlaceholder ||
+      hasProjectIdTokenInUrl ||
+      hasProjectIdTokenInParams;
+
+    if (!resolvedProjectId && useAuth && needsProjectId) {
+      const detectedProjectId = await this.authClient.getProjectId();
+      if (detectedProjectId) {
+        this.projectId = detectedProjectId;
+        resolvedProjectId = detectedProjectId;
+      }
+    }
+
+    if (resolvedProjectId) {
+      if (hasProjectParamPlaceholder && queryParameters) {
+        queryParameters.project = resolvedProjectId;
+      }
+      if (hasProjectIdTokenInUrl) {
+        const encodedProjectId = resolvedProjectId
+          .split(':')
+          .map(encodeURIComponent)
+          .join(':');
+        urlString = urlString
+          .split(DEFAULT_PROJECT_ID_TOKEN)
+          .join(encodedProjectId)
+          .split(encodedProjectIdToken)
+          .join(encodedProjectId);
+      }
+      if (hasProjectIdTokenInParams && queryParameters) {
+        for (const [key, value] of Object.entries(queryParameters)) {
+          if (
+            typeof value === 'string' &&
+            value.includes(DEFAULT_PROJECT_ID_TOKEN)
+          ) {
+            queryParameters[key] = value
+              .split(DEFAULT_PROJECT_ID_TOKEN)
+              .join(resolvedProjectId);
+          } else if (Array.isArray(value)) {
+            (queryParameters as Record<string, unknown>)[key] = value.map(
+              item =>
+                typeof item === 'string' &&
+                item.includes(DEFAULT_PROJECT_ID_TOKEN)
+                  ? item.split(DEFAULT_PROJECT_ID_TOKEN).join(resolvedProjectId)
+                  : item,
+            );
+          }
+        }
+      }
+    } else {
+      if (hasProjectParamPlaceholder && queryParameters) {
+        delete queryParameters.project;
+      }
+      if (hasProjectIdTokenInParams && queryParameters) {
+        for (const [key, value] of Object.entries(queryParameters)) {
+          if (value === DEFAULT_PROJECT_ID_TOKEN) {
+            delete queryParameters[key];
+          } else if (
+            typeof value === 'string' &&
+            value.includes(DEFAULT_PROJECT_ID_TOKEN)
+          ) {
+            throw new Error(
+              'A projectId is required to resolve the {{projectId}} placeholder in this request.',
+            );
+          } else if (Array.isArray(value)) {
+            const hasEmbeddedToken = value.some(
+              item =>
+                typeof item === 'string' &&
+                item.includes(DEFAULT_PROJECT_ID_TOKEN) &&
+                item !== DEFAULT_PROJECT_ID_TOKEN,
+            );
+            if (hasEmbeddedToken) {
+              throw new Error(
+                'A projectId is required to resolve the {{projectId}} placeholder in this request.',
+              );
+            }
+            const filtered = value.filter(
+              item => item !== DEFAULT_PROJECT_ID_TOKEN,
+            );
+            if (filtered.length === 0) {
+              delete queryParameters[key];
+            } else {
+              (queryParameters as Record<string, unknown>)[key] = filtered;
+            }
+          }
+        }
+      }
+      if (hasProjectIdTokenInUrl) {
+        const isAbs = this.#isValidUrl(urlString);
+        const normalized =
+          !isAbs && !urlString.startsWith('/') ? `/${urlString}` : urlString;
+        const parsedUrl = isAbs
+          ? new URL(urlString)
+          : new URL(normalized, this.baseUrl);
+        const entries = [...parsedUrl.searchParams.entries()];
+        const remaining = entries.filter(
+          ([, value]) => value !== DEFAULT_PROJECT_ID_TOKEN,
+        );
+        if (remaining.length !== entries.length) {
+          parsedUrl.search = '';
+          for (const [key, value] of remaining) {
+            parsedUrl.searchParams.append(key, value);
+          }
+          urlString = isAbs
+            ? parsedUrl.toString()
+            : `${parsedUrl.pathname}${parsedUrl.search}${parsedUrl.hash}`;
+        }
+        if (
+          urlString.includes(DEFAULT_PROJECT_ID_TOKEN) ||
+          urlString.includes(encodedProjectIdToken)
+        ) {
+          throw new Error(
+            'A projectId is required to resolve the {{projectId}} placeholder in this request.',
+          );
+        }
+      }
     }
 
     if (reqOpts.multipart && Array.isArray(reqOpts.multipart)) {
@@ -228,8 +395,21 @@ export class StorageTransport {
 
     // Interceptor Management
     const requestGaxiosInstance = reqOpts.interceptors
-      ? new Gaxios()
+      ? new Gaxios({...this.gaxiosInstance.defaults})
       : this.gaxiosInstance;
+
+    if (reqOpts.interceptors) {
+      for (const inter of this.gaxiosInstance.interceptors.request.values()) {
+        if (inter && !requestGaxiosInstance.interceptors.request.has(inter)) {
+          requestGaxiosInstance.interceptors.request.add(inter);
+        }
+      }
+      for (const inter of this.gaxiosInstance.interceptors.response.values()) {
+        if (inter && !requestGaxiosInstance.interceptors.response.has(inter)) {
+          requestGaxiosInstance.interceptors.response.add(inter);
+        }
+      }
+    }
 
     if (this.sharedInterceptors) {
       for (const inter of this.sharedInterceptors) {
@@ -245,7 +425,6 @@ export class StorageTransport {
       }
     }
 
-    const urlString = reqOpts.url?.toString() || '';
     const isAbsolute = this.#isValidUrl(urlString);
     const normalizedUrl =
       !isAbsolute && !urlString.startsWith('/') ? `/${urlString}` : urlString;
@@ -277,9 +456,9 @@ export class StorageTransport {
       this.retryOptions.idempotencyStrategy ===
         IdempotencyStrategy.RetryAlways ||
       reqOpts.hasPrecondition ||
-      reqOpts.queryParameters?.ifGenerationMatch !== undefined ||
-      reqOpts.queryParameters?.ifMetagenerationMatch !== undefined ||
-      reqOpts.queryParameters?.ifSourceGenerationMatch !== undefined ||
+      queryParameters?.ifGenerationMatch !== undefined ||
+      queryParameters?.ifMetagenerationMatch !== undefined ||
+      queryParameters?.ifSourceGenerationMatch !== undefined ||
       hasEtagInBody
     );
 
@@ -313,50 +492,74 @@ export class StorageTransport {
 
     const isRetryDisabled =
       this.retryOptions.autoRetry === false ||
-      this.retryOptions.idempotencyStrategy === IdempotencyStrategy.RetryNever;
+      this.retryOptions.idempotencyStrategy ===
+        IdempotencyStrategy.RetryNever ||
+      reqOpts.retry === false;
     const maxRetries = isRetryDisabled
       ? 0
       : (reqOpts.maxRetries ?? this.retryOptions.maxRetries ?? 3);
 
+    const hasDefinedQueryParams = Boolean(
+      queryParameters &&
+      Object.values(queryParameters).some(
+        value =>
+          value !== undefined && (!Array.isArray(value) || value.length > 0),
+      ),
+    );
+
+    const baseRequestOpts = {
+      retryConfig: {
+        retry: maxRetries,
+        noResponseRetries: maxRetries,
+        maxRetryDelay: this.retryOptions.maxRetryDelay,
+        retryDelayMultiplier: this.retryOptions.retryDelayMultiplier,
+        totalTimeout: this.retryOptions.totalTimeout,
+        shouldRetry: (err: GaxiosError) => {
+          if (isRetryDisabled) {
+            return false;
+          }
+          const attempts = err?.config?.retryConfig?.currentRetryAttempt ?? 0;
+          if (attempts >= maxRetries) {
+            return false;
+          }
+          return !!this.retryOptions.retryableErrorFn?.(err);
+        },
+      },
+      ...reqOpts,
+      hasPrecondition, // Pass flag to Gaxios / AuthClient options
+      params: hasDefinedQueryParams ? queryParameters : undefined,
+      paramsSerializer: this.#paramsSerializer,
+      headers,
+      url: requestUrl,
+      timeout: reqOpts.timeout ?? this.timeout,
+      validateStatus: (status: number): boolean => {
+        const isResumable = !!(
+          queryParameters?.uploadType === 'resumable' ||
+          urlString.includes('uploadType=resumable')
+        );
+        return (
+          (status >= 200 && status < 300) || (isResumable && status === 308)
+        );
+      },
+    } as unknown as GaxiosOptions;
+
     try {
-      const requestPromise = this.authClient.request<T>({
-        adapter: async (opts: GaxiosOptions) => {
-          const urlHasParams = opts.url
-            ? opts.url.toString() !== requestUrl
-            : false;
-          const innerOpts = {
-            ...opts,
-            adapter: undefined,
-            params: urlHasParams ? undefined : opts.params,
-          };
-          return requestGaxiosInstance.request(innerOpts);
-        },
-        retryConfig: {
-          retry: maxRetries,
-          noResponseRetries: maxRetries,
-          maxRetryDelay: this.retryOptions.maxRetryDelay,
-          retryDelayMultiplier: this.retryOptions.retryDelayMultiplier,
-          totalTimeout: this.retryOptions.totalTimeout,
-          shouldRetry: (err: GaxiosError) =>
-            !isRetryDisabled && !!this.retryOptions.retryableErrorFn?.(err),
-        },
-        ...reqOpts,
-        hasPrecondition, // Pass flag to Gaxios / AuthClient options
-        params: reqOpts.queryParameters,
-        paramsSerializer: this.#paramsSerializer,
-        headers,
-        url: requestUrl,
-        timeout: this.timeout,
-        validateStatus: (status: number): boolean => {
-          const isResumable = !!(
-            reqOpts.queryParameters?.uploadType === 'resumable' ||
-            reqOpts.url?.toString().includes('uploadType=resumable')
-          );
-          return (
-            (status >= 200 && status < 300) || (isResumable && status === 308)
-          );
-        },
-      } as unknown as GaxiosOptions);
+      const requestPromise = useAuth
+        ? this.authClient.request<T>({
+            adapter: async (opts: GaxiosOptions) => {
+              const urlHasParams = opts.url
+                ? opts.url.toString() !== requestUrl
+                : false;
+              const innerOpts = {
+                ...opts,
+                adapter: undefined,
+                params: urlHasParams ? undefined : opts.params,
+              };
+              return requestGaxiosInstance.request(innerOpts);
+            },
+            ...baseRequestOpts,
+          })
+        : requestGaxiosInstance.request<T>(baseRequestOpts);
 
       // Helper to decorate plain JSON objects with metadata for backward-compatibility callbacks
       const decorateMetadata = (resp: GaxiosResponse<T>) => {

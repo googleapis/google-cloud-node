@@ -904,6 +904,7 @@ export class Storage {
       baseUrl: this.baseUrl,
       customEndpoint: this.customEndpoint,
       useAuthWithCustomEndpoint: options?.useAuthWithCustomEndpoint,
+      projectIdRequired: false,
       scopes: [
         'https://www.googleapis.com/auth/iam',
         'https://www.googleapis.com/auth/cloud-platform',
@@ -931,6 +932,9 @@ export class Storage {
     this.storageTransport = new StorageTransport({
       ...config,
       ...options,
+      customEndpoint: this.customEndpoint,
+      useAuthWithCustomEndpoint: this.useAuthWithCustomEndpoint,
+      projectIdRequired: config.projectIdRequired,
       interceptors: this.interceptors,
     });
     this.universeDomain = options.universeDomain || DEFAULT_UNIVERSE;

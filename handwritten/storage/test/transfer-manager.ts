@@ -33,9 +33,14 @@ import {
 import assert from 'assert';
 import {describe, it, beforeEach, before, afterEach, after} from 'mocha';
 import * as path from 'path';
-import {GaxiosError, GaxiosResponse} from 'gaxios';
+import {Gaxios, GaxiosError, GaxiosOptions, GaxiosResponse} from 'gaxios';
 import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
-import {AuthClient, GoogleAuth} from 'google-auth-library';
+import {
+  AuthClient,
+  GoogleAuth,
+  OAuth2Client,
+  PassThroughClient,
+} from 'google-auth-library';
 import {tmpdir} from 'os';
 import fs, {promises as fsp, Stats} from 'fs';
 import * as sinon from 'sinon';
@@ -1174,6 +1179,451 @@ describe('Transfer Manager', () => {
 
       assert.strictEqual(fakeHelper.uploadPart.calledOnce, true);
       assert.strictEqual(assertionMade, true);
+    });
+
+    describe('custom endpoint authentication', () => {
+      const CUSTOM_ENDPOINT = 'http://localhost:4443';
+      const OTHER_UNIVERSE = 'example-universe.test';
+      const OTHER_UNIVERSE_CREDENTIALS = {
+        type: 'service_account',
+        client_email: 'test@example.iam.gserviceaccount.com',
+        private_key: 'not-a-real-key',
+        universe_domain: OTHER_UNIVERSE,
+      };
+      let savedEmulatorHost: string | undefined;
+
+      beforeEach(() => {
+        savedEmulatorHost = process.env.STORAGE_EMULATOR_HOST;
+        delete process.env.STORAGE_EMULATOR_HOST;
+      });
+
+      afterEach(() => {
+        if (savedEmulatorHost === undefined) {
+          delete process.env.STORAGE_EMULATOR_HOST;
+        } else {
+          process.env.STORAGE_EMULATOR_HOST = savedEmulatorHost;
+        }
+      });
+
+      function stubXmlResponses(
+        stub: sinon.SinonStub,
+        options: {failUploadPart?: boolean} = {},
+      ) {
+        stub.callsFake(async (opts?: GaxiosOptions) => {
+          const headers = new Headers(opts?.headers);
+          assert.strictEqual(headers.get('authorization'), null);
+          const urlStr = String(opts?.url ?? '');
+          if (opts?.method === 'POST' && urlStr.includes('?uploads')) {
+            return {
+              data: Buffer.from(
+                '<InitiateMultipartUploadResult><UploadId>upload-1</UploadId></InitiateMultipartUploadResult>',
+              ),
+              headers: new Headers(),
+              status: 200,
+            } as unknown as GaxiosResponse;
+          }
+          if (opts?.method === 'PUT') {
+            if (options.failUploadPart) {
+              throw new Error('part upload failed');
+            }
+            return {
+              data: '',
+              headers: new Headers({etag: '"etag-1"'}),
+              status: 200,
+            } as unknown as GaxiosResponse;
+          }
+          if (opts?.method === 'DELETE') {
+            return {
+              data: '',
+              headers: new Headers(),
+              status: 204,
+            } as unknown as GaxiosResponse;
+          }
+          return {
+            data: '<CompleteMultipartUploadResult/>',
+            headers: new Headers(),
+            status: 200,
+          } as unknown as GaxiosResponse;
+        });
+      }
+
+      for (const useAuthWithCustomEndpoint of [undefined, false]) {
+        it(`should use plain Gaxios and skip GoogleAuth without ADC when apiEndpoint is set and useAuthWithCustomEndpoint is ${String(useAuthWithCustomEndpoint)}`, async () => {
+          const adcError = new Error('Could not load the default credentials');
+          const authRequestStub = sandbox
+            .stub(GoogleAuth.prototype, 'request')
+            .rejects(adcError);
+          const getClientStub = sandbox
+            .stub(GoogleAuth.prototype, 'getClient')
+            .rejects(adcError);
+          const getProjectIdStub = sandbox
+            .stub(GoogleAuth.prototype, 'getProjectId')
+            .rejects(adcError);
+
+          const gaxiosRequestStub = sandbox.stub(Gaxios.prototype, 'request');
+          stubXmlResponses(gaxiosRequestStub);
+
+          const customStorage = new Storage({
+            apiEndpoint: CUSTOM_ENDPOINT,
+            useAuthWithCustomEndpoint,
+          });
+          const customTm = new TransferManager(
+            customStorage.bucket(BUCKET_NAME),
+          );
+
+          await customTm.uploadFileInChunks(filePath);
+
+          // initiateUpload (POST) + uploadPart (PUT) + completeUpload (POST)
+          assert.strictEqual(gaxiosRequestStub.callCount, 3);
+          assert.strictEqual(authRequestStub.called, false);
+          assert.strictEqual(getClientStub.called, false);
+          assert.strictEqual(getProjectIdStub.called, false);
+        });
+      }
+
+      it('should use plain Gaxios for abortUpload as well on unauthenticated custom endpoint', async () => {
+        const adcError = new Error('Could not load the default credentials');
+        const authRequestStub = sandbox
+          .stub(GoogleAuth.prototype, 'request')
+          .rejects(adcError);
+        const gaxiosRequestStub = sandbox.stub(Gaxios.prototype, 'request');
+        stubXmlResponses(gaxiosRequestStub, {failUploadPart: true});
+
+        const customStorage = new Storage({
+          apiEndpoint: CUSTOM_ENDPOINT,
+          retryOptions: {autoRetry: false},
+        });
+        const customTm = new TransferManager(customStorage.bucket(BUCKET_NAME));
+
+        await assert.rejects(
+          customTm.uploadFileInChunks(filePath),
+          /part upload failed/,
+        );
+
+        // initiateUpload (POST) + uploadPart (PUT, fails) + abortUpload (DELETE)
+        assert.strictEqual(gaxiosRequestStub.callCount, 3);
+        assert.strictEqual(
+          gaxiosRequestStub.thirdCall.args[0]?.method,
+          'DELETE',
+        );
+        assert.strictEqual(authRequestStub.called, false);
+      });
+
+      it('should bypass GoogleAuth and not attach Authorization header when STORAGE_EMULATOR_HOST is set even if credentials exist', async () => {
+        process.env.STORAGE_EMULATOR_HOST = CUSTOM_ENDPOINT;
+        const oauthClient = new OAuth2Client();
+        oauthClient.setCredentials({
+          access_token: 'leaked-token',
+          expiry_date: Date.now() + 3_600_000,
+        });
+        const getRequestHeadersSpy = sandbox.spy(
+          oauthClient,
+          'getRequestHeaders',
+        );
+        const gaxiosRequestStub = sandbox.stub(Gaxios.prototype, 'request');
+        stubXmlResponses(gaxiosRequestStub);
+
+        const emulatorStorage = new Storage({authClient: oauthClient});
+        const authRequestSpy = sandbox.spy(
+          emulatorStorage.storageTransport.authClient,
+          'request',
+        );
+        const emulatorTm = new TransferManager(
+          emulatorStorage.bucket(BUCKET_NAME),
+        );
+
+        await emulatorTm.uploadFileInChunks(filePath);
+
+        assert.strictEqual(gaxiosRequestStub.callCount, 3);
+        assert.strictEqual(authRequestSpy.called, false);
+        assert.strictEqual(getRequestHeadersSpy.called, false);
+      });
+
+      it('should use authClient.request and send Authorization header when customEndpoint is true and useAuthWithCustomEndpoint is true', async () => {
+        const oauthClient = new OAuth2Client();
+        oauthClient.setCredentials({
+          access_token: 'xml-token',
+          expiry_date: Date.now() + 3_600_000,
+        });
+
+        const capturedAuthHeaders: Array<string | null> = [];
+        const mockFetch: GaxiosOptions['fetchImplementation'] = async (
+          url,
+          init,
+        ) => {
+          const headers = new Headers(init?.headers);
+          capturedAuthHeaders.push(headers.get('authorization'));
+          const urlStr = String(url);
+          if (init?.method === 'POST' && urlStr.includes('?uploads')) {
+            return new Response(
+              '<InitiateMultipartUploadResult><UploadId>upload-1</UploadId></InitiateMultipartUploadResult>',
+              {status: 200},
+            );
+          }
+          if (init?.method === 'PUT') {
+            return new Response('', {status: 200, headers: {etag: '"etag-1"'}});
+          }
+          return new Response('<CompleteMultipartUploadResult/>', {
+            status: 200,
+          });
+        };
+        oauthClient.transporter.defaults.fetchImplementation = mockFetch;
+
+        const customStorage = new Storage({
+          apiEndpoint: CUSTOM_ENDPOINT,
+          useAuthWithCustomEndpoint: true,
+          authClient: oauthClient,
+        });
+        const authRequestSpy = sandbox.spy(
+          customStorage.storageTransport.authClient,
+          'request',
+        );
+        const customTm = new TransferManager(customStorage.bucket(BUCKET_NAME));
+
+        await customTm.uploadFileInChunks(filePath);
+
+        assert.strictEqual(authRequestSpy.callCount, 3);
+        assert.deepStrictEqual(capturedAuthHeaders, [
+          'Bearer xml-token',
+          'Bearer xml-token',
+          'Bearer xml-token',
+        ]);
+      });
+
+      it('should skip universe domain validation when useAuthWithCustomEndpoint is false and enforce it when true', async () => {
+        const gaxiosRequestStub = sandbox.stub(Gaxios.prototype, 'request');
+        stubXmlResponses(gaxiosRequestStub);
+
+        const unauthStorage = new Storage({
+          apiEndpoint: CUSTOM_ENDPOINT,
+          useAuthWithCustomEndpoint: false,
+          credentials: OTHER_UNIVERSE_CREDENTIALS,
+        });
+        const unauthTm = new TransferManager(unauthStorage.bucket(BUCKET_NAME));
+        await unauthTm.uploadFileInChunks(filePath);
+        assert.strictEqual(gaxiosRequestStub.callCount, 3);
+
+        const authStorage = new Storage({
+          apiEndpoint: CUSTOM_ENDPOINT,
+          useAuthWithCustomEndpoint: true,
+          credentials: OTHER_UNIVERSE_CREDENTIALS,
+        });
+        const authRequestStub = sandbox.stub(
+          authStorage.storageTransport.authClient,
+          'request',
+        );
+        const authTm = new TransferManager(authStorage.bucket(BUCKET_NAME));
+
+        await assert.rejects(
+          authTm.uploadFileInChunks(filePath),
+          /does not match the universe domain found in the credentials/,
+        );
+        assert.strictEqual(authRequestStub.called, false);
+      });
+
+      it('should allow PassThroughClient when useAuthWithCustomEndpoint is true and universeDomain is non-default', async () => {
+        const passThrough = new PassThroughClient();
+        const capturedMethods: Array<string | undefined> = [];
+        const capturedAuthHeaders: Array<string | null> = [];
+        const mockFetch: GaxiosOptions['fetchImplementation'] = async (
+          url,
+          init,
+        ) => {
+          capturedMethods.push(init?.method);
+          capturedAuthHeaders.push(
+            new Headers(init?.headers).get('authorization'),
+          );
+          const urlStr = String(url);
+          if (init?.method === 'POST' && urlStr.includes('?uploads')) {
+            return new Response(
+              '<InitiateMultipartUploadResult><UploadId>upload-1</UploadId></InitiateMultipartUploadResult>',
+              {status: 200},
+            );
+          }
+          if (init?.method === 'PUT') {
+            return new Response('', {status: 200, headers: {etag: '"etag-1"'}});
+          }
+          return new Response('<CompleteMultipartUploadResult/>', {
+            status: 200,
+          });
+        };
+        passThrough.transporter.defaults.fetchImplementation = mockFetch;
+
+        const customStorage = new Storage({
+          apiEndpoint: CUSTOM_ENDPOINT,
+          useAuthWithCustomEndpoint: true,
+          authClient: passThrough,
+          universeDomain: OTHER_UNIVERSE,
+        });
+        const customTm = new TransferManager(customStorage.bucket(BUCKET_NAME));
+
+        await customTm.uploadFileInChunks(filePath);
+
+        assert.deepStrictEqual(capturedMethods, ['POST', 'PUT', 'POST']);
+        assert.deepStrictEqual(capturedAuthHeaders, [null, null, null]);
+      });
+
+      it('should safely handle undefined storageTransport or gaxiosInstance on unauthenticated custom endpoints', async () => {
+        const gaxiosRequestStub = sandbox.stub(Gaxios.prototype, 'request');
+        stubXmlResponses(gaxiosRequestStub);
+
+        // Missing storageTransport
+        const storageNoTransport = new Storage({apiEndpoint: CUSTOM_ENDPOINT});
+        (
+          storageNoTransport as unknown as {storageTransport?: unknown}
+        ).storageTransport = undefined;
+        const tmNoTransport = new TransferManager(
+          storageNoTransport.bucket(BUCKET_NAME),
+        );
+        await tmNoTransport.uploadFileInChunks(filePath);
+        assert.strictEqual(gaxiosRequestStub.callCount, 3);
+
+        // Missing gaxiosInstance on storageTransport
+        const storageNoGaxios = new Storage({apiEndpoint: CUSTOM_ENDPOINT});
+        (
+          storageNoGaxios.storageTransport as unknown as {
+            gaxiosInstance?: unknown;
+          }
+        ).gaxiosInstance = undefined;
+        const tmNoGaxios = new TransferManager(
+          storageNoGaxios.bucket(BUCKET_NAME),
+        );
+        await tmNoGaxios.uploadFileInChunks(filePath);
+        assert.strictEqual(gaxiosRequestStub.callCount, 6);
+      });
+
+      it('should inherit gaxiosInstance defaults and preserve HTTP error messages across initiate, uploadPart, complete, and abort failures', async () => {
+        const seenDefaultHeaders: Array<string | null> = [];
+        let failPhase: 'initiate' | 'part' | 'complete' | 'part-and-abort' =
+          'initiate';
+
+        const mockFetch: GaxiosOptions['fetchImplementation'] = async (
+          url,
+          init,
+        ) => {
+          const headers = new Headers(init?.headers);
+          assert.strictEqual(headers.get('authorization'), null);
+          seenDefaultHeaders.push(headers.get('x-custom-default'));
+          const urlStr = String(url);
+
+          if (init?.method === 'POST' && urlStr.includes('?uploads')) {
+            if (failPhase === 'initiate') {
+              return new Response(
+                JSON.stringify({error: {message: 'Initiate forbidden'}}),
+                {status: 403, headers: {'content-type': 'application/json'}},
+              );
+            }
+            return new Response(
+              '<InitiateMultipartUploadResult><UploadId>upload-err-1</UploadId></InitiateMultipartUploadResult>',
+              {status: 200},
+            );
+          }
+
+          if (init?.method === 'PUT') {
+            if (failPhase === 'part' || failPhase === 'part-and-abort') {
+              return new Response('Part failed', {status: 500});
+            }
+            return new Response('', {
+              status: 200,
+              headers: {etag: '"etag-1"'},
+            });
+          }
+
+          if (init?.method === 'POST' && urlStr.includes('uploadId=')) {
+            if (failPhase === 'complete') {
+              return new Response('Complete bad request', {status: 400});
+            }
+            return new Response('<CompleteMultipartUploadResult/>', {
+              status: 200,
+            });
+          }
+
+          if (init?.method === 'DELETE') {
+            if (failPhase === 'part-and-abort') {
+              return new Response('Abort unavailable', {status: 503});
+            }
+            return new Response(null, {status: 204});
+          }
+
+          return new Response('', {status: 200});
+        };
+
+        const customStorage = new Storage({
+          apiEndpoint: CUSTOM_ENDPOINT,
+          retryOptions: {autoRetry: false},
+        });
+        customStorage.storageTransport.gaxiosInstance.defaults = {
+          fetchImplementation: mockFetch,
+          headers: {'x-custom-default': 'inherited-header'},
+        };
+        const customTm = new TransferManager(customStorage.bucket(BUCKET_NAME));
+
+        // 1. initiateUpload HTTP 403 error
+        failPhase = 'initiate';
+        await assert.rejects(
+          customTm.uploadFileInChunks(filePath),
+          (err: MultiPartUploadError) => {
+            assert(err instanceof MultiPartUploadError);
+            assert.match(err.message, /Initiate forbidden/);
+            assert.strictEqual(
+              (err as unknown as {uploadId: string}).uploadId,
+              '',
+            );
+            return true;
+          },
+        );
+
+        // 2. uploadPart HTTP 500 error (auto-aborts cleanly)
+        failPhase = 'part';
+        await assert.rejects(
+          customTm.uploadFileInChunks(filePath),
+          (err: MultiPartUploadError) => {
+            assert(err instanceof MultiPartUploadError);
+            assert.match(err.message, /Part failed/);
+            assert.strictEqual(
+              (err as unknown as {uploadId: string}).uploadId,
+              'upload-err-1',
+            );
+            return true;
+          },
+        );
+
+        // 3. completeUpload HTTP 400 error (auto-aborts cleanly)
+        failPhase = 'complete';
+        await assert.rejects(
+          customTm.uploadFileInChunks(filePath),
+          (err: MultiPartUploadError) => {
+            assert(err instanceof MultiPartUploadError);
+            assert.match(err.message, /Complete bad request/);
+            assert.strictEqual(
+              (err as unknown as {uploadId: string}).uploadId,
+              'upload-err-1',
+            );
+            return true;
+          },
+        );
+
+        // 4. uploadPart HTTP 500 + abortUpload HTTP 503 preserves both messages
+        failPhase = 'part-and-abort';
+        await assert.rejects(
+          customTm.uploadFileInChunks(filePath),
+          (err: MultiPartUploadError) => {
+            assert(err instanceof MultiPartUploadError);
+            assert.match(err.message, /Part failed/);
+            assert.match(err.message, /Abort unavailable/);
+            assert.strictEqual(
+              (err as unknown as {uploadId: string}).uploadId,
+              'upload-err-1',
+            );
+            return true;
+          },
+        );
+
+        assert.ok(seenDefaultHeaders.length > 0);
+        for (const hdr of seenDefaultHeaders) {
+          assert.strictEqual(hdr, 'inherited-header');
+        }
+      });
     });
   });
 });
