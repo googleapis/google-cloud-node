@@ -234,11 +234,21 @@ export function resolveExporterConfig(
     monitoringEndpoint = formatMonitoringTargetKey(parsed);
   }
 
+  const rawEnvUniverseDomain =
+    typeof process === 'object'
+      ? process.env?.GOOGLE_CLOUD_UNIVERSE_DOMAIN
+      : undefined;
+  const trimmedEnvUniverseDomain = rawEnvUniverseDomain?.trim() || undefined;
   const effectiveUniverseDomain =
     resolvedUniverseDomain ??
-    (typeof process === 'object'
-      ? process.env?.GOOGLE_CLOUD_UNIVERSE_DOMAIN?.trim() || undefined
-      : undefined);
+    trimmedEnvUniverseDomain ??
+    // When GOOGLE_CLOUD_UNIVERSE_DOMAIN is exported as empty/whitespace, pin
+    // the default explicitly so MetricServiceClient's `??` cannot read `""`.
+    (rawEnvUniverseDomain !== undefined ? 'googleapis.com' : undefined);
+
+  if (effectiveUniverseDomain !== undefined) {
+    clientOptions.universeDomain = effectiveUniverseDomain;
+  }
 
   return {
     clientOptions,
