@@ -12,12 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import * as http from 'http';
+import {AddressInfo} from 'net';
+import {PassThrough, Readable} from 'stream';
 import {describe} from 'mocha';
+import nock from 'nock';
 import {
   StorageRequestOptions,
   StorageTransport,
 } from '../src/storage-transport.js';
-import {GoogleAuth} from 'google-auth-library';
+import {GoogleAuth, OAuth2Client} from 'google-auth-library';
 import sinon, {createSandbox} from 'sinon';
 import assert from 'assert';
 import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
@@ -649,6 +653,599 @@ describe('Storage Transport', () => {
         /does not match the universe domain found in the credentials/,
       );
       assert.strictEqual(requestStub.calledOnce, true);
+    });
+  });
+
+  describe('multipart streaming', () => {
+    const UUID_BOUNDARY_REGEX =
+      /^multipart\/related; boundary="([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})"$/;
+
+    beforeEach(() => {
+      nock.enableNetConnect('127.0.0.1');
+    });
+
+    afterEach(() => {
+      nock.disableNetConnect();
+    });
+
+    function createLiveTransport(endpoint: string) {
+      const oauthClient = new OAuth2Client();
+      oauthClient.setCredentials({
+        access_token: 'test-secret-token',
+        expiry_date: Date.now() + 600_000,
+      });
+      return new StorageTransport({
+        apiEndpoint: endpoint,
+        baseUrl: endpoint,
+        authClient: oauthClient,
+        projectId: 'project-id',
+        retryOptions: {
+          maxRetries: 3,
+          retryDelayMultiplier: 2,
+          maxRetryDelay: 100,
+          totalTimeout: 1000,
+          retryableErrorFn: RETRYABLE_ERR_FN_DEFAULT,
+        },
+        scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+        packageJson: {name: 'test-package', version: '1.0.0'},
+      });
+    }
+
+    async function startServer(
+      handler: (req: http.IncomingMessage, res: http.ServerResponse) => void,
+    ): Promise<{server: http.Server; endpoint: string}> {
+      const server = http.createServer(handler);
+      await new Promise<void>(resolve =>
+        server.listen(0, '127.0.0.1', resolve),
+      );
+      const {port} = server.address() as AddressInfo;
+      return {server, endpoint: `http://127.0.0.1:${port}`};
+    }
+
+    async function closeServer(server: http.Server): Promise<void> {
+      server.closeAllConnections?.();
+      await new Promise<void>(resolve => server.close(() => resolve()));
+    }
+
+    function parseMultipartParts(
+      body: Buffer,
+      boundary: string,
+    ): Array<{headers: string; body: Buffer}> {
+      const delimiter = Buffer.from(`--${boundary}`);
+      const closing = Buffer.from(`--${boundary}--`);
+      const parts: Array<{headers: string; body: Buffer}> = [];
+      let offset = body.indexOf(delimiter);
+      while (offset !== -1) {
+        if (body.subarray(offset, offset + closing.length).equals(closing)) {
+          break;
+        }
+        const headerStart = offset + delimiter.length + 2; // skip \r\n
+        const headerEnd = body.indexOf(Buffer.from('\r\n\r\n'), headerStart);
+        assert.notStrictEqual(headerEnd, -1, 'Expected part header separator');
+        const nextBoundary = body.indexOf(
+          Buffer.from(`\r\n--${boundary}`),
+          headerEnd + 4,
+        );
+        assert.notStrictEqual(nextBoundary, -1, 'Expected next boundary');
+        parts.push({
+          headers: body.subarray(headerStart, headerEnd).toString('utf8'),
+          body: body.subarray(headerEnd + 4, nextBoundary),
+        });
+        offset = nextBoundary + 2; // point at --boundary
+      }
+      return parts;
+    }
+
+    it('should stream multipart chunks incrementally before the source stream finishes', async () => {
+      let resolveFirstChunk!: () => void;
+      const firstChunkReceived = new Promise<void>(resolve => {
+        resolveFirstChunk = resolve;
+      });
+      let receivedHeaders: http.IncomingHttpHeaders = {};
+      const chunks: Buffer[] = [];
+      let accumulated = '';
+
+      const {server, endpoint} = await startServer((req, res) => {
+        receivedHeaders = req.headers;
+        req.on('data', (chunk: Buffer) => {
+          chunks.push(chunk);
+          accumulated += chunk.toString('utf8');
+          if (accumulated.includes('first-chunk-payload')) {
+            resolveFirstChunk();
+          }
+        });
+        req.on('end', () => {
+          res.writeHead(200, {'Content-Type': 'application/json'});
+          res.end(JSON.stringify({name: 'streamed.txt'}));
+        });
+      });
+
+      try {
+        const liveTransport = createLiveTransport(endpoint);
+        const media = new PassThrough();
+
+        const reqPromise = liveTransport.makeRequest<{name: string}>({
+          url: '/upload/storage/v1/b/test-bucket/o',
+          method: 'POST',
+          queryParameters: {name: 'streamed.txt', uploadType: 'multipart'},
+          responseType: 'json',
+          multipart: [
+            {
+              headers: new Headers({'Content-Type': 'application/json'}),
+              content: JSON.stringify({name: 'streamed.txt'}),
+            },
+            {
+              headers: new Headers({'Content-Type': 'text/plain'}),
+              content: media,
+            },
+          ],
+        });
+
+        media.write(Buffer.from('first-chunk-payload-'));
+        // Proves streaming: server must receive the first chunk before media ends.
+        await Promise.race([
+          firstChunkReceived,
+          reqPromise.then(() => {
+            throw new Error('Request resolved before first chunk arrived');
+          }),
+        ]);
+        media.end(Buffer.from('second-chunk-payload'));
+
+        const resp = await reqPromise;
+        assert.strictEqual(resp.status, 200);
+        assert.strictEqual(resp.data.name, 'streamed.txt');
+        assert.strictEqual(receivedHeaders['transfer-encoding'], 'chunked');
+        assert.strictEqual(receivedHeaders['content-length'], undefined);
+
+        const ctMatch =
+          receivedHeaders['content-type']?.match(UUID_BOUNDARY_REGEX);
+        assert.ok(
+          ctMatch,
+          `Unexpected Content-Type: ${receivedHeaders['content-type']}`,
+        );
+        const parts = parseMultipartParts(Buffer.concat(chunks), ctMatch[1]);
+        assert.strictEqual(parts.length, 2);
+        assert.strictEqual(
+          parts[0].body.toString('utf8'),
+          '{"name":"streamed.txt"}',
+        );
+        assert.strictEqual(
+          parts[1].body.toString('utf8'),
+          'first-chunk-payload-second-chunk-payload',
+        );
+        assert.strictEqual(media.listenerCount('error'), 0);
+        assert.strictEqual(media.listenerCount('close'), 0);
+        assert.strictEqual(media.listenerCount('end'), 0);
+      } finally {
+        await closeServer(server);
+      }
+    });
+
+    it('should generate unique random boundaries per request and preserve payloads containing the legacy boundary', async () => {
+      const boundaries: string[] = [];
+      const extractedPayloads: string[] = [];
+      const trickyPayload =
+        'prefix\r\n--===============storage_multipart_boundary==\r\n' +
+        'Content-Type: text/plain\r\n\r\n' +
+        '===============storage_multipart_boundary==--\r\nsuffix';
+
+      const {server, endpoint} = await startServer((req, res) => {
+        const chunks: Buffer[] = [];
+        req.on('data', (chunk: Buffer) => chunks.push(chunk));
+        req.on('end', () => {
+          const ctMatch =
+            req.headers['content-type']?.match(UUID_BOUNDARY_REGEX);
+          assert.ok(
+            ctMatch,
+            `Expected UUID boundary in ${req.headers['content-type']}`,
+          );
+          boundaries.push(ctMatch[1]);
+          const parts = parseMultipartParts(Buffer.concat(chunks), ctMatch[1]);
+          assert.strictEqual(parts.length, 2);
+          extractedPayloads.push(parts[1].body.toString('utf8'));
+          res.writeHead(200, {'Content-Type': 'application/json'});
+          res.end(JSON.stringify({ok: true}));
+        });
+      });
+
+      try {
+        const liveTransport = createLiveTransport(endpoint);
+        for (let i = 0; i < 2; i++) {
+          const media = Readable.from([Buffer.from(trickyPayload)]);
+          const resp = await liveTransport.makeRequest({
+            url: '/upload/storage/v1/b/test-bucket/o',
+            method: 'POST',
+            responseType: 'json',
+            multipart: [
+              {
+                headers: new Headers({'Content-Type': 'application/json'}),
+                content: JSON.stringify({attempt: i}),
+              },
+              {
+                headers: new Headers({
+                  'Content-Type': 'application/octet-stream',
+                }),
+                content: media,
+              },
+            ],
+          });
+          assert.strictEqual(resp.status, 200);
+        }
+
+        assert.strictEqual(boundaries.length, 2);
+        assert.notStrictEqual(boundaries[0], boundaries[1]);
+        assert.deepStrictEqual(extractedPayloads, [
+          trickyPayload,
+          trickyPayload,
+        ]);
+      } finally {
+        await closeServer(server);
+      }
+    });
+
+    it('should support plain-object part headers, Buffer/Uint8Array parts, empty streams, and strip stale Content-Length', async () => {
+      let receivedHeaders: http.IncomingHttpHeaders = {};
+      let parsedParts: Array<{headers: string; body: Buffer}> = [];
+
+      const {server, endpoint} = await startServer((req, res) => {
+        receivedHeaders = req.headers;
+        const chunks: Buffer[] = [];
+        req.on('data', (chunk: Buffer) => chunks.push(chunk));
+        req.on('end', () => {
+          const ctMatch =
+            req.headers['content-type']?.match(UUID_BOUNDARY_REGEX);
+          assert.ok(ctMatch);
+          parsedParts = parseMultipartParts(Buffer.concat(chunks), ctMatch[1]);
+          res.writeHead(200, {'Content-Type': 'application/json'});
+          res.end(JSON.stringify({ok: true}));
+        });
+      });
+
+      try {
+        const liveTransport = createLiveTransport(endpoint);
+        const resp = await liveTransport.makeRequest({
+          url: '/upload',
+          method: 'POST',
+          headers: {'Content-Length': '999999'},
+          responseType: 'json',
+          multipart: [
+            {
+              headers: {
+                'content-type': 'application/json',
+              } as unknown as Headers,
+              content: '{"meta":true}',
+            },
+            {
+              headers: new Headers({
+                'Content-Type': 'application/octet-stream',
+              }),
+              content: Buffer.from('buf-part') as unknown as Readable,
+            },
+            {
+              headers: new Headers({
+                'Content-Type': 'application/octet-stream',
+              }),
+              content: new Uint8Array([65, 66, 67]) as unknown as Readable,
+            },
+            {
+              headers: new Headers({'Content-Type': 'text/plain'}),
+              content: Readable.from([]),
+            },
+          ],
+        });
+
+        assert.strictEqual(resp.status, 200);
+        assert.strictEqual(receivedHeaders['content-length'], undefined);
+        assert.strictEqual(receivedHeaders['transfer-encoding'], 'chunked');
+        assert.strictEqual(parsedParts.length, 4);
+        assert.strictEqual(
+          parsedParts[0].headers,
+          'Content-Type: application/json',
+        );
+        assert.strictEqual(
+          parsedParts[0].body.toString('utf8'),
+          '{"meta":true}',
+        );
+        assert.strictEqual(parsedParts[1].body.toString('utf8'), 'buf-part');
+        assert.strictEqual(parsedParts[2].body.toString('utf8'), 'ABC');
+        assert.strictEqual(parsedParts[3].body.length, 0);
+      } finally {
+        await closeServer(server);
+      }
+    });
+
+    it('should reject cleanly and abort the HTTP upload when a stream part errors mid-upload', async () => {
+      let resolveFirstChunk!: () => void;
+      const firstChunkReceived = new Promise<void>(resolve => {
+        resolveFirstChunk = resolve;
+      });
+      let serverSawEnd = false;
+      let serverBody = '';
+
+      const {server, endpoint} = await startServer((req, res) => {
+        req.on('data', (chunk: Buffer) => {
+          serverBody += chunk.toString('utf8');
+          if (serverBody.includes('partial-payload')) {
+            resolveFirstChunk();
+          }
+        });
+        req.on('end', () => {
+          serverSawEnd = true;
+          res.writeHead(200, {'Content-Type': 'application/json'});
+          res.end('{}');
+        });
+      });
+
+      try {
+        const liveTransport = createLiveTransport(endpoint);
+        const media = new PassThrough();
+
+        const reqPromise = liveTransport.makeRequest({
+          url: '/upload',
+          method: 'POST',
+          responseType: 'json',
+          multipart: [
+            {
+              headers: new Headers({'Content-Type': 'application/json'}),
+              content: '{}',
+            },
+            {
+              headers: new Headers({
+                'Content-Type': 'application/octet-stream',
+              }),
+              content: media,
+            },
+          ],
+        });
+
+        media.write(Buffer.from('partial-payload'));
+        await firstChunkReceived;
+        media.destroy(new Error('stream boom'));
+
+        await assert.rejects(reqPromise, (err: Error) => {
+          assert.ok(err instanceof Error);
+          return true;
+        });
+
+        assert.strictEqual(serverSawEnd, false);
+        assert.strictEqual(
+          media.listeners('error').filter(fn => fn.name === 'onError').length,
+          0,
+        );
+        assert.strictEqual(
+          media.listeners('close').filter(fn => fn.name === 'onClose').length,
+          0,
+        );
+      } finally {
+        await closeServer(server);
+      }
+    });
+
+    it('should reject cleanly when a stream part is destroyed prematurely without an error argument', async () => {
+      let resolveFirstChunk!: () => void;
+      const firstChunkReceived = new Promise<void>(resolve => {
+        resolveFirstChunk = resolve;
+      });
+      let serverSawEnd = false;
+      let serverBody = '';
+
+      const {server, endpoint} = await startServer((req, res) => {
+        req.on('data', (chunk: Buffer) => {
+          serverBody += chunk.toString('utf8');
+          if (serverBody.includes('partial-destroy')) {
+            resolveFirstChunk();
+          }
+        });
+        req.on('end', () => {
+          serverSawEnd = true;
+          res.writeHead(200, {'Content-Type': 'application/json'});
+          res.end('{}');
+        });
+      });
+
+      try {
+        const liveTransport = createLiveTransport(endpoint);
+        const media = new PassThrough();
+
+        const reqPromise = liveTransport.makeRequest({
+          url: '/upload',
+          method: 'POST',
+          responseType: 'json',
+          multipart: [
+            {
+              headers: new Headers({'Content-Type': 'application/json'}),
+              content: '{}',
+            },
+            {
+              headers: new Headers({
+                'Content-Type': 'application/octet-stream',
+              }),
+              content: media,
+            },
+          ],
+        });
+
+        media.write(Buffer.from('partial-destroy'));
+        await firstChunkReceived;
+        media.destroy();
+
+        await assert.rejects(reqPromise, (err: Error) => {
+          assert.ok(err instanceof Error);
+          return true;
+        });
+        assert.strictEqual(serverSawEnd, false);
+      } finally {
+        await closeServer(server);
+      }
+    });
+
+    it('should reject without calling authClient.request if a stream part errors during pre-request awaits', async () => {
+      const auth = new GoogleAuth();
+      const requestStub = sandbox.stub(auth, 'request').resolves({
+        data: {},
+        headers: new Map(),
+      } as unknown as GaxiosResponse);
+      sandbox.stub(auth, 'getClient').resolves();
+      sandbox.stub(auth, 'getProjectId').callsFake(async () => {
+        await new Promise(resolve => setTimeout(resolve, 20));
+        return 'project-id';
+      });
+
+      const delayedTransport = new StorageTransport({
+        apiEndpoint: baseUrl,
+        baseUrl,
+        authClient: auth,
+        retryOptions: {
+          maxRetries: 3,
+          retryableErrorFn: RETRYABLE_ERR_FN_DEFAULT,
+        },
+        scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+        packageJson: {name: 'test-package', version: '1.0.0'},
+      });
+
+      const media = new PassThrough();
+      const reqPromise = delayedTransport.makeRequest({
+        url: '/upload',
+        method: 'POST',
+        multipart: [
+          {
+            headers: new Headers({'Content-Type': 'application/json'}),
+            content: '{}',
+          },
+          {
+            headers: new Headers({'Content-Type': 'application/octet-stream'}),
+            content: media,
+          },
+        ],
+      });
+
+      media.destroy(new Error('early stream failure'));
+
+      await assert.rejects(reqPromise, /early stream failure/);
+      assert.strictEqual(requestStub.called, false);
+      assert.strictEqual(media.listenerCount('error'), 0);
+    });
+
+    it('should disable gaxios retries on stream bodies while preserving hasPrecondition and setting byte-mode Readable', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      requestStub.resolves({data: {}, headers: new Map()});
+
+      const media = new PassThrough();
+      media.end('hello');
+
+      const originalMultipart = [
+        {
+          headers: new Headers({'Content-Type': 'application/json'}),
+          content: '{}',
+        },
+        {
+          headers: new Headers({'Content-Type': 'text/plain'}),
+          content: media,
+        },
+      ];
+      const reqOpts: StorageRequestOptions = {
+        url: '/upload/storage/v1/b/bucket/o',
+        method: 'POST',
+        queryParameters: {uploadType: 'multipart', ifGenerationMatch: 0},
+        multipart: originalMultipart,
+      };
+
+      await transport.makeRequest(reqOpts);
+
+      assert.strictEqual(requestStub.calledOnce, true);
+      const calledWith = requestStub.getCall(0).args[0];
+      assert.strictEqual(calledWith.multipart, undefined);
+      assert.ok(calledWith.body instanceof Readable);
+      assert.strictEqual(calledWith.body.readableObjectMode, false);
+      assert.strictEqual(calledWith.data, calledWith.body);
+      assert.strictEqual(calledWith.hasPrecondition, true);
+      assert.strictEqual(calledWith.retryConfig.retry, 0);
+      assert.strictEqual(calledWith.retryConfig.noResponseRetries, 0);
+      assert.strictEqual(
+        calledWith.retryConfig.shouldRetry({
+          response: {status: 503},
+          config: {method: 'POST', url: '/upload', hasPrecondition: true},
+        } as unknown as GaxiosError),
+        false,
+      );
+      // Verify caller's reqOpts was not mutated.
+      assert.strictEqual(reqOpts.multipart, originalMultipart);
+    });
+
+    it('should redact sensitive headers without blocking the event loop on large binary or streaming error paths', async () => {
+      const {server, endpoint} = await startServer((req, res) => {
+        req.once('data', () => {
+          res.writeHead(403, {'Content-Type': 'application/json'});
+          res.end(
+            JSON.stringify({error: {code: 403, message: 'Access Denied'}}),
+          );
+        });
+      });
+
+      try {
+        const liveTransport = createLiveTransport(endpoint);
+
+        // 1. Streaming multipart early 403 error redacts Authorization header cleanly.
+        const media = new PassThrough();
+        const streamReq = liveTransport.makeRequest({
+          url: '/upload?token=secret-query-token',
+          method: 'POST',
+          responseType: 'json',
+          multipart: [
+            {
+              headers: new Headers({'Content-Type': 'application/json'}),
+              content: '{}',
+            },
+            {
+              headers: new Headers({
+                'Content-Type': 'application/octet-stream',
+              }),
+              content: media,
+            },
+          ],
+        });
+        media.write(Buffer.alloc(32 * 1024, 0x61));
+
+        await assert.rejects(streamReq, (err: GaxiosError) => {
+          assert.strictEqual(err.code, 403);
+          assert.strictEqual(err.message, 'Access Denied');
+          const authHeader = err.config?.headers?.get('authorization');
+          assert.ok(authHeader && authHeader.includes('REDACTED'));
+          assert.ok(
+            err.config?.url?.searchParams.get('token')?.includes('REDACTED'),
+          );
+          return true;
+        });
+
+        // 2. Large 64 MiB Buffer body error redaction completes in O(1) without stalling event loop.
+        const largeBuf = Buffer.alloc(64 * 1024 * 1024);
+        const start = Date.now();
+        await assert.rejects(
+          liveTransport.makeRequest({
+            url: '/upload?token=secret-buf-token',
+            method: 'POST',
+            body: largeBuf,
+            maxRetries: 0,
+            responseType: 'json',
+          }),
+          (err: GaxiosError) => {
+            assert.strictEqual(err.code, 403);
+            const authHeader = err.config?.headers?.get('authorization');
+            assert.ok(authHeader && authHeader.includes('REDACTED'));
+            assert.ok(
+              err.config?.url?.searchParams.get('token')?.includes('REDACTED'),
+            );
+            return true;
+          },
+        );
+        const elapsedMs = Date.now() - start;
+        assert.ok(
+          elapsedMs < 1500,
+          `Expected O(1) error redaction without event-loop stall, took ${elapsedMs}ms`,
+        );
+      } finally {
+        await closeServer(server);
+      }
     });
   });
 });

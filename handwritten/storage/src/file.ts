@@ -4925,6 +4925,9 @@ class File extends ServiceObject<File, FileMetadata> {
           dup.destroy(err);
           return;
         }
+        if (dup.destroyed) {
+          return;
+        }
 
         this.metadata = body as FileMetadata;
         dup.emit('metadata', body);

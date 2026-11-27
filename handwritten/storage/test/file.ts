@@ -22,12 +22,15 @@ import {
   GaxiosOptionsPrepared,
   Storage,
 } from '../src/index.js';
+import * as http from 'http';
+import {AddressInfo} from 'net';
+import nock from 'nock';
 import {
   StorageRequestOptions,
   StorageTransport,
 } from '../src/storage-transport.js';
 import sinon, {createSandbox} from 'sinon';
-import {GoogleAuth} from 'google-auth-library';
+import {GoogleAuth, OAuth2Client} from 'google-auth-library';
 import {
   FileExceptionMessages,
   FileMetadata,
@@ -6273,6 +6276,305 @@ describe('File', () => {
       const invalidUrl = 'https://storage.com/mybucket/myfile';
 
       assert.throws(() => File.from(invalidUrl, STORAGE));
+    });
+  });
+
+  describe('non-resumable multipart streaming', () => {
+    const UUID_BOUNDARY_REGEX =
+      /^multipart\/related; boundary="([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})"$/;
+
+    beforeEach(() => {
+      nock.enableNetConnect('127.0.0.1');
+    });
+
+    afterEach(() => {
+      nock.disableNetConnect();
+    });
+
+    async function startServer(
+      handler: (req: http.IncomingMessage, res: http.ServerResponse) => void,
+    ): Promise<{server: http.Server; endpoint: string}> {
+      const server = http.createServer(handler);
+      await new Promise<void>(resolve =>
+        server.listen(0, '127.0.0.1', resolve),
+      );
+      const {port} = server.address() as AddressInfo;
+      return {server, endpoint: `http://127.0.0.1:${port}`};
+    }
+
+    async function closeServer(server: http.Server): Promise<void> {
+      server.closeAllConnections?.();
+      await new Promise<void>(resolve => server.close(() => resolve()));
+    }
+
+    function createLiveFile(endpoint: string, name = 'stream-test.bin'): File {
+      const oauthClient = new OAuth2Client();
+      oauthClient.setCredentials({
+        access_token: 'test-token',
+        expiry_date: Date.now() + 600_000,
+      });
+      const liveStorage = new Storage({
+        apiEndpoint: endpoint,
+        projectId: PROJECT_ID,
+        authClient: oauthClient,
+      });
+      return liveStorage.bucket('test-bucket').file(name);
+    }
+
+    function extractMediaPart(body: Buffer, boundary: string): Buffer {
+      const firstDelim = Buffer.from(`--${boundary}`);
+      const secondBoundaryMarker = Buffer.from(`\r\n--${boundary}\r\n`);
+      const part2Start = body.indexOf(secondBoundaryMarker, firstDelim.length);
+      assert.notStrictEqual(part2Start, -1, 'Expected second multipart part');
+      const headerEnd = body.indexOf(Buffer.from('\r\n\r\n'), part2Start);
+      assert.notStrictEqual(headerEnd, -1, 'Expected part 2 header separator');
+      const closing = body.indexOf(
+        Buffer.from(`\r\n--${boundary}--`),
+        headerEnd + 4,
+      );
+      assert.notStrictEqual(closing, -1, 'Expected closing boundary');
+      return body.subarray(headerEnd + 4, closing);
+    }
+
+    it('createWriteStream({resumable: false}) should stream incrementally and preserve legacy boundary strings', async () => {
+      let resolveFirstChunk!: () => void;
+      const firstChunkReceived = new Promise<void>(resolve => {
+        resolveFirstChunk = resolve;
+      });
+      const chunk1 = Buffer.from(
+        'hello-===============storage_multipart_boundary==-',
+      );
+      const chunk2 = Buffer.from('world-end');
+      const receivedChunks: Buffer[] = [];
+      let receivedHeaders: http.IncomingHttpHeaders = {};
+      let accumulated = '';
+
+      const {server, endpoint} = await startServer((req, res) => {
+        receivedHeaders = req.headers;
+        req.on('data', (chunk: Buffer) => {
+          receivedChunks.push(chunk);
+          accumulated += chunk.toString('utf8');
+          if (accumulated.includes('hello-')) {
+            resolveFirstChunk();
+          }
+        });
+        req.on('end', () => {
+          res.writeHead(200, {'Content-Type': 'application/json'});
+          res.end(JSON.stringify({name: 'stream-test.bin'}));
+        });
+      });
+
+      try {
+        const liveFile = createLiveFile(endpoint);
+        const ws = liveFile.createWriteStream({
+          resumable: false,
+          validation: false,
+        });
+        const finished = new Promise<void>((resolve, reject) => {
+          ws.once('finish', resolve);
+          ws.once('error', reject);
+        });
+
+        ws.write(chunk1);
+        // Proves bytes reach the server before the write stream ends.
+        await Promise.race([
+          firstChunkReceived,
+          finished.then(() => {
+            throw new Error('Stream finished before first chunk arrived');
+          }),
+        ]);
+        ws.end(chunk2);
+        await finished;
+
+        assert.strictEqual(receivedHeaders['transfer-encoding'], 'chunked');
+        assert.strictEqual(receivedHeaders['content-length'], undefined);
+        const ctMatch =
+          receivedHeaders['content-type']?.match(UUID_BOUNDARY_REGEX);
+        assert.ok(ctMatch);
+        const media = extractMediaPart(
+          Buffer.concat(receivedChunks),
+          ctMatch[1],
+        );
+        assert.deepStrictEqual(media, Buffer.concat([chunk1, chunk2]));
+      } finally {
+        await closeServer(server);
+      }
+    });
+
+    it('createWriteStream({resumable: false}) should surface real HTTP 403 error on early server rejection', async () => {
+      const {server, endpoint} = await startServer((req, res) => {
+        req.once('data', () => {
+          res.writeHead(403, {'Content-Type': 'application/json'});
+          res.end(
+            JSON.stringify({error: {code: 403, message: 'Access Denied'}}),
+          );
+        });
+      });
+
+      try {
+        const liveFile = createLiveFile(endpoint);
+        const ws = liveFile.createWriteStream({
+          resumable: false,
+          validation: false,
+        });
+
+        const errPromise = new Promise<Error & {code?: number}>(resolve => {
+          ws.once('error', err => resolve(err as Error & {code?: number}));
+        });
+
+        ws.write(Buffer.alloc(64 * 1024, 0x61));
+
+        const err = await errPromise;
+        assert.strictEqual(err.code, 403);
+        assert.strictEqual(err.message, 'Access Denied');
+      } finally {
+        await closeServer(server);
+      }
+    });
+
+    it('file.save(asyncGenerator, {resumable: false}) should stream incrementally and reject cleanly on generator errors without stalling the event loop', async () => {
+      let resolveFirstChunk!: () => void;
+      const firstChunkReceived = new Promise<void>(resolve => {
+        resolveFirstChunk = resolve;
+      });
+      let serverBody = '';
+      let serverSawEnd = false;
+      let requestIndex = 0;
+
+      const {server, endpoint} = await startServer((req, res) => {
+        const idx = ++requestIndex;
+        if (idx === 1) {
+          const chunks: Buffer[] = [];
+          req.on('data', (chunk: Buffer) => {
+            chunks.push(chunk);
+            serverBody += chunk.toString('utf8');
+            if (serverBody.includes('gen-part-1')) {
+              resolveFirstChunk();
+            }
+          });
+          req.on('end', () => {
+            res.writeHead(200, {'Content-Type': 'application/json'});
+            res.end(JSON.stringify({name: 'gen.bin'}));
+          });
+        } else {
+          req.on('data', () => {});
+          req.on('end', () => {
+            serverSawEnd = true;
+            res.writeHead(200, {'Content-Type': 'application/json'});
+            res.end(JSON.stringify({name: 'gen-fail.bin'}));
+          });
+        }
+      });
+
+      try {
+        const liveFile = createLiveFile(endpoint, 'gen.bin');
+
+        // 1. Incremental streaming via async generator.
+        const healthyGenerator = async function* () {
+          yield Buffer.from('gen-part-1-');
+          await firstChunkReceived;
+          yield Buffer.from('gen-part-2');
+        };
+        await liveFile.save(healthyGenerator(), {
+          resumable: false,
+          validation: false,
+        });
+        assert.ok(serverBody.includes('gen-part-1-gen-part-2'));
+
+        // 2. Failing async generator rejects cleanly without event-loop stalls.
+        let maxTickLagMs = 0;
+        let lastTick = Date.now();
+        const ticker = setInterval(() => {
+          const now = Date.now();
+          maxTickLagMs = Math.max(maxTickLagMs, now - lastTick - 10);
+          lastTick = now;
+        }, 10);
+
+        const failingGenerator = async function* () {
+          for (let i = 0; i < 4; i++) {
+            yield Buffer.alloc(1024 * 1024, 0x62);
+          }
+          throw new Error('generator boom');
+        };
+
+        try {
+          await assert.rejects(
+            liveFile.save(failingGenerator(), {
+              resumable: false,
+              validation: false,
+            }),
+            /generator boom/,
+          );
+        } finally {
+          clearInterval(ticker);
+        }
+
+        assert.strictEqual(serverSawEnd, false);
+        assert.ok(
+          maxTickLagMs < 250,
+          `Expected non-blocking error path, observed max event-loop lag ${maxTickLagMs}ms`,
+        );
+      } finally {
+        await closeServer(server);
+      }
+    });
+
+    it('file.save(string, {resumable: false}) should retry a 503 via AsyncRetry with a fresh multipart stream and consistent invocationId', async () => {
+      const attempts: Array<{
+        boundary: string;
+        invocationId: string;
+        media: string;
+      }> = [];
+
+      const {server, endpoint} = await startServer((req, res) => {
+        const chunks: Buffer[] = [];
+        req.on('data', (chunk: Buffer) => chunks.push(chunk));
+        req.on('end', () => {
+          const ctMatch =
+            req.headers['content-type']?.match(UUID_BOUNDARY_REGEX);
+          assert.ok(ctMatch);
+          const apiClient = String(req.headers['x-goog-api-client'] || '');
+          const invMatch = apiClient.match(/gccl-invocation-id\/([a-f0-9-]+)/);
+          assert.ok(invMatch);
+          const media = extractMediaPart(
+            Buffer.concat(chunks),
+            ctMatch[1],
+          ).toString('utf8');
+          attempts.push({
+            boundary: ctMatch[1],
+            invocationId: invMatch[1],
+            media,
+          });
+          if (attempts.length === 1) {
+            res.writeHead(503, {'Content-Type': 'application/json'});
+            res.end(
+              JSON.stringify({
+                error: {code: 503, message: 'Service Unavailable'},
+              }),
+            );
+          } else {
+            res.writeHead(200, {'Content-Type': 'application/json'});
+            res.end(JSON.stringify({name: 'retry.txt'}));
+          }
+        });
+      });
+
+      try {
+        const liveFile = createLiveFile(endpoint, 'retry.txt');
+        await liveFile.save('retry-payload', {
+          resumable: false,
+          validation: false,
+          preconditionOpts: {ifGenerationMatch: 0},
+        });
+
+        assert.strictEqual(attempts.length, 2);
+        assert.strictEqual(attempts[0].media, 'retry-payload');
+        assert.strictEqual(attempts[1].media, 'retry-payload');
+        assert.strictEqual(attempts[0].invocationId, attempts[1].invocationId);
+        assert.notStrictEqual(attempts[0].boundary, attempts[1].boundary);
+      } finally {
+        await closeServer(server);
+      }
     });
   });
 });
