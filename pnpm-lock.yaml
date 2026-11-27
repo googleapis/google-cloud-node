@@ -2791,9 +2791,6 @@ importers:
       pack-n-play:
         specifier: ^5.3.0
         version: 5.3.0
-      post-install-check:
-        specifier: ^0.0.1
-        version: 0.0.1
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
