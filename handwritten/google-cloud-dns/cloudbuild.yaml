@@ -15,6 +15,7 @@ steps:
   args:
   - '-c'
   - |
+    set -o pipefail
     gcloud secrets versions access latest --project=cloud-devrel-kokoro-resources --secret=long-door-651-kokoro-system-test-service-account --format='get(payload.data)' | tr '_-' '/+' | base64 -d > /workspace/google_application_credentials.json
   id: 'get-service-account-key'
 
