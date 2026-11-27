@@ -18,7 +18,6 @@
     "system-test/*.ts",
     "system-test/fixtures/customer_record.json",
     "src/**/*.json",
-    "samples/**/*.json",
     "protos/protos.json"
   ]
 }
