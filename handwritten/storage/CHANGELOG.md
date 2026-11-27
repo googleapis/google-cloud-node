@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [9.0.1](https://github.com/googleapis/google-cloud-node/compare/storage-v9.0.0...storage-v9.0.1) (2026-11-27)
+
+
+### Bug Fixes
+
+* **storage:** Check credentials against the configured universe domain ([#9961](https://github.com/googleapis/google-cloud-node/issues/9961)) ([f0ea01d](https://github.com/googleapis/google-cloud-node/commit/f0ea01dd3c53730e36e9ae779b5fed757945198e))
+
 ## [9.0.0](https://github.com/googleapis/google-cloud-node/compare/storage-v8.4.0...storage-v9.0.0) (2026-11-03)
 
 
