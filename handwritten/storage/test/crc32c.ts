@@ -102,6 +102,86 @@ describe('CRC32C', () => {
 
         assert.equal(buffer.toString(), value);
       });
+
+      it('should match RFC 3720 test vectors', () => {
+        const vectors: Array<[Buffer, number]> = [
+          [Buffer.from('123456789'), 0xe3069283],
+          [Buffer.alloc(32, 0x00), 0x8a9136aa],
+          [Buffer.alloc(32, 0xff), 0x62a8ab43],
+          [Buffer.from(Uint8Array.from({length: 32}, (_, i) => i)), 0x46dd794e],
+          [
+            Buffer.from(Uint8Array.from({length: 32}, (_, i) => 31 - i)),
+            0x113fdb5c,
+          ],
+        ];
+
+        for (const [input, expected] of vectors) {
+          const crc32c = new CRC32C();
+          crc32c.update(input);
+          assert.equal(crc32c.valueOf() >>> 0, expected);
+        }
+      });
+
+      it('should handle high-bit bytes (0x80-0xff)', () => {
+        const buf = Buffer.from(Uint8Array.from({length: 256}, (_, i) => i));
+
+        const actual = new CRC32C();
+        actual.update(buf);
+
+        const expected = new CRC32C();
+        for (let i = 0; i < buf.length; i++) {
+          expected.update(buf.subarray(i, i + 1));
+        }
+
+        assert.equal(actual.toString(), expected.toString());
+      });
+
+      it('should handle all remainder lengths modulo 8', () => {
+        const buf = Buffer.from(Uint8Array.from({length: 32}, (_, i) => i));
+
+        for (let len = 0; len <= 31; len++) {
+          const actual = new CRC32C();
+          actual.update(buf.subarray(0, len));
+
+          const expected = new CRC32C();
+          for (let i = 0; i < len; i++) {
+            expected.update(buf.subarray(i, i + 1));
+          }
+
+          assert.equal(actual.toString(), expected.toString());
+        }
+      });
+
+      it('should handle multi-byte chunk boundaries', () => {
+        const buf = Buffer.from(Uint8Array.from({length: 256}, (_, i) => i));
+        const expected = new CRC32C();
+        expected.update(buf);
+
+        for (const size of [3, 7, 8, 9, 15, 16, 17, 64]) {
+          const actual = new CRC32C();
+          for (let i = 0; i < buf.length; i += size) {
+            actual.update(buf.subarray(i, i + size));
+          }
+
+          assert.equal(actual.toString(), expected.toString());
+        }
+      });
+
+      it('should handle unaligned Buffer.subarray views', () => {
+        const base = Buffer.from(Uint8Array.from({length: 64}, (_, i) => i));
+
+        for (let offset = 1; offset <= 7; offset++) {
+          const view = base.subarray(offset, offset + 27);
+
+          const actual = new CRC32C();
+          actual.update(view);
+
+          const expected = new CRC32C();
+          expected.update(Buffer.from(view));
+
+          assert.equal(actual.toString(), expected.toString());
+        }
+      });
     });
 
     describe('#validate', () => {
