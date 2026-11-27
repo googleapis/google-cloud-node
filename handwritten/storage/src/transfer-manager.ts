@@ -82,6 +82,157 @@ const UPLOAD_IN_CHUNKS_DEFAULT_CHUNK_SIZE = 32 * 1024 * 1024;
 const DEFAULT_PARALLEL_CHUNKED_UPLOAD_LIMIT = 5;
 
 const EMPTY_REGEX = '(?:)';
+const MAX_SYMLINK_HOPS = 40;
+
+function getErrorCode(err: unknown): string | undefined {
+  if (typeof err === 'object' && err !== null && 'code' in err) {
+    const {code} = err as {code?: unknown};
+    return typeof code === 'string' ? code : undefined;
+  }
+  return undefined;
+}
+
+function isPathWithinBase(base: string, target: string): boolean {
+  const relativeFromBase = path.relative(base, target);
+  return !(
+    path.isAbsolute(relativeFromBase) ||
+    relativeFromBase.split(/[\\/]/).includes('..')
+  );
+}
+
+/**
+ * Resolves symbolic links in each segment of targetPath, keeping non-existent
+ * trailing segments as-is. Throws an ELOOP error after maxSymlinkHops links.
+ */
+async function resolveCanonicalPath(
+  targetPath: string,
+  maxSymlinkHops = MAX_SYMLINK_HOPS,
+): Promise<string> {
+  const resolved = path.resolve(targetPath);
+  const separatorRegex = process.platform === 'win32' ? /[\\/]+/ : /\/+/;
+  const parsedRoot = path.parse(resolved).root;
+  let current = parsedRoot;
+  const pending = resolved
+    .slice(parsedRoot.length)
+    .split(separatorRegex)
+    .filter(Boolean)
+    .reverse();
+
+  let hops = 0;
+  let nonExistentDepth = 0;
+
+  while (pending.length > 0) {
+    const segment = pending.pop();
+    if (segment === undefined || segment === '.') {
+      continue;
+    }
+    if (segment === '..') {
+      if (nonExistentDepth > 0) {
+        nonExistentDepth--;
+      }
+      current = path.dirname(current);
+      continue;
+    }
+
+    const candidate = path.join(current, segment);
+    if (nonExistentDepth > 0) {
+      nonExistentDepth++;
+      current = candidate;
+      continue;
+    }
+
+    try {
+      const stat = await fsp.lstat(candidate);
+      if (stat.isSymbolicLink()) {
+        hops++;
+        if (hops > maxSymlinkHops) {
+          const loopError: NodeJS.ErrnoException = new Error(
+            `Too many symbolic links encountered while resolving ${targetPath}`,
+          );
+          loopError.code = 'ELOOP';
+          throw loopError;
+        }
+        let linkTarget = await fsp.readlink(candidate);
+        if (process.platform === 'win32') {
+          if (linkTarget.startsWith('\\\\?\\UNC\\')) {
+            linkTarget = '\\\\' + linkTarget.slice('\\\\?\\UNC\\'.length);
+          } else if (/^\\\\\?\\[a-zA-Z]:[\\/]/.test(linkTarget)) {
+            linkTarget = linkTarget.slice('\\\\?\\'.length);
+          }
+        }
+        let targetRemainder: string;
+        if (path.isAbsolute(linkTarget)) {
+          const linkRoot = path.parse(linkTarget).root;
+          const currentRoot = path.parse(current).root;
+          if (
+            process.platform === 'win32' &&
+            (linkRoot === '\\' || linkRoot === '/') &&
+            /^[a-zA-Z]:/.test(currentRoot)
+          ) {
+            current = currentRoot.slice(0, 2) + path.sep;
+          } else {
+            current = linkRoot;
+          }
+          targetRemainder = linkTarget.slice(linkRoot.length);
+        } else {
+          targetRemainder = linkTarget;
+        }
+        const targetSegments = targetRemainder
+          .split(separatorRegex)
+          .filter(Boolean);
+        for (let i = targetSegments.length - 1; i >= 0; i--) {
+          pending.push(targetSegments[i]);
+        }
+        continue;
+      }
+      current = candidate;
+    } catch (err) {
+      const code = getErrorCode(err);
+      if (code === 'ENOENT' || code === 'ENOTDIR') {
+        nonExistentDepth = 1;
+        current = candidate;
+        continue;
+      }
+      throw err;
+    }
+  }
+
+  return current;
+}
+
+async function isCanonicalDestinationWithinBase(
+  canonicalBase: string,
+  destinationPath: string,
+): Promise<boolean> {
+  try {
+    const canonicalDestination = await resolveCanonicalPath(destinationPath);
+    return isPathWithinBase(canonicalBase, canonicalDestination);
+  } catch (err) {
+    if (getErrorCode(err) === 'ELOOP') {
+      return false;
+    }
+    throw err;
+  }
+}
+
+function createSkippedDownloadResult(
+  fileName: string,
+  reason: SkipReason,
+  localPath?: string,
+  error?: Error,
+): DownloadResponseWithStatus {
+  const skippedResult = [Buffer.alloc(0)] as DownloadResponseWithStatus;
+  skippedResult.skipped = true;
+  skippedResult.reason = reason;
+  skippedResult.fileName = fileName;
+  if (localPath !== undefined) {
+    skippedResult.localPath = localPath;
+  }
+  if (error !== undefined) {
+    skippedResult.error = error;
+  }
+  return skippedResult;
+}
 
 /**
  * The `gccl-gcs-cmd` value for the `X-Goog-API-Client` header.
@@ -636,6 +787,7 @@ export class TransferManager {
     const baseDestination = path.resolve(
       options.passthroughOptions?.destination || '.',
     );
+    const canonicalBase = await resolveCanonicalPath(baseDestination);
 
     if (!Array.isArray(filesOrFolder)) {
       const directoryFiles = await this.bucket.getFiles({
@@ -663,11 +815,10 @@ export class TransferManager {
 
       const hasIllegalDrive = /^[a-zA-Z]:/.test(file.name);
       if (hasIllegalDrive) {
-        const skippedResult = [Buffer.alloc(0)] as DownloadResponseWithStatus;
-        skippedResult.skipped = true;
-        skippedResult.reason = SkipReason.ILLEGAL_CHARACTER;
-        skippedResult.fileName = file.name;
-        finalResults[i] = skippedResult;
+        finalResults[i] = createSkippedDownloadResult(
+          file.name,
+          SkipReason.ILLEGAL_CHARACTER,
+        );
         continue;
       }
 
@@ -678,29 +829,12 @@ export class TransferManager {
       const dest = fileName.replace(/^[\\/]+/, '');
 
       const resolvedPath = path.resolve(baseDestination, dest);
-      const relativeFromBase = path.relative(baseDestination, resolvedPath);
-
-      const isOutside =
-        path.isAbsolute(relativeFromBase) ||
-        relativeFromBase.split(/[\\/]/).includes('..');
-
-      if (isOutside) {
-        const skippedResult = [Buffer.alloc(0)] as DownloadResponseWithStatus;
-        skippedResult.skipped = true;
-        skippedResult.reason = SkipReason.PATH_TRAVERSAL;
-        skippedResult.fileName = file.name;
-        skippedResult.localPath = resolvedPath;
-        finalResults[i] = skippedResult;
-        continue;
-      }
-
-      if (options.skipIfExists && existsSync(resolvedPath)) {
-        const skippedResult = [Buffer.alloc(0)] as DownloadResponseWithStatus;
-        skippedResult.skipped = true;
-        skippedResult.reason = SkipReason.ALREADY_EXISTS;
-        skippedResult.fileName = file.name;
-        skippedResult.localPath = resolvedPath;
-        finalResults[i] = skippedResult;
+      if (!isPathWithinBase(baseDestination, resolvedPath)) {
+        finalResults[i] = createSkippedDownloadResult(
+          file.name,
+          SkipReason.PATH_TRAVERSAL,
+          resolvedPath,
+        );
         continue;
       }
 
@@ -713,19 +847,51 @@ export class TransferManager {
           };
 
           try {
-            const destination = passThroughOptionsCopy.destination!;
+            const ensureDestinationWithinBase = async (): Promise<boolean> => {
+              if (
+                await isCanonicalDestinationWithinBase(
+                  canonicalBase,
+                  resolvedPath,
+                )
+              ) {
+                return true;
+              }
+              finalResults[i] = createSkippedDownloadResult(
+                file.name,
+                SkipReason.PATH_TRAVERSAL,
+                resolvedPath,
+              );
+              return false;
+            };
 
-            if (destination.endsWith(path.sep) || destination.endsWith('/')) {
-              await fsp.mkdir(destination, {recursive: true});
+            if (!(await ensureDestinationWithinBase())) {
+              return;
+            }
+
+            if (options.skipIfExists && existsSync(resolvedPath)) {
+              finalResults[i] = createSkippedDownloadResult(
+                file.name,
+                SkipReason.ALREADY_EXISTS,
+                resolvedPath,
+              );
+              return;
+            }
+
+            if (resolvedPath.endsWith(path.sep) || resolvedPath.endsWith('/')) {
+              await fsp.mkdir(resolvedPath, {recursive: true});
               const dirResp = [Buffer.alloc(0)] as DownloadResponseWithStatus;
               dirResp.skipped = false;
               dirResp.fileName = file.name;
-              dirResp.localPath = destination;
+              dirResp.localPath = resolvedPath;
               finalResults[i] = dirResp;
               return;
             }
 
-            await fsp.mkdir(path.dirname(destination), {recursive: true});
+            await fsp.mkdir(path.dirname(resolvedPath), {recursive: true});
+
+            if (!(await ensureDestinationWithinBase())) {
+              return;
+            }
 
             const resp = (await file.download(
               passThroughOptionsCopy,
@@ -735,16 +901,15 @@ export class TransferManager {
               ...resp,
               skipped: false,
               fileName: file.name,
-              localPath: destination,
+              localPath: resolvedPath,
             } as DownloadResponse;
           } catch (err) {
-            const errorResp = [Buffer.alloc(0)] as DownloadResponseWithStatus;
-            errorResp.skipped = true;
-            errorResp.reason = SkipReason.DOWNLOAD_ERROR;
-            errorResp.fileName = file.name;
-            errorResp.localPath = resolvedPath;
-            errorResp.error = err as Error;
-            finalResults[i] = errorResp;
+            finalResults[i] = createSkippedDownloadResult(
+              file.name,
+              SkipReason.DOWNLOAD_ERROR,
+              resolvedPath,
+              err instanceof Error ? err : new Error(String(err)),
+            );
           }
         }),
       );

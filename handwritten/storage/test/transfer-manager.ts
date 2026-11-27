@@ -556,6 +556,204 @@ describe('Transfer Manager', () => {
       );
       assert.strictEqual(illegalCharSkips.length, 2);
     });
+
+    describe('symbolic link destination paths', () => {
+      let tempDir: string;
+      const dirLinkType = process.platform === 'win32' ? 'junction' : 'dir';
+
+      beforeEach(async () => {
+        (fs.existsSync as sinon.SinonStub).restore();
+        tempDir = await fsp.mkdtemp(path.join(tmpdir(), 'tm-symlink-test-'));
+      });
+
+      afterEach(async () => {
+        if (tempDir) {
+          await fsp.rm(tempDir, {recursive: true, force: true});
+        }
+      });
+
+      it('skips files when a directory symbolic link resolves outside the base destination', async () => {
+        const baseDir = path.join(tempDir, 'base');
+        const otherDir = path.join(tempDir, 'other');
+        await fsp.mkdir(baseDir);
+        await fsp.mkdir(otherDir);
+        const linkTarget =
+          process.platform === 'win32' ? otherDir : path.join('..', 'other');
+        await fsp.symlink(
+          linkTarget,
+          path.join(baseDir, 'linked-dir'),
+          dirLinkType,
+        );
+
+        const file = new File(bucket, 'linked-dir/nested/sample.txt');
+        const downloadStub = sandbox
+          .stub(file, 'download')
+          .resolves([Buffer.alloc(0)]);
+
+        const result = (await transferManager.downloadManyFiles([file], {
+          passthroughOptions: {destination: baseDir},
+        })) as DownloadResponseWithStatus[];
+
+        assert.strictEqual(downloadStub.called, false);
+        assert.strictEqual(result.length, 1);
+        assert.strictEqual(result[0].skipped, true);
+        assert.strictEqual(result[0].reason, SkipReason.PATH_TRAVERSAL);
+        assert.strictEqual(fs.existsSync(path.join(otherDir, 'nested')), false);
+      });
+
+      it('skips files when a file symbolic link resolves outside the base destination', async function () {
+        const baseDir = path.join(tempDir, 'base');
+        const otherDir = path.join(tempDir, 'other');
+        await fsp.mkdir(baseDir);
+        await fsp.mkdir(otherDir);
+
+        const existingTarget = path.join(otherDir, 'existing.txt');
+        const danglingTarget = path.join(otherDir, 'new.txt');
+        await fsp.writeFile(existingTarget, 'original-content');
+        try {
+          await fsp.symlink(
+            existingTarget,
+            path.join(baseDir, 'linked.txt'),
+            'file',
+          );
+          await fsp.symlink(
+            danglingTarget,
+            path.join(baseDir, 'dangling.txt'),
+            'file',
+          );
+          await fsp.symlink(
+            'looped.txt',
+            path.join(baseDir, 'looped.txt'),
+            'file',
+          );
+        } catch (err) {
+          if (
+            process.platform === 'win32' &&
+            (err as NodeJS.ErrnoException).code === 'EPERM'
+          ) {
+            this.skip();
+          }
+          throw err;
+        }
+
+        const linkedFile = new File(bucket, 'linked.txt');
+        const danglingFile = new File(bucket, 'dangling.txt');
+        const loopedFile = new File(bucket, 'looped.txt');
+        const linkedDownloadStub = sandbox
+          .stub(linkedFile, 'download')
+          .resolves([Buffer.alloc(0)]);
+        const danglingDownloadStub = sandbox
+          .stub(danglingFile, 'download')
+          .resolves([Buffer.alloc(0)]);
+        const loopedDownloadStub = sandbox
+          .stub(loopedFile, 'download')
+          .resolves([Buffer.alloc(0)]);
+
+        const result = (await transferManager.downloadManyFiles(
+          [linkedFile, danglingFile, loopedFile],
+          {
+            skipIfExists: true,
+            passthroughOptions: {destination: baseDir},
+          },
+        )) as DownloadResponseWithStatus[];
+
+        assert.strictEqual(linkedDownloadStub.called, false);
+        assert.strictEqual(danglingDownloadStub.called, false);
+        assert.strictEqual(loopedDownloadStub.called, false);
+        assert.strictEqual(result.length, 3);
+        for (const entry of result) {
+          assert.strictEqual(entry.skipped, true);
+          assert.strictEqual(entry.reason, SkipReason.PATH_TRAVERSAL);
+        }
+        assert.strictEqual(
+          fs.readFileSync(existingTarget, 'utf8'),
+          'original-content',
+        );
+        assert.strictEqual(fs.existsSync(danglingTarget), false);
+      });
+
+      it('allows downloads when the base destination or an in-tree link is a symbolic link', async () => {
+        const realBase = path.join(tempDir, 'real-base');
+        const linkedBase = path.join(tempDir, 'linked-base');
+        await fsp.mkdir(path.join(realBase, 'sub'), {recursive: true});
+        await fsp.symlink(realBase, linkedBase, dirLinkType);
+        const innerTarget =
+          process.platform === 'win32' ? path.join(realBase, 'sub') : 'sub';
+        await fsp.symlink(
+          innerTarget,
+          path.join(realBase, 'inner'),
+          dirLinkType,
+        );
+
+        const subFile = new File(bucket, 'sub/sample.txt');
+        const innerFile = new File(bucket, 'inner/nested/other.txt');
+        const subDownloadStub = sandbox
+          .stub(subFile, 'download')
+          .resolves([Buffer.alloc(0)]);
+        const innerDownloadStub = sandbox
+          .stub(innerFile, 'download')
+          .resolves([Buffer.alloc(0)]);
+
+        const result = (await transferManager.downloadManyFiles(
+          [subFile, innerFile],
+          {
+            passthroughOptions: {destination: linkedBase},
+          },
+        )) as DownloadResponseWithStatus[];
+
+        assert.strictEqual(subDownloadStub.calledOnce, true);
+        assert.strictEqual(innerDownloadStub.calledOnce, true);
+        assert.strictEqual(result.length, 2);
+        assert.strictEqual(result[0].skipped, false);
+        assert.strictEqual(result[1].skipped, false);
+        assert.strictEqual(
+          fs.existsSync(path.join(realBase, 'sub', 'nested')),
+          true,
+        );
+      });
+
+      it('records per-file path inspection errors without aborting other downloads', async () => {
+        const baseDir = path.join(tempDir, 'base');
+        await fsp.mkdir(baseDir);
+
+        const lstatError: NodeJS.ErrnoException = new Error('name too long');
+        lstatError.code = 'ENAMETOOLONG';
+        const lstatStub = sandbox.stub(fsp, 'lstat');
+        lstatStub.callThrough();
+        lstatStub
+          .withArgs(
+            sinon.match(
+              (targetPath: unknown) =>
+                path.basename(String(targetPath)) === 'long-name.txt',
+            ),
+          )
+          .rejects(lstatError);
+
+        const failingFile = new File(bucket, 'long-name.txt');
+        const validFile = new File(bucket, 'valid.txt');
+        const failingDownloadStub = sandbox
+          .stub(failingFile, 'download')
+          .resolves([Buffer.alloc(0)]);
+        const validDownloadStub = sandbox
+          .stub(validFile, 'download')
+          .resolves([Buffer.alloc(0)]);
+
+        const result = (await transferManager.downloadManyFiles(
+          [failingFile, validFile],
+          {
+            passthroughOptions: {destination: baseDir},
+          },
+        )) as DownloadResponseWithStatus[];
+
+        assert.strictEqual(failingDownloadStub.called, false);
+        assert.strictEqual(validDownloadStub.calledOnce, true);
+        assert.strictEqual(result.length, 2);
+        assert.strictEqual(result[0].skipped, true);
+        assert.strictEqual(result[0].reason, SkipReason.DOWNLOAD_ERROR);
+        assert.strictEqual(result[0].error, lstatError);
+        assert.strictEqual(result[1].skipped, false);
+      });
+    });
   });
 
   describe('downloadFileInChunks', () => {
