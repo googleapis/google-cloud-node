@@ -991,8 +991,7 @@ describe('Spanner', () => {
       );
     });
 
-    // T5: Accept https:// and dns:/// SPANNER_MONITORING_HOST end-to-end and deduplicate factory keys.
-    it('should accept https:// and dns:/// SPANNER_MONITORING_HOST and deduplicate MetricsTracerFactory key', () => {
+    it('should accept https://, dns:///, and dns://<authority>/ SPANNER_MONITORING_HOST', () => {
       process.env.SPANNER_MONITORING_HOST =
         'https://monitoring.custom-universe.example:8443';
       const httpsClient = new Spanner({
@@ -1019,6 +1018,23 @@ describe('Spanner', () => {
       );
       // Same normalized target key reuses the existing MetricsTracerFactory reader.
       assert.strictEqual(recordedExporterCalls.length, 1);
+
+      process.env.SPANNER_MONITORING_HOST =
+        'dns://8.8.8.8/monitoring.custom-universe.example:8443';
+      const dnsAuthorityClient = new Spanner({
+        projectId: 'tpc-project',
+        apiEndpoint: 'spanner.custom-universe.example',
+      });
+      assert.strictEqual(asAny(dnsAuthorityClient)._metricsEnabled, true);
+      assert.strictEqual(
+        asAny(dnsAuthorityClient)._monitoringTargetKey,
+        'dns://8.8.8.8/monitoring.custom-universe.example:8443',
+      );
+      assert.strictEqual(recordedExporterCalls.length, 2);
+      assert.strictEqual(
+        recordedExporterCalls[1].options.apiEndpoint,
+        'dns://8.8.8.8/monitoring.custom-universe.example:8443',
+      );
     });
 
     it('should keep built-in metrics active for an enabled client when a sibling disables metrics', async () => {

@@ -200,15 +200,19 @@ describe('CustomExporter', () => {
       'unix:///tmp/monitoring.sock',
       'https://',
       'https:///',
+      'https://:443',
       'https://monitoring.custom-universe.example//',
       'https://monitoring.custom-universe.example/v3',
       'https://user@monitoring.custom-universe.example',
       'user@monitoring.custom-universe.example:443',
       'dns://monitoring.custom-universe.example',
       'dns:///',
+      'dns:///:443',
       'dns:///monitoring.custom-universe.example/',
       'dns:///monitoring.custom-universe.example/v3',
       'dns://8.8.8.8/',
+      'dns://user@8.8.8.8/monitoring.example',
+      'dns://[127.0.0.1]/monitoring.example',
       'dns://dns.google/monitoring.custom-universe.example',
       'dns://8.8.8.8:0/monitoring.custom-universe.example',
       'dns://8.8.8.8:abc/monitoring.custom-universe.example',
@@ -305,7 +309,6 @@ describe('CustomExporter', () => {
     }
   });
 
-  // T1: https:// scheme normalization (host, host:port, trailing slash, case-insensitive, IPv6).
   it('should normalize https:// monitoring endpoints for MetricServiceClient', () => {
     assert.deepStrictEqual(
       parseMonitoringEndpoint('https://monitoring.custom-universe.example'),
@@ -321,7 +324,14 @@ describe('CustomExporter', () => {
       parseMonitoringEndpoint('HTTPS://monitoring.custom-universe.example/'),
       {apiEndpoint: 'monitoring.custom-universe.example'},
     );
+    assert.deepStrictEqual(parseMonitoringEndpoint('https://[::1]/'), {
+      apiEndpoint: '[::1]',
+    });
     assert.deepStrictEqual(parseMonitoringEndpoint('https://[::1]:8443'), {
+      apiEndpoint: '[::1]',
+      port: 8443,
+    });
+    assert.deepStrictEqual(parseMonitoringEndpoint('https://[::1]:8443/'), {
       apiEndpoint: '[::1]',
       port: 8443,
     });
@@ -337,7 +347,6 @@ describe('CustomExporter', () => {
     assert.strictEqual((exporter as any)._client._opts.port, 8443);
   });
 
-  // T2: dns:/// target syntax normalizes to canonical host[:port] and matches bare target keys.
   it('should normalize dns:/// monitoring endpoints to canonical host and port', () => {
     const bare = parseMonitoringEndpoint(
       'monitoring.custom-universe.example:8443',
@@ -377,13 +386,16 @@ describe('CustomExporter', () => {
     assert.strictEqual((exporter as any)._client._opts.port, 8443);
   });
 
-  // T3: dns://<authority>/ preserves validated IP-literal authority prefix on apiEndpoint.
-  it('should preserve validated IP authority in dns://<authority>/ monitoring endpoints', () => {
+  it('should preserve validated IP authority in dns://<authority>/ monitoring endpoints', async () => {
     assert.deepStrictEqual(
       parseMonitoringEndpoint(
         'dns://8.8.8.8/monitoring.custom-universe.example',
       ),
       {apiEndpoint: 'dns://8.8.8.8/monitoring.custom-universe.example'},
+    );
+    assert.deepStrictEqual(
+      parseMonitoringEndpoint('DNS://8.8.8.8/monitoring.example'),
+      {apiEndpoint: 'dns://8.8.8.8/monitoring.example'},
     );
     assert.deepStrictEqual(
       parseMonitoringEndpoint(
@@ -410,9 +422,31 @@ describe('CustomExporter', () => {
         port: 8443,
       },
     );
+
+    const hermeticAuth = new GoogleAuth();
+    sinon.stub(hermeticAuth, 'getUniverseDomain').resolves('googleapis.com');
+    sinon.stub(hermeticAuth, 'getClient').resolves({
+      getRequestHeaders: async () => new Headers(),
+    } as any);
+    const exporter = new CloudMonitoringMetricsExporter(
+      {
+        auth: hermeticAuth,
+        apiEndpoint: 'dns://8.8.8.8/monitoring.custom-universe.example:8443',
+      },
+      PROJECT_ID,
+    );
+    const client = (exporter as any)._client;
+    try {
+      const stub = await client.initialize();
+      assert.strictEqual(
+        stub.getChannel().getTarget(),
+        'dns://8.8.8.8/monitoring.custom-universe.example:8443',
+      );
+    } finally {
+      await client.close();
+    }
   });
 
-  // F1: Pin malformed bracketed IPv6 dns://<authority>/ rejection branches.
   it('should reject malformed bracketed IPv6 dns://<authority>/ endpoints', () => {
     assert.throws(
       () =>
@@ -437,7 +471,6 @@ describe('CustomExporter', () => {
     );
   });
 
-  // F2: Pin bare http:/https: prefix rejection without // (case-insensitive).
   it('should reject bare http:/https: prefixes without // case-insensitively', () => {
     for (const bad of [
       'http:8080',
