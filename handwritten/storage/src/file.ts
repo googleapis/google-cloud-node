@@ -32,6 +32,7 @@ import {randomUUID} from 'crypto';
 import {
   ExceptionMessages,
   IdempotencyStrategy,
+  isExplicitIdempotencyStrategy,
   PreconditionOptions,
   Storage,
 } from './storage.js';
@@ -248,7 +249,7 @@ export interface GetSignedUrlConfig extends Pick<
   queryParams?: Query;
 }
 
-export interface GetFileMetadataOptions {
+export interface GetFileMetadataOptions extends PreconditionOptions {
   userProject?: string;
 }
 
@@ -1258,12 +1259,18 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   private shouldRetryBasedOnPreconditionAndIdempotencyStrat(
     options?: PreconditionOptions,
+    defaultRetryAlways = false,
   ): boolean {
+    const isConditional = defaultRetryAlways
+      ? this.storage.retryOptions.idempotencyStrategy ===
+          IdempotencyStrategy.RetryConditional &&
+        isExplicitIdempotencyStrategy(this.storage.retryOptions)
+      : this.storage.retryOptions.idempotencyStrategy ===
+        IdempotencyStrategy.RetryConditional;
     return !(
       (options?.ifGenerationMatch === undefined &&
         this.instancePreconditionOpts?.ifGenerationMatch === undefined &&
-        this.storage.retryOptions.idempotencyStrategy ===
-          IdempotencyStrategy.RetryConditional) ||
+        isConditional) ||
       this.storage.retryOptions.idempotencyStrategy ===
         IdempotencyStrategy.RetryNever
     );
@@ -2017,18 +2024,6 @@ class File extends ServiceObject<File, FileMetadata> {
     callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
 
-    const retryOptions = this.storage.retryOptions;
-    if (
-      (options?.preconditionOpts?.ifGenerationMatch === undefined &&
-        this.instancePreconditionOpts?.ifGenerationMatch === undefined &&
-        this.storage.retryOptions.idempotencyStrategy ===
-          IdempotencyStrategy.RetryConditional) ||
-      this.storage.retryOptions.idempotencyStrategy ===
-        IdempotencyStrategy.RetryNever
-    ) {
-      retryOptions.autoRetry = false;
-    }
-
     resumableUpload.createURI(
       {
         authClient: this.storage.storageTransport.authClient,
@@ -2045,7 +2040,15 @@ class File extends ServiceObject<File, FileMetadata> {
         private: options.private,
         public: options.public,
         userProject: options.userProject || this.userProject,
-        retryOptions: retryOptions,
+        retryOptions: {
+          ...this.storage.retryOptions,
+          autoRetry: this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
+            options?.preconditionOpts,
+            true,
+          )
+            ? this.storage.retryOptions.autoRetry
+            : false,
+        },
         params: options?.preconditionOpts || this.instancePreconditionOpts,
         universeDomain: this.bucket.storage.universeDomain,
         useAuthWithCustomEndpoint: this.storage.useAuthWithCustomEndpoint,
@@ -2053,7 +2056,6 @@ class File extends ServiceObject<File, FileMetadata> {
       },
       callback!,
     );
-    this.storage.retryOptions.autoRetry = this.instanceRetryValue;
   }
 
   /**
@@ -4511,6 +4513,7 @@ class File extends ServiceObject<File, FileMetadata> {
     if (
       !this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
         options?.preconditionOpts,
+        true,
       )
     ) {
       maxRetries = 0;
@@ -4574,7 +4577,9 @@ class File extends ServiceObject<File, FileMetadata> {
         maxTimeout: this.storage.retryOptions.maxRetryDelay! * 1000, //convert to milliseconds
         maxRetryTime: this.storage.retryOptions.totalTimeout! * 1000, //convert to milliseconds
       },
-    );
+    ).finally(() => {
+      this.storage.retryOptions.autoRetry = this.instanceRetryValue;
+    });
     if (!callback) {
       return returnValue;
     }
@@ -4629,6 +4634,25 @@ class File extends ServiceObject<File, FileMetadata> {
       try {
         resp = await super.setMetadata(metadata, options);
       } catch (err) {
+        this.storage.retryOptions.autoRetry = this.instanceRetryValue;
+        const error = err as GaxiosError & {isRetry?: boolean};
+        if ((error.code === 412 || error.status === 412) && error.isRetry) {
+          const getMetadataOpts: GetFileMetadataOptions = {
+            ifMetagenerationMatch: undefined,
+          };
+          if (options.userProject) {
+            getMetadataOpts.userProject = options.userProject;
+          }
+          let getResp;
+          try {
+            getResp = await this.getMetadata(getMetadataOpts);
+          } catch (getErr) {
+            cb!(getErr as GaxiosError);
+            return;
+          }
+          cb!(null, ...getResp);
+          return;
+        }
         cb!(err as GaxiosError);
         return;
       } finally {
@@ -4764,14 +4788,6 @@ class File extends ServiceObject<File, FileMetadata> {
   ): void {
     options.metadata ??= {};
 
-    const retryOptions = this.storage.retryOptions;
-    if (
-      !this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
-        options.preconditionOpts,
-      )
-    ) {
-      retryOptions.autoRetry = false;
-    }
     const cfg = {
       authClient: this.storage.storageTransport.authClient,
       apiEndpoint: this.storage.apiEndpoint,
@@ -4788,7 +4804,15 @@ class File extends ServiceObject<File, FileMetadata> {
       public: options.public,
       uri: options.uri,
       userProject: options.userProject || this.userProject,
-      retryOptions: {...retryOptions},
+      retryOptions: {
+        ...this.storage.retryOptions,
+        autoRetry: this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
+          options.preconditionOpts,
+          true,
+        )
+          ? this.storage.retryOptions.autoRetry
+          : false,
+      },
       params: options?.preconditionOpts || this.instancePreconditionOpts,
       chunkSize: options?.chunkSize,
       highWaterMark: options?.highWaterMark,
@@ -4803,7 +4827,6 @@ class File extends ServiceObject<File, FileMetadata> {
       uploadStream = resumableUpload.upload(cfg);
     } catch (error) {
       dup.destroy(error as Error);
-      this.storage.retryOptions.autoRetry = this.instanceRetryValue;
       return;
     }
 
@@ -4824,7 +4847,6 @@ class File extends ServiceObject<File, FileMetadata> {
       .on('progress', evt => dup.emit('progress', evt));
 
     dup.setWritable(uploadStream);
-    this.storage.retryOptions.autoRetry = this.instanceRetryValue;
   }
 
   /**
@@ -4890,6 +4912,15 @@ class File extends ServiceObject<File, FileMetadata> {
       options.preconditionOpts,
     );
 
+    if (
+      !this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
+        options.preconditionOpts,
+        true,
+      )
+    ) {
+      reqOpts.maxRetries = 0;
+    }
+
     const writeStream = new ProgressStream();
     writeStream.on('progress', evt => dup.emit('progress', evt));
     dup.setWritable(writeStream);
@@ -4940,13 +4971,21 @@ class File extends ServiceObject<File, FileMetadata> {
     methodType: AvailableServiceObjectMethods,
     localPreconditionOptions?: PreconditionOptions,
   ): void {
+    const isExplicitConditional =
+      this.storage.retryOptions.idempotencyStrategy ===
+        IdempotencyStrategy.RetryConditional &&
+      isExplicitIdempotencyStrategy(this.storage.retryOptions);
+
     if (
       (typeof coreOpts === 'object' &&
+        coreOpts?.reqOpts?.queryParameters?.ifGenerationMatch === undefined &&
         coreOpts?.reqOpts?.qs?.ifGenerationMatch === undefined &&
+        this.instancePreconditionOpts?.ifGenerationMatch === undefined &&
         localPreconditionOptions?.ifGenerationMatch === undefined &&
+        (localPreconditionOptions as {preconditionOpts?: PreconditionOptions})
+          ?.preconditionOpts?.ifGenerationMatch === undefined &&
         methodType === AvailableServiceObjectMethods.delete &&
-        this.storage.retryOptions.idempotencyStrategy ===
-          IdempotencyStrategy.RetryConditional) ||
+        isExplicitConditional) ||
       this.storage.retryOptions.idempotencyStrategy ===
         IdempotencyStrategy.RetryNever
     ) {
@@ -4955,11 +4994,15 @@ class File extends ServiceObject<File, FileMetadata> {
 
     if (
       (typeof coreOpts === 'object' &&
+        coreOpts?.reqOpts?.queryParameters?.ifMetagenerationMatch ===
+          undefined &&
         coreOpts?.reqOpts?.qs?.ifMetagenerationMatch === undefined &&
+        this.instancePreconditionOpts?.ifMetagenerationMatch === undefined &&
         localPreconditionOptions?.ifMetagenerationMatch === undefined &&
+        (localPreconditionOptions as {preconditionOpts?: PreconditionOptions})
+          ?.preconditionOpts?.ifMetagenerationMatch === undefined &&
         methodType === AvailableServiceObjectMethods.setMetadata &&
-        this.storage.retryOptions.idempotencyStrategy ===
-          IdempotencyStrategy.RetryConditional) ||
+        isExplicitConditional) ||
       this.storage.retryOptions.idempotencyStrategy ===
         IdempotencyStrategy.RetryNever
     ) {

@@ -31,6 +31,8 @@ import {
   CreateHmacKeyOptions,
   GetBucketsRequest,
   GetHmacKeysOptions,
+  IdempotencyStrategy,
+  isExplicitIdempotencyStrategy,
   Storage,
   StorageExceptionMessages,
 } from '../src/storage.js';
@@ -165,6 +167,41 @@ describe('Storage', () => {
       assert.strictEqual(
         storage.retryOptions.maxRetryDelay,
         maxRetryDelayDefault,
+      );
+      assert.strictEqual(
+        storage.retryOptions.idempotencyStrategy,
+        IdempotencyStrategy.RetryConditional,
+      );
+      assert.strictEqual(
+        isExplicitIdempotencyStrategy(storage.retryOptions),
+        false,
+      );
+    });
+
+    it('should track explicit idempotencyStrategy when passed in constructor or assigned', () => {
+      const storageExplicit = new Storage({
+        projectId: PROJECT_ID,
+        retryOptions: {
+          idempotencyStrategy: IdempotencyStrategy.RetryConditional,
+        },
+      });
+      assert.strictEqual(
+        isExplicitIdempotencyStrategy(storageExplicit.retryOptions),
+        true,
+      );
+
+      const storageAssigned = new Storage({
+        projectId: PROJECT_ID,
+      });
+      assert.strictEqual(
+        isExplicitIdempotencyStrategy(storageAssigned.retryOptions),
+        false,
+      );
+      storageAssigned.retryOptions.idempotencyStrategy =
+        IdempotencyStrategy.RetryConditional;
+      assert.strictEqual(
+        isExplicitIdempotencyStrategy(storageAssigned.retryOptions),
+        true,
       );
     });
 
