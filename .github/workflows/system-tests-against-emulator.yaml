@@ -1,34 +1,97 @@
-# on:
-#   push:
-#     branches:
-#       - main
-#     paths:
-#       - 'handwritten/spanner/**'
-#   pull_request:
-#     paths:
-#       - 'handwritten/spanner/**'
-# name: system-tests-against-emulator
-# jobs:
-#   test:
-#     runs-on: ubuntu-latest
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-#     services:
-#       emulator:
-#         image: gcr.io/cloud-spanner-emulator/emulator:latest
-#         ports:
-#           - 9010:9010
-#           - 9020:9020
+name: system-tests-against-emulator
 
-#     steps:
-#       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
-#       - uses: actions/setup-node@v5
-#         with:
-#           node-version: 22
-#       - run: node --version
-#       - run: npm install
-#         working-directory: handwritten/spanner
-#       - run: npm run system-test
-#         working-directory: handwritten/spanner
-#         env:
-#           SPANNER_EMULATOR_HOST: localhost:9010
-#           GCLOUD_PROJECT: emulator-test-project
+permissions:
+  contents: read
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'handwritten/spanner/**'
+      - '!handwritten/spanner/CHANGELOG.md'
+      - '.github/workflows/system-tests-against-emulator.yaml'
+  pull_request:
+    paths:
+      - 'handwritten/spanner/**'
+      - '!handwritten/spanner/CHANGELOG.md'
+      - '.github/workflows/system-tests-against-emulator.yaml'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  test:
+    if: ${{ !(github.event_name == 'pull_request' && startsWith(github.head_ref, 'release-please--')) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    services:
+      emulator:
+        image: gcr.io/cloud-spanner-emulator/emulator:1.5.59@sha256:5f71fecd6330211789b75065ade9587d67b3a6b4678e7e5408e42c22f778c63e
+        ports:
+          - 9010:9010
+          - 9020:9020
+
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: 22
+      - run: node --version
+      - uses: ./.github/actions/pnpm-lockfile-check
+      - name: Compile Spanner
+        run: pnpm --filter "...{handwritten/spanner}" run --if-present compile
+      - name: Wait for Spanner emulator
+        run: |
+          node -e '
+            const net = require("node:net");
+            const deadline = Date.now() + 30000;
+            (function probe() {
+              const remaining = deadline - Date.now();
+              if (remaining <= 0) {
+                console.error("Timed out waiting for Spanner emulator on localhost:9010");
+                process.exit(1);
+              }
+              const socket = net.connect(9010, "localhost");
+              socket.setTimeout(Math.min(2000, remaining), () => {
+                socket.destroy(new Error("connect timeout"));
+              });
+              socket.once("connect", () => {
+                socket.destroy();
+                console.log("Spanner emulator is ready on localhost:9010");
+                process.exit(0);
+              });
+              socket.once("error", err => {
+                socket.destroy();
+                if (Date.now() >= deadline) {
+                  console.error("Timed out waiting for Spanner emulator:", err.message);
+                  process.exit(1);
+                }
+                setTimeout(probe, 500);
+              });
+            })();
+          '
+      - name: Run Spanner system tests against emulator
+        run: pnpm --dir handwritten/spanner --config.enable-pre-post-scripts=false run system-test:emulator
+        env:
+          SPANNER_EMULATOR_HOST: localhost:9010
+          GCLOUD_PROJECT: emulator-test-project
