@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/google-logging-utils-v2.2.0...google-logging-utils-v2.3.0) (2026-11-27)
+
+
+### Features
+
+* **logging-utils:** Emit log attributes and filter StructuredBackend ([#9852](https://github.com/googleapis/google-cloud-node/issues/9852)) ([f3a9177](https://github.com/googleapis/google-cloud-node/commit/f3a917721d725e1aaec51019fd2e5dccb2824934))
+
 ## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/google-logging-utils-v2.1.1...google-logging-utils-v2.2.0) (2026-11-09)
 
 
