@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import {google} from '../../protos/protos';
+import {protos} from '@google-cloud/pubsub-api';
+import google = protos.google;
 import * as tracing from '../telemetry-tracing';
 
 /**
@@ -26,8 +27,7 @@ export type Attributes = Record<string, string>;
  * The basic {data, attributes} for a message to be published.
  */
 export interface PubsubMessage
-  extends google.pubsub.v1.IPubsubMessage,
-    tracing.MessageWithAttributes {
+  extends google.pubsub.v1.IPubsubMessage, tracing.MessageWithAttributes {
   /**
    * If we've calculated the size of this message, it will be cached here.
    * This is done to avoid having to build up the attribute size over and over.

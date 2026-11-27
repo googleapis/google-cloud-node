@@ -21,7 +21,8 @@ import {proxyquire} from 'google-test-utils';
 import * as sinon from 'sinon';
 import defer = require('p-defer');
 
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/pubsub-api';
+import google = protos.google;
 import * as pubsubTypes from '../src/pubsub';
 import {Snapshot} from '../src/snapshot';
 import * as subby from '../src/subscription';

@@ -19,7 +19,8 @@ import {replaceProjectIdToken} from '@google-cloud/projectify';
 import {promisify} from '@google-cloud/promisify';
 import * as defer from 'p-defer';
 
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/pubsub-api';
+import google = protos.google;
 import {Histogram} from './histogram';
 import {FlowControlOptions, LeaseManager} from './lease-manager';
 import {AckQueue, BatchOptions, ModAckQueue} from './message-queues';

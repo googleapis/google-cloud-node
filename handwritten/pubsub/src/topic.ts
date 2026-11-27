@@ -17,7 +17,8 @@
 import {paginator} from '@google-cloud/paginator';
 import {CallOptions} from 'google-gax';
 
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/pubsub-api';
+import google = protos.google;
 
 import {IAM} from './iam';
 import {
