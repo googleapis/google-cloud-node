@@ -118,4 +118,51 @@ describe('Bigtable/MetricServiceClientCredentials', () => {
     }).Bigtable;
     new FakeBigtable(clientOptions);
   });
+
+  it('should pass nested client and env universe domain to the exporter', () => {
+    const capturedOptions: ClientOptions[] = [];
+    class FakeExporter {
+      constructor(options: ClientOptions) {
+        capturedOptions.push(options);
+      }
+    }
+    const FakeGCPMetricsHandler = proxyquire(
+      '../src/client-side-metrics/gcp-metrics-handler.js',
+      {
+        './exporter': {
+          CloudMonitoringExporter: FakeExporter,
+        },
+      },
+    ).GCPMetricsHandler;
+    const FakeBigtable = proxyquire('../src/index.js', {
+      './client-side-metrics/gcp-metrics-handler': {
+        GCPMetricsHandler: FakeGCPMetricsHandler,
+      },
+    }).Bigtable;
+
+    new FakeBigtable({
+      metricsEnabled: true,
+      BigtableClient: {universeDomain: 'nested-universe.example.com'},
+    });
+    assert.strictEqual(
+      capturedOptions[0]?.universeDomain,
+      'nested-universe.example.com',
+    );
+
+    const savedEnv = process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+    try {
+      process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = 'env-universe.example.com';
+      new FakeBigtable({metricsEnabled: true});
+      assert.strictEqual(
+        capturedOptions[1]?.universeDomain,
+        'env-universe.example.com',
+      );
+    } finally {
+      if (savedEnv !== undefined) {
+        process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = savedEnv;
+      } else {
+        delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
+      }
+    }
+  });
 });
