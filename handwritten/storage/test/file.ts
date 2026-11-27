@@ -6403,11 +6403,20 @@ describe('File', () => {
 
     it('createWriteStream({resumable: false}) should surface real HTTP 403 error on early server rejection', async () => {
       const {server, endpoint} = await startServer((req, res) => {
-        req.once('data', () => {
-          res.writeHead(403, {'Content-Type': 'application/json'});
-          res.end(
-            JSON.stringify({error: {code: 403, message: 'Access Denied'}}),
-          );
+        let received = '';
+        let responded = false;
+        req.on('data', (chunk: Buffer) => {
+          if (responded) {
+            return;
+          }
+          received += chunk.toString('utf8');
+          if (received.includes('early-403-chunk')) {
+            responded = true;
+            res.writeHead(403, {'Content-Type': 'application/json'});
+            res.end(
+              JSON.stringify({error: {code: 403, message: 'Access Denied'}}),
+            );
+          }
         });
       });
 
@@ -6422,7 +6431,7 @@ describe('File', () => {
           ws.once('error', err => resolve(err as Error & {code?: number}));
         });
 
-        ws.write(Buffer.alloc(64 * 1024, 0x61));
+        ws.write(Buffer.from('early-403-chunk'));
 
         const err = await errPromise;
         assert.strictEqual(err.code, 403);

@@ -1172,23 +1172,30 @@ describe('Storage Transport', () => {
       assert.strictEqual(reqOpts.multipart, originalMultipart);
     });
 
-    it('should redact sensitive headers without blocking the event loop on large binary or streaming error paths', async () => {
+    it('should redact sensitive headers cleanly on streaming multipart early 403 errors', async () => {
       const {server, endpoint} = await startServer((req, res) => {
-        req.once('data', () => {
-          res.writeHead(403, {'Content-Type': 'application/json'});
-          res.end(
-            JSON.stringify({error: {code: 403, message: 'Access Denied'}}),
-          );
+        let received = '';
+        let responded = false;
+        req.on('data', (chunk: Buffer) => {
+          if (responded) {
+            return;
+          }
+          received += chunk.toString('utf8');
+          if (received.includes('early-403-chunk')) {
+            responded = true;
+            res.writeHead(403, {'Content-Type': 'application/json'});
+            res.end(
+              JSON.stringify({error: {code: 403, message: 'Access Denied'}}),
+            );
+          }
         });
       });
 
+      const media = new PassThrough();
       try {
         const liveTransport = createLiveTransport(endpoint);
-
-        // 1. Streaming multipart early 403 error redacts Authorization header cleanly.
-        const media = new PassThrough();
         const streamReq = liveTransport.makeRequest({
-          url: '/upload?token=secret-query-token',
+          url: '/upload-stream?token=secret-query-token',
           method: 'POST',
           responseType: 'json',
           multipart: [
@@ -1204,7 +1211,7 @@ describe('Storage Transport', () => {
             },
           ],
         });
-        media.write(Buffer.alloc(32 * 1024, 0x61));
+        media.write(Buffer.from('early-403-chunk'));
 
         await assert.rejects(streamReq, (err: GaxiosError) => {
           assert.strictEqual(err.code, 403);
@@ -1216,13 +1223,34 @@ describe('Storage Transport', () => {
           );
           return true;
         });
+      } finally {
+        media.destroy();
+        await closeServer(server);
+      }
+    });
 
-        // 2. Large 64 MiB Buffer body error redaction completes in O(1) without stalling event loop.
+    it('should redact sensitive headers without blocking the event loop on large binary error paths', async () => {
+      let bufferResponseSentAt = 0;
+
+      const {server, endpoint} = await startServer((req, res) => {
+        // Drain the full request body before replying so closing the socket
+        // with unread bytes does not trigger TCP RST (ECONNRESET) on Windows.
+        req.resume();
+        req.once('end', () => {
+          bufferResponseSentAt = Date.now();
+          res.writeHead(403, {'Content-Type': 'application/json'});
+          res.end(
+            JSON.stringify({error: {code: 403, message: 'Access Denied'}}),
+          );
+        });
+      });
+
+      try {
+        const liveTransport = createLiveTransport(endpoint);
         const largeBuf = Buffer.alloc(64 * 1024 * 1024);
-        const start = Date.now();
         await assert.rejects(
           liveTransport.makeRequest({
-            url: '/upload?token=secret-buf-token',
+            url: '/upload-buffer?token=secret-buf-token',
             method: 'POST',
             body: largeBuf,
             maxRetries: 0,
@@ -1238,7 +1266,8 @@ describe('Storage Transport', () => {
             return true;
           },
         );
-        const elapsedMs = Date.now() - start;
+        assert.ok(bufferResponseSentAt > 0);
+        const elapsedMs = Date.now() - bufferResponseSentAt;
         assert.ok(
           elapsedMs < 1500,
           `Expected O(1) error redaction without event-loop stall, took ${elapsedMs}ms`,
