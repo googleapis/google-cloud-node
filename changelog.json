@@ -5,6 +5,348 @@
       "changes": [
         {
           "type": "fix",
+          "sha": "fc6da415b8d95575b6010d80d6e87a5562650bbc",
+          "message": "Support https:// and dns:// formats in SPANNER_MONITORING_HOST",
+          "issues": [
+            "9983"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "3ce79be100165f129e0f96794e266beef6a413d1",
+          "message": "Respect universeDomain and custom endpoints in metrics",
+          "issues": [
+            "9957"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "b86d909f3fc7d158af7ae5c758bea985a6f99f1f",
+          "message": "Retry and resume BatchWrite streams on UNAVAILABLE",
+          "issues": [
+            "9758"
+          ],
+          "scope": "Spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "30971894d0b75eb89f6ec0ca12ba71bfe40fef56",
+          "message": "Ensure OpenTelemetry context manager on cached tracing path",
+          "issues": [
+            "9728"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "2405101edaec264681f17d1038a6f65d126c7ea4",
+          "message": "Prefer AsyncLocalStorageContextManager in OpenTelemetry instrumentation",
+          "issues": [
+            "9610"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "7a5db1185a0c21a6f554f8c6bf640144178d5b9c",
+          "message": "ExcludeTxnFromChangeStreams field and request headers i…",
+          "issues": [
+            "9618"
+          ],
+          "scope": "Spanner"
+        },
+        {
+          "type": "feat",
+          "sha": "dd43d94a4cde1de6f7573434a377e358fee3b931",
+          "message": "Remove session pool and only use multiplexed sessions",
+          "issues": [
+            "9567"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "901a99b9a091b0a56adf53fb84c6b51bdaadd8ea",
+          "message": "Address follow-up review comments from #9533",
+          "issues": [
+            "9553"
+          ],
+          "scope": "tools"
+        },
+        {
+          "type": "feat",
+          "sha": "a5eec894b054e0605fd8e79591a88393bb2697c6",
+          "message": "Add individual CLI flags for Bun monkey patches",
+          "issues": [
+            "9533"
+          ],
+          "scope": "tools"
+        },
+        {
+          "type": "fix",
+          "sha": "be25b6fa1a6c6c90337ecad8afdcbcaeb477ded2",
+          "message": "Make google-test-utils a private workspace package",
+          "issues": [
+            "9525"
+          ],
+          "scope": "test-utils"
+        },
+        {
+          "type": "feat",
+          "sha": "f971bb559f3033441d4d20648fa4827b2c0f95d0",
+          "message": "Add runtime detection predicates and cross-engine assertion helpers",
+          "issues": [
+            "9492"
+          ],
+          "scope": "test-utils"
+        },
+        {
+          "type": "perf",
+          "sha": "5aab70cd9d0904e4f3e280689da904cd0c63153a",
+          "message": "Single-pass protobuf value encoding in codec",
+          "issues": [
+            "9350"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "3efbf665d696a48abd6182e433d107bdb10d24a6",
+          "message": "Optimize chunk processing, adopt resumable chunk queue, and add event-driven backpressure",
+          "issues": [
+            "9336"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "7c8795424fe5bacc7e27b415bcfefca795877d0d",
+          "message": "Optimize request ID generation and counter management",
+          "issues": [
+            "9447"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "bfa6bd98c1a2306a222a12d8f99740172b55f1f5",
+          "message": "Skip no-op release listener for queries on multiplexed sessions",
+          "issues": [
+            "9445"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "cadb10a6342e192a9aae4277efa1c67428c1e7f2",
+          "message": "Carry MetricsTracer on call context instead of global registry",
+          "issues": [
+            "9310"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "db1b7ed3ab00b586cce6cab39875ff1f5a3ee1b4",
+          "message": "Preserve query immutability and optimize trace config handling",
+          "issues": [
+            "9264"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "9491cf2ae38c7e6001fce796ab601eb0cc8d6f01",
+          "message": "Optimize prepareGapicRequest dispatch and eliminate deep cloning",
+          "issues": [
+            "9271"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "25b04860d27af606b15219e6744f83e10b9a0caa",
+          "message": "Eliminate per-RPC regex operations in metrics layer",
+          "issues": [
+            "9308"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "4f56e9d0697558f4c6e48bb8e6400402745094ee",
+          "message": "Hoist AFE timing check to skip AFE metrics",
+          "issues": [
+            "9313"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "244dc8ad723b0bd522ee73d1227cdbe6fe13eda1",
+          "message": "Cache OTel attribute objects in metrics tracer",
+          "issues": [
+            "9309"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "feat",
+          "sha": "ecd5bfd0e8ad8d2cf3b9fe003f7e35f2bbd592f5",
+          "message": "Update cloud-spanner to minimum Node version of 22",
+          "issues": [
+            "9291"
+          ],
+          "scope": "Spanner",
+          "breakingChangeNote": "Update cloud-spanner to minimum Node version of 22 ([#9291](https://github.com/googleapis/google-cloud-node/issues/9291))"
+        },
+        {
+          "type": "perf",
+          "sha": "1b1b411769fc0847e23a52cadaf3c6225ae281ea",
+          "message": "Optimize codec.getType and reuse type singletons",
+          "issues": [
+            "9366"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "dbbc55c508cf886863dff00e12ce362026515661",
+          "message": "Synchronous multiplexed session hand-off for non-stream callers",
+          "issues": [
+            "9362"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "11c257b5a64b0d360f2c9d47c412e59e9fd5a756",
+          "message": "Disable gRPC channelz by default",
+          "issues": [
+            "9320"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "a44180d659ff8734fcacd8e294fc9c8c0a181071",
+          "message": "Bypass gRPC message interception in metrics interceptor",
+          "issues": [
+            "9306"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "feat",
+          "sha": "ed3a44e7f396b1f71aa29c8291a740aaab4fef0b",
+          "message": "Upgrade OpenTelemetry to v2",
+          "issues": [
+            "9329"
+          ],
+          "scope": "Spanner",
+          "breakingChangeNote": "upgrade OpenTelemetry to v2 ([#9329](https://github.com/googleapis/google-cloud-node/issues/9329))"
+        },
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "f74f198914bd1ad62de684386249dc1b01c80df2",
+          "message": "Do not execute queued queries on ended transactions",
+          "issues": [
+            "9305"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "6eec761501734b837a934b30cac440f53486163c",
+          "message": "Avoid cloning metadata map in metrics interceptor",
+          "issues": [
+            "9307"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "c42f14440b5afd3bb7e4be997a47d55037bcc8aa",
+          "message": "Avoid redundant clock reads in isGlobalTracingEnabled",
+          "issues": [
+            "9311"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "e46a4076dcfea61104fcb99bf6f5d834fa0c1896",
+          "message": "Bypass stream pipeline for single-chunk query results",
+          "issues": [
+            "9279"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "5da6e08b8cb3bb5a7b307d565c1e8a32705aa7d7",
+          "message": "Eliminate throwaway transactions",
+          "issues": [
+            "9260"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "937768022b61092d3af50204cdce5f43b24fcc4d",
+          "message": "Optimize row creation by using a shared prototype for toJSON",
+          "issues": [
+            "9259"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "2fe3bf841a2e05509ef01533b1ff230feec16e99",
+          "message": "Complete query stream on PartialResultSet.last without resumeToken",
+          "issues": [
+            "9258"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "e76fac28c96ffb0b082419f6a3ac36b727128e67",
+          "message": "Optimize stream pipeline by eliminating events-intercept",
+          "issues": [
+            "9221"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "ee88e46133ec2eab9a658e849dfa3fa415a83ee6",
+          "message": "Add send and ack mutations Cloud Spanner Queues",
+          "issues": [
+            "9200"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "10.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner",
+      "id": "a97124f4-05b0-4d65-8f3f-0128af07946c",
+      "createTime": "2026-11-27T18:42:41.968Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
           "sha": "9f31cb2cc999d07901b2098950c12d5f4934db33",
           "message": "Regenerate with gapic-generator-v5.7.3",
           "issues": [
@@ -107878,5 +108220,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-11-12T20:23:42.797Z"
+  "updateTime": "2026-11-27T18:42:41.968Z"
 }

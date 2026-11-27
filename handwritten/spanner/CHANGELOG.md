@@ -5,6 +5,62 @@
 
 [1]: https://www.npmjs.com/package/nodejs-spanner?activeTab=versions
 
+## [10.0.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v9.1.1...spanner-v10.0.0) (2026-11-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* **Spanner:** Update cloud-spanner to minimum Node version of 22 ([#9291](https://github.com/googleapis/google-cloud-node/issues/9291))
+* **Spanner:** upgrade OpenTelemetry to v2 ([#9329](https://github.com/googleapis/google-cloud-node/issues/9329))
+
+### Features
+
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+* **spanner:** Add send and ack mutations Cloud Spanner Queues ([#9200](https://github.com/googleapis/google-cloud-node/issues/9200)) ([ee88e46](https://github.com/googleapis/google-cloud-node/commit/ee88e46133ec2eab9a658e849dfa3fa415a83ee6))
+* **spanner:** Remove session pool and only use multiplexed sessions ([#9567](https://github.com/googleapis/google-cloud-node/issues/9567)) ([dd43d94](https://github.com/googleapis/google-cloud-node/commit/dd43d94a4cde1de6f7573434a377e358fee3b931))
+* **Spanner:** Update cloud-spanner to minimum Node version of 22 ([#9291](https://github.com/googleapis/google-cloud-node/issues/9291)) ([ecd5bfd](https://github.com/googleapis/google-cloud-node/commit/ecd5bfd0e8ad8d2cf3b9fe003f7e35f2bbd592f5))
+* **Spanner:** Upgrade OpenTelemetry to v2 ([#9329](https://github.com/googleapis/google-cloud-node/issues/9329)) ([ed3a44e](https://github.com/googleapis/google-cloud-node/commit/ed3a44e7f396b1f71aa29c8291a740aaab4fef0b))
+* **test-utils:** Add runtime detection predicates and cross-engine assertion helpers ([#9492](https://github.com/googleapis/google-cloud-node/issues/9492)) ([f971bb5](https://github.com/googleapis/google-cloud-node/commit/f971bb559f3033441d4d20648fa4827b2c0f95d0))
+* **tools:** Add individual CLI flags for Bun monkey patches ([#9533](https://github.com/googleapis/google-cloud-node/issues/9533)) ([a5eec89](https://github.com/googleapis/google-cloud-node/commit/a5eec894b054e0605fd8e79591a88393bb2697c6))
+
+
+### Bug Fixes
+
+* **spanner:** Complete query stream on PartialResultSet.last without resumeToken ([#9258](https://github.com/googleapis/google-cloud-node/issues/9258)) ([2fe3bf8](https://github.com/googleapis/google-cloud-node/commit/2fe3bf841a2e05509ef01533b1ff230feec16e99))
+* **spanner:** Do not execute queued queries on ended transactions ([#9305](https://github.com/googleapis/google-cloud-node/issues/9305)) ([f74f198](https://github.com/googleapis/google-cloud-node/commit/f74f198914bd1ad62de684386249dc1b01c80df2))
+* **spanner:** Ensure OpenTelemetry context manager on cached tracing path ([#9728](https://github.com/googleapis/google-cloud-node/issues/9728)) ([3097189](https://github.com/googleapis/google-cloud-node/commit/30971894d0b75eb89f6ec0ca12ba71bfe40fef56))
+* **Spanner:** ExcludeTxnFromChangeStreams field and request headers i… ([#9618](https://github.com/googleapis/google-cloud-node/issues/9618)) ([7a5db11](https://github.com/googleapis/google-cloud-node/commit/7a5db1185a0c21a6f554f8c6bf640144178d5b9c))
+* **spanner:** Prefer AsyncLocalStorageContextManager in OpenTelemetry instrumentation ([#9610](https://github.com/googleapis/google-cloud-node/issues/9610)) ([2405101](https://github.com/googleapis/google-cloud-node/commit/2405101edaec264681f17d1038a6f65d126c7ea4))
+* **spanner:** Preserve query immutability and optimize trace config handling ([#9264](https://github.com/googleapis/google-cloud-node/issues/9264)) ([db1b7ed](https://github.com/googleapis/google-cloud-node/commit/db1b7ed3ab00b586cce6cab39875ff1f5a3ee1b4))
+* **spanner:** Respect universeDomain and custom endpoints in metrics ([#9957](https://github.com/googleapis/google-cloud-node/issues/9957)) ([3ce79be](https://github.com/googleapis/google-cloud-node/commit/3ce79be100165f129e0f96794e266beef6a413d1))
+* **Spanner:** Retry and resume BatchWrite streams on UNAVAILABLE ([#9758](https://github.com/googleapis/google-cloud-node/issues/9758)) ([b86d909](https://github.com/googleapis/google-cloud-node/commit/b86d909f3fc7d158af7ae5c758bea985a6f99f1f))
+* **spanner:** Support https:// and dns:// formats in SPANNER_MONITORING_HOST ([#9983](https://github.com/googleapis/google-cloud-node/issues/9983)) ([fc6da41](https://github.com/googleapis/google-cloud-node/commit/fc6da415b8d95575b6010d80d6e87a5562650bbc))
+* **test-utils:** Make google-test-utils a private workspace package ([#9525](https://github.com/googleapis/google-cloud-node/issues/9525)) ([be25b6f](https://github.com/googleapis/google-cloud-node/commit/be25b6fa1a6c6c90337ecad8afdcbcaeb477ded2))
+* **tools:** Address follow-up review comments from [#9533](https://github.com/googleapis/google-cloud-node/issues/9533) ([#9553](https://github.com/googleapis/google-cloud-node/issues/9553)) ([901a99b](https://github.com/googleapis/google-cloud-node/commit/901a99b9a091b0a56adf53fb84c6b51bdaadd8ea))
+
+
+### Performance Improvements
+
+* Optimize stream pipeline by eliminating events-intercept ([#9221](https://github.com/googleapis/google-cloud-node/issues/9221)) ([e76fac2](https://github.com/googleapis/google-cloud-node/commit/e76fac28c96ffb0b082419f6a3ac36b727128e67))
+* **spanner:** Avoid cloning metadata map in metrics interceptor ([#9307](https://github.com/googleapis/google-cloud-node/issues/9307)) ([6eec761](https://github.com/googleapis/google-cloud-node/commit/6eec761501734b837a934b30cac440f53486163c))
+* **spanner:** Avoid redundant clock reads in isGlobalTracingEnabled ([#9311](https://github.com/googleapis/google-cloud-node/issues/9311)) ([c42f144](https://github.com/googleapis/google-cloud-node/commit/c42f14440b5afd3bb7e4be997a47d55037bcc8aa))
+* **spanner:** Bypass gRPC message interception in metrics interceptor ([#9306](https://github.com/googleapis/google-cloud-node/issues/9306)) ([a44180d](https://github.com/googleapis/google-cloud-node/commit/a44180d659ff8734fcacd8e294fc9c8c0a181071))
+* **spanner:** Bypass stream pipeline for single-chunk query results ([#9279](https://github.com/googleapis/google-cloud-node/issues/9279)) ([e46a407](https://github.com/googleapis/google-cloud-node/commit/e46a4076dcfea61104fcb99bf6f5d834fa0c1896))
+* **spanner:** Cache OTel attribute objects in metrics tracer ([#9309](https://github.com/googleapis/google-cloud-node/issues/9309)) ([244dc8a](https://github.com/googleapis/google-cloud-node/commit/244dc8ad723b0bd522ee73d1227cdbe6fe13eda1))
+* **spanner:** Carry MetricsTracer on call context instead of global registry ([#9310](https://github.com/googleapis/google-cloud-node/issues/9310)) ([cadb10a](https://github.com/googleapis/google-cloud-node/commit/cadb10a6342e192a9aae4277efa1c67428c1e7f2))
+* **spanner:** Disable gRPC channelz by default ([#9320](https://github.com/googleapis/google-cloud-node/issues/9320)) ([11c257b](https://github.com/googleapis/google-cloud-node/commit/11c257b5a64b0d360f2c9d47c412e59e9fd5a756))
+* **spanner:** Eliminate per-RPC regex operations in metrics layer ([#9308](https://github.com/googleapis/google-cloud-node/issues/9308)) ([25b0486](https://github.com/googleapis/google-cloud-node/commit/25b04860d27af606b15219e6744f83e10b9a0caa))
+* **spanner:** Eliminate throwaway transactions ([#9260](https://github.com/googleapis/google-cloud-node/issues/9260)) ([5da6e08](https://github.com/googleapis/google-cloud-node/commit/5da6e08b8cb3bb5a7b307d565c1e8a32705aa7d7))
+* **spanner:** Hoist AFE timing check to skip AFE metrics ([#9313](https://github.com/googleapis/google-cloud-node/issues/9313)) ([4f56e9d](https://github.com/googleapis/google-cloud-node/commit/4f56e9d0697558f4c6e48bb8e6400402745094ee))
+* **spanner:** Optimize chunk processing, adopt resumable chunk queue, and add event-driven backpressure ([#9336](https://github.com/googleapis/google-cloud-node/issues/9336)) ([3efbf66](https://github.com/googleapis/google-cloud-node/commit/3efbf665d696a48abd6182e433d107bdb10d24a6))
+* **spanner:** Optimize codec.getType and reuse type singletons ([#9366](https://github.com/googleapis/google-cloud-node/issues/9366)) ([1b1b411](https://github.com/googleapis/google-cloud-node/commit/1b1b411769fc0847e23a52cadaf3c6225ae281ea))
+* **spanner:** Optimize prepareGapicRequest dispatch and eliminate deep cloning ([#9271](https://github.com/googleapis/google-cloud-node/issues/9271)) ([9491cf2](https://github.com/googleapis/google-cloud-node/commit/9491cf2ae38c7e6001fce796ab601eb0cc8d6f01))
+* **spanner:** Optimize request ID generation and counter management ([#9447](https://github.com/googleapis/google-cloud-node/issues/9447)) ([7c87954](https://github.com/googleapis/google-cloud-node/commit/7c8795424fe5bacc7e27b415bcfefca795877d0d))
+* **spanner:** Optimize row creation by using a shared prototype for toJSON ([#9259](https://github.com/googleapis/google-cloud-node/issues/9259)) ([9377680](https://github.com/googleapis/google-cloud-node/commit/937768022b61092d3af50204cdce5f43b24fcc4d))
+* **spanner:** Single-pass protobuf value encoding in codec ([#9350](https://github.com/googleapis/google-cloud-node/issues/9350)) ([5aab70c](https://github.com/googleapis/google-cloud-node/commit/5aab70cd9d0904e4f3e280689da904cd0c63153a))
+* **spanner:** Skip no-op release listener for queries on multiplexed sessions ([#9445](https://github.com/googleapis/google-cloud-node/issues/9445)) ([bfa6bd9](https://github.com/googleapis/google-cloud-node/commit/bfa6bd98c1a2306a222a12d8f99740172b55f1f5))
+* **spanner:** Synchronous multiplexed session hand-off for non-stream callers ([#9362](https://github.com/googleapis/google-cloud-node/issues/9362)) ([dbbc55c](https://github.com/googleapis/google-cloud-node/commit/dbbc55c508cf886863dff00e12ce362026515661))
+
 ## [9.1.1](https://github.com/googleapis/google-cloud-node/compare/spanner-v9.1.0...spanner-v9.1.1) (2026-11-23)
 
 
