@@ -20,7 +20,7 @@ objects to users via direct download.
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-storage/blob/main/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/google-cloud-node/blob/main/handwritten/storage/CHANGELOG.md).
 
 * [Google Cloud Storage Node.js Client API Reference][client-docs]
 * [Google Cloud Storage Documentation][product-docs]
