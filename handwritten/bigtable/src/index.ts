@@ -600,7 +600,9 @@ export class Bigtable {
         options.BigtableInstanceAdminClient ??
         options.BigtableTableAdminClient,
     );
-    const handlers = !(options.metricsEnabled === false)
+    const metricsEnabled =
+      options.metricsEnabled ?? !process.env.BIGTABLE_EMULATOR_HOST;
+    const handlers = metricsEnabled
       ? [
           new GCPMetricsHandler(
             Object.assign({}, options, metricsUniverseOptions) as ClientOptions,
