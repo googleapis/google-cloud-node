@@ -23,6 +23,7 @@
 /handwritten/bigquery-storage             @googleapis/cloud-sdk-nodejs-team @googleapis/bigquery-team
 /handwritten/cloud-profiler               @googleapis/cloud-sdk-nodejs-team @googleapis/cloud-profiler-team
 /handwritten/firestore                    @googleapis/cloud-sdk-nodejs-team @googleapis/firestore-team
+/handwritten/pubsub                       @googleapis/cloud-sdk-nodejs-team @googleapis/pubsub-team
 /handwritten/spanner                      @googleapis/cloud-sdk-nodejs-team @googleapis/spanner-team
 /handwritten/spanner-driver               @googleapis/cloud-sdk-nodejs-team @googleapis/spanner-team
 /handwritten/storage                      @googleapis/cloud-sdk-nodejs-team @googleapis/gcs-team
