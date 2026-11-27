@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import {isIPv4, isIPv6} from 'net';
 import {PushMetricExporter, ResourceMetrics} from '@opentelemetry/sdk-metrics';
 import {ExportResult, ExportResultCode} from '@opentelemetry/core';
 import {ExporterOptions} from './external-types';
@@ -85,12 +86,96 @@ export interface ResolvedExporterConfig {
 }
 
 /**
- * Parses and validates a Cloud Monitoring endpoint string (`host`, `host:port`,
- * `[ipv6]`, or `[ipv6]:port`) into separate `apiEndpoint` and optional `port`
- * fields suitable for `MetricServiceClient` / `google-gax`.
+ * Splits a `host`, `host:port`, `[ipv6]`, or `[ipv6]:port` string into its
+ * host (preserving IPv6 brackets) and optional validated numeric port.
  *
- * Brackets around IPv6 addresses are preserved on `apiEndpoint` because
- * `google-gax` builds the gRPC target as `${servicePath}:${port}`.
+ * @param value The host[:port] or [ipv6][:port] string to split.
+ * @returns Parsed `{host, port}` object.
+ */
+function splitHostPort(value: string): {host: string; port?: number} {
+  if (value.startsWith('[')) {
+    const closeIdx = value.indexOf(']');
+    if (closeIdx === -1) {
+      throw new Error('Monitoring endpoint has an unclosed IPv6 bracket.');
+    }
+    const innerHost = value.slice(1, closeIdx);
+    if (
+      innerHost.length === 0 ||
+      innerHost.includes('[') ||
+      innerHost.includes(']')
+    ) {
+      throw new Error('Monitoring endpoint has an invalid IPv6 host.');
+    }
+    // Preserve brackets so google-gax builds `[ipv6]:port`.
+    const host = value.slice(0, closeIdx + 1);
+    const remainder = value.slice(closeIdx + 1);
+    if (remainder.length > 0) {
+      if (!remainder.startsWith(':')) {
+        throw new Error(
+          'Monitoring endpoint has unexpected characters after IPv6 bracket.',
+        );
+      }
+      return {host, port: parsePortString(remainder.slice(1))};
+    }
+    return {host};
+  }
+
+  if (value.includes('[') || value.includes(']')) {
+    throw new Error('Monitoring endpoint has malformed IPv6 brackets.');
+  }
+  const firstColon = value.indexOf(':');
+  const lastColon = value.lastIndexOf(':');
+  if (firstColon !== lastColon) {
+    throw new Error(
+      'IPv6 monitoring endpoints must be enclosed in brackets, e.g. [::1] or [::1]:443.',
+    );
+  }
+  if (firstColon !== -1) {
+    const host = value.slice(0, firstColon);
+    if (host.length === 0) {
+      throw new Error('Monitoring endpoint host cannot be empty.');
+    }
+    return {host, port: parsePortString(value.slice(firstColon + 1))};
+  }
+  return {host: value};
+}
+
+/**
+ * Validates the custom DNS server authority from a `dns://<authority>/<target>`
+ * endpoint against the IP-literal grammar accepted by Node's
+ * `dns.Resolver.setServers()` (`ipv4`, `ipv4:port`, `[ipv6]`, or `[ipv6]:port`)
+ * so invalid authorities fail closed at construction instead of asynchronously
+ * during channel creation.
+ *
+ * @param authority Non-empty authority segment between `dns://` and `/`.
+ */
+function validateDnsAuthority(authority: string): void {
+  const {host} = splitHostPort(authority);
+  const isValidIp = host.startsWith('[')
+    ? isIPv6(host.slice(1, -1))
+    : isIPv4(host);
+  if (!isValidIp) {
+    throw new Error(
+      `Monitoring endpoint has an invalid DNS authority: ${authority}`,
+    );
+  }
+}
+
+/**
+ * Parses and validates a Cloud Monitoring endpoint string (`host`, `host:port`,
+ * `[ipv6]`, `[ipv6]:port`, `https://host[:port]`, or `dns://[authority]/host[:port]`)
+ * into separate `apiEndpoint` and optional `port` fields suitable for
+ * `MetricServiceClient` / `google-gax`.
+ *
+ * - `https://` strips the scheme and an optional single trailing `/` because
+ *   `@grpc/grpc-js` has no `https` resolver and `google-gax` builds the gRPC
+ *   target as `${servicePath}:${port}`.
+ * - `dns:///` normalizes to canonical bare `host[:port]` (the default
+ *   `@grpc/grpc-js` resolver) so factory cache keys deduplicate with bare hosts.
+ * - `dns://<authority>/` validates `<authority>` as an IP literal (`ipv4[:port]`
+ *   or `[ipv6][:port]`) and preserves the prefix on `apiEndpoint`.
+ * - Brackets around IPv6 addresses are preserved on `apiEndpoint` so
+ *   `google-gax` builds `[ipv6]:port`.
  *
  * @param endpoint The monitoring endpoint string to parse.
  * @returns Parsed `{apiEndpoint, port}` object.
@@ -105,79 +190,58 @@ export function parseMonitoringEndpoint(endpoint: string): {
   if (endpoint !== endpoint.trim() || /\s/.test(endpoint)) {
     throw new Error('Monitoring endpoint must not contain whitespace.');
   }
-  if (
+
+  let target = endpoint;
+  let prefix = '';
+
+  if (/^https:\/\//i.test(endpoint)) {
+    target = endpoint.slice('https://'.length);
+    if (target.endsWith('/')) {
+      target = target.slice(0, -1);
+    }
+    if (target.length === 0) {
+      throw new Error('Monitoring endpoint host cannot be empty.');
+    }
+  } else if (/^dns:\/\//i.test(endpoint)) {
+    const rest = endpoint.slice('dns://'.length);
+    const slashIdx = rest.indexOf('/');
+    if (slashIdx === -1) {
+      throw new Error(
+        'Monitoring endpoint with dns:// scheme must include a target path, e.g. dns:///host:port or dns://authority/host:port.',
+      );
+    }
+    const authority = rest.slice(0, slashIdx);
+    target = rest.slice(slashIdx + 1);
+    if (authority.length > 0) {
+      validateDnsAuthority(authority);
+      prefix = `dns://${authority}/`;
+    }
+    if (target.length === 0) {
+      throw new Error('Monitoring endpoint host cannot be empty.');
+    }
+  } else if (
     /^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(endpoint) ||
-    endpoint.startsWith('http:') ||
-    endpoint.startsWith('https:')
+    /^(?:http|https):/i.test(endpoint)
   ) {
     throw new Error(
-      'Monitoring endpoint must not include a protocol scheme (http/https).',
+      'Unsupported monitoring endpoint scheme. Use host[:port], [ipv6][:port], https://host[:port], or dns://[authority]/host[:port].',
     );
   }
-  if (
-    endpoint.includes('/') ||
-    endpoint.includes('?') ||
-    endpoint.includes('#')
-  ) {
+
+  if (target.includes('/') || target.includes('?') || target.includes('#')) {
     throw new Error(
       'Monitoring endpoint must not contain path, query, or fragment components.',
     );
   }
-
-  let host: string;
-  let embeddedPort: number | undefined;
-
-  if (endpoint.startsWith('[')) {
-    const closeIdx = endpoint.indexOf(']');
-    if (closeIdx === -1) {
-      throw new Error('Monitoring endpoint has an unclosed IPv6 bracket.');
-    }
-    const innerHost = endpoint.slice(1, closeIdx);
-    if (
-      innerHost.length === 0 ||
-      innerHost.includes('[') ||
-      innerHost.includes(']')
-    ) {
-      throw new Error('Monitoring endpoint has an invalid IPv6 host.');
-    }
-    // Preserve brackets so google-gax builds `[ipv6]:port`.
-    host = endpoint.slice(0, closeIdx + 1);
-    const remainder = endpoint.slice(closeIdx + 1);
-    if (remainder.length > 0) {
-      if (!remainder.startsWith(':')) {
-        throw new Error(
-          'Monitoring endpoint has unexpected characters after IPv6 bracket.',
-        );
-      }
-      const portStr = remainder.slice(1);
-      embeddedPort = parsePortString(portStr);
-    }
-  } else {
-    if (endpoint.includes('[') || endpoint.includes(']')) {
-      throw new Error('Monitoring endpoint has malformed IPv6 brackets.');
-    }
-    const firstColon = endpoint.indexOf(':');
-    const lastColon = endpoint.lastIndexOf(':');
-    if (firstColon !== lastColon) {
-      throw new Error(
-        'IPv6 monitoring endpoints must be enclosed in brackets, e.g. [::1] or [::1]:443.',
-      );
-    }
-    if (firstColon !== -1) {
-      host = endpoint.slice(0, firstColon);
-      const portStr = endpoint.slice(firstColon + 1);
-      if (host.length === 0) {
-        throw new Error('Monitoring endpoint host cannot be empty.');
-      }
-      embeddedPort = parsePortString(portStr);
-    } else {
-      host = endpoint;
-    }
+  if (target.includes('@')) {
+    throw new Error('Monitoring endpoint must not contain userinfo.');
   }
 
+  const {host, port: embeddedPort} = splitHostPort(target);
+  const normalizedApiEndpoint = `${prefix}${host}`;
   return embeddedPort !== undefined
-    ? {apiEndpoint: host, port: embeddedPort}
-    : {apiEndpoint: host};
+    ? {apiEndpoint: normalizedApiEndpoint, port: embeddedPort}
+    : {apiEndpoint: normalizedApiEndpoint};
 }
 
 /**
