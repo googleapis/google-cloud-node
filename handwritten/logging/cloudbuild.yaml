@@ -37,29 +37,6 @@ steps:
   #   - name: 'sa-keys'
   #     path: '/secrets'
 
-# 3. (Optional) Code Coverage Reporting
-- name: 'node:24'
-  entrypoint: 'bash'
-  args:
-  - '-c'
-  - |
-    # Check if nyc is installed and run report
-    if [ -f ./node_modules/nyc/bin/nyc.js ]; then
-      ./node_modules/nyc/bin/nyc.js report || true # `|| true` prevents build failure if nyc report itself exits non-zero
-    else
-      echo "nyc not found, skipping coverage report."
-    fi
-    # The original codecov.sh script from Kokoro needs to be made available to GCB.
-    # Options:
-    #   a) Commit codecov.sh into your repo (e.g., .kokoro/codecov.sh) and call it:
-    #      if [ -f .kokoro/codecov.sh ]; then . ./.kokoro/codecov.sh; fi
-    #   b) Replicate its functionality directly in this step.
-    #   c) Store it in a GCS bucket and fetch it.
-    echo "Codecov reporting (if desired) would be integrated here."
-  dir: 'handwritten/logging'
-  id: 'coverage-report'
-  waitFor: ['run-system-tests']
-
 # If you use Secret Manager for credentials, uncomment and configure:
 # availableSecrets:
 #   secretManager:
