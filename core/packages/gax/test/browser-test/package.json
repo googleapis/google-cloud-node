@@ -15,7 +15,7 @@
   "scripts": {
     "compile": "tsc",
     "prefetch-cleanup": "rm -rf node_modules package-lock.json google-gax*.tgz showcase-echo-client*.tgz showcase-server*.tgz",
-    "prefetch-google-gax": "cd ../.. && npm pack && mv google-gax*.tgz test/browser-test/google-gax.tgz",
+    "prefetch-google-gax": "cd ../.. && pnpm pack && mv google-gax*.tgz test/browser-test/google-gax.tgz",
     "prefetch-showcase-echo-client": "cd ../showcase-echo-client && npm run prefetch && npm install && npm pack && mv showcase-echo-client*.tgz ../browser-test/showcase-echo-client.tgz",
     "prefetch-showcase-server": "cd ../showcase-server && npm install && npm pack && mv showcase-server*.tgz ../browser-test/showcase-server.tgz",
     "prefetch": "npm run prefetch-cleanup && npm run prefetch-google-gax && npm run prefetch-showcase-echo-client && npm run prefetch-showcase-server",
