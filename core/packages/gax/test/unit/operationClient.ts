@@ -36,7 +36,7 @@ import {
 import {PassThroughClient} from 'google-auth-library';
 import {OtelHarness} from './otelHarness';
 import {setMockFallbackResponse} from './utils';
-import type {LogPayload} from '../../src/observability/LoggerHelper';
+import type {GaxLogFields} from '../../src/observability/LoggerHelper';
 import operationProtoJson = require('../../protos/operations.json');
 
 function generateSampleMessage<T extends object>(instance: T) {
@@ -778,10 +778,10 @@ describe('operation client', () => {
 
   describe('telemetry propagation', () => {
     class TestLogSink implements loggingUtils.DebugLogBackend {
-      logs: Array<{namespace: string; fields: loggingUtils.LogFields}> = [];
+      logs: Array<{namespace: string; fields: GaxLogFields}> = [];
       filters: string[] = [];
       log(namespace: string, fields: loggingUtils.LogFields): void {
-        this.logs.push({namespace, fields});
+        this.logs.push({namespace, fields: fields as GaxLogFields});
       }
       setFilters(filters: string[]): void {
         this.filters = filters;
@@ -890,26 +890,50 @@ describe('operation client', () => {
 
       assert.strictEqual(sink.logs.length, 2);
       const [attemptLog, callLog] = sink.logs;
-      const attemptOther = attemptLog.fields.other as LogPayload;
-      const callOther = callLog.fields.other as LogPayload;
-      assert.strictEqual(attemptOther['rpc.system.name'], 'http');
-      assert.strictEqual(callOther['rpc.system.name'], 'http');
+      assert.strictEqual(attemptLog.fields.other, undefined);
+      assert.strictEqual(callLog.fields.other, undefined);
       assert.strictEqual(
-        attemptOther['rpc.method'],
+        attemptLog.fields.trace_id,
+        attemptSpan.spanContext().traceId,
+      );
+      assert.strictEqual(
+        attemptLog.fields.span_id,
+        attemptSpan.spanContext().spanId,
+      );
+      assert.strictEqual(attemptLog.fields.trace_sampled, true);
+      assert.strictEqual(
+        callLog.fields.trace_id,
+        clientSpan.spanContext().traceId,
+      );
+      assert.strictEqual(
+        callLog.fields.span_id,
+        clientSpan.spanContext().spanId,
+      );
+      assert.strictEqual(callLog.fields.trace_sampled, true);
+      assert.strictEqual(attemptLog.fields['rpc.system.name'], 'http');
+      assert.strictEqual(callLog.fields['rpc.system.name'], 'http');
+      assert.strictEqual(
+        attemptLog.fields['rpc.method'],
         'google.longrunning.Operations/GetOperation',
       );
       assert.strictEqual(
-        callOther['rpc.method'],
+        callLog.fields['rpc.method'],
         'google.longrunning.Operations/GetOperation',
       );
-      assert.strictEqual(attemptOther['http.response.status_code'], 404);
-      assert.strictEqual(callOther['http.response.status_code'], 404);
-      assert.strictEqual(attemptOther['error.type'], '404');
-      assert.strictEqual(callOther['error.type'], '404');
-      assert.strictEqual(attemptOther['server.address'], '127.0.0.1');
-      assert.strictEqual(attemptOther['url.domain'], 'cloudkms.googleapis.com');
-      assert.strictEqual(callOther['server.address'], '127.0.0.1');
-      assert.strictEqual(callOther['url.domain'], 'cloudkms.googleapis.com');
+      assert.strictEqual(attemptLog.fields['http.response.status_code'], 404);
+      assert.strictEqual(callLog.fields['http.response.status_code'], 404);
+      assert.strictEqual(attemptLog.fields['error.type'], '404');
+      assert.strictEqual(callLog.fields['error.type'], '404');
+      assert.strictEqual(attemptLog.fields['server.address'], '127.0.0.1');
+      assert.strictEqual(
+        attemptLog.fields['url.domain'],
+        'cloudkms.googleapis.com',
+      );
+      assert.strictEqual(callLog.fields['server.address'], '127.0.0.1');
+      assert.strictEqual(
+        callLog.fields['url.domain'],
+        'cloudkms.googleapis.com',
+      );
     });
 
     it('propagates telemetry flags, apiEndpoint, and port from lroOptions and honors enableTelemetryLogging: false override', async () => {
