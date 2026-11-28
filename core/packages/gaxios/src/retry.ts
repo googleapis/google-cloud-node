@@ -166,6 +166,11 @@ function shouldRetryRequest(err: GaxiosError) {
     return false;
   }
 
+  // If the total timeout has elapsed, return
+  if (Date.now() - config.timeOfFirstRequest! >= config.totalTimeout!) {
+    return false;
+  }
+
   return true;
 }
 
