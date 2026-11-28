@@ -21,13 +21,14 @@
 set -eo pipefail
 
 echo "change directory to the project root"
-export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
-pushd ${PROJECT_ROOT}
+export PROJECT_ROOT="$(realpath "$(dirname "${BASH_SOURCE[0]}")/..")"
+pushd "${PROJECT_ROOT}"
 pwd
 
 echo "importing Cloud Build triggers"
 
 for file in ci/export/*.yaml; do
+    [[ -f "$file" ]] || continue
     echo "importing trigger from $file"
-    gcloud beta builds triggers import --source "$file"
+    gcloud beta builds triggers import --project=long-door-651 --source "$file"
 done

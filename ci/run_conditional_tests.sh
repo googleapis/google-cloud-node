@@ -19,7 +19,7 @@
 # with a non-zero
 set -eo pipefail
 
-export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
+export PROJECT_ROOT="$(realpath "$(dirname "${BASH_SOURCE[0]}")/..")"
 
 # Exit early if owl-bot-staging directory exists. The PR is not ready to merge.
 if test -d "${PROJECT_ROOT}/owl-bot-staging"; then
@@ -51,14 +51,6 @@ if [[ "${STRICT}" == "true" || "${STRICT}" == "1" ]]; then
     fi
     if [[ -z "${RUN_TESTS_MODE}" ]]; then
         echo "Error: STRICT mode requires RUN_TESTS_MODE to be set." >&2
-        exit 1
-    fi
-    set +e
-    git diff --quiet ${GIT_DIFF_ARG}
-    diff_status=$?
-    set -e
-    if [[ ${diff_status} -ne 0 && ${diff_status} -ne 1 ]]; then
-        echo "Error: STRICT mode git diff ${GIT_DIFF_ARG} failed with exit code ${diff_status}." >&2
         exit 1
     fi
 else
@@ -100,21 +92,6 @@ if [[ "${RUN_TESTS_MODE}" == "RUN_UNIT_TESTS" ]]; then
     fi
 fi
 
-# Then detect changes in the test scripts (triggers full test suite when ci/ changes).
-
-set +e
-git diff --quiet ${GIT_DIFF_ARG} ci
-changed=$?
-set -e
-if [[ "${changed}" -eq 0 ]]; then
-    echo "no change detected in ci"
-else
-    echo "change detected in ci, we should test everything"
-    echo "result of git diff ${GIT_DIFF_ARG} ci:"
-    git diff ${GIT_DIFF_ARG} ci
-    GIT_DIFF_ARG=""
-fi
-
 # Now we have a fixed list, but we can change it to autodetect if
 # necessary.
 
@@ -124,6 +101,12 @@ if [[ "${JS_RUNTIME}" == "bun" || "${TEST_CMD}" == *bun* ]]; then
         packages
         handwritten
         core/packages
+    )
+    mapping_subdirs=(
+        core/packages
+        core
+        packages
+        handwritten
     )
 else
     subdirs=(
@@ -135,13 +118,149 @@ else
         core/packages
         core/dev-packages
     )
+    mapping_subdirs=(
+        core/dev-packages
+        core/packages
+        .github/scripts
+        core
+        containers
+        packages
+        handwritten
+    )
 fi
 
-RETVAL=0
-# These following APIs need an explicit credential file to run properly (or oAuth2, which we don't support in this repo).
-# When we hit these packages, we will run the "samples with credentials" trigger, which contains the credentials as an env variable
+# Perform a single git diff pass to detect ci/ changes (excluding trigger exports
+# under ci/export/), short-circuit metadata-only release-please--* diffs, and map
+# changed files to affected package directories without per-directory git forks.
+affected_dirs=$'\n'
+skip_directory_scan=false
 
-tests_with_credentials="core/packages/google-auth-library-nodejs/ packages/google-analytics-admin/ packages/google-area120-tables/ packages/google-analytics-data/ packages/google-iam-credentials/ packages/google-apps-meet/ packages/google-chat/ packages/google-streetview-publish/ packages/google-cloud-developerconnect/"
+if [ -n "${GIT_DIFF_ARG}" ]; then
+    read -r -a git_diff_args <<< "${GIT_DIFF_ARG}"
+    if [[ ${#git_diff_args[@]} -eq 0 ]]; then
+        echo "Error: GIT_DIFF_ARG contains no arguments." >&2
+        exit 1
+    fi
+
+    git_diff_rev_args=()
+    for arg in "${git_diff_args[@]}"; do
+        if [[ "${arg}" == "--" ]]; then
+            break
+        fi
+        git_diff_rev_args+=("${arg}")
+    done
+
+    set +e
+    changed_files_output="$(git -c core.quotepath=false diff --name-only --no-renames "${git_diff_args[@]}")"
+    diff_status=$?
+    set -e
+    if [[ ${diff_status} -ne 0 ]]; then
+        echo "Error: git diff --name-only ${GIT_DIFF_ARG} failed with exit code ${diff_status}." >&2
+        exit 1
+    fi
+
+    changed_files=()
+    ci_changed_files=()
+    while IFS= read -r file; do
+        file="${file%$'\r'}"
+        [[ -z "${file}" ]] && continue
+        changed_files+=("${file}")
+        if [[ "${file}" == ci/* && "${file}" != ci/export/* ]]; then
+            ci_changed_files+=("${file}")
+        fi
+    done <<< "${changed_files_output}"
+
+    if (( ${#ci_changed_files[@]} == 0 )); then
+        echo "no change detected in ci"
+    else
+        echo "change detected in ci, we should test everything"
+        echo "result of git diff ${GIT_DIFF_ARG} -- ci ':!ci/export':"
+        git diff "${git_diff_rev_args[@]}" -- "${ci_changed_files[@]}"
+        GIT_DIFF_ARG=""
+    fi
+fi
+
+if [ -n "${GIT_DIFF_ARG}" ]; then
+    head_ref="${GITHUB_HEAD_REF:-${HEAD_BRANCH:-${REF_NAME:-}}}"
+    is_release_please_pr=false
+    if [[ "${head_ref}" == release-please--* ]]; then
+        is_release_please_pr=true
+    fi
+
+    has_non_metadata_change=false
+    for file in "${changed_files[@]}"; do
+        case "${file}" in
+            CHANGELOG.md|.release-please-manifest.json|changelog.json|release-notes.md|ci/export/*)
+                continue
+                ;;
+        esac
+
+        matched_subdir=false
+        for subdir in "${mapping_subdirs[@]}"; do
+            if [[ "${file}" == "${subdir}/"*/* ]]; then
+                matched_subdir=true
+                rel="${file#"${subdir}/"}"
+                pkg_name="${rel%%/*}"
+                pkg_rel="${rel#"${pkg_name}/"}"
+                if [[ "${subdir}" == "core" && ( "${pkg_name}" == "packages" || "${pkg_name}" == "dev-packages" ) ]]; then
+                    # On runtimes where core/dev-packages is omitted from subdirs (e.g. Bun),
+                    # avoid misclassifying nested package files under core/ or marking them metadata-only.
+                    nested_rel="${pkg_rel#*/}"
+                    if [[ "${nested_rel}" != "CHANGELOG.md" ]]; then
+                        has_non_metadata_change=true
+                    fi
+                    break
+                fi
+                # Skip package-level CHANGELOG.md-only changes while still testing
+                # package.json updates (and any non-metadata source/test files).
+                if [[ "${pkg_rel}" == "CHANGELOG.md" ]]; then
+                    break
+                fi
+                has_non_metadata_change=true
+                pkg_dir="${subdir}/${pkg_name}/"
+                if [[ "${affected_dirs}" != *$'\n'"${pkg_dir}"$'\n'* ]]; then
+                    affected_dirs+="${pkg_dir}"$'\n'
+                fi
+                break
+            fi
+        done
+        if [[ "${matched_subdir}" == "false" ]]; then
+            has_non_metadata_change=true
+        fi
+    done
+
+    if (( ${#changed_files[@]} == 0 )); then
+        echo "No changed files detected; skipping tests."
+        skip_directory_scan=true
+    elif [[ "${has_non_metadata_change}" == "false" ]]; then
+        if [[ "${is_release_please_pr}" == "true" ]]; then
+            echo "Metadata-only release-please PR (${head_ref}) detected; skipping tests."
+        else
+            echo "Metadata-only change detected (no testable package changes); skipping tests."
+        fi
+        skip_directory_scan=true
+    elif [[ "${affected_dirs}" == $'\n' ]]; then
+        echo "No affected test directories found in diff; skipping directory scan."
+        skip_directory_scan=true
+    fi
+fi
+
+# These following APIs need an explicit credential file to run properly (or oAuth2, which we don't support in this repo).
+# When we hit these packages, we will run the "samples with credentials" trigger, which contains the credentials as an env variable.
+tests_with_credentials=(
+    "core/packages/google-auth-library-nodejs/"
+)
+
+is_test_with_credentials() {
+    local target="$1"
+    local entry
+    for entry in "${tests_with_credentials[@]}"; do
+        if [[ "${entry}" == "${target}" ]]; then
+            return 0
+        fi
+    done
+    return 1
+}
 
 # Some packages are only used by our bots and automation. These packages do not need to run on Windows and
 # often employ platform specific code like file system interaction. Some packages may also fail
@@ -153,6 +272,7 @@ windows_exempt_tests="core/ core/packages/ core/dev-packages/ .github/scripts/fi
 # Gather all test directories into an array
 test_dirs=()
 
+if [[ "${skip_directory_scan}" == "false" ]]; then
 for subdir in "${subdirs[@]}"; do
     for d in "${subdir}"/*/; do
         [[ -d "$d" ]] || continue
@@ -218,79 +338,44 @@ for subdir in "${subdirs[@]}"; do
             fi
         fi
 
+        if [ -n "${GIT_DIFF_ARG}" ] && [[ "${affected_dirs}" != *$'\n'"${d}"$'\n'* ]]; then
+            echo "no change detected in ${d}, skipping"
+            continue
+        fi
+
         should_test=false
-        if [ -n "${GIT_DIFF_ARG}" ]; then
-            echo "checking changes with 'git diff --quiet ${GIT_DIFF_ARG} ${d}'"
-            set +e
-            git diff --quiet ${GIT_DIFF_ARG} ${d}
-            changed=$?
-            set -e
-            if [[ "${changed}" -eq 0 ]]; then
-                echo "no change detected in ${d}, skipping"
-            else
-                if [[ ( "${d}" == core/packages/* || "${d}" == core/dev-packages/* ) && "${IS_CORE}" == "true" && "${TEST_TYPE}" == "system" ]]; then
-                    echo "run system tests for core/packages in ${d}"
-                    export RUN_INTERDEPENDENT_TESTS=true
-                    should_test=true
-                elif [[ ( "${d}" == core/packages/* || "${d}" == core/dev-packages/* ) && "${IS_CORE}" == "true" && "${TEST_TYPE}" == "samples" ]]; then
-                    if [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
-                        echo "run samples tests with credentials for core/packages in ${d}"
-                        should_test=true
-                    elif ! [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
-                        echo "run samples tests for core/packages in ${d}"
-                        should_test=true
-                    fi
-                elif [[ ( "${d}" == core/packages/* || "${d}" == core/dev-packages/* ) && "${TEST_TYPE}" == "units" ]]; then
-                    echo "change detected in core package ${d} for ${TEST_TYPE} test"
-                    should_test=true
-                elif [[ "${d}" == core/packages/* || "${d}" == core/dev-packages/* ]]; then
-                    echo "skipping core package ${d} in non-core trigger"
-                elif [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
-                    echo "change detected in ${d} for ${TEST_TYPE} test"
-                    should_test=true
-                elif [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
-                    echo "change detected in ${d} in a directory that needs credentials"
-                    should_test=true
-                elif ! [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
-                    echo "change detected in ${d}"
-                    should_test=true
-                fi
-            fi
-        else
-            # If GIT_DIFF_ARG is empty, run all the tests.
-            if [[ ( "${d}" == core/packages/* || "${d}" == core/dev-packages/* ) && "${IS_CORE}" == "true" && "${TEST_TYPE}" == "system" ]]; then
-                echo "run system tests for core/packages in ${d}"
-                export RUN_INTERDEPENDENT_TESTS=true
+        if [[ ( "${d}" == core/packages/* || "${d}" == core/dev-packages/* ) && "${IS_CORE}" == "true" && "${TEST_TYPE}" == "system" ]]; then
+            echo "run system tests for core/packages in ${d}"
+            should_test=true
+        elif [[ ( "${d}" == core/packages/* || "${d}" == core/dev-packages/* ) && "${IS_CORE}" == "true" && "${TEST_TYPE}" == "samples" ]]; then
+            if is_test_with_credentials "${d}" && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+                echo "run samples tests with credentials for core/packages in ${d}"
                 should_test=true
-            elif [[ ( "${d}" == core/packages/* || "${d}" == core/dev-packages/* ) && "${IS_CORE}" == "true" && "${TEST_TYPE}" == "samples" ]]; then
-                if [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
-                    echo "run samples tests with credentials for core/packages in ${d}"
-                    should_test=true
-                elif ! [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
-                    echo "run samples tests for core/packages in ${d}"
-                    should_test=true
-                fi
-            elif [[ ( "${d}" == core/packages/* || "${d}" == core/dev-packages/* ) && "${TEST_TYPE}" == "units" ]]; then
-                echo "run ${TEST_TYPE} test for core package ${d}"
-                should_test=true
-            elif [[ "${d}" == core/packages/* || "${d}" == core/dev-packages/* ]]; then
-                echo "skipping core package ${d} in non-core trigger"
-            elif [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
-                echo "run ${TEST_TYPE} test for ${d}"
-                should_test=true
-            elif [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
-                echo "run tests with credentials in ${d}"
-                should_test=true
-            elif ! [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
-                echo "run tests in ${d}"
+            elif ! is_test_with_credentials "${d}" && [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+                echo "run samples tests for core/packages in ${d}"
                 should_test=true
             fi
+        elif [[ ( "${d}" == core/packages/* || "${d}" == core/dev-packages/* ) && "${TEST_TYPE}" == "units" ]]; then
+            echo "run ${TEST_TYPE} test for core package ${d}"
+            should_test=true
+        elif [[ "${d}" == core/packages/* || "${d}" == core/dev-packages/* ]]; then
+            echo "skipping core package ${d} in non-core trigger"
+        elif [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
+            echo "run ${TEST_TYPE} test for ${d}"
+            should_test=true
+        elif is_test_with_credentials "${d}" && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+            echo "run tests with credentials in ${d}"
+            should_test=true
+        elif ! is_test_with_credentials "${d}" && [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+            echo "run tests in ${d}"
+            should_test=true
         fi
         if [ "${should_test}" = true ]; then
             test_dirs+=("${d}")
         fi
     done
 done
+fi
 # If RUN_TESTS_MODE is CALCULATE_SHARD_MATRIX, output dynamic matrix values to GitHub Actions and exit
 if [[ "${RUN_TESTS_MODE}" == "CALCULATE_SHARD_MATRIX" ]]; then
     count=${#test_dirs[@]}
