@@ -398,6 +398,7 @@ libraries:
     apis:
       - path: google/cloud/beyondcorp/appconnections/v1
     copyright_year: "2026"
+    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/appconnections'
@@ -407,6 +408,7 @@ libraries:
     apis:
       - path: google/cloud/beyondcorp/appconnectors/v1
     copyright_year: "2026"
+    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/appconnectors'
@@ -416,6 +418,7 @@ libraries:
     apis:
       - path: google/cloud/beyondcorp/appgateways/v1
     copyright_year: "2026"
+    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/appgateways'
@@ -425,6 +428,7 @@ libraries:
     apis:
       - path: google/cloud/beyondcorp/clientconnectorservices/v1
     copyright_year: "2026"
+    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/clientconnectorservices'
@@ -434,6 +438,7 @@ libraries:
     apis:
       - path: google/cloud/beyondcorp/clientgateways/v1
     copyright_year: "2026"
+    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/clientgateways'
