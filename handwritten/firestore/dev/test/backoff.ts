@@ -15,8 +15,13 @@
 import {describe, it, beforeEach, before, after} from 'mocha';
 import {expect, use} from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
+import * as sinon from 'sinon';
 
-import {ExponentialBackoff, setTimeoutHandler} from '../src/backoff';
+import {
+  delayExecution,
+  ExponentialBackoff,
+  setTimeoutHandler,
+} from '../src/backoff';
 
 use(chaiAsPromised);
 
@@ -170,5 +175,25 @@ describe('ExponentialBackoff', () => {
     await expect(backoff.backoffAndWait()).to.eventually.be.rejectedWith(
       'A backoff operation is already in progress.',
     );
+  });
+});
+
+describe('setTimeoutHandler', () => {
+  it('preserves timer handles so scheduled callbacks can be cancelled', async () => {
+    const clock = sinon.useFakeTimers({toFake: ['setTimeout', 'clearTimeout']});
+    setTimeoutHandler(setTimeout);
+    const callback = sinon.spy();
+
+    try {
+      const handle = delayExecution(callback, 1000);
+      expect(clock.countTimers()).to.equal(1);
+      clearTimeout(handle);
+      expect(clock.countTimers()).to.equal(0);
+      await clock.tickAsync(1000);
+      expect(callback.called).to.equal(false);
+    } finally {
+      clock.restore();
+      setTimeoutHandler(setTimeout);
+    }
   });
 });
