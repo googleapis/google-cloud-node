@@ -1073,6 +1073,43 @@ describe('instantiation', () => {
       );
     });
   });
+
+  it('sets x-goog-is-transaction routing header', async () => {
+    let commitHeaders: {[k: string]: string} | undefined;
+    let batchGetHeaders: {[k: string]: string} | undefined;
+    const overrides: ApiOverride = {
+      commit: (_request, options) => {
+        commitHeaders = options?.otherArgs?.headers;
+        return response({
+          commitTime: {},
+          writeResults: [{updateTime: {}}],
+        });
+      },
+      batchGetDocuments: (_request, options) => {
+        batchGetHeaders = options?.otherArgs?.headers;
+        return stream(
+          {transaction: Buffer.from('tx1')},
+          found(document('documentId')),
+        );
+      },
+    };
+
+    const firestore = await createInstance(overrides);
+
+    await firestore
+      .collection('collectionId')
+      .doc('documentId')
+      .set({foo: 'bar'});
+    expect(commitHeaders?.['x-goog-is-transaction']).to.equal('false');
+
+    await firestore.runTransaction(async transaction => {
+      const docRef = firestore.doc('collectionId/documentId');
+      await transaction.get(docRef);
+      transaction.set(docRef, {foo: 'baz'});
+    });
+    expect(batchGetHeaders?.['x-goog-is-transaction']).to.equal('true');
+    expect(commitHeaders?.['x-goog-is-transaction']).to.equal('true');
+  });
 });
 
 describe('serializer', () => {
