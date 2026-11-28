@@ -80,7 +80,6 @@ import {
   Gaxios,
   GaxiosError,
   GaxiosInterceptor,
-  GaxiosOptions,
   GaxiosOptionsPrepared,
   GaxiosResponse,
 } from 'gaxios';
@@ -2488,42 +2487,9 @@ class File extends ServiceObject<File, FileMetadata> {
       options,
     );
 
-    const reqOpts: GaxiosOptions = {
-      ...options,
-      responseType: 'text',
-      validateStatus: (status: number) => {
-        return (
-          (status >= 200 && status < 300) || status === 404 || status === 403
-        );
-      },
-    };
-
     const promise = (async (): Promise<[GaxiosResponse]> => {
-      let respTuple: [GaxiosResponse];
       try {
-        respTuple = await super.delete(reqOpts);
-        const resp = respTuple[0];
-
-        if (resp.data && typeof resp.data.resume === 'function') {
-          resp.data.resume();
-        }
-
-        if (resp.status === 404) {
-          if (options.ignoreNotFound) {
-            return respTuple;
-          }
-          const err: Error & {code?: number} = new Error('Not Found');
-          err.code = 404;
-          throw err;
-        }
-
-        if (resp.status === 403) {
-          const err: Error & {code?: number} = new Error('Permission Denied');
-          err.code = 403;
-          throw err;
-        }
-
-        return respTuple;
+        return await super.delete(options);
       } finally {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
       }
