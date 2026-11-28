@@ -215,33 +215,68 @@ describe('Transfer Manager', () => {
     });
 
     it('sets the destination correctly when provided a prefix', async () => {
+      // Assertions happen after the call because errors thrown inside the
+      // download stub are caught by downloadManyFiles and reported as skipped
+      // files, which would cause the test to pass silently with wrong values.
       const prefix = 'test-prefix';
       const filename = 'first.txt';
-      const expectedDestination = path.normalize(`${prefix}/${filename}`);
+      const expectedDestination = path.resolve(prefix, filename);
+      let actualDestination: string | undefined;
 
       const file = new File(bucket, filename);
-      sandbox.stub(file, 'download').callsFake(options => {
-        assert.strictEqual(
-          (options as DownloadOptions).destination,
-          expectedDestination,
-        );
+      sandbox.stub(file, 'download').callsFake(async options => {
+        actualDestination = (options as DownloadOptions).destination;
+        return [Buffer.alloc(0)] as DownloadResponse;
       });
-      await transferManager.downloadManyFiles([file], {prefix});
+      const result = (await transferManager.downloadManyFiles([file], {
+        prefix,
+      })) as DownloadResponseWithStatus[];
+      assert.strictEqual(result[0].skipped, false);
+      assert.strictEqual(actualDestination, expectedDestination);
+    });
+
+    it('combines prefix and passthroughOptions.destination', async () => {
+      // Assertions happen after the call because errors thrown inside the
+      // download stub are caught by downloadManyFiles and reported as skipped
+      // files, which would cause the test to pass silently with wrong values.
+      const prefix = 'test-prefix';
+      const destination = 'nested-destination';
+      const filename = 'first.txt';
+      const expectedDestination = path.resolve(prefix, destination, filename);
+      let actualDestination: string | undefined;
+
+      const file = new File(bucket, filename);
+      sandbox.stub(file, 'download').callsFake(async options => {
+        actualDestination = (options as DownloadOptions).destination;
+        return [Buffer.alloc(0)] as DownloadResponse;
+      });
+      const result = (await transferManager.downloadManyFiles([file], {
+        prefix,
+        passthroughOptions: {destination},
+      })) as DownloadResponseWithStatus[];
+      assert.strictEqual(result[0].skipped, false);
+      assert.strictEqual(actualDestination, expectedDestination);
     });
 
     it('sets the destination correctly when provided a strip prefix', async () => {
+      // Assertions happen after the call because errors thrown inside the
+      // download stub are caught by downloadManyFiles and reported as skipped
+      // files, which would cause the test to pass silently with wrong values.
       const stripPrefix = 'should-be-removed/';
       const filename = 'should-be-removed/first.txt';
-      const expectedDestination = 'first.txt';
+      const expectedDestination = path.resolve('first.txt');
+      let actualDestination: string | undefined;
 
       const file = new File(bucket, filename);
-      sandbox.stub(file, 'download').callsFake(options => {
-        assert.strictEqual(
-          (options as DownloadOptions).destination,
-          expectedDestination,
-        );
+      sandbox.stub(file, 'download').callsFake(async options => {
+        actualDestination = (options as DownloadOptions).destination;
+        return [Buffer.alloc(0)] as DownloadResponse;
       });
-      await transferManager.downloadManyFiles([file], {stripPrefix});
+      const result = (await transferManager.downloadManyFiles([file], {
+        stripPrefix,
+      })) as DownloadResponseWithStatus[];
+      assert.strictEqual(result[0].skipped, false);
+      assert.strictEqual(actualDestination, expectedDestination);
     });
 
     it('should set the appropriate `GCCL_GCS_CMD_KEY`', async () => {
