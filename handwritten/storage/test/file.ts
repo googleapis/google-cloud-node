@@ -17,6 +17,8 @@ import assert from 'assert';
 import {
   Bucket,
   CRC32C,
+  CreateReadStreamOptions,
+  CreateWriteStreamOptions,
   File,
   GaxiosError,
   GaxiosOptionsPrepared,
@@ -1187,6 +1189,12 @@ describe('File', () => {
         .resume();
     });
 
+    it('should pass highWaterMark to the returned stream', () => {
+      const options: CreateReadStreamOptions = {highWaterMark: 12345};
+      const stream = file.createReadStream(options);
+      assert.strictEqual(stream.readableHighWaterMark, 12345);
+    });
+
     describe('authenticating', () => {
       it('should create an authenticated request', () => {
         file.storageTransport.makeRequest = sandbox.stub().callsFake(opts => {
@@ -2280,6 +2288,46 @@ describe('File', () => {
       writable.write('data');
     });
 
+    it('should set highWaterMark on the returned stream', () => {
+      const options: CreateWriteStreamOptions = {highWaterMark: 12345};
+      const writable = file.createWriteStream(options);
+      assert.strictEqual(writable.writableHighWaterMark, 12345);
+    });
+
+    it('should propagate highWaterMark to resumable upload', done => {
+      const highWaterMark = 12345;
+      const options: CreateWriteStreamOptions = {
+        highWaterMark,
+        resumable: true,
+      };
+
+      file.startResumableUpload_ = sandbox.stub().callsFake((_dup, opts) => {
+        assert.strictEqual(opts.highWaterMark, highWaterMark);
+        done();
+      });
+
+      const writable = file.createWriteStream(options);
+      assert.strictEqual(writable.writableHighWaterMark, highWaterMark);
+      writable.write('data');
+    });
+
+    it('should propagate highWaterMark to simple upload', done => {
+      const highWaterMark = 12345;
+      const options: CreateWriteStreamOptions = {
+        highWaterMark,
+        resumable: false,
+      };
+
+      file.startSimpleUpload_ = sandbox.stub().callsFake((_dup, opts) => {
+        assert.strictEqual(opts.highWaterMark, highWaterMark);
+        done();
+      });
+
+      const writable = file.createWriteStream(options);
+      assert.strictEqual(writable.writableHighWaterMark, highWaterMark);
+      writable.write('data');
+    });
+
     it('should not load credentials before a resumable upload', done => {
       const getClient = sandbox.stub().rejects(new Error('no credentials'));
       sandbox.define(file.storageTransport, 'authClient', {getClient});
@@ -2289,7 +2337,6 @@ describe('File', () => {
         assert.strictEqual(getClient.called, false);
         done();
       });
-
       writable.write('data');
     });
 
@@ -5896,6 +5943,18 @@ describe('File', () => {
         file.startResumableUpload_(duplexify(), options);
       });
 
+      it('should pass highWaterMark to the upload stream', done => {
+        const dup = duplexify();
+        const highWaterMark = 12345;
+
+        dup.setWritable = (stream: Duplex) => {
+          assert.strictEqual(stream.writableHighWaterMark, highWaterMark);
+          done();
+        };
+
+        file.startResumableUpload_(dup, {highWaterMark});
+      });
+
       it('should emit the response', done => {
         const resp = {};
         const uploadStream = new PassThrough();
@@ -6154,6 +6213,36 @@ describe('File', () => {
         .resolves({});
 
       await file.startSimpleUpload_(duplexify(), options);
+    });
+
+    it('should pass highWaterMark if set', () => {
+      const options: CreateWriteStreamOptions = {
+        highWaterMark: 12345,
+      };
+      const dup = duplexify();
+      let setWritableStream: Duplex | undefined;
+      dup.setWritable = sandbox.stub().callsFake((stream: Duplex) => {
+        setWritableStream = stream;
+      });
+      const makeRequestStub = sandbox
+        .stub()
+        .callsFake((options_: StorageRequestOptions) => {
+          const mediaPart = options_.multipart?.[1];
+          assert.strictEqual(mediaPart?.content, setWritableStream);
+          assert.strictEqual(
+            setWritableStream?.writableHighWaterMark,
+            options.highWaterMark,
+          );
+          assert.strictEqual(
+            setWritableStream?.readableHighWaterMark,
+            options.highWaterMark,
+          );
+          return Promise.resolve({} as GaxiosResponse);
+        });
+      file.storageTransport.makeRequest = makeRequestStub;
+
+      file.startSimpleUpload_(dup, options);
+      assert.strictEqual(makeRequestStub.calledOnce, true);
     });
 
     describe('request', () => {
