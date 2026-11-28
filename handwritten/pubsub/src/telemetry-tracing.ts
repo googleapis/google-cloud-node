@@ -553,8 +553,9 @@ export class PubsubSpans {
 
     if (span) {
       // Also attempt to link from the subscribe span(s) back to the publish RPC span.
+      // A batched RPC can outlive the subscribe span, and an ended span cannot take a link.
       messageSpans.forEach(m => {
-        if (m && isSampled(m)) {
+        if (m && isSampled(m) && m.isRecording()) {
           m.addLink({context: span.spanContext()});
         }
       });
@@ -601,8 +602,9 @@ export class PubsubSpans {
 
     if (span) {
       // Also attempt to link from the subscribe span(s) back to the publish RPC span.
+      // A batched RPC can outlive the subscribe span, and an ended span cannot take a link.
       messageSpans.forEach(m => {
-        if (m && isSampled(m)) {
+        if (m && isSampled(m) && m.isRecording()) {
           m.addLink({context: span.spanContext()});
         }
       });
