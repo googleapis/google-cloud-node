@@ -30,7 +30,7 @@
   "author": "Google API Authors",
   "license": "Apache-2.0",
   "dependencies": {
-    "@babel/core": "^7.26.8",
+    "@babel/core": "^7.29.6",
     "@babel/template": "^7.26.8",
     "@babel/traverse": "^7.26.8",
     "google-gax": "^6.12.1",

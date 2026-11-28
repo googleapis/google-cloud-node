@@ -51,7 +51,7 @@
     "coverage": "node ../../bin/run-test.cjs build/test build/test/common && c8 report --check-coverage"
   },
   "dependencies": {
-    "@babel/core": "7.27.7",
+    "@babel/core": "7.29.6",
     "@babel/helpers": "7.27.6",
     "@babel/traverse": "7.27.7",
     "@google-cloud/common": "^8.2.2",
