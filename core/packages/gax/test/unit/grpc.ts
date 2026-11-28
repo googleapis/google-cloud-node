@@ -872,6 +872,8 @@ dvorak
   });
 
   describe('ensurePqcCurvesConfigured', () => {
+    const TLS_SUPPORTED_GROUPS_EXTENSION_TYPE = 0x000a;
+    const IANA_MLKEM1024_GROUP_ID = 0x0202;
     const initialDefaultCurve = tls.DEFAULT_ECDH_CURVE;
     const runtimeSupportsMlkem1024 = (() => {
       try {
@@ -1007,7 +1009,10 @@ dvorak
                 const extType = buf.readUInt16BE(pos);
                 const extLen = buf.readUInt16BE(pos + 2);
                 pos += 4;
-                if (extType === 0x000a && pos + 2 <= end) {
+                if (
+                  extType === TLS_SUPPORTED_GROUPS_EXTENSION_TYPE &&
+                  pos + 2 <= end
+                ) {
                   const listLen = buf.readUInt16BE(pos);
                   for (
                     let i = 0;
@@ -1052,7 +1057,7 @@ dvorak
       });
 
       assert.ok(
-        supportedGroups.includes(0x0202),
+        supportedGroups.includes(IANA_MLKEM1024_GROUP_ID),
         `Expected ClientHello supported_groups (${supportedGroups.map(g => '0x' + g.toString(16)).join(', ')}) to include 0x0202 (MLKEM1024)`,
       );
     });
