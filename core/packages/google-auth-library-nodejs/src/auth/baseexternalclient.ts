@@ -313,6 +313,7 @@ export abstract class BaseExternalAccountClient extends AuthClient {
     this.stsCredential = new sts.StsCredentials({
       tokenExchangeEndpoint: this.tokenUrl,
       clientAuthentication: this.clientAuth,
+      transporter: this.transporter,
     });
     this.scopes = opts.get('scopes') || [DEFAULT_OAUTH_SCOPE];
     this.cachedAccessToken = null;
