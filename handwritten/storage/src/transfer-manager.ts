@@ -27,10 +27,10 @@ import {
 import * as path from 'path';
 import {createReadStream, existsSync, promises as fsp} from 'fs';
 import {CRC32C} from './crc32c.js';
-import {GoogleAuth} from 'google-auth-library';
+import {DEFAULT_UNIVERSE, GoogleAuth} from 'google-auth-library';
 import {XMLParser, XMLBuilder} from 'fast-xml-parser';
 import AsyncRetry from 'async-retry';
-import {GaxiosError, GaxiosResponse} from 'gaxios';
+import {Gaxios, GaxiosError, GaxiosOptions, GaxiosResponse} from 'gaxios';
 import {createHash} from 'crypto';
 import {GCCL_GCS_CMD_KEY} from './nodejs-common/util.js';
 import {
@@ -197,7 +197,8 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
   public bucket;
   public fileName;
 
-  private authClient;
+  private authClient?: GoogleAuth;
+  private requester: GoogleAuth | Gaxios;
   private universeDomain;
   private xmlParser;
   private xmlBuilder;
@@ -210,9 +211,39 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     uploadId?: string,
     partsMap?: Map<number, string>,
   ) {
-    this.authClient =
-      bucket.storage.storageTransport.authClient || new GoogleAuth();
-    this.universeDomain = bucket.storage.universeDomain;
+    const useAuth =
+      !bucket.storage.customEndpoint ||
+      Boolean(bucket.storage.useAuthWithCustomEndpoint);
+    if (useAuth) {
+      this.authClient =
+        bucket.storage.storageTransport?.authClient || new GoogleAuth();
+      this.requester = this.authClient;
+    } else {
+      const transport = bucket.storage.storageTransport;
+      const gaxiosDefaults = transport?.gaxiosInstance?.defaults
+        ? {...transport.gaxiosInstance.defaults}
+        : undefined;
+      if (gaxiosDefaults) {
+        delete gaxiosDefaults.adapter;
+      }
+      const requester = new Gaxios(gaxiosDefaults);
+      if (transport?.gaxiosInstance?.interceptors?.request) {
+        for (const inter of transport.gaxiosInstance.interceptors.request.values()) {
+          if (inter) {
+            requester.interceptors.request.add(inter);
+          }
+        }
+      }
+      if (transport?.gaxiosInstance?.interceptors?.response) {
+        for (const inter of transport.gaxiosInstance.interceptors.response.values()) {
+          if (inter) {
+            requester.interceptors.response.add(inter);
+          }
+        }
+      }
+      this.requester = requester;
+    }
+    this.universeDomain = bucket.storage.universeDomain || DEFAULT_UNIVERSE;
     this.uploadId = uploadId || '';
     this.bucket = bucket;
     this.fileName = fileName;
@@ -228,6 +259,16 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
       maxTimeout: this.bucket.storage.retryOptions.maxRetryDelay! * 1000,
       maxRetryTime: this.bucket.storage.retryOptions.totalTimeout! * 1000,
     };
+  }
+
+  async #assertAuth(): Promise<void> {
+    if (this.authClient) {
+      await assertUniverseDomain(this.authClient, this.universeDomain);
+    }
+  }
+
+  async #request<T>(opts: GaxiosOptions): Promise<GaxiosResponse<T>> {
+    return this.requester.request<T>(opts);
   }
 
   #setGoogApiClientHeaders(headers = new Headers()): Headers {
@@ -265,10 +306,10 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
   async initiateUpload(headers?: {[key: string]: string}): Promise<void> {
     const headersObject = new Headers(headers);
     const url = `${this.baseUrl}?uploads`;
-    await assertUniverseDomain(this.authClient, this.universeDomain);
+    await this.#assertAuth();
     return AsyncRetry(async bail => {
       try {
-        const res = await this.authClient.request<
+        const res = await this.#request<
           string | Buffer | MultiPartUploadErrorResponse
         >({
           headers: this.#setGoogApiClientHeaders(headersObject),
@@ -318,17 +359,15 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
       headers.set('x-goog-hash', `crc32c=${crc.toString()}`);
     }
 
-    await assertUniverseDomain(this.authClient, this.universeDomain);
+    await this.#assertAuth();
     return AsyncRetry(async bail => {
       try {
-        const res = await this.authClient.request<MultiPartUploadErrorResponse>(
-          {
-            url,
-            method: 'PUT',
-            body: chunk,
-            headers,
-          },
-        );
+        const res = await this.#request<MultiPartUploadErrorResponse>({
+          url,
+          method: 'PUT',
+          body: chunk,
+          headers,
+        });
         if (res.data && res.data.error) {
           throw res.data.error;
         }
@@ -357,17 +396,15 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     const body = `<CompleteMultipartUpload>${this.xmlBuilder.build(
       parts,
     )}</CompleteMultipartUpload>`;
-    await assertUniverseDomain(this.authClient, this.universeDomain);
+    await this.#assertAuth();
     return AsyncRetry(async bail => {
       try {
-        const res = await this.authClient.request<MultiPartUploadErrorResponse>(
-          {
-            headers: this.#setGoogApiClientHeaders(),
-            url,
-            method: 'POST',
-            body,
-          },
-        );
+        const res = await this.#request<MultiPartUploadErrorResponse>({
+          headers: this.#setGoogApiClientHeaders(),
+          url,
+          method: 'POST',
+          body,
+        });
         if (res.data && res.data.error) {
           throw res.data.error;
         }
@@ -387,15 +424,13 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
    */
   async abortUpload(): Promise<void> {
     const url = `${this.baseUrl}?uploadId=${this.uploadId}`;
-    await assertUniverseDomain(this.authClient, this.universeDomain);
+    await this.#assertAuth();
     return AsyncRetry(async bail => {
       try {
-        const res = await this.authClient.request<MultiPartUploadErrorResponse>(
-          {
-            url,
-            method: 'DELETE',
-          },
-        );
+        const res = await this.#request<MultiPartUploadErrorResponse>({
+          url,
+          method: 'DELETE',
+        });
         if (res.data && res.data.error) {
           throw res.data.error;
         }

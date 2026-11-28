@@ -2309,7 +2309,11 @@ class File extends ServiceObject<File, FileMetadata> {
         // A simple upload reports a failed request as a stream error, so its
         // credentials are verified before the stream is used. A resumable
         // upload verifies its own.
-        if (options.resumable === false) {
+        if (
+          options.resumable === false &&
+          (!this.storage.customEndpoint ||
+            this.storage.useAuthWithCustomEndpoint)
+        ) {
           await assertUniverseDomain(
             this.storageTransport.authClient,
             this.storage.universeDomain,
