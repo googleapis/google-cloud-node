@@ -112,6 +112,11 @@ export interface BigtableOptions extends gax.GoogleAuthOptions {
   BigtableTableAdminClient?: gax.ClientOptions;
 
   metricsEnabled?: boolean;
+
+  /** The default service domain for a given Cloud universe. */
+  universeDomain?: string;
+  /** An alias for {@link BigtableOptions.universeDomain}. */
+  universe_domain?: string;
 }
 
 /**
@@ -136,16 +141,41 @@ function getUniverseDomainOnly(
   // From https://github.com/googleapis/nodejs-bigtable/blob/589540475b0b2a055018a1cb6e475800fdd46a37/src/v2/bigtable_client.ts#L120-L128.
   // This code for universe domain was taken from the Gapic Layer.
   // It is reused here to build the service path.
-  const universeDomainEnvVar =
-    typeof process === 'object' && typeof process.env === 'object'
-      ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-      : undefined;
-  return (
+  for (const opts of [gaxOpts, options]) {
+    if (
+      opts?.universe_domain !== undefined &&
+      opts?.universeDomain !== undefined &&
+      opts.universe_domain !== opts.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
+    }
+  }
+
+  const explicit =
     gaxOpts?.universeDomain ??
     gaxOpts?.universe_domain ??
     options?.universeDomain ??
-    universeDomainEnvVar
-  );
+    options?.universe_domain;
+  if (explicit !== undefined) {
+    if (typeof explicit !== 'string' || !explicit.trim()) {
+      throw new Error('The universe domain cannot be an empty string.');
+    }
+    return explicit;
+  }
+
+  const envUniverse =
+    typeof process === 'object'
+      ? process.env?.['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+      : undefined;
+  if (envUniverse === undefined) {
+    return undefined;
+  }
+  if (!envUniverse.trim()) {
+    return 'googleapis.com';
+  }
+  return envUniverse;
 }
 
 /**
@@ -190,6 +220,33 @@ function getDomain(
   const universeDomainOnly = getUniverseDomainOnly(options, gaxOpts);
   const suffix = universeDomainOnly ? universeDomainOnly : 'googleapis.com';
   return `${prefix}.${suffix}`;
+}
+
+const NESTED_AUTH_KEYS = [
+  'authClient',
+  'auth',
+  'clientOptions',
+  'credentials',
+  'keyFilename',
+  'projectId',
+] as const;
+
+function applyNestedAuthDefaults<T extends object>(
+  target: T,
+  nested?: gax.ClientOptions,
+): T {
+  const record = target as Record<string, unknown>;
+  if (nested) {
+    for (const key of NESTED_AUTH_KEYS) {
+      if (record[key] === undefined && nested[key] !== undefined) {
+        record[key] = nested[key];
+      }
+    }
+  }
+  if (record.clientOptions && typeof record.clientOptions === 'object') {
+    record.clientOptions = Object.assign({}, record.clientOptions);
+  }
+  return target;
 }
 
 /**
@@ -488,6 +545,7 @@ export class Bigtable {
   _metricsConfigManager: ClientSideMetricsConfigManager;
   admin: admin.BigtableAdmin;
   closed = false;
+  private _universeDomain: string;
 
   constructor(options: BigtableOptions = {}) {
     // Determine what scopes are needed.
@@ -531,53 +589,45 @@ export class Bigtable {
       'grpc.keepalive_timeout_ms': 10000,
     }) as gax.ClientOptions;
 
-    const dataOptions = Object.assign(
-      {},
-      baseOptions,
-      getUniverseDomainOptions(options, options.BigtableClient),
-      {
-        servicePath:
-          customEndpointBaseUrl ||
-          getDomain('bigtable', options, options.BigtableClient),
-        'grpc.callInvocationTransformer': grpcGcp.gcpCallInvocationTransformer,
-        'grpc.channelFactoryOverride': grpcGcp.gcpChannelFactoryOverride,
-        'grpc.gcpApiConfig': grpcGcp.createGcpApiConfig({
-          channelPool: {
-            minSize: 2,
-            maxSize: 4,
-            maxConcurrentStreamsLowWatermark: 10,
-            debugHeaderIntervalSecs: 600,
+    const buildClientOpts = (
+      prefix: string,
+      nested?: gax.ClientOptions,
+      extra?: gax.ClientOptions,
+    ): gax.ClientOptions =>
+      applyNestedAuthDefaults(
+        Object.assign(
+          {},
+          baseOptions,
+          {
+            servicePath:
+              customEndpointBaseUrl || getDomain(prefix, options, nested),
           },
-        }),
-      },
-      options,
-    ) as gax.ClientOptions;
+          extra,
+          options,
+          getUniverseDomainOptions(options, nested),
+        ),
+        nested,
+      );
 
-    const adminOptions = Object.assign(
-      {},
-      baseOptions,
-      getUniverseDomainOptions(options, options.BigtableTableAdminClient),
-      {
-        servicePath:
-          customEndpointBaseUrl ||
-          getDomain('bigtableadmin', options, options.BigtableTableAdminClient),
-      },
-      options,
+    const dataOptions = buildClientOpts('bigtable', options.BigtableClient, {
+      'grpc.callInvocationTransformer': grpcGcp.gcpCallInvocationTransformer,
+      'grpc.channelFactoryOverride': grpcGcp.gcpChannelFactoryOverride,
+      'grpc.gcpApiConfig': grpcGcp.createGcpApiConfig({
+        channelPool: {
+          minSize: 2,
+          maxSize: 4,
+          maxConcurrentStreamsLowWatermark: 10,
+          debugHeaderIntervalSecs: 600,
+        },
+      }),
+    });
+    const adminOptions = buildClientOpts(
+      'bigtableadmin',
+      options.BigtableTableAdminClient,
     );
-    const instanceAdminOptions = Object.assign(
-      {},
-      baseOptions,
-      getUniverseDomainOptions(options, options.BigtableInstanceAdminClient),
-      {
-        servicePath:
-          customEndpointBaseUrl ||
-          getDomain(
-            'bigtableadmin',
-            options,
-            options.BigtableInstanceAdminClient,
-          ),
-      },
-      options,
+    const instanceAdminOptions = buildClientOpts(
+      'bigtableadmin',
+      options.BigtableInstanceAdminClient,
     );
 
     this.options = {
@@ -587,17 +637,54 @@ export class Bigtable {
     };
     this.admin = admin.BigtableAdmin.fromBigtable(this);
 
+    const nestedClientOptions =
+      options.BigtableClient ??
+      options.BigtableInstanceAdminClient ??
+      options.BigtableTableAdminClient;
+    const metricsUniverseOptions = getUniverseDomainOptions(
+      options,
+      nestedClientOptions,
+    );
+    this._universeDomain =
+      metricsUniverseOptions?.universeDomain ?? 'googleapis.com';
+
     this.api = {};
-    this.auth = new GoogleAuth(Object.assign({}, baseOptions, options));
-    this.projectId = options.projectId || '{{projectId}}';
+    const authOpts = applyNestedAuthDefaults(
+      Object.assign({}, baseOptions, options, metricsUniverseOptions),
+      nestedClientOptions,
+    ) as BigtableOptions & {
+      auth?: GoogleAuth | gax.GoogleAuthOptions['authClient'];
+    };
+    if (authOpts.auth instanceof GoogleAuth) {
+      this.auth = authOpts.auth;
+    } else if ((authOpts.authClient as unknown) instanceof GoogleAuth) {
+      this.auth = authOpts.authClient as unknown as GoogleAuth;
+    } else {
+      if (authOpts.auth && !authOpts.authClient) {
+        authOpts.authClient = authOpts.auth;
+      }
+      this.auth = new GoogleAuth(authOpts);
+    }
+    this.projectId =
+      options.projectId || nestedClientOptions?.projectId || '{{projectId}}';
     this.appProfileId = options.appProfileId;
     this.projectName = `projects/${this.projectId}`;
     this.shouldReplaceProjectIdToken = this.projectId === '{{projectId}}';
 
-    const handlers = !(options.metricsEnabled === false)
-      ? [new GCPMetricsHandler(Object.assign({}, options) as ClientOptions)]
+    const metricsClientOptions = Object.assign(
+      applyNestedAuthDefaults(Object.assign({}, options), nestedClientOptions),
+      metricsUniverseOptions,
+    ) as ClientOptions;
+    const metricsEnabled =
+      options.metricsEnabled ?? !process.env.BIGTABLE_EMULATOR_HOST;
+    const handlers = metricsEnabled
+      ? [new GCPMetricsHandler(metricsClientOptions)]
       : [];
     this._metricsConfigManager = new ClientSideMetricsConfigManager(handlers);
+  }
+
+  get universeDomain(): string {
+    return this._universeDomain;
   }
 
   createInstance(
