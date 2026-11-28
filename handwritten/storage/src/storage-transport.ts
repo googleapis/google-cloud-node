@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import {randomUUID} from 'crypto';
+import {Readable} from 'stream';
 import {
   Gaxios,
   GaxiosError,
@@ -36,6 +38,312 @@ import {
   RETRYABLE_ERR_FN_DEFAULT,
   RetryOptions,
 } from './storage.js';
+
+const REDACTED_VALUE =
+  '<<REDACTED> - See `errorRedactor` option in `gaxios` for configuration>.';
+
+interface MultipartPartLike {
+  headers?: Headers | Record<string, string>;
+  content: unknown;
+}
+
+interface EventEmitterStreamLike {
+  destroyed?: boolean;
+  errored?: Error | null;
+  readableEnded?: boolean;
+  on(event: string, listener: (...args: unknown[]) => void): unknown;
+  once(event: string, listener: (...args: unknown[]) => void): unknown;
+  removeListener(
+    event: string,
+    listener: (...args: unknown[]) => void,
+  ): unknown;
+}
+
+function createPrematureCloseError(): NodeJS.ErrnoException {
+  const err = new Error('Premature close') as NodeJS.ErrnoException;
+  err.code = 'ERR_STREAM_PREMATURE_CLOSE';
+  return err;
+}
+
+function isBinaryValue(value: unknown): boolean {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+  return (
+    ArrayBuffer.isView(value) ||
+    value instanceof ArrayBuffer ||
+    (typeof Blob !== 'undefined' && value instanceof Blob)
+  );
+}
+
+function isStreamLike(value: unknown): boolean {
+  if (!value || typeof value !== 'object' || isBinaryValue(value)) {
+    return false;
+  }
+  if (value instanceof Readable) {
+    return true;
+  }
+  if (
+    typeof ReadableStream !== 'undefined' &&
+    value instanceof ReadableStream
+  ) {
+    return true;
+  }
+  const obj = value as {
+    pipe?: unknown;
+    [Symbol.asyncIterator]?: unknown;
+  };
+  return (
+    typeof obj.pipe === 'function' ||
+    typeof obj[Symbol.asyncIterator] === 'function'
+  );
+}
+
+function isEventEmitterStream(value: unknown): value is EventEmitterStreamLike {
+  if (!isStreamLike(value)) {
+    return false;
+  }
+  const obj = value as Partial<EventEmitterStreamLike>;
+  return (
+    typeof obj.on === 'function' &&
+    typeof obj.once === 'function' &&
+    typeof obj.removeListener === 'function'
+  );
+}
+
+function extractPartContentType(
+  headers?: Headers | Record<string, string>,
+): string {
+  const defaultType = 'application/octet-stream';
+  if (!headers) {
+    return defaultType;
+  }
+  if (typeof (headers as Headers).get === 'function') {
+    return (headers as Headers).get('content-type') || defaultType;
+  }
+  if (typeof headers === 'object') {
+    for (const [key, value] of Object.entries(headers)) {
+      if (key.toLowerCase() === 'content-type' && value) {
+        return value;
+      }
+    }
+  }
+  return defaultType;
+}
+
+function normalizeChunk(chunk: unknown): Buffer {
+  if (Buffer.isBuffer(chunk)) {
+    return chunk;
+  }
+  if (typeof chunk === 'string') {
+    return Buffer.from(chunk);
+  }
+  if (ArrayBuffer.isView(chunk)) {
+    return Buffer.from(chunk.buffer, chunk.byteOffset, chunk.byteLength);
+  }
+  if (chunk instanceof ArrayBuffer) {
+    return Buffer.from(chunk);
+  }
+  return Buffer.from(String(chunk));
+}
+
+function toPartAsyncIterable(content: unknown): AsyncIterable<unknown> {
+  if (content instanceof Readable && typeof content.iterator === 'function') {
+    // Do not destroy the upstream stream when the consumer detaches (e.g. on an
+    // early HTTP 4xx/5xx response), otherwise duplexify receives ABORT_ERR before
+    // the real HTTP error propagates to the caller.
+    return content.iterator({destroyOnReturn: false});
+  }
+  if (
+    content &&
+    typeof content === 'object' &&
+    typeof (content as {[Symbol.asyncIterator]?: unknown})[
+      Symbol.asyncIterator
+    ] === 'function'
+  ) {
+    return content as AsyncIterable<unknown>;
+  }
+  const wrapped = new Readable().wrap(content as NodeJS.ReadableStream);
+  return wrapped.iterator({destroyOnReturn: false});
+}
+
+function createMultipartStream(
+  parts: MultipartPartLike[],
+  boundary: string,
+  earlyErrors: Map<object, Error>,
+): Readable {
+  async function* generateMultipartChunks(): AsyncGenerator<Buffer> {
+    for (const part of parts) {
+      const contentType = extractPartContentType(part.headers);
+      yield Buffer.from(
+        `--${boundary}\r\nContent-Type: ${contentType}\r\n\r\n`,
+      );
+
+      const content = part.content;
+      if (typeof content === 'string') {
+        if (content.length > 0) {
+          yield Buffer.from(content);
+        }
+      } else if (Buffer.isBuffer(content)) {
+        if (content.length > 0) {
+          yield content;
+        }
+      } else if (ArrayBuffer.isView(content)) {
+        if (content.byteLength > 0) {
+          yield Buffer.from(
+            content.buffer,
+            content.byteOffset,
+            content.byteLength,
+          );
+        }
+      } else if (content instanceof ArrayBuffer) {
+        if (content.byteLength > 0) {
+          yield Buffer.from(content);
+        }
+      } else if (isStreamLike(content)) {
+        const earlyErr = earlyErrors.get(content as object);
+        if (earlyErr) {
+          throw earlyErr;
+        }
+        const iterable = toPartAsyncIterable(content);
+        for await (const chunk of iterable) {
+          const buf = normalizeChunk(chunk);
+          if (buf.length > 0) {
+            yield buf;
+          }
+        }
+      }
+
+      yield Buffer.from('\r\n');
+    }
+    yield Buffer.from(`--${boundary}--\r\n`);
+  }
+
+  return Readable.from(generateMultipartChunks(), {objectMode: false});
+}
+
+/**
+ * O(1) error redactor mirroring gaxios's default redaction for headers, URL
+ * query params, and JSON/text error responses while skipping binary views
+ * (Buffer/Uint8Array) and streams so large request bodies cannot stall the
+ * event loop.
+ */
+function redactStorageError<
+  O extends GaxiosOptionsPrepared,
+  R extends GaxiosResponse,
+>(data: {config?: O; response?: R}): {config?: O; response?: R} {
+  const redactHeaders = (headers?: Headers | Record<string, string>) => {
+    if (!headers) return;
+    if (
+      typeof (headers as Headers).forEach === 'function' &&
+      typeof (headers as Headers).set === 'function'
+    ) {
+      (headers as Headers).forEach((_, key) => {
+        if (
+          /^authentication$/i.test(key) ||
+          /^authorization$/i.test(key) ||
+          /secret/i.test(key)
+        ) {
+          (headers as Headers).set(key, REDACTED_VALUE);
+        }
+      });
+    } else if (typeof headers === 'object') {
+      for (const key of Object.keys(headers)) {
+        if (
+          /^authentication$/i.test(key) ||
+          /^authorization$/i.test(key) ||
+          /secret/i.test(key)
+        ) {
+          (headers as Record<string, string>)[key] = REDACTED_VALUE;
+        }
+      }
+    }
+  };
+
+  const redactString = <T extends Record<string, unknown>>(
+    obj: T,
+    key: keyof T,
+  ) => {
+    if (
+      typeof obj === 'object' &&
+      obj !== null &&
+      typeof obj[key] === 'string'
+    ) {
+      const text = obj[key] as string;
+      if (
+        /grant_type=/i.test(text) ||
+        /assertion=/i.test(text) ||
+        /secret/i.test(text)
+      ) {
+        (obj[key] as unknown) = REDACTED_VALUE;
+      }
+    }
+  };
+
+  const redactObject = (obj: unknown) => {
+    if (
+      !obj ||
+      typeof obj !== 'object' ||
+      isBinaryValue(obj) ||
+      isStreamLike(obj)
+    ) {
+      return;
+    }
+    if (
+      obj instanceof FormData ||
+      obj instanceof URLSearchParams ||
+      ('forEach' in obj && 'set' in obj)
+    ) {
+      (obj as FormData | URLSearchParams).forEach((_, key) => {
+        if (['grant_type', 'assertion'].includes(key) || /secret/.test(key)) {
+          (obj as FormData | URLSearchParams).set(key, REDACTED_VALUE);
+        }
+      });
+    } else {
+      const record = obj as Record<string, unknown>;
+      if ('grant_type' in record) {
+        record['grant_type'] = REDACTED_VALUE;
+      }
+      if ('assertion' in record) {
+        record['assertion'] = REDACTED_VALUE;
+      }
+      if ('client_secret' in record) {
+        record['client_secret'] = REDACTED_VALUE;
+      }
+    }
+  };
+
+  if (data.config) {
+    redactHeaders(data.config.headers);
+    if (!isBinaryValue(data.config.data) && !isStreamLike(data.config.data)) {
+      redactString(data.config as unknown as Record<string, unknown>, 'data');
+      redactObject(data.config.data);
+    }
+    if (!isBinaryValue(data.config.body) && !isStreamLike(data.config.body)) {
+      redactString(data.config as unknown as Record<string, unknown>, 'body');
+      redactObject(data.config.body);
+    }
+    if (data.config.url?.searchParams) {
+      if (data.config.url.searchParams.has('token')) {
+        data.config.url.searchParams.set('token', REDACTED_VALUE);
+      }
+      if (data.config.url.searchParams.has('client_secret')) {
+        data.config.url.searchParams.set('client_secret', REDACTED_VALUE);
+      }
+    }
+  }
+
+  if (data.response) {
+    redactStorageError({config: data.response.config});
+    redactHeaders(data.response.headers);
+    if ((data.response as unknown as Response).bodyUsed) {
+      redactString(data.response as unknown as Record<string, unknown>, 'data');
+      redactObject(data.response.data);
+    }
+  }
+
+  return data;
+}
 
 export interface StandardStorageQueryParams {
   alt?: 'json' | 'media';
@@ -138,96 +446,120 @@ export class StorageTransport {
     reqOpts: StorageRequestOptions,
     callback?: StorageTransportCallback<T>,
   ): Promise<GaxiosResponse<T>> {
-    await assertUniverseDomain(this.authClient, this.universeDomain);
+    // Attach early error and premature-close listeners to any multipart stream
+    // parts synchronously before awaiting auth/project resolution so stream
+    // failures cannot trigger unhandled 'error' events or hang the request.
+    const earlyErrors = new Map<object, Error>();
+    const partCleanupFns: Array<() => void> = [];
+    let multipartAbortController: AbortController | undefined;
+    let firstEarlyError: Error | undefined;
 
-    // Project ID Resolution
-    if (!this.projectId) {
-      this.projectId =
-        reqOpts.projectId || (await this.authClient.getProjectId());
+    if (reqOpts.multipart && Array.isArray(reqOpts.multipart)) {
+      for (const part of reqOpts.multipart as MultipartPartLike[]) {
+        if (!isEventEmitterStream(part.content)) {
+          continue;
+        }
+        const stream = part.content;
+        multipartAbortController ??= new AbortController();
+        const recordPartError = (err: Error) => {
+          if (!earlyErrors.has(stream)) {
+            earlyErrors.set(stream, err);
+          }
+          firstEarlyError ??= err;
+          if (!multipartAbortController!.signal.aborted) {
+            multipartAbortController!.abort(err);
+          }
+        };
+
+        if (stream.errored) {
+          recordPartError(stream.errored);
+          continue;
+        }
+        if (stream.destroyed && stream.readableEnded === false) {
+          recordPartError(createPrematureCloseError());
+          continue;
+        }
+
+        let ended = Boolean(stream.readableEnded);
+        const onEnd = () => {
+          ended = true;
+        };
+        const onError = (err: unknown) => {
+          recordPartError(err instanceof Error ? err : new Error(String(err)));
+        };
+        const onClose = () => {
+          if (!ended && !stream.readableEnded) {
+            recordPartError(createPrematureCloseError());
+          }
+        };
+        stream.once('end', onEnd);
+        stream.on('error', onError);
+        stream.once('close', onClose);
+        partCleanupFns.push(() => {
+          stream.removeListener('end', onEnd);
+          stream.removeListener('error', onError);
+          stream.removeListener('close', onClose);
+        });
+      }
+    }
+
+    let cleanedUp = false;
+    const cleanupPartListeners = () => {
+      if (cleanedUp) return;
+      cleanedUp = true;
+      for (const cleanup of partCleanupFns) {
+        cleanup();
+      }
+    };
+
+    try {
+      await assertUniverseDomain(this.authClient, this.universeDomain);
+
+      // Project ID Resolution
+      if (!this.projectId) {
+        this.projectId =
+          reqOpts.projectId || (await this.authClient.getProjectId());
+      }
+    } catch (e) {
+      cleanupPartListeners();
+      throw e;
     }
 
     if (reqOpts.queryParameters && 'project' in reqOpts.queryParameters) {
       reqOpts.queryParameters.project = this.projectId;
     }
 
-    if (reqOpts.multipart && Array.isArray(reqOpts.multipart)) {
-      const boundary = '===============storage_multipart_boundary==';
-      const chunks: Buffer[] = [];
-      for (const part of reqOpts.multipart) {
-        let contentType = 'application/octet-stream';
-        if (part.headers) {
-          if (typeof (part.headers as Headers).get === 'function') {
-            contentType =
-              (part.headers as Headers).get('content-type') || contentType;
-          } else if (typeof part.headers === 'object') {
-            const h = part.headers as unknown as Record<string, string>;
-            contentType = h['Content-Type'] || h['content-type'] || contentType;
-          }
-        }
-        chunks.push(
-          Buffer.from(`--${boundary}\r\nContent-Type: ${contentType}\r\n\r\n`),
-        );
-        if (typeof part.content === 'string') {
-          chunks.push(Buffer.from(part.content));
-        } else if (Buffer.isBuffer(part.content)) {
-          chunks.push(part.content);
-        } else if (
-          part.content &&
-          typeof (part.content as {pipe?: unknown}).pipe === 'function'
-        ) {
-          const stream = part.content as import('stream').Readable;
-          const streamChunks: Buffer[] = [];
-          await new Promise<void>((resolve, reject) => {
-            const onData = (chunk: Buffer | string | Uint8Array) => {
-              streamChunks.push(
-                Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk),
-              );
-            };
-            const onEnd = () => {
-              cleanup();
-              resolve();
-            };
-            const onError = (err: Error) => {
-              cleanup();
-              reject(err);
-            };
-            const cleanup = () => {
-              stream.removeListener('data', onData);
-              stream.removeListener('end', onEnd);
-              stream.removeListener('error', onError);
-            };
-            stream.on('data', onData);
-            stream.once('end', onEnd);
-            stream.once('error', onError);
-            if (typeof stream.resume === 'function') {
-              stream.resume();
-            }
-          });
-          chunks.push(Buffer.concat(streamChunks));
-        }
-        chunks.push(Buffer.from('\r\n'));
-      }
-      chunks.push(Buffer.from(`--${boundary}--\r\n`));
+    const requestOpts: StorageRequestOptions = {...reqOpts};
+    let multipartBoundary: string | undefined;
+    let multipartStream: Readable | undefined;
 
-      reqOpts.headers = reqOpts.headers || {};
-      if (typeof (reqOpts.headers as Headers).set === 'function') {
-        (reqOpts.headers as Headers).set(
-          'Content-Type',
-          `multipart/related; boundary="${boundary}"`,
-        );
-      } else {
-        (reqOpts.headers as Record<string, string>)['Content-Type'] =
-          `multipart/related; boundary="${boundary}"`;
-      }
-      reqOpts.body = Buffer.concat(chunks);
-      delete reqOpts.multipart;
+    if (requestOpts.multipart && Array.isArray(requestOpts.multipart)) {
+      multipartBoundary = randomUUID();
+      multipartStream = createMultipartStream(
+        requestOpts.multipart as MultipartPartLike[],
+        multipartBoundary,
+        earlyErrors,
+      );
+      requestOpts.body = multipartStream as unknown as GaxiosOptions['body'];
+      requestOpts.data = multipartStream;
+      delete requestOpts.multipart;
     }
 
     // Header Construction
-    const headers = this.#prepareHeaders(reqOpts);
+    const headers = this.#prepareHeaders(requestOpts);
+    if (multipartBoundary) {
+      for (const key of Object.keys(headers)) {
+        const lower = key.toLowerCase();
+        if (lower === 'content-type' || lower === 'content-length') {
+          delete headers[key];
+        }
+      }
+      headers['Content-Type'] =
+        `multipart/related; boundary="${multipartBoundary}"`;
+    }
 
     // Interceptor Management
-    const requestGaxiosInstance = reqOpts.interceptors
+    const requestGaxiosInstance = requestOpts.interceptors
       ? new Gaxios()
       : this.gaxiosInstance;
 
@@ -239,13 +571,13 @@ export class StorageTransport {
       }
     }
 
-    if (reqOpts.interceptors) {
-      for (const inter of reqOpts.interceptors) {
+    if (requestOpts.interceptors) {
+      for (const inter of requestOpts.interceptors) {
         requestGaxiosInstance.interceptors.request.add(inter);
       }
     }
 
-    const urlString = reqOpts.url?.toString() || '';
+    const urlString = requestOpts.url?.toString() || '';
     const isAbsolute = this.#isValidUrl(urlString);
     const normalizedUrl =
       !isAbsolute && !urlString.startsWith('/') ? `/${urlString}` : urlString;
@@ -256,16 +588,16 @@ export class StorageTransport {
       : new URL(normalizedUrl, this.baseUrl).toString();
 
     let hasEtagInBody = !!(
-      (reqOpts.body as {etag?: unknown})?.etag ||
-      (reqOpts.data as {etag?: unknown})?.etag
+      (requestOpts.body as {etag?: unknown})?.etag ||
+      (requestOpts.data as {etag?: unknown})?.etag
     );
     if (
       !hasEtagInBody &&
-      typeof reqOpts.body === 'string' &&
-      reqOpts.body.includes('"etag"')
+      typeof requestOpts.body === 'string' &&
+      requestOpts.body.includes('"etag"')
     ) {
       try {
-        const parsed = JSON.parse(reqOpts.body);
+        const parsed = JSON.parse(requestOpts.body);
         hasEtagInBody = Boolean(parsed && parsed.etag);
       } catch {
         hasEtagInBody = false;
@@ -276,10 +608,10 @@ export class StorageTransport {
     const hasPrecondition = !!(
       this.retryOptions.idempotencyStrategy ===
         IdempotencyStrategy.RetryAlways ||
-      reqOpts.hasPrecondition ||
-      reqOpts.queryParameters?.ifGenerationMatch !== undefined ||
-      reqOpts.queryParameters?.ifMetagenerationMatch !== undefined ||
-      reqOpts.queryParameters?.ifSourceGenerationMatch !== undefined ||
+      requestOpts.hasPrecondition ||
+      requestOpts.queryParameters?.ifGenerationMatch !== undefined ||
+      requestOpts.queryParameters?.ifMetagenerationMatch !== undefined ||
+      requestOpts.queryParameters?.ifSourceGenerationMatch !== undefined ||
       hasEtagInBody
     );
 
@@ -311,14 +643,40 @@ export class StorageTransport {
       return err;
     };
 
+    const isStreamBody =
+      Boolean(multipartStream) ||
+      isStreamLike(requestOpts.body) ||
+      isStreamLike(requestOpts.data);
+    const isBinaryBody =
+      isBinaryValue(requestOpts.body) || isBinaryValue(requestOpts.data);
+
     const isRetryDisabled =
       this.retryOptions.autoRetry === false ||
       this.retryOptions.idempotencyStrategy === IdempotencyStrategy.RetryNever;
-    const maxRetries = isRetryDisabled
-      ? 0
-      : (reqOpts.maxRetries ?? this.retryOptions.maxRetries ?? 3);
+    const maxRetries =
+      isRetryDisabled || isStreamBody
+        ? 0
+        : (requestOpts.maxRetries ?? this.retryOptions.maxRetries ?? 3);
+
+    let signal = requestOpts.signal ?? undefined;
+    if (multipartAbortController) {
+      signal = signal
+        ? AbortSignal.any([signal, multipartAbortController.signal])
+        : multipartAbortController.signal;
+    }
+
+    const errorRedactor =
+      requestOpts.errorRedactor !== undefined
+        ? requestOpts.errorRedactor
+        : isStreamBody || isBinaryBody
+          ? redactStorageError
+          : undefined;
 
     try {
+      if (firstEarlyError) {
+        throw firstEarlyError;
+      }
+
       const requestPromise = this.authClient.request<T>({
         adapter: async (opts: GaxiosOptions) => {
           const urlHasParams = opts.url
@@ -338,19 +696,23 @@ export class StorageTransport {
           retryDelayMultiplier: this.retryOptions.retryDelayMultiplier,
           totalTimeout: this.retryOptions.totalTimeout,
           shouldRetry: (err: GaxiosError) =>
-            !isRetryDisabled && !!this.retryOptions.retryableErrorFn?.(err),
+            !isStreamBody &&
+            !isRetryDisabled &&
+            !!this.retryOptions.retryableErrorFn?.(err),
         },
-        ...reqOpts,
+        ...requestOpts,
+        ...(errorRedactor !== undefined ? {errorRedactor} : {}),
+        ...(signal ? {signal} : {}),
         hasPrecondition, // Pass flag to Gaxios / AuthClient options
-        params: reqOpts.queryParameters,
+        params: requestOpts.queryParameters,
         paramsSerializer: this.#paramsSerializer,
         headers,
         url: requestUrl,
         timeout: this.timeout,
         validateStatus: (status: number): boolean => {
           const isResumable = !!(
-            reqOpts.queryParameters?.uploadType === 'resumable' ||
-            reqOpts.url?.toString().includes('uploadType=resumable')
+            requestOpts.queryParameters?.uploadType === 'resumable' ||
+            requestOpts.url?.toString().includes('uploadType=resumable')
           );
           return (
             (status >= 200 && status < 300) || (isResumable && status === 308)
@@ -399,9 +761,16 @@ export class StorageTransport {
         return resp as unknown as T;
       };
 
-      const enrichedPromise = requestPromise.catch(err => {
-        throw decorateError(err);
-      });
+      const enrichedPromise = requestPromise
+        .catch(err => {
+          if (multipartStream && !multipartStream.destroyed) {
+            multipartStream.destroy();
+          }
+          throw decorateError(err);
+        })
+        .finally(() => {
+          cleanupPartListeners();
+        });
 
       if (callback) {
         void (async () => {
@@ -423,6 +792,10 @@ export class StorageTransport {
 
       return enrichedPromise;
     } catch (e) {
+      if (multipartStream && !multipartStream.destroyed) {
+        multipartStream.destroy();
+      }
+      cleanupPartListeners();
       const err = decorateError(e);
       if (callback) {
         callback(err as GaxiosError);
