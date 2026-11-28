@@ -19,7 +19,7 @@ import assert from 'assert';
 
 const SCENARIO_NUMBER_TO_TEST = 4;
 const retryTestCase: RetryTestCase | undefined = testFile.retryTests.find(
-  test => test.id === SCENARIO_NUMBER_TO_TEST
+  test => test.id === SCENARIO_NUMBER_TO_TEST,
 );
 
 describe(`Scenario ${SCENARIO_NUMBER_TO_TEST}`, () => {

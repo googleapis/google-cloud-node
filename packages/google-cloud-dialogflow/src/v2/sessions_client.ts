@@ -712,7 +712,7 @@ export class SessionsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('detectIntent request %j', request);
+    this._log.debug('detectIntent request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2.IDetectIntentResponse,
@@ -723,7 +723,7 @@ export class SessionsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('detectIntent response %j', response);
+          this._log.debug('detectIntent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -735,7 +735,7 @@ export class SessionsClient {
           protos.google.cloud.dialogflow.v2.IDetectIntentRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('detectIntent response %j', response);
+          this._log.debug('detectIntent response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -788,7 +788,7 @@ export class SessionsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('streamingDetectIntent stream %j', options);
+    this._log.debug('streamingDetectIntent stream %j', options);
     return this.innerApiCalls.streamingDetectIntent(null, options);
   }
 

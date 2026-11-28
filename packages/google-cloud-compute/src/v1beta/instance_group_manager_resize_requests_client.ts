@@ -507,7 +507,7 @@ export class InstanceGroupManagerResizeRequestsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('cancel request %j', request);
+    this._log.debug('cancel request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
@@ -518,7 +518,7 @@ export class InstanceGroupManagerResizeRequestsClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('cancel response %j', rawResponse);
+          this._log.debug('cancel response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -683,7 +683,7 @@ export class InstanceGroupManagerResizeRequestsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('delete request %j', request);
+    this._log.debug('delete request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
@@ -694,7 +694,7 @@ export class InstanceGroupManagerResizeRequestsClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('delete response %j', rawResponse);
+          this._log.debug('delete response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -844,7 +844,7 @@ export class InstanceGroupManagerResizeRequestsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('get request %j', request);
+    this._log.debug('get request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1beta.IInstanceGroupManagerResizeRequest,
@@ -855,7 +855,7 @@ export class InstanceGroupManagerResizeRequestsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -870,7 +870,7 @@ export class InstanceGroupManagerResizeRequestsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1013,7 +1013,7 @@ export class InstanceGroupManagerResizeRequestsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('insert request %j', request);
+    this._log.debug('insert request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
@@ -1024,7 +1024,7 @@ export class InstanceGroupManagerResizeRequestsClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('insert response %j', rawResponse);
+          this._log.debug('insert response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -1266,11 +1266,11 @@ export class InstanceGroupManagerResizeRequestsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('list values %j', values);
+          this._log.debug('list values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('list request %j', request);
+    this._log.debug('list request %j', request);
     return this.innerApiCalls
       .list(request, options, wrappedCallback)
       ?.then(
@@ -1279,7 +1279,7 @@ export class InstanceGroupManagerResizeRequestsClient {
           protos.google.cloud.compute.v1beta.IListInstanceGroupManagerResizeRequestsRequest | null,
           protos.google.cloud.compute.v1beta.IInstanceGroupManagerResizeRequestsListResponse,
         ]) => {
-          this._log.info('list values %j', response);
+          this._log.debug('list values %j', response);
           return [response, input, output];
         },
       );
@@ -1414,7 +1414,7 @@ export class InstanceGroupManagerResizeRequestsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('list stream %j', request);
+    this._log.debug('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
       request,
@@ -1554,7 +1554,7 @@ export class InstanceGroupManagerResizeRequestsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('list iterate %j', request);
+    this._log.debug('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
       request as {},

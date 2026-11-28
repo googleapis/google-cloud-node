@@ -757,7 +757,7 @@ export class ProjectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getProject request %j', request);
+    this._log.debug('getProject request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1alpha.IProject,
@@ -768,7 +768,7 @@ export class ProjectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getProject response %j', response);
+          this._log.debug('getProject response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -783,7 +783,7 @@ export class ProjectServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getProject response %j', response);
+          this._log.debug('getProject response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -923,7 +923,7 @@ export class ProjectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('reportConsentChange request %j', request);
+    this._log.debug('reportConsentChange request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1alpha.IProject,
@@ -934,7 +934,7 @@ export class ProjectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('reportConsentChange response %j', response);
+          this._log.debug('reportConsentChange response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -949,7 +949,7 @@ export class ProjectServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('reportConsentChange response %j', response);
+          this._log.debug('reportConsentChange response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1101,11 +1101,11 @@ export class ProjectServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('provisionProject response %j', rawResponse);
+          this._log.debug('provisionProject response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('provisionProject request %j', request);
+    this._log.debug('provisionProject request %j', request);
     return this.innerApiCalls
       .provisionProject(request, options, wrappedCallback)
       ?.then(
@@ -1117,7 +1117,7 @@ export class ProjectServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('provisionProject response %j', rawResponse);
+          this._log.debug('provisionProject response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

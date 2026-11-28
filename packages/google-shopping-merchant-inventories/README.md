@@ -64,12 +64,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete regional inventory | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1/regional_inventory_service.delete_regional_inventory.js) |
 | insert regional inventory | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1/regional_inventory_service.insert_regional_inventory.js) |
 | list regional inventories | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1/regional_inventory_service.list_regional_inventories.js) |
-| delete local inventory | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1beta/local_inventory_service.delete_local_inventory.js) |
-| insert local inventory | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1beta/local_inventory_service.insert_local_inventory.js) |
-| list local inventories | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1beta/local_inventory_service.list_local_inventories.js) |
-| delete regional inventory | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1beta/regional_inventory_service.delete_regional_inventory.js) |
-| insert regional inventory | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1beta/regional_inventory_service.insert_regional_inventory.js) |
-| list regional inventories | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1beta/regional_inventory_service.list_regional_inventories.js) |
 
 
 ## Supported Node.js Versions

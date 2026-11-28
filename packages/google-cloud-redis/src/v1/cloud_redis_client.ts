@@ -643,7 +643,7 @@ export class CloudRedisClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getInstance request %j', request);
+    this._log.debug('getInstance request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.redis.v1.IInstance,
@@ -652,7 +652,7 @@ export class CloudRedisClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getInstance response %j', response);
+          this._log.debug('getInstance response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -664,7 +664,7 @@ export class CloudRedisClient {
           protos.google.cloud.redis.v1.IGetInstanceRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getInstance response %j', response);
+          this._log.debug('getInstance response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -779,7 +779,7 @@ export class CloudRedisClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getInstanceAuthString request %j', request);
+    this._log.debug('getInstanceAuthString request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.redis.v1.IInstanceAuthString,
@@ -790,7 +790,7 @@ export class CloudRedisClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getInstanceAuthString response %j', response);
+          this._log.debug('getInstanceAuthString response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -805,7 +805,7 @@ export class CloudRedisClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getInstanceAuthString response %j', response);
+          this._log.debug('getInstanceAuthString response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -964,11 +964,11 @@ export class CloudRedisClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createInstance response %j', rawResponse);
+          this._log.debug('createInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createInstance request %j', request);
+    this._log.debug('createInstance request %j', request);
     return this.innerApiCalls
       .createInstance(request, options, wrappedCallback)
       ?.then(
@@ -980,7 +980,7 @@ export class CloudRedisClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createInstance response %j', rawResponse);
+          this._log.debug('createInstance response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1148,11 +1148,11 @@ export class CloudRedisClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateInstance response %j', rawResponse);
+          this._log.debug('updateInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateInstance request %j', request);
+    this._log.debug('updateInstance request %j', request);
     return this.innerApiCalls
       .updateInstance(request, options, wrappedCallback)
       ?.then(
@@ -1164,7 +1164,7 @@ export class CloudRedisClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateInstance response %j', rawResponse);
+          this._log.debug('updateInstance response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1322,11 +1322,11 @@ export class CloudRedisClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('upgradeInstance response %j', rawResponse);
+          this._log.debug('upgradeInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('upgradeInstance request %j', request);
+    this._log.debug('upgradeInstance request %j', request);
     return this.innerApiCalls
       .upgradeInstance(request, options, wrappedCallback)
       ?.then(
@@ -1338,7 +1338,7 @@ export class CloudRedisClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('upgradeInstance response %j', rawResponse);
+          this._log.debug('upgradeInstance response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1502,11 +1502,11 @@ export class CloudRedisClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('importInstance response %j', rawResponse);
+          this._log.debug('importInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('importInstance request %j', request);
+    this._log.debug('importInstance request %j', request);
     return this.innerApiCalls
       .importInstance(request, options, wrappedCallback)
       ?.then(
@@ -1518,7 +1518,7 @@ export class CloudRedisClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('importInstance response %j', rawResponse);
+          this._log.debug('importInstance response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1680,11 +1680,11 @@ export class CloudRedisClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('exportInstance response %j', rawResponse);
+          this._log.debug('exportInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('exportInstance request %j', request);
+    this._log.debug('exportInstance request %j', request);
     return this.innerApiCalls
       .exportInstance(request, options, wrappedCallback)
       ?.then(
@@ -1696,7 +1696,7 @@ export class CloudRedisClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('exportInstance response %j', rawResponse);
+          this._log.debug('exportInstance response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1855,11 +1855,11 @@ export class CloudRedisClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('failoverInstance response %j', rawResponse);
+          this._log.debug('failoverInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('failoverInstance request %j', request);
+    this._log.debug('failoverInstance request %j', request);
     return this.innerApiCalls
       .failoverInstance(request, options, wrappedCallback)
       ?.then(
@@ -1871,7 +1871,7 @@ export class CloudRedisClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('failoverInstance response %j', rawResponse);
+          this._log.debug('failoverInstance response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2027,11 +2027,11 @@ export class CloudRedisClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteInstance response %j', rawResponse);
+          this._log.debug('deleteInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteInstance request %j', request);
+    this._log.debug('deleteInstance request %j', request);
     return this.innerApiCalls
       .deleteInstance(request, options, wrappedCallback)
       ?.then(
@@ -2043,7 +2043,7 @@ export class CloudRedisClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteInstance response %j', rawResponse);
+          this._log.debug('deleteInstance response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2206,11 +2206,11 @@ export class CloudRedisClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('rescheduleMaintenance response %j', rawResponse);
+          this._log.debug('rescheduleMaintenance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('rescheduleMaintenance request %j', request);
+    this._log.debug('rescheduleMaintenance request %j', request);
     return this.innerApiCalls
       .rescheduleMaintenance(request, options, wrappedCallback)
       ?.then(
@@ -2222,7 +2222,7 @@ export class CloudRedisClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('rescheduleMaintenance response %j', rawResponse);
+          this._log.debug('rescheduleMaintenance response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2381,11 +2381,11 @@ export class CloudRedisClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listInstances values %j', values);
+          this._log.debug('listInstances values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listInstances request %j', request);
+    this._log.debug('listInstances request %j', request);
     return this.innerApiCalls
       .listInstances(request, options, wrappedCallback)
       ?.then(
@@ -2394,7 +2394,7 @@ export class CloudRedisClient {
           protos.google.cloud.redis.v1.IListInstancesRequest | null,
           protos.google.cloud.redis.v1.IListInstancesResponse,
         ]) => {
-          this._log.info('listInstances values %j', response);
+          this._log.debug('listInstances values %j', response);
           return [response, input, output];
         },
       );
@@ -2448,7 +2448,7 @@ export class CloudRedisClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listInstances stream %j', request);
+    this._log.debug('listInstances stream %j', request);
     return this.descriptors.page.listInstances.createStream(
       this.innerApiCalls.listInstances as GaxCall,
       request,
@@ -2507,7 +2507,7 @@ export class CloudRedisClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listInstances iterate %j', request);
+    this._log.debug('listInstances iterate %j', request);
     return this.descriptors.page.listInstances.asyncIterate(
       this.innerApiCalls['listInstances'] as GaxCall,
       request as {},

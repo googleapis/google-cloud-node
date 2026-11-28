@@ -29,6 +29,42 @@ const UNKNOWN_TYPE_ENCONDED_ERROR_PREFIX = 'Unknown type encoded in';
 const UNKNOWN_TYPE_NO_SUCH_TYPE = 'no such type';
 
 const NUM_OF_PARTS_IN_PROTO_TYPE_NAME = 2;
+const RAW_HTTP_RESPONSE_PAYLOAD = Symbol.for(
+  'google-gax.rawHttpResponsePayload',
+);
+
+/**
+ * Attaches the full raw HTTP response body non-enumerably to a GoogleError so
+ * telemetry debug logging can report `response.payload` without altering
+ * standard error formatting or serialization.
+ */
+export function setRawHttpResponsePayload(
+  err: GoogleError,
+  payload: unknown,
+): void {
+  try {
+    Object.defineProperty(err, RAW_HTTP_RESPONSE_PAYLOAD, {
+      value: payload,
+      configurable: true,
+      enumerable: false,
+      writable: true,
+    });
+  } catch {
+    // Fail open if err is frozen, non-extensible, or traps defineProperty.
+  }
+}
+
+/**
+ * Reads the raw HTTP response body previously attached by
+ * {@link setRawHttpResponsePayload}, if any.
+ */
+export function getRawHttpResponsePayload(err: object): unknown {
+  try {
+    return (err as Record<symbol, unknown>)[RAW_HTTP_RESPONSE_PAYLOAD];
+  } catch {
+    return undefined;
+  }
+}
 
 export class GoogleError extends Error {
   code?: Status;

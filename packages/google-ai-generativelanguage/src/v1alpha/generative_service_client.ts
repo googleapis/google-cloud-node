@@ -578,7 +578,7 @@ export class GenerativeServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateContent request %j', request);
+    this._log.debug('generateContent request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1alpha.IGenerateContentResponse,
@@ -589,7 +589,7 @@ export class GenerativeServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateContent response %j', response);
+          this._log.debug('generateContent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -604,7 +604,7 @@ export class GenerativeServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('generateContent response %j', response);
+          this._log.debug('generateContent response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -766,7 +766,7 @@ export class GenerativeServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateAnswer request %j', request);
+    this._log.debug('generateAnswer request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1alpha.IGenerateAnswerResponse,
@@ -777,7 +777,7 @@ export class GenerativeServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateAnswer response %j', response);
+          this._log.debug('generateAnswer response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -792,7 +792,7 @@ export class GenerativeServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('generateAnswer response %j', response);
+          this._log.debug('generateAnswer response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -933,7 +933,7 @@ export class GenerativeServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('embedContent request %j', request);
+    this._log.debug('embedContent request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1alpha.IEmbedContentResponse,
@@ -944,7 +944,7 @@ export class GenerativeServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('embedContent response %j', response);
+          this._log.debug('embedContent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -959,7 +959,7 @@ export class GenerativeServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('embedContent response %j', response);
+          this._log.debug('embedContent response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1086,7 +1086,7 @@ export class GenerativeServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchEmbedContents request %j', request);
+    this._log.debug('batchEmbedContents request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1alpha.IBatchEmbedContentsResponse,
@@ -1097,7 +1097,7 @@ export class GenerativeServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchEmbedContents response %j', response);
+          this._log.debug('batchEmbedContents response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1112,7 +1112,7 @@ export class GenerativeServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchEmbedContents response %j', response);
+          this._log.debug('batchEmbedContents response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1248,7 +1248,7 @@ export class GenerativeServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('countTokens request %j', request);
+    this._log.debug('countTokens request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1alpha.ICountTokensResponse,
@@ -1259,7 +1259,7 @@ export class GenerativeServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('countTokens response %j', response);
+          this._log.debug('countTokens response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1274,7 +1274,7 @@ export class GenerativeServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('countTokens response %j', response);
+          this._log.debug('countTokens response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1382,7 +1382,7 @@ export class GenerativeServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('streamGenerateContent stream %j', options);
+    this._log.debug('streamGenerateContent stream %j', options);
     return this.innerApiCalls.streamGenerateContent(request, options);
   }
 
@@ -1405,7 +1405,7 @@ export class GenerativeServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('bidiGenerateContent stream %j', options);
+    this._log.debug('bidiGenerateContent stream %j', options);
     return this.innerApiCalls.bidiGenerateContent(null, options);
   }
 

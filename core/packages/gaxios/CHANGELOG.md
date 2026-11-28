@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [8.3.3](https://github.com/googleapis/google-cloud-node/compare/gaxios-v8.3.2...gaxios-v8.3.3) (2026-11-02)
+
+
+### Bug Fixes
+
+* **gaxios:** Enforce maxContentLength on headerless responses in Bun ([#9773](https://github.com/googleapis/google-cloud-node/issues/9773)) ([1426695](https://github.com/googleapis/google-cloud-node/commit/1426695d559d0d69aeadef8788a1d0f88bd465a6))
+
 ## [8.3.2](https://github.com/googleapis/google-cloud-node/compare/gaxios-v8.3.1...gaxios-v8.3.2) (2026-10-23)
 
 

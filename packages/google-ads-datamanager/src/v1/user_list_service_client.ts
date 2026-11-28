@@ -502,7 +502,7 @@ export class UserListServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getUserList request %j', request);
+    this._log.debug('getUserList request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.datamanager.v1.IUserList,
@@ -513,7 +513,7 @@ export class UserListServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getUserList response %j', response);
+          this._log.debug('getUserList response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -525,7 +525,7 @@ export class UserListServiceClient {
           protos.google.ads.datamanager.v1.IGetUserListRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getUserList response %j', response);
+          this._log.debug('getUserList response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -654,7 +654,7 @@ export class UserListServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createUserList request %j', request);
+    this._log.debug('createUserList request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.datamanager.v1.IUserList,
@@ -665,7 +665,7 @@ export class UserListServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createUserList response %j', response);
+          this._log.debug('createUserList response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -677,7 +677,7 @@ export class UserListServiceClient {
           protos.google.ads.datamanager.v1.ICreateUserListRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createUserList response %j', response);
+          this._log.debug('createUserList response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -809,7 +809,7 @@ export class UserListServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateUserList request %j', request);
+    this._log.debug('updateUserList request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.datamanager.v1.IUserList,
@@ -820,7 +820,7 @@ export class UserListServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateUserList response %j', response);
+          this._log.debug('updateUserList response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -832,7 +832,7 @@ export class UserListServiceClient {
           protos.google.ads.datamanager.v1.IUpdateUserListRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateUserList response %j', response);
+          this._log.debug('updateUserList response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -960,7 +960,7 @@ export class UserListServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteUserList request %j', request);
+    this._log.debug('deleteUserList request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -971,7 +971,7 @@ export class UserListServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteUserList response %j', response);
+          this._log.debug('deleteUserList response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -983,7 +983,7 @@ export class UserListServiceClient {
           protos.google.ads.datamanager.v1.IDeleteUserListRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteUserList response %j', response);
+          this._log.debug('deleteUserList response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1165,11 +1165,11 @@ export class UserListServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listUserLists values %j', values);
+          this._log.debug('listUserLists values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listUserLists request %j', request);
+    this._log.debug('listUserLists request %j', request);
     return this.innerApiCalls
       .listUserLists(request, options, wrappedCallback)
       ?.then(
@@ -1178,7 +1178,7 @@ export class UserListServiceClient {
           protos.google.ads.datamanager.v1.IListUserListsRequest | null,
           protos.google.ads.datamanager.v1.IListUserListsResponse,
         ]) => {
-          this._log.info('listUserLists values %j', response);
+          this._log.debug('listUserLists values %j', response);
           return [response, input, output];
         },
       );
@@ -1262,7 +1262,7 @@ export class UserListServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listUserLists stream %j', request);
+    this._log.debug('listUserLists stream %j', request);
     return this.descriptors.page.listUserLists.createStream(
       this.innerApiCalls.listUserLists as GaxCall,
       request,
@@ -1351,7 +1351,7 @@ export class UserListServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listUserLists iterate %j', request);
+    this._log.debug('listUserLists iterate %j', request);
     return this.descriptors.page.listUserLists.asyncIterate(
       this.innerApiCalls['listUserLists'] as GaxCall,
       request as {},

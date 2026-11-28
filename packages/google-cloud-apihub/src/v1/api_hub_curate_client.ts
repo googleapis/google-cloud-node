@@ -557,7 +557,7 @@ export class ApiHubCurateClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createCuration request %j', request);
+    this._log.debug('createCuration request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apihub.v1.ICuration,
@@ -568,7 +568,7 @@ export class ApiHubCurateClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createCuration response %j', response);
+          this._log.debug('createCuration response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -580,7 +580,7 @@ export class ApiHubCurateClient {
           protos.google.cloud.apihub.v1.ICreateCurationRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createCuration response %j', response);
+          this._log.debug('createCuration response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -684,7 +684,7 @@ export class ApiHubCurateClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCuration request %j', request);
+    this._log.debug('getCuration request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apihub.v1.ICuration,
@@ -693,7 +693,7 @@ export class ApiHubCurateClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCuration response %j', response);
+          this._log.debug('getCuration response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -705,7 +705,7 @@ export class ApiHubCurateClient {
           protos.google.cloud.apihub.v1.IGetCurationRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getCuration response %j', response);
+          this._log.debug('getCuration response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -824,7 +824,7 @@ export class ApiHubCurateClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateCuration request %j', request);
+    this._log.debug('updateCuration request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apihub.v1.ICuration,
@@ -835,7 +835,7 @@ export class ApiHubCurateClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateCuration response %j', response);
+          this._log.debug('updateCuration response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -847,7 +847,7 @@ export class ApiHubCurateClient {
           protos.google.cloud.apihub.v1.IUpdateCurationRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateCuration response %j', response);
+          this._log.debug('updateCuration response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -954,7 +954,7 @@ export class ApiHubCurateClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteCuration request %j', request);
+    this._log.debug('deleteCuration request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -965,7 +965,7 @@ export class ApiHubCurateClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteCuration response %j', response);
+          this._log.debug('deleteCuration response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -977,7 +977,7 @@ export class ApiHubCurateClient {
           protos.google.cloud.apihub.v1.IDeleteCurationRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteCuration response %j', response);
+          this._log.debug('deleteCuration response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1138,11 +1138,11 @@ export class ApiHubCurateClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listCurations values %j', values);
+          this._log.debug('listCurations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listCurations request %j', request);
+    this._log.debug('listCurations request %j', request);
     return this.innerApiCalls
       .listCurations(request, options, wrappedCallback)
       ?.then(
@@ -1151,7 +1151,7 @@ export class ApiHubCurateClient {
           protos.google.cloud.apihub.v1.IListCurationsRequest | null,
           protos.google.cloud.apihub.v1.IListCurationsResponse,
         ]) => {
-          this._log.info('listCurations values %j', response);
+          this._log.debug('listCurations values %j', response);
           return [response, input, output];
         },
       );
@@ -1233,7 +1233,7 @@ export class ApiHubCurateClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCurations stream %j', request);
+    this._log.debug('listCurations stream %j', request);
     return this.descriptors.page.listCurations.createStream(
       this.innerApiCalls.listCurations as GaxCall,
       request,
@@ -1320,7 +1320,7 @@ export class ApiHubCurateClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCurations iterate %j', request);
+    this._log.debug('listCurations iterate %j', request);
     return this.descriptors.page.listCurations.asyncIterate(
       this.innerApiCalls['listCurations'] as GaxCall,
       request as {},

@@ -7846,6 +7846,9 @@ export namespace google {
 
                     /** ListMessagesRequest filter */
                     filter?: (string|null);
+
+                    /** ListMessagesRequest pendingWriteWaitSkipped */
+                    pendingWriteWaitSkipped?: (boolean|null);
                 }
 
                 /** Represents a ListMessagesRequest. */
@@ -7868,6 +7871,9 @@ export namespace google {
 
                     /** ListMessagesRequest filter. */
                     public filter: string;
+
+                    /** ListMessagesRequest pendingWriteWaitSkipped. */
+                    public pendingWriteWaitSkipped: boolean;
 
                     /**
                      * Creates a new ListMessagesRequest instance using the specified properties.
@@ -21771,6 +21777,9 @@ export namespace google {
 
                     /** ListMessagesRequest filter */
                     filter?: (string|null);
+
+                    /** ListMessagesRequest pendingWriteWaitSkipped */
+                    pendingWriteWaitSkipped?: (boolean|null);
                 }
 
                 /** Represents a ListMessagesRequest. */
@@ -21793,6 +21802,9 @@ export namespace google {
 
                     /** ListMessagesRequest filter. */
                     public filter: string;
+
+                    /** ListMessagesRequest pendingWriteWaitSkipped. */
+                    public pendingWriteWaitSkipped: boolean;
 
                     /**
                      * Creates a new ListMessagesRequest instance using the specified properties.
@@ -36052,6 +36064,9 @@ export namespace google {
 
                     /** ListMessagesRequest filter */
                     filter?: (string|null);
+
+                    /** ListMessagesRequest pendingWriteWaitSkipped */
+                    pendingWriteWaitSkipped?: (boolean|null);
                 }
 
                 /** Represents a ListMessagesRequest. */
@@ -36074,6 +36089,9 @@ export namespace google {
 
                     /** ListMessagesRequest filter. */
                     public filter: string;
+
+                    /** ListMessagesRequest pendingWriteWaitSkipped. */
+                    public pendingWriteWaitSkipped: boolean;
 
                     /**
                      * Creates a new ListMessagesRequest instance using the specified properties.

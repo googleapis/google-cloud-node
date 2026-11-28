@@ -502,7 +502,7 @@ export class CaseAttachmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAttachment request %j', request);
+    this._log.debug('getAttachment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.support.v2beta.IAttachment,
@@ -513,7 +513,7 @@ export class CaseAttachmentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAttachment response %j', response);
+          this._log.debug('getAttachment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -525,7 +525,7 @@ export class CaseAttachmentServiceClient {
           protos.google.cloud.support.v2beta.IGetAttachmentRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getAttachment response %j', response);
+          this._log.debug('getAttachment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -662,11 +662,11 @@ export class CaseAttachmentServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAttachments values %j', values);
+          this._log.debug('listAttachments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAttachments request %j', request);
+    this._log.debug('listAttachments request %j', request);
     return this.innerApiCalls
       .listAttachments(request, options, wrappedCallback)
       ?.then(
@@ -675,7 +675,7 @@ export class CaseAttachmentServiceClient {
           protos.google.cloud.support.v2beta.IListAttachmentsRequest | null,
           protos.google.cloud.support.v2beta.IListAttachmentsResponse,
         ]) => {
-          this._log.info('listAttachments values %j', response);
+          this._log.debug('listAttachments values %j', response);
           return [response, input, output];
         },
       );
@@ -727,7 +727,7 @@ export class CaseAttachmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAttachments stream %j', request);
+    this._log.debug('listAttachments stream %j', request);
     return this.descriptors.page.listAttachments.createStream(
       this.innerApiCalls.listAttachments as GaxCall,
       request,
@@ -784,7 +784,7 @@ export class CaseAttachmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAttachments iterate %j', request);
+    this._log.debug('listAttachments iterate %j', request);
     return this.descriptors.page.listAttachments.asyncIterate(
       this.innerApiCalls['listAttachments'] as GaxCall,
       request as {},

@@ -226,6 +226,9 @@ export class DataTableServiceClient {
       dataTableRowPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/dataTables/{data_table}/dataTableRows/{data_table_row}',
       ),
+      eventPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/events/{event}',
+      ),
       featuredContentNativeDashboardPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/instances/{instance}/contentHub/featuredContentNativeDashboards/{featured_content_native_dashboard}',
@@ -264,6 +267,18 @@ export class DataTableServiceClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}',
       ),
+      projectLocationInstanceAnalyticEntitiesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/instances/{instance}/analytics/{analytic}/entities/{entity}',
+        ),
+      projectLocationInstanceEntitiesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/instances/{instance}/entities/{entity}',
+        ),
+      projectLocationInstanceWatchlistEntitiesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/instances/{instance}/watchlists/{watchlist}/entities/{entity}',
+        ),
       referenceListPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/referenceLists/{reference_list}',
       ),
@@ -278,6 +293,12 @@ export class DataTableServiceClient {
       ),
       ruleExecutionErrorPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/ruleExecutionErrors/{rule_execution_error}',
+      ),
+      searchSessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/searchSessions/{search_session}',
+      ),
+      searchedResultPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/searchSessions/{search_session}/searchedResults/{searched_result}',
       ),
       watchlistPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/watchlists/{watchlist}',
@@ -582,7 +603,7 @@ export class DataTableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createDataTable request %j', request);
+    this._log.debug('createDataTable request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IDataTable,
@@ -593,7 +614,7 @@ export class DataTableServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createDataTable response %j', response);
+          this._log.debug('createDataTable response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -605,7 +626,7 @@ export class DataTableServiceClient {
           protos.google.cloud.chronicle.v1.ICreateDataTableRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createDataTable response %j', response);
+          this._log.debug('createDataTable response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -712,7 +733,7 @@ export class DataTableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDataTable request %j', request);
+    this._log.debug('getDataTable request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IDataTable,
@@ -723,7 +744,7 @@ export class DataTableServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDataTable response %j', response);
+          this._log.debug('getDataTable response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -735,7 +756,7 @@ export class DataTableServiceClient {
           protos.google.cloud.chronicle.v1.IGetDataTableRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getDataTable response %j', response);
+          this._log.debug('getDataTable response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -853,7 +874,7 @@ export class DataTableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateDataTable request %j', request);
+    this._log.debug('updateDataTable request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IDataTable,
@@ -864,7 +885,7 @@ export class DataTableServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateDataTable response %j', response);
+          this._log.debug('updateDataTable response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -876,7 +897,7 @@ export class DataTableServiceClient {
           protos.google.cloud.chronicle.v1.IUpdateDataTableRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateDataTable response %j', response);
+          this._log.debug('updateDataTable response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -993,7 +1014,7 @@ export class DataTableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteDataTable request %j', request);
+    this._log.debug('deleteDataTable request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1004,7 +1025,7 @@ export class DataTableServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteDataTable response %j', response);
+          this._log.debug('deleteDataTable response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1016,7 +1037,7 @@ export class DataTableServiceClient {
           protos.google.cloud.chronicle.v1.IDeleteDataTableRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteDataTable response %j', response);
+          this._log.debug('deleteDataTable response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1131,7 +1152,7 @@ export class DataTableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createDataTableRow request %j', request);
+    this._log.debug('createDataTableRow request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IDataTableRow,
@@ -1142,7 +1163,7 @@ export class DataTableServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createDataTableRow response %j', response);
+          this._log.debug('createDataTableRow response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1157,7 +1178,7 @@ export class DataTableServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createDataTableRow response %j', response);
+          this._log.debug('createDataTableRow response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1274,7 +1295,7 @@ export class DataTableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateDataTableRow request %j', request);
+    this._log.debug('updateDataTableRow request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IDataTableRow,
@@ -1285,7 +1306,7 @@ export class DataTableServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateDataTableRow response %j', response);
+          this._log.debug('updateDataTableRow response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1300,7 +1321,7 @@ export class DataTableServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateDataTableRow response %j', response);
+          this._log.debug('updateDataTableRow response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1413,7 +1434,7 @@ export class DataTableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDataTableRow request %j', request);
+    this._log.debug('getDataTableRow request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IDataTableRow,
@@ -1424,7 +1445,7 @@ export class DataTableServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDataTableRow response %j', response);
+          this._log.debug('getDataTableRow response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1436,7 +1457,7 @@ export class DataTableServiceClient {
           protos.google.cloud.chronicle.v1.IGetDataTableRowRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getDataTableRow response %j', response);
+          this._log.debug('getDataTableRow response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1549,7 +1570,7 @@ export class DataTableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteDataTableRow request %j', request);
+    this._log.debug('deleteDataTableRow request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1560,7 +1581,7 @@ export class DataTableServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteDataTableRow response %j', response);
+          this._log.debug('deleteDataTableRow response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1575,7 +1596,7 @@ export class DataTableServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteDataTableRow response %j', response);
+          this._log.debug('deleteDataTableRow response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1698,7 +1719,7 @@ export class DataTableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('bulkCreateDataTableRows request %j', request);
+    this._log.debug('bulkCreateDataTableRows request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IBulkCreateDataTableRowsResponse,
@@ -1709,7 +1730,7 @@ export class DataTableServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('bulkCreateDataTableRows response %j', response);
+          this._log.debug('bulkCreateDataTableRows response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1724,7 +1745,7 @@ export class DataTableServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('bulkCreateDataTableRows response %j', response);
+          this._log.debug('bulkCreateDataTableRows response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1840,7 +1861,7 @@ export class DataTableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('bulkGetDataTableRows request %j', request);
+    this._log.debug('bulkGetDataTableRows request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IBulkGetDataTableRowsResponse,
@@ -1851,7 +1872,7 @@ export class DataTableServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('bulkGetDataTableRows response %j', response);
+          this._log.debug('bulkGetDataTableRows response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1866,7 +1887,7 @@ export class DataTableServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('bulkGetDataTableRows response %j', response);
+          this._log.debug('bulkGetDataTableRows response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1990,7 +2011,7 @@ export class DataTableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('bulkReplaceDataTableRows request %j', request);
+    this._log.debug('bulkReplaceDataTableRows request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IBulkReplaceDataTableRowsResponse,
@@ -2001,7 +2022,7 @@ export class DataTableServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('bulkReplaceDataTableRows response %j', response);
+          this._log.debug('bulkReplaceDataTableRows response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2016,7 +2037,7 @@ export class DataTableServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('bulkReplaceDataTableRows response %j', response);
+          this._log.debug('bulkReplaceDataTableRows response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2138,7 +2159,7 @@ export class DataTableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('bulkUpdateDataTableRows request %j', request);
+    this._log.debug('bulkUpdateDataTableRows request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IBulkUpdateDataTableRowsResponse,
@@ -2149,7 +2170,7 @@ export class DataTableServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('bulkUpdateDataTableRows response %j', response);
+          this._log.debug('bulkUpdateDataTableRows response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2164,7 +2185,7 @@ export class DataTableServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('bulkUpdateDataTableRows response %j', response);
+          this._log.debug('bulkUpdateDataTableRows response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2283,7 +2304,7 @@ export class DataTableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDataTableOperationErrors request %j', request);
+    this._log.debug('getDataTableOperationErrors request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IDataTableOperationErrors,
@@ -2294,7 +2315,7 @@ export class DataTableServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDataTableOperationErrors response %j', response);
+          this._log.debug('getDataTableOperationErrors response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2309,7 +2330,7 @@ export class DataTableServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getDataTableOperationErrors response %j', response);
+          this._log.debug('getDataTableOperationErrors response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2449,11 +2470,11 @@ export class DataTableServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDataTables values %j', values);
+          this._log.debug('listDataTables values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDataTables request %j', request);
+    this._log.debug('listDataTables request %j', request);
     return this.innerApiCalls
       .listDataTables(request, options, wrappedCallback)
       ?.then(
@@ -2462,7 +2483,7 @@ export class DataTableServiceClient {
           protos.google.cloud.chronicle.v1.IListDataTablesRequest | null,
           protos.google.cloud.chronicle.v1.IListDataTablesResponse,
         ]) => {
-          this._log.info('listDataTables values %j', response);
+          this._log.debug('listDataTables values %j', response);
           return [response, input, output];
         },
       );
@@ -2517,7 +2538,7 @@ export class DataTableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDataTables stream %j', request);
+    this._log.debug('listDataTables stream %j', request);
     return this.descriptors.page.listDataTables.createStream(
       this.innerApiCalls.listDataTables as GaxCall,
       request,
@@ -2577,7 +2598,7 @@ export class DataTableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDataTables iterate %j', request);
+    this._log.debug('listDataTables iterate %j', request);
     return this.descriptors.page.listDataTables.asyncIterate(
       this.innerApiCalls['listDataTables'] as GaxCall,
       request as {},
@@ -2702,11 +2723,11 @@ export class DataTableServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDataTableRows values %j', values);
+          this._log.debug('listDataTableRows values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDataTableRows request %j', request);
+    this._log.debug('listDataTableRows request %j', request);
     return this.innerApiCalls
       .listDataTableRows(request, options, wrappedCallback)
       ?.then(
@@ -2715,7 +2736,7 @@ export class DataTableServiceClient {
           protos.google.cloud.chronicle.v1.IListDataTableRowsRequest | null,
           protos.google.cloud.chronicle.v1.IListDataTableRowsResponse,
         ]) => {
-          this._log.info('listDataTableRows values %j', response);
+          this._log.debug('listDataTableRows values %j', response);
           return [response, input, output];
         },
       );
@@ -2770,7 +2791,7 @@ export class DataTableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDataTableRows stream %j', request);
+    this._log.debug('listDataTableRows stream %j', request);
     return this.descriptors.page.listDataTableRows.createStream(
       this.innerApiCalls.listDataTableRows as GaxCall,
       request,
@@ -2830,7 +2851,7 @@ export class DataTableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDataTableRows iterate %j', request);
+    this._log.debug('listDataTableRows iterate %j', request);
     return this.descriptors.page.listDataTableRows.asyncIterate(
       this.innerApiCalls['listDataTableRows'] as GaxCall,
       request as {},
@@ -3434,6 +3455,73 @@ export class DataTableServiceClient {
   matchDataTableRowFromDataTableRowName(dataTableRowName: string) {
     return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName)
       .data_table_row;
+  }
+
+  /**
+   * Return a fully-qualified event resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} event
+   * @returns {string} Resource name string.
+   */
+  eventPath(
+    project: string,
+    location: string,
+    instance: string,
+    event: string,
+  ) {
+    return this.pathTemplates.eventPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      event: event,
+    });
+  }
+
+  /**
+   * Parse the project from Event resource.
+   *
+   * @param {string} eventName
+   *   A fully-qualified path representing Event resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEventName(eventName: string) {
+    return this.pathTemplates.eventPathTemplate.match(eventName).project;
+  }
+
+  /**
+   * Parse the location from Event resource.
+   *
+   * @param {string} eventName
+   *   A fully-qualified path representing Event resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEventName(eventName: string) {
+    return this.pathTemplates.eventPathTemplate.match(eventName).location;
+  }
+
+  /**
+   * Parse the instance from Event resource.
+   *
+   * @param {string} eventName
+   *   A fully-qualified path representing Event resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromEventName(eventName: string) {
+    return this.pathTemplates.eventPathTemplate.match(eventName).instance;
+  }
+
+  /**
+   * Parse the event from Event resource.
+   *
+   * @param {string} eventName
+   *   A fully-qualified path representing Event resource.
+   * @returns {string} A string representing the event.
+   */
+  matchEventFromEventName(eventName: string) {
+    return this.pathTemplates.eventPathTemplate.match(eventName).event;
   }
 
   /**
@@ -4235,6 +4323,297 @@ export class DataTableServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationInstanceAnalyticEntities resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} analytic
+   * @param {string} entity
+   * @returns {string} Resource name string.
+   */
+  projectLocationInstanceAnalyticEntitiesPath(
+    project: string,
+    location: string,
+    instance: string,
+    analytic: string,
+    entity: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        instance: instance,
+        analytic: analytic,
+        entity: entity,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationInstanceAnalyticEntities resource.
+   *
+   * @param {string} projectLocationInstanceAnalyticEntitiesName
+   *   A fully-qualified path representing project_location_instance_analytic_entities resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationInstanceAnalyticEntitiesName(
+    projectLocationInstanceAnalyticEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.match(
+      projectLocationInstanceAnalyticEntitiesName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationInstanceAnalyticEntities resource.
+   *
+   * @param {string} projectLocationInstanceAnalyticEntitiesName
+   *   A fully-qualified path representing project_location_instance_analytic_entities resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationInstanceAnalyticEntitiesName(
+    projectLocationInstanceAnalyticEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.match(
+      projectLocationInstanceAnalyticEntitiesName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from ProjectLocationInstanceAnalyticEntities resource.
+   *
+   * @param {string} projectLocationInstanceAnalyticEntitiesName
+   *   A fully-qualified path representing project_location_instance_analytic_entities resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromProjectLocationInstanceAnalyticEntitiesName(
+    projectLocationInstanceAnalyticEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.match(
+      projectLocationInstanceAnalyticEntitiesName,
+    ).instance;
+  }
+
+  /**
+   * Parse the analytic from ProjectLocationInstanceAnalyticEntities resource.
+   *
+   * @param {string} projectLocationInstanceAnalyticEntitiesName
+   *   A fully-qualified path representing project_location_instance_analytic_entities resource.
+   * @returns {string} A string representing the analytic.
+   */
+  matchAnalyticFromProjectLocationInstanceAnalyticEntitiesName(
+    projectLocationInstanceAnalyticEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.match(
+      projectLocationInstanceAnalyticEntitiesName,
+    ).analytic;
+  }
+
+  /**
+   * Parse the entity from ProjectLocationInstanceAnalyticEntities resource.
+   *
+   * @param {string} projectLocationInstanceAnalyticEntitiesName
+   *   A fully-qualified path representing project_location_instance_analytic_entities resource.
+   * @returns {string} A string representing the entity.
+   */
+  matchEntityFromProjectLocationInstanceAnalyticEntitiesName(
+    projectLocationInstanceAnalyticEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.match(
+      projectLocationInstanceAnalyticEntitiesName,
+    ).entity;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationInstanceEntities resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} entity
+   * @returns {string} Resource name string.
+   */
+  projectLocationInstanceEntitiesPath(
+    project: string,
+    location: string,
+    instance: string,
+    entity: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceEntitiesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        instance: instance,
+        entity: entity,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationInstanceEntities resource.
+   *
+   * @param {string} projectLocationInstanceEntitiesName
+   *   A fully-qualified path representing project_location_instance_entities resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationInstanceEntitiesName(
+    projectLocationInstanceEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceEntitiesPathTemplate.match(
+      projectLocationInstanceEntitiesName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationInstanceEntities resource.
+   *
+   * @param {string} projectLocationInstanceEntitiesName
+   *   A fully-qualified path representing project_location_instance_entities resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationInstanceEntitiesName(
+    projectLocationInstanceEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceEntitiesPathTemplate.match(
+      projectLocationInstanceEntitiesName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from ProjectLocationInstanceEntities resource.
+   *
+   * @param {string} projectLocationInstanceEntitiesName
+   *   A fully-qualified path representing project_location_instance_entities resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromProjectLocationInstanceEntitiesName(
+    projectLocationInstanceEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceEntitiesPathTemplate.match(
+      projectLocationInstanceEntitiesName,
+    ).instance;
+  }
+
+  /**
+   * Parse the entity from ProjectLocationInstanceEntities resource.
+   *
+   * @param {string} projectLocationInstanceEntitiesName
+   *   A fully-qualified path representing project_location_instance_entities resource.
+   * @returns {string} A string representing the entity.
+   */
+  matchEntityFromProjectLocationInstanceEntitiesName(
+    projectLocationInstanceEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceEntitiesPathTemplate.match(
+      projectLocationInstanceEntitiesName,
+    ).entity;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationInstanceWatchlistEntities resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} watchlist
+   * @param {string} entity
+   * @returns {string} Resource name string.
+   */
+  projectLocationInstanceWatchlistEntitiesPath(
+    project: string,
+    location: string,
+    instance: string,
+    watchlist: string,
+    entity: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        instance: instance,
+        watchlist: watchlist,
+        entity: entity,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationInstanceWatchlistEntities resource.
+   *
+   * @param {string} projectLocationInstanceWatchlistEntitiesName
+   *   A fully-qualified path representing project_location_instance_watchlist_entities resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationInstanceWatchlistEntitiesName(
+    projectLocationInstanceWatchlistEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.match(
+      projectLocationInstanceWatchlistEntitiesName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationInstanceWatchlistEntities resource.
+   *
+   * @param {string} projectLocationInstanceWatchlistEntitiesName
+   *   A fully-qualified path representing project_location_instance_watchlist_entities resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationInstanceWatchlistEntitiesName(
+    projectLocationInstanceWatchlistEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.match(
+      projectLocationInstanceWatchlistEntitiesName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from ProjectLocationInstanceWatchlistEntities resource.
+   *
+   * @param {string} projectLocationInstanceWatchlistEntitiesName
+   *   A fully-qualified path representing project_location_instance_watchlist_entities resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromProjectLocationInstanceWatchlistEntitiesName(
+    projectLocationInstanceWatchlistEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.match(
+      projectLocationInstanceWatchlistEntitiesName,
+    ).instance;
+  }
+
+  /**
+   * Parse the watchlist from ProjectLocationInstanceWatchlistEntities resource.
+   *
+   * @param {string} projectLocationInstanceWatchlistEntitiesName
+   *   A fully-qualified path representing project_location_instance_watchlist_entities resource.
+   * @returns {string} A string representing the watchlist.
+   */
+  matchWatchlistFromProjectLocationInstanceWatchlistEntitiesName(
+    projectLocationInstanceWatchlistEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.match(
+      projectLocationInstanceWatchlistEntitiesName,
+    ).watchlist;
+  }
+
+  /**
+   * Parse the entity from ProjectLocationInstanceWatchlistEntities resource.
+   *
+   * @param {string} projectLocationInstanceWatchlistEntitiesName
+   *   A fully-qualified path representing project_location_instance_watchlist_entities resource.
+   * @returns {string} A string representing the entity.
+   */
+  matchEntityFromProjectLocationInstanceWatchlistEntitiesName(
+    projectLocationInstanceWatchlistEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.match(
+      projectLocationInstanceWatchlistEntitiesName,
+    ).entity;
+  }
+
+  /**
    * Return a fully-qualified referenceList resource name string.
    *
    * @param {string} project
@@ -4602,6 +4981,168 @@ export class DataTableServiceClient {
     return this.pathTemplates.ruleExecutionErrorPathTemplate.match(
       ruleExecutionErrorName,
     ).rule_execution_error;
+  }
+
+  /**
+   * Return a fully-qualified searchSession resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} search_session
+   * @returns {string} Resource name string.
+   */
+  searchSessionPath(
+    project: string,
+    location: string,
+    instance: string,
+    searchSession: string,
+  ) {
+    return this.pathTemplates.searchSessionPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      search_session: searchSession,
+    });
+  }
+
+  /**
+   * Parse the project from SearchSession resource.
+   *
+   * @param {string} searchSessionName
+   *   A fully-qualified path representing SearchSession resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSearchSessionName(searchSessionName: string) {
+    return this.pathTemplates.searchSessionPathTemplate.match(searchSessionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from SearchSession resource.
+   *
+   * @param {string} searchSessionName
+   *   A fully-qualified path representing SearchSession resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSearchSessionName(searchSessionName: string) {
+    return this.pathTemplates.searchSessionPathTemplate.match(searchSessionName)
+      .location;
+  }
+
+  /**
+   * Parse the instance from SearchSession resource.
+   *
+   * @param {string} searchSessionName
+   *   A fully-qualified path representing SearchSession resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromSearchSessionName(searchSessionName: string) {
+    return this.pathTemplates.searchSessionPathTemplate.match(searchSessionName)
+      .instance;
+  }
+
+  /**
+   * Parse the search_session from SearchSession resource.
+   *
+   * @param {string} searchSessionName
+   *   A fully-qualified path representing SearchSession resource.
+   * @returns {string} A string representing the search_session.
+   */
+  matchSearchSessionFromSearchSessionName(searchSessionName: string) {
+    return this.pathTemplates.searchSessionPathTemplate.match(searchSessionName)
+      .search_session;
+  }
+
+  /**
+   * Return a fully-qualified searchedResult resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} search_session
+   * @param {string} searched_result
+   * @returns {string} Resource name string.
+   */
+  searchedResultPath(
+    project: string,
+    location: string,
+    instance: string,
+    searchSession: string,
+    searchedResult: string,
+  ) {
+    return this.pathTemplates.searchedResultPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      search_session: searchSession,
+      searched_result: searchedResult,
+    });
+  }
+
+  /**
+   * Parse the project from SearchedResult resource.
+   *
+   * @param {string} searchedResultName
+   *   A fully-qualified path representing SearchedResult resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSearchedResultName(searchedResultName: string) {
+    return this.pathTemplates.searchedResultPathTemplate.match(
+      searchedResultName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from SearchedResult resource.
+   *
+   * @param {string} searchedResultName
+   *   A fully-qualified path representing SearchedResult resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSearchedResultName(searchedResultName: string) {
+    return this.pathTemplates.searchedResultPathTemplate.match(
+      searchedResultName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from SearchedResult resource.
+   *
+   * @param {string} searchedResultName
+   *   A fully-qualified path representing SearchedResult resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromSearchedResultName(searchedResultName: string) {
+    return this.pathTemplates.searchedResultPathTemplate.match(
+      searchedResultName,
+    ).instance;
+  }
+
+  /**
+   * Parse the search_session from SearchedResult resource.
+   *
+   * @param {string} searchedResultName
+   *   A fully-qualified path representing SearchedResult resource.
+   * @returns {string} A string representing the search_session.
+   */
+  matchSearchSessionFromSearchedResultName(searchedResultName: string) {
+    return this.pathTemplates.searchedResultPathTemplate.match(
+      searchedResultName,
+    ).search_session;
+  }
+
+  /**
+   * Parse the searched_result from SearchedResult resource.
+   *
+   * @param {string} searchedResultName
+   *   A fully-qualified path representing SearchedResult resource.
+   * @returns {string} A string representing the searched_result.
+   */
+  matchSearchedResultFromSearchedResultName(searchedResultName: string) {
+    return this.pathTemplates.searchedResultPathTemplate.match(
+      searchedResultName,
+    ).searched_result;
   }
 
   /**

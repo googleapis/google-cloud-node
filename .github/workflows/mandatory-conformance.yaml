@@ -22,13 +22,21 @@ on:
     - main
     paths:
     - 'handwritten/bigtable/**'
+    - '!handwritten/bigtable/CHANGELOG.md'
+    - '.github/workflows/mandatory-conformance.yaml'
   pull_request:
     paths:
     - 'handwritten/bigtable/**'
+    - '!handwritten/bigtable/CHANGELOG.md'
+    - '.github/workflows/mandatory-conformance.yaml'
 name: mandatory-conformance
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   mandatory-conformance:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     defaults:
       run:
         working-directory: handwritten/bigtable
@@ -54,5 +62,6 @@ jobs:
     - run: chmod +x .kokoro/mandatory-conformance.sh
     - uses: ./.github/actions/pnpm-lockfile-check
     - run: pnpm --filter ...{handwritten/bigtable} run --if-present compile
+      working-directory: .
     - run: go version
     - run: .kokoro/mandatory-conformance.sh

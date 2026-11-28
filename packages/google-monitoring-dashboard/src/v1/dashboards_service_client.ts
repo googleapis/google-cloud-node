@@ -504,7 +504,7 @@ export class DashboardsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createDashboard request %j', request);
+    this._log.debug('createDashboard request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.monitoring.dashboard.v1.IDashboard,
@@ -515,7 +515,7 @@ export class DashboardsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createDashboard response %j', response);
+          this._log.debug('createDashboard response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -530,7 +530,7 @@ export class DashboardsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createDashboard response %j', response);
+          this._log.debug('createDashboard response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -649,7 +649,7 @@ export class DashboardsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDashboard request %j', request);
+    this._log.debug('getDashboard request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.monitoring.dashboard.v1.IDashboard,
@@ -660,7 +660,7 @@ export class DashboardsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDashboard response %j', response);
+          this._log.debug('getDashboard response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -675,7 +675,7 @@ export class DashboardsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getDashboard response %j', response);
+          this._log.debug('getDashboard response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -792,7 +792,7 @@ export class DashboardsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteDashboard request %j', request);
+    this._log.debug('deleteDashboard request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -803,7 +803,7 @@ export class DashboardsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteDashboard response %j', response);
+          this._log.debug('deleteDashboard response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -818,7 +818,7 @@ export class DashboardsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteDashboard response %j', response);
+          this._log.debug('deleteDashboard response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -936,7 +936,7 @@ export class DashboardsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateDashboard request %j', request);
+    this._log.debug('updateDashboard request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.monitoring.dashboard.v1.IDashboard,
@@ -947,7 +947,7 @@ export class DashboardsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateDashboard response %j', response);
+          this._log.debug('updateDashboard response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -962,7 +962,7 @@ export class DashboardsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateDashboard response %j', response);
+          this._log.debug('updateDashboard response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1101,11 +1101,11 @@ export class DashboardsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDashboards values %j', values);
+          this._log.debug('listDashboards values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDashboards request %j', request);
+    this._log.debug('listDashboards request %j', request);
     return this.innerApiCalls
       .listDashboards(request, options, wrappedCallback)
       ?.then(
@@ -1114,7 +1114,7 @@ export class DashboardsServiceClient {
           protos.google.monitoring.dashboard.v1.IListDashboardsRequest | null,
           protos.google.monitoring.dashboard.v1.IListDashboardsResponse,
         ]) => {
-          this._log.info('listDashboards values %j', response);
+          this._log.debug('listDashboards values %j', response);
           return [response, input, output];
         },
       );
@@ -1164,7 +1164,7 @@ export class DashboardsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDashboards stream %j', request);
+    this._log.debug('listDashboards stream %j', request);
     return this.descriptors.page.listDashboards.createStream(
       this.innerApiCalls.listDashboards as GaxCall,
       request,
@@ -1219,7 +1219,7 @@ export class DashboardsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDashboards iterate %j', request);
+    this._log.debug('listDashboards iterate %j', request);
     return this.descriptors.page.listDashboards.asyncIterate(
       this.innerApiCalls['listDashboards'] as GaxCall,
       request as {},

@@ -670,7 +670,7 @@ export class DataCatalogClient {
       'CreateEntryGroup is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('createEntryGroup request %j', request);
+    this._log.debug('createEntryGroup request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1.IEntryGroup,
@@ -681,7 +681,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createEntryGroup response %j', response);
+          this._log.debug('createEntryGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -696,7 +696,7 @@ export class DataCatalogClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createEntryGroup response %j', response);
+          this._log.debug('createEntryGroup response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -815,7 +815,7 @@ export class DataCatalogClient {
       'GetEntryGroup is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('getEntryGroup request %j', request);
+    this._log.debug('getEntryGroup request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1.IEntryGroup,
@@ -826,7 +826,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getEntryGroup response %j', response);
+          this._log.debug('getEntryGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -838,7 +838,7 @@ export class DataCatalogClient {
           protos.google.cloud.datacatalog.v1.IGetEntryGroupRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getEntryGroup response %j', response);
+          this._log.debug('getEntryGroup response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -966,7 +966,7 @@ export class DataCatalogClient {
       'UpdateEntryGroup is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('updateEntryGroup request %j', request);
+    this._log.debug('updateEntryGroup request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1.IEntryGroup,
@@ -977,7 +977,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateEntryGroup response %j', response);
+          this._log.debug('updateEntryGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -992,7 +992,7 @@ export class DataCatalogClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateEntryGroup response %j', response);
+          this._log.debug('updateEntryGroup response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1116,7 +1116,7 @@ export class DataCatalogClient {
       'DeleteEntryGroup is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('deleteEntryGroup request %j', request);
+    this._log.debug('deleteEntryGroup request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1127,7 +1127,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteEntryGroup response %j', response);
+          this._log.debug('deleteEntryGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1142,7 +1142,7 @@ export class DataCatalogClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteEntryGroup response %j', response);
+          this._log.debug('deleteEntryGroup response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1274,7 +1274,7 @@ export class DataCatalogClient {
       'CreateEntry is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('createEntry request %j', request);
+    this._log.debug('createEntry request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1.IEntry,
@@ -1285,7 +1285,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createEntry response %j', response);
+          this._log.debug('createEntry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1297,7 +1297,7 @@ export class DataCatalogClient {
           protos.google.cloud.datacatalog.v1.ICreateEntryRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createEntry response %j', response);
+          this._log.debug('createEntry response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1443,7 +1443,7 @@ export class DataCatalogClient {
       'UpdateEntry is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('updateEntry request %j', request);
+    this._log.debug('updateEntry request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1.IEntry,
@@ -1454,7 +1454,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateEntry response %j', response);
+          this._log.debug('updateEntry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1466,7 +1466,7 @@ export class DataCatalogClient {
           protos.google.cloud.datacatalog.v1.IUpdateEntryRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateEntry response %j', response);
+          this._log.debug('updateEntry response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1586,7 +1586,7 @@ export class DataCatalogClient {
       'DeleteEntry is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('deleteEntry request %j', request);
+    this._log.debug('deleteEntry request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1597,7 +1597,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteEntry response %j', response);
+          this._log.debug('deleteEntry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1609,7 +1609,7 @@ export class DataCatalogClient {
           protos.google.cloud.datacatalog.v1.IDeleteEntryRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteEntry response %j', response);
+          this._log.debug('deleteEntry response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1720,7 +1720,7 @@ export class DataCatalogClient {
       'GetEntry is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('getEntry request %j', request);
+    this._log.debug('getEntry request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1.IEntry,
@@ -1731,7 +1731,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getEntry response %j', response);
+          this._log.debug('getEntry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1743,7 +1743,7 @@ export class DataCatalogClient {
           protos.google.cloud.datacatalog.v1.IGetEntryRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getEntry response %j', response);
+          this._log.debug('getEntry response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1899,7 +1899,7 @@ export class DataCatalogClient {
       'LookupEntry is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('lookupEntry request %j', request);
+    this._log.debug('lookupEntry request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1.IEntry,
@@ -1910,7 +1910,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('lookupEntry response %j', response);
+          this._log.debug('lookupEntry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1922,7 +1922,7 @@ export class DataCatalogClient {
           protos.google.cloud.datacatalog.v1.ILookupEntryRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('lookupEntry response %j', response);
+          this._log.debug('lookupEntry response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2051,7 +2051,7 @@ export class DataCatalogClient {
       'ModifyEntryOverview is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('modifyEntryOverview request %j', request);
+    this._log.debug('modifyEntryOverview request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1.IEntryOverview,
@@ -2062,7 +2062,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('modifyEntryOverview response %j', response);
+          this._log.debug('modifyEntryOverview response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2077,7 +2077,7 @@ export class DataCatalogClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('modifyEntryOverview response %j', response);
+          this._log.debug('modifyEntryOverview response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2206,7 +2206,7 @@ export class DataCatalogClient {
       'ModifyEntryContacts is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('modifyEntryContacts request %j', request);
+    this._log.debug('modifyEntryContacts request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1.IContacts,
@@ -2217,7 +2217,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('modifyEntryContacts response %j', response);
+          this._log.debug('modifyEntryContacts response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2232,7 +2232,7 @@ export class DataCatalogClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('modifyEntryContacts response %j', response);
+          this._log.debug('modifyEntryContacts response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2363,7 +2363,7 @@ export class DataCatalogClient {
       'CreateTagTemplate is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('createTagTemplate request %j', request);
+    this._log.debug('createTagTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1.ITagTemplate,
@@ -2374,7 +2374,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createTagTemplate response %j', response);
+          this._log.debug('createTagTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2389,7 +2389,7 @@ export class DataCatalogClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createTagTemplate response %j', response);
+          this._log.debug('createTagTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2506,7 +2506,7 @@ export class DataCatalogClient {
       'GetTagTemplate is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('getTagTemplate request %j', request);
+    this._log.debug('getTagTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1.ITagTemplate,
@@ -2517,7 +2517,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTagTemplate response %j', response);
+          this._log.debug('getTagTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2529,7 +2529,7 @@ export class DataCatalogClient {
           protos.google.cloud.datacatalog.v1.IGetTagTemplateRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getTagTemplate response %j', response);
+          this._log.debug('getTagTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2664,7 +2664,7 @@ export class DataCatalogClient {
       'UpdateTagTemplate is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('updateTagTemplate request %j', request);
+    this._log.debug('updateTagTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1.ITagTemplate,
@@ -2675,7 +2675,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateTagTemplate response %j', response);
+          this._log.debug('updateTagTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2690,7 +2690,7 @@ export class DataCatalogClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateTagTemplate response %j', response);
+          this._log.debug('updateTagTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2815,7 +2815,7 @@ export class DataCatalogClient {
       'DeleteTagTemplate is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('deleteTagTemplate request %j', request);
+    this._log.debug('deleteTagTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -2826,7 +2826,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteTagTemplate response %j', response);
+          this._log.debug('deleteTagTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2841,7 +2841,7 @@ export class DataCatalogClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteTagTemplate response %j', response);
+          this._log.debug('deleteTagTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2980,7 +2980,7 @@ export class DataCatalogClient {
       'CreateTagTemplateField is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('createTagTemplateField request %j', request);
+    this._log.debug('createTagTemplateField request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1.ITagTemplateField,
@@ -2991,7 +2991,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createTagTemplateField response %j', response);
+          this._log.debug('createTagTemplateField response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -3006,7 +3006,7 @@ export class DataCatalogClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createTagTemplateField response %j', response);
+          this._log.debug('createTagTemplateField response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3155,7 +3155,7 @@ export class DataCatalogClient {
       'UpdateTagTemplateField is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('updateTagTemplateField request %j', request);
+    this._log.debug('updateTagTemplateField request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1.ITagTemplateField,
@@ -3166,7 +3166,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateTagTemplateField response %j', response);
+          this._log.debug('updateTagTemplateField response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -3181,7 +3181,7 @@ export class DataCatalogClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateTagTemplateField response %j', response);
+          this._log.debug('updateTagTemplateField response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3311,7 +3311,7 @@ export class DataCatalogClient {
       'RenameTagTemplateField is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('renameTagTemplateField request %j', request);
+    this._log.debug('renameTagTemplateField request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1.ITagTemplateField,
@@ -3322,7 +3322,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('renameTagTemplateField response %j', response);
+          this._log.debug('renameTagTemplateField response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -3337,7 +3337,7 @@ export class DataCatalogClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('renameTagTemplateField response %j', response);
+          this._log.debug('renameTagTemplateField response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3465,7 +3465,7 @@ export class DataCatalogClient {
       'RenameTagTemplateFieldEnumValue is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('renameTagTemplateFieldEnumValue request %j', request);
+    this._log.debug('renameTagTemplateFieldEnumValue request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1.ITagTemplateField,
@@ -3476,7 +3476,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'renameTagTemplateFieldEnumValue response %j',
             response,
           );
@@ -3494,7 +3494,7 @@ export class DataCatalogClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'renameTagTemplateFieldEnumValue response %j',
             response,
           );
@@ -3629,7 +3629,7 @@ export class DataCatalogClient {
       'DeleteTagTemplateField is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('deleteTagTemplateField request %j', request);
+    this._log.debug('deleteTagTemplateField request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -3640,7 +3640,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteTagTemplateField response %j', response);
+          this._log.debug('deleteTagTemplateField response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -3655,7 +3655,7 @@ export class DataCatalogClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteTagTemplateField response %j', response);
+          this._log.debug('deleteTagTemplateField response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3785,7 +3785,7 @@ export class DataCatalogClient {
       'CreateTag is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('createTag request %j', request);
+    this._log.debug('createTag request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1.ITag,
@@ -3796,7 +3796,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createTag response %j', response);
+          this._log.debug('createTag response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -3808,7 +3808,7 @@ export class DataCatalogClient {
           protos.google.cloud.datacatalog.v1.ICreateTagRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createTag response %j', response);
+          this._log.debug('createTag response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3926,7 +3926,7 @@ export class DataCatalogClient {
       'UpdateTag is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('updateTag request %j', request);
+    this._log.debug('updateTag request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1.ITag,
@@ -3937,7 +3937,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateTag response %j', response);
+          this._log.debug('updateTag response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -3949,7 +3949,7 @@ export class DataCatalogClient {
           protos.google.cloud.datacatalog.v1.IUpdateTagRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateTag response %j', response);
+          this._log.debug('updateTag response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -4060,7 +4060,7 @@ export class DataCatalogClient {
       'DeleteTag is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('deleteTag request %j', request);
+    this._log.debug('deleteTag request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -4071,7 +4071,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteTag response %j', response);
+          this._log.debug('deleteTag response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -4083,7 +4083,7 @@ export class DataCatalogClient {
           protos.google.cloud.datacatalog.v1.IDeleteTagRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteTag response %j', response);
+          this._log.debug('deleteTag response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -4195,7 +4195,7 @@ export class DataCatalogClient {
       'StarEntry is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('starEntry request %j', request);
+    this._log.debug('starEntry request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1.IStarEntryResponse,
@@ -4206,7 +4206,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('starEntry response %j', response);
+          this._log.debug('starEntry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -4218,7 +4218,7 @@ export class DataCatalogClient {
           protos.google.cloud.datacatalog.v1.IStarEntryRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('starEntry response %j', response);
+          this._log.debug('starEntry response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -4330,7 +4330,7 @@ export class DataCatalogClient {
       'UnstarEntry is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('unstarEntry request %j', request);
+    this._log.debug('unstarEntry request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1.IUnstarEntryResponse,
@@ -4341,7 +4341,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('unstarEntry response %j', response);
+          this._log.debug('unstarEntry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -4353,7 +4353,7 @@ export class DataCatalogClient {
           protos.google.cloud.datacatalog.v1.IUnstarEntryRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('unstarEntry response %j', response);
+          this._log.debug('unstarEntry response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -4490,7 +4490,7 @@ export class DataCatalogClient {
       'SetIamPolicy is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('setIamPolicy request %j', request);
+    this._log.debug('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.IPolicy,
@@ -4499,7 +4499,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('setIamPolicy response %j', response);
+          this._log.debug('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -4511,7 +4511,7 @@ export class DataCatalogClient {
           protos.google.iam.v1.ISetIamPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('setIamPolicy response %j', response);
+          this._log.debug('setIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -4644,7 +4644,7 @@ export class DataCatalogClient {
       'GetIamPolicy is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('getIamPolicy request %j', request);
+    this._log.debug('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.IPolicy,
@@ -4653,7 +4653,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -4665,7 +4665,7 @@ export class DataCatalogClient {
           protos.google.iam.v1.IGetIamPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -4793,7 +4793,7 @@ export class DataCatalogClient {
       'TestIamPermissions is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('testIamPermissions request %j', request);
+    this._log.debug('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
@@ -4802,7 +4802,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('testIamPermissions response %j', response);
+          this._log.debug('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -4814,7 +4814,7 @@ export class DataCatalogClient {
           protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('testIamPermissions response %j', response);
+          this._log.debug('testIamPermissions response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -4930,7 +4930,7 @@ export class DataCatalogClient {
       'SetConfig is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('setConfig request %j', request);
+    this._log.debug('setConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1.IMigrationConfig,
@@ -4941,7 +4941,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('setConfig response %j', response);
+          this._log.debug('setConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -4953,7 +4953,7 @@ export class DataCatalogClient {
           protos.google.cloud.datacatalog.v1.ISetConfigRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('setConfig response %j', response);
+          this._log.debug('setConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -5072,7 +5072,7 @@ export class DataCatalogClient {
       'RetrieveConfig is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('retrieveConfig request %j', request);
+    this._log.debug('retrieveConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1.IOrganizationConfig,
@@ -5083,7 +5083,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('retrieveConfig response %j', response);
+          this._log.debug('retrieveConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -5095,7 +5095,7 @@ export class DataCatalogClient {
           protos.google.cloud.datacatalog.v1.IRetrieveConfigRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('retrieveConfig response %j', response);
+          this._log.debug('retrieveConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -5222,7 +5222,7 @@ export class DataCatalogClient {
       'RetrieveEffectiveConfig is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('retrieveEffectiveConfig request %j', request);
+    this._log.debug('retrieveEffectiveConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1.IMigrationConfig,
@@ -5233,7 +5233,7 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('retrieveEffectiveConfig response %j', response);
+          this._log.debug('retrieveEffectiveConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -5248,7 +5248,7 @@ export class DataCatalogClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('retrieveEffectiveConfig response %j', response);
+          this._log.debug('retrieveEffectiveConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -5412,11 +5412,11 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('reconcileTags response %j', rawResponse);
+          this._log.debug('reconcileTags response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('reconcileTags request %j', request);
+    this._log.debug('reconcileTags request %j', request);
     return this.innerApiCalls
       .reconcileTags(request, options, wrappedCallback)
       ?.then(
@@ -5428,7 +5428,7 @@ export class DataCatalogClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('reconcileTags response %j', rawResponse);
+          this._log.debug('reconcileTags response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -5615,11 +5615,11 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('importEntries response %j', rawResponse);
+          this._log.debug('importEntries response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('importEntries request %j', request);
+    this._log.debug('importEntries request %j', request);
     return this.innerApiCalls
       .importEntries(request, options, wrappedCallback)
       ?.then(
@@ -5631,7 +5631,7 @@ export class DataCatalogClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('importEntries response %j', rawResponse);
+          this._log.debug('importEntries response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -5851,11 +5851,11 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('searchCatalog values %j', values);
+          this._log.debug('searchCatalog values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('searchCatalog request %j', request);
+    this._log.debug('searchCatalog request %j', request);
     return this.innerApiCalls
       .searchCatalog(request, options, wrappedCallback)
       ?.then(
@@ -5864,7 +5864,7 @@ export class DataCatalogClient {
           protos.google.cloud.datacatalog.v1.ISearchCatalogRequest | null,
           protos.google.cloud.datacatalog.v1.ISearchCatalogResponse,
         ]) => {
-          this._log.info('searchCatalog values %j', response);
+          this._log.debug('searchCatalog values %j', response);
           return [response, input, output];
         },
       );
@@ -5961,7 +5961,7 @@ export class DataCatalogClient {
       'SearchCatalog is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('searchCatalog stream %j', request);
+    this._log.debug('searchCatalog stream %j', request);
     return this.descriptors.page.searchCatalog.createStream(
       this.innerApiCalls.searchCatalog as GaxCall,
       request,
@@ -6063,7 +6063,7 @@ export class DataCatalogClient {
       'SearchCatalog is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('searchCatalog iterate %j', request);
+    this._log.debug('searchCatalog iterate %j', request);
     return this.descriptors.page.searchCatalog.asyncIterate(
       this.innerApiCalls['searchCatalog'] as GaxCall,
       request as {},
@@ -6189,11 +6189,11 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listEntryGroups values %j', values);
+          this._log.debug('listEntryGroups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listEntryGroups request %j', request);
+    this._log.debug('listEntryGroups request %j', request);
     return this.innerApiCalls
       .listEntryGroups(request, options, wrappedCallback)
       ?.then(
@@ -6202,7 +6202,7 @@ export class DataCatalogClient {
           protos.google.cloud.datacatalog.v1.IListEntryGroupsRequest | null,
           protos.google.cloud.datacatalog.v1.IListEntryGroupsResponse,
         ]) => {
-          this._log.info('listEntryGroups values %j', response);
+          this._log.debug('listEntryGroups values %j', response);
           return [response, input, output];
         },
       );
@@ -6258,7 +6258,7 @@ export class DataCatalogClient {
       'ListEntryGroups is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('listEntryGroups stream %j', request);
+    this._log.debug('listEntryGroups stream %j', request);
     return this.descriptors.page.listEntryGroups.createStream(
       this.innerApiCalls.listEntryGroups as GaxCall,
       request,
@@ -6319,7 +6319,7 @@ export class DataCatalogClient {
       'ListEntryGroups is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('listEntryGroups iterate %j', request);
+    this._log.debug('listEntryGroups iterate %j', request);
     return this.descriptors.page.listEntryGroups.asyncIterate(
       this.innerApiCalls['listEntryGroups'] as GaxCall,
       request as {},
@@ -6453,11 +6453,11 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listEntries values %j', values);
+          this._log.debug('listEntries values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listEntries request %j', request);
+    this._log.debug('listEntries request %j', request);
     return this.innerApiCalls
       .listEntries(request, options, wrappedCallback)
       ?.then(
@@ -6466,7 +6466,7 @@ export class DataCatalogClient {
           protos.google.cloud.datacatalog.v1.IListEntriesRequest | null,
           protos.google.cloud.datacatalog.v1.IListEntriesResponse,
         ]) => {
-          this._log.info('listEntries values %j', response);
+          this._log.debug('listEntries values %j', response);
           return [response, input, output];
         },
       );
@@ -6526,7 +6526,7 @@ export class DataCatalogClient {
       'ListEntries is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('listEntries stream %j', request);
+    this._log.debug('listEntries stream %j', request);
     return this.descriptors.page.listEntries.createStream(
       this.innerApiCalls.listEntries as GaxCall,
       request,
@@ -6591,7 +6591,7 @@ export class DataCatalogClient {
       'ListEntries is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('listEntries iterate %j', request);
+    this._log.debug('listEntries iterate %j', request);
     return this.descriptors.page.listEntries.asyncIterate(
       this.innerApiCalls['listEntries'] as GaxCall,
       request as {},
@@ -6712,11 +6712,11 @@ export class DataCatalogClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listTags values %j', values);
+          this._log.debug('listTags values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listTags request %j', request);
+    this._log.debug('listTags request %j', request);
     return this.innerApiCalls
       .listTags(request, options, wrappedCallback)
       ?.then(
@@ -6725,7 +6725,7 @@ export class DataCatalogClient {
           protos.google.cloud.datacatalog.v1.IListTagsRequest | null,
           protos.google.cloud.datacatalog.v1.IListTagsResponse,
         ]) => {
-          this._log.info('listTags values %j', response);
+          this._log.debug('listTags values %j', response);
           return [response, input, output];
         },
       );
@@ -6780,7 +6780,7 @@ export class DataCatalogClient {
       'ListTags is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('listTags stream %j', request);
+    this._log.debug('listTags stream %j', request);
     return this.descriptors.page.listTags.createStream(
       this.innerApiCalls.listTags as GaxCall,
       request,
@@ -6840,7 +6840,7 @@ export class DataCatalogClient {
       'ListTags is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('listTags iterate %j', request);
+    this._log.debug('listTags iterate %j', request);
     return this.descriptors.page.listTags.asyncIterate(
       this.innerApiCalls['listTags'] as GaxCall,
       request as {},

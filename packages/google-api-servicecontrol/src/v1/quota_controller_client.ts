@@ -474,7 +474,7 @@ export class QuotaControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('allocateQuota request %j', request);
+    this._log.debug('allocateQuota request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.api.servicecontrol.v1.IAllocateQuotaResponse,
@@ -485,7 +485,7 @@ export class QuotaControllerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('allocateQuota response %j', response);
+          this._log.debug('allocateQuota response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -497,7 +497,7 @@ export class QuotaControllerClient {
           protos.google.api.servicecontrol.v1.IAllocateQuotaRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('allocateQuota response %j', response);
+          this._log.debug('allocateQuota response %j', response);
           return [response, options, rawResponse];
         },
       )

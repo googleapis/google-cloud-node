@@ -644,7 +644,7 @@ export class PredictionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('predict request %j', request);
+    this._log.debug('predict request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2beta.IPredictResponse,
@@ -653,7 +653,7 @@ export class PredictionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('predict response %j', response);
+          this._log.debug('predict response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -665,7 +665,7 @@ export class PredictionServiceClient {
           protos.google.cloud.retail.v2beta.IPredictRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('predict response %j', response);
+          this._log.debug('predict response %j', response);
           return [response, options, rawResponse];
         },
       )

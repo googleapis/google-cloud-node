@@ -405,7 +405,7 @@ export class StreamingVideoIntelligenceServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('streamingAnnotateVideo stream %j', options);
+    this._log.debug('streamingAnnotateVideo stream %j', options);
     return this.innerApiCalls.streamingAnnotateVideo(null, options);
   }
 

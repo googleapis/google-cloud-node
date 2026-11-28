@@ -201,6 +201,20 @@ export namespace google {
                     public fetchReadToken(request: google.cloud.developerconnect.v1.IFetchReadTokenRequest): Promise<google.cloud.developerconnect.v1.FetchReadTokenResponse>;
 
                     /**
+                     * Calls OpenGitRepositoryLinkPullRequest.
+                     * @param request OpenGitRepositoryLinkPullRequestRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PullRequest
+                     */
+                    public openGitRepositoryLinkPullRequest(request: google.cloud.developerconnect.v1.IOpenGitRepositoryLinkPullRequestRequest, callback: google.cloud.developerconnect.v1.DeveloperConnect.OpenGitRepositoryLinkPullRequestCallback): void;
+
+                    /**
+                     * Calls OpenGitRepositoryLinkPullRequest.
+                     * @param request OpenGitRepositoryLinkPullRequestRequest message or plain object
+                     * @returns Promise
+                     */
+                    public openGitRepositoryLinkPullRequest(request: google.cloud.developerconnect.v1.IOpenGitRepositoryLinkPullRequestRequest): Promise<google.cloud.developerconnect.v1.PullRequest>;
+
+                    /**
                      * Calls FetchLinkableGitRepositories.
                      * @param request FetchLinkableGitRepositoriesRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and FetchLinkableGitRepositoriesResponse
@@ -241,6 +255,132 @@ export namespace google {
                      * @returns Promise
                      */
                     public fetchGitRefs(request: google.cloud.developerconnect.v1.IFetchGitRefsRequest): Promise<google.cloud.developerconnect.v1.FetchGitRefsResponse>;
+
+                    /**
+                     * Calls DiffGitRepositoryLinkCommit.
+                     * @param request DiffGitRepositoryLinkCommitRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DiffGitRepositoryLinkCommitResponse
+                     */
+                    public diffGitRepositoryLinkCommit(request: google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitRequest, callback: google.cloud.developerconnect.v1.DeveloperConnect.DiffGitRepositoryLinkCommitCallback): void;
+
+                    /**
+                     * Calls DiffGitRepositoryLinkCommit.
+                     * @param request DiffGitRepositoryLinkCommitRequest message or plain object
+                     * @returns Promise
+                     */
+                    public diffGitRepositoryLinkCommit(request: google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitRequest): Promise<google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitResponse>;
+
+                    /**
+                     * Calls FetchGitRepositoryLinkCommit.
+                     * @param request FetchGitRepositoryLinkCommitRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FetchGitRepositoryLinkCommitResponse
+                     */
+                    public fetchGitRepositoryLinkCommit(request: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitRequest, callback: google.cloud.developerconnect.v1.DeveloperConnect.FetchGitRepositoryLinkCommitCallback): void;
+
+                    /**
+                     * Calls FetchGitRepositoryLinkCommit.
+                     * @param request FetchGitRepositoryLinkCommitRequest message or plain object
+                     * @returns Promise
+                     */
+                    public fetchGitRepositoryLinkCommit(request: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitRequest): Promise<google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitResponse>;
+
+                    /**
+                     * Calls FetchGitRepositoryLinkCommitList.
+                     * @param request FetchGitRepositoryLinkCommitListRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FetchGitRepositoryLinkCommitListResponse
+                     */
+                    public fetchGitRepositoryLinkCommitList(request: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListRequest, callback: google.cloud.developerconnect.v1.DeveloperConnect.FetchGitRepositoryLinkCommitListCallback): void;
+
+                    /**
+                     * Calls FetchGitRepositoryLinkCommitList.
+                     * @param request FetchGitRepositoryLinkCommitListRequest message or plain object
+                     * @returns Promise
+                     */
+                    public fetchGitRepositoryLinkCommitList(request: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListRequest): Promise<google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListResponse>;
+
+                    /**
+                     * Calls FetchGitRepositoryLinkFileBlame.
+                     * @param request FetchGitRepositoryLinkFileBlameRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FetchGitRepositoryLinkFileBlameResponse
+                     */
+                    public fetchGitRepositoryLinkFileBlame(request: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameRequest, callback: google.cloud.developerconnect.v1.DeveloperConnect.FetchGitRepositoryLinkFileBlameCallback): void;
+
+                    /**
+                     * Calls FetchGitRepositoryLinkFileBlame.
+                     * @param request FetchGitRepositoryLinkFileBlameRequest message or plain object
+                     * @returns Promise
+                     */
+                    public fetchGitRepositoryLinkFileBlame(request: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameRequest): Promise<google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameResponse>;
+
+                    /**
+                     * Calls FetchGitRepositoryLinkPullRequest.
+                     * @param request FetchGitRepositoryLinkPullRequestRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PullRequest
+                     */
+                    public fetchGitRepositoryLinkPullRequest(request: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestRequest, callback: google.cloud.developerconnect.v1.DeveloperConnect.FetchGitRepositoryLinkPullRequestCallback): void;
+
+                    /**
+                     * Calls FetchGitRepositoryLinkPullRequest.
+                     * @param request FetchGitRepositoryLinkPullRequestRequest message or plain object
+                     * @returns Promise
+                     */
+                    public fetchGitRepositoryLinkPullRequest(request: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestRequest): Promise<google.cloud.developerconnect.v1.PullRequest>;
+
+                    /**
+                     * Calls AddGitRepositoryLinkPullRequestComment.
+                     * @param request AddGitRepositoryLinkPullRequestCommentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PullRequestComment
+                     */
+                    public addGitRepositoryLinkPullRequestComment(request: google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestCommentRequest, callback: google.cloud.developerconnect.v1.DeveloperConnect.AddGitRepositoryLinkPullRequestCommentCallback): void;
+
+                    /**
+                     * Calls AddGitRepositoryLinkPullRequestComment.
+                     * @param request AddGitRepositoryLinkPullRequestCommentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public addGitRepositoryLinkPullRequestComment(request: google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestCommentRequest): Promise<google.cloud.developerconnect.v1.PullRequestComment>;
+
+                    /**
+                     * Calls AddGitRepositoryLinkPullRequestReviewComment.
+                     * @param request AddGitRepositoryLinkPullRequestReviewCommentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PullRequestReviewComment
+                     */
+                    public addGitRepositoryLinkPullRequestReviewComment(request: google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestReviewCommentRequest, callback: google.cloud.developerconnect.v1.DeveloperConnect.AddGitRepositoryLinkPullRequestReviewCommentCallback): void;
+
+                    /**
+                     * Calls AddGitRepositoryLinkPullRequestReviewComment.
+                     * @param request AddGitRepositoryLinkPullRequestReviewCommentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public addGitRepositoryLinkPullRequestReviewComment(request: google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestReviewCommentRequest): Promise<google.cloud.developerconnect.v1.PullRequestReviewComment>;
+
+                    /**
+                     * Calls ModifyGitRepositoryLinkPullRequest.
+                     * @param request ModifyGitRepositoryLinkPullRequestRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PullRequest
+                     */
+                    public modifyGitRepositoryLinkPullRequest(request: google.cloud.developerconnect.v1.IModifyGitRepositoryLinkPullRequestRequest, callback: google.cloud.developerconnect.v1.DeveloperConnect.ModifyGitRepositoryLinkPullRequestCallback): void;
+
+                    /**
+                     * Calls ModifyGitRepositoryLinkPullRequest.
+                     * @param request ModifyGitRepositoryLinkPullRequestRequest message or plain object
+                     * @returns Promise
+                     */
+                    public modifyGitRepositoryLinkPullRequest(request: google.cloud.developerconnect.v1.IModifyGitRepositoryLinkPullRequestRequest): Promise<google.cloud.developerconnect.v1.PullRequest>;
+
+                    /**
+                     * Calls FetchGitRepositoryLinkPullRequestList.
+                     * @param request FetchGitRepositoryLinkPullRequestListRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FetchGitRepositoryLinkPullRequestListResponse
+                     */
+                    public fetchGitRepositoryLinkPullRequestList(request: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListRequest, callback: google.cloud.developerconnect.v1.DeveloperConnect.FetchGitRepositoryLinkPullRequestListCallback): void;
+
+                    /**
+                     * Calls FetchGitRepositoryLinkPullRequestList.
+                     * @param request FetchGitRepositoryLinkPullRequestListRequest message or plain object
+                     * @returns Promise
+                     */
+                    public fetchGitRepositoryLinkPullRequestList(request: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListRequest): Promise<google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListResponse>;
 
                     /**
                      * Calls ListAccountConnectors.
@@ -491,6 +631,13 @@ export namespace google {
                     type FetchReadTokenCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.FetchReadTokenResponse) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|openGitRepositoryLinkPullRequest}.
+                     * @param error Error, if any
+                     * @param [response] PullRequest
+                     */
+                    type OpenGitRepositoryLinkPullRequestCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.PullRequest) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|fetchLinkableGitRepositories}.
                      * @param error Error, if any
                      * @param [response] FetchLinkableGitRepositoriesResponse
@@ -510,6 +657,69 @@ export namespace google {
                      * @param [response] FetchGitRefsResponse
                      */
                     type FetchGitRefsCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.FetchGitRefsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|diffGitRepositoryLinkCommit}.
+                     * @param error Error, if any
+                     * @param [response] DiffGitRepositoryLinkCommitResponse
+                     */
+                    type DiffGitRepositoryLinkCommitCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|fetchGitRepositoryLinkCommit}.
+                     * @param error Error, if any
+                     * @param [response] FetchGitRepositoryLinkCommitResponse
+                     */
+                    type FetchGitRepositoryLinkCommitCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|fetchGitRepositoryLinkCommitList}.
+                     * @param error Error, if any
+                     * @param [response] FetchGitRepositoryLinkCommitListResponse
+                     */
+                    type FetchGitRepositoryLinkCommitListCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|fetchGitRepositoryLinkFileBlame}.
+                     * @param error Error, if any
+                     * @param [response] FetchGitRepositoryLinkFileBlameResponse
+                     */
+                    type FetchGitRepositoryLinkFileBlameCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|fetchGitRepositoryLinkPullRequest}.
+                     * @param error Error, if any
+                     * @param [response] PullRequest
+                     */
+                    type FetchGitRepositoryLinkPullRequestCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.PullRequest) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|addGitRepositoryLinkPullRequestComment}.
+                     * @param error Error, if any
+                     * @param [response] PullRequestComment
+                     */
+                    type AddGitRepositoryLinkPullRequestCommentCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.PullRequestComment) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|addGitRepositoryLinkPullRequestReviewComment}.
+                     * @param error Error, if any
+                     * @param [response] PullRequestReviewComment
+                     */
+                    type AddGitRepositoryLinkPullRequestReviewCommentCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.PullRequestReviewComment) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|modifyGitRepositoryLinkPullRequest}.
+                     * @param error Error, if any
+                     * @param [response] PullRequest
+                     */
+                    type ModifyGitRepositoryLinkPullRequestCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.PullRequest) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|fetchGitRepositoryLinkPullRequestList}.
+                     * @param error Error, if any
+                     * @param [response] FetchGitRepositoryLinkPullRequestListResponse
+                     */
+                    type FetchGitRepositoryLinkPullRequestListCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|listAccountConnectors}.
@@ -594,6 +804,13 @@ export namespace google {
                      * @param [response] FinishOAuthResponse
                      */
                     type FinishOAuthCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.FinishOAuthResponse) => void;
+                }
+
+                /** CommitView enum. */
+                enum CommitView {
+                    COMMIT_VIEW_UNSPECIFIED = 0,
+                    BASIC = 1,
+                    FULL = 2
                 }
 
                 /** SystemProvider enum. */
@@ -4914,6 +5131,327 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a DiffGitRepositoryLinkCommitRequest. */
+                interface IDiffGitRepositoryLinkCommitRequest {
+
+                    /** DiffGitRepositoryLinkCommitRequest name */
+                    name?: (string|null);
+
+                    /** DiffGitRepositoryLinkCommitRequest baseSha */
+                    baseSha?: (string|null);
+
+                    /** DiffGitRepositoryLinkCommitRequest headSha */
+                    headSha?: (string|null);
+
+                    /** DiffGitRepositoryLinkCommitRequest pathFilters */
+                    pathFilters?: (string[]|null);
+                }
+
+                /** Represents a DiffGitRepositoryLinkCommitRequest. */
+                class DiffGitRepositoryLinkCommitRequest implements IDiffGitRepositoryLinkCommitRequest {
+
+                    /**
+                     * Constructs a new DiffGitRepositoryLinkCommitRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitRequest);
+
+                    /** DiffGitRepositoryLinkCommitRequest name. */
+                    public name: string;
+
+                    /** DiffGitRepositoryLinkCommitRequest baseSha. */
+                    public baseSha: string;
+
+                    /** DiffGitRepositoryLinkCommitRequest headSha. */
+                    public headSha: string;
+
+                    /** DiffGitRepositoryLinkCommitRequest pathFilters. */
+                    public pathFilters: string[];
+
+                    /**
+                     * Creates a new DiffGitRepositoryLinkCommitRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiffGitRepositoryLinkCommitRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitRequest): google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitRequest;
+
+                    /**
+                     * Encodes the specified DiffGitRepositoryLinkCommitRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitRequest.verify|verify} messages.
+                     * @param message DiffGitRepositoryLinkCommitRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiffGitRepositoryLinkCommitRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitRequest.verify|verify} messages.
+                     * @param message DiffGitRepositoryLinkCommitRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiffGitRepositoryLinkCommitRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiffGitRepositoryLinkCommitRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitRequest;
+
+                    /**
+                     * Decodes a DiffGitRepositoryLinkCommitRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiffGitRepositoryLinkCommitRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitRequest;
+
+                    /**
+                     * Verifies a DiffGitRepositoryLinkCommitRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiffGitRepositoryLinkCommitRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiffGitRepositoryLinkCommitRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitRequest;
+
+                    /**
+                     * Creates a plain object from a DiffGitRepositoryLinkCommitRequest message. Also converts values to other types if specified.
+                     * @param message DiffGitRepositoryLinkCommitRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiffGitRepositoryLinkCommitRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiffGitRepositoryLinkCommitRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DiffGitRepositoryLinkCommitResponse. */
+                interface IDiffGitRepositoryLinkCommitResponse {
+
+                    /** DiffGitRepositoryLinkCommitResponse files */
+                    files?: (google.cloud.developerconnect.v1.IFileDiff[]|null);
+                }
+
+                /** Represents a DiffGitRepositoryLinkCommitResponse. */
+                class DiffGitRepositoryLinkCommitResponse implements IDiffGitRepositoryLinkCommitResponse {
+
+                    /**
+                     * Constructs a new DiffGitRepositoryLinkCommitResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitResponse);
+
+                    /** DiffGitRepositoryLinkCommitResponse files. */
+                    public files: google.cloud.developerconnect.v1.IFileDiff[];
+
+                    /**
+                     * Creates a new DiffGitRepositoryLinkCommitResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiffGitRepositoryLinkCommitResponse instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitResponse): google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitResponse;
+
+                    /**
+                     * Encodes the specified DiffGitRepositoryLinkCommitResponse message. Does not implicitly {@link google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitResponse.verify|verify} messages.
+                     * @param message DiffGitRepositoryLinkCommitResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiffGitRepositoryLinkCommitResponse message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitResponse.verify|verify} messages.
+                     * @param message DiffGitRepositoryLinkCommitResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IDiffGitRepositoryLinkCommitResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiffGitRepositoryLinkCommitResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiffGitRepositoryLinkCommitResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitResponse;
+
+                    /**
+                     * Decodes a DiffGitRepositoryLinkCommitResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiffGitRepositoryLinkCommitResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitResponse;
+
+                    /**
+                     * Verifies a DiffGitRepositoryLinkCommitResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiffGitRepositoryLinkCommitResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiffGitRepositoryLinkCommitResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitResponse;
+
+                    /**
+                     * Creates a plain object from a DiffGitRepositoryLinkCommitResponse message. Also converts values to other types if specified.
+                     * @param message DiffGitRepositoryLinkCommitResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.DiffGitRepositoryLinkCommitResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiffGitRepositoryLinkCommitResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiffGitRepositoryLinkCommitResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FileDiff. */
+                interface IFileDiff {
+
+                    /** FileDiff path */
+                    path?: (string|null);
+
+                    /** FileDiff status */
+                    status?: (string|null);
+
+                    /** FileDiff patch */
+                    patch?: (string|null);
+                }
+
+                /** Represents a FileDiff. */
+                class FileDiff implements IFileDiff {
+
+                    /**
+                     * Constructs a new FileDiff.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IFileDiff);
+
+                    /** FileDiff path. */
+                    public path: string;
+
+                    /** FileDiff status. */
+                    public status: string;
+
+                    /** FileDiff patch. */
+                    public patch: string;
+
+                    /**
+                     * Creates a new FileDiff instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FileDiff instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IFileDiff): google.cloud.developerconnect.v1.FileDiff;
+
+                    /**
+                     * Encodes the specified FileDiff message. Does not implicitly {@link google.cloud.developerconnect.v1.FileDiff.verify|verify} messages.
+                     * @param message FileDiff message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IFileDiff, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FileDiff message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FileDiff.verify|verify} messages.
+                     * @param message FileDiff message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IFileDiff, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FileDiff message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FileDiff
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.FileDiff;
+
+                    /**
+                     * Decodes a FileDiff message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FileDiff
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.FileDiff;
+
+                    /**
+                     * Verifies a FileDiff message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FileDiff message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FileDiff
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.FileDiff;
+
+                    /**
+                     * Creates a plain object from a FileDiff message. Also converts values to other types if specified.
+                     * @param message FileDiff
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.FileDiff, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FileDiff to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FileDiff
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a StartOAuthRequest. */
                 interface IStartOAuthRequest {
 
@@ -6812,6 +7350,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an OpenGitRepositoryLinkPullRequestRequest. */
+                interface IOpenGitRepositoryLinkPullRequestRequest {
+
+                    /** OpenGitRepositoryLinkPullRequestRequest name */
+                    name?: (string|null);
+
+                    /** OpenGitRepositoryLinkPullRequestRequest pullRequest */
+                    pullRequest?: (google.cloud.developerconnect.v1.IPullRequest|null);
+                }
+
+                /** Represents an OpenGitRepositoryLinkPullRequestRequest. */
+                class OpenGitRepositoryLinkPullRequestRequest implements IOpenGitRepositoryLinkPullRequestRequest {
+
+                    /**
+                     * Constructs a new OpenGitRepositoryLinkPullRequestRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IOpenGitRepositoryLinkPullRequestRequest);
+
+                    /** OpenGitRepositoryLinkPullRequestRequest name. */
+                    public name: string;
+
+                    /** OpenGitRepositoryLinkPullRequestRequest pullRequest. */
+                    public pullRequest?: (google.cloud.developerconnect.v1.IPullRequest|null);
+
+                    /**
+                     * Creates a new OpenGitRepositoryLinkPullRequestRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OpenGitRepositoryLinkPullRequestRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IOpenGitRepositoryLinkPullRequestRequest): google.cloud.developerconnect.v1.OpenGitRepositoryLinkPullRequestRequest;
+
+                    /**
+                     * Encodes the specified OpenGitRepositoryLinkPullRequestRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.OpenGitRepositoryLinkPullRequestRequest.verify|verify} messages.
+                     * @param message OpenGitRepositoryLinkPullRequestRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IOpenGitRepositoryLinkPullRequestRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OpenGitRepositoryLinkPullRequestRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.OpenGitRepositoryLinkPullRequestRequest.verify|verify} messages.
+                     * @param message OpenGitRepositoryLinkPullRequestRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IOpenGitRepositoryLinkPullRequestRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OpenGitRepositoryLinkPullRequestRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OpenGitRepositoryLinkPullRequestRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.OpenGitRepositoryLinkPullRequestRequest;
+
+                    /**
+                     * Decodes an OpenGitRepositoryLinkPullRequestRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OpenGitRepositoryLinkPullRequestRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.OpenGitRepositoryLinkPullRequestRequest;
+
+                    /**
+                     * Verifies an OpenGitRepositoryLinkPullRequestRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OpenGitRepositoryLinkPullRequestRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OpenGitRepositoryLinkPullRequestRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.OpenGitRepositoryLinkPullRequestRequest;
+
+                    /**
+                     * Creates a plain object from an OpenGitRepositoryLinkPullRequestRequest message. Also converts values to other types if specified.
+                     * @param message OpenGitRepositoryLinkPullRequestRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.OpenGitRepositoryLinkPullRequestRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OpenGitRepositoryLinkPullRequestRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OpenGitRepositoryLinkPullRequestRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a FetchLinkableGitRepositoriesRequest. */
                 interface IFetchLinkableGitRepositoriesRequest {
 
@@ -7649,6 +8290,2061 @@ export namespace google {
 
                     /**
                      * Gets the default type url for FetchGitRefsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchGitRepositoryLinkCommitRequest. */
+                interface IFetchGitRepositoryLinkCommitRequest {
+
+                    /** FetchGitRepositoryLinkCommitRequest name */
+                    name?: (string|null);
+
+                    /** FetchGitRepositoryLinkCommitRequest commitSha */
+                    commitSha?: (string|null);
+
+                    /** FetchGitRepositoryLinkCommitRequest view */
+                    view?: (google.cloud.developerconnect.v1.CommitView|keyof typeof google.cloud.developerconnect.v1.CommitView|null);
+
+                    /** FetchGitRepositoryLinkCommitRequest pathFilters */
+                    pathFilters?: (string[]|null);
+                }
+
+                /** Represents a FetchGitRepositoryLinkCommitRequest. */
+                class FetchGitRepositoryLinkCommitRequest implements IFetchGitRepositoryLinkCommitRequest {
+
+                    /**
+                     * Constructs a new FetchGitRepositoryLinkCommitRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitRequest);
+
+                    /** FetchGitRepositoryLinkCommitRequest name. */
+                    public name: string;
+
+                    /** FetchGitRepositoryLinkCommitRequest commitSha. */
+                    public commitSha: string;
+
+                    /** FetchGitRepositoryLinkCommitRequest view. */
+                    public view: (google.cloud.developerconnect.v1.CommitView|keyof typeof google.cloud.developerconnect.v1.CommitView);
+
+                    /** FetchGitRepositoryLinkCommitRequest pathFilters. */
+                    public pathFilters: string[];
+
+                    /**
+                     * Creates a new FetchGitRepositoryLinkCommitRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchGitRepositoryLinkCommitRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitRequest): google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitRequest;
+
+                    /**
+                     * Encodes the specified FetchGitRepositoryLinkCommitRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitRequest.verify|verify} messages.
+                     * @param message FetchGitRepositoryLinkCommitRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchGitRepositoryLinkCommitRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitRequest.verify|verify} messages.
+                     * @param message FetchGitRepositoryLinkCommitRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchGitRepositoryLinkCommitRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchGitRepositoryLinkCommitRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitRequest;
+
+                    /**
+                     * Decodes a FetchGitRepositoryLinkCommitRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchGitRepositoryLinkCommitRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitRequest;
+
+                    /**
+                     * Verifies a FetchGitRepositoryLinkCommitRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchGitRepositoryLinkCommitRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchGitRepositoryLinkCommitRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitRequest;
+
+                    /**
+                     * Creates a plain object from a FetchGitRepositoryLinkCommitRequest message. Also converts values to other types if specified.
+                     * @param message FetchGitRepositoryLinkCommitRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchGitRepositoryLinkCommitRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchGitRepositoryLinkCommitRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchGitRepositoryLinkCommitResponse. */
+                interface IFetchGitRepositoryLinkCommitResponse {
+
+                    /** FetchGitRepositoryLinkCommitResponse commit */
+                    commit?: (google.cloud.developerconnect.v1.ISCMCommit|null);
+
+                    /** FetchGitRepositoryLinkCommitResponse files */
+                    files?: (google.cloud.developerconnect.v1.IFileDiff[]|null);
+                }
+
+                /** Represents a FetchGitRepositoryLinkCommitResponse. */
+                class FetchGitRepositoryLinkCommitResponse implements IFetchGitRepositoryLinkCommitResponse {
+
+                    /**
+                     * Constructs a new FetchGitRepositoryLinkCommitResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitResponse);
+
+                    /** FetchGitRepositoryLinkCommitResponse commit. */
+                    public commit?: (google.cloud.developerconnect.v1.ISCMCommit|null);
+
+                    /** FetchGitRepositoryLinkCommitResponse files. */
+                    public files: google.cloud.developerconnect.v1.IFileDiff[];
+
+                    /**
+                     * Creates a new FetchGitRepositoryLinkCommitResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchGitRepositoryLinkCommitResponse instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitResponse): google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitResponse;
+
+                    /**
+                     * Encodes the specified FetchGitRepositoryLinkCommitResponse message. Does not implicitly {@link google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitResponse.verify|verify} messages.
+                     * @param message FetchGitRepositoryLinkCommitResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchGitRepositoryLinkCommitResponse message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitResponse.verify|verify} messages.
+                     * @param message FetchGitRepositoryLinkCommitResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchGitRepositoryLinkCommitResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchGitRepositoryLinkCommitResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitResponse;
+
+                    /**
+                     * Decodes a FetchGitRepositoryLinkCommitResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchGitRepositoryLinkCommitResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitResponse;
+
+                    /**
+                     * Verifies a FetchGitRepositoryLinkCommitResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchGitRepositoryLinkCommitResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchGitRepositoryLinkCommitResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitResponse;
+
+                    /**
+                     * Creates a plain object from a FetchGitRepositoryLinkCommitResponse message. Also converts values to other types if specified.
+                     * @param message FetchGitRepositoryLinkCommitResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchGitRepositoryLinkCommitResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchGitRepositoryLinkCommitResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchGitRepositoryLinkCommitListRequest. */
+                interface IFetchGitRepositoryLinkCommitListRequest {
+
+                    /** FetchGitRepositoryLinkCommitListRequest name */
+                    name?: (string|null);
+
+                    /** FetchGitRepositoryLinkCommitListRequest ref */
+                    ref?: (string|null);
+
+                    /** FetchGitRepositoryLinkCommitListRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** FetchGitRepositoryLinkCommitListRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** FetchGitRepositoryLinkCommitListRequest view */
+                    view?: (google.cloud.developerconnect.v1.CommitView|keyof typeof google.cloud.developerconnect.v1.CommitView|null);
+                }
+
+                /** Represents a FetchGitRepositoryLinkCommitListRequest. */
+                class FetchGitRepositoryLinkCommitListRequest implements IFetchGitRepositoryLinkCommitListRequest {
+
+                    /**
+                     * Constructs a new FetchGitRepositoryLinkCommitListRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListRequest);
+
+                    /** FetchGitRepositoryLinkCommitListRequest name. */
+                    public name: string;
+
+                    /** FetchGitRepositoryLinkCommitListRequest ref. */
+                    public ref: string;
+
+                    /** FetchGitRepositoryLinkCommitListRequest pageSize. */
+                    public pageSize: number;
+
+                    /** FetchGitRepositoryLinkCommitListRequest pageToken. */
+                    public pageToken: string;
+
+                    /** FetchGitRepositoryLinkCommitListRequest view. */
+                    public view: (google.cloud.developerconnect.v1.CommitView|keyof typeof google.cloud.developerconnect.v1.CommitView);
+
+                    /**
+                     * Creates a new FetchGitRepositoryLinkCommitListRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchGitRepositoryLinkCommitListRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListRequest): google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListRequest;
+
+                    /**
+                     * Encodes the specified FetchGitRepositoryLinkCommitListRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListRequest.verify|verify} messages.
+                     * @param message FetchGitRepositoryLinkCommitListRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchGitRepositoryLinkCommitListRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListRequest.verify|verify} messages.
+                     * @param message FetchGitRepositoryLinkCommitListRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchGitRepositoryLinkCommitListRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchGitRepositoryLinkCommitListRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListRequest;
+
+                    /**
+                     * Decodes a FetchGitRepositoryLinkCommitListRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchGitRepositoryLinkCommitListRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListRequest;
+
+                    /**
+                     * Verifies a FetchGitRepositoryLinkCommitListRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchGitRepositoryLinkCommitListRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchGitRepositoryLinkCommitListRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListRequest;
+
+                    /**
+                     * Creates a plain object from a FetchGitRepositoryLinkCommitListRequest message. Also converts values to other types if specified.
+                     * @param message FetchGitRepositoryLinkCommitListRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchGitRepositoryLinkCommitListRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchGitRepositoryLinkCommitListRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchGitRepositoryLinkCommitListResponse. */
+                interface IFetchGitRepositoryLinkCommitListResponse {
+
+                    /** FetchGitRepositoryLinkCommitListResponse commits */
+                    commits?: (google.cloud.developerconnect.v1.ISCMCommit[]|null);
+
+                    /** FetchGitRepositoryLinkCommitListResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a FetchGitRepositoryLinkCommitListResponse. */
+                class FetchGitRepositoryLinkCommitListResponse implements IFetchGitRepositoryLinkCommitListResponse {
+
+                    /**
+                     * Constructs a new FetchGitRepositoryLinkCommitListResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListResponse);
+
+                    /** FetchGitRepositoryLinkCommitListResponse commits. */
+                    public commits: google.cloud.developerconnect.v1.ISCMCommit[];
+
+                    /** FetchGitRepositoryLinkCommitListResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new FetchGitRepositoryLinkCommitListResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchGitRepositoryLinkCommitListResponse instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListResponse): google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListResponse;
+
+                    /**
+                     * Encodes the specified FetchGitRepositoryLinkCommitListResponse message. Does not implicitly {@link google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListResponse.verify|verify} messages.
+                     * @param message FetchGitRepositoryLinkCommitListResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchGitRepositoryLinkCommitListResponse message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListResponse.verify|verify} messages.
+                     * @param message FetchGitRepositoryLinkCommitListResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkCommitListResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchGitRepositoryLinkCommitListResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchGitRepositoryLinkCommitListResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListResponse;
+
+                    /**
+                     * Decodes a FetchGitRepositoryLinkCommitListResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchGitRepositoryLinkCommitListResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListResponse;
+
+                    /**
+                     * Verifies a FetchGitRepositoryLinkCommitListResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchGitRepositoryLinkCommitListResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchGitRepositoryLinkCommitListResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListResponse;
+
+                    /**
+                     * Creates a plain object from a FetchGitRepositoryLinkCommitListResponse message. Also converts values to other types if specified.
+                     * @param message FetchGitRepositoryLinkCommitListResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.FetchGitRepositoryLinkCommitListResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchGitRepositoryLinkCommitListResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchGitRepositoryLinkCommitListResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SCMCommit. */
+                interface ISCMCommit {
+
+                    /** SCMCommit sha */
+                    sha?: (string|null);
+
+                    /** SCMCommit message */
+                    message?: (string|null);
+
+                    /** SCMCommit author */
+                    author?: (string|null);
+
+                    /** SCMCommit authorEmail */
+                    authorEmail?: (string|null);
+
+                    /** SCMCommit commitTime */
+                    commitTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SCMCommit url */
+                    url?: (string|null);
+                }
+
+                /** Represents a SCMCommit. */
+                class SCMCommit implements ISCMCommit {
+
+                    /**
+                     * Constructs a new SCMCommit.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.ISCMCommit);
+
+                    /** SCMCommit sha. */
+                    public sha: string;
+
+                    /** SCMCommit message. */
+                    public message: string;
+
+                    /** SCMCommit author. */
+                    public author: string;
+
+                    /** SCMCommit authorEmail. */
+                    public authorEmail: string;
+
+                    /** SCMCommit commitTime. */
+                    public commitTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SCMCommit url. */
+                    public url: string;
+
+                    /**
+                     * Creates a new SCMCommit instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SCMCommit instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.ISCMCommit): google.cloud.developerconnect.v1.SCMCommit;
+
+                    /**
+                     * Encodes the specified SCMCommit message. Does not implicitly {@link google.cloud.developerconnect.v1.SCMCommit.verify|verify} messages.
+                     * @param message SCMCommit message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.ISCMCommit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SCMCommit message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.SCMCommit.verify|verify} messages.
+                     * @param message SCMCommit message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.ISCMCommit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SCMCommit message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SCMCommit
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.SCMCommit;
+
+                    /**
+                     * Decodes a SCMCommit message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SCMCommit
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.SCMCommit;
+
+                    /**
+                     * Verifies a SCMCommit message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SCMCommit message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SCMCommit
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.SCMCommit;
+
+                    /**
+                     * Creates a plain object from a SCMCommit message. Also converts values to other types if specified.
+                     * @param message SCMCommit
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.SCMCommit, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SCMCommit to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SCMCommit
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchGitRepositoryLinkFileBlameRequest. */
+                interface IFetchGitRepositoryLinkFileBlameRequest {
+
+                    /** FetchGitRepositoryLinkFileBlameRequest name */
+                    name?: (string|null);
+
+                    /** FetchGitRepositoryLinkFileBlameRequest ref */
+                    ref?: (string|null);
+
+                    /** FetchGitRepositoryLinkFileBlameRequest path */
+                    path?: (string|null);
+
+                    /** FetchGitRepositoryLinkFileBlameRequest firstLine */
+                    firstLine?: (number|null);
+
+                    /** FetchGitRepositoryLinkFileBlameRequest lastLine */
+                    lastLine?: (number|null);
+                }
+
+                /** Represents a FetchGitRepositoryLinkFileBlameRequest. */
+                class FetchGitRepositoryLinkFileBlameRequest implements IFetchGitRepositoryLinkFileBlameRequest {
+
+                    /**
+                     * Constructs a new FetchGitRepositoryLinkFileBlameRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameRequest);
+
+                    /** FetchGitRepositoryLinkFileBlameRequest name. */
+                    public name: string;
+
+                    /** FetchGitRepositoryLinkFileBlameRequest ref. */
+                    public ref: string;
+
+                    /** FetchGitRepositoryLinkFileBlameRequest path. */
+                    public path: string;
+
+                    /** FetchGitRepositoryLinkFileBlameRequest firstLine. */
+                    public firstLine: number;
+
+                    /** FetchGitRepositoryLinkFileBlameRequest lastLine. */
+                    public lastLine: number;
+
+                    /**
+                     * Creates a new FetchGitRepositoryLinkFileBlameRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchGitRepositoryLinkFileBlameRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameRequest): google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameRequest;
+
+                    /**
+                     * Encodes the specified FetchGitRepositoryLinkFileBlameRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameRequest.verify|verify} messages.
+                     * @param message FetchGitRepositoryLinkFileBlameRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchGitRepositoryLinkFileBlameRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameRequest.verify|verify} messages.
+                     * @param message FetchGitRepositoryLinkFileBlameRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchGitRepositoryLinkFileBlameRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchGitRepositoryLinkFileBlameRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameRequest;
+
+                    /**
+                     * Decodes a FetchGitRepositoryLinkFileBlameRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchGitRepositoryLinkFileBlameRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameRequest;
+
+                    /**
+                     * Verifies a FetchGitRepositoryLinkFileBlameRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchGitRepositoryLinkFileBlameRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchGitRepositoryLinkFileBlameRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameRequest;
+
+                    /**
+                     * Creates a plain object from a FetchGitRepositoryLinkFileBlameRequest message. Also converts values to other types if specified.
+                     * @param message FetchGitRepositoryLinkFileBlameRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchGitRepositoryLinkFileBlameRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchGitRepositoryLinkFileBlameRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BlameRange. */
+                interface IBlameRange {
+
+                    /** BlameRange firstLine */
+                    firstLine?: (number|null);
+
+                    /** BlameRange lastLine */
+                    lastLine?: (number|null);
+
+                    /** BlameRange commit */
+                    commit?: (google.cloud.developerconnect.v1.ISCMCommit|null);
+                }
+
+                /** Represents a BlameRange. */
+                class BlameRange implements IBlameRange {
+
+                    /**
+                     * Constructs a new BlameRange.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IBlameRange);
+
+                    /** BlameRange firstLine. */
+                    public firstLine: number;
+
+                    /** BlameRange lastLine. */
+                    public lastLine: number;
+
+                    /** BlameRange commit. */
+                    public commit?: (google.cloud.developerconnect.v1.ISCMCommit|null);
+
+                    /**
+                     * Creates a new BlameRange instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BlameRange instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IBlameRange): google.cloud.developerconnect.v1.BlameRange;
+
+                    /**
+                     * Encodes the specified BlameRange message. Does not implicitly {@link google.cloud.developerconnect.v1.BlameRange.verify|verify} messages.
+                     * @param message BlameRange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IBlameRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BlameRange message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.BlameRange.verify|verify} messages.
+                     * @param message BlameRange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IBlameRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BlameRange message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BlameRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.BlameRange;
+
+                    /**
+                     * Decodes a BlameRange message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BlameRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.BlameRange;
+
+                    /**
+                     * Verifies a BlameRange message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BlameRange message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BlameRange
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.BlameRange;
+
+                    /**
+                     * Creates a plain object from a BlameRange message. Also converts values to other types if specified.
+                     * @param message BlameRange
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.BlameRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BlameRange to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BlameRange
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchGitRepositoryLinkFileBlameResponse. */
+                interface IFetchGitRepositoryLinkFileBlameResponse {
+
+                    /** FetchGitRepositoryLinkFileBlameResponse ranges */
+                    ranges?: (google.cloud.developerconnect.v1.IBlameRange[]|null);
+                }
+
+                /** Represents a FetchGitRepositoryLinkFileBlameResponse. */
+                class FetchGitRepositoryLinkFileBlameResponse implements IFetchGitRepositoryLinkFileBlameResponse {
+
+                    /**
+                     * Constructs a new FetchGitRepositoryLinkFileBlameResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameResponse);
+
+                    /** FetchGitRepositoryLinkFileBlameResponse ranges. */
+                    public ranges: google.cloud.developerconnect.v1.IBlameRange[];
+
+                    /**
+                     * Creates a new FetchGitRepositoryLinkFileBlameResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchGitRepositoryLinkFileBlameResponse instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameResponse): google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameResponse;
+
+                    /**
+                     * Encodes the specified FetchGitRepositoryLinkFileBlameResponse message. Does not implicitly {@link google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameResponse.verify|verify} messages.
+                     * @param message FetchGitRepositoryLinkFileBlameResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchGitRepositoryLinkFileBlameResponse message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameResponse.verify|verify} messages.
+                     * @param message FetchGitRepositoryLinkFileBlameResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkFileBlameResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchGitRepositoryLinkFileBlameResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchGitRepositoryLinkFileBlameResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameResponse;
+
+                    /**
+                     * Decodes a FetchGitRepositoryLinkFileBlameResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchGitRepositoryLinkFileBlameResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameResponse;
+
+                    /**
+                     * Verifies a FetchGitRepositoryLinkFileBlameResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchGitRepositoryLinkFileBlameResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchGitRepositoryLinkFileBlameResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameResponse;
+
+                    /**
+                     * Creates a plain object from a FetchGitRepositoryLinkFileBlameResponse message. Also converts values to other types if specified.
+                     * @param message FetchGitRepositoryLinkFileBlameResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.FetchGitRepositoryLinkFileBlameResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchGitRepositoryLinkFileBlameResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchGitRepositoryLinkFileBlameResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchGitRepositoryLinkPullRequestRequest. */
+                interface IFetchGitRepositoryLinkPullRequestRequest {
+
+                    /** FetchGitRepositoryLinkPullRequestRequest name */
+                    name?: (string|null);
+
+                    /** FetchGitRepositoryLinkPullRequestRequest pullRequestId */
+                    pullRequestId?: (string|null);
+                }
+
+                /** Represents a FetchGitRepositoryLinkPullRequestRequest. */
+                class FetchGitRepositoryLinkPullRequestRequest implements IFetchGitRepositoryLinkPullRequestRequest {
+
+                    /**
+                     * Constructs a new FetchGitRepositoryLinkPullRequestRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestRequest);
+
+                    /** FetchGitRepositoryLinkPullRequestRequest name. */
+                    public name: string;
+
+                    /** FetchGitRepositoryLinkPullRequestRequest pullRequestId. */
+                    public pullRequestId: string;
+
+                    /**
+                     * Creates a new FetchGitRepositoryLinkPullRequestRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchGitRepositoryLinkPullRequestRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestRequest): google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestRequest;
+
+                    /**
+                     * Encodes the specified FetchGitRepositoryLinkPullRequestRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestRequest.verify|verify} messages.
+                     * @param message FetchGitRepositoryLinkPullRequestRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchGitRepositoryLinkPullRequestRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestRequest.verify|verify} messages.
+                     * @param message FetchGitRepositoryLinkPullRequestRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchGitRepositoryLinkPullRequestRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchGitRepositoryLinkPullRequestRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestRequest;
+
+                    /**
+                     * Decodes a FetchGitRepositoryLinkPullRequestRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchGitRepositoryLinkPullRequestRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestRequest;
+
+                    /**
+                     * Verifies a FetchGitRepositoryLinkPullRequestRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchGitRepositoryLinkPullRequestRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchGitRepositoryLinkPullRequestRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestRequest;
+
+                    /**
+                     * Creates a plain object from a FetchGitRepositoryLinkPullRequestRequest message. Also converts values to other types if specified.
+                     * @param message FetchGitRepositoryLinkPullRequestRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchGitRepositoryLinkPullRequestRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchGitRepositoryLinkPullRequestRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PullRequest. */
+                interface IPullRequest {
+
+                    /** PullRequest id */
+                    id?: (string|null);
+
+                    /** PullRequest title */
+                    title?: (string|null);
+
+                    /** PullRequest body */
+                    body?: (string|null);
+
+                    /** PullRequest headRef */
+                    headRef?: (string|null);
+
+                    /** PullRequest baseRef */
+                    baseRef?: (string|null);
+
+                    /** PullRequest author */
+                    author?: (string|null);
+
+                    /** PullRequest createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequest updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequest mergeTime */
+                    mergeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequest closeTime */
+                    closeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequest declineTime */
+                    declineTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequest state */
+                    state?: (google.cloud.developerconnect.v1.PullRequest.State|keyof typeof google.cloud.developerconnect.v1.PullRequest.State|null);
+
+                    /** PullRequest mergeability */
+                    mergeability?: (google.cloud.developerconnect.v1.PullRequest.Mergeability|keyof typeof google.cloud.developerconnect.v1.PullRequest.Mergeability|null);
+
+                    /** PullRequest htmlUrl */
+                    htmlUrl?: (string|null);
+                }
+
+                /** Represents a PullRequest. */
+                class PullRequest implements IPullRequest {
+
+                    /**
+                     * Constructs a new PullRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IPullRequest);
+
+                    /** PullRequest id. */
+                    public id: string;
+
+                    /** PullRequest title. */
+                    public title: string;
+
+                    /** PullRequest body. */
+                    public body: string;
+
+                    /** PullRequest headRef. */
+                    public headRef: string;
+
+                    /** PullRequest baseRef. */
+                    public baseRef: string;
+
+                    /** PullRequest author. */
+                    public author: string;
+
+                    /** PullRequest createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequest updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequest mergeTime. */
+                    public mergeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequest closeTime. */
+                    public closeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequest declineTime. */
+                    public declineTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequest state. */
+                    public state: (google.cloud.developerconnect.v1.PullRequest.State|keyof typeof google.cloud.developerconnect.v1.PullRequest.State);
+
+                    /** PullRequest mergeability. */
+                    public mergeability: (google.cloud.developerconnect.v1.PullRequest.Mergeability|keyof typeof google.cloud.developerconnect.v1.PullRequest.Mergeability);
+
+                    /** PullRequest htmlUrl. */
+                    public htmlUrl: string;
+
+                    /**
+                     * Creates a new PullRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PullRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IPullRequest): google.cloud.developerconnect.v1.PullRequest;
+
+                    /**
+                     * Encodes the specified PullRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.PullRequest.verify|verify} messages.
+                     * @param message PullRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IPullRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PullRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.PullRequest.verify|verify} messages.
+                     * @param message PullRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IPullRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PullRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PullRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.PullRequest;
+
+                    /**
+                     * Decodes a PullRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PullRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.PullRequest;
+
+                    /**
+                     * Verifies a PullRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PullRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PullRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.PullRequest;
+
+                    /**
+                     * Creates a plain object from a PullRequest message. Also converts values to other types if specified.
+                     * @param message PullRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.PullRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PullRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PullRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PullRequest {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        OPEN = 1,
+                        CLOSED = 2,
+                        MERGED = 3,
+                        DECLINED = 4
+                    }
+
+                    /** Mergeability enum. */
+                    enum Mergeability {
+                        MERGEABILITY_UNSPECIFIED = 0,
+                        MERGEABLE = 1,
+                        CONFLICTING = 2,
+                        COMPUTING = 3
+                    }
+                }
+
+                /** Properties of a PullRequestComment. */
+                interface IPullRequestComment {
+
+                    /** PullRequestComment id */
+                    id?: (string|null);
+
+                    /** PullRequestComment body */
+                    body?: (string|null);
+
+                    /** PullRequestComment author */
+                    author?: (string|null);
+
+                    /** PullRequestComment createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequestComment updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a PullRequestComment. */
+                class PullRequestComment implements IPullRequestComment {
+
+                    /**
+                     * Constructs a new PullRequestComment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IPullRequestComment);
+
+                    /** PullRequestComment id. */
+                    public id: string;
+
+                    /** PullRequestComment body. */
+                    public body: string;
+
+                    /** PullRequestComment author. */
+                    public author: string;
+
+                    /** PullRequestComment createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequestComment updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new PullRequestComment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PullRequestComment instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IPullRequestComment): google.cloud.developerconnect.v1.PullRequestComment;
+
+                    /**
+                     * Encodes the specified PullRequestComment message. Does not implicitly {@link google.cloud.developerconnect.v1.PullRequestComment.verify|verify} messages.
+                     * @param message PullRequestComment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IPullRequestComment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PullRequestComment message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.PullRequestComment.verify|verify} messages.
+                     * @param message PullRequestComment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IPullRequestComment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PullRequestComment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PullRequestComment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.PullRequestComment;
+
+                    /**
+                     * Decodes a PullRequestComment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PullRequestComment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.PullRequestComment;
+
+                    /**
+                     * Verifies a PullRequestComment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PullRequestComment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PullRequestComment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.PullRequestComment;
+
+                    /**
+                     * Creates a plain object from a PullRequestComment message. Also converts values to other types if specified.
+                     * @param message PullRequestComment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.PullRequestComment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PullRequestComment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PullRequestComment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AddGitRepositoryLinkPullRequestCommentRequest. */
+                interface IAddGitRepositoryLinkPullRequestCommentRequest {
+
+                    /** AddGitRepositoryLinkPullRequestCommentRequest name */
+                    name?: (string|null);
+
+                    /** AddGitRepositoryLinkPullRequestCommentRequest pullRequestId */
+                    pullRequestId?: (string|null);
+
+                    /** AddGitRepositoryLinkPullRequestCommentRequest comment */
+                    comment?: (google.cloud.developerconnect.v1.IPullRequestComment|null);
+                }
+
+                /** Represents an AddGitRepositoryLinkPullRequestCommentRequest. */
+                class AddGitRepositoryLinkPullRequestCommentRequest implements IAddGitRepositoryLinkPullRequestCommentRequest {
+
+                    /**
+                     * Constructs a new AddGitRepositoryLinkPullRequestCommentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestCommentRequest);
+
+                    /** AddGitRepositoryLinkPullRequestCommentRequest name. */
+                    public name: string;
+
+                    /** AddGitRepositoryLinkPullRequestCommentRequest pullRequestId. */
+                    public pullRequestId: string;
+
+                    /** AddGitRepositoryLinkPullRequestCommentRequest comment. */
+                    public comment?: (google.cloud.developerconnect.v1.IPullRequestComment|null);
+
+                    /**
+                     * Creates a new AddGitRepositoryLinkPullRequestCommentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AddGitRepositoryLinkPullRequestCommentRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestCommentRequest): google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestCommentRequest;
+
+                    /**
+                     * Encodes the specified AddGitRepositoryLinkPullRequestCommentRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestCommentRequest.verify|verify} messages.
+                     * @param message AddGitRepositoryLinkPullRequestCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AddGitRepositoryLinkPullRequestCommentRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestCommentRequest.verify|verify} messages.
+                     * @param message AddGitRepositoryLinkPullRequestCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AddGitRepositoryLinkPullRequestCommentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AddGitRepositoryLinkPullRequestCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestCommentRequest;
+
+                    /**
+                     * Decodes an AddGitRepositoryLinkPullRequestCommentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AddGitRepositoryLinkPullRequestCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestCommentRequest;
+
+                    /**
+                     * Verifies an AddGitRepositoryLinkPullRequestCommentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AddGitRepositoryLinkPullRequestCommentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AddGitRepositoryLinkPullRequestCommentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestCommentRequest;
+
+                    /**
+                     * Creates a plain object from an AddGitRepositoryLinkPullRequestCommentRequest message. Also converts values to other types if specified.
+                     * @param message AddGitRepositoryLinkPullRequestCommentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestCommentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AddGitRepositoryLinkPullRequestCommentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AddGitRepositoryLinkPullRequestCommentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PullRequestReviewComment. */
+                interface IPullRequestReviewComment {
+
+                    /** PullRequestReviewComment id */
+                    id?: (string|null);
+
+                    /** PullRequestReviewComment body */
+                    body?: (string|null);
+
+                    /** PullRequestReviewComment path */
+                    path?: (string|null);
+
+                    /** PullRequestReviewComment firstLine */
+                    firstLine?: (number|null);
+
+                    /** PullRequestReviewComment lastLine */
+                    lastLine?: (number|null);
+
+                    /** PullRequestReviewComment side */
+                    side?: (google.cloud.developerconnect.v1.PullRequestReviewComment.DiffSide|keyof typeof google.cloud.developerconnect.v1.PullRequestReviewComment.DiffSide|null);
+
+                    /** PullRequestReviewComment author */
+                    author?: (string|null);
+
+                    /** PullRequestReviewComment createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequestReviewComment updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequestReviewComment commitId */
+                    commitId?: (string|null);
+                }
+
+                /** Represents a PullRequestReviewComment. */
+                class PullRequestReviewComment implements IPullRequestReviewComment {
+
+                    /**
+                     * Constructs a new PullRequestReviewComment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IPullRequestReviewComment);
+
+                    /** PullRequestReviewComment id. */
+                    public id: string;
+
+                    /** PullRequestReviewComment body. */
+                    public body: string;
+
+                    /** PullRequestReviewComment path. */
+                    public path: string;
+
+                    /** PullRequestReviewComment firstLine. */
+                    public firstLine: number;
+
+                    /** PullRequestReviewComment lastLine. */
+                    public lastLine: number;
+
+                    /** PullRequestReviewComment side. */
+                    public side: (google.cloud.developerconnect.v1.PullRequestReviewComment.DiffSide|keyof typeof google.cloud.developerconnect.v1.PullRequestReviewComment.DiffSide);
+
+                    /** PullRequestReviewComment author. */
+                    public author: string;
+
+                    /** PullRequestReviewComment createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequestReviewComment updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequestReviewComment commitId. */
+                    public commitId: string;
+
+                    /**
+                     * Creates a new PullRequestReviewComment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PullRequestReviewComment instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IPullRequestReviewComment): google.cloud.developerconnect.v1.PullRequestReviewComment;
+
+                    /**
+                     * Encodes the specified PullRequestReviewComment message. Does not implicitly {@link google.cloud.developerconnect.v1.PullRequestReviewComment.verify|verify} messages.
+                     * @param message PullRequestReviewComment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IPullRequestReviewComment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PullRequestReviewComment message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.PullRequestReviewComment.verify|verify} messages.
+                     * @param message PullRequestReviewComment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IPullRequestReviewComment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PullRequestReviewComment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PullRequestReviewComment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.PullRequestReviewComment;
+
+                    /**
+                     * Decodes a PullRequestReviewComment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PullRequestReviewComment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.PullRequestReviewComment;
+
+                    /**
+                     * Verifies a PullRequestReviewComment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PullRequestReviewComment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PullRequestReviewComment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.PullRequestReviewComment;
+
+                    /**
+                     * Creates a plain object from a PullRequestReviewComment message. Also converts values to other types if specified.
+                     * @param message PullRequestReviewComment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.PullRequestReviewComment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PullRequestReviewComment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PullRequestReviewComment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PullRequestReviewComment {
+
+                    /** DiffSide enum. */
+                    enum DiffSide {
+                        DIFF_SIDE_UNSPECIFIED = 0,
+                        BASE = 1,
+                        HEAD = 2
+                    }
+                }
+
+                /** Properties of an AddGitRepositoryLinkPullRequestReviewCommentRequest. */
+                interface IAddGitRepositoryLinkPullRequestReviewCommentRequest {
+
+                    /** AddGitRepositoryLinkPullRequestReviewCommentRequest name */
+                    name?: (string|null);
+
+                    /** AddGitRepositoryLinkPullRequestReviewCommentRequest pullRequestId */
+                    pullRequestId?: (string|null);
+
+                    /** AddGitRepositoryLinkPullRequestReviewCommentRequest comment */
+                    comment?: (google.cloud.developerconnect.v1.IPullRequestReviewComment|null);
+
+                    /** AddGitRepositoryLinkPullRequestReviewCommentRequest commitId */
+                    commitId?: (string|null);
+                }
+
+                /** Represents an AddGitRepositoryLinkPullRequestReviewCommentRequest. */
+                class AddGitRepositoryLinkPullRequestReviewCommentRequest implements IAddGitRepositoryLinkPullRequestReviewCommentRequest {
+
+                    /**
+                     * Constructs a new AddGitRepositoryLinkPullRequestReviewCommentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestReviewCommentRequest);
+
+                    /** AddGitRepositoryLinkPullRequestReviewCommentRequest name. */
+                    public name: string;
+
+                    /** AddGitRepositoryLinkPullRequestReviewCommentRequest pullRequestId. */
+                    public pullRequestId: string;
+
+                    /** AddGitRepositoryLinkPullRequestReviewCommentRequest comment. */
+                    public comment?: (google.cloud.developerconnect.v1.IPullRequestReviewComment|null);
+
+                    /** AddGitRepositoryLinkPullRequestReviewCommentRequest commitId. */
+                    public commitId: string;
+
+                    /**
+                     * Creates a new AddGitRepositoryLinkPullRequestReviewCommentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AddGitRepositoryLinkPullRequestReviewCommentRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestReviewCommentRequest): google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestReviewCommentRequest;
+
+                    /**
+                     * Encodes the specified AddGitRepositoryLinkPullRequestReviewCommentRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestReviewCommentRequest.verify|verify} messages.
+                     * @param message AddGitRepositoryLinkPullRequestReviewCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestReviewCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AddGitRepositoryLinkPullRequestReviewCommentRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestReviewCommentRequest.verify|verify} messages.
+                     * @param message AddGitRepositoryLinkPullRequestReviewCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IAddGitRepositoryLinkPullRequestReviewCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AddGitRepositoryLinkPullRequestReviewCommentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AddGitRepositoryLinkPullRequestReviewCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestReviewCommentRequest;
+
+                    /**
+                     * Decodes an AddGitRepositoryLinkPullRequestReviewCommentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AddGitRepositoryLinkPullRequestReviewCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestReviewCommentRequest;
+
+                    /**
+                     * Verifies an AddGitRepositoryLinkPullRequestReviewCommentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AddGitRepositoryLinkPullRequestReviewCommentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AddGitRepositoryLinkPullRequestReviewCommentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestReviewCommentRequest;
+
+                    /**
+                     * Creates a plain object from an AddGitRepositoryLinkPullRequestReviewCommentRequest message. Also converts values to other types if specified.
+                     * @param message AddGitRepositoryLinkPullRequestReviewCommentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.AddGitRepositoryLinkPullRequestReviewCommentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AddGitRepositoryLinkPullRequestReviewCommentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AddGitRepositoryLinkPullRequestReviewCommentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ModifyGitRepositoryLinkPullRequestRequest. */
+                interface IModifyGitRepositoryLinkPullRequestRequest {
+
+                    /** ModifyGitRepositoryLinkPullRequestRequest name */
+                    name?: (string|null);
+
+                    /** ModifyGitRepositoryLinkPullRequestRequest pullRequestId */
+                    pullRequestId?: (string|null);
+
+                    /** ModifyGitRepositoryLinkPullRequestRequest title */
+                    title?: (string|null);
+
+                    /** ModifyGitRepositoryLinkPullRequestRequest body */
+                    body?: (string|null);
+
+                    /** ModifyGitRepositoryLinkPullRequestRequest baseRef */
+                    baseRef?: (string|null);
+
+                    /** ModifyGitRepositoryLinkPullRequestRequest state */
+                    state?: (google.cloud.developerconnect.v1.ModifyGitRepositoryLinkPullRequestRequest.State|keyof typeof google.cloud.developerconnect.v1.ModifyGitRepositoryLinkPullRequestRequest.State|null);
+                }
+
+                /** Represents a ModifyGitRepositoryLinkPullRequestRequest. */
+                class ModifyGitRepositoryLinkPullRequestRequest implements IModifyGitRepositoryLinkPullRequestRequest {
+
+                    /**
+                     * Constructs a new ModifyGitRepositoryLinkPullRequestRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IModifyGitRepositoryLinkPullRequestRequest);
+
+                    /** ModifyGitRepositoryLinkPullRequestRequest name. */
+                    public name: string;
+
+                    /** ModifyGitRepositoryLinkPullRequestRequest pullRequestId. */
+                    public pullRequestId: string;
+
+                    /** ModifyGitRepositoryLinkPullRequestRequest title. */
+                    public title: string;
+
+                    /** ModifyGitRepositoryLinkPullRequestRequest body. */
+                    public body: string;
+
+                    /** ModifyGitRepositoryLinkPullRequestRequest baseRef. */
+                    public baseRef: string;
+
+                    /** ModifyGitRepositoryLinkPullRequestRequest state. */
+                    public state: (google.cloud.developerconnect.v1.ModifyGitRepositoryLinkPullRequestRequest.State|keyof typeof google.cloud.developerconnect.v1.ModifyGitRepositoryLinkPullRequestRequest.State);
+
+                    /**
+                     * Creates a new ModifyGitRepositoryLinkPullRequestRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ModifyGitRepositoryLinkPullRequestRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IModifyGitRepositoryLinkPullRequestRequest): google.cloud.developerconnect.v1.ModifyGitRepositoryLinkPullRequestRequest;
+
+                    /**
+                     * Encodes the specified ModifyGitRepositoryLinkPullRequestRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.ModifyGitRepositoryLinkPullRequestRequest.verify|verify} messages.
+                     * @param message ModifyGitRepositoryLinkPullRequestRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IModifyGitRepositoryLinkPullRequestRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ModifyGitRepositoryLinkPullRequestRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ModifyGitRepositoryLinkPullRequestRequest.verify|verify} messages.
+                     * @param message ModifyGitRepositoryLinkPullRequestRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IModifyGitRepositoryLinkPullRequestRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ModifyGitRepositoryLinkPullRequestRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ModifyGitRepositoryLinkPullRequestRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.ModifyGitRepositoryLinkPullRequestRequest;
+
+                    /**
+                     * Decodes a ModifyGitRepositoryLinkPullRequestRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ModifyGitRepositoryLinkPullRequestRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.ModifyGitRepositoryLinkPullRequestRequest;
+
+                    /**
+                     * Verifies a ModifyGitRepositoryLinkPullRequestRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ModifyGitRepositoryLinkPullRequestRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ModifyGitRepositoryLinkPullRequestRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.ModifyGitRepositoryLinkPullRequestRequest;
+
+                    /**
+                     * Creates a plain object from a ModifyGitRepositoryLinkPullRequestRequest message. Also converts values to other types if specified.
+                     * @param message ModifyGitRepositoryLinkPullRequestRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.ModifyGitRepositoryLinkPullRequestRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ModifyGitRepositoryLinkPullRequestRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ModifyGitRepositoryLinkPullRequestRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ModifyGitRepositoryLinkPullRequestRequest {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        OPEN = 1,
+                        CLOSED = 2
+                    }
+                }
+
+                /** Properties of a FetchGitRepositoryLinkPullRequestListRequest. */
+                interface IFetchGitRepositoryLinkPullRequestListRequest {
+
+                    /** FetchGitRepositoryLinkPullRequestListRequest name */
+                    name?: (string|null);
+
+                    /** FetchGitRepositoryLinkPullRequestListRequest filter */
+                    filter?: (string|null);
+
+                    /** FetchGitRepositoryLinkPullRequestListRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** FetchGitRepositoryLinkPullRequestListRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a FetchGitRepositoryLinkPullRequestListRequest. */
+                class FetchGitRepositoryLinkPullRequestListRequest implements IFetchGitRepositoryLinkPullRequestListRequest {
+
+                    /**
+                     * Constructs a new FetchGitRepositoryLinkPullRequestListRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListRequest);
+
+                    /** FetchGitRepositoryLinkPullRequestListRequest name. */
+                    public name: string;
+
+                    /** FetchGitRepositoryLinkPullRequestListRequest filter. */
+                    public filter: string;
+
+                    /** FetchGitRepositoryLinkPullRequestListRequest pageSize. */
+                    public pageSize: number;
+
+                    /** FetchGitRepositoryLinkPullRequestListRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new FetchGitRepositoryLinkPullRequestListRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchGitRepositoryLinkPullRequestListRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListRequest): google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListRequest;
+
+                    /**
+                     * Encodes the specified FetchGitRepositoryLinkPullRequestListRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListRequest.verify|verify} messages.
+                     * @param message FetchGitRepositoryLinkPullRequestListRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchGitRepositoryLinkPullRequestListRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListRequest.verify|verify} messages.
+                     * @param message FetchGitRepositoryLinkPullRequestListRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchGitRepositoryLinkPullRequestListRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchGitRepositoryLinkPullRequestListRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListRequest;
+
+                    /**
+                     * Decodes a FetchGitRepositoryLinkPullRequestListRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchGitRepositoryLinkPullRequestListRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListRequest;
+
+                    /**
+                     * Verifies a FetchGitRepositoryLinkPullRequestListRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchGitRepositoryLinkPullRequestListRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchGitRepositoryLinkPullRequestListRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListRequest;
+
+                    /**
+                     * Creates a plain object from a FetchGitRepositoryLinkPullRequestListRequest message. Also converts values to other types if specified.
+                     * @param message FetchGitRepositoryLinkPullRequestListRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchGitRepositoryLinkPullRequestListRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchGitRepositoryLinkPullRequestListRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchGitRepositoryLinkPullRequestListResponse. */
+                interface IFetchGitRepositoryLinkPullRequestListResponse {
+
+                    /** FetchGitRepositoryLinkPullRequestListResponse pullRequests */
+                    pullRequests?: (google.cloud.developerconnect.v1.IPullRequest[]|null);
+
+                    /** FetchGitRepositoryLinkPullRequestListResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a FetchGitRepositoryLinkPullRequestListResponse. */
+                class FetchGitRepositoryLinkPullRequestListResponse implements IFetchGitRepositoryLinkPullRequestListResponse {
+
+                    /**
+                     * Constructs a new FetchGitRepositoryLinkPullRequestListResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListResponse);
+
+                    /** FetchGitRepositoryLinkPullRequestListResponse pullRequests. */
+                    public pullRequests: google.cloud.developerconnect.v1.IPullRequest[];
+
+                    /** FetchGitRepositoryLinkPullRequestListResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new FetchGitRepositoryLinkPullRequestListResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchGitRepositoryLinkPullRequestListResponse instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListResponse): google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListResponse;
+
+                    /**
+                     * Encodes the specified FetchGitRepositoryLinkPullRequestListResponse message. Does not implicitly {@link google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListResponse.verify|verify} messages.
+                     * @param message FetchGitRepositoryLinkPullRequestListResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchGitRepositoryLinkPullRequestListResponse message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListResponse.verify|verify} messages.
+                     * @param message FetchGitRepositoryLinkPullRequestListResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IFetchGitRepositoryLinkPullRequestListResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchGitRepositoryLinkPullRequestListResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchGitRepositoryLinkPullRequestListResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListResponse;
+
+                    /**
+                     * Decodes a FetchGitRepositoryLinkPullRequestListResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchGitRepositoryLinkPullRequestListResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListResponse;
+
+                    /**
+                     * Verifies a FetchGitRepositoryLinkPullRequestListResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchGitRepositoryLinkPullRequestListResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchGitRepositoryLinkPullRequestListResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListResponse;
+
+                    /**
+                     * Creates a plain object from a FetchGitRepositoryLinkPullRequestListResponse message. Also converts values to other types if specified.
+                     * @param message FetchGitRepositoryLinkPullRequestListResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.FetchGitRepositoryLinkPullRequestListResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchGitRepositoryLinkPullRequestListResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchGitRepositoryLinkPullRequestListResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

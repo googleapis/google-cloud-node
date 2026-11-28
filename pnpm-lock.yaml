@@ -111,9 +111,6 @@ importers:
       '@types/node':
         specifier: ^22.13.5
         version: 22.20.1
-      '@types/proxyquire':
-        specifier: ^1.3.31
-        version: 1.3.31
       '@types/request':
         specifier: ^2.48.12
         version: 2.48.13
@@ -129,6 +126,9 @@ importers:
       codecov:
         specifier: ^3.8.3
         version: 3.8.3(encoding@0.1.13)
+      google-test-utils:
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -153,9 +153,6 @@ importers:
       nock:
         specifier: ^14.0.1
         version: 14.0.16
-      proxyquire:
-        specifier: ^2.1.3
-        version: 2.1.3
       sinon:
         specifier: ^19.0.2
         version: 19.0.5
@@ -444,9 +441,6 @@ importers:
       '@types/object-hash':
         specifier: ^3.0.6
         version: 3.0.6
-      '@types/proxyquire':
-        specifier: ^1.3.31
-        version: 1.3.31
       '@types/pumpify':
         specifier: ^1.4.4
         version: 1.4.5
@@ -466,8 +460,8 @@ importers:
         specifier: ^5.0.0
         version: 5.1.1
       glob:
-        specifier: 10.5.0
-        version: 10.5.0
+        specifier: 14.0.2
+        version: 14.0.2
       google-proto-files:
         specifier: ^6.1.0
         version: 6.1.0
@@ -504,9 +498,6 @@ importers:
       null-loader:
         specifier: ^4.0.1
         version: 4.0.1(webpack@5.109.0)
-      proxyquire:
-        specifier: ^2.1.3
-        version: 2.1.3
       pumpify:
         specifier: ^2.0.1
         version: 2.0.1
@@ -949,9 +940,6 @@ importers:
       '@types/nock':
         specifier: ^11.0.0
         version: 11.1.0
-      '@types/proxyquire':
-        specifier: ^1.3.31
-        version: 1.3.31
       '@types/qs':
         specifier: ^6.5.3
         version: 6.15.1
@@ -1030,9 +1018,6 @@ importers:
       path-to-regexp:
         specifier: ^6.0.0
         version: 6.3.0
-      proxyquire:
-        specifier: ^2.1.3
-        version: 2.1.3
       puppeteer:
         specifier: ^24.0.0
         version: 24.43.1(typescript@5.8.3)
@@ -1070,9 +1055,6 @@ importers:
       '@types/node':
         specifier: ^24.0.0
         version: 24.13.3
-      '@types/proxyquire':
-        specifier: ^1.3.31
-        version: 1.3.31
       '@types/sinon':
         specifier: ^21.0.0
         version: 21.0.1
@@ -1100,9 +1082,6 @@ importers:
       mocha:
         specifier: ^11.1.0
         version: 11.7.6
-      proxyquire:
-        specifier: ^2.1.3
-        version: 2.1.3
       sinon:
         specifier: 21.0.3
         version: 21.0.3
@@ -1641,9 +1620,6 @@ importers:
       '@types/node':
         specifier: ^22.14.0
         version: 22.20.1
-      '@types/proxyquire':
-        specifier: ^1.3.31
-        version: 1.3.31
       '@types/sinon':
         specifier: ^17.0.4
         version: 17.0.4
@@ -1659,6 +1635,9 @@ importers:
       eslint-plugin-prettier:
         specifier: ^5.2.6
         version: 5.5.6(eslint-config-prettier@9.1.2(eslint@8.57.1))(eslint@8.57.1)(prettier@3.9.6)
+      google-test-utils:
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -1686,9 +1665,6 @@ importers:
       prettier:
         specifier: ^3.5.3
         version: 3.9.6
-      proxyquire:
-        specifier: ^2.1.3
-        version: 2.1.3
       sinon:
         specifier: 21.0.3
         version: 21.0.3
@@ -1904,9 +1880,6 @@ importers:
       '@types/p-queue':
         specifier: ^3.2.1
         version: 3.2.1
-      '@types/proxyquire':
-        specifier: ^1.3.31
-        version: 1.3.31
       '@types/pumpify':
         specifier: ^1.4.4
         version: 1.4.5
@@ -1925,6 +1898,9 @@ importers:
       gapic-tools:
         specifier: ^2.2.0
         version: 2.2.0(protobufjs@8.8.0)
+      google-test-utils:
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -1946,9 +1922,6 @@ importers:
       pack-n-play:
         specifier: ^5.3.0
         version: 5.3.0
-      proxyquire:
-        specifier: ^2.1.3
-        version: 2.1.3
       sinon:
         specifier: ^20.0.0
         version: 20.0.0
@@ -2155,9 +2128,6 @@ importers:
       '@types/node':
         specifier: ^22.15.3
         version: 22.20.1
-      '@types/proxyquire':
-        specifier: ^1.3.31
-        version: 1.3.31
       '@types/sinon':
         specifier: ^17.0.4
         version: 17.0.4
@@ -2170,6 +2140,9 @@ importers:
       gapic-tools:
         specifier: ^2.2.0
         version: 2.2.0(protobufjs@7.5.9)
+      google-test-utils:
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2200,9 +2173,6 @@ importers:
       pack-n-play:
         specifier: ^5.3.0
         version: 5.3.0
-      proxyquire:
-        specifier: ^2.1.3
-        version: 2.1.3
       sinon:
         specifier: ^20.0.0
         version: 20.0.0
@@ -2252,9 +2222,6 @@ importers:
       '@types/once':
         specifier: ^1.4.5
         version: 1.4.5
-      '@types/proxyquire':
-        specifier: ^1.3.31
-        version: 1.3.31
       boom:
         specifier: ^7.2.0
         version: 7.3.0
@@ -2271,8 +2238,8 @@ importers:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
       joi:
-        specifier: ^17.13.8
-        version: 17.13.8
+        specifier: ^17.13.9
+        version: 17.13.9
       js-green-licenses:
         specifier: ^4.0.0
         version: 4.0.0(encoding@0.1.13)
@@ -2300,9 +2267,6 @@ importers:
       pack-n-play:
         specifier: ^5.3.0
         version: 5.3.0
-      proxyquire:
-        specifier: ^2.1.3
-        version: 2.1.3
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -2445,9 +2409,6 @@ importers:
       protobufjs-cli:
         specifier: ^1.1.3
         version: 1.3.3(protobufjs@7.5.9)
-      proxyquire:
-        specifier: ^2.1.3
-        version: 2.1.3
       sinon:
         specifier: 21.0.3
         version: 21.0.3
@@ -2497,9 +2458,6 @@ importers:
       '@types/node':
         specifier: ^22.13.9
         version: 22.20.1
-      '@types/proxyquire':
-        specifier: ^1.3.31
-        version: 1.3.31
       '@types/request':
         specifier: ^2.48.12
         version: 2.48.13
@@ -2512,6 +2470,9 @@ importers:
       codecov:
         specifier: ^3.8.3
         version: 3.8.3(encoding@0.1.13)
+      google-test-utils:
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2530,9 +2491,6 @@ importers:
       mocha:
         specifier: ^11.1.0
         version: 11.7.6
-      proxyquire:
-        specifier: ^2.1.3
-        version: 2.1.3
       tmp:
         specifier: ^0.2.3
         version: 0.2.7
@@ -2633,9 +2591,6 @@ importers:
       '@types/on-finished':
         specifier: ^2.3.1
         version: 2.3.5
-      '@types/proxyquire':
-        specifier: ^1.3.28
-        version: 1.3.31
       '@types/pumpify':
         specifier: ^1.4.1
         version: 1.4.5
@@ -2657,6 +2612,9 @@ importers:
       gapic-tools:
         specifier: ^2.2.0
         version: 2.2.0(protobufjs@8.8.0)
+      google-test-utils:
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^5.0.0
         version: 5.3.1(typescript@5.9.3)
@@ -2684,9 +2642,6 @@ importers:
       pack-n-play:
         specifier: ^5.3.0
         version: 5.3.0
-      proxyquire:
-        specifier: ^2.1.3
-        version: 2.1.3
       sinon:
         specifier: ^18.0.0
         version: 18.0.1
@@ -2730,9 +2685,6 @@ importers:
       '@types/node':
         specifier: ^20.4.9
         version: 20.19.43
-      '@types/proxyquire':
-        specifier: ^1.3.28
-        version: 1.3.31
       bunyan:
         specifier: ^1.8.12
         version: 1.8.15
@@ -2754,6 +2706,9 @@ importers:
       express:
         specifier: ^4.16.3
         version: 4.22.2
+      google-test-utils:
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2772,9 +2727,6 @@ importers:
       post-install-check:
         specifier: 0.0.1
         version: 0.0.1
-      proxyquire:
-        specifier: ^2.0.1
-        version: 2.1.3
       typescript:
         specifier: ^5.1.6
         version: 5.9.3
@@ -2806,9 +2758,6 @@ importers:
       '@types/node':
         specifier: ^24.10.1
         version: 24.13.3
-      '@types/proxyquire':
-        specifier: ^1.3.31
-        version: 1.3.31
       '@types/triple-beam':
         specifier: ^1.3.5
         version: 1.3.5
@@ -2821,6 +2770,9 @@ importers:
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
+      google-test-utils:
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2842,9 +2794,6 @@ importers:
       post-install-check:
         specifier: ^0.0.1
         version: 0.0.1
-      proxyquire:
-        specifier: ^2.1.3
-        version: 2.1.3
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -2939,9 +2888,6 @@ importers:
       '@types/node':
         specifier: ^24.0.0
         version: 24.13.3
-      '@types/proxyquire':
-        specifier: ^1.3.31
-        version: 1.3.31
       '@types/sinon':
         specifier: ^21.0.0
         version: 21.0.1
@@ -2964,8 +2910,8 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0(protobufjs@7.5.9)
       google-test-utils:
-        specifier: ^0.3.0
-        version: 0.3.1
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^6.0.0
         version: 6.0.2(typescript@5.9.3)
@@ -2999,9 +2945,6 @@ importers:
       protobufjs:
         specifier: ~7.5.0
         version: 7.5.9
-      proxyquire:
-        specifier: ^2.1.3
-        version: 2.1.3
       sinon:
         specifier: 21.0.3
         version: 21.0.3
@@ -3156,9 +3099,6 @@ importers:
       '@types/node':
         specifier: ^22.18.12
         version: 22.20.1
-      '@types/proxyquire':
-        specifier: ^1.3.31
-        version: 1.3.31
       '@types/request':
         specifier: ^2.48.12
         version: 2.48.13
@@ -3193,8 +3133,8 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0(protobufjs@7.5.9)
       google-test-utils:
-        specifier: ^0.3.0
-        version: 0.3.1
+        specifier: ^0.4.0
+        version: 0.4.0
       grpc-health-check:
         specifier: ^2.1.0
         version: 2.1.0
@@ -3237,9 +3177,6 @@ importers:
       path-to-regexp:
         specifier: ^8.2.0
         version: 8.4.2
-      proxyquire:
-        specifier: ^2.1.3
-        version: 2.1.3
       sinon:
         specifier: 21.0.3
         version: 21.0.3
@@ -3311,15 +3248,9 @@ importers:
       '@google-cloud/paginator':
         specifier: ^7.2.0
         version: 7.2.0
-      '@google-cloud/projectify':
-        specifier: ^6.2.0
-        version: 6.2.1
       '@google-cloud/promisify':
         specifier: ^6.2.0
         version: 6.2.1
-      abort-controller:
-        specifier: ^3.0.0
-        version: 3.0.0
       async-retry:
         specifier: ^1.3.3
         version: 1.3.3
@@ -3335,66 +3266,48 @@ importers:
       google-auth-library:
         specifier: ^11.3.1
         version: 11.3.1
-      html-entities:
-        specifier: ^2.5.2
-        version: 2.6.0
       mime:
         specifier: ^3.0.0
         version: 3.0.0
       p-limit:
         specifier: ^3.0.1
         version: 3.1.0
-      retry-request:
-        specifier: ^9.1.0
-        version: 9.1.0
-      teeny-request:
-        specifier: ^11.1.1
-        version: 11.1.1
     devDependencies:
       '@babel/cli':
-        specifier: ^7.22.10
+        specifier: ^7.27.0
         version: 7.29.7(@babel/core@7.27.7)
       '@babel/core':
-        specifier: ^7.22.11
+        specifier: ^7.26.10
         version: 7.27.7
       '@google-cloud/pubsub':
         specifier: ^6.0.0
         version: 6.0.1
-      '@grpc/grpc-js':
-        specifier: ^1.0.3
-        version: 1.14.5
-      '@grpc/proto-loader':
-        specifier: ^0.8.0
-        version: 0.8.1
       '@types/async-retry':
-        specifier: ^1.4.3
+        specifier: ^1.4.9
         version: 1.4.9
       '@types/duplexify':
         specifier: ^3.6.4
         version: 3.6.5
       '@types/mime':
-        specifier: ^3.0.0
-        version: 3.0.4
+        specifier: 3.0.0
+        version: 3.0.0
       '@types/mocha':
-        specifier: ^9.1.1
-        version: 9.1.1
+        specifier: ^10.0.10
+        version: 10.0.10
       '@types/mockery':
-        specifier: ^1.4.29
+        specifier: ^1.4.33
         version: 1.4.33
       '@types/node':
         specifier: ^24.0.0
         version: 24.13.3
-      '@types/proxyquire':
-        specifier: ^1.3.28
-        version: 1.3.31
-      '@types/request':
-        specifier: ^2.48.12
-        version: 2.48.13
+      '@types/retry':
+        specifier: ^0.12.5
+        version: 0.12.5
       '@types/sinon':
-        specifier: ^17.0.0
+        specifier: ^17.0.4
         version: 17.0.4
       '@types/tmp':
-        specifier: 0.2.6
+        specifier: ^0.2.6
         version: 0.2.6
       '@types/yargs':
         specifier: ^17.0.35
@@ -3402,18 +3315,15 @@ importers:
       c8:
         specifier: ^10.1.3
         version: 10.1.3
-      cross-env:
-        specifier: ^7.0.3
-        version: 7.0.3
-      form-data:
-        specifier: ^4.0.4
-        version: 4.0.6
       gapic-tools:
         specifier: ^2.2.0
         version: 2.2.0(protobufjs@8.8.0)
+      google-test-utils:
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
-        specifier: ^5.0.0
-        version: 5.3.1(typescript@5.9.3)
+        specifier: ^6.0.2
+        version: 6.0.2(typescript@5.9.3)
       jsdoc:
         specifier: ^4.0.4
         version: 4.0.5
@@ -3432,29 +3342,20 @@ importers:
       mockery:
         specifier: ^2.1.0
         version: 2.1.0
-      nise:
-        specifier: 6.0.0
-        version: 6.0.0
       nock:
         specifier: ^14.0.5
         version: 14.0.16
       pack-n-play:
         specifier: ^5.3.0
         version: 5.3.0
-      path-to-regexp:
-        specifier: 6.3.0
-        version: 6.3.0
-      proxyquire:
-        specifier: ^2.1.3
-        version: 2.1.3
       sinon:
         specifier: ^18.0.0
         version: 18.0.1
       tmp:
-        specifier: ^0.2.0
+        specifier: ^0.2.3
         version: 0.2.7
       typescript:
-        specifier: ^5.1.6
+        specifier: ^5.8.3
         version: 5.9.3
       yargs:
         specifier: ^17.7.2
@@ -12656,9 +12557,6 @@ importers:
       '@types/node':
         specifier: ^22.13.10
         version: 22.20.1
-      '@types/proxyquire':
-        specifier: ^1.3.31
-        version: 1.3.31
       '@types/request':
         specifier: ^2.48.12
         version: 2.48.13
@@ -12701,9 +12599,6 @@ importers:
       pack-n-play:
         specifier: ^5.0.0
         version: 5.1.0
-      proxyquire:
-        specifier: ^2.1.3
-        version: 2.1.3
       sinon:
         specifier: 21.0.3
         version: 21.0.3
@@ -16820,6 +16715,9 @@ packages:
     resolution: {integrity: sha512-wgm9Ehl2jpeqP3zw/7mo3kRHFp5MEDhqAdwy1fTGkHAwnkGOVsgpvQhL8B5n1qlb01jV3n/bI0ZfZp5lWA1k4w==}
     engines: {node: '>=18.0.0'}
 
+  '@isaacs/nonrecursive-glob-match@1.0.3':
+    resolution: {integrity: sha512-SI7kyKHq4XXDRozw+r9GlRZkia1ZkFrpLW98r2IC2Bpr8YkFGE3fvjzmxCG0x78A++69HmDNrDvSMYBZmHGpKA==}
+
   '@isaacs/string-locale-compare@1.1.0':
     resolution: {integrity: sha512-SQ7Kzhh9+D+ZW9MA0zkYv3VXhIDNx+LzM6EJ+/65I3QY+enU6Itte7E5XX7EWrqLW2FN4n06GWzBnPoC3th2aQ==}
 
@@ -17551,9 +17449,6 @@ packages:
   '@sinonjs/fake-timers@11.2.2':
     resolution: {integrity: sha512-G2piCSxQ7oWOxwGSAyFHfPIsyeJGXYtc6mFbnFA+kRXkiEnTl8c/8jul2S329iFBnDI9HGoeWWAZvuvOkZccgw==}
 
-  '@sinonjs/fake-timers@11.3.1':
-    resolution: {integrity: sha512-EVJO7nW5M/F5Tur0Rf2z/QoMo+1Ia963RiMtapiQrEWvY0iBUvADo8Beegwjpnle5BHkyHuoxSTW3jF43H1XRA==}
-
   '@sinonjs/fake-timers@13.0.5':
     resolution: {integrity: sha512-36/hTbH2uaWuGVERyC6da9YwGWnzUZXuPro/F2LfsdOsLnCojz/iSH8MxUt/FD2S5XBSVPhmArFUXcpCQ2Hkiw==}
 
@@ -17565,12 +17460,6 @@ packages:
 
   '@sinonjs/samsam@9.0.3':
     resolution: {integrity: sha512-ZgYY7Dc2RW+OUdnZ1DEHg00lhRt+9BjymPKHog4PRFzr1U3MbK57+djmscWyKxzO1qfunHqs4N45WWyKIFKpiQ==}
-
-  '@sinonjs/text-encoding@0.7.3':
-    resolution: {integrity: sha512-DE427ROAphMQzU4ENbliGYrBSYPXF+TtLg9S8vzeA+OF4ZKzoDdzfL8sxuMUGS/lgRhM6j1URSk9ghf7Xo1tyA==}
-    deprecated: |-
-      Deprecated: no longer maintained and no longer used by Sinon packages. See
-        https://github.com/sinonjs/nise/issues/243 for replacement details.
 
   '@so-ric/colorspace@1.1.6':
     resolution: {integrity: sha512-/KiKkpHNOBgkFJwu9sh48LkHSMYGyuTcSFK/qMBdnOAlrRJzRSXAOFB5qwzaVQuDl8wAvHVMkaASQDReTahxuw==}
@@ -17840,8 +17729,8 @@ packages:
   '@types/mime@1.3.5':
     resolution: {integrity: sha512-/pyBZWSLD2n0dcHE3hq8s8ZvcETHtEuF+3E7XVt0Ig2nvsVQXdghHVcEkIWjy9A0wKfTn97a/PSDYohKIlnP/w==}
 
-  '@types/mime@3.0.4':
-    resolution: {integrity: sha512-iJt33IQnVRkqeqC7PzBHPTC6fDlRNRW8vjrgqtScAhrmMwe8c4Eo7+fUGTa+XdWrpEgpyKWMYmi2dIwMAYRzPw==}
+  '@types/mime@3.0.0':
+    resolution: {integrity: sha512-fccbsHKqFDXClBZTDLA43zl0+TbxyIwyzIzwwhvoJvhNjOErCdeX2xJbURimv2EbSVUGav001PaCJg4mZxMl4w==}
 
   '@types/minimist@1.2.5':
     resolution: {integrity: sha512-hov8bUuiLiyFPGyFPE1lwWhmzYbirOXQNNo40+y3zow8aFVTeyn3VWL0VFFfdNddA8S4Vf0Tc062rzyNr7Paag==}
@@ -18675,6 +18564,10 @@ packages:
 
   brace-expansion@2.1.2:
     resolution: {integrity: sha512-w5JZcKgdhDOgOwm8H+KgbosopHMuGcl6qbulwjtz3SM7I7P3yW1eAjzMPLrIE+NQ9vjgANKHWeMHnrT0OXW1oA==}
+
+  brace-expansion@5.0.12:
+    resolution: {integrity: sha512-YovQ3rzhaLMIrDjNDMkNS01tea93qhEhG5xy8f6+R0l+dw3Ki+5sCoIoI942iuLZTHWogWktgwVDhU09iNEimQ==}
+    engines: {node: 20 || >=22}
 
   brace-expansion@5.0.8:
     resolution: {integrity: sha512-JZyDyq3D4AUifKTPOB7DELf6XsB3WdPuNxCtob1vFXPsSXhdAiHBWJ/tJ8HAc9aH84BK+5JFZLNkJKx3G9kzQg==}
@@ -20450,6 +20343,10 @@ packages:
     resolution: {integrity: sha512-Wjlyrolmm8uDpm/ogGyXZXb1Z+Ca2B8NbJwqBVg0axK9GbBeoS7yGV6vjXnYdGm6X53iehEuxxbyiKp8QmN4Vw==}
     engines: {node: 18 || 20 || >=22}
 
+  glob@14.0.2:
+    resolution: {integrity: sha512-vfMgTR2djMHPUchsJMLpZlYQvtjVL+mHpEr5wPpoCbQs2vr/FBNK+3Gnl9Ara1DSs4Aeg4eG9HiADb5/rkY/ZA==}
+    engines: {node: 18 || 20 || >=22}
+
   glob@5.0.15:
     resolution: {integrity: sha512-c9IPMazfRITpmAAKi22dK1VKxGDX9ehhqfABDriL/lzO92xcUKEJPQHrVA/2YHSNFB4iFlykVmWvwo48nr3OxA==}
     deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
@@ -20556,8 +20453,8 @@ packages:
     resolution: {integrity: sha512-UD8I3vdspFSKFu8yi48sgeXDXcET0CAPYbSK7G2oRh7G1Y+BEG8VKDY3r+0GXF8KmHhQWhygRLVxY0lgTGeySA==}
     engines: {node: '>=22'}
 
-  google-test-utils@0.3.1:
-    resolution: {integrity: sha512-lyoeWglF387Kfdd7zw8tuKS0GWlF/lNknoUmK08TdncVeOyHtTV9HKzgScVt1JrQsvx5qT7tihmXJSYVwbLZaA==}
+  google-test-utils@0.4.0:
+    resolution: {integrity: sha512-MMlNdyzy/i51cJXqjgzqgvu7qR1uNierj2+bZj1hMoJixJBEdnw51XuVjLu5n6DsKGo1dVbUI0UyU9OP8nYgdg==}
     engines: {node: '>=22'}
 
   googleapis-common@4.4.3:
@@ -21375,8 +21272,8 @@ packages:
   jju@1.4.0:
     resolution: {integrity: sha512-8wb9Yw966OSxApiCt0K3yNJL8pnNeIv+OEq2YMidz4FKP6nonSRoOXc80iXY4JaN2FC11B9qsNmDsm+ZOfMROA==}
 
-  joi@17.13.8:
-    resolution: {integrity: sha512-iPKOGmiRw1jxf/JOPwxmCcUQAOdF359mdzYiP2DJ+TMX0YK2zjK3D+zYOaGjpumWxOFF/l2xVWjRVK5bGSLdEw==}
+  joi@17.13.9:
+    resolution: {integrity: sha512-llFCT2rVtfwgBCaIqxtjim+iHqrgss4ONiGSYiiGH9jnjWq90ppSRffqmqKvwpa8W+YfILyQV6XyGcegXX2T4g==}
 
   js-green-licenses@4.0.0:
     resolution: {integrity: sha512-kcgTOaZmpDpINcRAOKKhjHtBN6zibMVTC8qfPUOpowQtI/6fUgdmwJLJ0ycCb0pUO3ZYKn++56sy8IlG60p5mg==}
@@ -21755,8 +21652,8 @@ packages:
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
 
-  lru-cache@11.5.2:
-    resolution: {integrity: sha512-4pfM1Ff0x50o0tQwb5ucw/RzNyD0/YJME6IVcStalZuMWxdt3sR3huStTtxz4PUmvZfRguvDejasvQ2kifR11g==}
+  lru-cache@11.5.3:
+    resolution: {integrity: sha512-U4N8FgzmWxc8k1VH8Kr6lQg18U7Fjvby6wXHVRX/ZZ7IwWbRMgrRbP0Wrb5q5NVinryp4SQampHKdvtecItxUg==}
     engines: {node: 20 || >=22}
 
   lru-cache@5.1.1:
@@ -21970,6 +21867,10 @@ packages:
   minimatch@10.2.6:
     resolution: {integrity: sha512-vpLQEs+VLCr1nU0BXS07maYoFwlDAH0gngQuuttxIwutDFEMHq2blX+8vpgxDdK3J1PwjCJiep77OitTZ4Ll1A==}
     engines: {node: 18 || 20 || >=22}
+
+  minimatch@11.0.4:
+    resolution: {integrity: sha512-/UJ1dEoVQTjPNDh6SGlUo+ueLMmoHTas4q+8yaAR/5t6nLAIiBDJtoYUh20IYleix7ehiQkgczb84PE3uzHkxg==}
+    engines: {node: 20 || >=22}
 
   minimatch@3.1.5:
     resolution: {integrity: sha512-VgjWUsnnT6n+NUk6eZq77zeFdpW2LWDzP6zFGrCbHXiYNul5Dzqk2HHQ5uFH2DNW5Xbp8+jVzaeNt94ssEEl4w==}
@@ -22188,9 +22089,6 @@ packages:
 
   next-tick@1.1.0:
     resolution: {integrity: sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==}
-
-  nise@6.0.0:
-    resolution: {integrity: sha512-K8ePqo9BFvN31HXwEtTNGzgrPpmvgciDsFz8aztFjt4LqKO/JeFD8tBOeuDiCMXrIl/m1YvfH8auSpxfaD09wg==}
 
   nise@6.1.5:
     resolution: {integrity: sha512-SnRDPDBjxZZoU2n0+gzzLtSvo1OZo7j6jnbXsoh3AFxEGhaFU7ZF0TmefuKERq79wxR2U+MPn7ArW+Tl+clC3A==}
@@ -22622,6 +22520,10 @@ packages:
 
   path-scurry@2.0.2:
     resolution: {integrity: sha512-3O/iVVsJAPsOnpwWIeD+d6z/7PmqApyQePUtCndjatj/9I5LylHvt5qluFaBT3I5h3r1ejfR056c+FCv+NnNXg==}
+    engines: {node: 18 || 20 || >=22}
+
+  path-scurry@3.0.0:
+    resolution: {integrity: sha512-1pTbQqH1wIwMi/eleQ5leFTTCkzFsPcgXNjwOA8YGGW/W4/kHT3dssE7Z6NH+zuqNLOzOB0uaD61yl7cAcVhgg==}
     engines: {node: 18 || 20 || >=22}
 
   path-to-regexp@0.1.13:
@@ -26032,6 +25934,8 @@ snapshots:
     dependencies:
       minipass: 7.1.3
 
+  '@isaacs/nonrecursive-glob-match@1.0.3': {}
+
   '@isaacs/string-locale-compare@1.1.0': {}
 
   '@istanbuljs/load-nyc-config@1.1.0':
@@ -27072,10 +26976,6 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 3.0.1
 
-  '@sinonjs/fake-timers@11.3.1':
-    dependencies:
-      '@sinonjs/commons': 3.0.1
-
   '@sinonjs/fake-timers@13.0.5':
     dependencies:
       '@sinonjs/commons': 3.0.1
@@ -27093,8 +26993,6 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 3.0.1
       type-detect: 4.1.0
-
-  '@sinonjs/text-encoding@0.7.3': {}
 
   '@so-ric/colorspace@1.1.6':
     dependencies:
@@ -27383,7 +27281,7 @@ snapshots:
 
   '@types/mime@1.3.5': {}
 
-  '@types/mime@3.0.4': {}
+  '@types/mime@3.0.0': {}
 
   '@types/minimist@1.2.5': {}
 
@@ -28583,6 +28481,10 @@ snapshots:
   brace-expansion@2.1.2:
     dependencies:
       balanced-match: 1.0.2
+
+  brace-expansion@5.0.12:
+    dependencies:
+      balanced-match: 4.0.4
 
   brace-expansion@5.0.8:
     dependencies:
@@ -30906,6 +30808,12 @@ snapshots:
       minipass: 7.1.3
       path-scurry: 2.0.2
 
+  glob@14.0.2:
+    dependencies:
+      minimatch: 11.0.4
+      minipass: 7.1.3
+      path-scurry: 3.0.0
+
   glob@5.0.15:
     dependencies:
       inflight: 1.0.6
@@ -31111,7 +31019,7 @@ snapshots:
       protobufjs: 7.5.9
       walkdir: 0.4.1
 
-  google-test-utils@0.3.1: {}
+  google-test-utils@0.4.0: {}
 
   googleapis-common@4.4.3(encoding@0.1.13):
     dependencies:
@@ -32268,7 +32176,7 @@ snapshots:
 
   jju@1.4.0: {}
 
-  joi@17.13.8:
+  joi@17.13.9:
     dependencies:
       '@hapi/hoek': 9.3.0
       '@hapi/topo': 5.1.0
@@ -32728,7 +32636,7 @@ snapshots:
 
   lru-cache@10.4.3: {}
 
-  lru-cache@11.5.2: {}
+  lru-cache@11.5.3: {}
 
   lru-cache@5.1.1:
     dependencies:
@@ -32941,6 +32849,11 @@ snapshots:
   minimatch@10.2.6:
     dependencies:
       brace-expansion: 5.0.8
+
+  minimatch@11.0.4:
+    dependencies:
+      '@isaacs/nonrecursive-glob-match': 1.0.3
+      brace-expansion: 5.0.12
 
   minimatch@3.1.5:
     dependencies:
@@ -33181,14 +33094,6 @@ snapshots:
   netmask@2.1.1: {}
 
   next-tick@1.1.0: {}
-
-  nise@6.0.0:
-    dependencies:
-      '@sinonjs/commons': 3.0.1
-      '@sinonjs/fake-timers': 11.3.1
-      '@sinonjs/text-encoding': 0.7.3
-      just-extend: 6.2.0
-      path-to-regexp: 6.3.0
 
   nise@6.1.5:
     dependencies:
@@ -33717,7 +33622,12 @@ snapshots:
 
   path-scurry@2.0.2:
     dependencies:
-      lru-cache: 11.5.2
+      lru-cache: 11.5.3
+      minipass: 7.1.3
+
+  path-scurry@3.0.0:
+    dependencies:
+      lru-cache: 11.5.3
       minipass: 7.1.3
 
   path-to-regexp@0.1.13: {}

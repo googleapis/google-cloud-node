@@ -495,11 +495,11 @@ export class ReportServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('search values %j', values);
+          this._log.debug('search values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('search request %j', request);
+    this._log.debug('search request %j', request);
     return this.innerApiCalls
       .search(request, options, wrappedCallback)
       ?.then(
@@ -508,7 +508,7 @@ export class ReportServiceClient {
           protos.google.shopping.merchant.reports.v1.ISearchRequest | null,
           protos.google.shopping.merchant.reports.v1.ISearchResponse,
         ]) => {
-          this._log.info('search values %j', response);
+          this._log.debug('search values %j', response);
           return [response, input, output];
         },
       );
@@ -564,7 +564,7 @@ export class ReportServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('search stream %j', request);
+    this._log.debug('search stream %j', request);
     return this.descriptors.page.search.createStream(
       this.innerApiCalls.search as GaxCall,
       request,
@@ -625,7 +625,7 @@ export class ReportServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('search iterate %j', request);
+    this._log.debug('search iterate %j', request);
     return this.descriptors.page.search.asyncIterate(
       this.innerApiCalls['search'] as GaxCall,
       request as {},

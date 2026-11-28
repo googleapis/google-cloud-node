@@ -36,6 +36,13 @@
                 "listClustersStream",
                 "listClustersAsync"
               ]
+            },
+            "ListNodes": {
+              "methods": [
+                "listNodes",
+                "listNodesStream",
+                "listNodesAsync"
+              ]
             }
           }
         },
@@ -67,6 +74,13 @@
                 "listClusters",
                 "listClustersStream",
                 "listClustersAsync"
+              ]
+            },
+            "ListNodes": {
+              "methods": [
+                "listNodes",
+                "listNodesStream",
+                "listNodesAsync"
               ]
             }
           }

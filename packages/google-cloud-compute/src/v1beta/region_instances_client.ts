@@ -477,7 +477,7 @@ export class RegionInstancesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('bulkInsert request %j', request);
+    this._log.debug('bulkInsert request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
@@ -488,7 +488,7 @@ export class RegionInstancesClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('bulkInsert response %j', rawResponse);
+          this._log.debug('bulkInsert response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;

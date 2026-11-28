@@ -484,7 +484,7 @@ export class LfpInventoryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('insertLfpInventory request %j', request);
+    this._log.debug('insertLfpInventory request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.lfp.v1.ILfpInventory,
@@ -495,7 +495,7 @@ export class LfpInventoryServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('insertLfpInventory response %j', response);
+          this._log.debug('insertLfpInventory response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -510,7 +510,7 @@ export class LfpInventoryServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('insertLfpInventory response %j', response);
+          this._log.debug('insertLfpInventory response %j', response);
           return [response, options, rawResponse];
         },
       )

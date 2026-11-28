@@ -520,7 +520,7 @@ export class CloudControlsPartnerCoreClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getWorkload request %j', request);
+    this._log.debug('getWorkload request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload,
@@ -531,7 +531,7 @@ export class CloudControlsPartnerCoreClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getWorkload response %j', response);
+          this._log.debug('getWorkload response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -546,7 +546,7 @@ export class CloudControlsPartnerCoreClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getWorkload response %j', response);
+          this._log.debug('getWorkload response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -664,7 +664,7 @@ export class CloudControlsPartnerCoreClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCustomer request %j', request);
+    this._log.debug('getCustomer request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
@@ -675,7 +675,7 @@ export class CloudControlsPartnerCoreClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCustomer response %j', response);
+          this._log.debug('getCustomer response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -690,7 +690,7 @@ export class CloudControlsPartnerCoreClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getCustomer response %j', response);
+          this._log.debug('getCustomer response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -808,7 +808,7 @@ export class CloudControlsPartnerCoreClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getEkmConnections request %j', request);
+    this._log.debug('getEkmConnections request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.cloudcontrolspartner.v1beta.IEkmConnections,
@@ -819,7 +819,7 @@ export class CloudControlsPartnerCoreClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getEkmConnections response %j', response);
+          this._log.debug('getEkmConnections response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -834,7 +834,7 @@ export class CloudControlsPartnerCoreClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getEkmConnections response %j', response);
+          this._log.debug('getEkmConnections response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -952,7 +952,7 @@ export class CloudControlsPartnerCoreClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPartnerPermissions request %j', request);
+    this._log.debug('getPartnerPermissions request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.cloudcontrolspartner.v1beta.IPartnerPermissions,
@@ -963,7 +963,7 @@ export class CloudControlsPartnerCoreClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPartnerPermissions response %j', response);
+          this._log.debug('getPartnerPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -978,7 +978,7 @@ export class CloudControlsPartnerCoreClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getPartnerPermissions response %j', response);
+          this._log.debug('getPartnerPermissions response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1096,7 +1096,7 @@ export class CloudControlsPartnerCoreClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPartner request %j', request);
+    this._log.debug('getPartner request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.cloudcontrolspartner.v1beta.IPartner,
@@ -1107,7 +1107,7 @@ export class CloudControlsPartnerCoreClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPartner response %j', response);
+          this._log.debug('getPartner response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1122,7 +1122,7 @@ export class CloudControlsPartnerCoreClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getPartner response %j', response);
+          this._log.debug('getPartner response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1246,7 +1246,7 @@ export class CloudControlsPartnerCoreClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createCustomer request %j', request);
+    this._log.debug('createCustomer request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
@@ -1257,7 +1257,7 @@ export class CloudControlsPartnerCoreClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createCustomer response %j', response);
+          this._log.debug('createCustomer response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1272,7 +1272,7 @@ export class CloudControlsPartnerCoreClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createCustomer response %j', response);
+          this._log.debug('createCustomer response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1393,7 +1393,7 @@ export class CloudControlsPartnerCoreClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateCustomer request %j', request);
+    this._log.debug('updateCustomer request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
@@ -1404,7 +1404,7 @@ export class CloudControlsPartnerCoreClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateCustomer response %j', response);
+          this._log.debug('updateCustomer response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1419,7 +1419,7 @@ export class CloudControlsPartnerCoreClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateCustomer response %j', response);
+          this._log.debug('updateCustomer response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1537,7 +1537,7 @@ export class CloudControlsPartnerCoreClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteCustomer request %j', request);
+    this._log.debug('deleteCustomer request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1548,7 +1548,7 @@ export class CloudControlsPartnerCoreClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteCustomer response %j', response);
+          this._log.debug('deleteCustomer response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1563,7 +1563,7 @@ export class CloudControlsPartnerCoreClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteCustomer response %j', response);
+          this._log.debug('deleteCustomer response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1700,11 +1700,11 @@ export class CloudControlsPartnerCoreClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listWorkloads values %j', values);
+          this._log.debug('listWorkloads values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listWorkloads request %j', request);
+    this._log.debug('listWorkloads request %j', request);
     return this.innerApiCalls
       .listWorkloads(request, options, wrappedCallback)
       ?.then(
@@ -1713,7 +1713,7 @@ export class CloudControlsPartnerCoreClient {
           protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest | null,
           protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsResponse,
         ]) => {
-          this._log.info('listWorkloads values %j', response);
+          this._log.debug('listWorkloads values %j', response);
           return [response, input, output];
         },
       );
@@ -1765,7 +1765,7 @@ export class CloudControlsPartnerCoreClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkloads stream %j', request);
+    this._log.debug('listWorkloads stream %j', request);
     return this.descriptors.page.listWorkloads.createStream(
       this.innerApiCalls.listWorkloads as GaxCall,
       request,
@@ -1822,7 +1822,7 @@ export class CloudControlsPartnerCoreClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkloads iterate %j', request);
+    this._log.debug('listWorkloads iterate %j', request);
     return this.descriptors.page.listWorkloads.asyncIterate(
       this.innerApiCalls['listWorkloads'] as GaxCall,
       request as {},
@@ -1943,11 +1943,11 @@ export class CloudControlsPartnerCoreClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listCustomers values %j', values);
+          this._log.debug('listCustomers values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listCustomers request %j', request);
+    this._log.debug('listCustomers request %j', request);
     return this.innerApiCalls
       .listCustomers(request, options, wrappedCallback)
       ?.then(
@@ -1956,7 +1956,7 @@ export class CloudControlsPartnerCoreClient {
           protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest | null,
           protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersResponse,
         ]) => {
-          this._log.info('listCustomers values %j', response);
+          this._log.debug('listCustomers values %j', response);
           return [response, input, output];
         },
       );
@@ -2007,7 +2007,7 @@ export class CloudControlsPartnerCoreClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCustomers stream %j', request);
+    this._log.debug('listCustomers stream %j', request);
     return this.descriptors.page.listCustomers.createStream(
       this.innerApiCalls.listCustomers as GaxCall,
       request,
@@ -2063,7 +2063,7 @@ export class CloudControlsPartnerCoreClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCustomers iterate %j', request);
+    this._log.debug('listCustomers iterate %j', request);
     return this.descriptors.page.listCustomers.asyncIterate(
       this.innerApiCalls['listCustomers'] as GaxCall,
       request as {},
@@ -2194,11 +2194,11 @@ export class CloudControlsPartnerCoreClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAccessApprovalRequests values %j', values);
+          this._log.debug('listAccessApprovalRequests values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAccessApprovalRequests request %j', request);
+    this._log.debug('listAccessApprovalRequests request %j', request);
     return this.innerApiCalls
       .listAccessApprovalRequests(request, options, wrappedCallback)
       ?.then(
@@ -2207,7 +2207,7 @@ export class CloudControlsPartnerCoreClient {
           protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest | null,
           protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsResponse,
         ]) => {
-          this._log.info('listAccessApprovalRequests values %j', response);
+          this._log.debug('listAccessApprovalRequests values %j', response);
           return [response, input, output];
         },
       );
@@ -2267,7 +2267,7 @@ export class CloudControlsPartnerCoreClient {
       'ListAccessApprovalRequests is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('listAccessApprovalRequests stream %j', request);
+    this._log.debug('listAccessApprovalRequests stream %j', request);
     return this.descriptors.page.listAccessApprovalRequests.createStream(
       this.innerApiCalls.listAccessApprovalRequests as GaxCall,
       request,
@@ -2332,7 +2332,7 @@ export class CloudControlsPartnerCoreClient {
       'ListAccessApprovalRequests is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('listAccessApprovalRequests iterate %j', request);
+    this._log.debug('listAccessApprovalRequests iterate %j', request);
     return this.descriptors.page.listAccessApprovalRequests.asyncIterate(
       this.innerApiCalls['listAccessApprovalRequests'] as GaxCall,
       request as {},

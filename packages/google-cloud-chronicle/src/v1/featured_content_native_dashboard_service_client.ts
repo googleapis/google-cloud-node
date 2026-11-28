@@ -233,6 +233,9 @@ export class FeaturedContentNativeDashboardServiceClient {
       dataTableRowPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/dataTables/{data_table}/dataTableRows/{data_table_row}',
       ),
+      eventPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/events/{event}',
+      ),
       featuredContentNativeDashboardPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/instances/{instance}/contentHub/featuredContentNativeDashboards/{featured_content_native_dashboard}',
@@ -271,6 +274,18 @@ export class FeaturedContentNativeDashboardServiceClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}',
       ),
+      projectLocationInstanceAnalyticEntitiesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/instances/{instance}/analytics/{analytic}/entities/{entity}',
+        ),
+      projectLocationInstanceEntitiesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/instances/{instance}/entities/{entity}',
+        ),
+      projectLocationInstanceWatchlistEntitiesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/instances/{instance}/watchlists/{watchlist}/entities/{entity}',
+        ),
       referenceListPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/referenceLists/{reference_list}',
       ),
@@ -285,6 +300,12 @@ export class FeaturedContentNativeDashboardServiceClient {
       ),
       ruleExecutionErrorPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/ruleExecutionErrors/{rule_execution_error}',
+      ),
+      searchSessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/searchSessions/{search_session}',
+      ),
+      searchedResultPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/searchSessions/{search_session}/searchedResults/{searched_result}',
       ),
       watchlistPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/watchlists/{watchlist}',
@@ -572,7 +593,7 @@ export class FeaturedContentNativeDashboardServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getFeaturedContentNativeDashboard request %j', request);
+    this._log.debug('getFeaturedContentNativeDashboard request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IFeaturedContentNativeDashboard,
@@ -583,7 +604,7 @@ export class FeaturedContentNativeDashboardServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'getFeaturedContentNativeDashboard response %j',
             response,
           );
@@ -601,7 +622,7 @@ export class FeaturedContentNativeDashboardServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'getFeaturedContentNativeDashboard response %j',
             response,
           );
@@ -725,7 +746,10 @@ export class FeaturedContentNativeDashboardServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('installFeaturedContentNativeDashboard request %j', request);
+    this._log.debug(
+      'installFeaturedContentNativeDashboard request %j',
+      request,
+    );
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IInstallFeaturedContentNativeDashboardResponse,
@@ -736,7 +760,7 @@ export class FeaturedContentNativeDashboardServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'installFeaturedContentNativeDashboard response %j',
             response,
           );
@@ -754,7 +778,7 @@ export class FeaturedContentNativeDashboardServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'installFeaturedContentNativeDashboard response %j',
             response,
           );
@@ -918,14 +942,14 @@ export class FeaturedContentNativeDashboardServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'listFeaturedContentNativeDashboards values %j',
             values,
           );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listFeaturedContentNativeDashboards request %j', request);
+    this._log.debug('listFeaturedContentNativeDashboards request %j', request);
     return this.innerApiCalls
       .listFeaturedContentNativeDashboards(request, options, wrappedCallback)
       ?.then(
@@ -934,7 +958,7 @@ export class FeaturedContentNativeDashboardServiceClient {
           protos.google.cloud.chronicle.v1.IListFeaturedContentNativeDashboardsRequest | null,
           protos.google.cloud.chronicle.v1.IListFeaturedContentNativeDashboardsResponse,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'listFeaturedContentNativeDashboards values %j',
             response,
           );
@@ -1014,7 +1038,7 @@ export class FeaturedContentNativeDashboardServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFeaturedContentNativeDashboards stream %j', request);
+    this._log.debug('listFeaturedContentNativeDashboards stream %j', request);
     return this.descriptors.page.listFeaturedContentNativeDashboards.createStream(
       this.innerApiCalls.listFeaturedContentNativeDashboards as GaxCall,
       request,
@@ -1096,7 +1120,7 @@ export class FeaturedContentNativeDashboardServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFeaturedContentNativeDashboards iterate %j', request);
+    this._log.debug('listFeaturedContentNativeDashboards iterate %j', request);
     return this.descriptors.page.listFeaturedContentNativeDashboards.asyncIterate(
       this.innerApiCalls['listFeaturedContentNativeDashboards'] as GaxCall,
       request as {},
@@ -1752,6 +1776,73 @@ export class FeaturedContentNativeDashboardServiceClient {
   matchDataTableRowFromDataTableRowName(dataTableRowName: string) {
     return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName)
       .data_table_row;
+  }
+
+  /**
+   * Return a fully-qualified event resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} event
+   * @returns {string} Resource name string.
+   */
+  eventPath(
+    project: string,
+    location: string,
+    instance: string,
+    event: string,
+  ) {
+    return this.pathTemplates.eventPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      event: event,
+    });
+  }
+
+  /**
+   * Parse the project from Event resource.
+   *
+   * @param {string} eventName
+   *   A fully-qualified path representing Event resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEventName(eventName: string) {
+    return this.pathTemplates.eventPathTemplate.match(eventName).project;
+  }
+
+  /**
+   * Parse the location from Event resource.
+   *
+   * @param {string} eventName
+   *   A fully-qualified path representing Event resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEventName(eventName: string) {
+    return this.pathTemplates.eventPathTemplate.match(eventName).location;
+  }
+
+  /**
+   * Parse the instance from Event resource.
+   *
+   * @param {string} eventName
+   *   A fully-qualified path representing Event resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromEventName(eventName: string) {
+    return this.pathTemplates.eventPathTemplate.match(eventName).instance;
+  }
+
+  /**
+   * Parse the event from Event resource.
+   *
+   * @param {string} eventName
+   *   A fully-qualified path representing Event resource.
+   * @returns {string} A string representing the event.
+   */
+  matchEventFromEventName(eventName: string) {
+    return this.pathTemplates.eventPathTemplate.match(eventName).event;
   }
 
   /**
@@ -2553,6 +2644,297 @@ export class FeaturedContentNativeDashboardServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationInstanceAnalyticEntities resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} analytic
+   * @param {string} entity
+   * @returns {string} Resource name string.
+   */
+  projectLocationInstanceAnalyticEntitiesPath(
+    project: string,
+    location: string,
+    instance: string,
+    analytic: string,
+    entity: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        instance: instance,
+        analytic: analytic,
+        entity: entity,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationInstanceAnalyticEntities resource.
+   *
+   * @param {string} projectLocationInstanceAnalyticEntitiesName
+   *   A fully-qualified path representing project_location_instance_analytic_entities resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationInstanceAnalyticEntitiesName(
+    projectLocationInstanceAnalyticEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.match(
+      projectLocationInstanceAnalyticEntitiesName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationInstanceAnalyticEntities resource.
+   *
+   * @param {string} projectLocationInstanceAnalyticEntitiesName
+   *   A fully-qualified path representing project_location_instance_analytic_entities resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationInstanceAnalyticEntitiesName(
+    projectLocationInstanceAnalyticEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.match(
+      projectLocationInstanceAnalyticEntitiesName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from ProjectLocationInstanceAnalyticEntities resource.
+   *
+   * @param {string} projectLocationInstanceAnalyticEntitiesName
+   *   A fully-qualified path representing project_location_instance_analytic_entities resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromProjectLocationInstanceAnalyticEntitiesName(
+    projectLocationInstanceAnalyticEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.match(
+      projectLocationInstanceAnalyticEntitiesName,
+    ).instance;
+  }
+
+  /**
+   * Parse the analytic from ProjectLocationInstanceAnalyticEntities resource.
+   *
+   * @param {string} projectLocationInstanceAnalyticEntitiesName
+   *   A fully-qualified path representing project_location_instance_analytic_entities resource.
+   * @returns {string} A string representing the analytic.
+   */
+  matchAnalyticFromProjectLocationInstanceAnalyticEntitiesName(
+    projectLocationInstanceAnalyticEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.match(
+      projectLocationInstanceAnalyticEntitiesName,
+    ).analytic;
+  }
+
+  /**
+   * Parse the entity from ProjectLocationInstanceAnalyticEntities resource.
+   *
+   * @param {string} projectLocationInstanceAnalyticEntitiesName
+   *   A fully-qualified path representing project_location_instance_analytic_entities resource.
+   * @returns {string} A string representing the entity.
+   */
+  matchEntityFromProjectLocationInstanceAnalyticEntitiesName(
+    projectLocationInstanceAnalyticEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.match(
+      projectLocationInstanceAnalyticEntitiesName,
+    ).entity;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationInstanceEntities resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} entity
+   * @returns {string} Resource name string.
+   */
+  projectLocationInstanceEntitiesPath(
+    project: string,
+    location: string,
+    instance: string,
+    entity: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceEntitiesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        instance: instance,
+        entity: entity,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationInstanceEntities resource.
+   *
+   * @param {string} projectLocationInstanceEntitiesName
+   *   A fully-qualified path representing project_location_instance_entities resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationInstanceEntitiesName(
+    projectLocationInstanceEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceEntitiesPathTemplate.match(
+      projectLocationInstanceEntitiesName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationInstanceEntities resource.
+   *
+   * @param {string} projectLocationInstanceEntitiesName
+   *   A fully-qualified path representing project_location_instance_entities resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationInstanceEntitiesName(
+    projectLocationInstanceEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceEntitiesPathTemplate.match(
+      projectLocationInstanceEntitiesName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from ProjectLocationInstanceEntities resource.
+   *
+   * @param {string} projectLocationInstanceEntitiesName
+   *   A fully-qualified path representing project_location_instance_entities resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromProjectLocationInstanceEntitiesName(
+    projectLocationInstanceEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceEntitiesPathTemplate.match(
+      projectLocationInstanceEntitiesName,
+    ).instance;
+  }
+
+  /**
+   * Parse the entity from ProjectLocationInstanceEntities resource.
+   *
+   * @param {string} projectLocationInstanceEntitiesName
+   *   A fully-qualified path representing project_location_instance_entities resource.
+   * @returns {string} A string representing the entity.
+   */
+  matchEntityFromProjectLocationInstanceEntitiesName(
+    projectLocationInstanceEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceEntitiesPathTemplate.match(
+      projectLocationInstanceEntitiesName,
+    ).entity;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationInstanceWatchlistEntities resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} watchlist
+   * @param {string} entity
+   * @returns {string} Resource name string.
+   */
+  projectLocationInstanceWatchlistEntitiesPath(
+    project: string,
+    location: string,
+    instance: string,
+    watchlist: string,
+    entity: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        instance: instance,
+        watchlist: watchlist,
+        entity: entity,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationInstanceWatchlistEntities resource.
+   *
+   * @param {string} projectLocationInstanceWatchlistEntitiesName
+   *   A fully-qualified path representing project_location_instance_watchlist_entities resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationInstanceWatchlistEntitiesName(
+    projectLocationInstanceWatchlistEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.match(
+      projectLocationInstanceWatchlistEntitiesName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationInstanceWatchlistEntities resource.
+   *
+   * @param {string} projectLocationInstanceWatchlistEntitiesName
+   *   A fully-qualified path representing project_location_instance_watchlist_entities resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationInstanceWatchlistEntitiesName(
+    projectLocationInstanceWatchlistEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.match(
+      projectLocationInstanceWatchlistEntitiesName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from ProjectLocationInstanceWatchlistEntities resource.
+   *
+   * @param {string} projectLocationInstanceWatchlistEntitiesName
+   *   A fully-qualified path representing project_location_instance_watchlist_entities resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromProjectLocationInstanceWatchlistEntitiesName(
+    projectLocationInstanceWatchlistEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.match(
+      projectLocationInstanceWatchlistEntitiesName,
+    ).instance;
+  }
+
+  /**
+   * Parse the watchlist from ProjectLocationInstanceWatchlistEntities resource.
+   *
+   * @param {string} projectLocationInstanceWatchlistEntitiesName
+   *   A fully-qualified path representing project_location_instance_watchlist_entities resource.
+   * @returns {string} A string representing the watchlist.
+   */
+  matchWatchlistFromProjectLocationInstanceWatchlistEntitiesName(
+    projectLocationInstanceWatchlistEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.match(
+      projectLocationInstanceWatchlistEntitiesName,
+    ).watchlist;
+  }
+
+  /**
+   * Parse the entity from ProjectLocationInstanceWatchlistEntities resource.
+   *
+   * @param {string} projectLocationInstanceWatchlistEntitiesName
+   *   A fully-qualified path representing project_location_instance_watchlist_entities resource.
+   * @returns {string} A string representing the entity.
+   */
+  matchEntityFromProjectLocationInstanceWatchlistEntitiesName(
+    projectLocationInstanceWatchlistEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.match(
+      projectLocationInstanceWatchlistEntitiesName,
+    ).entity;
+  }
+
+  /**
    * Return a fully-qualified referenceList resource name string.
    *
    * @param {string} project
@@ -2920,6 +3302,168 @@ export class FeaturedContentNativeDashboardServiceClient {
     return this.pathTemplates.ruleExecutionErrorPathTemplate.match(
       ruleExecutionErrorName,
     ).rule_execution_error;
+  }
+
+  /**
+   * Return a fully-qualified searchSession resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} search_session
+   * @returns {string} Resource name string.
+   */
+  searchSessionPath(
+    project: string,
+    location: string,
+    instance: string,
+    searchSession: string,
+  ) {
+    return this.pathTemplates.searchSessionPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      search_session: searchSession,
+    });
+  }
+
+  /**
+   * Parse the project from SearchSession resource.
+   *
+   * @param {string} searchSessionName
+   *   A fully-qualified path representing SearchSession resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSearchSessionName(searchSessionName: string) {
+    return this.pathTemplates.searchSessionPathTemplate.match(searchSessionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from SearchSession resource.
+   *
+   * @param {string} searchSessionName
+   *   A fully-qualified path representing SearchSession resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSearchSessionName(searchSessionName: string) {
+    return this.pathTemplates.searchSessionPathTemplate.match(searchSessionName)
+      .location;
+  }
+
+  /**
+   * Parse the instance from SearchSession resource.
+   *
+   * @param {string} searchSessionName
+   *   A fully-qualified path representing SearchSession resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromSearchSessionName(searchSessionName: string) {
+    return this.pathTemplates.searchSessionPathTemplate.match(searchSessionName)
+      .instance;
+  }
+
+  /**
+   * Parse the search_session from SearchSession resource.
+   *
+   * @param {string} searchSessionName
+   *   A fully-qualified path representing SearchSession resource.
+   * @returns {string} A string representing the search_session.
+   */
+  matchSearchSessionFromSearchSessionName(searchSessionName: string) {
+    return this.pathTemplates.searchSessionPathTemplate.match(searchSessionName)
+      .search_session;
+  }
+
+  /**
+   * Return a fully-qualified searchedResult resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} search_session
+   * @param {string} searched_result
+   * @returns {string} Resource name string.
+   */
+  searchedResultPath(
+    project: string,
+    location: string,
+    instance: string,
+    searchSession: string,
+    searchedResult: string,
+  ) {
+    return this.pathTemplates.searchedResultPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      search_session: searchSession,
+      searched_result: searchedResult,
+    });
+  }
+
+  /**
+   * Parse the project from SearchedResult resource.
+   *
+   * @param {string} searchedResultName
+   *   A fully-qualified path representing SearchedResult resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSearchedResultName(searchedResultName: string) {
+    return this.pathTemplates.searchedResultPathTemplate.match(
+      searchedResultName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from SearchedResult resource.
+   *
+   * @param {string} searchedResultName
+   *   A fully-qualified path representing SearchedResult resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSearchedResultName(searchedResultName: string) {
+    return this.pathTemplates.searchedResultPathTemplate.match(
+      searchedResultName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from SearchedResult resource.
+   *
+   * @param {string} searchedResultName
+   *   A fully-qualified path representing SearchedResult resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromSearchedResultName(searchedResultName: string) {
+    return this.pathTemplates.searchedResultPathTemplate.match(
+      searchedResultName,
+    ).instance;
+  }
+
+  /**
+   * Parse the search_session from SearchedResult resource.
+   *
+   * @param {string} searchedResultName
+   *   A fully-qualified path representing SearchedResult resource.
+   * @returns {string} A string representing the search_session.
+   */
+  matchSearchSessionFromSearchedResultName(searchedResultName: string) {
+    return this.pathTemplates.searchedResultPathTemplate.match(
+      searchedResultName,
+    ).search_session;
+  }
+
+  /**
+   * Parse the searched_result from SearchedResult resource.
+   *
+   * @param {string} searchedResultName
+   *   A fully-qualified path representing SearchedResult resource.
+   * @returns {string} A string representing the searched_result.
+   */
+  matchSearchedResultFromSearchedResultName(searchedResultName: string) {
+    return this.pathTemplates.searchedResultPathTemplate.match(
+      searchedResultName,
+    ).searched_result;
   }
 
   /**

@@ -595,7 +595,7 @@ export class RoutesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('computeRoutes request %j', request);
+    this._log.debug('computeRoutes request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.maps.routing.v2.IComputeRoutesResponse,
@@ -606,7 +606,7 @@ export class RoutesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('computeRoutes response %j', response);
+          this._log.debug('computeRoutes response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -618,7 +618,7 @@ export class RoutesClient {
           protos.google.maps.routing.v2.IComputeRoutesRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('computeRoutes response %j', response);
+          this._log.debug('computeRoutes response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -770,7 +770,7 @@ export class RoutesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('computeRouteMatrix stream %j', options);
+    this._log.debug('computeRouteMatrix stream %j', options);
     return this.innerApiCalls.computeRouteMatrix(request, options);
   }
 

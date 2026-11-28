@@ -656,7 +656,7 @@ export class ProductServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createProduct request %j', request);
+    this._log.debug('createProduct request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2.IProduct,
@@ -667,7 +667,7 @@ export class ProductServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createProduct response %j', response);
+          this._log.debug('createProduct response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -679,7 +679,7 @@ export class ProductServiceClient {
           protos.google.cloud.retail.v2.ICreateProductRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createProduct response %j', response);
+          this._log.debug('createProduct response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -791,7 +791,7 @@ export class ProductServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getProduct request %j', request);
+    this._log.debug('getProduct request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2.IProduct,
@@ -800,7 +800,7 @@ export class ProductServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getProduct response %j', response);
+          this._log.debug('getProduct response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -812,7 +812,7 @@ export class ProductServiceClient {
           protos.google.cloud.retail.v2.IGetProductRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getProduct response %j', response);
+          this._log.debug('getProduct response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -943,7 +943,7 @@ export class ProductServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateProduct request %j', request);
+    this._log.debug('updateProduct request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2.IProduct,
@@ -954,7 +954,7 @@ export class ProductServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateProduct response %j', response);
+          this._log.debug('updateProduct response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -966,7 +966,7 @@ export class ProductServiceClient {
           protos.google.cloud.retail.v2.IUpdateProductRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateProduct response %j', response);
+          this._log.debug('updateProduct response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1091,7 +1091,7 @@ export class ProductServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteProduct request %j', request);
+    this._log.debug('deleteProduct request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1102,7 +1102,7 @@ export class ProductServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteProduct response %j', response);
+          this._log.debug('deleteProduct response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1114,7 +1114,7 @@ export class ProductServiceClient {
           protos.google.cloud.retail.v2.IDeleteProductRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteProduct response %j', response);
+          this._log.debug('deleteProduct response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1311,11 +1311,11 @@ export class ProductServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('purgeProducts response %j', rawResponse);
+          this._log.debug('purgeProducts response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('purgeProducts request %j', request);
+    this._log.debug('purgeProducts request %j', request);
     return this.innerApiCalls
       .purgeProducts(request, options, wrappedCallback)
       ?.then(
@@ -1327,7 +1327,7 @@ export class ProductServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('purgeProducts response %j', rawResponse);
+          this._log.debug('purgeProducts response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1521,11 +1521,11 @@ export class ProductServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('importProducts response %j', rawResponse);
+          this._log.debug('importProducts response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('importProducts request %j', request);
+    this._log.debug('importProducts request %j', request);
     return this.innerApiCalls
       .importProducts(request, options, wrappedCallback)
       ?.then(
@@ -1537,7 +1537,7 @@ export class ProductServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('importProducts response %j', rawResponse);
+          this._log.debug('importProducts response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1814,11 +1814,11 @@ export class ProductServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('setInventory response %j', rawResponse);
+          this._log.debug('setInventory response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('setInventory request %j', request);
+    this._log.debug('setInventory request %j', request);
     return this.innerApiCalls
       .setInventory(request, options, wrappedCallback)
       ?.then(
@@ -1830,7 +1830,7 @@ export class ProductServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('setInventory response %j', rawResponse);
+          this._log.debug('setInventory response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2066,11 +2066,11 @@ export class ProductServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('addFulfillmentPlaces response %j', rawResponse);
+          this._log.debug('addFulfillmentPlaces response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('addFulfillmentPlaces request %j', request);
+    this._log.debug('addFulfillmentPlaces request %j', request);
     return this.innerApiCalls
       .addFulfillmentPlaces(request, options, wrappedCallback)
       ?.then(
@@ -2082,7 +2082,7 @@ export class ProductServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('addFulfillmentPlaces response %j', rawResponse);
+          this._log.debug('addFulfillmentPlaces response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2313,11 +2313,11 @@ export class ProductServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('removeFulfillmentPlaces response %j', rawResponse);
+          this._log.debug('removeFulfillmentPlaces response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('removeFulfillmentPlaces request %j', request);
+    this._log.debug('removeFulfillmentPlaces request %j', request);
     return this.innerApiCalls
       .removeFulfillmentPlaces(request, options, wrappedCallback)
       ?.then(
@@ -2329,7 +2329,7 @@ export class ProductServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('removeFulfillmentPlaces response %j', rawResponse);
+          this._log.debug('removeFulfillmentPlaces response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2545,11 +2545,11 @@ export class ProductServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('addLocalInventories response %j', rawResponse);
+          this._log.debug('addLocalInventories response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('addLocalInventories request %j', request);
+    this._log.debug('addLocalInventories request %j', request);
     return this.innerApiCalls
       .addLocalInventories(request, options, wrappedCallback)
       ?.then(
@@ -2561,7 +2561,7 @@ export class ProductServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('addLocalInventories response %j', rawResponse);
+          this._log.debug('addLocalInventories response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2759,11 +2759,11 @@ export class ProductServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('removeLocalInventories response %j', rawResponse);
+          this._log.debug('removeLocalInventories response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('removeLocalInventories request %j', request);
+    this._log.debug('removeLocalInventories request %j', request);
     return this.innerApiCalls
       .removeLocalInventories(request, options, wrappedCallback)
       ?.then(
@@ -2775,7 +2775,7 @@ export class ProductServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('removeLocalInventories response %j', rawResponse);
+          this._log.debug('removeLocalInventories response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2983,11 +2983,11 @@ export class ProductServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listProducts values %j', values);
+          this._log.debug('listProducts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listProducts request %j', request);
+    this._log.debug('listProducts request %j', request);
     return this.innerApiCalls
       .listProducts(request, options, wrappedCallback)
       ?.then(
@@ -2996,7 +2996,7 @@ export class ProductServiceClient {
           protos.google.cloud.retail.v2.IListProductsRequest | null,
           protos.google.cloud.retail.v2.IListProductsResponse,
         ]) => {
-          this._log.info('listProducts values %j', response);
+          this._log.debug('listProducts values %j', response);
           return [response, input, output];
         },
       );
@@ -3107,7 +3107,7 @@ export class ProductServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listProducts stream %j', request);
+    this._log.debug('listProducts stream %j', request);
     return this.descriptors.page.listProducts.createStream(
       this.innerApiCalls.listProducts as GaxCall,
       request,
@@ -3223,7 +3223,7 @@ export class ProductServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listProducts iterate %j', request);
+    this._log.debug('listProducts iterate %j', request);
     return this.descriptors.page.listProducts.asyncIterate(
       this.innerApiCalls['listProducts'] as GaxCall,
       request as {},

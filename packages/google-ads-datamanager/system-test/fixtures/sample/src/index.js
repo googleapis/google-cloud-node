@@ -24,6 +24,7 @@ function main() {
   const ingestionServiceClient = new datamanager.IngestionServiceClient();
   const marketingDataInsightsServiceClient = new datamanager.MarketingDataInsightsServiceClient();
   const partnerLinkServiceClient = new datamanager.PartnerLinkServiceClient();
+  const reportingServiceClient = new datamanager.ReportingServiceClient();
   const userListDirectLicenseServiceClient = new datamanager.UserListDirectLicenseServiceClient();
   const userListGlobalLicenseServiceClient = new datamanager.UserListGlobalLicenseServiceClient();
   const userListServiceClient = new datamanager.UserListServiceClient();

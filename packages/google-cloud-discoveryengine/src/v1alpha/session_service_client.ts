@@ -641,7 +641,7 @@ export class SessionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createSession request %j', request);
+    this._log.debug('createSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1alpha.ISession,
@@ -652,7 +652,7 @@ export class SessionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createSession response %j', response);
+          this._log.debug('createSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -667,7 +667,7 @@ export class SessionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createSession response %j', response);
+          this._log.debug('createSession response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -788,7 +788,7 @@ export class SessionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteSession request %j', request);
+    this._log.debug('deleteSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -799,7 +799,7 @@ export class SessionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteSession response %j', response);
+          this._log.debug('deleteSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -814,7 +814,7 @@ export class SessionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteSession response %j', response);
+          this._log.debug('deleteSession response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -943,7 +943,7 @@ export class SessionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateSession request %j', request);
+    this._log.debug('updateSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1alpha.ISession,
@@ -954,7 +954,7 @@ export class SessionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateSession response %j', response);
+          this._log.debug('updateSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -969,7 +969,7 @@ export class SessionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateSession response %j', response);
+          this._log.debug('updateSession response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1090,7 +1090,7 @@ export class SessionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSession request %j', request);
+    this._log.debug('getSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1alpha.ISession,
@@ -1101,7 +1101,7 @@ export class SessionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSession response %j', response);
+          this._log.debug('getSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1116,7 +1116,7 @@ export class SessionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getSession response %j', response);
+          this._log.debug('getSession response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1283,11 +1283,11 @@ export class SessionServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listSessions values %j', values);
+          this._log.debug('listSessions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listSessions request %j', request);
+    this._log.debug('listSessions request %j', request);
     return this.innerApiCalls
       .listSessions(request, options, wrappedCallback)
       ?.then(
@@ -1296,7 +1296,7 @@ export class SessionServiceClient {
           protos.google.cloud.discoveryengine.v1alpha.IListSessionsRequest | null,
           protos.google.cloud.discoveryengine.v1alpha.IListSessionsResponse,
         ]) => {
-          this._log.info('listSessions values %j', response);
+          this._log.debug('listSessions values %j', response);
           return [response, input, output];
         },
       );
@@ -1377,7 +1377,7 @@ export class SessionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSessions stream %j', request);
+    this._log.debug('listSessions stream %j', request);
     return this.descriptors.page.listSessions.createStream(
       this.innerApiCalls.listSessions as GaxCall,
       request,
@@ -1463,7 +1463,7 @@ export class SessionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSessions iterate %j', request);
+    this._log.debug('listSessions iterate %j', request);
     return this.descriptors.page.listSessions.asyncIterate(
       this.innerApiCalls['listSessions'] as GaxCall,
       request as {},
@@ -1607,11 +1607,11 @@ export class SessionServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listFiles values %j', values);
+          this._log.debug('listFiles values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listFiles request %j', request);
+    this._log.debug('listFiles request %j', request);
     return this.innerApiCalls
       .listFiles(request, options, wrappedCallback)
       ?.then(
@@ -1620,7 +1620,7 @@ export class SessionServiceClient {
           protos.google.cloud.discoveryengine.v1alpha.IListFilesRequest | null,
           protos.google.cloud.discoveryengine.v1alpha.IListFilesResponse,
         ]) => {
-          this._log.info('listFiles values %j', response);
+          this._log.debug('listFiles values %j', response);
           return [response, input, output];
         },
       );
@@ -1694,7 +1694,7 @@ export class SessionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFiles stream %j', request);
+    this._log.debug('listFiles stream %j', request);
     return this.descriptors.page.listFiles.createStream(
       this.innerApiCalls.listFiles as GaxCall,
       request,
@@ -1773,7 +1773,7 @@ export class SessionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFiles iterate %j', request);
+    this._log.debug('listFiles iterate %j', request);
     return this.descriptors.page.listFiles.asyncIterate(
       this.innerApiCalls['listFiles'] as GaxCall,
       request as {},

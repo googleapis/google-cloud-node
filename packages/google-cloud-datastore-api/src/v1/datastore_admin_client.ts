@@ -598,7 +598,7 @@ export class DatastoreAdminClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getIndex request %j', request);
+    this._log.debug('getIndex request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.datastore.admin.v1.IIndex,
@@ -607,7 +607,7 @@ export class DatastoreAdminClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getIndex response %j', response);
+          this._log.debug('getIndex response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -619,7 +619,7 @@ export class DatastoreAdminClient {
           protos.google.datastore.admin.v1.IGetIndexRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getIndex response %j', response);
+          this._log.debug('getIndex response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -784,11 +784,11 @@ export class DatastoreAdminClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('exportEntities response %j', rawResponse);
+          this._log.debug('exportEntities response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('exportEntities request %j', request);
+    this._log.debug('exportEntities request %j', request);
     return this.innerApiCalls
       .exportEntities(request, options, wrappedCallback)
       ?.then(
@@ -800,7 +800,7 @@ export class DatastoreAdminClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('exportEntities response %j', rawResponse);
+          this._log.debug('exportEntities response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -979,11 +979,11 @@ export class DatastoreAdminClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('importEntities response %j', rawResponse);
+          this._log.debug('importEntities response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('importEntities request %j', request);
+    this._log.debug('importEntities request %j', request);
     return this.innerApiCalls
       .importEntities(request, options, wrappedCallback)
       ?.then(
@@ -995,7 +995,7 @@ export class DatastoreAdminClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('importEntities response %j', rawResponse);
+          this._log.debug('importEntities response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1164,11 +1164,11 @@ export class DatastoreAdminClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createIndex response %j', rawResponse);
+          this._log.debug('createIndex response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createIndex request %j', request);
+    this._log.debug('createIndex request %j', request);
     return this.innerApiCalls
       .createIndex(request, options, wrappedCallback)
       ?.then(
@@ -1180,7 +1180,7 @@ export class DatastoreAdminClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createIndex response %j', rawResponse);
+          this._log.debug('createIndex response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1346,11 +1346,11 @@ export class DatastoreAdminClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteIndex response %j', rawResponse);
+          this._log.debug('deleteIndex response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteIndex request %j', request);
+    this._log.debug('deleteIndex request %j', request);
     return this.innerApiCalls
       .deleteIndex(request, options, wrappedCallback)
       ?.then(
@@ -1362,7 +1362,7 @@ export class DatastoreAdminClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteIndex response %j', rawResponse);
+          this._log.debug('deleteIndex response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1507,11 +1507,11 @@ export class DatastoreAdminClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listIndexes values %j', values);
+          this._log.debug('listIndexes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listIndexes request %j', request);
+    this._log.debug('listIndexes request %j', request);
     return this.innerApiCalls
       .listIndexes(request, options, wrappedCallback)
       ?.then(
@@ -1520,7 +1520,7 @@ export class DatastoreAdminClient {
           protos.google.datastore.admin.v1.IListIndexesRequest | null,
           protos.google.datastore.admin.v1.IListIndexesResponse,
         ]) => {
-          this._log.info('listIndexes values %j', response);
+          this._log.debug('listIndexes values %j', response);
           return [response, input, output];
         },
       );
@@ -1566,7 +1566,7 @@ export class DatastoreAdminClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listIndexes stream %j', request);
+    this._log.debug('listIndexes stream %j', request);
     return this.descriptors.page.listIndexes.createStream(
       this.innerApiCalls.listIndexes as GaxCall,
       request,
@@ -1617,7 +1617,7 @@ export class DatastoreAdminClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listIndexes iterate %j', request);
+    this._log.debug('listIndexes iterate %j', request);
     return this.descriptors.page.listIndexes.asyncIterate(
       this.innerApiCalls['listIndexes'] as GaxCall,
       request as {},

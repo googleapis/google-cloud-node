@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(parent, instance, instanceId) {
+function main(parent, instance) {
   // [START run_v2_generated_Instances_CreateInstance_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -29,15 +29,18 @@ function main(parent, instance, instanceId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
+   *  Required. The location and project in which this Instance should be
+   *  created.
    */
   // const parent = 'abc123'
   /**
    */
   // const instance = {}
   /**
-   *  Required. The unique identifier for the Instance. It must begin with
+   *  Optional. The unique identifier for the Instance. It must begin with
    *  letter, and cannot end with hyphen; must contain fewer than 50 characters.
    *  The name of the instance becomes {parent}/instances/{instance_id}.
+   *  If not provided, the server will generate a unique `instance_id`.
    */
   // const instanceId = 'abc123'
   /**
@@ -57,7 +60,6 @@ function main(parent, instance, instanceId) {
     const request = {
       parent,
       instance,
-      instanceId,
     };
 
     // Run request

@@ -2531,6 +2531,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "pendingWriteWaitSkipped": {
+                          "type": "bool",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -6534,6 +6541,13 @@
                         "filter": {
                           "type": "string",
                           "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pendingWriteWaitSkipped": {
+                          "type": "bool",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -10689,6 +10703,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "pendingWriteWaitSkipped": {
+                          "type": "bool",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -13494,8 +13515,8 @@
                     "retention": "RETENTION_SOURCE",
                     "targets": "TARGET_TYPE_FILE",
                     "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "STRICT"
                   }
                 },
                 "enforceProtoLimits": {

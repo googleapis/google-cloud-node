@@ -167,6 +167,7 @@ export type GetBackupsCallback = (
  * const cluster = instance.cluster('my-cluster');
  * const backup = cluster.backup('my-backup');
  * ```
+ * @deprecated Use {@link TableAdminClient} from @google-cloud/bigtable instead.
  */
 export class Backup {
   bigtable: Bigtable;
@@ -266,6 +267,7 @@ Please use the format 'my-backup' or '${cluster.name}/backups/my-backup'.`);
    * created as a result of calling copy.
    * @param {CopyBackupCallback} [callback] The callback function that passes an
    * error or results back to the user.
+   * @deprecated Use {@link TableAdminClient#copyBackup} from @google-cloud/bigtable instead.
    */
   copy(config: CopyBackupConfig, callback: CopyBackupCallback): void;
   copy(config: CopyBackupConfig): Promise<CopyBackupResponse>;
@@ -324,6 +326,7 @@ Please use the format 'my-backup' or '${cluster.name}/backups/my-backup'.`);
    *
    * @example <caption>include:samples/api-reference-doc-snippets/backups.create.js</caption>
    * region_tag:bigtable_api_create_backup
+   * @deprecated Use {@link TableAdminClient#createBackup} from @google-cloud/bigtable instead.
    */
   create(
     config: CreateBackupConfig,
@@ -346,6 +349,7 @@ Please use the format 'my-backup' or '${cluster.name}/backups/my-backup'.`);
    *
    * @example <caption>include:samples/api-reference-doc-snippets/backups.delete.js</caption>
    * region_tag:bigtable_api_delete_backup
+   * @deprecated Use {@link TableAdminClient#deleteBackup} from @google-cloud/bigtable instead.
    */
   delete(
     gaxOptionsOrCallback?: CallOptions | DeleteBackupCallback,
@@ -381,6 +385,7 @@ Please use the format 'my-backup' or '${cluster.name}/backups/my-backup'.`);
    * @param {?error} callback.err An error returned while making this
    *     request.
    * @param {boolean} callback.exists Whether the backup exists or not.
+   * @deprecated Use {@link TableAdminClient#getBackup} from @google-cloud/bigtable instead.
    */
   exists(
     optionsOrCallback?: CallOptions | BackupExistsCallback,
@@ -420,6 +425,7 @@ Please use the format 'my-backup' or '${cluster.name}/backups/my-backup'.`);
    *
    * @example <caption>include:samples/api-reference-doc-snippets/backups.get.js</caption>
    * region_tag:bigtable_api_get_backup
+   * @deprecated Use {@link TableAdminClient#getBackup} from @google-cloud/bigtable instead.
    */
   get(
     gaxOptionsOrCallback?: CallOptions | GetBackupCallback,
@@ -458,6 +464,7 @@ Please use the format 'my-backup' or '${cluster.name}/backups/my-backup'.`);
    *
    * @example <caption>include:samples/api-reference-doc-snippets/instance.js</caption>
    * region_tag:bigtable_api_get_table_Iam_policy
+   * @deprecated Use {@link TableAdminClient#getIamPolicy} from @google-cloud/bigtable instead.
    */
   getIamPolicy(
     optionsOrCallback?: GetIamPolicyOptions | GetIamPolicyCallback,
@@ -489,6 +496,7 @@ Please use the format 'my-backup' or '${cluster.name}/backups/my-backup'.`);
    *
    * @example <caption>include:samples/api-reference-doc-snippets/backups.get.js</caption>
    * region_tag:bigtable_api_get_backup
+   * @deprecated Use {@link TableAdminClient#getBackup} from @google-cloud/bigtable instead.
    */
   getMetadata(
     gaxOptionsOrCallback?: CallOptions | BackupGetMetadataCallback,
@@ -548,6 +556,7 @@ Please use the format 'my-backup' or '${cluster.name}/backups/my-backup'.`);
    *
    * @example <caption>include:samples/api-reference-doc-snippets/backups.restore.js</caption>
    * region_tag:bigtable_api_restore_backup
+   * @deprecated Use {@link TableAdminClient#restoreTable} from @google-cloud/bigtable instead.
    */
   restore(
     tableId: string,
@@ -597,6 +606,7 @@ Please use the format 'my-backup' or '${cluster.name}/backups/my-backup'.`);
    *     to check the status of the request.
    * @param {object} callback.apiResponse The full API response.
    * @return {void | Promise<RestoreTableResponse>}
+   * @deprecated Use {@link TableAdminClient#restoreTable} from @google-cloud/bigtable instead.
    */
   restoreTo(
     config: RestoreTableConfig,
@@ -658,6 +668,7 @@ Please use the format 'my-backup' or '${cluster.name}/backups/my-backup'.`);
    *
    * @example <caption>include:samples/api-reference-doc-snippets/instance.js</caption>
    * region_tag:bigtable_api_set_instance_Iam_policy
+   * @deprecated Use {@link TableAdminClient#setIamPolicy} from @google-cloud/bigtable instead.
    */
   setIamPolicy(
     policy: Policy,
@@ -697,6 +708,7 @@ Please use the format 'my-backup' or '${cluster.name}/backups/my-backup'.`);
    *
    * @example <caption>include:samples/api-reference-doc-snippets/backups.update.js</caption>
    * region_tag:bigtable_api_update_backup
+   * @deprecated Use {@link TableAdminClient#updateBackup} from @google-cloud/bigtable instead.
    */
   setMetadata(
     metadata: ModifiableBackupFields,
@@ -764,6 +776,7 @@ Please use the format 'my-backup' or '${cluster.name}/backups/my-backup'.`);
    *
    * @example <caption>include:samples/api-reference-doc-snippets/instance.js</caption>
    * region_tag:bigtable_api_test_table_Iam_permissions
+   * @deprecated Use {@link TableAdminClient#testIamPermissions} from @google-cloud/bigtable instead.
    */
   testIamPermissions(
     permissions: string | string[],

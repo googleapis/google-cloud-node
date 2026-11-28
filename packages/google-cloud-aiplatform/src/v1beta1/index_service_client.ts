@@ -2664,7 +2664,7 @@ export class IndexServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getIndex request %j', request);
+    this._log.debug('getIndex request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IIndex,
@@ -2675,7 +2675,7 @@ export class IndexServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getIndex response %j', response);
+          this._log.debug('getIndex response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2687,7 +2687,7 @@ export class IndexServiceClient {
           protos.google.cloud.aiplatform.v1beta1.IGetIndexRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getIndex response %j', response);
+          this._log.debug('getIndex response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2816,7 +2816,7 @@ export class IndexServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('upsertDatapoints request %j', request);
+    this._log.debug('upsertDatapoints request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IUpsertDatapointsResponse,
@@ -2827,7 +2827,7 @@ export class IndexServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('upsertDatapoints response %j', response);
+          this._log.debug('upsertDatapoints response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2842,7 +2842,7 @@ export class IndexServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('upsertDatapoints response %j', response);
+          this._log.debug('upsertDatapoints response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2963,7 +2963,7 @@ export class IndexServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('removeDatapoints request %j', request);
+    this._log.debug('removeDatapoints request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IRemoveDatapointsResponse,
@@ -2974,7 +2974,7 @@ export class IndexServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('removeDatapoints response %j', response);
+          this._log.debug('removeDatapoints response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2989,7 +2989,7 @@ export class IndexServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('removeDatapoints response %j', response);
+          this._log.debug('removeDatapoints response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3127,11 +3127,11 @@ export class IndexServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createIndex response %j', rawResponse);
+          this._log.debug('createIndex response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createIndex request %j', request);
+    this._log.debug('createIndex request %j', request);
     return this.innerApiCalls
       .createIndex(request, options, wrappedCallback)
       ?.then(
@@ -3143,7 +3143,7 @@ export class IndexServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createIndex response %j', rawResponse);
+          this._log.debug('createIndex response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3303,11 +3303,11 @@ export class IndexServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('importIndex response %j', rawResponse);
+          this._log.debug('importIndex response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('importIndex request %j', request);
+    this._log.debug('importIndex request %j', request);
     return this.innerApiCalls
       .importIndex(request, options, wrappedCallback)
       ?.then(
@@ -3319,7 +3319,7 @@ export class IndexServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('importIndex response %j', rawResponse);
+          this._log.debug('importIndex response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3476,11 +3476,11 @@ export class IndexServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateIndex response %j', rawResponse);
+          this._log.debug('updateIndex response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateIndex request %j', request);
+    this._log.debug('updateIndex request %j', request);
     return this.innerApiCalls
       .updateIndex(request, options, wrappedCallback)
       ?.then(
@@ -3492,7 +3492,7 @@ export class IndexServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateIndex response %j', rawResponse);
+          this._log.debug('updateIndex response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3650,11 +3650,11 @@ export class IndexServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteIndex response %j', rawResponse);
+          this._log.debug('deleteIndex response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteIndex request %j', request);
+    this._log.debug('deleteIndex request %j', request);
     return this.innerApiCalls
       .deleteIndex(request, options, wrappedCallback)
       ?.then(
@@ -3666,7 +3666,7 @@ export class IndexServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteIndex response %j', rawResponse);
+          this._log.debug('deleteIndex response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3823,11 +3823,11 @@ export class IndexServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listIndexes values %j', values);
+          this._log.debug('listIndexes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listIndexes request %j', request);
+    this._log.debug('listIndexes request %j', request);
     return this.innerApiCalls
       .listIndexes(request, options, wrappedCallback)
       ?.then(
@@ -3836,7 +3836,7 @@ export class IndexServiceClient {
           protos.google.cloud.aiplatform.v1beta1.IListIndexesRequest | null,
           protos.google.cloud.aiplatform.v1beta1.IListIndexesResponse,
         ]) => {
-          this._log.info('listIndexes values %j', response);
+          this._log.debug('listIndexes values %j', response);
           return [response, input, output];
         },
       );
@@ -3890,7 +3890,7 @@ export class IndexServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listIndexes stream %j', request);
+    this._log.debug('listIndexes stream %j', request);
     return this.descriptors.page.listIndexes.createStream(
       this.innerApiCalls.listIndexes as GaxCall,
       request,
@@ -3949,7 +3949,7 @@ export class IndexServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listIndexes iterate %j', request);
+    this._log.debug('listIndexes iterate %j', request);
     return this.descriptors.page.listIndexes.asyncIterate(
       this.innerApiCalls['listIndexes'] as GaxCall,
       request as {},

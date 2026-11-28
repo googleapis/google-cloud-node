@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/saasservicemgmt-v0.7.0...saasservicemgmt-v0.8.0) (2026-11-09)
+
+
+### Features
+
+* **google/cloud/saasplatform/saasservicemgmt/v1:** Onboard a new library ([#9820](https://github.com/googleapis/google-cloud-node/issues/9820)) ([4c59a87](https://github.com/googleapis/google-cloud-node/commit/4c59a874b88c09a608057ada6776026211fb04c7))
+
 ## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/saasservicemgmt-v0.6.1...saasservicemgmt-v0.7.0) (2026-10-08)
 
 

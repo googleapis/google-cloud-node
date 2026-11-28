@@ -18,6 +18,7 @@ import {OutgoingHttpHeaders} from 'http';
 import objectHash from 'object-hash';
 import * as protobuf from 'protobufjs';
 import * as gax from './gax';
+import {setSettingsDefaultDomain} from './observability/contextUtil';
 import * as routingHeader from './routingHeader';
 import {Status} from './status';
 import {GoogleAuth, AuthClient} from 'google-auth-library';
@@ -305,7 +306,7 @@ export class GrpcClient {
     if (this._port !== undefined) {
       otherArgs.port = this._port;
     }
-    return gax.constructSettings(
+    const defaults = gax.constructSettings(
       serviceName,
       clientConfig,
       configOverrides,
@@ -315,6 +316,17 @@ export class GrpcClient {
       _legacyTelemetryInfo,
       enableTelemetryLogging ?? this._enableTelemetryLogging,
     );
+    const defaultServicePath = (this.auth as {defaultServicePath?: unknown})
+      ?.defaultServicePath;
+    if (
+      typeof defaultServicePath === 'string' &&
+      defaultServicePath.includes('.')
+    ) {
+      for (const methodName of Object.keys(defaults)) {
+        setSettingsDefaultDomain(defaults[methodName], defaultServicePath);
+      }
+    }
+    return defaults;
   }
 
   /**

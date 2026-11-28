@@ -456,7 +456,7 @@ export class LanguageServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('analyzeSentiment request %j', request);
+    this._log.debug('analyzeSentiment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.language.v2.IAnalyzeSentimentResponse,
@@ -467,7 +467,7 @@ export class LanguageServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('analyzeSentiment response %j', response);
+          this._log.debug('analyzeSentiment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -479,7 +479,7 @@ export class LanguageServiceClient {
           protos.google.cloud.language.v2.IAnalyzeSentimentRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('analyzeSentiment response %j', response);
+          this._log.debug('analyzeSentiment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -590,7 +590,7 @@ export class LanguageServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('analyzeEntities request %j', request);
+    this._log.debug('analyzeEntities request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.language.v2.IAnalyzeEntitiesResponse,
@@ -601,7 +601,7 @@ export class LanguageServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('analyzeEntities response %j', response);
+          this._log.debug('analyzeEntities response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -613,7 +613,7 @@ export class LanguageServiceClient {
           protos.google.cloud.language.v2.IAnalyzeEntitiesRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('analyzeEntities response %j', response);
+          this._log.debug('analyzeEntities response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -714,7 +714,7 @@ export class LanguageServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('classifyText request %j', request);
+    this._log.debug('classifyText request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.language.v2.IClassifyTextResponse,
@@ -725,7 +725,7 @@ export class LanguageServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('classifyText response %j', response);
+          this._log.debug('classifyText response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -737,7 +737,7 @@ export class LanguageServiceClient {
           protos.google.cloud.language.v2.IClassifyTextRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('classifyText response %j', response);
+          this._log.debug('classifyText response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -840,7 +840,7 @@ export class LanguageServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('moderateText request %j', request);
+    this._log.debug('moderateText request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.language.v2.IModerateTextResponse,
@@ -851,7 +851,7 @@ export class LanguageServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('moderateText response %j', response);
+          this._log.debug('moderateText response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -863,7 +863,7 @@ export class LanguageServiceClient {
           protos.google.cloud.language.v2.IModerateTextRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('moderateText response %j', response);
+          this._log.debug('moderateText response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -968,7 +968,7 @@ export class LanguageServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('annotateText request %j', request);
+    this._log.debug('annotateText request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.language.v2.IAnnotateTextResponse,
@@ -979,7 +979,7 @@ export class LanguageServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('annotateText response %j', response);
+          this._log.debug('annotateText response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -991,7 +991,7 @@ export class LanguageServiceClient {
           protos.google.cloud.language.v2.IAnnotateTextRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('annotateText response %j', response);
+          this._log.debug('annotateText response %j', response);
           return [response, options, rawResponse];
         },
       )

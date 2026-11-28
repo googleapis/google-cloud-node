@@ -43,8 +43,9 @@
           "retry_params_name": "default"
         },
         "GetAuditSchedule": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "2607cc7256ff9acb2ee9b232c5722dbbaab18846"
         },
         "ListAuditSchedules": {
           "timeout_millis": 60000,

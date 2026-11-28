@@ -513,7 +513,7 @@ export class CompletionClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('completeQuery request %j', request);
+    this._log.debug('completeQuery request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.talent.v4beta1.ICompleteQueryResponse,
@@ -524,7 +524,7 @@ export class CompletionClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('completeQuery response %j', response);
+          this._log.debug('completeQuery response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -536,7 +536,7 @@ export class CompletionClient {
           protos.google.cloud.talent.v4beta1.ICompleteQueryRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('completeQuery response %j', response);
+          this._log.debug('completeQuery response %j', response);
           return [response, options, rawResponse];
         },
       )

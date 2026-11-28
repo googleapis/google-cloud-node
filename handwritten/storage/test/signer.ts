@@ -31,7 +31,7 @@ import {
 import {encodeURI, formatAsUTCISO, qsStringify} from '../src/util.js';
 import {ExceptionMessages, Storage} from '../src/storage.js';
 import {OutgoingHttpHeaders} from 'http';
-import {GoogleAuth} from 'google-auth-library';
+import {Compute, DEFAULT_UNIVERSE, GoogleAuth} from 'google-auth-library';
 
 interface SignedUrlArgs {
   bucket: string;
@@ -58,10 +58,8 @@ describe('signer', () => {
     let file: FileI;
 
     const NOW = new Date('2019-03-18T00:00:00.999Z');
-    let fakeTimers: sinon.SinonFakeTimers;
 
-    beforeEach(() => (fakeTimers = sinon.useFakeTimers(NOW)));
-    afterEach(() => fakeTimers.restore());
+    beforeEach(() => sandbox.useFakeTimers(NOW));
 
     beforeEach(() => {
       authClient = {
@@ -106,6 +104,50 @@ describe('signer', () => {
         };
       });
 
+      describe('universe domain', () => {
+        const OTHER_UNIVERSE = 'example-universe.test';
+        let auth: GoogleAuth;
+        let sign: sinon.SinonStub;
+        let lookup: sinon.SinonStub;
+
+        beforeEach(() => {
+          auth = new GoogleAuth({authClient: new Compute()});
+          sign = sandbox.stub(auth, 'sign').resolves('signature');
+          (sandbox.stub(auth, 'getCredentials') as sinon.SinonStub).resolves({
+            client_email: CLIENT_EMAIL,
+          });
+          lookup = sandbox.stub(
+            GoogleAuth.prototype,
+            'getUniverseDomainFromMetadataServer',
+          );
+          storage.universeDomain = OTHER_UNIVERSE;
+          signer = new URLSigner(auth, bucket, file, storage);
+        });
+
+        for (const version of ['v2', 'v4'] as const) {
+          it(`should sign ${version} URLs with the IAM endpoint of the configured universe domain`, async () => {
+            lookup.resolves(OTHER_UNIVERSE);
+
+            await signer.getSignedUrl({...CONFIG, version});
+
+            assert.strictEqual(
+              sign.firstCall.args[1],
+              `https://iamcredentials.${OTHER_UNIVERSE}/v1/projects/-/serviceAccounts/`,
+            );
+          });
+
+          it(`should not sign ${version} URLs with credentials of another universe domain`, async () => {
+            lookup.resolves(DEFAULT_UNIVERSE);
+
+            await assert.rejects(
+              signer.getSignedUrl({...CONFIG, version}),
+              /does not match the universe domain found in the credentials/,
+            );
+            assert.strictEqual(sign.called, false);
+          });
+        }
+      });
+
       describe('version', () => {
         it('should default to v2 if version is not given', async () => {
           const v2 = sandbox
@@ -141,7 +183,7 @@ describe('signer', () => {
           assert.strictEqual(v2arg.contentType, CONFIG.contentType);
           assert.deepStrictEqual(
             v2arg.extensionHeaders,
-            CONFIG.extensionHeaders
+            CONFIG.extensionHeaders,
           );
         });
 
@@ -169,7 +211,7 @@ describe('signer', () => {
           assert.strictEqual(v4arg.contentType, CONFIG.contentType);
           assert.deepStrictEqual(
             v4arg.extensionHeaders,
-            CONFIG.extensionHeaders
+            CONFIG.extensionHeaders,
           );
         });
 
@@ -179,7 +221,7 @@ describe('signer', () => {
 
           assert.throws(
             () => signer.getSignedUrl(CONFIG),
-            /Invalid signed URL version: v42\. Supported versions are 'v2' and 'v4'\./
+            /Invalid signed URL version: v42\. Supported versions are 'v2' and 'v4'\./,
           );
         });
       });
@@ -219,7 +261,7 @@ describe('signer', () => {
             {
               message:
                 SignerExceptionMessages.EXPIRATION_BEFORE_ACCESSIBLE_DATE,
-            }
+            },
           );
         });
 
@@ -293,7 +335,7 @@ describe('signer', () => {
 
           assert(
             (v2.getCall(0).args[0] as SignedUrlArgs).expiration,
-            expiresInSeconds
+            expiresInSeconds,
           );
         });
       });
@@ -384,8 +426,8 @@ describe('signer', () => {
               qsStringify({
                 ...query,
                 ...CONFIG.queryParams,
-              })
-            )
+              }),
+            ),
           );
         });
       });
@@ -423,8 +465,8 @@ describe('signer', () => {
         const signedUrl = await signer.getSignedUrl(CONFIG);
         assert(
           signedUrl.startsWith(
-            `https://${bucket.name}.storage.googleapis.com/${file.name}`
-          )
+            `https://${bucket.name}.storage.googleapis.com/${file.name}`,
+          ),
         );
       });
 
@@ -551,7 +593,7 @@ describe('signer', () => {
               '',
               CONFIG.expiration,
               'canonical-headers' + '/resource/path',
-            ].join('\n')
+            ].join('\n'),
           );
         });
       });
@@ -601,7 +643,7 @@ describe('signer', () => {
           },
           {
             message: `Max allowed expiration is seven days (${SEVEN_DAYS} seconds).`,
-          }
+          },
         );
       });
 
@@ -622,10 +664,10 @@ describe('signer', () => {
             assert(err instanceof Error);
             assert.strictEqual(
               err.message,
-              `Max allowed expiration is seven days (${SEVEN_DAYS_IN_SECONDS.toString()} seconds).`
+              `Max allowed expiration is seven days (${SEVEN_DAYS_IN_SECONDS.toString()} seconds).`,
             );
             return true;
-          }
+          },
         );
       });
 
@@ -639,7 +681,7 @@ describe('signer', () => {
           const arg = getCanonicalHeaders.getCall(0).args[0];
           assert.strictEqual(
             arg.host,
-            PATH_STYLED_HOST.replace('https://', '')
+            PATH_STYLED_HOST.replace('https://', ''),
           );
         });
 
@@ -723,8 +765,9 @@ describe('signer', () => {
           };
 
           assert.throws(() => {
-            void signer['getSignedUrlV4'](CONFIG);
-          }, new RegExp(SignerExceptionMessages.X_GOOG_CONTENT_SHA256));
+            void (signer['getSignedUrlV4'](CONFIG),
+            SignerExceptionMessages.X_GOOG_CONTENT_SHA256);
+          });
         });
       });
 
@@ -785,11 +828,11 @@ describe('signer', () => {
 
           assert.strictEqual(
             arg['X-Goog-SignedHeaders'],
-            'host;x-foo;x-goog-acl'
+            'host;x-foo;x-goog-acl',
           );
           assert.strictEqual(
             query['X-Goog-SignedHeaders'],
-            'host;x-foo;x-goog-acl'
+            'host;x-foo;x-goog-acl',
           );
         });
 
@@ -812,11 +855,13 @@ describe('signer', () => {
           'x-goog-content-sha256': '76af7efae0d034d1e3335ed1b90f24b6cadf2bf1',
         };
         CONFIG.file = 'file-name.png';
-        sinon.stub(signer, 'getCanonicalHeaders').returns('canonical-headers');
-        sinon
+        sandbox
+          .stub(signer, 'getCanonicalHeaders')
+          .returns('canonical-headers');
+        sandbox
           .stub(signer, 'getCanonicalQueryParams')
           .returns('canonical-query');
-        const getCanonicalRequest = sinon.spy(signer, 'getCanonicalRequest');
+        const getCanonicalRequest = sandbox.spy(signer, 'getCanonicalRequest');
 
         await signer['getSignedUrlV4'](CONFIG);
         const args = getCanonicalRequest.getCall(0).args;
@@ -830,8 +875,10 @@ describe('signer', () => {
       });
 
       it('should compute SHA256 digest in hex on canonical request', async () => {
-        sinon.stub(signer, 'getCanonicalRequest').returns('canonical-request');
-        const authClientSign = sinon
+        sandbox
+          .stub(signer, 'getCanonicalRequest')
+          .returns('canonical-request');
+        const authClientSign = sandbox
           .stub(authClient, 'sign')
           .resolves('signature');
 
@@ -849,8 +896,10 @@ describe('signer', () => {
       it('should sign using the `signingEndpoint` when provided', async () => {
         const signingEndpoint = 'https://my-endpoint.com';
 
-        sinon.stub(signer, 'getCanonicalRequest').returns('canonical-request');
-        const authClientSign = sinon
+        sandbox
+          .stub(signer, 'getCanonicalRequest')
+          .returns('canonical-request');
+        const authClientSign = sandbox
           .stub(authClient, 'sign')
           .resolves('signature');
 
@@ -870,7 +919,7 @@ describe('signer', () => {
         const credentialScope = `${datestamp}/auto/storage/goog4_request`;
         const dateISO = formatAsUTCISO(NOW, true);
 
-        const authClientSign = sinon
+        const authClientSign = sandbox
           .stub(authClient, 'sign')
           .resolves('signature');
 
@@ -879,15 +928,15 @@ describe('signer', () => {
 
         assert(
           blobToSign.startsWith(
-            ['GOOG4-RSA-SHA256', dateISO, credentialScope].join('\n')
-          )
+            ['GOOG4-RSA-SHA256', dateISO, credentialScope].join('\n'),
+          ),
         );
       });
 
       it('rejects with SigningError on signing Error', async () => {
         const err = new Error('my-err');
         err.stack = 'some-stack-trace';
-        sinon.stub(authClient, 'sign').rejects(err);
+        sandbox.stub(authClient, 'sign').rejects(err);
 
         await assert.rejects(() => signer['getSignedUrlV4'](CONFIG), {
           name: 'SigningError',
@@ -903,7 +952,7 @@ describe('signer', () => {
 
         const query = (await signer['getSignedUrlV4'](CONFIG)) as Query;
         const signatureInHex = Buffer.from('signature', 'base64').toString(
-          'hex'
+          'hex',
         );
         assert.strictEqual(query['X-Goog-Signature'], signatureInHex);
       });
@@ -977,7 +1026,7 @@ describe('signer', () => {
           'query',
           'headers',
           'signedHeaders',
-          SHA
+          SHA,
         );
 
         const EXPECTED = [

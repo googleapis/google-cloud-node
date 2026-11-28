@@ -628,7 +628,7 @@ export class AttachedClustersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAttachedCluster request %j', request);
+    this._log.debug('getAttachedCluster request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.gkemulticloud.v1.IAttachedCluster,
@@ -639,7 +639,7 @@ export class AttachedClustersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAttachedCluster response %j', response);
+          this._log.debug('getAttachedCluster response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -654,7 +654,7 @@ export class AttachedClustersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAttachedCluster response %j', response);
+          this._log.debug('getAttachedCluster response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -780,7 +780,7 @@ export class AttachedClustersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAttachedServerConfig request %j', request);
+    this._log.debug('getAttachedServerConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.gkemulticloud.v1.IAttachedServerConfig,
@@ -791,7 +791,7 @@ export class AttachedClustersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAttachedServerConfig response %j', response);
+          this._log.debug('getAttachedServerConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -806,7 +806,7 @@ export class AttachedClustersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAttachedServerConfig response %j', response);
+          this._log.debug('getAttachedServerConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -954,7 +954,7 @@ export class AttachedClustersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'generateAttachedClusterInstallManifest request %j',
       request,
     );
@@ -968,7 +968,7 @@ export class AttachedClustersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'generateAttachedClusterInstallManifest response %j',
             response,
           );
@@ -986,7 +986,7 @@ export class AttachedClustersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'generateAttachedClusterInstallManifest response %j',
             response,
           );
@@ -1122,7 +1122,7 @@ export class AttachedClustersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateAttachedClusterAgentToken request %j', request);
+    this._log.debug('generateAttachedClusterAgentToken request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.gkemulticloud.v1.IGenerateAttachedClusterAgentTokenResponse,
@@ -1133,7 +1133,7 @@ export class AttachedClustersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'generateAttachedClusterAgentToken response %j',
             response,
           );
@@ -1151,7 +1151,7 @@ export class AttachedClustersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'generateAttachedClusterAgentToken response %j',
             response,
           );
@@ -1317,11 +1317,11 @@ export class AttachedClustersClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createAttachedCluster response %j', rawResponse);
+          this._log.debug('createAttachedCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createAttachedCluster request %j', request);
+    this._log.debug('createAttachedCluster request %j', request);
     return this.innerApiCalls
       .createAttachedCluster(request, options, wrappedCallback)
       ?.then(
@@ -1333,7 +1333,7 @@ export class AttachedClustersClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createAttachedCluster response %j', rawResponse);
+          this._log.debug('createAttachedCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1509,11 +1509,11 @@ export class AttachedClustersClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateAttachedCluster response %j', rawResponse);
+          this._log.debug('updateAttachedCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateAttachedCluster request %j', request);
+    this._log.debug('updateAttachedCluster request %j', request);
     return this.innerApiCalls
       .updateAttachedCluster(request, options, wrappedCallback)
       ?.then(
@@ -1525,7 +1525,7 @@ export class AttachedClustersClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateAttachedCluster response %j', rawResponse);
+          this._log.debug('updateAttachedCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1710,11 +1710,11 @@ export class AttachedClustersClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('importAttachedCluster response %j', rawResponse);
+          this._log.debug('importAttachedCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('importAttachedCluster request %j', request);
+    this._log.debug('importAttachedCluster request %j', request);
     return this.innerApiCalls
       .importAttachedCluster(request, options, wrappedCallback)
       ?.then(
@@ -1726,7 +1726,7 @@ export class AttachedClustersClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('importAttachedCluster response %j', rawResponse);
+          this._log.debug('importAttachedCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1914,11 +1914,11 @@ export class AttachedClustersClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteAttachedCluster response %j', rawResponse);
+          this._log.debug('deleteAttachedCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteAttachedCluster request %j', request);
+    this._log.debug('deleteAttachedCluster request %j', request);
     return this.innerApiCalls
       .deleteAttachedCluster(request, options, wrappedCallback)
       ?.then(
@@ -1930,7 +1930,7 @@ export class AttachedClustersClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteAttachedCluster response %j', rawResponse);
+          this._log.debug('deleteAttachedCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2092,11 +2092,11 @@ export class AttachedClustersClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAttachedClusters values %j', values);
+          this._log.debug('listAttachedClusters values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAttachedClusters request %j', request);
+    this._log.debug('listAttachedClusters request %j', request);
     return this.innerApiCalls
       .listAttachedClusters(request, options, wrappedCallback)
       ?.then(
@@ -2105,7 +2105,7 @@ export class AttachedClustersClient {
           protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest | null,
           protos.google.cloud.gkemulticloud.v1.IListAttachedClustersResponse,
         ]) => {
-          this._log.info('listAttachedClusters values %j', response);
+          this._log.debug('listAttachedClusters values %j', response);
           return [response, input, output];
         },
       );
@@ -2163,7 +2163,7 @@ export class AttachedClustersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAttachedClusters stream %j', request);
+    this._log.debug('listAttachedClusters stream %j', request);
     return this.descriptors.page.listAttachedClusters.createStream(
       this.innerApiCalls.listAttachedClusters as GaxCall,
       request,
@@ -2226,7 +2226,7 @@ export class AttachedClustersClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAttachedClusters iterate %j', request);
+    this._log.debug('listAttachedClusters iterate %j', request);
     return this.descriptors.page.listAttachedClusters.asyncIterate(
       this.innerApiCalls['listAttachedClusters'] as GaxCall,
       request as {},

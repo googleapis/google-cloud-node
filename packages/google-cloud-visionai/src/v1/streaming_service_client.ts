@@ -569,7 +569,7 @@ export class StreamingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('acquireLease request %j', request);
+    this._log.debug('acquireLease request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.visionai.v1.ILease,
@@ -580,7 +580,7 @@ export class StreamingServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('acquireLease response %j', response);
+          this._log.debug('acquireLease response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -592,7 +592,7 @@ export class StreamingServiceClient {
           protos.google.cloud.visionai.v1.IAcquireLeaseRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('acquireLease response %j', response);
+          this._log.debug('acquireLease response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -701,7 +701,7 @@ export class StreamingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('renewLease request %j', request);
+    this._log.debug('renewLease request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.visionai.v1.ILease,
@@ -710,7 +710,7 @@ export class StreamingServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('renewLease response %j', response);
+          this._log.debug('renewLease response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -722,7 +722,7 @@ export class StreamingServiceClient {
           protos.google.cloud.visionai.v1.IRenewLeaseRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('renewLease response %j', response);
+          this._log.debug('renewLease response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -831,7 +831,7 @@ export class StreamingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('releaseLease request %j', request);
+    this._log.debug('releaseLease request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.visionai.v1.IReleaseLeaseResponse,
@@ -842,7 +842,7 @@ export class StreamingServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('releaseLease response %j', response);
+          this._log.debug('releaseLease response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -854,7 +854,7 @@ export class StreamingServiceClient {
           protos.google.cloud.visionai.v1.IReleaseLeaseRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('releaseLease response %j', response);
+          this._log.debug('releaseLease response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -894,7 +894,7 @@ export class StreamingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('sendPackets stream %j', options);
+    this._log.debug('sendPackets stream %j', options);
     return this.innerApiCalls.sendPackets(null, options);
   }
 
@@ -916,7 +916,7 @@ export class StreamingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('receivePackets stream %j', options);
+    this._log.debug('receivePackets stream %j', options);
     return this.innerApiCalls.receivePackets(null, options);
   }
 
@@ -938,7 +938,7 @@ export class StreamingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('receiveEvents stream %j', options);
+    this._log.debug('receiveEvents stream %j', options);
     return this.innerApiCalls.receiveEvents(null, options);
   }
 

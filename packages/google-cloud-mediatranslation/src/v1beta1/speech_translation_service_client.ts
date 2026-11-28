@@ -402,7 +402,7 @@ export class SpeechTranslationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('streamingTranslateSpeech stream %j', options);
+    this._log.debug('streamingTranslateSpeech stream %j', options);
     return this.innerApiCalls.streamingTranslateSpeech(null, options);
   }
 

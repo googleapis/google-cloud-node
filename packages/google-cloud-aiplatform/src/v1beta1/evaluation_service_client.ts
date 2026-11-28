@@ -2699,7 +2699,7 @@ export class EvaluationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('evaluateInstances request %j', request);
+    this._log.debug('evaluateInstances request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IEvaluateInstancesResponse,
@@ -2710,7 +2710,7 @@ export class EvaluationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('evaluateInstances response %j', response);
+          this._log.debug('evaluateInstances response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2725,7 +2725,7 @@ export class EvaluationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('evaluateInstances response %j', response);
+          this._log.debug('evaluateInstances response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2863,7 +2863,7 @@ export class EvaluationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateInstanceRubrics request %j', request);
+    this._log.debug('generateInstanceRubrics request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IGenerateInstanceRubricsResponse,
@@ -2874,7 +2874,7 @@ export class EvaluationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateInstanceRubrics response %j', response);
+          this._log.debug('generateInstanceRubrics response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2889,7 +2889,7 @@ export class EvaluationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('generateInstanceRubrics response %j', response);
+          this._log.debug('generateInstanceRubrics response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3035,11 +3035,11 @@ export class EvaluationServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('evaluateDataset response %j', rawResponse);
+          this._log.debug('evaluateDataset response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('evaluateDataset request %j', request);
+    this._log.debug('evaluateDataset request %j', request);
     return this.innerApiCalls
       .evaluateDataset(request, options, wrappedCallback)
       ?.then(
@@ -3051,7 +3051,7 @@ export class EvaluationServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('evaluateDataset response %j', rawResponse);
+          this._log.debug('evaluateDataset response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

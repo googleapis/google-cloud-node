@@ -669,7 +669,7 @@ export class ReachabilityServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getConnectivityTest request %j', request);
+    this._log.debug('getConnectivityTest request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
@@ -680,7 +680,7 @@ export class ReachabilityServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getConnectivityTest response %j', response);
+          this._log.debug('getConnectivityTest response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -695,7 +695,7 @@ export class ReachabilityServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getConnectivityTest response %j', response);
+          this._log.debug('getConnectivityTest response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -854,11 +854,11 @@ export class ReachabilityServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createConnectivityTest response %j', rawResponse);
+          this._log.debug('createConnectivityTest response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createConnectivityTest request %j', request);
+    this._log.debug('createConnectivityTest request %j', request);
     return this.innerApiCalls
       .createConnectivityTest(request, options, wrappedCallback)
       ?.then(
@@ -870,7 +870,7 @@ export class ReachabilityServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createConnectivityTest response %j', rawResponse);
+          this._log.debug('createConnectivityTest response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1039,11 +1039,11 @@ export class ReachabilityServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateConnectivityTest response %j', rawResponse);
+          this._log.debug('updateConnectivityTest response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateConnectivityTest request %j', request);
+    this._log.debug('updateConnectivityTest request %j', request);
     return this.innerApiCalls
       .updateConnectivityTest(request, options, wrappedCallback)
       ?.then(
@@ -1055,7 +1055,7 @@ export class ReachabilityServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateConnectivityTest response %j', rawResponse);
+          this._log.debug('updateConnectivityTest response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1220,11 +1220,11 @@ export class ReachabilityServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('rerunConnectivityTest response %j', rawResponse);
+          this._log.debug('rerunConnectivityTest response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('rerunConnectivityTest request %j', request);
+    this._log.debug('rerunConnectivityTest request %j', request);
     return this.innerApiCalls
       .rerunConnectivityTest(request, options, wrappedCallback)
       ?.then(
@@ -1236,7 +1236,7 @@ export class ReachabilityServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('rerunConnectivityTest response %j', rawResponse);
+          this._log.debug('rerunConnectivityTest response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1390,11 +1390,11 @@ export class ReachabilityServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteConnectivityTest response %j', rawResponse);
+          this._log.debug('deleteConnectivityTest response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteConnectivityTest request %j', request);
+    this._log.debug('deleteConnectivityTest request %j', request);
     return this.innerApiCalls
       .deleteConnectivityTest(request, options, wrappedCallback)
       ?.then(
@@ -1406,7 +1406,7 @@ export class ReachabilityServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteConnectivityTest response %j', rawResponse);
+          this._log.debug('deleteConnectivityTest response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1575,11 +1575,11 @@ export class ReachabilityServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listConnectivityTests values %j', values);
+          this._log.debug('listConnectivityTests values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listConnectivityTests request %j', request);
+    this._log.debug('listConnectivityTests request %j', request);
     return this.innerApiCalls
       .listConnectivityTests(request, options, wrappedCallback)
       ?.then(
@@ -1588,7 +1588,7 @@ export class ReachabilityServiceClient {
           protos.google.cloud.networkmanagement.v1beta1.IListConnectivityTestsRequest | null,
           protos.google.cloud.networkmanagement.v1beta1.IListConnectivityTestsResponse,
         ]) => {
-          this._log.info('listConnectivityTests values %j', response);
+          this._log.debug('listConnectivityTests values %j', response);
           return [response, input, output];
         },
       );
@@ -1654,7 +1654,7 @@ export class ReachabilityServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listConnectivityTests stream %j', request);
+    this._log.debug('listConnectivityTests stream %j', request);
     return this.descriptors.page.listConnectivityTests.createStream(
       this.innerApiCalls.listConnectivityTests as GaxCall,
       request,
@@ -1725,7 +1725,7 @@ export class ReachabilityServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listConnectivityTests iterate %j', request);
+    this._log.debug('listConnectivityTests iterate %j', request);
     return this.descriptors.page.listConnectivityTests.asyncIterate(
       this.innerApiCalls['listConnectivityTests'] as GaxCall,
       request as {},

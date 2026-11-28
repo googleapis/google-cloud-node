@@ -584,7 +584,7 @@ export class ChangelogsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getChangelog request %j', request);
+    this._log.debug('getChangelog request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.cx.v3beta1.IChangelog,
@@ -595,7 +595,7 @@ export class ChangelogsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getChangelog response %j', response);
+          this._log.debug('getChangelog response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -610,7 +610,7 @@ export class ChangelogsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getChangelog response %j', response);
+          this._log.debug('getChangelog response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -762,11 +762,11 @@ export class ChangelogsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listChangelogs values %j', values);
+          this._log.debug('listChangelogs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listChangelogs request %j', request);
+    this._log.debug('listChangelogs request %j', request);
     return this.innerApiCalls
       .listChangelogs(request, options, wrappedCallback)
       ?.then(
@@ -775,7 +775,7 @@ export class ChangelogsClient {
           protos.google.cloud.dialogflow.cx.v3beta1.IListChangelogsRequest | null,
           protos.google.cloud.dialogflow.cx.v3beta1.IListChangelogsResponse,
         ]) => {
-          this._log.info('listChangelogs values %j', response);
+          this._log.debug('listChangelogs values %j', response);
           return [response, input, output];
         },
       );
@@ -842,7 +842,7 @@ export class ChangelogsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listChangelogs stream %j', request);
+    this._log.debug('listChangelogs stream %j', request);
     return this.descriptors.page.listChangelogs.createStream(
       this.innerApiCalls.listChangelogs as GaxCall,
       request,
@@ -914,7 +914,7 @@ export class ChangelogsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listChangelogs iterate %j', request);
+    this._log.debug('listChangelogs iterate %j', request);
     return this.descriptors.page.listChangelogs.asyncIterate(
       this.innerApiCalls['listChangelogs'] as GaxCall,
       request as {},

@@ -371,7 +371,10 @@ export class BuildsClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/run',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -415,8 +418,8 @@ export class BuildsClient {
    *   Optional. The service account to use for the build. If not set, the default
    *   Cloud Build service account for the project will be used.
    * @param {string} [request.workerPool]
-   *   Optional. Name of the Cloud Build Custom Worker Pool that should be used to
-   *   build the function. The format of this field is
+   *   Optional. Name of the Cloud Build private pool that should be used to build
+   *   the function. The format of this field is
    *   `projects/{project}/locations/{region}/workerPools/{workerPool}` where
    *   `{project}` and `{region}` are the project id and region respectively where
    *   the worker pool is defined and `{workerPool}` is the short name of the
@@ -506,7 +509,7 @@ export class BuildsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('submitBuild request %j', request);
+    this._log.debug('submitBuild request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.run.v2.ISubmitBuildResponse,
@@ -515,7 +518,7 @@ export class BuildsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('submitBuild response %j', response);
+          this._log.debug('submitBuild response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -527,7 +530,7 @@ export class BuildsClient {
           protos.google.cloud.run.v2.ISubmitBuildRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('submitBuild response %j', response);
+          this._log.debug('submitBuild response %j', response);
           return [response, options, rawResponse];
         },
       )

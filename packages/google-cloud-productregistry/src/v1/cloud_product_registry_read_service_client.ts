@@ -505,7 +505,7 @@ export class CloudProductRegistryReadServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getProductSuite request %j', request);
+    this._log.debug('getProductSuite request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.productregistry.v1.IProductSuite,
@@ -516,7 +516,7 @@ export class CloudProductRegistryReadServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getProductSuite response %j', response);
+          this._log.debug('getProductSuite response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -531,7 +531,7 @@ export class CloudProductRegistryReadServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getProductSuite response %j', response);
+          this._log.debug('getProductSuite response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -649,7 +649,7 @@ export class CloudProductRegistryReadServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getLogicalProduct request %j', request);
+    this._log.debug('getLogicalProduct request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.productregistry.v1.ILogicalProduct,
@@ -660,7 +660,7 @@ export class CloudProductRegistryReadServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getLogicalProduct response %j', response);
+          this._log.debug('getLogicalProduct response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -675,7 +675,7 @@ export class CloudProductRegistryReadServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getLogicalProduct response %j', response);
+          this._log.debug('getLogicalProduct response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -793,7 +793,7 @@ export class CloudProductRegistryReadServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getLogicalProductVariant request %j', request);
+    this._log.debug('getLogicalProductVariant request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.productregistry.v1.ILogicalProductVariant,
@@ -804,7 +804,7 @@ export class CloudProductRegistryReadServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getLogicalProductVariant response %j', response);
+          this._log.debug('getLogicalProductVariant response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -819,7 +819,7 @@ export class CloudProductRegistryReadServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getLogicalProductVariant response %j', response);
+          this._log.debug('getLogicalProductVariant response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -934,7 +934,7 @@ export class CloudProductRegistryReadServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('lookupEntity request %j', request);
+    this._log.debug('lookupEntity request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.productregistry.v1.ILookupEntityResponse,
@@ -945,7 +945,7 @@ export class CloudProductRegistryReadServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('lookupEntity response %j', response);
+          this._log.debug('lookupEntity response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -960,7 +960,7 @@ export class CloudProductRegistryReadServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('lookupEntity response %j', response);
+          this._log.debug('lookupEntity response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1089,11 +1089,11 @@ export class CloudProductRegistryReadServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listProductSuites values %j', values);
+          this._log.debug('listProductSuites values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listProductSuites request %j', request);
+    this._log.debug('listProductSuites request %j', request);
     return this.innerApiCalls
       .listProductSuites(request, options, wrappedCallback)
       ?.then(
@@ -1102,7 +1102,7 @@ export class CloudProductRegistryReadServiceClient {
           protos.google.cloud.productregistry.v1.IListProductSuitesRequest | null,
           protos.google.cloud.productregistry.v1.IListProductSuitesResponse,
         ]) => {
-          this._log.info('listProductSuites values %j', response);
+          this._log.debug('listProductSuites values %j', response);
           return [response, input, output];
         },
       );
@@ -1146,7 +1146,7 @@ export class CloudProductRegistryReadServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listProductSuites stream %j', request);
+    this._log.debug('listProductSuites stream %j', request);
     return this.descriptors.page.listProductSuites.createStream(
       this.innerApiCalls.listProductSuites as GaxCall,
       request,
@@ -1195,7 +1195,7 @@ export class CloudProductRegistryReadServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listProductSuites iterate %j', request);
+    this._log.debug('listProductSuites iterate %j', request);
     return this.descriptors.page.listProductSuites.asyncIterate(
       this.innerApiCalls['listProductSuites'] as GaxCall,
       request as {},
@@ -1314,11 +1314,11 @@ export class CloudProductRegistryReadServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listLogicalProducts values %j', values);
+          this._log.debug('listLogicalProducts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listLogicalProducts request %j', request);
+    this._log.debug('listLogicalProducts request %j', request);
     return this.innerApiCalls
       .listLogicalProducts(request, options, wrappedCallback)
       ?.then(
@@ -1327,7 +1327,7 @@ export class CloudProductRegistryReadServiceClient {
           protos.google.cloud.productregistry.v1.IListLogicalProductsRequest | null,
           protos.google.cloud.productregistry.v1.IListLogicalProductsResponse,
         ]) => {
-          this._log.info('listLogicalProducts values %j', response);
+          this._log.debug('listLogicalProducts values %j', response);
           return [response, input, output];
         },
       );
@@ -1376,7 +1376,7 @@ export class CloudProductRegistryReadServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLogicalProducts stream %j', request);
+    this._log.debug('listLogicalProducts stream %j', request);
     return this.descriptors.page.listLogicalProducts.createStream(
       this.innerApiCalls.listLogicalProducts as GaxCall,
       request,
@@ -1430,7 +1430,7 @@ export class CloudProductRegistryReadServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLogicalProducts iterate %j', request);
+    this._log.debug('listLogicalProducts iterate %j', request);
     return this.descriptors.page.listLogicalProducts.asyncIterate(
       this.innerApiCalls['listLogicalProducts'] as GaxCall,
       request as {},
@@ -1554,11 +1554,11 @@ export class CloudProductRegistryReadServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listLogicalProductVariants values %j', values);
+          this._log.debug('listLogicalProductVariants values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listLogicalProductVariants request %j', request);
+    this._log.debug('listLogicalProductVariants request %j', request);
     return this.innerApiCalls
       .listLogicalProductVariants(request, options, wrappedCallback)
       ?.then(
@@ -1567,7 +1567,7 @@ export class CloudProductRegistryReadServiceClient {
           protos.google.cloud.productregistry.v1.IListLogicalProductVariantsRequest | null,
           protos.google.cloud.productregistry.v1.IListLogicalProductVariantsResponse,
         ]) => {
-          this._log.info('listLogicalProductVariants values %j', response);
+          this._log.debug('listLogicalProductVariants values %j', response);
           return [response, input, output];
         },
       );
@@ -1621,7 +1621,7 @@ export class CloudProductRegistryReadServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLogicalProductVariants stream %j', request);
+    this._log.debug('listLogicalProductVariants stream %j', request);
     return this.descriptors.page.listLogicalProductVariants.createStream(
       this.innerApiCalls.listLogicalProductVariants as GaxCall,
       request,
@@ -1680,7 +1680,7 @@ export class CloudProductRegistryReadServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLogicalProductVariants iterate %j', request);
+    this._log.debug('listLogicalProductVariants iterate %j', request);
     return this.descriptors.page.listLogicalProductVariants.asyncIterate(
       this.innerApiCalls['listLogicalProductVariants'] as GaxCall,
       request as {},

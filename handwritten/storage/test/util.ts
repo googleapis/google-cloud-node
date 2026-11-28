@@ -15,6 +15,16 @@
 import assert from 'assert';
 import {describe, it, before, after, beforeEach, afterEach} from 'mocha';
 import Module from 'module';
+import * as sinon from 'sinon';
+import {
+  Compute,
+  DEFAULT_UNIVERSE,
+  GoogleAuth,
+  JWTInput,
+  OAuth2Client,
+  PassThroughClient,
+} from 'google-auth-library';
+import {assertUniverseDomain, signBlob} from '../src/util.js';
 
 const utilPath = require.resolve('../src/util.js');
 
@@ -82,7 +92,7 @@ describe('util lazy imports', () => {
         assert.strictEqual(mime.getType('archive.zip'), 'application/zip');
         assert.strictEqual(
           mime.getType('unknown.nonexistentextension123'),
-          null
+          null,
         );
       });
     });
@@ -94,7 +104,7 @@ describe('util lazy imports', () => {
 
         Module.prototype.require = Object.assign(function (
           this: NodeModule,
-          request: string
+          request: string,
         ) {
           if (request === 'mime' && shouldFail) {
             throw new Error('Simulated mime import failure');
@@ -108,7 +118,7 @@ describe('util lazy imports', () => {
           },
           {
             message: 'Simulated mime import failure',
-          }
+          },
         );
 
         // Verify recovery: after error is resolved, next call creates a new promise and succeeds
@@ -120,7 +130,7 @@ describe('util lazy imports', () => {
         assert.strictEqual(typeof mimeRecovered.getType, 'function');
         assert.strictEqual(
           mimeRecovered.getType('test.json'),
-          'application/json'
+          'application/json',
         );
 
         // Subsequent call should now cache and return the recovered promise
@@ -193,7 +203,7 @@ describe('util lazy imports', () => {
 
         Module.prototype.require = Object.assign(function (
           this: NodeModule,
-          request: string
+          request: string,
         ) {
           if (request === 'p-limit' && shouldFail) {
             throw new Error('Simulated p-limit import failure');
@@ -207,7 +217,7 @@ describe('util lazy imports', () => {
           },
           {
             message: 'Simulated p-limit import failure',
-          }
+          },
         );
 
         // Verify recovery: after error is resolved, next call creates a new promise and succeeds
@@ -225,6 +235,308 @@ describe('util lazy imports', () => {
         // Subsequent call should now cache and return the recovered promise
         assert.strictEqual(util.getPLimit(), pRecovered);
       });
+    });
+  });
+});
+
+describe('universe domain', () => {
+  const OTHER_UNIVERSE = 'example-universe.test';
+  const MISMATCH =
+    /does not match the universe domain found in the credentials/;
+  let sandbox: sinon.SinonSandbox;
+
+  function serviceAccount(universeDomain?: string): JWTInput {
+    return {
+      type: 'service_account',
+      client_email: 'test@example.iam.gserviceaccount.com',
+      private_key: 'not-a-real-key',
+      ...(universeDomain ? {universe_domain: universeDomain} : {}),
+    };
+  }
+
+  function authFor(credentials: object) {
+    return new GoogleAuth({credentials: credentials as JWTInput});
+  }
+
+  beforeEach(() => {
+    sandbox = sinon.createSandbox();
+  });
+
+  afterEach(() => {
+    sandbox.restore();
+  });
+
+  describe('assertUniverseDomain', () => {
+    it('should accept credentials of the configured universe domain', async () => {
+      await assertUniverseDomain(
+        authFor(serviceAccount(OTHER_UNIVERSE)),
+        OTHER_UNIVERSE,
+      );
+      await assertUniverseDomain(
+        authFor(serviceAccount(DEFAULT_UNIVERSE)),
+        DEFAULT_UNIVERSE,
+      );
+    });
+
+    it('should reject credentials of another universe domain', async () => {
+      await assert.rejects(
+        assertUniverseDomain(
+          authFor(serviceAccount(OTHER_UNIVERSE)),
+          DEFAULT_UNIVERSE,
+        ),
+        MISMATCH,
+      );
+      await assert.rejects(
+        assertUniverseDomain(
+          authFor(serviceAccount(DEFAULT_UNIVERSE)),
+          OTHER_UNIVERSE,
+        ),
+        MISMATCH,
+      );
+    });
+
+    it('should treat a credential file without a universe domain as the default one', async () => {
+      await assertUniverseDomain(authFor(serviceAccount()), DEFAULT_UNIVERSE);
+      await assert.rejects(
+        assertUniverseDomain(authFor(serviceAccount()), OTHER_UNIVERSE),
+        MISMATCH,
+      );
+    });
+
+    it('should use the source credentials of an impersonation file', async () => {
+      const file = {
+        type: 'impersonated_service_account',
+        service_account_impersonation_url: `https://iamcredentials.${OTHER_UNIVERSE}/v1/projects/-/serviceAccounts/target@example.iam.gserviceaccount.com:generateAccessToken`,
+        source_credentials: serviceAccount(OTHER_UNIVERSE),
+      };
+
+      await assertUniverseDomain(authFor(file), OTHER_UNIVERSE);
+      await assert.rejects(
+        assertUniverseDomain(authFor(file), DEFAULT_UNIVERSE),
+        MISMATCH,
+      );
+    });
+
+    it('should read a universe domain named in camel case', async () => {
+      const credentials = {
+        type: 'external_account',
+        audience:
+          '//iam.googleapis.com/projects/1/locations/global/workloadIdentityPools/pool/providers/provider',
+        subject_token_type: 'urn:ietf:params:oauth:token-type:jwt',
+        token_url: `https://sts.${OTHER_UNIVERSE}/v1/token`,
+        credential_source: {file: '/path/to/token'},
+        universeDomain: OTHER_UNIVERSE,
+      };
+
+      await assertUniverseDomain(authFor(credentials), OTHER_UNIVERSE);
+      await assert.rejects(
+        assertUniverseDomain(authFor(credentials), DEFAULT_UNIVERSE),
+        MISMATCH,
+      );
+    });
+
+    it('should use the universe domain reported by the auth client', async () => {
+      const auth = new GoogleAuth({
+        authClient: new OAuth2Client({universeDomain: OTHER_UNIVERSE}),
+      });
+
+      await assertUniverseDomain(auth, OTHER_UNIVERSE);
+      await assert.rejects(
+        assertUniverseDomain(auth, DEFAULT_UNIVERSE),
+        MISMATCH,
+      );
+    });
+
+    it('should use the universe domain of the client, not the one given to its auth object', async () => {
+      const auth = new GoogleAuth({
+        authClient: new OAuth2Client(),
+        universeDomain: OTHER_UNIVERSE,
+      });
+
+      await assertUniverseDomain(auth, DEFAULT_UNIVERSE);
+      await assert.rejects(
+        assertUniverseDomain(auth, OTHER_UNIVERSE),
+        MISMATCH,
+      );
+    });
+
+    it('should verify a client used without an auth object', async () => {
+      await assertUniverseDomain(new OAuth2Client(), DEFAULT_UNIVERSE);
+      await assert.rejects(
+        assertUniverseDomain(new OAuth2Client(), OTHER_UNIVERSE),
+        MISMATCH,
+      );
+    });
+
+    it('should verify an auth object held as the client of another one', async () => {
+      const auth = {
+        getClient: async () => authFor(serviceAccount(OTHER_UNIVERSE)),
+      };
+
+      await assertUniverseDomain(auth, OTHER_UNIVERSE);
+      await assert.rejects(
+        assertUniverseDomain(auth, DEFAULT_UNIVERSE),
+        MISMATCH,
+      );
+    });
+
+    it('should accept a custom object that does not report a universe domain', async () => {
+      const client = {request: async () => ({})};
+
+      await assertUniverseDomain(client, OTHER_UNIVERSE);
+      await assertUniverseDomain(
+        {getClient: async () => client},
+        OTHER_UNIVERSE,
+      );
+      await assertUniverseDomain(undefined, OTHER_UNIVERSE);
+    });
+
+    it('should reject a custom object that reports another universe domain', async () => {
+      const client = {
+        request: async () => ({}),
+        universeDomain: OTHER_UNIVERSE,
+      };
+
+      await assert.rejects(
+        assertUniverseDomain(client, DEFAULT_UNIVERSE),
+        MISMATCH,
+      );
+    });
+
+    it('should accept a client that sends no credentials', async () => {
+      const auth = new GoogleAuth({authClient: new PassThroughClient()});
+
+      await assertUniverseDomain(auth, OTHER_UNIVERSE);
+    });
+
+    it('should accept a client that sends no credentials created by another copy of the auth library', async () => {
+      // Has the name of the class, without being an instance of it.
+      const client = new (class PassThroughClient {
+        universeDomain = DEFAULT_UNIVERSE;
+      })();
+
+      await assertUniverseDomain(
+        {getClient: async () => client},
+        OTHER_UNIVERSE,
+      );
+    });
+
+    describe('credentials of a VM', () => {
+      let lookup: sinon.SinonStub;
+
+      beforeEach(() => {
+        lookup = sandbox.stub(
+          GoogleAuth.prototype,
+          'getUniverseDomainFromMetadataServer',
+        );
+      });
+
+      it('should use the universe domain reported by the metadata server', async () => {
+        lookup.resolves(OTHER_UNIVERSE);
+
+        await assertUniverseDomain(
+          new GoogleAuth({authClient: new Compute()}),
+          OTHER_UNIVERSE,
+        );
+        await assert.rejects(
+          assertUniverseDomain(
+            new GoogleAuth({authClient: new Compute()}),
+            DEFAULT_UNIVERSE,
+          ),
+          MISMATCH,
+        );
+      });
+
+      it('should not use the universe domain given to the credentials of the VM', async () => {
+        lookup.resolves(DEFAULT_UNIVERSE);
+        const auth = new GoogleAuth({
+          authClient: new Compute({universeDomain: OTHER_UNIVERSE}),
+          universeDomain: OTHER_UNIVERSE,
+        });
+
+        await assertUniverseDomain(auth, DEFAULT_UNIVERSE);
+        await assert.rejects(
+          assertUniverseDomain(auth, OTHER_UNIVERSE),
+          MISMATCH,
+        );
+      });
+
+      it('should recognise credentials of a VM created by another copy of the auth library', async () => {
+        lookup.resolves(OTHER_UNIVERSE);
+        // Has the name of the class, without being an instance of it.
+        const client = new (class Compute {
+          universeDomain = DEFAULT_UNIVERSE;
+        })();
+        const auth = {getClient: async () => client};
+
+        await assertUniverseDomain(auth, OTHER_UNIVERSE);
+        await assert.rejects(
+          assertUniverseDomain(auth, DEFAULT_UNIVERSE),
+          MISMATCH,
+        );
+      });
+
+      it('should share one read of the universe domain for the same credentials', async () => {
+        lookup.resolves(DEFAULT_UNIVERSE);
+        const auth = new GoogleAuth({authClient: new Compute()});
+
+        await Promise.all([
+          assertUniverseDomain(auth, DEFAULT_UNIVERSE),
+          assertUniverseDomain(auth, DEFAULT_UNIVERSE),
+        ]);
+        await assertUniverseDomain(auth, DEFAULT_UNIVERSE);
+
+        assert.strictEqual(lookup.callCount, 1);
+      });
+
+      it('should reject when the metadata server cannot be read', async () => {
+        lookup.rejects(new Error('unavailable'));
+        const auth = new GoogleAuth({authClient: new Compute()});
+
+        await assert.rejects(
+          assertUniverseDomain(auth, DEFAULT_UNIVERSE),
+          /Unable to read the universe domain from the metadata server: unavailable/,
+        );
+
+        // A failed read is not remembered.
+        lookup.resolves(DEFAULT_UNIVERSE);
+        await assertUniverseDomain(auth, DEFAULT_UNIVERSE);
+      });
+    });
+  });
+
+  describe('signBlob', () => {
+    it('should sign with the IAM endpoint of the configured universe domain', async () => {
+      const auth = authFor(serviceAccount(OTHER_UNIVERSE));
+      const sign = sandbox.stub(auth, 'sign').resolves('signature');
+
+      const signature = await signBlob(auth, OTHER_UNIVERSE, 'data');
+
+      assert.strictEqual(signature, 'signature');
+      assert.deepStrictEqual(sign.firstCall.args, [
+        'data',
+        `https://iamcredentials.${OTHER_UNIVERSE}/v1/projects/-/serviceAccounts/`,
+      ]);
+    });
+
+    it('should sign with a custom endpoint when one is given', async () => {
+      const auth = authFor(serviceAccount());
+      const sign = sandbox.stub(auth, 'sign').resolves('signature');
+
+      await signBlob(auth, DEFAULT_UNIVERSE, 'data', 'https://my-endpoint.com');
+
+      assert.deepStrictEqual(sign.firstCall.args, [
+        'data',
+        'https://my-endpoint.com',
+      ]);
+    });
+
+    it('should not sign with credentials of another universe domain', async () => {
+      const auth = authFor(serviceAccount(OTHER_UNIVERSE));
+      const sign = sandbox.stub(auth, 'sign').resolves('signature');
+
+      await assert.rejects(signBlob(auth, DEFAULT_UNIVERSE, 'data'), MISMATCH);
+      assert.strictEqual(sign.called, false);
     });
   });
 });

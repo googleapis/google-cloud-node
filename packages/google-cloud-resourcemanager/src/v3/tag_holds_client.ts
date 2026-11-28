@@ -579,11 +579,11 @@ export class TagHoldsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createTagHold response %j', rawResponse);
+          this._log.debug('createTagHold response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createTagHold request %j', request);
+    this._log.debug('createTagHold request %j', request);
     return this.innerApiCalls
       .createTagHold(request, options, wrappedCallback)
       ?.then(
@@ -595,7 +595,7 @@ export class TagHoldsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createTagHold response %j', rawResponse);
+          this._log.debug('createTagHold response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -752,11 +752,11 @@ export class TagHoldsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteTagHold response %j', rawResponse);
+          this._log.debug('deleteTagHold response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteTagHold request %j', request);
+    this._log.debug('deleteTagHold request %j', request);
     return this.innerApiCalls
       .deleteTagHold(request, options, wrappedCallback)
       ?.then(
@@ -768,7 +768,7 @@ export class TagHoldsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteTagHold response %j', rawResponse);
+          this._log.debug('deleteTagHold response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -931,11 +931,11 @@ export class TagHoldsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listTagHolds values %j', values);
+          this._log.debug('listTagHolds values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listTagHolds request %j', request);
+    this._log.debug('listTagHolds request %j', request);
     return this.innerApiCalls
       .listTagHolds(request, options, wrappedCallback)
       ?.then(
@@ -944,7 +944,7 @@ export class TagHoldsClient {
           protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest | null,
           protos.google.cloud.resourcemanager.v3.IListTagHoldsResponse,
         ]) => {
-          this._log.info('listTagHolds values %j', response);
+          this._log.debug('listTagHolds values %j', response);
           return [response, input, output];
         },
       );
@@ -1004,7 +1004,7 @@ export class TagHoldsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTagHolds stream %j', request);
+    this._log.debug('listTagHolds stream %j', request);
     return this.descriptors.page.listTagHolds.createStream(
       this.innerApiCalls.listTagHolds as GaxCall,
       request,
@@ -1069,7 +1069,7 @@ export class TagHoldsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTagHolds iterate %j', request);
+    this._log.debug('listTagHolds iterate %j', request);
     return this.descriptors.page.listTagHolds.asyncIterate(
       this.innerApiCalls['listTagHolds'] as GaxCall,
       request as {},

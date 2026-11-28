@@ -934,6 +934,535 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
       await assert.rejects(client.list(request), expectedError);
     });
   });
+
+  describe('updateCustomerManagedCertificate', () => {
+    it('invokes updateCustomerManagedCertificate without error', async () => {
+      const client =
+        new sqlsslcertsserviceModule.v1beta4.SqlSslCertsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.UpdateCustomerManagedCertificateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.UpdateCustomerManagedCertificateRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.UpdateCustomerManagedCertificateRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.UpdateCustomerManagedCertificateRequest',
+        ['certificateBundle'],
+      );
+      request.certificateBundle = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&certificate_bundle=${defaultValue3 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.Operation(),
+      );
+      client.innerApiCalls.updateCustomerManagedCertificate =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateCustomerManagedCertificate(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateCustomerManagedCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomerManagedCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateCustomerManagedCertificate without error using callback', async () => {
+      const client =
+        new sqlsslcertsserviceModule.v1beta4.SqlSslCertsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.UpdateCustomerManagedCertificateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.UpdateCustomerManagedCertificateRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.UpdateCustomerManagedCertificateRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.UpdateCustomerManagedCertificateRequest',
+        ['certificateBundle'],
+      );
+      request.certificateBundle = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&certificate_bundle=${defaultValue3 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.Operation(),
+      );
+      client.innerApiCalls.updateCustomerManagedCertificate =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateCustomerManagedCertificate(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.sql.v1beta4.IOperation | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateCustomerManagedCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomerManagedCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateCustomerManagedCertificate with error', async () => {
+      const client =
+        new sqlsslcertsserviceModule.v1beta4.SqlSslCertsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.UpdateCustomerManagedCertificateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.UpdateCustomerManagedCertificateRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.UpdateCustomerManagedCertificateRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.UpdateCustomerManagedCertificateRequest',
+        ['certificateBundle'],
+      );
+      request.certificateBundle = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&certificate_bundle=${defaultValue3 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateCustomerManagedCertificate = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.updateCustomerManagedCertificate(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateCustomerManagedCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomerManagedCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateCustomerManagedCertificate with closed client', async () => {
+      const client =
+        new sqlsslcertsserviceModule.v1beta4.SqlSslCertsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.UpdateCustomerManagedCertificateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.UpdateCustomerManagedCertificateRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.UpdateCustomerManagedCertificateRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.UpdateCustomerManagedCertificateRequest',
+        ['certificateBundle'],
+      );
+      request.certificateBundle = defaultValue3;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.updateCustomerManagedCertificate(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('deleteCustomerManagedCertificate', () => {
+    it('invokes deleteCustomerManagedCertificate without error', async () => {
+      const client =
+        new sqlsslcertsserviceModule.v1beta4.SqlSslCertsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.DeleteCustomerManagedCertificateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.DeleteCustomerManagedCertificateRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.DeleteCustomerManagedCertificateRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.DeleteCustomerManagedCertificateRequest',
+        ['certificateBundle'],
+      );
+      request.certificateBundle = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&certificate_bundle=${defaultValue3 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.Operation(),
+      );
+      client.innerApiCalls.deleteCustomerManagedCertificate =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteCustomerManagedCertificate(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteCustomerManagedCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCustomerManagedCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteCustomerManagedCertificate without error using callback', async () => {
+      const client =
+        new sqlsslcertsserviceModule.v1beta4.SqlSslCertsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.DeleteCustomerManagedCertificateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.DeleteCustomerManagedCertificateRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.DeleteCustomerManagedCertificateRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.DeleteCustomerManagedCertificateRequest',
+        ['certificateBundle'],
+      );
+      request.certificateBundle = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&certificate_bundle=${defaultValue3 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.Operation(),
+      );
+      client.innerApiCalls.deleteCustomerManagedCertificate =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteCustomerManagedCertificate(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.sql.v1beta4.IOperation | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteCustomerManagedCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCustomerManagedCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteCustomerManagedCertificate with error', async () => {
+      const client =
+        new sqlsslcertsserviceModule.v1beta4.SqlSslCertsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.DeleteCustomerManagedCertificateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.DeleteCustomerManagedCertificateRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.DeleteCustomerManagedCertificateRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.DeleteCustomerManagedCertificateRequest',
+        ['certificateBundle'],
+      );
+      request.certificateBundle = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}&certificate_bundle=${defaultValue3 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteCustomerManagedCertificate = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.deleteCustomerManagedCertificate(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCustomerManagedCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCustomerManagedCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteCustomerManagedCertificate with closed client', async () => {
+      const client =
+        new sqlsslcertsserviceModule.v1beta4.SqlSslCertsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.DeleteCustomerManagedCertificateRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.DeleteCustomerManagedCertificateRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.DeleteCustomerManagedCertificateRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.DeleteCustomerManagedCertificateRequest',
+        ['certificateBundle'],
+      );
+      request.certificateBundle = defaultValue3;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.deleteCustomerManagedCertificate(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('listCustomerManagedCertificates', () => {
+    it('invokes listCustomerManagedCertificates without error', async () => {
+      const client =
+        new sqlsslcertsserviceModule.v1beta4.SqlSslCertsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.ListCustomerManagedCertificatesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.ListCustomerManagedCertificatesRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.ListCustomerManagedCertificatesRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.ListCustomerManagedCertificatesResponse(),
+      );
+      client.innerApiCalls.listCustomerManagedCertificates =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listCustomerManagedCertificates(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listCustomerManagedCertificates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomerManagedCertificates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listCustomerManagedCertificates without error using callback', async () => {
+      const client =
+        new sqlsslcertsserviceModule.v1beta4.SqlSslCertsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.ListCustomerManagedCertificatesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.ListCustomerManagedCertificatesRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.ListCustomerManagedCertificatesRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.ListCustomerManagedCertificatesResponse(),
+      );
+      client.innerApiCalls.listCustomerManagedCertificates =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listCustomerManagedCertificates(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.sql.v1beta4.IListCustomerManagedCertificatesResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listCustomerManagedCertificates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomerManagedCertificates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listCustomerManagedCertificates with error', async () => {
+      const client =
+        new sqlsslcertsserviceModule.v1beta4.SqlSslCertsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.ListCustomerManagedCertificatesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.ListCustomerManagedCertificatesRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.ListCustomerManagedCertificatesRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listCustomerManagedCertificates = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.listCustomerManagedCertificates(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.listCustomerManagedCertificates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomerManagedCertificates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listCustomerManagedCertificates with closed client', async () => {
+      const client =
+        new sqlsslcertsserviceModule.v1beta4.SqlSslCertsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1beta4.ListCustomerManagedCertificatesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.ListCustomerManagedCertificatesRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1beta4.ListCustomerManagedCertificatesRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.listCustomerManagedCertificates(request),
+        expectedError,
+      );
+    });
+  });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client =
@@ -1262,6 +1791,56 @@ describe('v1beta4.SqlSslCertsServiceClient', () => {
             client.pathTemplates.blueGreenDeploymentPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('network', async () => {
+      const fakePath = '/rendered/path/network';
+      const expectedParameters = {
+        project: 'projectValue',
+        network: 'networkValue',
+      };
+      const client =
+        new sqlsslcertsserviceModule.v1beta4.SqlSslCertsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.networkPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.networkPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('networkPath', () => {
+        const result = client.networkPath('projectValue', 'networkValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.networkPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromNetworkName', () => {
+        const result = client.matchProjectFromNetworkName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.networkPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchNetworkFromNetworkName', () => {
+        const result = client.matchNetworkFromNetworkName(fakePath);
+        assert.strictEqual(result, 'networkValue');
+        assert(
+          (client.pathTemplates.networkPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

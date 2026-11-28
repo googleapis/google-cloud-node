@@ -1455,6 +1455,342 @@ describe('v1beta.HypercomputeClusterClient', () => {
       );
     });
   });
+
+  describe('listNodes', () => {
+    it('invokes listNodes without error', async () => {
+      const client =
+        new hypercomputeclusterModule.v1beta.HypercomputeClusterClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1beta.ListNodesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1beta.ListNodesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1beta.Node(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1beta.Node(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1beta.Node(),
+        ),
+      ];
+      client.innerApiCalls.listNodes = stubSimpleCall(expectedResponse);
+      const [response] = await client.listNodes(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listNodes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNodes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listNodes without error using callback', async () => {
+      const client =
+        new hypercomputeclusterModule.v1beta.HypercomputeClusterClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1beta.ListNodesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1beta.ListNodesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1beta.Node(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1beta.Node(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1beta.Node(),
+        ),
+      ];
+      client.innerApiCalls.listNodes =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listNodes(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              protos.google.cloud.hypercomputecluster.v1beta.INode[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listNodes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNodes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listNodes with error', async () => {
+      const client =
+        new hypercomputeclusterModule.v1beta.HypercomputeClusterClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1beta.ListNodesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1beta.ListNodesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listNodes = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.listNodes(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listNodes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNodes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listNodesStream without error', async () => {
+      const client =
+        new hypercomputeclusterModule.v1beta.HypercomputeClusterClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1beta.ListNodesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1beta.ListNodesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1beta.Node(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1beta.Node(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1beta.Node(),
+        ),
+      ];
+      client.descriptors.page.listNodes.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listNodesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.hypercomputecluster.v1beta.Node[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.hypercomputecluster.v1beta.Node) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listNodes.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listNodes, request),
+      );
+      assert(
+        (client.descriptors.page.listNodes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listNodesStream with error', async () => {
+      const client =
+        new hypercomputeclusterModule.v1beta.HypercomputeClusterClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1beta.ListNodesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1beta.ListNodesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listNodes.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError,
+      );
+      const stream = client.listNodesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.hypercomputecluster.v1beta.Node[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.hypercomputecluster.v1beta.Node) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listNodes.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listNodes, request),
+      );
+      assert(
+        (client.descriptors.page.listNodes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listNodes without error', async () => {
+      const client =
+        new hypercomputeclusterModule.v1beta.HypercomputeClusterClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1beta.ListNodesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1beta.ListNodesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1beta.Node(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1beta.Node(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1beta.Node(),
+        ),
+      ];
+      client.descriptors.page.listNodes.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.hypercomputecluster.v1beta.INode[] =
+        [];
+      const iterable = client.listNodesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.listNodes.asyncIterate as SinonStub).getCall(0)
+          .args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listNodes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listNodes with error', async () => {
+      const client =
+        new hypercomputeclusterModule.v1beta.HypercomputeClusterClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1beta.ListNodesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1beta.ListNodesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listNodes.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError,
+      );
+      const iterable = client.listNodesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.hypercomputecluster.v1beta.INode[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.listNodes.asyncIterate as SinonStub).getCall(0)
+          .args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listNodes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client =
@@ -2166,6 +2502,71 @@ describe('v1beta.HypercomputeClusterClient', () => {
       });
     });
 
+    describe('disk', async () => {
+      const fakePath = '/rendered/path/disk';
+      const expectedParameters = {
+        project: 'projectValue',
+        zone: 'zoneValue',
+        disk: 'diskValue',
+      };
+      const client =
+        new hypercomputeclusterModule.v1beta.HypercomputeClusterClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.diskPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.diskPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('diskPath', () => {
+        const result = client.diskPath(
+          'projectValue',
+          'zoneValue',
+          'diskValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.diskPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDiskName', () => {
+        const result = client.matchProjectFromDiskName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.diskPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchZoneFromDiskName', () => {
+        const result = client.matchZoneFromDiskName(fakePath);
+        assert.strictEqual(result, 'zoneValue');
+        assert(
+          (client.pathTemplates.diskPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDiskFromDiskName', () => {
+        const result = client.matchDiskFromDiskName(fakePath);
+        assert.strictEqual(result, 'diskValue');
+        assert(
+          (client.pathTemplates.diskPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('diskType', async () => {
       const fakePath = '/rendered/path/diskType';
       const expectedParameters = {
@@ -2231,6 +2632,178 @@ describe('v1beta.HypercomputeClusterClient', () => {
       });
     });
 
+    describe('fileInstance', async () => {
+      const fakePath = '/rendered/path/fileInstance';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+      };
+      const client =
+        new hypercomputeclusterModule.v1beta.HypercomputeClusterClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.fileInstancePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.fileInstancePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('fileInstancePath', () => {
+        const result = client.fileInstancePath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.fileInstancePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromFileInstanceName', () => {
+        const result = client.matchProjectFromFileInstanceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.fileInstancePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromFileInstanceName', () => {
+        const result = client.matchLocationFromFileInstanceName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.fileInstancePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromFileInstanceName', () => {
+        const result = client.matchInstanceFromFileInstanceName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.fileInstancePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('image', async () => {
+      const fakePath = '/rendered/path/image';
+      const expectedParameters = {
+        project: 'projectValue',
+        image: 'imageValue',
+      };
+      const client =
+        new hypercomputeclusterModule.v1beta.HypercomputeClusterClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.imagePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.imagePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('imagePath', () => {
+        const result = client.imagePath('projectValue', 'imageValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.imagePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromImageName', () => {
+        const result = client.matchProjectFromImageName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.imagePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchImageFromImageName', () => {
+        const result = client.matchImageFromImageName(fakePath);
+        assert.strictEqual(result, 'imageValue');
+        assert(
+          (client.pathTemplates.imagePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('instanceTemplate', async () => {
+      const fakePath = '/rendered/path/instanceTemplate';
+      const expectedParameters = {
+        project: 'projectValue',
+        instance_template: 'instanceTemplateValue',
+      };
+      const client =
+        new hypercomputeclusterModule.v1beta.HypercomputeClusterClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.instanceTemplatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.instanceTemplatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('instanceTemplatePath', () => {
+        const result = client.instanceTemplatePath(
+          'projectValue',
+          'instanceTemplateValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.instanceTemplatePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromInstanceTemplateName', () => {
+        const result = client.matchProjectFromInstanceTemplateName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.instanceTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceTemplateFromInstanceTemplateName', () => {
+        const result =
+          client.matchInstanceTemplateFromInstanceTemplateName(fakePath);
+        assert.strictEqual(result, 'instanceTemplateValue');
+        assert(
+          (client.pathTemplates.instanceTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
@@ -2275,71 +2848,6 @@ describe('v1beta.HypercomputeClusterClient', () => {
         assert.strictEqual(result, 'locationValue');
         assert(
           (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath),
-        );
-      });
-    });
-
-    describe('lustreInstance', async () => {
-      const fakePath = '/rendered/path/lustreInstance';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        instance: 'instanceValue',
-      };
-      const client =
-        new hypercomputeclusterModule.v1beta.HypercomputeClusterClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      client.pathTemplates.lustreInstancePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.lustreInstancePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('lustreInstancePath', () => {
-        const result = client.lustreInstancePath(
-          'projectValue',
-          'locationValue',
-          'instanceValue',
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.lustreInstancePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters),
-        );
-      });
-
-      it('matchProjectFromLustreInstanceName', () => {
-        const result = client.matchProjectFromLustreInstanceName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.lustreInstancePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath),
-        );
-      });
-
-      it('matchLocationFromLustreInstanceName', () => {
-        const result = client.matchLocationFromLustreInstanceName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.lustreInstancePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath),
-        );
-      });
-
-      it('matchInstanceFromLustreInstanceName', () => {
-        const result = client.matchInstanceFromLustreInstanceName(fakePath);
-        assert.strictEqual(result, 'instanceValue');
-        assert(
-          (client.pathTemplates.lustreInstancePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -2396,6 +2904,83 @@ describe('v1beta.HypercomputeClusterClient', () => {
       });
     });
 
+    describe('node', async () => {
+      const fakePath = '/rendered/path/node';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        cluster: 'clusterValue',
+        node: 'nodeValue',
+      };
+      const client =
+        new hypercomputeclusterModule.v1beta.HypercomputeClusterClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.nodePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.nodePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('nodePath', () => {
+        const result = client.nodePath(
+          'projectValue',
+          'locationValue',
+          'clusterValue',
+          'nodeValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.nodePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromNodeName', () => {
+        const result = client.matchProjectFromNodeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.nodePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromNodeName', () => {
+        const result = client.matchLocationFromNodeName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.nodePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchClusterFromNodeName', () => {
+        const result = client.matchClusterFromNodeName(fakePath);
+        assert.strictEqual(result, 'clusterValue');
+        assert(
+          (client.pathTemplates.nodePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchNodeFromNodeName', () => {
+        const result = client.matchNodeFromNodeName(fakePath);
+        assert.strictEqual(result, 'nodeValue');
+        assert(
+          (client.pathTemplates.nodePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
@@ -2429,6 +3014,312 @@ describe('v1beta.HypercomputeClusterClient', () => {
         assert.strictEqual(result, 'projectValue');
         assert(
           (client.pathTemplates.projectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectGlobalSnapshot', async () => {
+      const fakePath = '/rendered/path/projectGlobalSnapshot';
+      const expectedParameters = {
+        project: 'projectValue',
+        snapshot: 'snapshotValue',
+      };
+      const client =
+        new hypercomputeclusterModule.v1beta.HypercomputeClusterClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.projectGlobalSnapshotPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectGlobalSnapshotPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectGlobalSnapshotPath', () => {
+        const result = client.projectGlobalSnapshotPath(
+          'projectValue',
+          'snapshotValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectGlobalSnapshotPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectGlobalSnapshotName', () => {
+        const result =
+          client.matchProjectFromProjectGlobalSnapshotName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectGlobalSnapshotPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSnapshotFromProjectGlobalSnapshotName', () => {
+        const result =
+          client.matchSnapshotFromProjectGlobalSnapshotName(fakePath);
+        assert.strictEqual(result, 'snapshotValue');
+        assert(
+          (
+            client.pathTemplates.projectGlobalSnapshotPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectRegionInstanceGroupManager', async () => {
+      const fakePath = '/rendered/path/projectRegionInstanceGroupManager';
+      const expectedParameters = {
+        project: 'projectValue',
+        region: 'regionValue',
+        instance_group_manager: 'instanceGroupManagerValue',
+      };
+      const client =
+        new hypercomputeclusterModule.v1beta.HypercomputeClusterClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.projectRegionInstanceGroupManagerPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectRegionInstanceGroupManagerPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectRegionInstanceGroupManagerPath', () => {
+        const result = client.projectRegionInstanceGroupManagerPath(
+          'projectValue',
+          'regionValue',
+          'instanceGroupManagerValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectRegionInstanceGroupManagerPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectRegionInstanceGroupManagerName', () => {
+        const result =
+          client.matchProjectFromProjectRegionInstanceGroupManagerName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectRegionInstanceGroupManagerPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRegionFromProjectRegionInstanceGroupManagerName', () => {
+        const result =
+          client.matchRegionFromProjectRegionInstanceGroupManagerName(fakePath);
+        assert.strictEqual(result, 'regionValue');
+        assert(
+          (
+            client.pathTemplates.projectRegionInstanceGroupManagerPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceGroupManagerFromProjectRegionInstanceGroupManagerName', () => {
+        const result =
+          client.matchInstanceGroupManagerFromProjectRegionInstanceGroupManagerName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'instanceGroupManagerValue');
+        assert(
+          (
+            client.pathTemplates.projectRegionInstanceGroupManagerPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectRegionSnapshot', async () => {
+      const fakePath = '/rendered/path/projectRegionSnapshot';
+      const expectedParameters = {
+        project: 'projectValue',
+        region: 'regionValue',
+        snapshot: 'snapshotValue',
+      };
+      const client =
+        new hypercomputeclusterModule.v1beta.HypercomputeClusterClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.projectRegionSnapshotPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectRegionSnapshotPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectRegionSnapshotPath', () => {
+        const result = client.projectRegionSnapshotPath(
+          'projectValue',
+          'regionValue',
+          'snapshotValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectRegionSnapshotPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectRegionSnapshotName', () => {
+        const result =
+          client.matchProjectFromProjectRegionSnapshotName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectRegionSnapshotPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRegionFromProjectRegionSnapshotName', () => {
+        const result =
+          client.matchRegionFromProjectRegionSnapshotName(fakePath);
+        assert.strictEqual(result, 'regionValue');
+        assert(
+          (
+            client.pathTemplates.projectRegionSnapshotPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSnapshotFromProjectRegionSnapshotName', () => {
+        const result =
+          client.matchSnapshotFromProjectRegionSnapshotName(fakePath);
+        assert.strictEqual(result, 'snapshotValue');
+        assert(
+          (
+            client.pathTemplates.projectRegionSnapshotPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectZoneInstanceGroupManager', async () => {
+      const fakePath = '/rendered/path/projectZoneInstanceGroupManager';
+      const expectedParameters = {
+        project: 'projectValue',
+        zone: 'zoneValue',
+        instance_group_manager: 'instanceGroupManagerValue',
+      };
+      const client =
+        new hypercomputeclusterModule.v1beta.HypercomputeClusterClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.projectZoneInstanceGroupManagerPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectZoneInstanceGroupManagerPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectZoneInstanceGroupManagerPath', () => {
+        const result = client.projectZoneInstanceGroupManagerPath(
+          'projectValue',
+          'zoneValue',
+          'instanceGroupManagerValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectZoneInstanceGroupManagerPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectZoneInstanceGroupManagerName', () => {
+        const result =
+          client.matchProjectFromProjectZoneInstanceGroupManagerName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectZoneInstanceGroupManagerPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchZoneFromProjectZoneInstanceGroupManagerName', () => {
+        const result =
+          client.matchZoneFromProjectZoneInstanceGroupManagerName(fakePath);
+        assert.strictEqual(result, 'zoneValue');
+        assert(
+          (
+            client.pathTemplates.projectZoneInstanceGroupManagerPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceGroupManagerFromProjectZoneInstanceGroupManagerName', () => {
+        const result =
+          client.matchInstanceGroupManagerFromProjectZoneInstanceGroupManagerName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'instanceGroupManagerValue');
+        assert(
+          (
+            client.pathTemplates.projectZoneInstanceGroupManagerPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -2494,6 +3385,263 @@ describe('v1beta.HypercomputeClusterClient', () => {
         assert.strictEqual(result, 'reservationValue');
         assert(
           (client.pathTemplates.reservationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('reservationBlock', async () => {
+      const fakePath = '/rendered/path/reservationBlock';
+      const expectedParameters = {
+        project: 'projectValue',
+        zone: 'zoneValue',
+        reservation: 'reservationValue',
+        reservation_block: 'reservationBlockValue',
+      };
+      const client =
+        new hypercomputeclusterModule.v1beta.HypercomputeClusterClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.reservationBlockPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.reservationBlockPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('reservationBlockPath', () => {
+        const result = client.reservationBlockPath(
+          'projectValue',
+          'zoneValue',
+          'reservationValue',
+          'reservationBlockValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.reservationBlockPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromReservationBlockName', () => {
+        const result = client.matchProjectFromReservationBlockName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.reservationBlockPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchZoneFromReservationBlockName', () => {
+        const result = client.matchZoneFromReservationBlockName(fakePath);
+        assert.strictEqual(result, 'zoneValue');
+        assert(
+          (client.pathTemplates.reservationBlockPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchReservationFromReservationBlockName', () => {
+        const result =
+          client.matchReservationFromReservationBlockName(fakePath);
+        assert.strictEqual(result, 'reservationValue');
+        assert(
+          (client.pathTemplates.reservationBlockPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchReservationBlockFromReservationBlockName', () => {
+        const result =
+          client.matchReservationBlockFromReservationBlockName(fakePath);
+        assert.strictEqual(result, 'reservationBlockValue');
+        assert(
+          (client.pathTemplates.reservationBlockPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('reservationSubBlock', async () => {
+      const fakePath = '/rendered/path/reservationSubBlock';
+      const expectedParameters = {
+        project: 'projectValue',
+        zone: 'zoneValue',
+        reservation: 'reservationValue',
+        reservation_block: 'reservationBlockValue',
+        reservation_sub_block: 'reservationSubBlockValue',
+      };
+      const client =
+        new hypercomputeclusterModule.v1beta.HypercomputeClusterClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.reservationSubBlockPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.reservationSubBlockPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('reservationSubBlockPath', () => {
+        const result = client.reservationSubBlockPath(
+          'projectValue',
+          'zoneValue',
+          'reservationValue',
+          'reservationBlockValue',
+          'reservationSubBlockValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.reservationSubBlockPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromReservationSubBlockName', () => {
+        const result = client.matchProjectFromReservationSubBlockName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.reservationSubBlockPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchZoneFromReservationSubBlockName', () => {
+        const result = client.matchZoneFromReservationSubBlockName(fakePath);
+        assert.strictEqual(result, 'zoneValue');
+        assert(
+          (
+            client.pathTemplates.reservationSubBlockPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchReservationFromReservationSubBlockName', () => {
+        const result =
+          client.matchReservationFromReservationSubBlockName(fakePath);
+        assert.strictEqual(result, 'reservationValue');
+        assert(
+          (
+            client.pathTemplates.reservationSubBlockPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchReservationBlockFromReservationSubBlockName', () => {
+        const result =
+          client.matchReservationBlockFromReservationSubBlockName(fakePath);
+        assert.strictEqual(result, 'reservationBlockValue');
+        assert(
+          (
+            client.pathTemplates.reservationSubBlockPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchReservationSubBlockFromReservationSubBlockName', () => {
+        const result =
+          client.matchReservationSubBlockFromReservationSubBlockName(fakePath);
+        assert.strictEqual(result, 'reservationSubBlockValue');
+        assert(
+          (
+            client.pathTemplates.reservationSubBlockPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('storagePool', async () => {
+      const fakePath = '/rendered/path/storagePool';
+      const expectedParameters = {
+        project: 'projectValue',
+        zone: 'zoneValue',
+        storage_pool: 'storagePoolValue',
+      };
+      const client =
+        new hypercomputeclusterModule.v1beta.HypercomputeClusterClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.storagePoolPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.storagePoolPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('storagePoolPath', () => {
+        const result = client.storagePoolPath(
+          'projectValue',
+          'zoneValue',
+          'storagePoolValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.storagePoolPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromStoragePoolName', () => {
+        const result = client.matchProjectFromStoragePoolName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.storagePoolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchZoneFromStoragePoolName', () => {
+        const result = client.matchZoneFromStoragePoolName(fakePath);
+        assert.strictEqual(result, 'zoneValue');
+        assert(
+          (client.pathTemplates.storagePoolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchStoragePoolFromStoragePoolName', () => {
+        const result = client.matchStoragePoolFromStoragePoolName(fakePath);
+        assert.strictEqual(result, 'storagePoolValue');
+        assert(
+          (client.pathTemplates.storagePoolPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

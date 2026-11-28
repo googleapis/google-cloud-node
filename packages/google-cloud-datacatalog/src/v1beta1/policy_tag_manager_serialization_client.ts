@@ -498,7 +498,7 @@ export class PolicyTagManagerSerializationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('importTaxonomies request %j', request);
+    this._log.debug('importTaxonomies request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1beta1.IImportTaxonomiesResponse,
@@ -509,7 +509,7 @@ export class PolicyTagManagerSerializationClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('importTaxonomies response %j', response);
+          this._log.debug('importTaxonomies response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -524,7 +524,7 @@ export class PolicyTagManagerSerializationClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('importTaxonomies response %j', response);
+          this._log.debug('importTaxonomies response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -649,7 +649,7 @@ export class PolicyTagManagerSerializationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('exportTaxonomies request %j', request);
+    this._log.debug('exportTaxonomies request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.v1beta1.IExportTaxonomiesResponse,
@@ -660,7 +660,7 @@ export class PolicyTagManagerSerializationClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('exportTaxonomies response %j', response);
+          this._log.debug('exportTaxonomies response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -675,7 +675,7 @@ export class PolicyTagManagerSerializationClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('exportTaxonomies response %j', response);
+          this._log.debug('exportTaxonomies response %j', response);
           return [response, options, rawResponse];
         },
       )

@@ -705,6 +705,9 @@ export namespace google {
 
                     /** Condition executionReason */
                     executionReason?: (google.cloud.run.v2.Condition.ExecutionReason|keyof typeof google.cloud.run.v2.Condition.ExecutionReason|null);
+
+                    /** Condition instanceReason */
+                    instanceReason?: (google.cloud.run.v2.Condition.InstanceReason|keyof typeof google.cloud.run.v2.Condition.InstanceReason|null);
                 }
 
                 /** Represents a Condition. */
@@ -740,8 +743,11 @@ export namespace google {
                     /** Condition executionReason. */
                     public executionReason?: (google.cloud.run.v2.Condition.ExecutionReason|keyof typeof google.cloud.run.v2.Condition.ExecutionReason|null);
 
+                    /** Condition instanceReason. */
+                    public instanceReason?: (google.cloud.run.v2.Condition.InstanceReason|keyof typeof google.cloud.run.v2.Condition.InstanceReason|null);
+
                     /** Condition reasons. */
-                    public reasons?: ("reason"|"revisionReason"|"executionReason");
+                    public reasons?: ("reason"|"revisionReason"|"executionReason"|"instanceReason");
 
                     /**
                      * Creates a new Condition instance using the specified properties.
@@ -885,7 +891,17 @@ export namespace google {
                         CANCELLED = 3,
                         CANCELLING = 4,
                         DELETED = 5,
-                        DELAYED_START_PENDING = 6
+                        DELAYED_START_PENDING = 6,
+                        DELAYED_EXECUTION_EXCEEDING_DURATION_LIMIT = 7
+                    }
+
+                    /** InstanceReason enum. */
+                    enum InstanceReason {
+                        INSTANCE_REASON_UNSPECIFIED = 0,
+                        INSTANCE_DELETED = 1,
+                        INSTANCE_STOPPED = 2,
+                        INSTANCE_STOPPING = 3,
+                        INSTANCE_NON_ZERO_EXIT_CODE = 4
                     }
                 }
 
@@ -1717,6 +1733,12 @@ export namespace google {
                     /** Execution satisfiesPzs */
                     satisfiesPzs?: (boolean|null);
 
+                    /** Execution client */
+                    client?: (string|null);
+
+                    /** Execution clientVersion */
+                    clientVersion?: (string|null);
+
                     /** Execution etag */
                     etag?: (string|null);
                 }
@@ -1811,6 +1833,12 @@ export namespace google {
                     /** Execution satisfiesPzs. */
                     public satisfiesPzs: boolean;
 
+                    /** Execution client. */
+                    public client: string;
+
+                    /** Execution clientVersion. */
+                    public clientVersion: string;
+
                     /** Execution etag. */
                     public etag: string;
 
@@ -1898,6 +1926,9 @@ export namespace google {
                     /** TaskTemplate containers */
                     containers?: (google.cloud.run.v2.IContainer[]|null);
 
+                    /** TaskTemplate sandboxes */
+                    sandboxes?: (google.cloud.run.v2.ISandboxConfiguration|null);
+
                     /** TaskTemplate volumes */
                     volumes?: (google.cloud.run.v2.IVolume[]|null);
 
@@ -1924,6 +1955,9 @@ export namespace google {
 
                     /** TaskTemplate gpuZonalRedundancyDisabled */
                     gpuZonalRedundancyDisabled?: (boolean|null);
+
+                    /** TaskTemplate workloadIdentityConfig */
+                    workloadIdentityConfig?: (google.cloud.run.v2.IWorkloadIdentityConfig|null);
                 }
 
                 /** Represents a TaskTemplate. */
@@ -1937,6 +1971,9 @@ export namespace google {
 
                     /** TaskTemplate containers. */
                     public containers: google.cloud.run.v2.IContainer[];
+
+                    /** TaskTemplate sandboxes. */
+                    public sandboxes?: (google.cloud.run.v2.ISandboxConfiguration|null);
 
                     /** TaskTemplate volumes. */
                     public volumes: google.cloud.run.v2.IVolume[];
@@ -1964,6 +2001,9 @@ export namespace google {
 
                     /** TaskTemplate gpuZonalRedundancyDisabled. */
                     public gpuZonalRedundancyDisabled?: (boolean|null);
+
+                    /** TaskTemplate workloadIdentityConfig. */
+                    public workloadIdentityConfig?: (google.cloud.run.v2.IWorkloadIdentityConfig|null);
 
                     /** TaskTemplate retries. */
                     public retries?: "maxRetries";
@@ -2096,6 +2136,9 @@ export namespace google {
 
                     /** Container buildInfo */
                     buildInfo?: (google.cloud.run.v2.IBuildInfo|null);
+
+                    /** Container sandboxLauncher */
+                    sandboxLauncher?: (boolean|null);
                 }
 
                 /** Represents a Container. */
@@ -2154,6 +2197,9 @@ export namespace google {
 
                     /** Container buildInfo. */
                     public buildInfo?: (google.cloud.run.v2.IBuildInfo|null);
+
+                    /** Container sandboxLauncher. */
+                    public sandboxLauncher?: (boolean|null);
 
                     /**
                      * Creates a new Container instance using the specified properties.
@@ -3419,7 +3465,8 @@ export namespace google {
                     /** Medium enum. */
                     enum Medium {
                         MEDIUM_UNSPECIFIED = 0,
-                        MEMORY = 1
+                        MEMORY = 1,
+                        DISK = 2
                     }
                 }
 
@@ -4297,6 +4344,9 @@ export namespace google {
 
                     /** SourceCode cloudStorageSource */
                     cloudStorageSource?: (google.cloud.run.v2.SourceCode.ICloudStorageSource|null);
+
+                    /** SourceCode inlinedSource */
+                    inlinedSource?: (google.cloud.run.v2.SourceCode.IInlinedSource|null);
                 }
 
                 /** Represents a SourceCode. */
@@ -4311,8 +4361,11 @@ export namespace google {
                     /** SourceCode cloudStorageSource. */
                     public cloudStorageSource?: (google.cloud.run.v2.SourceCode.ICloudStorageSource|null);
 
+                    /** SourceCode inlinedSource. */
+                    public inlinedSource?: (google.cloud.run.v2.SourceCode.IInlinedSource|null);
+
                     /** SourceCode sourceType. */
-                    public sourceType?: "cloudStorageSource";
+                    public sourceType?: ("cloudStorageSource"|"inlinedSource");
 
                     /**
                      * Creates a new SourceCode instance using the specified properties.
@@ -4502,6 +4555,436 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of a SourceFile. */
+                    interface ISourceFile {
+
+                        /** SourceFile filename */
+                        filename?: (string|null);
+
+                        /** SourceFile content */
+                        content?: (string|null);
+                    }
+
+                    /** Represents a SourceFile. */
+                    class SourceFile implements ISourceFile {
+
+                        /**
+                         * Constructs a new SourceFile.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.run.v2.SourceCode.ISourceFile);
+
+                        /** SourceFile filename. */
+                        public filename: string;
+
+                        /** SourceFile content. */
+                        public content: string;
+
+                        /**
+                         * Creates a new SourceFile instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SourceFile instance
+                         */
+                        public static create(properties?: google.cloud.run.v2.SourceCode.ISourceFile): google.cloud.run.v2.SourceCode.SourceFile;
+
+                        /**
+                         * Encodes the specified SourceFile message. Does not implicitly {@link google.cloud.run.v2.SourceCode.SourceFile.verify|verify} messages.
+                         * @param message SourceFile message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.run.v2.SourceCode.ISourceFile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SourceFile message, length delimited. Does not implicitly {@link google.cloud.run.v2.SourceCode.SourceFile.verify|verify} messages.
+                         * @param message SourceFile message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.run.v2.SourceCode.ISourceFile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SourceFile message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SourceFile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.SourceCode.SourceFile;
+
+                        /**
+                         * Decodes a SourceFile message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SourceFile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.SourceCode.SourceFile;
+
+                        /**
+                         * Verifies a SourceFile message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SourceFile message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SourceFile
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.SourceCode.SourceFile;
+
+                        /**
+                         * Creates a plain object from a SourceFile message. Also converts values to other types if specified.
+                         * @param message SourceFile
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.run.v2.SourceCode.SourceFile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SourceFile to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SourceFile
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an InlinedSource. */
+                    interface IInlinedSource {
+
+                        /** InlinedSource sources */
+                        sources?: (google.cloud.run.v2.SourceCode.ISourceFile[]|null);
+                    }
+
+                    /** Represents an InlinedSource. */
+                    class InlinedSource implements IInlinedSource {
+
+                        /**
+                         * Constructs a new InlinedSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.run.v2.SourceCode.IInlinedSource);
+
+                        /** InlinedSource sources. */
+                        public sources: google.cloud.run.v2.SourceCode.ISourceFile[];
+
+                        /**
+                         * Creates a new InlinedSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InlinedSource instance
+                         */
+                        public static create(properties?: google.cloud.run.v2.SourceCode.IInlinedSource): google.cloud.run.v2.SourceCode.InlinedSource;
+
+                        /**
+                         * Encodes the specified InlinedSource message. Does not implicitly {@link google.cloud.run.v2.SourceCode.InlinedSource.verify|verify} messages.
+                         * @param message InlinedSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.run.v2.SourceCode.IInlinedSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InlinedSource message, length delimited. Does not implicitly {@link google.cloud.run.v2.SourceCode.InlinedSource.verify|verify} messages.
+                         * @param message InlinedSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.run.v2.SourceCode.IInlinedSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InlinedSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InlinedSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.SourceCode.InlinedSource;
+
+                        /**
+                         * Decodes an InlinedSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InlinedSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.SourceCode.InlinedSource;
+
+                        /**
+                         * Verifies an InlinedSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InlinedSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InlinedSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.SourceCode.InlinedSource;
+
+                        /**
+                         * Creates a plain object from an InlinedSource message. Also converts values to other types if specified.
+                         * @param message InlinedSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.run.v2.SourceCode.InlinedSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InlinedSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for InlinedSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a SandboxConfiguration. */
+                interface ISandboxConfiguration {
+
+                    /** SandboxConfiguration templates */
+                    templates?: (google.cloud.run.v2.ISandboxTemplate[]|null);
+                }
+
+                /** Represents a SandboxConfiguration. */
+                class SandboxConfiguration implements ISandboxConfiguration {
+
+                    /**
+                     * Constructs a new SandboxConfiguration.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.ISandboxConfiguration);
+
+                    /** SandboxConfiguration templates. */
+                    public templates: google.cloud.run.v2.ISandboxTemplate[];
+
+                    /**
+                     * Creates a new SandboxConfiguration instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SandboxConfiguration instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.ISandboxConfiguration): google.cloud.run.v2.SandboxConfiguration;
+
+                    /**
+                     * Encodes the specified SandboxConfiguration message. Does not implicitly {@link google.cloud.run.v2.SandboxConfiguration.verify|verify} messages.
+                     * @param message SandboxConfiguration message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.ISandboxConfiguration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SandboxConfiguration message, length delimited. Does not implicitly {@link google.cloud.run.v2.SandboxConfiguration.verify|verify} messages.
+                     * @param message SandboxConfiguration message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.ISandboxConfiguration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SandboxConfiguration message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SandboxConfiguration
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.SandboxConfiguration;
+
+                    /**
+                     * Decodes a SandboxConfiguration message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SandboxConfiguration
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.SandboxConfiguration;
+
+                    /**
+                     * Verifies a SandboxConfiguration message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SandboxConfiguration message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SandboxConfiguration
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.SandboxConfiguration;
+
+                    /**
+                     * Creates a plain object from a SandboxConfiguration message. Also converts values to other types if specified.
+                     * @param message SandboxConfiguration
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.SandboxConfiguration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SandboxConfiguration to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SandboxConfiguration
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SandboxTemplate. */
+                interface ISandboxTemplate {
+
+                    /** SandboxTemplate name */
+                    name?: (string|null);
+
+                    /** SandboxTemplate image */
+                    image?: (string|null);
+
+                    /** SandboxTemplate command */
+                    command?: (string[]|null);
+
+                    /** SandboxTemplate args */
+                    args?: (string[]|null);
+
+                    /** SandboxTemplate env */
+                    env?: (google.cloud.run.v2.IEnvVar[]|null);
+
+                    /** SandboxTemplate volumeMounts */
+                    volumeMounts?: (google.cloud.run.v2.IVolumeMount[]|null);
+
+                    /** SandboxTemplate workingDir */
+                    workingDir?: (string|null);
+                }
+
+                /** Represents a SandboxTemplate. */
+                class SandboxTemplate implements ISandboxTemplate {
+
+                    /**
+                     * Constructs a new SandboxTemplate.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.ISandboxTemplate);
+
+                    /** SandboxTemplate name. */
+                    public name: string;
+
+                    /** SandboxTemplate image. */
+                    public image: string;
+
+                    /** SandboxTemplate command. */
+                    public command: string[];
+
+                    /** SandboxTemplate args. */
+                    public args: string[];
+
+                    /** SandboxTemplate env. */
+                    public env: google.cloud.run.v2.IEnvVar[];
+
+                    /** SandboxTemplate volumeMounts. */
+                    public volumeMounts: google.cloud.run.v2.IVolumeMount[];
+
+                    /** SandboxTemplate workingDir. */
+                    public workingDir: string;
+
+                    /**
+                     * Creates a new SandboxTemplate instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SandboxTemplate instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.ISandboxTemplate): google.cloud.run.v2.SandboxTemplate;
+
+                    /**
+                     * Encodes the specified SandboxTemplate message. Does not implicitly {@link google.cloud.run.v2.SandboxTemplate.verify|verify} messages.
+                     * @param message SandboxTemplate message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.ISandboxTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SandboxTemplate message, length delimited. Does not implicitly {@link google.cloud.run.v2.SandboxTemplate.verify|verify} messages.
+                     * @param message SandboxTemplate message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.ISandboxTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SandboxTemplate message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SandboxTemplate
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.SandboxTemplate;
+
+                    /**
+                     * Decodes a SandboxTemplate message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SandboxTemplate
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.SandboxTemplate;
+
+                    /**
+                     * Verifies a SandboxTemplate message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SandboxTemplate message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SandboxTemplate
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.SandboxTemplate;
+
+                    /**
+                     * Creates a plain object from a SandboxTemplate message. Also converts values to other types if specified.
+                     * @param message SandboxTemplate
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.SandboxTemplate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SandboxTemplate to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SandboxTemplate
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a VpcAccess. */
@@ -4852,6 +5335,12 @@ export namespace google {
 
                     /** RevisionScaling maxInstanceCount */
                     maxInstanceCount?: (number|null);
+
+                    /** RevisionScaling cpuUtilization */
+                    cpuUtilization?: (number|null);
+
+                    /** RevisionScaling concurrencyUtilization */
+                    concurrencyUtilization?: (number|null);
                 }
 
                 /** Represents a RevisionScaling. */
@@ -4868,6 +5357,12 @@ export namespace google {
 
                     /** RevisionScaling maxInstanceCount. */
                     public maxInstanceCount: number;
+
+                    /** RevisionScaling cpuUtilization. */
+                    public cpuUtilization?: (number|null);
+
+                    /** RevisionScaling concurrencyUtilization. */
+                    public concurrencyUtilization?: (number|null);
 
                     /**
                      * Creates a new RevisionScaling instance using the specified properties.
@@ -5038,6 +5533,116 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ServiceMesh
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** AmbientScope enum. */
+                enum AmbientScope {
+                    AMBIENT_SCOPE_UNSPECIFIED = 0,
+                    AMBIENT_SCOPE_REGIONAL = 1,
+                    AMBIENT_SCOPE_GLOBAL = 2
+                }
+
+                /** Properties of an AmbientNetworking. */
+                interface IAmbientNetworking {
+
+                    /** AmbientNetworking enabled */
+                    enabled?: (boolean|null);
+
+                    /** AmbientNetworking ambientScope */
+                    ambientScope?: (google.cloud.run.v2.AmbientScope|keyof typeof google.cloud.run.v2.AmbientScope|null);
+                }
+
+                /** Represents an AmbientNetworking. */
+                class AmbientNetworking implements IAmbientNetworking {
+
+                    /**
+                     * Constructs a new AmbientNetworking.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IAmbientNetworking);
+
+                    /** AmbientNetworking enabled. */
+                    public enabled?: (boolean|null);
+
+                    /** AmbientNetworking ambientScope. */
+                    public ambientScope: (google.cloud.run.v2.AmbientScope|keyof typeof google.cloud.run.v2.AmbientScope);
+
+                    /**
+                     * Creates a new AmbientNetworking instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AmbientNetworking instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IAmbientNetworking): google.cloud.run.v2.AmbientNetworking;
+
+                    /**
+                     * Encodes the specified AmbientNetworking message. Does not implicitly {@link google.cloud.run.v2.AmbientNetworking.verify|verify} messages.
+                     * @param message AmbientNetworking message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IAmbientNetworking, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AmbientNetworking message, length delimited. Does not implicitly {@link google.cloud.run.v2.AmbientNetworking.verify|verify} messages.
+                     * @param message AmbientNetworking message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IAmbientNetworking, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AmbientNetworking message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AmbientNetworking
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.AmbientNetworking;
+
+                    /**
+                     * Decodes an AmbientNetworking message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AmbientNetworking
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.AmbientNetworking;
+
+                    /**
+                     * Verifies an AmbientNetworking message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AmbientNetworking message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AmbientNetworking
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.AmbientNetworking;
+
+                    /**
+                     * Creates a plain object from an AmbientNetworking message. Also converts values to other types if specified.
+                     * @param message AmbientNetworking
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.AmbientNetworking, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AmbientNetworking to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AmbientNetworking
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -5531,6 +6136,129 @@ export namespace google {
                     SHUTDOWN = 2
                 }
 
+                /** IdentityType enum. */
+                enum IdentityType {
+                    IDENTITY_TYPE_UNSPECIFIED = 0,
+                    IDENTITY_TYPE_SERVICE_ACCOUNT = 1,
+                    IDENTITY_TYPE_AGENT_IDENTITY = 3
+                }
+
+                /** Properties of a WorkloadIdentityConfig. */
+                interface IWorkloadIdentityConfig {
+
+                    /** WorkloadIdentityConfig identity */
+                    identity?: (string|null);
+
+                    /** WorkloadIdentityConfig identityType */
+                    identityType?: (google.cloud.run.v2.IdentityType|keyof typeof google.cloud.run.v2.IdentityType|null);
+
+                    /** WorkloadIdentityConfig identityCertificateEnabled */
+                    identityCertificateEnabled?: (boolean|null);
+                }
+
+                /** Represents a WorkloadIdentityConfig. */
+                class WorkloadIdentityConfig implements IWorkloadIdentityConfig {
+
+                    /**
+                     * Constructs a new WorkloadIdentityConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IWorkloadIdentityConfig);
+
+                    /** WorkloadIdentityConfig identity. */
+                    public identity: string;
+
+                    /** WorkloadIdentityConfig identityType. */
+                    public identityType: (google.cloud.run.v2.IdentityType|keyof typeof google.cloud.run.v2.IdentityType);
+
+                    /** WorkloadIdentityConfig identityCertificateEnabled. */
+                    public identityCertificateEnabled?: (boolean|null);
+
+                    /**
+                     * Creates a new WorkloadIdentityConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns WorkloadIdentityConfig instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IWorkloadIdentityConfig): google.cloud.run.v2.WorkloadIdentityConfig;
+
+                    /**
+                     * Encodes the specified WorkloadIdentityConfig message. Does not implicitly {@link google.cloud.run.v2.WorkloadIdentityConfig.verify|verify} messages.
+                     * @param message WorkloadIdentityConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IWorkloadIdentityConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified WorkloadIdentityConfig message, length delimited. Does not implicitly {@link google.cloud.run.v2.WorkloadIdentityConfig.verify|verify} messages.
+                     * @param message WorkloadIdentityConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IWorkloadIdentityConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a WorkloadIdentityConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns WorkloadIdentityConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.WorkloadIdentityConfig;
+
+                    /**
+                     * Decodes a WorkloadIdentityConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns WorkloadIdentityConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.WorkloadIdentityConfig;
+
+                    /**
+                     * Verifies a WorkloadIdentityConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a WorkloadIdentityConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns WorkloadIdentityConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.WorkloadIdentityConfig;
+
+                    /**
+                     * Creates a plain object from a WorkloadIdentityConfig message. Also converts values to other types if specified.
+                     * @param message WorkloadIdentityConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.WorkloadIdentityConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this WorkloadIdentityConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for WorkloadIdentityConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** FunctionalType enum. */
+                enum FunctionalType {
+                    FUNCTIONAL_TYPE_UNSPECIFIED = 0,
+                    FUNCTIONAL_TYPE_AGENT = 1,
+                    FUNCTIONAL_TYPE_MCP_SERVER = 2
+                }
+
                 /** Properties of an ExecutionTemplate. */
                 interface IExecutionTemplate {
 
@@ -5548,6 +6276,15 @@ export namespace google {
 
                     /** ExecutionTemplate template */
                     template?: (google.cloud.run.v2.ITaskTemplate|null);
+
+                    /** ExecutionTemplate delayExecution */
+                    delayExecution?: (boolean|null);
+
+                    /** ExecutionTemplate client */
+                    client?: (string|null);
+
+                    /** ExecutionTemplate clientVersion */
+                    clientVersion?: (string|null);
                 }
 
                 /** Represents an ExecutionTemplate. */
@@ -5573,6 +6310,15 @@ export namespace google {
 
                     /** ExecutionTemplate template. */
                     public template?: (google.cloud.run.v2.ITaskTemplate|null);
+
+                    /** ExecutionTemplate delayExecution. */
+                    public delayExecution?: (boolean|null);
+
+                    /** ExecutionTemplate client. */
+                    public client: string;
+
+                    /** ExecutionTemplate clientVersion. */
+                    public clientVersion: string;
 
                     /**
                      * Creates a new ExecutionTemplate instance using the specified properties.
@@ -5687,6 +6433,20 @@ export namespace google {
                     public createInstance(request: google.cloud.run.v2.ICreateInstanceRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls UpdateInstance.
+                     * @param request UpdateInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateInstance(request: google.cloud.run.v2.IUpdateInstanceRequest, callback: google.cloud.run.v2.Instances.UpdateInstanceCallback): void;
+
+                    /**
+                     * Calls UpdateInstance.
+                     * @param request UpdateInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateInstance(request: google.cloud.run.v2.IUpdateInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls DeleteInstance.
                      * @param request DeleteInstanceRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -5755,6 +6515,48 @@ export namespace google {
                      * @returns Promise
                      */
                     public startInstance(request: google.cloud.run.v2.IStartInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetIamPolicy.
+                     * @param request GetIamPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Policy
+                     */
+                    public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest, callback: google.cloud.run.v2.Instances.GetIamPolicyCallback): void;
+
+                    /**
+                     * Calls GetIamPolicy.
+                     * @param request GetIamPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                    /**
+                     * Calls SetIamPolicy.
+                     * @param request SetIamPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Policy
+                     */
+                    public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest, callback: google.cloud.run.v2.Instances.SetIamPolicyCallback): void;
+
+                    /**
+                     * Calls SetIamPolicy.
+                     * @param request SetIamPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                    /**
+                     * Calls TestIamPermissions.
+                     * @param request TestIamPermissionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
+                     */
+                    public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest, callback: google.cloud.run.v2.Instances.TestIamPermissionsCallback): void;
+
+                    /**
+                     * Calls TestIamPermissions.
+                     * @param request TestIamPermissionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest): Promise<google.iam.v1.TestIamPermissionsResponse>;
                 }
 
                 namespace Instances {
@@ -5765,6 +6567,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type CreateInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.run.v2.Instances|updateInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.run.v2.Instances|deleteInstance}.
@@ -5800,6 +6609,27 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type StartInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.run.v2.Instances|getIamPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Policy
+                     */
+                    type GetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.run.v2.Instances|setIamPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Policy
+                     */
+                    type SetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.run.v2.Instances|testIamPermissions}.
+                     * @param error Error, if any
+                     * @param [response] TestIamPermissionsResponse
+                     */
+                    type TestIamPermissionsCallback = (error: (Error|null), response?: google.iam.v1.TestIamPermissionsResponse) => void;
                 }
 
                 /** Properties of a CreateInstanceRequest. */
@@ -5911,6 +6741,121 @@ export namespace google {
 
                     /**
                      * Gets the default type url for CreateInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateInstanceRequest. */
+                interface IUpdateInstanceRequest {
+
+                    /** UpdateInstanceRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateInstanceRequest instance */
+                    instance?: (google.cloud.run.v2.IInstance|null);
+
+                    /** UpdateInstanceRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** UpdateInstanceRequest allowMissing */
+                    allowMissing?: (boolean|null);
+                }
+
+                /** Represents an UpdateInstanceRequest. */
+                class UpdateInstanceRequest implements IUpdateInstanceRequest {
+
+                    /**
+                     * Constructs a new UpdateInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IUpdateInstanceRequest);
+
+                    /** UpdateInstanceRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateInstanceRequest instance. */
+                    public instance?: (google.cloud.run.v2.IInstance|null);
+
+                    /** UpdateInstanceRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** UpdateInstanceRequest allowMissing. */
+                    public allowMissing: boolean;
+
+                    /**
+                     * Creates a new UpdateInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IUpdateInstanceRequest): google.cloud.run.v2.UpdateInstanceRequest;
+
+                    /**
+                     * Encodes the specified UpdateInstanceRequest message. Does not implicitly {@link google.cloud.run.v2.UpdateInstanceRequest.verify|verify} messages.
+                     * @param message UpdateInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IUpdateInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.run.v2.UpdateInstanceRequest.verify|verify} messages.
+                     * @param message UpdateInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IUpdateInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.UpdateInstanceRequest;
+
+                    /**
+                     * Decodes an UpdateInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.UpdateInstanceRequest;
+
+                    /**
+                     * Verifies an UpdateInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.UpdateInstanceRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateInstanceRequest message. Also converts values to other types if specified.
+                     * @param message UpdateInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.UpdateInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateInstanceRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -6619,6 +7564,9 @@ export namespace google {
                     /** Instance containers */
                     containers?: (google.cloud.run.v2.IContainer[]|null);
 
+                    /** Instance sandboxes */
+                    sandboxes?: (google.cloud.run.v2.ISandboxConfiguration|null);
+
                     /** Instance volumes */
                     volumes?: (google.cloud.run.v2.IVolume[]|null);
 
@@ -6643,8 +7591,17 @@ export namespace google {
                     /** Instance invokerIamDisabled */
                     invokerIamDisabled?: (boolean|null);
 
+                    /** Instance defaultUriDisabled */
+                    defaultUriDisabled?: (boolean|null);
+
                     /** Instance iapEnabled */
                     iapEnabled?: (boolean|null);
+
+                    /** Instance sshEnabled */
+                    sshEnabled?: (boolean|null);
+
+                    /** Instance restartPolicy */
+                    restartPolicy?: (google.cloud.run.v2.Instance.RestartPolicy|keyof typeof google.cloud.run.v2.Instance.RestartPolicy|null);
 
                     /** Instance observedGeneration */
                     observedGeneration?: (number|Long|string|null);
@@ -6740,6 +7697,9 @@ export namespace google {
                     /** Instance containers. */
                     public containers: google.cloud.run.v2.IContainer[];
 
+                    /** Instance sandboxes. */
+                    public sandboxes?: (google.cloud.run.v2.ISandboxConfiguration|null);
+
                     /** Instance volumes. */
                     public volumes: google.cloud.run.v2.IVolume[];
 
@@ -6764,8 +7724,17 @@ export namespace google {
                     /** Instance invokerIamDisabled. */
                     public invokerIamDisabled: boolean;
 
+                    /** Instance defaultUriDisabled. */
+                    public defaultUriDisabled: boolean;
+
                     /** Instance iapEnabled. */
                     public iapEnabled: boolean;
+
+                    /** Instance sshEnabled. */
+                    public sshEnabled?: (boolean|null);
+
+                    /** Instance restartPolicy. */
+                    public restartPolicy: (google.cloud.run.v2.Instance.RestartPolicy|keyof typeof google.cloud.run.v2.Instance.RestartPolicy);
 
                     /** Instance observedGeneration. */
                     public observedGeneration: (number|Long|string);
@@ -6870,6 +7839,17 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Instance {
+
+                    /** RestartPolicy enum. */
+                    enum RestartPolicy {
+                        RESTART_POLICY_UNSPECIFIED = 0,
+                        ALWAYS = 1,
+                        ON_FAILURE = 2,
+                        NEVER = 3
+                    }
                 }
 
                 /** Properties of an InstanceSplit. */
@@ -8086,6 +9066,9 @@ export namespace google {
 
                         /** Overrides timeout */
                         timeout?: (google.protobuf.IDuration|null);
+
+                        /** Overrides delayExecution */
+                        delayExecution?: (boolean|null);
                     }
 
                     /** Represents an Overrides. */
@@ -8105,6 +9088,9 @@ export namespace google {
 
                         /** Overrides timeout. */
                         public timeout?: (google.protobuf.IDuration|null);
+
+                        /** Overrides delayExecution. */
+                        public delayExecution?: (boolean|null);
 
                         /**
                          * Creates a new Overrides instance using the specified properties.
@@ -8381,6 +9367,9 @@ export namespace google {
                     /** Job runExecutionToken */
                     runExecutionToken?: (string|null);
 
+                    /** Job functionalType */
+                    functionalType?: (google.cloud.run.v2.FunctionalType|keyof typeof google.cloud.run.v2.FunctionalType|null);
+
                     /** Job etag */
                     etag?: (string|null);
                 }
@@ -8468,6 +9457,9 @@ export namespace google {
 
                     /** Job runExecutionToken. */
                     public runExecutionToken?: (string|null);
+
+                    /** Job functionalType. */
+                    public functionalType: (google.cloud.run.v2.FunctionalType|keyof typeof google.cloud.run.v2.FunctionalType);
 
                     /** Job etag. */
                     public etag: string;
@@ -9252,6 +10244,9 @@ export namespace google {
                     /** Revision containers */
                     containers?: (google.cloud.run.v2.IContainer[]|null);
 
+                    /** Revision sandboxes */
+                    sandboxes?: (google.cloud.run.v2.ISandboxConfiguration|null);
+
                     /** Revision volumes */
                     volumes?: (google.cloud.run.v2.IVolume[]|null);
 
@@ -9294,11 +10289,23 @@ export namespace google {
                     /** Revision nodeSelector */
                     nodeSelector?: (google.cloud.run.v2.INodeSelector|null);
 
+                    /** Revision workloadIdentityConfig */
+                    workloadIdentityConfig?: (google.cloud.run.v2.IWorkloadIdentityConfig|null);
+
                     /** Revision gpuZonalRedundancyDisabled */
                     gpuZonalRedundancyDisabled?: (boolean|null);
 
                     /** Revision creator */
                     creator?: (string|null);
+
+                    /** Revision client */
+                    client?: (string|null);
+
+                    /** Revision clientVersion */
+                    clientVersion?: (string|null);
+
+                    /** Revision ambientNetworking */
+                    ambientNetworking?: (google.cloud.run.v2.IAmbientNetworking|null);
 
                     /** Revision etag */
                     etag?: (string|null);
@@ -9364,6 +10371,9 @@ export namespace google {
                     /** Revision containers. */
                     public containers: google.cloud.run.v2.IContainer[];
 
+                    /** Revision sandboxes. */
+                    public sandboxes?: (google.cloud.run.v2.ISandboxConfiguration|null);
+
                     /** Revision volumes. */
                     public volumes: google.cloud.run.v2.IVolume[];
 
@@ -9406,11 +10416,23 @@ export namespace google {
                     /** Revision nodeSelector. */
                     public nodeSelector?: (google.cloud.run.v2.INodeSelector|null);
 
+                    /** Revision workloadIdentityConfig. */
+                    public workloadIdentityConfig?: (google.cloud.run.v2.IWorkloadIdentityConfig|null);
+
                     /** Revision gpuZonalRedundancyDisabled. */
                     public gpuZonalRedundancyDisabled?: (boolean|null);
 
                     /** Revision creator. */
                     public creator: string;
+
+                    /** Revision client. */
+                    public client: string;
+
+                    /** Revision clientVersion. */
+                    public clientVersion: string;
+
+                    /** Revision ambientNetworking. */
+                    public ambientNetworking?: (google.cloud.run.v2.IAmbientNetworking|null);
 
                     /** Revision etag. */
                     public etag: string;
@@ -9617,6 +10639,9 @@ export namespace google {
                     /** RevisionTemplate containers */
                     containers?: (google.cloud.run.v2.IContainer[]|null);
 
+                    /** RevisionTemplate sandboxes */
+                    sandboxes?: (google.cloud.run.v2.ISandboxConfiguration|null);
+
                     /** RevisionTemplate volumes */
                     volumes?: (google.cloud.run.v2.IVolume[]|null);
 
@@ -9647,8 +10672,20 @@ export namespace google {
                     /** RevisionTemplate nodeSelector */
                     nodeSelector?: (google.cloud.run.v2.INodeSelector|null);
 
+                    /** RevisionTemplate workloadIdentityConfig */
+                    workloadIdentityConfig?: (google.cloud.run.v2.IWorkloadIdentityConfig|null);
+
                     /** RevisionTemplate gpuZonalRedundancyDisabled */
                     gpuZonalRedundancyDisabled?: (boolean|null);
+
+                    /** RevisionTemplate client */
+                    client?: (string|null);
+
+                    /** RevisionTemplate clientVersion */
+                    clientVersion?: (string|null);
+
+                    /** RevisionTemplate ambientNetworking */
+                    ambientNetworking?: (google.cloud.run.v2.IAmbientNetworking|null);
                 }
 
                 /** Represents a RevisionTemplate. */
@@ -9684,6 +10721,9 @@ export namespace google {
                     /** RevisionTemplate containers. */
                     public containers: google.cloud.run.v2.IContainer[];
 
+                    /** RevisionTemplate sandboxes. */
+                    public sandboxes?: (google.cloud.run.v2.ISandboxConfiguration|null);
+
                     /** RevisionTemplate volumes. */
                     public volumes: google.cloud.run.v2.IVolume[];
 
@@ -9714,8 +10754,20 @@ export namespace google {
                     /** RevisionTemplate nodeSelector. */
                     public nodeSelector?: (google.cloud.run.v2.INodeSelector|null);
 
+                    /** RevisionTemplate workloadIdentityConfig. */
+                    public workloadIdentityConfig?: (google.cloud.run.v2.IWorkloadIdentityConfig|null);
+
                     /** RevisionTemplate gpuZonalRedundancyDisabled. */
                     public gpuZonalRedundancyDisabled?: (boolean|null);
+
+                    /** RevisionTemplate client. */
+                    public client: string;
+
+                    /** RevisionTemplate clientVersion. */
+                    public clientVersion: string;
+
+                    /** RevisionTemplate ambientNetworking. */
+                    public ambientNetworking?: (google.cloud.run.v2.IAmbientNetworking|null);
 
                     /**
                      * Creates a new RevisionTemplate instance using the specified properties.
@@ -10116,6 +11168,9 @@ export namespace google {
 
                     /** UpdateServiceRequest allowMissing */
                     allowMissing?: (boolean|null);
+
+                    /** UpdateServiceRequest forceNewRevision */
+                    forceNewRevision?: (boolean|null);
                 }
 
                 /** Represents an UpdateServiceRequest. */
@@ -10138,6 +11193,9 @@ export namespace google {
 
                     /** UpdateServiceRequest allowMissing. */
                     public allowMissing: boolean;
+
+                    /** UpdateServiceRequest forceNewRevision. */
+                    public forceNewRevision: boolean;
 
                     /**
                      * Creates a new UpdateServiceRequest instance using the specified properties.
@@ -10722,6 +11780,9 @@ export namespace google {
                     /** Service iapEnabled */
                     iapEnabled?: (boolean|null);
 
+                    /** Service sshEnabled */
+                    sshEnabled?: (boolean|null);
+
                     /** Service multiRegionSettings */
                     multiRegionSettings?: (google.cloud.run.v2.Service.IMultiRegionSettings|null);
 
@@ -10757,6 +11818,9 @@ export namespace google {
 
                     /** Service buildConfig */
                     buildConfig?: (google.cloud.run.v2.IBuildConfig|null);
+
+                    /** Service functionalType */
+                    functionalType?: (google.cloud.run.v2.FunctionalType|keyof typeof google.cloud.run.v2.FunctionalType|null);
 
                     /** Service reconciling */
                     reconciling?: (boolean|null);
@@ -10846,6 +11910,9 @@ export namespace google {
                     /** Service iapEnabled. */
                     public iapEnabled: boolean;
 
+                    /** Service sshEnabled. */
+                    public sshEnabled?: (boolean|null);
+
                     /** Service multiRegionSettings. */
                     public multiRegionSettings?: (google.cloud.run.v2.Service.IMultiRegionSettings|null);
 
@@ -10881,6 +11948,9 @@ export namespace google {
 
                     /** Service buildConfig. */
                     public buildConfig?: (google.cloud.run.v2.IBuildConfig|null);
+
+                    /** Service functionalType. */
+                    public functionalType: (google.cloud.run.v2.FunctionalType|keyof typeof google.cloud.run.v2.FunctionalType);
 
                     /** Service reconciling. */
                     public reconciling: boolean;
@@ -11315,6 +12385,254 @@ export namespace google {
                     TRAFFIC_TARGET_ALLOCATION_TYPE_REVISION = 2
                 }
 
+                /** Represents a SourceUpload */
+                class SourceUpload extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new SourceUpload service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new SourceUpload service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SourceUpload;
+
+                    /**
+                     * Calls UploadSource.
+                     * @param request UploadSourceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and UploadSourceResponse
+                     */
+                    public uploadSource(request: google.cloud.run.v2.IUploadSourceRequest, callback: google.cloud.run.v2.SourceUpload.UploadSourceCallback): void;
+
+                    /**
+                     * Calls UploadSource.
+                     * @param request UploadSourceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public uploadSource(request: google.cloud.run.v2.IUploadSourceRequest): Promise<google.cloud.run.v2.UploadSourceResponse>;
+                }
+
+                namespace SourceUpload {
+
+                    /**
+                     * Callback as used by {@link google.cloud.run.v2.SourceUpload|uploadSource}.
+                     * @param error Error, if any
+                     * @param [response] UploadSourceResponse
+                     */
+                    type UploadSourceCallback = (error: (Error|null), response?: google.cloud.run.v2.UploadSourceResponse) => void;
+                }
+
+                /** Properties of an UploadSourceRequest. */
+                interface IUploadSourceRequest {
+
+                    /** UploadSourceRequest parent */
+                    parent?: (string|null);
+
+                    /** UploadSourceRequest service */
+                    service?: (string|null);
+                }
+
+                /** Represents an UploadSourceRequest. */
+                class UploadSourceRequest implements IUploadSourceRequest {
+
+                    /**
+                     * Constructs a new UploadSourceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IUploadSourceRequest);
+
+                    /** UploadSourceRequest parent. */
+                    public parent: string;
+
+                    /** UploadSourceRequest service. */
+                    public service?: (string|null);
+
+                    /** UploadSourceRequest target. */
+                    public target?: "service";
+
+                    /**
+                     * Creates a new UploadSourceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UploadSourceRequest instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IUploadSourceRequest): google.cloud.run.v2.UploadSourceRequest;
+
+                    /**
+                     * Encodes the specified UploadSourceRequest message. Does not implicitly {@link google.cloud.run.v2.UploadSourceRequest.verify|verify} messages.
+                     * @param message UploadSourceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IUploadSourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UploadSourceRequest message, length delimited. Does not implicitly {@link google.cloud.run.v2.UploadSourceRequest.verify|verify} messages.
+                     * @param message UploadSourceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IUploadSourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UploadSourceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UploadSourceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.UploadSourceRequest;
+
+                    /**
+                     * Decodes an UploadSourceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UploadSourceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.UploadSourceRequest;
+
+                    /**
+                     * Verifies an UploadSourceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UploadSourceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UploadSourceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.UploadSourceRequest;
+
+                    /**
+                     * Creates a plain object from an UploadSourceRequest message. Also converts values to other types if specified.
+                     * @param message UploadSourceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.UploadSourceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UploadSourceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UploadSourceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UploadSourceResponse. */
+                interface IUploadSourceResponse {
+
+                    /** UploadSourceResponse cloudStorageSource */
+                    cloudStorageSource?: (google.cloud.run.v2.SourceCode.ICloudStorageSource|null);
+                }
+
+                /** Represents an UploadSourceResponse. */
+                class UploadSourceResponse implements IUploadSourceResponse {
+
+                    /**
+                     * Constructs a new UploadSourceResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IUploadSourceResponse);
+
+                    /** UploadSourceResponse cloudStorageSource. */
+                    public cloudStorageSource?: (google.cloud.run.v2.SourceCode.ICloudStorageSource|null);
+
+                    /**
+                     * Creates a new UploadSourceResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UploadSourceResponse instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IUploadSourceResponse): google.cloud.run.v2.UploadSourceResponse;
+
+                    /**
+                     * Encodes the specified UploadSourceResponse message. Does not implicitly {@link google.cloud.run.v2.UploadSourceResponse.verify|verify} messages.
+                     * @param message UploadSourceResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IUploadSourceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UploadSourceResponse message, length delimited. Does not implicitly {@link google.cloud.run.v2.UploadSourceResponse.verify|verify} messages.
+                     * @param message UploadSourceResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IUploadSourceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UploadSourceResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UploadSourceResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.UploadSourceResponse;
+
+                    /**
+                     * Decodes an UploadSourceResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UploadSourceResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.UploadSourceResponse;
+
+                    /**
+                     * Verifies an UploadSourceResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UploadSourceResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UploadSourceResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.UploadSourceResponse;
+
+                    /**
+                     * Creates a plain object from an UploadSourceResponse message. Also converts values to other types if specified.
+                     * @param message UploadSourceResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.UploadSourceResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UploadSourceResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UploadSourceResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a Tasks */
                 class Tasks extends $protobuf.rpc.Service {
 
@@ -11744,6 +13062,9 @@ export namespace google {
                     /** Task containers */
                     containers?: (google.cloud.run.v2.IContainer[]|null);
 
+                    /** Task sandboxes */
+                    sandboxes?: (google.cloud.run.v2.ISandboxConfiguration|null);
+
                     /** Task volumes */
                     volumes?: (google.cloud.run.v2.IVolume[]|null);
 
@@ -11794,6 +13115,9 @@ export namespace google {
 
                     /** Task gpuZonalRedundancyDisabled */
                     gpuZonalRedundancyDisabled?: (boolean|null);
+
+                    /** Task workloadIdentityConfig */
+                    workloadIdentityConfig?: (google.cloud.run.v2.IWorkloadIdentityConfig|null);
 
                     /** Task etag */
                     etag?: (string|null);
@@ -11853,6 +13177,9 @@ export namespace google {
                     /** Task containers. */
                     public containers: google.cloud.run.v2.IContainer[];
 
+                    /** Task sandboxes. */
+                    public sandboxes?: (google.cloud.run.v2.ISandboxConfiguration|null);
+
                     /** Task volumes. */
                     public volumes: google.cloud.run.v2.IVolume[];
 
@@ -11903,6 +13230,9 @@ export namespace google {
 
                     /** Task gpuZonalRedundancyDisabled. */
                     public gpuZonalRedundancyDisabled?: (boolean|null);
+
+                    /** Task workloadIdentityConfig. */
+                    public workloadIdentityConfig?: (google.cloud.run.v2.IWorkloadIdentityConfig|null);
 
                     /** Task etag. */
                     public etag: string;
@@ -13238,6 +14568,9 @@ export namespace google {
                     /** WorkerPoolRevisionTemplate containers */
                     containers?: (google.cloud.run.v2.IContainer[]|null);
 
+                    /** WorkerPoolRevisionTemplate sandboxes */
+                    sandboxes?: (google.cloud.run.v2.ISandboxConfiguration|null);
+
                     /** WorkerPoolRevisionTemplate volumes */
                     volumes?: (google.cloud.run.v2.IVolume[]|null);
 
@@ -13258,6 +14591,12 @@ export namespace google {
 
                     /** WorkerPoolRevisionTemplate gpuZonalRedundancyDisabled */
                     gpuZonalRedundancyDisabled?: (boolean|null);
+
+                    /** WorkerPoolRevisionTemplate client */
+                    client?: (string|null);
+
+                    /** WorkerPoolRevisionTemplate clientVersion */
+                    clientVersion?: (string|null);
                 }
 
                 /** Represents a WorkerPoolRevisionTemplate. */
@@ -13287,6 +14626,9 @@ export namespace google {
                     /** WorkerPoolRevisionTemplate containers. */
                     public containers: google.cloud.run.v2.IContainer[];
 
+                    /** WorkerPoolRevisionTemplate sandboxes. */
+                    public sandboxes?: (google.cloud.run.v2.ISandboxConfiguration|null);
+
                     /** WorkerPoolRevisionTemplate volumes. */
                     public volumes: google.cloud.run.v2.IVolume[];
 
@@ -13307,6 +14649,12 @@ export namespace google {
 
                     /** WorkerPoolRevisionTemplate gpuZonalRedundancyDisabled. */
                     public gpuZonalRedundancyDisabled?: (boolean|null);
+
+                    /** WorkerPoolRevisionTemplate client. */
+                    public client: string;
+
+                    /** WorkerPoolRevisionTemplate clientVersion. */
+                    public clientVersion: string;
 
                     /**
                      * Creates a new WorkerPoolRevisionTemplate instance using the specified properties.

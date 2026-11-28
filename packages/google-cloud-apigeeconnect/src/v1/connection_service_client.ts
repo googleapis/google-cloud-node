@@ -497,11 +497,11 @@ export class ConnectionServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listConnections values %j', values);
+          this._log.debug('listConnections values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listConnections request %j', request);
+    this._log.debug('listConnections request %j', request);
     return this.innerApiCalls
       .listConnections(request, options, wrappedCallback)
       ?.then(
@@ -510,7 +510,7 @@ export class ConnectionServiceClient {
           protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest | null,
           protos.google.cloud.apigeeconnect.v1.IListConnectionsResponse,
         ]) => {
-          this._log.info('listConnections values %j', response);
+          this._log.debug('listConnections values %j', response);
           return [response, input, output];
         },
       );
@@ -561,7 +561,7 @@ export class ConnectionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listConnections stream %j', request);
+    this._log.debug('listConnections stream %j', request);
     return this.descriptors.page.listConnections.createStream(
       this.innerApiCalls.listConnections as GaxCall,
       request,
@@ -617,7 +617,7 @@ export class ConnectionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listConnections iterate %j', request);
+    this._log.debug('listConnections iterate %j', request);
     return this.descriptors.page.listConnections.asyncIterate(
       this.innerApiCalls['listConnections'] as GaxCall,
       request as {},

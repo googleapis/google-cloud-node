@@ -16,9 +16,18 @@ import {GoogleAuth} from 'google-auth-library';
 
 export interface ExporterOptions {
   /**
-   * Optional authentication options for Google services.
+   * Authentication client for Google services.
    */
   auth: GoogleAuth;
+  /**
+   * Optional universe domain for the Cloud Monitoring endpoint (e.g. `googleapis.com`).
+   */
+  universeDomain?: string;
+  /**
+   * Optional custom Cloud Monitoring API endpoint (`host`, `host:port`, `[ipv6]`,
+   * `[ipv6]:port`, `https://host[:port]`, or `dns://[authority]/host[:port]`).
+   */
+  apiEndpoint?: string;
 }
 
 export enum MetricKind {

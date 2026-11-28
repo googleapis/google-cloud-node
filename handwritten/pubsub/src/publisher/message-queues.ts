@@ -148,6 +148,7 @@ export abstract class MessageQueue extends EventEmitter {
     }
 
     if (!this.allowsHedging && this.publisher.hedgingOptions) {
+      messages.forEach(m => m.parentSpan?.end());
       const err = new Error(
         'Publish hedging and message ordering cannot be enabled at the same time.',
       ) as ServiceError;
@@ -536,6 +537,7 @@ export class OrderedQueue extends MessageQueue {
    */
   add(message: PubsubMessage, callback: PublishCallback): void {
     if (this.publisher.hedgingOptions) {
+      message.parentSpan?.end();
       callback(
         new Error(
           'Publish hedging and message ordering cannot be enabled at the same time.',

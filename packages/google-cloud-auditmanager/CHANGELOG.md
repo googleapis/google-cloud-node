@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/auditmanager-v0.6.0...auditmanager-v0.7.0) (2026-11-09)
+
+
+### Features
+
+* Update API sources and regenerate ([#9817](https://github.com/googleapis/google-cloud-node/issues/9817)) ([46517fb](https://github.com/googleapis/google-cloud-node/commit/46517fb49d3e3ae1b35af21adf352a277a5e45ea))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/auditmanager-v0.5.1...auditmanager-v0.6.0) (2026-10-08)
 
 

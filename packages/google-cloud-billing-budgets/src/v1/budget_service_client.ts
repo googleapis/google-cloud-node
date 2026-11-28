@@ -489,7 +489,7 @@ export class BudgetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createBudget request %j', request);
+    this._log.debug('createBudget request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.billing.budgets.v1.IBudget,
@@ -500,7 +500,7 @@ export class BudgetServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createBudget response %j', response);
+          this._log.debug('createBudget response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -515,7 +515,7 @@ export class BudgetServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createBudget response %j', response);
+          this._log.debug('createBudget response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -638,7 +638,7 @@ export class BudgetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateBudget request %j', request);
+    this._log.debug('updateBudget request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.billing.budgets.v1.IBudget,
@@ -649,7 +649,7 @@ export class BudgetServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateBudget response %j', response);
+          this._log.debug('updateBudget response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -664,7 +664,7 @@ export class BudgetServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateBudget response %j', response);
+          this._log.debug('updateBudget response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -781,7 +781,7 @@ export class BudgetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getBudget request %j', request);
+    this._log.debug('getBudget request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.billing.budgets.v1.IBudget,
@@ -792,7 +792,7 @@ export class BudgetServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getBudget response %j', response);
+          this._log.debug('getBudget response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -804,7 +804,7 @@ export class BudgetServiceClient {
           protos.google.cloud.billing.budgets.v1.IGetBudgetRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getBudget response %j', response);
+          this._log.debug('getBudget response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -916,7 +916,7 @@ export class BudgetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteBudget request %j', request);
+    this._log.debug('deleteBudget request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -927,7 +927,7 @@ export class BudgetServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteBudget response %j', response);
+          this._log.debug('deleteBudget response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -942,7 +942,7 @@ export class BudgetServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteBudget response %j', response);
+          this._log.debug('deleteBudget response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1087,11 +1087,11 @@ export class BudgetServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listBudgets values %j', values);
+          this._log.debug('listBudgets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listBudgets request %j', request);
+    this._log.debug('listBudgets request %j', request);
     return this.innerApiCalls
       .listBudgets(request, options, wrappedCallback)
       ?.then(
@@ -1100,7 +1100,7 @@ export class BudgetServiceClient {
           protos.google.cloud.billing.budgets.v1.IListBudgetsRequest | null,
           protos.google.cloud.billing.budgets.v1.IListBudgetsResponse,
         ]) => {
-          this._log.info('listBudgets values %j', response);
+          this._log.debug('listBudgets values %j', response);
           return [response, input, output];
         },
       );
@@ -1155,7 +1155,7 @@ export class BudgetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBudgets stream %j', request);
+    this._log.debug('listBudgets stream %j', request);
     return this.descriptors.page.listBudgets.createStream(
       this.innerApiCalls.listBudgets as GaxCall,
       request,
@@ -1215,7 +1215,7 @@ export class BudgetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBudgets iterate %j', request);
+    this._log.debug('listBudgets iterate %j', request);
     return this.descriptors.page.listBudgets.asyncIterate(
       this.innerApiCalls['listBudgets'] as GaxCall,
       request as {},

@@ -520,7 +520,7 @@ export class HealthProfileServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getProfile request %j', request);
+    this._log.debug('getProfile request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devicesandservices.health.v4.IProfile,
@@ -531,7 +531,7 @@ export class HealthProfileServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getProfile response %j', response);
+          this._log.debug('getProfile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -546,7 +546,7 @@ export class HealthProfileServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getProfile response %j', response);
+          this._log.debug('getProfile response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -665,7 +665,7 @@ export class HealthProfileServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateProfile request %j', request);
+    this._log.debug('updateProfile request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devicesandservices.health.v4.IProfile,
@@ -676,7 +676,7 @@ export class HealthProfileServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateProfile response %j', response);
+          this._log.debug('updateProfile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -691,7 +691,7 @@ export class HealthProfileServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateProfile response %j', response);
+          this._log.debug('updateProfile response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -809,7 +809,7 @@ export class HealthProfileServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSettings request %j', request);
+    this._log.debug('getSettings request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devicesandservices.health.v4.ISettings,
@@ -820,7 +820,7 @@ export class HealthProfileServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSettings response %j', response);
+          this._log.debug('getSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -835,7 +835,7 @@ export class HealthProfileServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getSettings response %j', response);
+          this._log.debug('getSettings response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -954,7 +954,7 @@ export class HealthProfileServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateSettings request %j', request);
+    this._log.debug('updateSettings request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devicesandservices.health.v4.ISettings,
@@ -965,7 +965,7 @@ export class HealthProfileServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateSettings response %j', response);
+          this._log.debug('updateSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -980,7 +980,7 @@ export class HealthProfileServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateSettings response %j', response);
+          this._log.debug('updateSettings response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1101,7 +1101,7 @@ export class HealthProfileServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getIdentity request %j', request);
+    this._log.debug('getIdentity request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devicesandservices.health.v4.IIdentity,
@@ -1112,7 +1112,7 @@ export class HealthProfileServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getIdentity response %j', response);
+          this._log.debug('getIdentity response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1127,7 +1127,7 @@ export class HealthProfileServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getIdentity response %j', response);
+          this._log.debug('getIdentity response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1250,7 +1250,7 @@ export class HealthProfileServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getIrnProfile request %j', request);
+    this._log.debug('getIrnProfile request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devicesandservices.health.v4.IIrnProfile,
@@ -1261,7 +1261,7 @@ export class HealthProfileServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getIrnProfile response %j', response);
+          this._log.debug('getIrnProfile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1276,7 +1276,7 @@ export class HealthProfileServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getIrnProfile response %j', response);
+          this._log.debug('getIrnProfile response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1394,7 +1394,7 @@ export class HealthProfileServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPairedDevice request %j', request);
+    this._log.debug('getPairedDevice request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devicesandservices.health.v4.IPairedDevice,
@@ -1405,7 +1405,7 @@ export class HealthProfileServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPairedDevice response %j', response);
+          this._log.debug('getPairedDevice response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1420,7 +1420,7 @@ export class HealthProfileServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getPairedDevice response %j', response);
+          this._log.debug('getPairedDevice response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1556,11 +1556,11 @@ export class HealthProfileServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listPairedDevices values %j', values);
+          this._log.debug('listPairedDevices values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listPairedDevices request %j', request);
+    this._log.debug('listPairedDevices request %j', request);
     return this.innerApiCalls
       .listPairedDevices(request, options, wrappedCallback)
       ?.then(
@@ -1569,7 +1569,7 @@ export class HealthProfileServiceClient {
           protos.google.devicesandservices.health.v4.IListPairedDevicesRequest | null,
           protos.google.devicesandservices.health.v4.IListPairedDevicesResponse,
         ]) => {
-          this._log.info('listPairedDevices values %j', response);
+          this._log.debug('listPairedDevices values %j', response);
           return [response, input, output];
         },
       );
@@ -1620,7 +1620,7 @@ export class HealthProfileServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPairedDevices stream %j', request);
+    this._log.debug('listPairedDevices stream %j', request);
     return this.descriptors.page.listPairedDevices.createStream(
       this.innerApiCalls.listPairedDevices as GaxCall,
       request,
@@ -1676,7 +1676,7 @@ export class HealthProfileServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPairedDevices iterate %j', request);
+    this._log.debug('listPairedDevices iterate %j', request);
     return this.descriptors.page.listPairedDevices.asyncIterate(
       this.innerApiCalls['listPairedDevices'] as GaxCall,
       request as {},

@@ -583,11 +583,11 @@ export class AlloyDBCSQLAdminClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('restoreFromCloudSQL response %j', rawResponse);
+          this._log.debug('restoreFromCloudSQL response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('restoreFromCloudSQL request %j', request);
+    this._log.debug('restoreFromCloudSQL request %j', request);
     return this.innerApiCalls
       .restoreFromCloudSqL(request, options, wrappedCallback)
       ?.then(
@@ -599,7 +599,7 @@ export class AlloyDBCSQLAdminClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('restoreFromCloudSQL response %j', rawResponse);
+          this._log.debug('restoreFromCloudSQL response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

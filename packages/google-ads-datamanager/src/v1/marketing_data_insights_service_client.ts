@@ -495,7 +495,7 @@ export class MarketingDataInsightsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('retrieveInsights request %j', request);
+    this._log.debug('retrieveInsights request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.datamanager.v1.IRetrieveInsightsResponse,
@@ -506,7 +506,7 @@ export class MarketingDataInsightsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('retrieveInsights response %j', response);
+          this._log.debug('retrieveInsights response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -518,7 +518,7 @@ export class MarketingDataInsightsServiceClient {
           protos.google.ads.datamanager.v1.IRetrieveInsightsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('retrieveInsights response %j', response);
+          this._log.debug('retrieveInsights response %j', response);
           return [response, options, rawResponse];
         },
       )

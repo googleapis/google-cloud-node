@@ -527,11 +527,11 @@ export class TextToSpeechLongAudioSynthesizeClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('synthesizeLongAudio response %j', rawResponse);
+          this._log.debug('synthesizeLongAudio response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('synthesizeLongAudio request %j', request);
+    this._log.debug('synthesizeLongAudio request %j', request);
     return this.innerApiCalls
       .synthesizeLongAudio(request, options, wrappedCallback)
       ?.then(
@@ -543,7 +543,7 @@ export class TextToSpeechLongAudioSynthesizeClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('synthesizeLongAudio response %j', rawResponse);
+          this._log.debug('synthesizeLongAudio response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

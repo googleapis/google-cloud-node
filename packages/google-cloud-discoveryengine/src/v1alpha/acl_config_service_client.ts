@@ -611,7 +611,7 @@ export class AclConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateAclConfig request %j', request);
+    this._log.debug('updateAclConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1alpha.IAclConfig,
@@ -622,7 +622,7 @@ export class AclConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateAclConfig response %j', response);
+          this._log.debug('updateAclConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -637,7 +637,7 @@ export class AclConfigServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateAclConfig response %j', response);
+          this._log.debug('updateAclConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -760,7 +760,7 @@ export class AclConfigServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAclConfig request %j', request);
+    this._log.debug('getAclConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1alpha.IAclConfig,
@@ -771,7 +771,7 @@ export class AclConfigServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAclConfig response %j', response);
+          this._log.debug('getAclConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -786,7 +786,7 @@ export class AclConfigServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAclConfig response %j', response);
+          this._log.debug('getAclConfig response %j', response);
           return [response, options, rawResponse];
         },
       )

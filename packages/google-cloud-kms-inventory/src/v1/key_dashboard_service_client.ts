@@ -522,11 +522,11 @@ export class KeyDashboardServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listCryptoKeys values %j', values);
+          this._log.debug('listCryptoKeys values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listCryptoKeys request %j', request);
+    this._log.debug('listCryptoKeys request %j', request);
     return this.innerApiCalls
       .listCryptoKeys(request, options, wrappedCallback)
       ?.then(
@@ -535,7 +535,7 @@ export class KeyDashboardServiceClient {
           protos.google.cloud.kms.inventory.v1.IListCryptoKeysRequest | null,
           protos.google.cloud.kms.inventory.v1.IListCryptoKeysResponse,
         ]) => {
-          this._log.info('listCryptoKeys values %j', response);
+          this._log.debug('listCryptoKeys values %j', response);
           return [response, input, output];
         },
       );
@@ -583,7 +583,7 @@ export class KeyDashboardServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCryptoKeys stream %j', request);
+    this._log.debug('listCryptoKeys stream %j', request);
     return this.descriptors.page.listCryptoKeys.createStream(
       this.innerApiCalls.listCryptoKeys as GaxCall,
       request,
@@ -636,7 +636,7 @@ export class KeyDashboardServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCryptoKeys iterate %j', request);
+    this._log.debug('listCryptoKeys iterate %j', request);
     return this.descriptors.page.listCryptoKeys.asyncIterate(
       this.innerApiCalls['listCryptoKeys'] as GaxCall,
       request as {},

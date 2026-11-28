@@ -33,10 +33,12 @@ import {isAFEServerTimingEnabled} from '../common';
 class MetricAttemptTracer {
   private _startTime: number;
   public status: string;
+  public completed: boolean;
 
   constructor() {
     this._startTime = performance.now();
     this.status = Status[Status.UNKNOWN];
+    this.completed = false;
   }
 
   /**
@@ -327,8 +329,15 @@ export class MetricsTracer {
    * @param status The status code of the attempt (default: Status.OK).
    */
   public recordAttemptCompletion(statusCode: Status = Status.OK) {
-    if (!this.enabled || !this.currentOperation?.currentAttempt) return;
+    if (
+      !this.enabled ||
+      !this.currentOperation?.currentAttempt ||
+      this.currentOperation.currentAttempt.completed
+    ) {
+      return;
+    }
     const currentAttempt = this.currentOperation.currentAttempt;
+    currentAttempt.completed = true;
     currentAttempt.status = Status[statusCode] ?? Status[Status.UNKNOWN];
     const attemptAttributes = this._createAttemptOtelAttributes();
     const endTime = performance.now();
@@ -358,11 +367,22 @@ export class MetricsTracer {
   /**
    * Records the completion of the current operation, including its status,
    * latency, and attempt count. Also clears the current tracer from the factory.
+   * @param finalStatus Optional final status code override for the operation.
    */
-  public recordOperationCompletion() {
+  public recordOperationCompletion(finalStatus?: Status) {
     if (!this.enabled || !this.currentOperation) return;
+    if (
+      finalStatus !== undefined &&
+      this.currentOperation.currentAttempt &&
+      !this.currentOperation.currentAttempt.completed
+    ) {
+      this.recordAttemptCompletion(finalStatus);
+    }
     const endTime = performance.now();
-    const operationAttributes = this._createOperationOtelAttributes();
+    const operationAttributes =
+      finalStatus !== undefined
+        ? this._getAttributesForStatus(finalStatus)
+        : this._createOperationOtelAttributes();
     const operationLatencyMilliseconds = this._getMillisecondTimeDifference(
       this.currentOperation.startTime,
       endTime,

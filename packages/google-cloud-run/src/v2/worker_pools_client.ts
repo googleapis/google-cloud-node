@@ -475,7 +475,11 @@ export class WorkerPoolsClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/run',
+      'https://www.googleapis.com/auth/run.readonly',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -593,7 +597,7 @@ export class WorkerPoolsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getWorkerPool request %j', request);
+    this._log.debug('getWorkerPool request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.run.v2.IWorkerPool,
@@ -602,7 +606,7 @@ export class WorkerPoolsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getWorkerPool response %j', response);
+          this._log.debug('getWorkerPool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -614,7 +618,7 @@ export class WorkerPoolsClient {
           protos.google.cloud.run.v2.IGetWorkerPoolRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getWorkerPool response %j', response);
+          this._log.debug('getWorkerPool response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -722,7 +726,7 @@ export class WorkerPoolsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getIamPolicy request %j', request);
+    this._log.debug('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.IPolicy,
@@ -731,7 +735,7 @@ export class WorkerPoolsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -743,7 +747,7 @@ export class WorkerPoolsClient {
           protos.google.iam.v1.IGetIamPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -859,7 +863,7 @@ export class WorkerPoolsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('setIamPolicy request %j', request);
+    this._log.debug('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.IPolicy,
@@ -868,7 +872,7 @@ export class WorkerPoolsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('setIamPolicy response %j', response);
+          this._log.debug('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -880,7 +884,7 @@ export class WorkerPoolsClient {
           protos.google.iam.v1.ISetIamPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('setIamPolicy response %j', response);
+          this._log.debug('setIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -991,7 +995,7 @@ export class WorkerPoolsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('testIamPermissions request %j', request);
+    this._log.debug('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
@@ -1000,7 +1004,7 @@ export class WorkerPoolsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('testIamPermissions response %j', response);
+          this._log.debug('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1012,7 +1016,7 @@ export class WorkerPoolsClient {
           protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('testIamPermissions response %j', response);
+          this._log.debug('testIamPermissions response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1046,11 +1050,12 @@ export class WorkerPoolsClient {
    *   and hyphens.
    * @param {google.cloud.run.v2.WorkerPool} request.workerPool
    *   Required. The WorkerPool instance to create.
-   * @param {string} request.workerPoolId
-   *   Required. The unique identifier for the WorkerPool. It must begin with
+   * @param {string} [request.workerPoolId]
+   *   Optional. The unique identifier for the WorkerPool. It must begin with
    *   letter, and cannot end with hyphen; must contain fewer than 50 characters.
    *   The name of the worker pool becomes
    *   `{parent}/workerPools/{worker_pool_id}`.
+   *   If not provided, the server will generate a unique `worker_pool_id`.
    * @param {boolean} [request.validateOnly]
    *   Optional. Indicates that the request should be validated and default values
    *   populated, without persisting the request or creating any resources.
@@ -1171,11 +1176,11 @@ export class WorkerPoolsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createWorkerPool response %j', rawResponse);
+          this._log.debug('createWorkerPool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createWorkerPool request %j', request);
+    this._log.debug('createWorkerPool request %j', request);
     return this.innerApiCalls
       .createWorkerPool(request, options, wrappedCallback)
       ?.then(
@@ -1187,7 +1192,7 @@ export class WorkerPoolsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createWorkerPool response %j', rawResponse);
+          this._log.debug('createWorkerPool response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1369,11 +1374,11 @@ export class WorkerPoolsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateWorkerPool response %j', rawResponse);
+          this._log.debug('updateWorkerPool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateWorkerPool request %j', request);
+    this._log.debug('updateWorkerPool request %j', request);
     return this.innerApiCalls
       .updateWorkerPool(request, options, wrappedCallback)
       ?.then(
@@ -1385,7 +1390,7 @@ export class WorkerPoolsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateWorkerPool response %j', rawResponse);
+          this._log.debug('updateWorkerPool response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1558,11 +1563,11 @@ export class WorkerPoolsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteWorkerPool response %j', rawResponse);
+          this._log.debug('deleteWorkerPool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteWorkerPool request %j', request);
+    this._log.debug('deleteWorkerPool request %j', request);
     return this.innerApiCalls
       .deleteWorkerPool(request, options, wrappedCallback)
       ?.then(
@@ -1574,7 +1579,7 @@ export class WorkerPoolsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteWorkerPool response %j', rawResponse);
+          this._log.debug('deleteWorkerPool response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1732,11 +1737,11 @@ export class WorkerPoolsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listWorkerPools values %j', values);
+          this._log.debug('listWorkerPools values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listWorkerPools request %j', request);
+    this._log.debug('listWorkerPools request %j', request);
     return this.innerApiCalls
       .listWorkerPools(request, options, wrappedCallback)
       ?.then(
@@ -1745,7 +1750,7 @@ export class WorkerPoolsClient {
           protos.google.cloud.run.v2.IListWorkerPoolsRequest | null,
           protos.google.cloud.run.v2.IListWorkerPoolsResponse,
         ]) => {
-          this._log.info('listWorkerPools values %j', response);
+          this._log.debug('listWorkerPools values %j', response);
           return [response, input, output];
         },
       );
@@ -1806,7 +1811,7 @@ export class WorkerPoolsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkerPools stream %j', request);
+    this._log.debug('listWorkerPools stream %j', request);
     return this.descriptors.page.listWorkerPools.createStream(
       this.innerApiCalls.listWorkerPools as GaxCall,
       request,
@@ -1872,7 +1877,7 @@ export class WorkerPoolsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkerPools iterate %j', request);
+    this._log.debug('listWorkerPools iterate %j', request);
     return this.descriptors.page.listWorkerPools.asyncIterate(
       this.innerApiCalls['listWorkerPools'] as GaxCall,
       request as {},

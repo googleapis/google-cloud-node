@@ -1,10 +1,7 @@
 name: Auto Assign Reviewers
 
 on:
-  # pull_request_target is required to grant write permissions for reviewer assignment on fork PRs.
-  # The workflow only runs github-script and does not check out or execute untrusted code.
-  # zizmor: ignore[dangerous-triggers]
-  pull_request_target:
+  pull_request:
     types: [opened, ready_for_review, reopened, synchronize, review_requested, assigned]
 
 permissions:
@@ -18,7 +15,12 @@ concurrency:
 jobs:
   assign-reviewers:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.draft == false
+    # Skip fork and Dependabot PRs: under pull_request, GITHUB_TOKEN is read-only for those runs,
+    # so they fall back to .github/CODEOWNERS team reviewers instead of failing with 403.
+    if: >-
+      github.event.pull_request.draft == false &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.user.login != 'dependabot[bot]'
     steps:
       - name: Assign Reviewers
         continue-on-error: true

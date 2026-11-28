@@ -689,7 +689,7 @@ export class EncryptionSpecServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getEncryptionSpec request %j', request);
+    this._log.debug('getEncryptionSpec request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2beta1.IEncryptionSpec,
@@ -700,7 +700,7 @@ export class EncryptionSpecServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getEncryptionSpec response %j', response);
+          this._log.debug('getEncryptionSpec response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -715,7 +715,7 @@ export class EncryptionSpecServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getEncryptionSpec response %j', response);
+          this._log.debug('getEncryptionSpec response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -857,11 +857,11 @@ export class EncryptionSpecServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('initializeEncryptionSpec response %j', rawResponse);
+          this._log.debug('initializeEncryptionSpec response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('initializeEncryptionSpec request %j', request);
+    this._log.debug('initializeEncryptionSpec request %j', request);
     return this.innerApiCalls
       .initializeEncryptionSpec(request, options, wrappedCallback)
       ?.then(
@@ -873,7 +873,7 @@ export class EncryptionSpecServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('initializeEncryptionSpec response %j', rawResponse);
+          this._log.debug('initializeEncryptionSpec response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

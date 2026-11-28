@@ -491,7 +491,7 @@ export class FileServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createFile request %j', request);
+    this._log.debug('createFile request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta.ICreateFileResponse,
@@ -502,7 +502,7 @@ export class FileServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createFile response %j', response);
+          this._log.debug('createFile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -517,7 +517,7 @@ export class FileServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createFile response %j', response);
+          this._log.debug('createFile response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -629,7 +629,7 @@ export class FileServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getFile request %j', request);
+    this._log.debug('getFile request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta.IFile,
@@ -640,7 +640,7 @@ export class FileServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getFile response %j', response);
+          this._log.debug('getFile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -655,7 +655,7 @@ export class FileServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getFile response %j', response);
+          this._log.debug('getFile response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -767,7 +767,7 @@ export class FileServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteFile request %j', request);
+    this._log.debug('deleteFile request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -778,7 +778,7 @@ export class FileServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteFile response %j', response);
+          this._log.debug('deleteFile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -793,7 +793,7 @@ export class FileServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteFile response %j', response);
+          this._log.debug('deleteFile response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -911,7 +911,7 @@ export class FileServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('downloadFile request %j', request);
+    this._log.debug('downloadFile request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta.IDownloadFileResponse,
@@ -922,7 +922,7 @@ export class FileServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('downloadFile response %j', response);
+          this._log.debug('downloadFile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -937,7 +937,7 @@ export class FileServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('downloadFile response %j', response);
+          this._log.debug('downloadFile response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1061,11 +1061,11 @@ export class FileServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listFiles values %j', values);
+          this._log.debug('listFiles values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listFiles request %j', request);
+    this._log.debug('listFiles request %j', request);
     return this.innerApiCalls
       .listFiles(request, options, wrappedCallback)
       ?.then(
@@ -1074,7 +1074,7 @@ export class FileServiceClient {
           protos.google.ai.generativelanguage.v1beta.IListFilesRequest | null,
           protos.google.ai.generativelanguage.v1beta.IListFilesResponse,
         ]) => {
-          this._log.info('listFiles values %j', response);
+          this._log.debug('listFiles values %j', response);
           return [response, input, output];
         },
       );
@@ -1113,7 +1113,7 @@ export class FileServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFiles stream %j', request);
+    this._log.debug('listFiles stream %j', request);
     return this.descriptors.page.listFiles.createStream(
       this.innerApiCalls.listFiles as GaxCall,
       request,
@@ -1157,7 +1157,7 @@ export class FileServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFiles iterate %j', request);
+    this._log.debug('listFiles iterate %j', request);
     return this.descriptors.page.listFiles.asyncIterate(
       this.innerApiCalls['listFiles'] as GaxCall,
       request as {},

@@ -17,12 +17,11 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
-import * as v1beta from './v1beta';
 
 const PromotionsServiceClient = v1.PromotionsServiceClient;
 type PromotionsServiceClient = v1.PromotionsServiceClient;
 
-export {v1, v1beta, PromotionsServiceClient};
-export default {v1, v1beta, PromotionsServiceClient};
+export {v1, PromotionsServiceClient};
+export default {v1, PromotionsServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

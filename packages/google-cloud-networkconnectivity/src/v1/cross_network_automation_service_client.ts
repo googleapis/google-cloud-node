@@ -865,7 +865,7 @@ export class CrossNetworkAutomationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getServiceConnectionMap request %j', request);
+    this._log.debug('getServiceConnectionMap request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networkconnectivity.v1.IServiceConnectionMap,
@@ -876,7 +876,7 @@ export class CrossNetworkAutomationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getServiceConnectionMap response %j', response);
+          this._log.debug('getServiceConnectionMap response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -891,7 +891,7 @@ export class CrossNetworkAutomationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getServiceConnectionMap response %j', response);
+          this._log.debug('getServiceConnectionMap response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1008,7 +1008,7 @@ export class CrossNetworkAutomationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getServiceConnectionPolicy request %j', request);
+    this._log.debug('getServiceConnectionPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networkconnectivity.v1.IServiceConnectionPolicy,
@@ -1019,7 +1019,7 @@ export class CrossNetworkAutomationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getServiceConnectionPolicy response %j', response);
+          this._log.debug('getServiceConnectionPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1034,7 +1034,7 @@ export class CrossNetworkAutomationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getServiceConnectionPolicy response %j', response);
+          this._log.debug('getServiceConnectionPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1151,7 +1151,7 @@ export class CrossNetworkAutomationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getServiceClass request %j', request);
+    this._log.debug('getServiceClass request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networkconnectivity.v1.IServiceClass,
@@ -1162,7 +1162,7 @@ export class CrossNetworkAutomationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getServiceClass response %j', response);
+          this._log.debug('getServiceClass response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1177,7 +1177,7 @@ export class CrossNetworkAutomationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getServiceClass response %j', response);
+          this._log.debug('getServiceClass response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1294,7 +1294,7 @@ export class CrossNetworkAutomationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getServiceConnectionToken request %j', request);
+    this._log.debug('getServiceConnectionToken request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networkconnectivity.v1.IServiceConnectionToken,
@@ -1305,7 +1305,7 @@ export class CrossNetworkAutomationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getServiceConnectionToken response %j', response);
+          this._log.debug('getServiceConnectionToken response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1320,7 +1320,7 @@ export class CrossNetworkAutomationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getServiceConnectionToken response %j', response);
+          this._log.debug('getServiceConnectionToken response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1478,11 +1478,14 @@ export class CrossNetworkAutomationServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createServiceConnectionMap response %j', rawResponse);
+          this._log.debug(
+            'createServiceConnectionMap response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createServiceConnectionMap request %j', request);
+    this._log.debug('createServiceConnectionMap request %j', request);
     return this.innerApiCalls
       .createServiceConnectionMap(request, options, wrappedCallback)
       ?.then(
@@ -1494,7 +1497,10 @@ export class CrossNetworkAutomationServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createServiceConnectionMap response %j', rawResponse);
+          this._log.debug(
+            'createServiceConnectionMap response %j',
+            rawResponse,
+          );
           return [response, rawResponse, _];
         },
       );
@@ -1667,11 +1673,14 @@ export class CrossNetworkAutomationServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateServiceConnectionMap response %j', rawResponse);
+          this._log.debug(
+            'updateServiceConnectionMap response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateServiceConnectionMap request %j', request);
+    this._log.debug('updateServiceConnectionMap request %j', request);
     return this.innerApiCalls
       .updateServiceConnectionMap(request, options, wrappedCallback)
       ?.then(
@@ -1683,7 +1692,10 @@ export class CrossNetworkAutomationServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateServiceConnectionMap response %j', rawResponse);
+          this._log.debug(
+            'updateServiceConnectionMap response %j',
+            rawResponse,
+          );
           return [response, rawResponse, _];
         },
       );
@@ -1854,11 +1866,14 @@ export class CrossNetworkAutomationServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteServiceConnectionMap response %j', rawResponse);
+          this._log.debug(
+            'deleteServiceConnectionMap response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteServiceConnectionMap request %j', request);
+    this._log.debug('deleteServiceConnectionMap request %j', request);
     return this.innerApiCalls
       .deleteServiceConnectionMap(request, options, wrappedCallback)
       ?.then(
@@ -1870,7 +1885,10 @@ export class CrossNetworkAutomationServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteServiceConnectionMap response %j', rawResponse);
+          this._log.debug(
+            'deleteServiceConnectionMap response %j',
+            rawResponse,
+          );
           return [response, rawResponse, _];
         },
       );
@@ -2045,14 +2063,14 @@ export class CrossNetworkAutomationServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'createServiceConnectionPolicy response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createServiceConnectionPolicy request %j', request);
+    this._log.debug('createServiceConnectionPolicy request %j', request);
     return this.innerApiCalls
       .createServiceConnectionPolicy(request, options, wrappedCallback)
       ?.then(
@@ -2064,7 +2082,7 @@ export class CrossNetworkAutomationServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'createServiceConnectionPolicy response %j',
             rawResponse,
           );
@@ -2241,14 +2259,14 @@ export class CrossNetworkAutomationServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'updateServiceConnectionPolicy response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateServiceConnectionPolicy request %j', request);
+    this._log.debug('updateServiceConnectionPolicy request %j', request);
     return this.innerApiCalls
       .updateServiceConnectionPolicy(request, options, wrappedCallback)
       ?.then(
@@ -2260,7 +2278,7 @@ export class CrossNetworkAutomationServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'updateServiceConnectionPolicy response %j',
             rawResponse,
           );
@@ -2434,14 +2452,14 @@ export class CrossNetworkAutomationServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'deleteServiceConnectionPolicy response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteServiceConnectionPolicy request %j', request);
+    this._log.debug('deleteServiceConnectionPolicy request %j', request);
     return this.innerApiCalls
       .deleteServiceConnectionPolicy(request, options, wrappedCallback)
       ?.then(
@@ -2453,7 +2471,7 @@ export class CrossNetworkAutomationServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'deleteServiceConnectionPolicy response %j',
             rawResponse,
           );
@@ -2629,11 +2647,11 @@ export class CrossNetworkAutomationServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateServiceClass response %j', rawResponse);
+          this._log.debug('updateServiceClass response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateServiceClass request %j', request);
+    this._log.debug('updateServiceClass request %j', request);
     return this.innerApiCalls
       .updateServiceClass(request, options, wrappedCallback)
       ?.then(
@@ -2645,7 +2663,7 @@ export class CrossNetworkAutomationServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateServiceClass response %j', rawResponse);
+          this._log.debug('updateServiceClass response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2816,11 +2834,11 @@ export class CrossNetworkAutomationServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteServiceClass response %j', rawResponse);
+          this._log.debug('deleteServiceClass response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteServiceClass request %j', request);
+    this._log.debug('deleteServiceClass request %j', request);
     return this.innerApiCalls
       .deleteServiceClass(request, options, wrappedCallback)
       ?.then(
@@ -2832,7 +2850,7 @@ export class CrossNetworkAutomationServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteServiceClass response %j', rawResponse);
+          this._log.debug('deleteServiceClass response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3008,14 +3026,14 @@ export class CrossNetworkAutomationServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'createServiceConnectionToken response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createServiceConnectionToken request %j', request);
+    this._log.debug('createServiceConnectionToken request %j', request);
     return this.innerApiCalls
       .createServiceConnectionToken(request, options, wrappedCallback)
       ?.then(
@@ -3027,7 +3045,7 @@ export class CrossNetworkAutomationServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'createServiceConnectionToken response %j',
             rawResponse,
           );
@@ -3201,14 +3219,14 @@ export class CrossNetworkAutomationServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'deleteServiceConnectionToken response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteServiceConnectionToken request %j', request);
+    this._log.debug('deleteServiceConnectionToken request %j', request);
     return this.innerApiCalls
       .deleteServiceConnectionToken(request, options, wrappedCallback)
       ?.then(
@@ -3220,7 +3238,7 @@ export class CrossNetworkAutomationServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'deleteServiceConnectionToken response %j',
             rawResponse,
           );
@@ -3374,11 +3392,11 @@ export class CrossNetworkAutomationServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listServiceConnectionMaps values %j', values);
+          this._log.debug('listServiceConnectionMaps values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listServiceConnectionMaps request %j', request);
+    this._log.debug('listServiceConnectionMaps request %j', request);
     return this.innerApiCalls
       .listServiceConnectionMaps(request, options, wrappedCallback)
       ?.then(
@@ -3387,7 +3405,7 @@ export class CrossNetworkAutomationServiceClient {
           protos.google.cloud.networkconnectivity.v1.IListServiceConnectionMapsRequest | null,
           protos.google.cloud.networkconnectivity.v1.IListServiceConnectionMapsResponse,
         ]) => {
-          this._log.info('listServiceConnectionMaps values %j', response);
+          this._log.debug('listServiceConnectionMaps values %j', response);
           return [response, input, output];
         },
       );
@@ -3435,7 +3453,7 @@ export class CrossNetworkAutomationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listServiceConnectionMaps stream %j', request);
+    this._log.debug('listServiceConnectionMaps stream %j', request);
     return this.descriptors.page.listServiceConnectionMaps.createStream(
       this.innerApiCalls.listServiceConnectionMaps as GaxCall,
       request,
@@ -3488,7 +3506,7 @@ export class CrossNetworkAutomationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listServiceConnectionMaps iterate %j', request);
+    this._log.debug('listServiceConnectionMaps iterate %j', request);
     return this.descriptors.page.listServiceConnectionMaps.asyncIterate(
       this.innerApiCalls['listServiceConnectionMaps'] as GaxCall,
       request as {},
@@ -3606,11 +3624,11 @@ export class CrossNetworkAutomationServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listServiceConnectionPolicies values %j', values);
+          this._log.debug('listServiceConnectionPolicies values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listServiceConnectionPolicies request %j', request);
+    this._log.debug('listServiceConnectionPolicies request %j', request);
     return this.innerApiCalls
       .listServiceConnectionPolicies(request, options, wrappedCallback)
       ?.then(
@@ -3619,7 +3637,7 @@ export class CrossNetworkAutomationServiceClient {
           protos.google.cloud.networkconnectivity.v1.IListServiceConnectionPoliciesRequest | null,
           protos.google.cloud.networkconnectivity.v1.IListServiceConnectionPoliciesResponse,
         ]) => {
-          this._log.info('listServiceConnectionPolicies values %j', response);
+          this._log.debug('listServiceConnectionPolicies values %j', response);
           return [response, input, output];
         },
       );
@@ -3667,7 +3685,7 @@ export class CrossNetworkAutomationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listServiceConnectionPolicies stream %j', request);
+    this._log.debug('listServiceConnectionPolicies stream %j', request);
     return this.descriptors.page.listServiceConnectionPolicies.createStream(
       this.innerApiCalls.listServiceConnectionPolicies as GaxCall,
       request,
@@ -3720,7 +3738,7 @@ export class CrossNetworkAutomationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listServiceConnectionPolicies iterate %j', request);
+    this._log.debug('listServiceConnectionPolicies iterate %j', request);
     return this.descriptors.page.listServiceConnectionPolicies.asyncIterate(
       this.innerApiCalls['listServiceConnectionPolicies'] as GaxCall,
       request as {},
@@ -3838,11 +3856,11 @@ export class CrossNetworkAutomationServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listServiceClasses values %j', values);
+          this._log.debug('listServiceClasses values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listServiceClasses request %j', request);
+    this._log.debug('listServiceClasses request %j', request);
     return this.innerApiCalls
       .listServiceClasses(request, options, wrappedCallback)
       ?.then(
@@ -3851,7 +3869,7 @@ export class CrossNetworkAutomationServiceClient {
           protos.google.cloud.networkconnectivity.v1.IListServiceClassesRequest | null,
           protos.google.cloud.networkconnectivity.v1.IListServiceClassesResponse,
         ]) => {
-          this._log.info('listServiceClasses values %j', response);
+          this._log.debug('listServiceClasses values %j', response);
           return [response, input, output];
         },
       );
@@ -3899,7 +3917,7 @@ export class CrossNetworkAutomationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listServiceClasses stream %j', request);
+    this._log.debug('listServiceClasses stream %j', request);
     return this.descriptors.page.listServiceClasses.createStream(
       this.innerApiCalls.listServiceClasses as GaxCall,
       request,
@@ -3952,7 +3970,7 @@ export class CrossNetworkAutomationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listServiceClasses iterate %j', request);
+    this._log.debug('listServiceClasses iterate %j', request);
     return this.descriptors.page.listServiceClasses.asyncIterate(
       this.innerApiCalls['listServiceClasses'] as GaxCall,
       request as {},
@@ -4070,11 +4088,11 @@ export class CrossNetworkAutomationServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listServiceConnectionTokens values %j', values);
+          this._log.debug('listServiceConnectionTokens values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listServiceConnectionTokens request %j', request);
+    this._log.debug('listServiceConnectionTokens request %j', request);
     return this.innerApiCalls
       .listServiceConnectionTokens(request, options, wrappedCallback)
       ?.then(
@@ -4083,7 +4101,7 @@ export class CrossNetworkAutomationServiceClient {
           protos.google.cloud.networkconnectivity.v1.IListServiceConnectionTokensRequest | null,
           protos.google.cloud.networkconnectivity.v1.IListServiceConnectionTokensResponse,
         ]) => {
-          this._log.info('listServiceConnectionTokens values %j', response);
+          this._log.debug('listServiceConnectionTokens values %j', response);
           return [response, input, output];
         },
       );
@@ -4131,7 +4149,7 @@ export class CrossNetworkAutomationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listServiceConnectionTokens stream %j', request);
+    this._log.debug('listServiceConnectionTokens stream %j', request);
     return this.descriptors.page.listServiceConnectionTokens.createStream(
       this.innerApiCalls.listServiceConnectionTokens as GaxCall,
       request,
@@ -4184,7 +4202,7 @@ export class CrossNetworkAutomationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listServiceConnectionTokens iterate %j', request);
+    this._log.debug('listServiceConnectionTokens iterate %j', request);
     return this.descriptors.page.listServiceConnectionTokens.asyncIterate(
       this.innerApiCalls['listServiceConnectionTokens'] as GaxCall,
       request as {},

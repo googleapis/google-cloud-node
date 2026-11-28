@@ -33,6 +33,11 @@ function main(name) {
    *  Format: projects/{project}/trips/{trip_id}
    */
   // const name = 'abc123'
+  /**
+   *  Optional. The format of the route polyline to return.
+   *  If not set, `SIMPLE` route polyline will be returned.
+   */
+  // const routePolylineFormat = {}
 
   // Imports the Navconnect library
   const {NavConnectServiceClient} = require('@google-cloud/navconnect').v1;

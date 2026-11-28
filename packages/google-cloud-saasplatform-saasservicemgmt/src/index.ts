@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
+import * as v1 from './v1';
 import * as v1beta1 from './v1beta1';
 
 const SaasDeploymentsClient = v1beta1.SaasDeploymentsClient;
@@ -23,7 +24,7 @@ type SaasDeploymentsClient = v1beta1.SaasDeploymentsClient;
 const SaasRolloutsClient = v1beta1.SaasRolloutsClient;
 type SaasRolloutsClient = v1beta1.SaasRolloutsClient;
 
-export {v1beta1, SaasDeploymentsClient, SaasRolloutsClient};
-export default {v1beta1, SaasDeploymentsClient, SaasRolloutsClient};
+export {v1, v1beta1, SaasDeploymentsClient, SaasRolloutsClient};
+export default {v1, v1beta1, SaasDeploymentsClient, SaasRolloutsClient};
 import * as protos from '../protos/protos';
 export {protos};

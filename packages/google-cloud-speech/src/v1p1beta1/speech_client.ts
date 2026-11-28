@@ -526,7 +526,7 @@ export class SpeechClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('recognize request %j', request);
+    this._log.debug('recognize request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.speech.v1p1beta1.IRecognizeResponse,
@@ -537,7 +537,7 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('recognize response %j', response);
+          this._log.debug('recognize response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -549,7 +549,7 @@ export class SpeechClient {
           protos.google.cloud.speech.v1p1beta1.IRecognizeRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('recognize response %j', response);
+          this._log.debug('recognize response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -590,7 +590,7 @@ export class SpeechClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('streamingRecognize stream %j', options);
+    this._log.debug('streamingRecognize stream %j', options);
     return this.innerApiCalls.streamingRecognize(null, options);
   }
 
@@ -713,11 +713,11 @@ export class SpeechClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('longRunningRecognize response %j', rawResponse);
+          this._log.debug('longRunningRecognize response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('longRunningRecognize request %j', request);
+    this._log.debug('longRunningRecognize request %j', request);
     return this.innerApiCalls
       .longRunningRecognize(request, options, wrappedCallback)
       ?.then(
@@ -729,7 +729,7 @@ export class SpeechClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('longRunningRecognize response %j', rawResponse);
+          this._log.debug('longRunningRecognize response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

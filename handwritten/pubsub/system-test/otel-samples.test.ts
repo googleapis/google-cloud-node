@@ -17,12 +17,13 @@ import * as tracing from '../src/telemetry-tracing';
 import * as assert from 'assert';
 import {describe, it, after, before} from 'mocha';
 import {TestResources} from 'google-test-utils';
+import {trace} from '@opentelemetry/api';
 import {NodeTracerProvider} from '@opentelemetry/sdk-trace-node';
 import {SimpleSpanProcessor, InMemorySpanExporter} from '@opentelemetry/sdk-trace-base';
 import {waitForMessage} from './common';
 
 describe('OpenTelemetry Samples System Tests', () => {
-  const pubsub = new PubSub({enableOpenTelemetryTracing: true});
+  let pubsub: PubSub;
   const resources = new TestResources('ps-sys-otel');
 
   let topicName: string;
@@ -34,26 +35,28 @@ describe('OpenTelemetry Samples System Tests', () => {
   let exporter: InMemorySpanExporter;
 
   before(async () => {
-    topicName = resources.generateName('ot');
-    subName = resources.generateName('ot');
-    topic = (await pubsub.createTopic(topicName))[0];
-    subscription = (await topic.createSubscription(subName))[0];
+    trace.disable();
+    tracing.setGloballyEnabled(true);
 
     exporter = new InMemorySpanExporter();
-
-    // Build a tracer provider and a span processor to do
-    // something with the spans we're generating.
     processor = new SimpleSpanProcessor(exporter);
     provider = new NodeTracerProvider({
       spanProcessors: [processor],
     });
     provider.register();
+
+    pubsub = new PubSub({enableOpenTelemetryTracing: true});
+    topicName = resources.generateName('ot');
+    subName = resources.generateName('ot');
+    topic = (await pubsub.createTopic(topicName))[0];
+    subscription = (await topic.createSubscription(subName))[0];
   });
 
   after(async () => {
     // Don't interfere with other tests.
     tracing.setGloballyEnabled(false);
-    provider.shutdown();
+    await provider.shutdown();
+    trace.disable();
 
     const [subscriptions] = await pubsub.getSubscriptions();
     await Promise.all(
@@ -64,6 +67,8 @@ describe('OpenTelemetry Samples System Tests', () => {
     await Promise.all(
       resources.filterForCleanup(topics).map((x: any) => x.delete?.())
     );
+
+    await pubsub?.close();
   });
 
   it('should publish and listen with OpenTelemetry tracing', async () => {

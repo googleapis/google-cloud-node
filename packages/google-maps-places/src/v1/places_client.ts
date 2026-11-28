@@ -569,7 +569,7 @@ export class PlacesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchNearby request %j', request);
+    this._log.debug('searchNearby request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.maps.places.v1.ISearchNearbyResponse,
@@ -578,7 +578,7 @@ export class PlacesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('searchNearby response %j', response);
+          this._log.debug('searchNearby response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -590,7 +590,7 @@ export class PlacesClient {
           protos.google.maps.places.v1.ISearchNearbyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('searchNearby response %j', response);
+          this._log.debug('searchNearby response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -760,7 +760,7 @@ export class PlacesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchText request %j', request);
+    this._log.debug('searchText request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.maps.places.v1.ISearchTextResponse,
@@ -769,7 +769,7 @@ export class PlacesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('searchText response %j', response);
+          this._log.debug('searchText response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -781,7 +781,7 @@ export class PlacesClient {
           protos.google.maps.places.v1.ISearchTextRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('searchText response %j', response);
+          this._log.debug('searchText response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -919,7 +919,7 @@ export class PlacesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPhotoMedia request %j', request);
+    this._log.debug('getPhotoMedia request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.maps.places.v1.IPhotoMedia,
@@ -928,7 +928,7 @@ export class PlacesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPhotoMedia response %j', response);
+          this._log.debug('getPhotoMedia response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -940,7 +940,7 @@ export class PlacesClient {
           protos.google.maps.places.v1.IGetPhotoMediaRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getPhotoMedia response %j', response);
+          this._log.debug('getPhotoMedia response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1087,7 +1087,7 @@ export class PlacesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPlace request %j', request);
+    this._log.debug('getPlace request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.maps.places.v1.IPlace,
@@ -1096,7 +1096,7 @@ export class PlacesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPlace response %j', response);
+          this._log.debug('getPlace response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1108,7 +1108,7 @@ export class PlacesClient {
           protos.google.maps.places.v1.IGetPlaceRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getPlace response %j', response);
+          this._log.debug('getPlace response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1302,7 +1302,7 @@ export class PlacesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('autocompletePlaces request %j', request);
+    this._log.debug('autocompletePlaces request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.maps.places.v1.IAutocompletePlacesResponse,
@@ -1313,7 +1313,7 @@ export class PlacesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('autocompletePlaces response %j', response);
+          this._log.debug('autocompletePlaces response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1325,7 +1325,7 @@ export class PlacesClient {
           protos.google.maps.places.v1.IAutocompletePlacesRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('autocompletePlaces response %j', response);
+          this._log.debug('autocompletePlaces response %j', response);
           return [response, options, rawResponse];
         },
       )

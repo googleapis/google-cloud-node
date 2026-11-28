@@ -531,7 +531,7 @@ export class AutokeyAdminClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateAutokeyConfig request %j', request);
+    this._log.debug('updateAutokeyConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.kms.v1.IAutokeyConfig,
@@ -542,7 +542,7 @@ export class AutokeyAdminClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateAutokeyConfig response %j', response);
+          this._log.debug('updateAutokeyConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -554,7 +554,7 @@ export class AutokeyAdminClient {
           protos.google.cloud.kms.v1.IUpdateAutokeyConfigRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateAutokeyConfig response %j', response);
+          this._log.debug('updateAutokeyConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -662,7 +662,7 @@ export class AutokeyAdminClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAutokeyConfig request %j', request);
+    this._log.debug('getAutokeyConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.kms.v1.IAutokeyConfig,
@@ -673,7 +673,7 @@ export class AutokeyAdminClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAutokeyConfig response %j', response);
+          this._log.debug('getAutokeyConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -685,7 +685,7 @@ export class AutokeyAdminClient {
           protos.google.cloud.kms.v1.IGetAutokeyConfigRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getAutokeyConfig response %j', response);
+          this._log.debug('getAutokeyConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -798,7 +798,7 @@ export class AutokeyAdminClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('showEffectiveAutokeyConfig request %j', request);
+    this._log.debug('showEffectiveAutokeyConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.kms.v1.IShowEffectiveAutokeyConfigResponse,
@@ -809,7 +809,7 @@ export class AutokeyAdminClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('showEffectiveAutokeyConfig response %j', response);
+          this._log.debug('showEffectiveAutokeyConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -824,7 +824,7 @@ export class AutokeyAdminClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('showEffectiveAutokeyConfig response %j', response);
+          this._log.debug('showEffectiveAutokeyConfig response %j', response);
           return [response, options, rawResponse];
         },
       )

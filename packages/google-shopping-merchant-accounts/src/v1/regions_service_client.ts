@@ -550,7 +550,7 @@ export class RegionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRegion request %j', request);
+    this._log.debug('getRegion request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1.IRegion,
@@ -561,7 +561,7 @@ export class RegionsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getRegion response %j', response);
+          this._log.debug('getRegion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -576,7 +576,7 @@ export class RegionsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getRegion response %j', response);
+          this._log.debug('getRegion response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -700,7 +700,7 @@ export class RegionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createRegion request %j', request);
+    this._log.debug('createRegion request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1.IRegion,
@@ -711,7 +711,7 @@ export class RegionsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createRegion response %j', response);
+          this._log.debug('createRegion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -726,7 +726,7 @@ export class RegionsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createRegion response %j', response);
+          this._log.debug('createRegion response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -848,7 +848,7 @@ export class RegionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreateRegions request %j', request);
+    this._log.debug('batchCreateRegions request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1.IBatchCreateRegionsResponse,
@@ -859,7 +859,7 @@ export class RegionsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchCreateRegions response %j', response);
+          this._log.debug('batchCreateRegions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -874,7 +874,7 @@ export class RegionsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchCreateRegions response %j', response);
+          this._log.debug('batchCreateRegions response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -996,7 +996,7 @@ export class RegionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateRegion request %j', request);
+    this._log.debug('updateRegion request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1.IRegion,
@@ -1007,7 +1007,7 @@ export class RegionsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateRegion response %j', response);
+          this._log.debug('updateRegion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1022,7 +1022,7 @@ export class RegionsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateRegion response %j', response);
+          this._log.debug('updateRegion response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1144,7 +1144,7 @@ export class RegionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdateRegions request %j', request);
+    this._log.debug('batchUpdateRegions request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1.IBatchUpdateRegionsResponse,
@@ -1155,7 +1155,7 @@ export class RegionsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUpdateRegions response %j', response);
+          this._log.debug('batchUpdateRegions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1170,7 +1170,7 @@ export class RegionsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchUpdateRegions response %j', response);
+          this._log.debug('batchUpdateRegions response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1289,7 +1289,7 @@ export class RegionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteRegion request %j', request);
+    this._log.debug('deleteRegion request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1300,7 +1300,7 @@ export class RegionsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteRegion response %j', response);
+          this._log.debug('deleteRegion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1315,7 +1315,7 @@ export class RegionsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteRegion response %j', response);
+          this._log.debug('deleteRegion response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1437,7 +1437,7 @@ export class RegionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchDeleteRegions request %j', request);
+    this._log.debug('batchDeleteRegions request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1448,7 +1448,7 @@ export class RegionsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchDeleteRegions response %j', response);
+          this._log.debug('batchDeleteRegions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1463,7 +1463,7 @@ export class RegionsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchDeleteRegions response %j', response);
+          this._log.debug('batchDeleteRegions response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1600,11 +1600,11 @@ export class RegionsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRegions values %j', values);
+          this._log.debug('listRegions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRegions request %j', request);
+    this._log.debug('listRegions request %j', request);
     return this.innerApiCalls
       .listRegions(request, options, wrappedCallback)
       ?.then(
@@ -1613,7 +1613,7 @@ export class RegionsServiceClient {
           protos.google.shopping.merchant.accounts.v1.IListRegionsRequest | null,
           protos.google.shopping.merchant.accounts.v1.IListRegionsResponse,
         ]) => {
-          this._log.info('listRegions values %j', response);
+          this._log.debug('listRegions values %j', response);
           return [response, input, output];
         },
       );
@@ -1665,7 +1665,7 @@ export class RegionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRegions stream %j', request);
+    this._log.debug('listRegions stream %j', request);
     return this.descriptors.page.listRegions.createStream(
       this.innerApiCalls.listRegions as GaxCall,
       request,
@@ -1722,7 +1722,7 @@ export class RegionsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRegions iterate %j', request);
+    this._log.debug('listRegions iterate %j', request);
     return this.descriptors.page.listRegions.asyncIterate(
       this.innerApiCalls['listRegions'] as GaxCall,
       request as {},

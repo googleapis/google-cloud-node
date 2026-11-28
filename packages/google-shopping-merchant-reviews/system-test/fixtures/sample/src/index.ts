@@ -16,17 +16,9 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  MerchantReviewsServiceClient,
-  ProductReviewsServiceClient,
-} from '@google-shopping/reviews';
+import {ProductReviewsServiceClient} from '@google-shopping/reviews';
 
 // check that the client class type name can be used
-function doStuffWithMerchantReviewsServiceClient(
-  client: MerchantReviewsServiceClient,
-) {
-  client.close();
-}
 function doStuffWithProductReviewsServiceClient(
   client: ProductReviewsServiceClient,
 ) {
@@ -34,9 +26,6 @@ function doStuffWithProductReviewsServiceClient(
 }
 
 function main() {
-  // check that the client instance can be created
-  const merchantReviewsServiceClient = new MerchantReviewsServiceClient();
-  doStuffWithMerchantReviewsServiceClient(merchantReviewsServiceClient);
   // check that the client instance can be created
   const productReviewsServiceClient = new ProductReviewsServiceClient();
   doStuffWithProductReviewsServiceClient(productReviewsServiceClient);

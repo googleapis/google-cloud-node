@@ -495,11 +495,11 @@ export class AuthorizedDomainsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAuthorizedDomains values %j', values);
+          this._log.debug('listAuthorizedDomains values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAuthorizedDomains request %j', request);
+    this._log.debug('listAuthorizedDomains request %j', request);
     return this.innerApiCalls
       .listAuthorizedDomains(request, options, wrappedCallback)
       ?.then(
@@ -508,7 +508,7 @@ export class AuthorizedDomainsClient {
           protos.google.appengine.v1.IListAuthorizedDomainsRequest | null,
           protos.google.appengine.v1.IListAuthorizedDomainsResponse,
         ]) => {
-          this._log.info('listAuthorizedDomains values %j', response);
+          this._log.debug('listAuthorizedDomains values %j', response);
           return [response, input, output];
         },
       );
@@ -552,7 +552,7 @@ export class AuthorizedDomainsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAuthorizedDomains stream %j', request);
+    this._log.debug('listAuthorizedDomains stream %j', request);
     return this.descriptors.page.listAuthorizedDomains.createStream(
       this.innerApiCalls.listAuthorizedDomains as GaxCall,
       request,
@@ -601,7 +601,7 @@ export class AuthorizedDomainsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAuthorizedDomains iterate %j', request);
+    this._log.debug('listAuthorizedDomains iterate %j', request);
     return this.descriptors.page.listAuthorizedDomains.asyncIterate(
       this.innerApiCalls['listAuthorizedDomains'] as GaxCall,
       request as {},

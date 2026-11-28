@@ -490,7 +490,7 @@ export class IssueResolutionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('renderAccountIssues request %j', request);
+    this._log.debug('renderAccountIssues request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.issueresolution.v1.IRenderAccountIssuesResponse,
@@ -501,7 +501,7 @@ export class IssueResolutionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('renderAccountIssues response %j', response);
+          this._log.debug('renderAccountIssues response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -516,7 +516,7 @@ export class IssueResolutionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('renderAccountIssues response %j', response);
+          this._log.debug('renderAccountIssues response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -646,7 +646,7 @@ export class IssueResolutionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('renderProductIssues request %j', request);
+    this._log.debug('renderProductIssues request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.issueresolution.v1.IRenderProductIssuesResponse,
@@ -657,7 +657,7 @@ export class IssueResolutionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('renderProductIssues response %j', response);
+          this._log.debug('renderProductIssues response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -672,7 +672,7 @@ export class IssueResolutionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('renderProductIssues response %j', response);
+          this._log.debug('renderProductIssues response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -806,7 +806,7 @@ export class IssueResolutionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('triggerAction request %j', request);
+    this._log.debug('triggerAction request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.issueresolution.v1.ITriggerActionResponse,
@@ -817,7 +817,7 @@ export class IssueResolutionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('triggerAction response %j', response);
+          this._log.debug('triggerAction response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -832,7 +832,7 @@ export class IssueResolutionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('triggerAction response %j', response);
+          this._log.debug('triggerAction response %j', response);
           return [response, options, rawResponse];
         },
       )

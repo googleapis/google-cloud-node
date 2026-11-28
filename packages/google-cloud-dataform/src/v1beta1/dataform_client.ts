@@ -311,6 +311,11 @@ export class DataformClient {
         'nextPageToken',
         'branches',
       ),
+      fetchWorkspaceHistory: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'commits',
+      ),
       queryDirectoryContents: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -424,6 +429,12 @@ export class DataformClient {
     const moveRepositoryMetadata = protoFilesRoot.lookup(
       '.google.cloud.dataform.v1beta1.MoveRepositoryMetadata',
     ) as gax.protobuf.Type;
+    const createCompilationResultLongRunningResponse = protoFilesRoot.lookup(
+      '.google.cloud.dataform.v1beta1.CompilationResult',
+    ) as gax.protobuf.Type;
+    const createCompilationResultLongRunningMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dataform.v1beta1.CreateCompilationResultMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       deleteTeamFolderTree: new this._gaxModule.LongrunningDescriptor(
@@ -455,6 +466,16 @@ export class DataformClient {
         moveRepositoryResponse.decode.bind(moveRepositoryResponse),
         moveRepositoryMetadata.decode.bind(moveRepositoryMetadata),
       ),
+      createCompilationResultLongRunning:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          createCompilationResultLongRunningResponse.decode.bind(
+            createCompilationResultLongRunningResponse,
+          ),
+          createCompilationResultLongRunningMetadata.decode.bind(
+            createCompilationResultLongRunningMetadata,
+          ),
+        ),
     };
 
     // Put together the default options sent with requests.
@@ -549,6 +570,7 @@ export class DataformClient {
       'pushGitCommits',
       'fetchFileGitStatuses',
       'fetchGitAheadBehind',
+      'fetchWorkspaceHistory',
       'commitWorkspaceChanges',
       'resetWorkspaceChanges',
       'fetchFileDiff',
@@ -569,6 +591,7 @@ export class DataformClient {
       'listCompilationResults',
       'getCompilationResult',
       'createCompilationResult',
+      'createCompilationResultLongRunning',
       'queryCompilationResultActions',
       'listWorkflowConfigs',
       'getWorkflowConfig',
@@ -796,7 +819,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getTeamFolder request %j', request);
+    this._log.debug('getTeamFolder request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.ITeamFolder,
@@ -807,7 +830,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTeamFolder response %j', response);
+          this._log.debug('getTeamFolder response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -822,7 +845,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getTeamFolder response %j', response);
+          this._log.debug('getTeamFolder response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -941,7 +964,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createTeamFolder request %j', request);
+    this._log.debug('createTeamFolder request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.ITeamFolder,
@@ -952,7 +975,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createTeamFolder response %j', response);
+          this._log.debug('createTeamFolder response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -967,7 +990,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createTeamFolder response %j', response);
+          this._log.debug('createTeamFolder response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1081,7 +1104,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateTeamFolder request %j', request);
+    this._log.debug('updateTeamFolder request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.ITeamFolder,
@@ -1092,7 +1115,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateTeamFolder response %j', response);
+          this._log.debug('updateTeamFolder response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1107,7 +1130,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateTeamFolder response %j', response);
+          this._log.debug('updateTeamFolder response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1218,7 +1241,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteTeamFolder request %j', request);
+    this._log.debug('deleteTeamFolder request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1229,7 +1252,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteTeamFolder response %j', response);
+          this._log.debug('deleteTeamFolder response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1244,7 +1267,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteTeamFolder response %j', response);
+          this._log.debug('deleteTeamFolder response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1349,7 +1372,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getFolder request %j', request);
+    this._log.debug('getFolder request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IFolder,
@@ -1360,7 +1383,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getFolder response %j', response);
+          this._log.debug('getFolder response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1372,7 +1395,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IGetFolderRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getFolder response %j', response);
+          this._log.debug('getFolder response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1491,7 +1514,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createFolder request %j', request);
+    this._log.debug('createFolder request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IFolder,
@@ -1502,7 +1525,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createFolder response %j', response);
+          this._log.debug('createFolder response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1514,7 +1537,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.ICreateFolderRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createFolder response %j', response);
+          this._log.debug('createFolder response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1630,7 +1653,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateFolder request %j', request);
+    this._log.debug('updateFolder request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IFolder,
@@ -1641,7 +1664,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateFolder response %j', response);
+          this._log.debug('updateFolder response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1653,7 +1676,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IUpdateFolderRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateFolder response %j', response);
+          this._log.debug('updateFolder response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1764,7 +1787,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteFolder request %j', request);
+    this._log.debug('deleteFolder request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1775,7 +1798,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteFolder response %j', response);
+          this._log.debug('deleteFolder response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1787,7 +1810,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IDeleteFolderRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteFolder response %j', response);
+          this._log.debug('deleteFolder response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1898,7 +1921,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRepository request %j', request);
+    this._log.debug('getRepository request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IRepository,
@@ -1909,7 +1932,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getRepository response %j', response);
+          this._log.debug('getRepository response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1924,7 +1947,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getRepository response %j', response);
+          this._log.debug('getRepository response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2041,7 +2064,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createRepository request %j', request);
+    this._log.debug('createRepository request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IRepository,
@@ -2052,7 +2075,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createRepository response %j', response);
+          this._log.debug('createRepository response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2067,7 +2090,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createRepository response %j', response);
+          this._log.debug('createRepository response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2186,7 +2209,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateRepository request %j', request);
+    this._log.debug('updateRepository request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IRepository,
@@ -2197,7 +2220,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateRepository response %j', response);
+          this._log.debug('updateRepository response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2212,7 +2235,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateRepository response %j', response);
+          this._log.debug('updateRepository response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2331,7 +2354,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteRepository request %j', request);
+    this._log.debug('deleteRepository request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -2342,7 +2365,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteRepository response %j', response);
+          this._log.debug('deleteRepository response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2357,7 +2380,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteRepository response %j', response);
+          this._log.debug('deleteRepository response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2484,7 +2507,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('commitRepositoryChanges request %j', request);
+    this._log.debug('commitRepositoryChanges request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.ICommitRepositoryChangesResponse,
@@ -2495,7 +2518,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('commitRepositoryChanges response %j', response);
+          this._log.debug('commitRepositoryChanges response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2510,7 +2533,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('commitRepositoryChanges response %j', response);
+          this._log.debug('commitRepositoryChanges response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2633,7 +2656,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('readRepositoryFile request %j', request);
+    this._log.debug('readRepositoryFile request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IReadRepositoryFileResponse,
@@ -2644,7 +2667,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('readRepositoryFile response %j', response);
+          this._log.debug('readRepositoryFile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2659,7 +2682,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('readRepositoryFile response %j', response);
+          this._log.debug('readRepositoryFile response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2776,7 +2799,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('computeRepositoryAccessTokenStatus request %j', request);
+    this._log.debug('computeRepositoryAccessTokenStatus request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IComputeRepositoryAccessTokenStatusResponse,
@@ -2787,7 +2810,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'computeRepositoryAccessTokenStatus response %j',
             response,
           );
@@ -2805,7 +2828,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'computeRepositoryAccessTokenStatus response %j',
             response,
           );
@@ -2925,7 +2948,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchRemoteBranches request %j', request);
+    this._log.debug('fetchRemoteBranches request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IFetchRemoteBranchesResponse,
@@ -2936,7 +2959,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('fetchRemoteBranches response %j', response);
+          this._log.debug('fetchRemoteBranches response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2951,7 +2974,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('fetchRemoteBranches response %j', response);
+          this._log.debug('fetchRemoteBranches response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3062,7 +3085,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getWorkspace request %j', request);
+    this._log.debug('getWorkspace request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IWorkspace,
@@ -3073,7 +3096,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getWorkspace response %j', response);
+          this._log.debug('getWorkspace response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -3085,7 +3108,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IGetWorkspaceRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getWorkspace response %j', response);
+          this._log.debug('getWorkspace response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3202,7 +3225,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createWorkspace request %j', request);
+    this._log.debug('createWorkspace request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IWorkspace,
@@ -3213,7 +3236,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createWorkspace response %j', response);
+          this._log.debug('createWorkspace response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -3228,7 +3251,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createWorkspace response %j', response);
+          this._log.debug('createWorkspace response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3339,7 +3362,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteWorkspace request %j', request);
+    this._log.debug('deleteWorkspace request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -3350,7 +3373,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteWorkspace response %j', response);
+          this._log.debug('deleteWorkspace response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -3365,7 +3388,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteWorkspace response %j', response);
+          this._log.debug('deleteWorkspace response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3485,7 +3508,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('installNpmPackages request %j', request);
+    this._log.debug('installNpmPackages request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IInstallNpmPackagesResponse,
@@ -3496,7 +3519,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('installNpmPackages response %j', response);
+          this._log.debug('installNpmPackages response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -3511,7 +3534,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('installNpmPackages response %j', response);
+          this._log.debug('installNpmPackages response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3628,7 +3651,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('pullGitCommits request %j', request);
+    this._log.debug('pullGitCommits request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IPullGitCommitsResponse,
@@ -3639,7 +3662,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('pullGitCommits response %j', response);
+          this._log.debug('pullGitCommits response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -3654,7 +3677,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('pullGitCommits response %j', response);
+          this._log.debug('pullGitCommits response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3780,7 +3803,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('syncWorkspaceRefs request %j', request);
+    this._log.debug('syncWorkspaceRefs request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.ISyncWorkspaceRefsResponse,
@@ -3791,7 +3814,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('syncWorkspaceRefs response %j', response);
+          this._log.debug('syncWorkspaceRefs response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -3806,7 +3829,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('syncWorkspaceRefs response %j', response);
+          this._log.debug('syncWorkspaceRefs response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3924,7 +3947,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteBranch request %j', request);
+    this._log.debug('deleteBranch request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IDeleteBranchResponse,
@@ -3935,7 +3958,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteBranch response %j', response);
+          this._log.debug('deleteBranch response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -3947,7 +3970,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IDeleteBranchRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteBranch response %j', response);
+          this._log.debug('deleteBranch response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -4078,7 +4101,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('checkoutWorkspaceBranch request %j', request);
+    this._log.debug('checkoutWorkspaceBranch request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -4089,7 +4112,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('checkoutWorkspaceBranch response %j', response);
+          this._log.debug('checkoutWorkspaceBranch response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -4104,7 +4127,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('checkoutWorkspaceBranch response %j', response);
+          this._log.debug('checkoutWorkspaceBranch response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -4223,7 +4246,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchCurrentWorkspaceBranch request %j', request);
+    this._log.debug('fetchCurrentWorkspaceBranch request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchResponse,
@@ -4234,7 +4257,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('fetchCurrentWorkspaceBranch response %j', response);
+          this._log.debug('fetchCurrentWorkspaceBranch response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -4249,7 +4272,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('fetchCurrentWorkspaceBranch response %j', response);
+          this._log.debug('fetchCurrentWorkspaceBranch response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -4364,7 +4387,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('pushGitCommits request %j', request);
+    this._log.debug('pushGitCommits request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IPushGitCommitsResponse,
@@ -4375,7 +4398,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('pushGitCommits response %j', response);
+          this._log.debug('pushGitCommits response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -4390,7 +4413,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('pushGitCommits response %j', response);
+          this._log.debug('pushGitCommits response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -4507,7 +4530,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchFileGitStatuses request %j', request);
+    this._log.debug('fetchFileGitStatuses request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IFetchFileGitStatusesResponse,
@@ -4518,7 +4541,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('fetchFileGitStatuses response %j', response);
+          this._log.debug('fetchFileGitStatuses response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -4533,7 +4556,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('fetchFileGitStatuses response %j', response);
+          this._log.debug('fetchFileGitStatuses response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -4654,7 +4677,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchGitAheadBehind request %j', request);
+    this._log.debug('fetchGitAheadBehind request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IFetchGitAheadBehindResponse,
@@ -4665,7 +4688,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('fetchGitAheadBehind response %j', response);
+          this._log.debug('fetchGitAheadBehind response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -4680,7 +4703,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('fetchGitAheadBehind response %j', response);
+          this._log.debug('fetchGitAheadBehind response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -4804,7 +4827,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('commitWorkspaceChanges request %j', request);
+    this._log.debug('commitWorkspaceChanges request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.ICommitWorkspaceChangesResponse,
@@ -4815,7 +4838,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('commitWorkspaceChanges response %j', response);
+          this._log.debug('commitWorkspaceChanges response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -4830,7 +4853,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('commitWorkspaceChanges response %j', response);
+          this._log.debug('commitWorkspaceChanges response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -4952,7 +4975,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('resetWorkspaceChanges request %j', request);
+    this._log.debug('resetWorkspaceChanges request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IResetWorkspaceChangesResponse,
@@ -4963,7 +4986,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('resetWorkspaceChanges response %j', response);
+          this._log.debug('resetWorkspaceChanges response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -4978,7 +5001,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('resetWorkspaceChanges response %j', response);
+          this._log.debug('resetWorkspaceChanges response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -5092,7 +5115,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchFileDiff request %j', request);
+    this._log.debug('fetchFileDiff request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IFetchFileDiffResponse,
@@ -5103,7 +5126,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('fetchFileDiff response %j', response);
+          this._log.debug('fetchFileDiff response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -5118,7 +5141,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('fetchFileDiff response %j', response);
+          this._log.debug('fetchFileDiff response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -5232,7 +5255,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('makeDirectory request %j', request);
+    this._log.debug('makeDirectory request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IMakeDirectoryResponse,
@@ -5243,7 +5266,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('makeDirectory response %j', response);
+          this._log.debug('makeDirectory response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -5258,7 +5281,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('makeDirectory response %j', response);
+          this._log.debug('makeDirectory response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -5372,7 +5395,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('removeDirectory request %j', request);
+    this._log.debug('removeDirectory request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IRemoveDirectoryResponse,
@@ -5383,7 +5406,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('removeDirectory response %j', response);
+          this._log.debug('removeDirectory response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -5398,7 +5421,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('removeDirectory response %j', response);
+          this._log.debug('removeDirectory response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -5516,7 +5539,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('moveDirectory request %j', request);
+    this._log.debug('moveDirectory request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IMoveDirectoryResponse,
@@ -5527,7 +5550,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('moveDirectory response %j', response);
+          this._log.debug('moveDirectory response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -5542,7 +5565,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('moveDirectory response %j', response);
+          this._log.debug('moveDirectory response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -5653,7 +5676,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('readFile request %j', request);
+    this._log.debug('readFile request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IReadFileResponse,
@@ -5664,7 +5687,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('readFile response %j', response);
+          this._log.debug('readFile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -5676,7 +5699,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IReadFileRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('readFile response %j', response);
+          this._log.debug('readFile response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -5790,7 +5813,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('removeFile request %j', request);
+    this._log.debug('removeFile request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IRemoveFileResponse,
@@ -5801,7 +5824,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('removeFile response %j', response);
+          this._log.debug('removeFile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -5813,7 +5836,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IRemoveFileRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('removeFile response %j', response);
+          this._log.debug('removeFile response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -5924,7 +5947,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('moveFile request %j', request);
+    this._log.debug('moveFile request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IMoveFileResponse,
@@ -5935,7 +5958,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('moveFile response %j', response);
+          this._log.debug('moveFile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -5947,7 +5970,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IMoveFileRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('moveFile response %j', response);
+          this._log.debug('moveFile response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -6056,7 +6079,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('writeFile request %j', request);
+    this._log.debug('writeFile request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IWriteFileResponse,
@@ -6067,7 +6090,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('writeFile response %j', response);
+          this._log.debug('writeFile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -6079,7 +6102,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IWriteFileRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('writeFile response %j', response);
+          this._log.debug('writeFile response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -6190,7 +6213,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getReleaseConfig request %j', request);
+    this._log.debug('getReleaseConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IReleaseConfig,
@@ -6201,7 +6224,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getReleaseConfig response %j', response);
+          this._log.debug('getReleaseConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -6216,7 +6239,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getReleaseConfig response %j', response);
+          this._log.debug('getReleaseConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -6339,7 +6362,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createReleaseConfig request %j', request);
+    this._log.debug('createReleaseConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IReleaseConfig,
@@ -6350,7 +6373,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createReleaseConfig response %j', response);
+          this._log.debug('createReleaseConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -6365,7 +6388,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createReleaseConfig response %j', response);
+          this._log.debug('createReleaseConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -6490,7 +6513,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateReleaseConfig request %j', request);
+    this._log.debug('updateReleaseConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IReleaseConfig,
@@ -6501,7 +6524,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateReleaseConfig response %j', response);
+          this._log.debug('updateReleaseConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -6516,7 +6539,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateReleaseConfig response %j', response);
+          this._log.debug('updateReleaseConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -6633,7 +6656,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteReleaseConfig request %j', request);
+    this._log.debug('deleteReleaseConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -6644,7 +6667,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteReleaseConfig response %j', response);
+          this._log.debug('deleteReleaseConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -6659,7 +6682,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteReleaseConfig response %j', response);
+          this._log.debug('deleteReleaseConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -6776,7 +6799,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCompilationResult request %j', request);
+    this._log.debug('getCompilationResult request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.ICompilationResult,
@@ -6787,7 +6810,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCompilationResult response %j', response);
+          this._log.debug('getCompilationResult response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -6802,7 +6825,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getCompilationResult response %j', response);
+          this._log.debug('getCompilationResult response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -6922,7 +6945,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createCompilationResult request %j', request);
+    this._log.debug('createCompilationResult request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.ICompilationResult,
@@ -6933,7 +6956,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createCompilationResult response %j', response);
+          this._log.debug('createCompilationResult response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -6948,7 +6971,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createCompilationResult response %j', response);
+          this._log.debug('createCompilationResult response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -7065,7 +7088,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getWorkflowConfig request %j', request);
+    this._log.debug('getWorkflowConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
@@ -7076,7 +7099,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getWorkflowConfig response %j', response);
+          this._log.debug('getWorkflowConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -7091,7 +7114,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getWorkflowConfig response %j', response);
+          this._log.debug('getWorkflowConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -7214,7 +7237,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createWorkflowConfig request %j', request);
+    this._log.debug('createWorkflowConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
@@ -7225,7 +7248,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createWorkflowConfig response %j', response);
+          this._log.debug('createWorkflowConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -7240,7 +7263,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createWorkflowConfig response %j', response);
+          this._log.debug('createWorkflowConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -7365,7 +7388,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateWorkflowConfig request %j', request);
+    this._log.debug('updateWorkflowConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IWorkflowConfig,
@@ -7376,7 +7399,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateWorkflowConfig response %j', response);
+          this._log.debug('updateWorkflowConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -7391,7 +7414,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateWorkflowConfig response %j', response);
+          this._log.debug('updateWorkflowConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -7508,7 +7531,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteWorkflowConfig request %j', request);
+    this._log.debug('deleteWorkflowConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -7519,7 +7542,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteWorkflowConfig response %j', response);
+          this._log.debug('deleteWorkflowConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -7534,7 +7557,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteWorkflowConfig response %j', response);
+          this._log.debug('deleteWorkflowConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -7651,7 +7674,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getWorkflowInvocation request %j', request);
+    this._log.debug('getWorkflowInvocation request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
@@ -7662,7 +7685,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getWorkflowInvocation response %j', response);
+          this._log.debug('getWorkflowInvocation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -7677,7 +7700,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getWorkflowInvocation response %j', response);
+          this._log.debug('getWorkflowInvocation response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -7797,7 +7820,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createWorkflowInvocation request %j', request);
+    this._log.debug('createWorkflowInvocation request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IWorkflowInvocation,
@@ -7808,7 +7831,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createWorkflowInvocation response %j', response);
+          this._log.debug('createWorkflowInvocation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -7823,7 +7846,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createWorkflowInvocation response %j', response);
+          this._log.debug('createWorkflowInvocation response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -7940,7 +7963,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteWorkflowInvocation request %j', request);
+    this._log.debug('deleteWorkflowInvocation request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -7951,7 +7974,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteWorkflowInvocation response %j', response);
+          this._log.debug('deleteWorkflowInvocation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -7966,7 +7989,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteWorkflowInvocation response %j', response);
+          this._log.debug('deleteWorkflowInvocation response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -8083,7 +8106,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('cancelWorkflowInvocation request %j', request);
+    this._log.debug('cancelWorkflowInvocation request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.ICancelWorkflowInvocationResponse,
@@ -8094,7 +8117,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('cancelWorkflowInvocation response %j', response);
+          this._log.debug('cancelWorkflowInvocation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -8109,7 +8132,7 @@ export class DataformClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('cancelWorkflowInvocation response %j', response);
+          this._log.debug('cancelWorkflowInvocation response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -8214,7 +8237,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getConfig request %j', request);
+    this._log.debug('getConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IConfig,
@@ -8225,7 +8248,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getConfig response %j', response);
+          this._log.debug('getConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -8237,7 +8260,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IGetConfigRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getConfig response %j', response);
+          this._log.debug('getConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -8355,7 +8378,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateConfig request %j', request);
+    this._log.debug('updateConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataform.v1beta1.IConfig,
@@ -8366,7 +8389,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateConfig response %j', response);
+          this._log.debug('updateConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -8378,7 +8401,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IUpdateConfigRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateConfig response %j', response);
+          this._log.debug('updateConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -8487,7 +8510,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getIamPolicy request %j', request);
+    this._log.debug('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.IPolicy,
@@ -8496,7 +8519,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -8508,7 +8531,7 @@ export class DataformClient {
           protos.google.iam.v1.IGetIamPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -8626,7 +8649,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('setIamPolicy request %j', request);
+    this._log.debug('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.IPolicy,
@@ -8635,7 +8658,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('setIamPolicy response %j', response);
+          this._log.debug('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -8647,7 +8670,7 @@ export class DataformClient {
           protos.google.iam.v1.ISetIamPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('setIamPolicy response %j', response);
+          this._log.debug('setIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -8762,7 +8785,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('testIamPermissions request %j', request);
+    this._log.debug('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
@@ -8771,7 +8794,7 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('testIamPermissions response %j', response);
+          this._log.debug('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -8783,7 +8806,7 @@ export class DataformClient {
           protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('testIamPermissions response %j', response);
+          this._log.debug('testIamPermissions response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -8928,11 +8951,11 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteTeamFolderTree response %j', rawResponse);
+          this._log.debug('deleteTeamFolderTree response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteTeamFolderTree request %j', request);
+    this._log.debug('deleteTeamFolderTree request %j', request);
     return this.innerApiCalls
       .deleteTeamFolderTree(request, options, wrappedCallback)
       ?.then(
@@ -8944,7 +8967,7 @@ export class DataformClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteTeamFolderTree response %j', rawResponse);
+          this._log.debug('deleteTeamFolderTree response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -9107,11 +9130,11 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteFolderTree response %j', rawResponse);
+          this._log.debug('deleteFolderTree response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteFolderTree request %j', request);
+    this._log.debug('deleteFolderTree request %j', request);
     return this.innerApiCalls
       .deleteFolderTree(request, options, wrappedCallback)
       ?.then(
@@ -9123,7 +9146,7 @@ export class DataformClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteFolderTree response %j', rawResponse);
+          this._log.debug('deleteFolderTree response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -9280,11 +9303,11 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('moveFolder response %j', rawResponse);
+          this._log.debug('moveFolder response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('moveFolder request %j', request);
+    this._log.debug('moveFolder request %j', request);
     return this.innerApiCalls
       .moveFolder(request, options, wrappedCallback)
       ?.then(
@@ -9296,7 +9319,7 @@ export class DataformClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('moveFolder response %j', rawResponse);
+          this._log.debug('moveFolder response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -9457,14 +9480,14 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'deleteRepositoryLongRunning response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteRepositoryLongRunning request %j', request);
+    this._log.debug('deleteRepositoryLongRunning request %j', request);
     return this.innerApiCalls
       .deleteRepositoryLongRunning(request, options, wrappedCallback)
       ?.then(
@@ -9476,7 +9499,7 @@ export class DataformClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'deleteRepositoryLongRunning response %j',
             rawResponse,
           );
@@ -9637,11 +9660,11 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('moveRepository response %j', rawResponse);
+          this._log.debug('moveRepository response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('moveRepository request %j', request);
+    this._log.debug('moveRepository request %j', request);
     return this.innerApiCalls
       .moveRepository(request, options, wrappedCallback)
       ?.then(
@@ -9653,7 +9676,7 @@ export class DataformClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('moveRepository response %j', rawResponse);
+          this._log.debug('moveRepository response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -9691,6 +9714,185 @@ export class DataformClient {
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
       protos.google.cloud.dataform.v1beta1.MoveRepositoryMetadata
+    >;
+  }
+  /**
+   * Creates a new CompilationResult in a given project and location
+   * asynchronously.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The repository in which to create the compilation result. Must be
+   *   in the format `projects/* /locations/* /repositories/*`.
+   * @param {google.cloud.dataform.v1beta1.CompilationResult} request.compilationResult
+   *   Required. The compilation result to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.create_compilation_result_long_running.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_CreateCompilationResultLongRunning_async
+   */
+  createCompilationResultLongRunning(
+    request?: protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataform.v1beta1.ICompilationResult,
+        protos.google.cloud.dataform.v1beta1.ICreateCompilationResultMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createCompilationResultLongRunning(
+    request: protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataform.v1beta1.ICompilationResult,
+        protos.google.cloud.dataform.v1beta1.ICreateCompilationResultMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createCompilationResultLongRunning(
+    request: protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataform.v1beta1.ICompilationResult,
+        protos.google.cloud.dataform.v1beta1.ICreateCompilationResultMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createCompilationResultLongRunning(
+    request?: protos.google.cloud.dataform.v1beta1.ICreateCompilationResultRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataform.v1beta1.ICompilationResult,
+            protos.google.cloud.dataform.v1beta1.ICreateCompilationResultMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataform.v1beta1.ICompilationResult,
+        protos.google.cloud.dataform.v1beta1.ICreateCompilationResultMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataform.v1beta1.ICompilationResult,
+        protos.google.cloud.dataform.v1beta1.ICreateCompilationResultMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataform.v1beta1.ICompilationResult,
+            protos.google.cloud.dataform.v1beta1.ICreateCompilationResultMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.debug(
+            'createCompilationResultLongRunning response %j',
+            rawResponse,
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.debug('createCompilationResultLongRunning request %j', request);
+    return this.innerApiCalls
+      .createCompilationResultLongRunning(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataform.v1beta1.ICompilationResult,
+            protos.google.cloud.dataform.v1beta1.ICreateCompilationResultMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.debug(
+            'createCompilationResultLongRunning response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `createCompilationResultLongRunning()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.create_compilation_result_long_running.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_CreateCompilationResultLongRunning_async
+   */
+  async checkCreateCompilationResultLongRunningProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataform.v1beta1.CompilationResult,
+      protos.google.cloud.dataform.v1beta1.CreateCompilationResultMetadata
+    >
+  > {
+    this._log.info('createCompilationResultLongRunning long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createCompilationResultLongRunning,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataform.v1beta1.CompilationResult,
+      protos.google.cloud.dataform.v1beta1.CreateCompilationResultMetadata
     >;
   }
   /**
@@ -9824,11 +10026,11 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('queryTeamFolderContents values %j', values);
+          this._log.debug('queryTeamFolderContents values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('queryTeamFolderContents request %j', request);
+    this._log.debug('queryTeamFolderContents request %j', request);
     return this.innerApiCalls
       .queryTeamFolderContents(request, options, wrappedCallback)
       ?.then(
@@ -9837,7 +10039,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IQueryTeamFolderContentsRequest | null,
           protos.google.cloud.dataform.v1beta1.IQueryTeamFolderContentsResponse,
         ]) => {
-          this._log.info('queryTeamFolderContents values %j', response);
+          this._log.debug('queryTeamFolderContents values %j', response);
           return [response, input, output];
         },
       );
@@ -9905,7 +10107,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryTeamFolderContents stream %j', request);
+    this._log.debug('queryTeamFolderContents stream %j', request);
     return this.descriptors.page.queryTeamFolderContents.createStream(
       this.innerApiCalls.queryTeamFolderContents as GaxCall,
       request,
@@ -9978,7 +10180,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryTeamFolderContents iterate %j', request);
+    this._log.debug('queryTeamFolderContents iterate %j', request);
     return this.descriptors.page.queryTeamFolderContents.asyncIterate(
       this.innerApiCalls['queryTeamFolderContents'] as GaxCall,
       request as {},
@@ -10115,11 +10317,11 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('searchTeamFolders values %j', values);
+          this._log.debug('searchTeamFolders values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('searchTeamFolders request %j', request);
+    this._log.debug('searchTeamFolders request %j', request);
     return this.innerApiCalls
       .searchTeamFolders(request, options, wrappedCallback)
       ?.then(
@@ -10128,7 +10330,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.ISearchTeamFoldersRequest | null,
           protos.google.cloud.dataform.v1beta1.ISearchTeamFoldersResponse,
         ]) => {
-          this._log.info('searchTeamFolders values %j', response);
+          this._log.debug('searchTeamFolders values %j', response);
           return [response, input, output];
         },
       );
@@ -10194,7 +10396,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchTeamFolders stream %j', request);
+    this._log.debug('searchTeamFolders stream %j', request);
     return this.descriptors.page.searchTeamFolders.createStream(
       this.innerApiCalls.searchTeamFolders as GaxCall,
       request,
@@ -10265,7 +10467,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchTeamFolders iterate %j', request);
+    this._log.debug('searchTeamFolders iterate %j', request);
     return this.descriptors.page.searchTeamFolders.asyncIterate(
       this.innerApiCalls['searchTeamFolders'] as GaxCall,
       request as {},
@@ -10403,11 +10605,11 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('queryFolderContents values %j', values);
+          this._log.debug('queryFolderContents values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('queryFolderContents request %j', request);
+    this._log.debug('queryFolderContents request %j', request);
     return this.innerApiCalls
       .queryFolderContents(request, options, wrappedCallback)
       ?.then(
@@ -10416,7 +10618,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IQueryFolderContentsRequest | null,
           protos.google.cloud.dataform.v1beta1.IQueryFolderContentsResponse,
         ]) => {
-          this._log.info('queryFolderContents values %j', response);
+          this._log.debug('queryFolderContents values %j', response);
           return [response, input, output];
         },
       );
@@ -10484,7 +10686,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryFolderContents stream %j', request);
+    this._log.debug('queryFolderContents stream %j', request);
     return this.descriptors.page.queryFolderContents.createStream(
       this.innerApiCalls.queryFolderContents as GaxCall,
       request,
@@ -10557,7 +10759,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryFolderContents iterate %j', request);
+    this._log.debug('queryFolderContents iterate %j', request);
     return this.descriptors.page.queryFolderContents.asyncIterate(
       this.innerApiCalls['queryFolderContents'] as GaxCall,
       request as {},
@@ -10696,11 +10898,11 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('queryUserRootContents values %j', values);
+          this._log.debug('queryUserRootContents values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('queryUserRootContents request %j', request);
+    this._log.debug('queryUserRootContents request %j', request);
     return this.innerApiCalls
       .queryUserRootContents(request, options, wrappedCallback)
       ?.then(
@@ -10709,7 +10911,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IQueryUserRootContentsRequest | null,
           protos.google.cloud.dataform.v1beta1.IQueryUserRootContentsResponse,
         ]) => {
-          this._log.info('queryUserRootContents values %j', response);
+          this._log.debug('queryUserRootContents values %j', response);
           return [response, input, output];
         },
       );
@@ -10776,7 +10978,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryUserRootContents stream %j', request);
+    this._log.debug('queryUserRootContents stream %j', request);
     return this.descriptors.page.queryUserRootContents.createStream(
       this.innerApiCalls.queryUserRootContents as GaxCall,
       request,
@@ -10848,7 +11050,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryUserRootContents iterate %j', request);
+    this._log.debug('queryUserRootContents iterate %j', request);
     return this.descriptors.page.queryUserRootContents.asyncIterate(
       this.innerApiCalls['queryUserRootContents'] as GaxCall,
       request as {},
@@ -10979,11 +11181,11 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRepositories values %j', values);
+          this._log.debug('listRepositories values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRepositories request %j', request);
+    this._log.debug('listRepositories request %j', request);
     return this.innerApiCalls
       .listRepositories(request, options, wrappedCallback)
       ?.then(
@@ -10992,7 +11194,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest | null,
           protos.google.cloud.dataform.v1beta1.IListRepositoriesResponse,
         ]) => {
-          this._log.info('listRepositories values %j', response);
+          this._log.debug('listRepositories values %j', response);
           return [response, input, output];
         },
       );
@@ -11050,7 +11252,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRepositories stream %j', request);
+    this._log.debug('listRepositories stream %j', request);
     return this.descriptors.page.listRepositories.createStream(
       this.innerApiCalls.listRepositories as GaxCall,
       request,
@@ -11113,7 +11315,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRepositories iterate %j', request);
+    this._log.debug('listRepositories iterate %j', request);
     return this.descriptors.page.listRepositories.asyncIterate(
       this.innerApiCalls['listRepositories'] as GaxCall,
       request as {},
@@ -11242,11 +11444,11 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('queryRepositoryDirectoryContents values %j', values);
+          this._log.debug('queryRepositoryDirectoryContents values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('queryRepositoryDirectoryContents request %j', request);
+    this._log.debug('queryRepositoryDirectoryContents request %j', request);
     return this.innerApiCalls
       .queryRepositoryDirectoryContents(request, options, wrappedCallback)
       ?.then(
@@ -11255,7 +11457,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest | null,
           protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsResponse,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'queryRepositoryDirectoryContents values %j',
             response,
           );
@@ -11317,7 +11519,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryRepositoryDirectoryContents stream %j', request);
+    this._log.debug('queryRepositoryDirectoryContents stream %j', request);
     return this.descriptors.page.queryRepositoryDirectoryContents.createStream(
       this.innerApiCalls.queryRepositoryDirectoryContents as GaxCall,
       request,
@@ -11381,7 +11583,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryRepositoryDirectoryContents iterate %j', request);
+    this._log.debug('queryRepositoryDirectoryContents iterate %j', request);
     return this.descriptors.page.queryRepositoryDirectoryContents.asyncIterate(
       this.innerApiCalls['queryRepositoryDirectoryContents'] as GaxCall,
       request as {},
@@ -11503,11 +11705,11 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('fetchRepositoryHistory values %j', values);
+          this._log.debug('fetchRepositoryHistory values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('fetchRepositoryHistory request %j', request);
+    this._log.debug('fetchRepositoryHistory request %j', request);
     return this.innerApiCalls
       .fetchRepositoryHistory(request, options, wrappedCallback)
       ?.then(
@@ -11516,7 +11718,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest | null,
           protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryResponse,
         ]) => {
-          this._log.info('fetchRepositoryHistory values %j', response);
+          this._log.debug('fetchRepositoryHistory values %j', response);
           return [response, input, output];
         },
       );
@@ -11567,7 +11769,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchRepositoryHistory stream %j', request);
+    this._log.debug('fetchRepositoryHistory stream %j', request);
     return this.descriptors.page.fetchRepositoryHistory.createStream(
       this.innerApiCalls.fetchRepositoryHistory as GaxCall,
       request,
@@ -11623,7 +11825,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchRepositoryHistory iterate %j', request);
+    this._log.debug('fetchRepositoryHistory iterate %j', request);
     return this.descriptors.page.fetchRepositoryHistory.asyncIterate(
       this.innerApiCalls['fetchRepositoryHistory'] as GaxCall,
       request as {},
@@ -11751,11 +11953,11 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listWorkspaces values %j', values);
+          this._log.debug('listWorkspaces values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listWorkspaces request %j', request);
+    this._log.debug('listWorkspaces request %j', request);
     return this.innerApiCalls
       .listWorkspaces(request, options, wrappedCallback)
       ?.then(
@@ -11764,7 +11966,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest | null,
           protos.google.cloud.dataform.v1beta1.IListWorkspacesResponse,
         ]) => {
-          this._log.info('listWorkspaces values %j', response);
+          this._log.debug('listWorkspaces values %j', response);
           return [response, input, output];
         },
       );
@@ -11822,7 +12024,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkspaces stream %j', request);
+    this._log.debug('listWorkspaces stream %j', request);
     return this.descriptors.page.listWorkspaces.createStream(
       this.innerApiCalls.listWorkspaces as GaxCall,
       request,
@@ -11885,7 +12087,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkspaces iterate %j', request);
+    this._log.debug('listWorkspaces iterate %j', request);
     return this.descriptors.page.listWorkspaces.asyncIterate(
       this.innerApiCalls['listWorkspaces'] as GaxCall,
       request as {},
@@ -12011,11 +12213,11 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('fetchWorkspaceBranches values %j', values);
+          this._log.debug('fetchWorkspaceBranches values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('fetchWorkspaceBranches request %j', request);
+    this._log.debug('fetchWorkspaceBranches request %j', request);
     return this.innerApiCalls
       .fetchWorkspaceBranches(request, options, wrappedCallback)
       ?.then(
@@ -12024,7 +12226,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesRequest | null,
           protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesResponse,
         ]) => {
-          this._log.info('fetchWorkspaceBranches values %j', response);
+          this._log.debug('fetchWorkspaceBranches values %j', response);
           return [response, input, output];
         },
       );
@@ -12080,7 +12282,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchWorkspaceBranches stream %j', request);
+    this._log.debug('fetchWorkspaceBranches stream %j', request);
     return this.descriptors.page.fetchWorkspaceBranches.createStream(
       this.innerApiCalls.fetchWorkspaceBranches as GaxCall,
       request,
@@ -12141,12 +12343,253 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchWorkspaceBranches iterate %j', request);
+    this._log.debug('fetchWorkspaceBranches iterate %j', request);
     return this.descriptors.page.fetchWorkspaceBranches.asyncIterate(
       this.innerApiCalls['fetchWorkspaceBranches'] as GaxCall,
       request as {},
       callSettings,
     ) as AsyncIterable<protos.google.cloud.dataform.v1beta1.IBranchMetadata>;
+  }
+  /**
+   * Fetches a Workspace's history of commits.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The workspace's name.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of commits to return. The server may return fewer
+   *   items than requested. If unspecified, the server will pick an appropriate
+   *   default.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `FetchWorkspaceHistory` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `FetchWorkspaceHistory`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.CommitLogEntry|CommitLogEntry}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `fetchWorkspaceHistoryAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  fetchWorkspaceHistory(
+    request?: protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataform.v1beta1.ICommitLogEntry[],
+      protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest | null,
+      protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryResponse,
+    ]
+  >;
+  fetchWorkspaceHistory(
+    request: protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest,
+      | protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataform.v1beta1.ICommitLogEntry
+    >,
+  ): void;
+  fetchWorkspaceHistory(
+    request: protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest,
+      | protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataform.v1beta1.ICommitLogEntry
+    >,
+  ): void;
+  fetchWorkspaceHistory(
+    request?: protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest,
+          | protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataform.v1beta1.ICommitLogEntry
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest,
+      | protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataform.v1beta1.ICommitLogEntry
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataform.v1beta1.ICommitLogEntry[],
+      protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest | null,
+      protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest,
+          | protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataform.v1beta1.ICommitLogEntry
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.debug('fetchWorkspaceHistory values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.debug('fetchWorkspaceHistory request %j', request);
+    return this.innerApiCalls
+      .fetchWorkspaceHistory(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataform.v1beta1.ICommitLogEntry[],
+          protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest | null,
+          protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryResponse,
+        ]) => {
+          this._log.debug('fetchWorkspaceHistory values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `fetchWorkspaceHistory`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The workspace's name.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of commits to return. The server may return fewer
+   *   items than requested. If unspecified, the server will pick an appropriate
+   *   default.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `FetchWorkspaceHistory` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `FetchWorkspaceHistory`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.CommitLogEntry|CommitLogEntry} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `fetchWorkspaceHistoryAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  fetchWorkspaceHistoryStream(
+    request?: protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    const defaultCallSettings = this._defaults['fetchWorkspaceHistory'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.debug('fetchWorkspaceHistory stream %j', request);
+    return this.descriptors.page.fetchWorkspaceHistory.createStream(
+      this.innerApiCalls.fetchWorkspaceHistory as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `fetchWorkspaceHistory`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The workspace's name.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of commits to return. The server may return fewer
+   *   items than requested. If unspecified, the server will pick an appropriate
+   *   default.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `FetchWorkspaceHistory` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `FetchWorkspaceHistory`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.dataform.v1beta1.CommitLogEntry|CommitLogEntry}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.fetch_workspace_history.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_FetchWorkspaceHistory_async
+   */
+  fetchWorkspaceHistoryAsync(
+    request?: protos.google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.dataform.v1beta1.ICommitLogEntry> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    const defaultCallSettings = this._defaults['fetchWorkspaceHistory'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.debug('fetchWorkspaceHistory iterate %j', request);
+    return this.descriptors.page.fetchWorkspaceHistory.asyncIterate(
+      this.innerApiCalls['fetchWorkspaceHistory'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.dataform.v1beta1.ICommitLogEntry>;
   }
   /**
    * Returns the contents of a given Workspace directory.
@@ -12270,11 +12713,11 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('queryDirectoryContents values %j', values);
+          this._log.debug('queryDirectoryContents values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('queryDirectoryContents request %j', request);
+    this._log.debug('queryDirectoryContents request %j', request);
     return this.innerApiCalls
       .queryDirectoryContents(request, options, wrappedCallback)
       ?.then(
@@ -12283,7 +12726,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest | null,
           protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsResponse,
         ]) => {
-          this._log.info('queryDirectoryContents values %j', response);
+          this._log.debug('queryDirectoryContents values %j', response);
           return [response, input, output];
         },
       );
@@ -12342,7 +12785,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryDirectoryContents stream %j', request);
+    this._log.debug('queryDirectoryContents stream %j', request);
     return this.descriptors.page.queryDirectoryContents.createStream(
       this.innerApiCalls.queryDirectoryContents as GaxCall,
       request,
@@ -12406,7 +12849,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryDirectoryContents iterate %j', request);
+    this._log.debug('queryDirectoryContents iterate %j', request);
     return this.descriptors.page.queryDirectoryContents.asyncIterate(
       this.innerApiCalls['queryDirectoryContents'] as GaxCall,
       request as {},
@@ -12531,11 +12974,11 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('searchFiles values %j', values);
+          this._log.debug('searchFiles values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('searchFiles request %j', request);
+    this._log.debug('searchFiles request %j', request);
     return this.innerApiCalls
       .searchFiles(request, options, wrappedCallback)
       ?.then(
@@ -12544,7 +12987,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.ISearchFilesRequest | null,
           protos.google.cloud.dataform.v1beta1.ISearchFilesResponse,
         ]) => {
-          this._log.info('searchFiles values %j', response);
+          this._log.debug('searchFiles values %j', response);
           return [response, input, output];
         },
       );
@@ -12599,7 +13042,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchFiles stream %j', request);
+    this._log.debug('searchFiles stream %j', request);
     return this.descriptors.page.searchFiles.createStream(
       this.innerApiCalls.searchFiles as GaxCall,
       request,
@@ -12659,7 +13102,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchFiles iterate %j', request);
+    this._log.debug('searchFiles iterate %j', request);
     return this.descriptors.page.searchFiles.asyncIterate(
       this.innerApiCalls['searchFiles'] as GaxCall,
       request as {},
@@ -12781,11 +13224,11 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listReleaseConfigs values %j', values);
+          this._log.debug('listReleaseConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listReleaseConfigs request %j', request);
+    this._log.debug('listReleaseConfigs request %j', request);
     return this.innerApiCalls
       .listReleaseConfigs(request, options, wrappedCallback)
       ?.then(
@@ -12794,7 +13237,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest | null,
           protos.google.cloud.dataform.v1beta1.IListReleaseConfigsResponse,
         ]) => {
-          this._log.info('listReleaseConfigs values %j', response);
+          this._log.debug('listReleaseConfigs values %j', response);
           return [response, input, output];
         },
       );
@@ -12846,7 +13289,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listReleaseConfigs stream %j', request);
+    this._log.debug('listReleaseConfigs stream %j', request);
     return this.descriptors.page.listReleaseConfigs.createStream(
       this.innerApiCalls.listReleaseConfigs as GaxCall,
       request,
@@ -12903,7 +13346,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listReleaseConfigs iterate %j', request);
+    this._log.debug('listReleaseConfigs iterate %j', request);
     return this.descriptors.page.listReleaseConfigs.asyncIterate(
       this.innerApiCalls['listReleaseConfigs'] as GaxCall,
       request as {},
@@ -13031,11 +13474,11 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listCompilationResults values %j', values);
+          this._log.debug('listCompilationResults values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listCompilationResults request %j', request);
+    this._log.debug('listCompilationResults request %j', request);
     return this.innerApiCalls
       .listCompilationResults(request, options, wrappedCallback)
       ?.then(
@@ -13044,7 +13487,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest | null,
           protos.google.cloud.dataform.v1beta1.IListCompilationResultsResponse,
         ]) => {
-          this._log.info('listCompilationResults values %j', response);
+          this._log.debug('listCompilationResults values %j', response);
           return [response, input, output];
         },
       );
@@ -13102,7 +13545,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCompilationResults stream %j', request);
+    this._log.debug('listCompilationResults stream %j', request);
     return this.descriptors.page.listCompilationResults.createStream(
       this.innerApiCalls.listCompilationResults as GaxCall,
       request,
@@ -13165,7 +13608,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCompilationResults iterate %j', request);
+    this._log.debug('listCompilationResults iterate %j', request);
     return this.descriptors.page.listCompilationResults.asyncIterate(
       this.innerApiCalls['listCompilationResults'] as GaxCall,
       request as {},
@@ -13290,11 +13733,11 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('queryCompilationResultActions values %j', values);
+          this._log.debug('queryCompilationResultActions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('queryCompilationResultActions request %j', request);
+    this._log.debug('queryCompilationResultActions request %j', request);
     return this.innerApiCalls
       .queryCompilationResultActions(request, options, wrappedCallback)
       ?.then(
@@ -13303,7 +13746,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest | null,
           protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsResponse,
         ]) => {
-          this._log.info('queryCompilationResultActions values %j', response);
+          this._log.debug('queryCompilationResultActions values %j', response);
           return [response, input, output];
         },
       );
@@ -13358,7 +13801,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryCompilationResultActions stream %j', request);
+    this._log.debug('queryCompilationResultActions stream %j', request);
     return this.descriptors.page.queryCompilationResultActions.createStream(
       this.innerApiCalls.queryCompilationResultActions as GaxCall,
       request,
@@ -13418,7 +13861,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryCompilationResultActions iterate %j', request);
+    this._log.debug('queryCompilationResultActions iterate %j', request);
     return this.descriptors.page.queryCompilationResultActions.asyncIterate(
       this.innerApiCalls['queryCompilationResultActions'] as GaxCall,
       request as {},
@@ -13540,11 +13983,11 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listWorkflowConfigs values %j', values);
+          this._log.debug('listWorkflowConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listWorkflowConfigs request %j', request);
+    this._log.debug('listWorkflowConfigs request %j', request);
     return this.innerApiCalls
       .listWorkflowConfigs(request, options, wrappedCallback)
       ?.then(
@@ -13553,7 +13996,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest | null,
           protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsResponse,
         ]) => {
-          this._log.info('listWorkflowConfigs values %j', response);
+          this._log.debug('listWorkflowConfigs values %j', response);
           return [response, input, output];
         },
       );
@@ -13605,7 +14048,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkflowConfigs stream %j', request);
+    this._log.debug('listWorkflowConfigs stream %j', request);
     return this.descriptors.page.listWorkflowConfigs.createStream(
       this.innerApiCalls.listWorkflowConfigs as GaxCall,
       request,
@@ -13662,7 +14105,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkflowConfigs iterate %j', request);
+    this._log.debug('listWorkflowConfigs iterate %j', request);
     return this.descriptors.page.listWorkflowConfigs.asyncIterate(
       this.innerApiCalls['listWorkflowConfigs'] as GaxCall,
       request as {},
@@ -13790,11 +14233,11 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listWorkflowInvocations values %j', values);
+          this._log.debug('listWorkflowInvocations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listWorkflowInvocations request %j', request);
+    this._log.debug('listWorkflowInvocations request %j', request);
     return this.innerApiCalls
       .listWorkflowInvocations(request, options, wrappedCallback)
       ?.then(
@@ -13803,7 +14246,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest | null,
           protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsResponse,
         ]) => {
-          this._log.info('listWorkflowInvocations values %j', response);
+          this._log.debug('listWorkflowInvocations values %j', response);
           return [response, input, output];
         },
       );
@@ -13861,7 +14304,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkflowInvocations stream %j', request);
+    this._log.debug('listWorkflowInvocations stream %j', request);
     return this.descriptors.page.listWorkflowInvocations.createStream(
       this.innerApiCalls.listWorkflowInvocations as GaxCall,
       request,
@@ -13924,7 +14367,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkflowInvocations iterate %j', request);
+    this._log.debug('listWorkflowInvocations iterate %j', request);
     return this.descriptors.page.listWorkflowInvocations.asyncIterate(
       this.innerApiCalls['listWorkflowInvocations'] as GaxCall,
       request as {},
@@ -14046,11 +14489,11 @@ export class DataformClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('queryWorkflowInvocationActions values %j', values);
+          this._log.debug('queryWorkflowInvocationActions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('queryWorkflowInvocationActions request %j', request);
+    this._log.debug('queryWorkflowInvocationActions request %j', request);
     return this.innerApiCalls
       .queryWorkflowInvocationActions(request, options, wrappedCallback)
       ?.then(
@@ -14059,7 +14502,7 @@ export class DataformClient {
           protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest | null,
           protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsResponse,
         ]) => {
-          this._log.info('queryWorkflowInvocationActions values %j', response);
+          this._log.debug('queryWorkflowInvocationActions values %j', response);
           return [response, input, output];
         },
       );
@@ -14112,7 +14555,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryWorkflowInvocationActions stream %j', request);
+    this._log.debug('queryWorkflowInvocationActions stream %j', request);
     return this.descriptors.page.queryWorkflowInvocationActions.createStream(
       this.innerApiCalls.queryWorkflowInvocationActions as GaxCall,
       request,
@@ -14170,7 +14613,7 @@ export class DataformClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryWorkflowInvocationActions iterate %j', request);
+    this._log.debug('queryWorkflowInvocationActions iterate %j', request);
     return this.descriptors.page.queryWorkflowInvocationActions.asyncIterate(
       this.innerApiCalls['queryWorkflowInvocationActions'] as GaxCall,
       request as {},

@@ -480,7 +480,7 @@ export class ConfigManagementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getConfig request %j', request);
+    this._log.debug('getConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.lineage.configmanagement.v1.IConfig,
@@ -491,7 +491,7 @@ export class ConfigManagementServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getConfig response %j', response);
+          this._log.debug('getConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -506,7 +506,7 @@ export class ConfigManagementServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getConfig response %j', response);
+          this._log.debug('getConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -624,7 +624,7 @@ export class ConfigManagementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateConfig request %j', request);
+    this._log.debug('updateConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.datacatalog.lineage.configmanagement.v1.IConfig,
@@ -635,7 +635,7 @@ export class ConfigManagementServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateConfig response %j', response);
+          this._log.debug('updateConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -650,7 +650,7 @@ export class ConfigManagementServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateConfig response %j', response);
+          this._log.debug('updateConfig response %j', response);
           return [response, options, rawResponse];
         },
       )

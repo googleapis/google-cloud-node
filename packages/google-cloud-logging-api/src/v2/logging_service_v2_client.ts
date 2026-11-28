@@ -630,7 +630,7 @@ export class LoggingServiceV2Client {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteLog request %j', request);
+    this._log.debug('deleteLog request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -639,7 +639,7 @@ export class LoggingServiceV2Client {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteLog response %j', response);
+          this._log.debug('deleteLog response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -651,7 +651,7 @@ export class LoggingServiceV2Client {
           protos.google.logging.v2.IDeleteLogRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteLog response %j', response);
+          this._log.debug('deleteLog response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -823,7 +823,7 @@ export class LoggingServiceV2Client {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('writeLogEntries request %j', request);
+    this._log.debug('writeLogEntries request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.logging.v2.IWriteLogEntriesResponse,
@@ -832,7 +832,7 @@ export class LoggingServiceV2Client {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('writeLogEntries response %j', response);
+          this._log.debug('writeLogEntries response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -844,7 +844,7 @@ export class LoggingServiceV2Client {
           protos.google.logging.v2.IWriteLogEntriesRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('writeLogEntries response %j', response);
+          this._log.debug('writeLogEntries response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -885,7 +885,7 @@ export class LoggingServiceV2Client {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('tailLogEntries stream %j', options);
+    this._log.debug('tailLogEntries stream %j', options);
     return this.innerApiCalls.tailLogEntries(null, options);
   }
 
@@ -1020,11 +1020,11 @@ export class LoggingServiceV2Client {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listLogEntries values %j', values);
+          this._log.debug('listLogEntries values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listLogEntries request %j', request);
+    this._log.debug('listLogEntries request %j', request);
     return this.innerApiCalls
       .listLogEntries(request, options, wrappedCallback)
       ?.then(
@@ -1033,7 +1033,7 @@ export class LoggingServiceV2Client {
           protos.google.logging.v2.IListLogEntriesRequest | null,
           protos.google.logging.v2.IListLogEntriesResponse,
         ]) => {
-          this._log.info('listLogEntries values %j', response);
+          this._log.debug('listLogEntries values %j', response);
           return [response, input, output];
         },
       );
@@ -1108,7 +1108,7 @@ export class LoggingServiceV2Client {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLogEntries stream %j', request);
+    this._log.debug('listLogEntries stream %j', request);
     return this.descriptors.page.listLogEntries.createStream(
       this.innerApiCalls.listLogEntries as GaxCall,
       request,
@@ -1188,7 +1188,7 @@ export class LoggingServiceV2Client {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLogEntries iterate %j', request);
+    this._log.debug('listLogEntries iterate %j', request);
     return this.descriptors.page.listLogEntries.asyncIterate(
       this.innerApiCalls['listLogEntries'] as GaxCall,
       request as {},
@@ -1301,11 +1301,11 @@ export class LoggingServiceV2Client {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listMonitoredResourceDescriptors values %j', values);
+          this._log.debug('listMonitoredResourceDescriptors values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listMonitoredResourceDescriptors request %j', request);
+    this._log.debug('listMonitoredResourceDescriptors request %j', request);
     return this.innerApiCalls
       .listMonitoredResourceDescriptors(request, options, wrappedCallback)
       ?.then(
@@ -1314,7 +1314,7 @@ export class LoggingServiceV2Client {
           protos.google.logging.v2.IListMonitoredResourceDescriptorsRequest | null,
           protos.google.logging.v2.IListMonitoredResourceDescriptorsResponse,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'listMonitoredResourceDescriptors values %j',
             response,
           );
@@ -1361,7 +1361,7 @@ export class LoggingServiceV2Client {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMonitoredResourceDescriptors stream %j', request);
+    this._log.debug('listMonitoredResourceDescriptors stream %j', request);
     return this.descriptors.page.listMonitoredResourceDescriptors.createStream(
       this.innerApiCalls.listMonitoredResourceDescriptors as GaxCall,
       request,
@@ -1410,7 +1410,7 @@ export class LoggingServiceV2Client {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMonitoredResourceDescriptors iterate %j', request);
+    this._log.debug('listMonitoredResourceDescriptors iterate %j', request);
     return this.descriptors.page.listMonitoredResourceDescriptors.asyncIterate(
       this.innerApiCalls['listMonitoredResourceDescriptors'] as GaxCall,
       request as {},
@@ -1541,11 +1541,11 @@ export class LoggingServiceV2Client {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listLogs values %j', values);
+          this._log.debug('listLogs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listLogs request %j', request);
+    this._log.debug('listLogs request %j', request);
     return this.innerApiCalls
       .listLogs(request, options, wrappedCallback)
       ?.then(
@@ -1554,7 +1554,7 @@ export class LoggingServiceV2Client {
           protos.google.logging.v2.IListLogsRequest | null,
           protos.google.logging.v2.IListLogsResponse,
         ]) => {
-          this._log.info('listLogs values %j', response);
+          this._log.debug('listLogs values %j', response);
           return [response, input, output];
         },
       );
@@ -1624,7 +1624,7 @@ export class LoggingServiceV2Client {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLogs stream %j', request);
+    this._log.debug('listLogs stream %j', request);
     return this.descriptors.page.listLogs.createStream(
       this.innerApiCalls.listLogs as GaxCall,
       request,
@@ -1699,7 +1699,7 @@ export class LoggingServiceV2Client {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLogs iterate %j', request);
+    this._log.debug('listLogs iterate %j', request);
     return this.descriptors.page.listLogs.asyncIterate(
       this.innerApiCalls['listLogs'] as GaxCall,
       request as {},

@@ -5,6 +5,25 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/pubsub?activeTab=versions
 
+## [6.4.1](https://github.com/googleapis/google-cloud-node/compare/pubsub-v6.4.0...pubsub-v6.4.1) (2026-11-09)
+
+
+### Bug Fixes
+
+* **pubsub:** Import protos from @google-cloud/pubsub-api in index.ts ([#9686](https://github.com/googleapis/google-cloud-node/issues/9686)) ([f25cd62](https://github.com/googleapis/google-cloud-node/commit/f25cd628110307f5b54f28b07398e4e3c3b5fb9d))
+* **pubsub:** Use ROOT_CONTEXT when creating receive span without parent context ([#9499](https://github.com/googleapis/google-cloud-node/issues/9499)) ([74cd73d](https://github.com/googleapis/google-cloud-node/commit/74cd73dd26ff9409ac7661a1a1494025e932841f)), refs [#7624](https://github.com/googleapis/google-cloud-node/issues/7624)
+
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/pubsub-v6.3.2...pubsub-v6.4.0) (2026-11-02)
+
+
+### Features
+
+* **pubsub:** Add CancellationSharer and HedgingScheduler ([#9464](https://github.com/googleapis/google-cloud-node/issues/9464)) ([43ef4dd](https://github.com/googleapis/google-cloud-node/commit/43ef4dd20590f314bf8e4333140e3a514a6bca79))
+* **pubsub:** Add enabled option to HedgingOptions (post-merge adjustments) ([#9654](https://github.com/googleapis/google-cloud-node/issues/9654)) ([cdb23f5](https://github.com/googleapis/google-cloud-node/commit/cdb23f50bec6859ac8387e127dbfb25ef26b5ec7))
+* **pubsub:** Add HedgingOptions validation and token bucket ([#9463](https://github.com/googleapis/google-cloud-node/issues/9463)) ([764347a](https://github.com/googleapis/google-cloud-node/commit/764347a763f9d0a20ed750e9c1a3073b68c15439))
+* **pubsub:** Add OpenTelemetry events and logging for hedged publish ([#9465](https://github.com/googleapis/google-cloud-node/issues/9465)) ([8636dba](https://github.com/googleapis/google-cloud-node/commit/8636dbae72652ddaa9b1818aa9d30fa0d9f0595b))
+* **pubsub:** Integrate publish hedging into MessageQueue ([#9466](https://github.com/googleapis/google-cloud-node/issues/9466)) ([89fd786](https://github.com/googleapis/google-cloud-node/commit/89fd786ca068856ea28e8a38f0f21fe314457e91))
+
 ## [6.3.2](https://github.com/googleapis/google-cloud-node/compare/pubsub-v6.3.1...pubsub-v6.3.2) (2026-10-28)
 
 

@@ -17,7 +17,6 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
-import * as v1beta from './v1beta';
 
 const LfpInventoryServiceClient = v1.LfpInventoryServiceClient;
 type LfpInventoryServiceClient = v1.LfpInventoryServiceClient;
@@ -28,7 +27,7 @@ type LfpSaleServiceClient = v1.LfpSaleServiceClient;
 const LfpStoreServiceClient = v1.LfpStoreServiceClient;
 type LfpStoreServiceClient = v1.LfpStoreServiceClient;
 
-export {v1, v1beta, LfpInventoryServiceClient, LfpMerchantStateServiceClient, LfpSaleServiceClient, LfpStoreServiceClient};
-export default {v1, v1beta, LfpInventoryServiceClient, LfpMerchantStateServiceClient, LfpSaleServiceClient, LfpStoreServiceClient};
+export {v1, LfpInventoryServiceClient, LfpMerchantStateServiceClient, LfpSaleServiceClient, LfpStoreServiceClient};
+export default {v1, LfpInventoryServiceClient, LfpMerchantStateServiceClient, LfpSaleServiceClient, LfpStoreServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

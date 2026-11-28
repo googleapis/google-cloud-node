@@ -47,7 +47,7 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Products library
-  const {ProductsServiceClient} = require('@google-shopping/products').v1beta;
+  const {ProductsServiceClient} = require('@google-shopping/products').v1;
 
   // Instantiates a client
   const productsClient = new ProductsServiceClient();

@@ -13,6 +13,9 @@
     },
     "handwritten/storage": {
       "component": "storage"
+    },
+    "packages/google-storage-control": {
+      "component": "storage-control"
     }
   },
   "plugins": [

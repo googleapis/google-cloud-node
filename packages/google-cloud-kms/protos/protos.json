@@ -1987,7 +1987,8 @@
                           "values": {
                             "ATTESTATION_FORMAT_UNSPECIFIED": 0,
                             "CAVIUM_V1_COMPRESSED": 3,
-                            "CAVIUM_V2_COMPRESSED": 4
+                            "CAVIUM_V2_COMPRESSED": 4,
+                            "CAVIUM_V209": 5
                           }
                         },
                         "CertificateChains": {
@@ -6450,8 +6451,8 @@
                     "retention": "RETENTION_SOURCE",
                     "targets": "TARGET_TYPE_FILE",
                     "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "STRICT"
                   }
                 },
                 "enforceProtoLimits": {

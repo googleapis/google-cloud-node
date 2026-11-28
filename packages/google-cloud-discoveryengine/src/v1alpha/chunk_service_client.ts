@@ -628,7 +628,7 @@ export class ChunkServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getChunk request %j', request);
+    this._log.debug('getChunk request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1alpha.IChunk,
@@ -639,7 +639,7 @@ export class ChunkServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getChunk response %j', response);
+          this._log.debug('getChunk response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -654,7 +654,7 @@ export class ChunkServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getChunk response %j', response);
+          this._log.debug('getChunk response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -802,11 +802,11 @@ export class ChunkServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listChunks values %j', values);
+          this._log.debug('listChunks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listChunks request %j', request);
+    this._log.debug('listChunks request %j', request);
     return this.innerApiCalls
       .listChunks(request, options, wrappedCallback)
       ?.then(
@@ -815,7 +815,7 @@ export class ChunkServiceClient {
           protos.google.cloud.discoveryengine.v1alpha.IListChunksRequest | null,
           protos.google.cloud.discoveryengine.v1alpha.IListChunksResponse,
         ]) => {
-          this._log.info('listChunks values %j', response);
+          this._log.debug('listChunks values %j', response);
           return [response, input, output];
         },
       );
@@ -878,7 +878,7 @@ export class ChunkServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listChunks stream %j', request);
+    this._log.debug('listChunks stream %j', request);
     return this.descriptors.page.listChunks.createStream(
       this.innerApiCalls.listChunks as GaxCall,
       request,
@@ -946,7 +946,7 @@ export class ChunkServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listChunks iterate %j', request);
+    this._log.debug('listChunks iterate %j', request);
     return this.descriptors.page.listChunks.asyncIterate(
       this.innerApiCalls['listChunks'] as GaxCall,
       request as {},

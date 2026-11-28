@@ -42,6 +42,7 @@ import * as gapicConfig from './sql_backups_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
+ *  Service for managing database backups for Cloud SQL instances.
  * @class
  * @memberof v1
  */
@@ -494,7 +495,7 @@ export class SqlBackupsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createBackup request %j', request);
+    this._log.debug('createBackup request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1.IOperation,
@@ -503,7 +504,7 @@ export class SqlBackupsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createBackup response %j', response);
+          this._log.debug('createBackup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -515,7 +516,7 @@ export class SqlBackupsServiceClient {
           protos.google.cloud.sql.v1.ICreateBackupRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createBackup response %j', response);
+          this._log.debug('createBackup response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -619,7 +620,7 @@ export class SqlBackupsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getBackup request %j', request);
+    this._log.debug('getBackup request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1.IBackup,
@@ -628,7 +629,7 @@ export class SqlBackupsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getBackup response %j', response);
+          this._log.debug('getBackup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -640,7 +641,7 @@ export class SqlBackupsServiceClient {
           protos.google.cloud.sql.v1.IGetBackupRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getBackup response %j', response);
+          this._log.debug('getBackup response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -749,7 +750,7 @@ export class SqlBackupsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateBackup request %j', request);
+    this._log.debug('updateBackup request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1.IOperation,
@@ -758,7 +759,7 @@ export class SqlBackupsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateBackup response %j', response);
+          this._log.debug('updateBackup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -770,7 +771,7 @@ export class SqlBackupsServiceClient {
           protos.google.cloud.sql.v1.IUpdateBackupRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateBackup response %j', response);
+          this._log.debug('updateBackup response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -874,7 +875,7 @@ export class SqlBackupsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteBackup request %j', request);
+    this._log.debug('deleteBackup request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1.IOperation,
@@ -883,7 +884,7 @@ export class SqlBackupsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteBackup response %j', response);
+          this._log.debug('deleteBackup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -895,7 +896,7 @@ export class SqlBackupsServiceClient {
           protos.google.cloud.sql.v1.IDeleteBackupRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteBackup response %j', response);
+          this._log.debug('deleteBackup response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1028,11 +1029,11 @@ export class SqlBackupsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listBackups values %j', values);
+          this._log.debug('listBackups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listBackups request %j', request);
+    this._log.debug('listBackups request %j', request);
     return this.innerApiCalls
       .listBackups(request, options, wrappedCallback)
       ?.then(
@@ -1041,7 +1042,7 @@ export class SqlBackupsServiceClient {
           protos.google.cloud.sql.v1.IListBackupsRequest | null,
           protos.google.cloud.sql.v1.IListBackupsResponse,
         ]) => {
-          this._log.info('listBackups values %j', response);
+          this._log.debug('listBackups values %j', response);
           return [response, input, output];
         },
       );
@@ -1099,7 +1100,7 @@ export class SqlBackupsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBackups stream %j', request);
+    this._log.debug('listBackups stream %j', request);
     return this.descriptors.page.listBackups.createStream(
       this.innerApiCalls.listBackups as GaxCall,
       request,
@@ -1162,7 +1163,7 @@ export class SqlBackupsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBackups iterate %j', request);
+    this._log.debug('listBackups iterate %j', request);
     return this.descriptors.page.listBackups.asyncIterate(
       this.innerApiCalls['listBackups'] as GaxCall,
       request as {},

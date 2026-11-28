@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const path = require('path');
-
 const config = {
   "enable-source-maps": true,
   "throw-deprecation": true,
@@ -28,7 +26,6 @@ if (process.env.MOCHA_PARALLEL === 'false' || typeof Bun !== 'undefined') {
   config.parallel = false;
 }
 if (typeof Bun !== 'undefined') {
-  config.require = [path.resolve(__dirname, 'bin/proxyquire-bun-shim.cjs')];
   config.exit = true;
 }
 if (process.env.MOCHA_REPORTER) {

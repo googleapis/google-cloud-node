@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(autoProtectionPolicy, updateMask) {
+function main(autoProtectionPolicy) {
   // [START backupdr_v1beta_generated_BackupDR_UpdateAutoProtectionPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -33,13 +33,22 @@ function main(autoProtectionPolicy, updateMask) {
    */
   // const autoProtectionPolicy = {}
   /**
-   *  Required. Field mask is used to specify the fields to be overwritten in the
+   *  Optional. Field mask is used to specify the fields to be overwritten in the
    *  AutoProtectionPolicy resource by the update.
    *  The fields specified in the update_mask are relative to the resource, not
    *  the full request. A field will be overwritten if it is in the mask. If the
    *  user does not provide a mask then all fields will be overwritten.
    */
   // const updateMask = {}
+  /**
+   *  Optional. An optional request ID to identify requests. Specify a unique
+   *  request ID so that if you must retry your request, the server will know to
+   *  ignore the request if it has already been completed. The server will
+   *  guarantee that for at least 60 minutes since the first request.
+   *  The request ID must be a valid UUID with the exception that zero UUID is
+   *  not supported (00000000-0000-0000-0000-000000000000).
+   */
+  // const requestId = 'abc123'
 
   // Imports the Backupdr library
   const {BackupDRClient} = require('@google-cloud/backupdr').v1beta;
@@ -51,7 +60,6 @@ function main(autoProtectionPolicy, updateMask) {
     // Construct request
     const request = {
       autoProtectionPolicy,
-      updateMask,
     };
 
     // Run request
