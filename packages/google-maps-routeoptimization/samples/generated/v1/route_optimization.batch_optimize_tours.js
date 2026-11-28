@@ -32,8 +32,8 @@ function main(parent, modelConfigs) {
    *  Required. Target project and location to make a call.
    *  Format:
    *  * `projects/{project-id}`
-   *  * `projects/{project-id}/locations/{location-id}`
-   *  If no location is specified, a region will be chosen automatically.
+   *  * `projects/{project-id}/locations/-`
+   *  Regional `{location-id}` values are not supported.
    */
   // const parent = 'abc123'
   /**

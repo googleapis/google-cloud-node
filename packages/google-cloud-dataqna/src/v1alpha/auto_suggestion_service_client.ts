@@ -545,7 +545,7 @@ export class AutoSuggestionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('suggestQueries request %j', request);
+    this._log.debug('suggestQueries request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataqna.v1alpha.ISuggestQueriesResponse,
@@ -556,7 +556,7 @@ export class AutoSuggestionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('suggestQueries response %j', response);
+          this._log.debug('suggestQueries response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -571,7 +571,7 @@ export class AutoSuggestionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('suggestQueries response %j', response);
+          this._log.debug('suggestQueries response %j', response);
           return [response, options, rawResponse];
         },
       )

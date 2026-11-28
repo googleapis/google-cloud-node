@@ -512,6 +512,16 @@
                 "restart"
               ]
             },
+            "Start": {
+              "methods": [
+                "start"
+              ]
+            },
+            "Stop": {
+              "methods": [
+                "stop"
+              ]
+            },
             "RestoreBackup": {
               "methods": [
                 "restoreBackup"
@@ -592,6 +602,11 @@
                 "getLatestRecoveryTime"
               ]
             },
+            "ExecuteSqlReadOnly": {
+              "methods": [
+                "executeSqlReadOnly"
+              ]
+            },
             "ExecuteSql": {
               "methods": [
                 "executeSql"
@@ -615,6 +630,11 @@
             "PointInTimeRestore": {
               "methods": [
                 "pointInTimeRestore"
+              ]
+            },
+            "ReconcileNetworking": {
+              "methods": [
+                "reconcileNetworking"
               ]
             }
           }
@@ -732,6 +752,16 @@
                 "restart"
               ]
             },
+            "Start": {
+              "methods": [
+                "start"
+              ]
+            },
+            "Stop": {
+              "methods": [
+                "stop"
+              ]
+            },
             "RestoreBackup": {
               "methods": [
                 "restoreBackup"
@@ -812,6 +842,11 @@
                 "getLatestRecoveryTime"
               ]
             },
+            "ExecuteSqlReadOnly": {
+              "methods": [
+                "executeSqlReadOnly"
+              ]
+            },
             "ExecuteSql": {
               "methods": [
                 "executeSql"
@@ -835,6 +870,11 @@
             "PointInTimeRestore": {
               "methods": [
                 "pointInTimeRestore"
+              ]
+            },
+            "ReconcileNetworking": {
+              "methods": [
+                "reconcileNetworking"
               ]
             }
           }
@@ -921,6 +961,21 @@
               "methods": [
                 "list"
               ]
+            },
+            "UpdateCustomerManagedCertificate": {
+              "methods": [
+                "updateCustomerManagedCertificate"
+              ]
+            },
+            "DeleteCustomerManagedCertificate": {
+              "methods": [
+                "deleteCustomerManagedCertificate"
+              ]
+            },
+            "ListCustomerManagedCertificates": {
+              "methods": [
+                "listCustomerManagedCertificates"
+              ]
             }
           }
         },
@@ -945,6 +1000,21 @@
             "List": {
               "methods": [
                 "list"
+              ]
+            },
+            "UpdateCustomerManagedCertificate": {
+              "methods": [
+                "updateCustomerManagedCertificate"
+              ]
+            },
+            "DeleteCustomerManagedCertificate": {
+              "methods": [
+                "deleteCustomerManagedCertificate"
+              ]
+            },
+            "ListCustomerManagedCertificates": {
+              "methods": [
+                "listCustomerManagedCertificates"
               ]
             }
           }

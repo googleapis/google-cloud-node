@@ -548,7 +548,7 @@ export class UserServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getUser request %j', request);
+    this._log.debug('getUser request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1.IUser,
@@ -559,7 +559,7 @@ export class UserServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getUser response %j', response);
+          this._log.debug('getUser response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -574,7 +574,7 @@ export class UserServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getUser response %j', response);
+          this._log.debug('getUser response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -698,7 +698,7 @@ export class UserServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createUser request %j', request);
+    this._log.debug('createUser request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1.IUser,
@@ -709,7 +709,7 @@ export class UserServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createUser response %j', response);
+          this._log.debug('createUser response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -724,7 +724,7 @@ export class UserServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createUser response %j', response);
+          this._log.debug('createUser response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -847,7 +847,7 @@ export class UserServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteUser request %j', request);
+    this._log.debug('deleteUser request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -858,7 +858,7 @@ export class UserServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteUser response %j', response);
+          this._log.debug('deleteUser response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -873,7 +873,7 @@ export class UserServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteUser response %j', response);
+          this._log.debug('deleteUser response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1001,7 +1001,7 @@ export class UserServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateUser request %j', request);
+    this._log.debug('updateUser request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1.IUser,
@@ -1012,7 +1012,7 @@ export class UserServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateUser response %j', response);
+          this._log.debug('updateUser response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1027,7 +1027,7 @@ export class UserServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateUser response %j', response);
+          this._log.debug('updateUser response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1146,7 +1146,7 @@ export class UserServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('verifySelf request %j', request);
+    this._log.debug('verifySelf request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1.IUser,
@@ -1157,7 +1157,7 @@ export class UserServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('verifySelf response %j', response);
+          this._log.debug('verifySelf response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1172,7 +1172,7 @@ export class UserServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('verifySelf response %j', response);
+          this._log.debug('verifySelf response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1308,11 +1308,11 @@ export class UserServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listUsers values %j', values);
+          this._log.debug('listUsers values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listUsers request %j', request);
+    this._log.debug('listUsers request %j', request);
     return this.innerApiCalls
       .listUsers(request, options, wrappedCallback)
       ?.then(
@@ -1321,7 +1321,7 @@ export class UserServiceClient {
           protos.google.shopping.merchant.accounts.v1.IListUsersRequest | null,
           protos.google.shopping.merchant.accounts.v1.IListUsersResponse,
         ]) => {
-          this._log.info('listUsers values %j', response);
+          this._log.debug('listUsers values %j', response);
           return [response, input, output];
         },
       );
@@ -1372,7 +1372,7 @@ export class UserServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listUsers stream %j', request);
+    this._log.debug('listUsers stream %j', request);
     return this.descriptors.page.listUsers.createStream(
       this.innerApiCalls.listUsers as GaxCall,
       request,
@@ -1428,7 +1428,7 @@ export class UserServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listUsers iterate %j', request);
+    this._log.debug('listUsers iterate %j', request);
     return this.descriptors.page.listUsers.asyncIterate(
       this.innerApiCalls['listUsers'] as GaxCall,
       request as {},

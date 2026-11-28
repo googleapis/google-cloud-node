@@ -688,7 +688,7 @@ export class WorkloadIdentityPoolsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getWorkloadIdentityPool request %j', request);
+    this._log.debug('getWorkloadIdentityPool request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1beta.IWorkloadIdentityPool,
@@ -699,7 +699,7 @@ export class WorkloadIdentityPoolsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getWorkloadIdentityPool response %j', response);
+          this._log.debug('getWorkloadIdentityPool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -711,7 +711,7 @@ export class WorkloadIdentityPoolsClient {
           protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getWorkloadIdentityPool response %j', response);
+          this._log.debug('getWorkloadIdentityPool response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -829,7 +829,7 @@ export class WorkloadIdentityPoolsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getWorkloadIdentityPoolProvider request %j', request);
+    this._log.debug('getWorkloadIdentityPoolProvider request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
@@ -840,7 +840,7 @@ export class WorkloadIdentityPoolsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'getWorkloadIdentityPoolProvider response %j',
             response,
           );
@@ -858,7 +858,7 @@ export class WorkloadIdentityPoolsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'getWorkloadIdentityPoolProvider response %j',
             response,
           );
@@ -1007,11 +1007,14 @@ export class WorkloadIdentityPoolsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createWorkloadIdentityPool response %j', rawResponse);
+          this._log.debug(
+            'createWorkloadIdentityPool response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createWorkloadIdentityPool request %j', request);
+    this._log.debug('createWorkloadIdentityPool request %j', request);
     return this.innerApiCalls
       .createWorkloadIdentityPool(request, options, wrappedCallback)
       ?.then(
@@ -1023,7 +1026,10 @@ export class WorkloadIdentityPoolsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createWorkloadIdentityPool response %j', rawResponse);
+          this._log.debug(
+            'createWorkloadIdentityPool response %j',
+            rawResponse,
+          );
           return [response, rawResponse, _];
         },
       );
@@ -1180,11 +1186,14 @@ export class WorkloadIdentityPoolsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateWorkloadIdentityPool response %j', rawResponse);
+          this._log.debug(
+            'updateWorkloadIdentityPool response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateWorkloadIdentityPool request %j', request);
+    this._log.debug('updateWorkloadIdentityPool request %j', request);
     return this.innerApiCalls
       .updateWorkloadIdentityPool(request, options, wrappedCallback)
       ?.then(
@@ -1196,7 +1205,10 @@ export class WorkloadIdentityPoolsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateWorkloadIdentityPool response %j', rawResponse);
+          this._log.debug(
+            'updateWorkloadIdentityPool response %j',
+            rawResponse,
+          );
           return [response, rawResponse, _];
         },
       );
@@ -1360,11 +1372,14 @@ export class WorkloadIdentityPoolsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteWorkloadIdentityPool response %j', rawResponse);
+          this._log.debug(
+            'deleteWorkloadIdentityPool response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteWorkloadIdentityPool request %j', request);
+    this._log.debug('deleteWorkloadIdentityPool request %j', request);
     return this.innerApiCalls
       .deleteWorkloadIdentityPool(request, options, wrappedCallback)
       ?.then(
@@ -1376,7 +1391,10 @@ export class WorkloadIdentityPoolsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteWorkloadIdentityPool response %j', rawResponse);
+          this._log.debug(
+            'deleteWorkloadIdentityPool response %j',
+            rawResponse,
+          );
           return [response, rawResponse, _];
         },
       );
@@ -1530,14 +1548,14 @@ export class WorkloadIdentityPoolsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'undeleteWorkloadIdentityPool response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('undeleteWorkloadIdentityPool request %j', request);
+    this._log.debug('undeleteWorkloadIdentityPool request %j', request);
     return this.innerApiCalls
       .undeleteWorkloadIdentityPool(request, options, wrappedCallback)
       ?.then(
@@ -1549,7 +1567,7 @@ export class WorkloadIdentityPoolsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'undeleteWorkloadIdentityPool response %j',
             rawResponse,
           );
@@ -1717,14 +1735,14 @@ export class WorkloadIdentityPoolsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'createWorkloadIdentityPoolProvider response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createWorkloadIdentityPoolProvider request %j', request);
+    this._log.debug('createWorkloadIdentityPoolProvider request %j', request);
     return this.innerApiCalls
       .createWorkloadIdentityPoolProvider(request, options, wrappedCallback)
       ?.then(
@@ -1736,7 +1754,7 @@ export class WorkloadIdentityPoolsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'createWorkloadIdentityPoolProvider response %j',
             rawResponse,
           );
@@ -1896,14 +1914,14 @@ export class WorkloadIdentityPoolsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'updateWorkloadIdentityPoolProvider response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateWorkloadIdentityPoolProvider request %j', request);
+    this._log.debug('updateWorkloadIdentityPoolProvider request %j', request);
     return this.innerApiCalls
       .updateWorkloadIdentityPoolProvider(request, options, wrappedCallback)
       ?.then(
@@ -1915,7 +1933,7 @@ export class WorkloadIdentityPoolsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'updateWorkloadIdentityPoolProvider response %j',
             rawResponse,
           );
@@ -2077,14 +2095,14 @@ export class WorkloadIdentityPoolsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'deleteWorkloadIdentityPoolProvider response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteWorkloadIdentityPoolProvider request %j', request);
+    this._log.debug('deleteWorkloadIdentityPoolProvider request %j', request);
     return this.innerApiCalls
       .deleteWorkloadIdentityPoolProvider(request, options, wrappedCallback)
       ?.then(
@@ -2096,7 +2114,7 @@ export class WorkloadIdentityPoolsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'deleteWorkloadIdentityPoolProvider response %j',
             rawResponse,
           );
@@ -2254,14 +2272,14 @@ export class WorkloadIdentityPoolsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'undeleteWorkloadIdentityPoolProvider response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('undeleteWorkloadIdentityPoolProvider request %j', request);
+    this._log.debug('undeleteWorkloadIdentityPoolProvider request %j', request);
     return this.innerApiCalls
       .undeleteWorkloadIdentityPoolProvider(request, options, wrappedCallback)
       ?.then(
@@ -2273,7 +2291,7 @@ export class WorkloadIdentityPoolsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'undeleteWorkloadIdentityPoolProvider response %j',
             rawResponse,
           );
@@ -2431,11 +2449,11 @@ export class WorkloadIdentityPoolsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listWorkloadIdentityPools values %j', values);
+          this._log.debug('listWorkloadIdentityPools values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listWorkloadIdentityPools request %j', request);
+    this._log.debug('listWorkloadIdentityPools request %j', request);
     return this.innerApiCalls
       .listWorkloadIdentityPools(request, options, wrappedCallback)
       ?.then(
@@ -2444,7 +2462,7 @@ export class WorkloadIdentityPoolsClient {
           protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest | null,
           protos.google.iam.v1beta.IListWorkloadIdentityPoolsResponse,
         ]) => {
-          this._log.info('listWorkloadIdentityPools values %j', response);
+          this._log.debug('listWorkloadIdentityPools values %j', response);
           return [response, input, output];
         },
       );
@@ -2493,7 +2511,7 @@ export class WorkloadIdentityPoolsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkloadIdentityPools stream %j', request);
+    this._log.debug('listWorkloadIdentityPools stream %j', request);
     return this.descriptors.page.listWorkloadIdentityPools.createStream(
       this.innerApiCalls.listWorkloadIdentityPools as GaxCall,
       request,
@@ -2547,7 +2565,7 @@ export class WorkloadIdentityPoolsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkloadIdentityPools iterate %j', request);
+    this._log.debug('listWorkloadIdentityPools iterate %j', request);
     return this.descriptors.page.listWorkloadIdentityPools.asyncIterate(
       this.innerApiCalls['listWorkloadIdentityPools'] as GaxCall,
       request as {},
@@ -2670,11 +2688,14 @@ export class WorkloadIdentityPoolsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listWorkloadIdentityPoolProviders values %j', values);
+          this._log.debug(
+            'listWorkloadIdentityPoolProviders values %j',
+            values,
+          );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listWorkloadIdentityPoolProviders request %j', request);
+    this._log.debug('listWorkloadIdentityPoolProviders request %j', request);
     return this.innerApiCalls
       .listWorkloadIdentityPoolProviders(request, options, wrappedCallback)
       ?.then(
@@ -2683,7 +2704,7 @@ export class WorkloadIdentityPoolsClient {
           protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest | null,
           protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersResponse,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'listWorkloadIdentityPoolProviders values %j',
             response,
           );
@@ -2737,7 +2758,7 @@ export class WorkloadIdentityPoolsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkloadIdentityPoolProviders stream %j', request);
+    this._log.debug('listWorkloadIdentityPoolProviders stream %j', request);
     return this.descriptors.page.listWorkloadIdentityPoolProviders.createStream(
       this.innerApiCalls.listWorkloadIdentityPoolProviders as GaxCall,
       request,
@@ -2793,7 +2814,7 @@ export class WorkloadIdentityPoolsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkloadIdentityPoolProviders iterate %j', request);
+    this._log.debug('listWorkloadIdentityPoolProviders iterate %j', request);
     return this.descriptors.page.listWorkloadIdentityPoolProviders.asyncIterate(
       this.innerApiCalls['listWorkloadIdentityPoolProviders'] as GaxCall,
       request as {},

@@ -581,11 +581,11 @@ export class AssetServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('exportAssets response %j', rawResponse);
+          this._log.debug('exportAssets response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('exportAssets request %j', request);
+    this._log.debug('exportAssets request %j', request);
     return this.innerApiCalls
       .exportAssets(request, options, wrappedCallback)
       ?.then(
@@ -597,7 +597,7 @@ export class AssetServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('exportAssets response %j', rawResponse);
+          this._log.debug('exportAssets response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

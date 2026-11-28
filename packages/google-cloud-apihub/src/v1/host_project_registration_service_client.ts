@@ -565,7 +565,7 @@ export class HostProjectRegistrationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createHostProjectRegistration request %j', request);
+    this._log.debug('createHostProjectRegistration request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apihub.v1.IHostProjectRegistration,
@@ -576,7 +576,10 @@ export class HostProjectRegistrationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createHostProjectRegistration response %j', response);
+          this._log.debug(
+            'createHostProjectRegistration response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -591,7 +594,10 @@ export class HostProjectRegistrationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createHostProjectRegistration response %j', response);
+          this._log.debug(
+            'createHostProjectRegistration response %j',
+            response,
+          );
           return [response, options, rawResponse];
         },
       )
@@ -709,7 +715,7 @@ export class HostProjectRegistrationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getHostProjectRegistration request %j', request);
+    this._log.debug('getHostProjectRegistration request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apihub.v1.IHostProjectRegistration,
@@ -720,7 +726,7 @@ export class HostProjectRegistrationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getHostProjectRegistration response %j', response);
+          this._log.debug('getHostProjectRegistration response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -735,7 +741,7 @@ export class HostProjectRegistrationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getHostProjectRegistration response %j', response);
+          this._log.debug('getHostProjectRegistration response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -893,11 +899,11 @@ export class HostProjectRegistrationServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listHostProjectRegistrations values %j', values);
+          this._log.debug('listHostProjectRegistrations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listHostProjectRegistrations request %j', request);
+    this._log.debug('listHostProjectRegistrations request %j', request);
     return this.innerApiCalls
       .listHostProjectRegistrations(request, options, wrappedCallback)
       ?.then(
@@ -906,7 +912,7 @@ export class HostProjectRegistrationServiceClient {
           protos.google.cloud.apihub.v1.IListHostProjectRegistrationsRequest | null,
           protos.google.cloud.apihub.v1.IListHostProjectRegistrationsResponse,
         ]) => {
-          this._log.info('listHostProjectRegistrations values %j', response);
+          this._log.debug('listHostProjectRegistrations values %j', response);
           return [response, input, output];
         },
       );
@@ -979,7 +985,7 @@ export class HostProjectRegistrationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listHostProjectRegistrations stream %j', request);
+    this._log.debug('listHostProjectRegistrations stream %j', request);
     return this.descriptors.page.listHostProjectRegistrations.createStream(
       this.innerApiCalls.listHostProjectRegistrations as GaxCall,
       request,
@@ -1057,7 +1063,7 @@ export class HostProjectRegistrationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listHostProjectRegistrations iterate %j', request);
+    this._log.debug('listHostProjectRegistrations iterate %j', request);
     return this.descriptors.page.listHostProjectRegistrations.asyncIterate(
       this.innerApiCalls['listHostProjectRegistrations'] as GaxCall,
       request as {},

@@ -513,7 +513,7 @@ export class NetworksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('addPeering request %j', request);
+    this._log.debug('addPeering request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -524,7 +524,7 @@ export class NetworksClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('addPeering response %j', rawResponse);
+          this._log.debug('addPeering response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -682,7 +682,7 @@ export class NetworksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('cancelRequestRemovePeering request %j', request);
+    this._log.debug('cancelRequestRemovePeering request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -693,7 +693,10 @@ export class NetworksClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('cancelRequestRemovePeering response %j', rawResponse);
+          this._log.debug(
+            'cancelRequestRemovePeering response %j',
+            rawResponse,
+          );
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -841,7 +844,7 @@ export class NetworksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('delete request %j', request);
+    this._log.debug('delete request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -852,7 +855,7 @@ export class NetworksClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('delete response %j', rawResponse);
+          this._log.debug('delete response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -979,7 +982,7 @@ export class NetworksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('get request %j', request);
+    this._log.debug('get request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.INetwork,
@@ -988,7 +991,7 @@ export class NetworksClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1000,7 +1003,7 @@ export class NetworksClient {
           protos.google.cloud.compute.v1.IGetNetworkRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1120,7 +1123,7 @@ export class NetworksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getEffectiveFirewalls request %j', request);
+    this._log.debug('getEffectiveFirewalls request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
@@ -1131,7 +1134,7 @@ export class NetworksClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getEffectiveFirewalls response %j', response);
+          this._log.debug('getEffectiveFirewalls response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1146,7 +1149,7 @@ export class NetworksClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getEffectiveFirewalls response %j', response);
+          this._log.debug('getEffectiveFirewalls response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1273,7 +1276,7 @@ export class NetworksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('insert request %j', request);
+    this._log.debug('insert request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -1284,7 +1287,7 @@ export class NetworksClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('insert response %j', rawResponse);
+          this._log.debug('insert response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -1435,7 +1438,7 @@ export class NetworksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('patch request %j', request);
+    this._log.debug('patch request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -1446,7 +1449,7 @@ export class NetworksClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('patch response %j', rawResponse);
+          this._log.debug('patch response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -1602,7 +1605,7 @@ export class NetworksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('removePeering request %j', request);
+    this._log.debug('removePeering request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -1613,7 +1616,7 @@ export class NetworksClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('removePeering response %j', rawResponse);
+          this._log.debug('removePeering response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -1770,7 +1773,7 @@ export class NetworksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('requestRemovePeering request %j', request);
+    this._log.debug('requestRemovePeering request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -1781,7 +1784,7 @@ export class NetworksClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('requestRemovePeering response %j', rawResponse);
+          this._log.debug('requestRemovePeering response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -1935,7 +1938,7 @@ export class NetworksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('switchToCustomMode request %j', request);
+    this._log.debug('switchToCustomMode request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -1946,7 +1949,7 @@ export class NetworksClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('switchToCustomMode response %j', rawResponse);
+          this._log.debug('switchToCustomMode response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -2104,7 +2107,7 @@ export class NetworksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updatePeering request %j', request);
+    this._log.debug('updatePeering request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -2115,7 +2118,7 @@ export class NetworksClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('updatePeering response %j', rawResponse);
+          this._log.debug('updatePeering response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -2332,11 +2335,11 @@ export class NetworksClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('list values %j', values);
+          this._log.debug('list values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('list request %j', request);
+    this._log.debug('list request %j', request);
     return this.innerApiCalls
       .list(request, options, wrappedCallback)
       ?.then(
@@ -2345,7 +2348,7 @@ export class NetworksClient {
           protos.google.cloud.compute.v1.IListNetworksRequest | null,
           protos.google.cloud.compute.v1.INetworkList,
         ]) => {
-          this._log.info('list values %j', response);
+          this._log.debug('list values %j', response);
           return [response, input, output];
         },
       );
@@ -2466,7 +2469,7 @@ export class NetworksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('list stream %j', request);
+    this._log.debug('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
       request,
@@ -2592,7 +2595,7 @@ export class NetworksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('list iterate %j', request);
+    this._log.debug('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
       request as {},
@@ -2794,11 +2797,11 @@ export class NetworksClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listPeeringRoutes values %j', values);
+          this._log.debug('listPeeringRoutes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listPeeringRoutes request %j', request);
+    this._log.debug('listPeeringRoutes request %j', request);
     return this.innerApiCalls
       .listPeeringRoutes(request, options, wrappedCallback)
       ?.then(
@@ -2807,7 +2810,7 @@ export class NetworksClient {
           protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest | null,
           protos.google.cloud.compute.v1.IExchangedPeeringRoutesList,
         ]) => {
-          this._log.info('listPeeringRoutes values %j', response);
+          this._log.debug('listPeeringRoutes values %j', response);
           return [response, input, output];
         },
       );
@@ -2939,7 +2942,7 @@ export class NetworksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPeeringRoutes stream %j', request);
+    this._log.debug('listPeeringRoutes stream %j', request);
     return this.descriptors.page.listPeeringRoutes.createStream(
       this.innerApiCalls.listPeeringRoutes as GaxCall,
       request,
@@ -3076,7 +3079,7 @@ export class NetworksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPeeringRoutes iterate %j', request);
+    this._log.debug('listPeeringRoutes iterate %j', request);
     return this.descriptors.page.listPeeringRoutes.asyncIterate(
       this.innerApiCalls['listPeeringRoutes'] as GaxCall,
       request as {},

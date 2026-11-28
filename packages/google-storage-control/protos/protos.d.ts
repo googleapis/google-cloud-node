@@ -201,6 +201,20 @@ export namespace google {
                     public listManagedFolders(request: google.storage.control.v2.IListManagedFoldersRequest): Promise<google.storage.control.v2.ListManagedFoldersResponse>;
 
                     /**
+                     * Calls UpdateManagedFolder.
+                     * @param request UpdateManagedFolderRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ManagedFolder
+                     */
+                    public updateManagedFolder(request: google.storage.control.v2.IUpdateManagedFolderRequest, callback: google.storage.control.v2.StorageControl.UpdateManagedFolderCallback): void;
+
+                    /**
+                     * Calls UpdateManagedFolder.
+                     * @param request UpdateManagedFolderRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateManagedFolder(request: google.storage.control.v2.IUpdateManagedFolderRequest): Promise<google.storage.control.v2.ManagedFolder>;
+
+                    /**
                      * Calls CreateAnywhereCache.
                      * @param request CreateAnywhereCacheRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -297,6 +311,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public listAnywhereCaches(request: google.storage.control.v2.IListAnywhereCachesRequest): Promise<google.storage.control.v2.ListAnywhereCachesResponse>;
+
+                    /**
+                     * Calls CreateRapidCache.
+                     * @param request CreateRapidCacheRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createRapidCache(request: google.storage.control.v2.ICreateRapidCacheRequest, callback: google.storage.control.v2.StorageControl.CreateRapidCacheCallback): void;
+
+                    /**
+                     * Calls CreateRapidCache.
+                     * @param request CreateRapidCacheRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createRapidCache(request: google.storage.control.v2.ICreateRapidCacheRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateRapidCache.
+                     * @param request UpdateRapidCacheRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateRapidCache(request: google.storage.control.v2.IUpdateRapidCacheRequest, callback: google.storage.control.v2.StorageControl.UpdateRapidCacheCallback): void;
+
+                    /**
+                     * Calls UpdateRapidCache.
+                     * @param request UpdateRapidCacheRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateRapidCache(request: google.storage.control.v2.IUpdateRapidCacheRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DisableRapidCache.
+                     * @param request DisableRapidCacheRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public disableRapidCache(request: google.storage.control.v2.IDisableRapidCacheRequest, callback: google.storage.control.v2.StorageControl.DisableRapidCacheCallback): void;
+
+                    /**
+                     * Calls DisableRapidCache.
+                     * @param request DisableRapidCacheRequest message or plain object
+                     * @returns Promise
+                     */
+                    public disableRapidCache(request: google.storage.control.v2.IDisableRapidCacheRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetRapidCache.
+                     * @param request GetRapidCacheRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RapidCache
+                     */
+                    public getRapidCache(request: google.storage.control.v2.IGetRapidCacheRequest, callback: google.storage.control.v2.StorageControl.GetRapidCacheCallback): void;
+
+                    /**
+                     * Calls GetRapidCache.
+                     * @param request GetRapidCacheRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getRapidCache(request: google.storage.control.v2.IGetRapidCacheRequest): Promise<google.storage.control.v2.RapidCache>;
+
+                    /**
+                     * Calls ListRapidCaches.
+                     * @param request ListRapidCachesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRapidCachesResponse
+                     */
+                    public listRapidCaches(request: google.storage.control.v2.IListRapidCachesRequest, callback: google.storage.control.v2.StorageControl.ListRapidCachesCallback): void;
+
+                    /**
+                     * Calls ListRapidCaches.
+                     * @param request ListRapidCachesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRapidCaches(request: google.storage.control.v2.IListRapidCachesRequest): Promise<google.storage.control.v2.ListRapidCachesResponse>;
 
                     /**
                      * Calls GetProjectIntelligenceConfig.
@@ -493,6 +577,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public listIntelligenceFindingRevisions(request: google.storage.control.v2.IListIntelligenceFindingRevisionsRequest): Promise<google.storage.control.v2.ListIntelligenceFindingRevisionsResponse>;
+
+                    /**
+                     * Calls ViewObjectFullContext.
+                     * @param request ViewObjectFullContextRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ObjectFullContext
+                     */
+                    public viewObjectFullContext(request: google.storage.control.v2.IViewObjectFullContextRequest, callback: google.storage.control.v2.StorageControl.ViewObjectFullContextCallback): void;
+
+                    /**
+                     * Calls ViewObjectFullContext.
+                     * @param request ViewObjectFullContextRequest message or plain object
+                     * @returns Promise
+                     */
+                    public viewObjectFullContext(request: google.storage.control.v2.IViewObjectFullContextRequest): Promise<google.storage.control.v2.ObjectFullContext>;
                 }
 
                 namespace StorageControl {
@@ -575,6 +673,13 @@ export namespace google {
                     type ListManagedFoldersCallback = (error: (Error|null), response?: google.storage.control.v2.ListManagedFoldersResponse) => void;
 
                     /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|updateManagedFolder}.
+                     * @param error Error, if any
+                     * @param [response] ManagedFolder
+                     */
+                    type UpdateManagedFolderCallback = (error: (Error|null), response?: google.storage.control.v2.ManagedFolder) => void;
+
+                    /**
                      * Callback as used by {@link google.storage.control.v2.StorageControl|createAnywhereCache}.
                      * @param error Error, if any
                      * @param [response] Operation
@@ -622,6 +727,41 @@ export namespace google {
                      * @param [response] ListAnywhereCachesResponse
                      */
                     type ListAnywhereCachesCallback = (error: (Error|null), response?: google.storage.control.v2.ListAnywhereCachesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|createRapidCache}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateRapidCacheCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|updateRapidCache}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateRapidCacheCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|disableRapidCache}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DisableRapidCacheCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|getRapidCache}.
+                     * @param error Error, if any
+                     * @param [response] RapidCache
+                     */
+                    type GetRapidCacheCallback = (error: (Error|null), response?: google.storage.control.v2.RapidCache) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|listRapidCaches}.
+                     * @param error Error, if any
+                     * @param [response] ListRapidCachesResponse
+                     */
+                    type ListRapidCachesCallback = (error: (Error|null), response?: google.storage.control.v2.ListRapidCachesResponse) => void;
 
                     /**
                      * Callback as used by {@link google.storage.control.v2.StorageControl|getProjectIntelligenceConfig}.
@@ -720,6 +860,13 @@ export namespace google {
                      * @param [response] ListIntelligenceFindingRevisionsResponse
                      */
                     type ListIntelligenceFindingRevisionsCallback = (error: (Error|null), response?: google.storage.control.v2.ListIntelligenceFindingRevisionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|viewObjectFullContext}.
+                     * @param error Error, if any
+                     * @param [response] ObjectFullContext
+                     */
+                    type ViewObjectFullContextCallback = (error: (Error|null), response?: google.storage.control.v2.ObjectFullContext) => void;
                 }
 
                 /** Properties of a PendingRenameInfo. */
@@ -2125,6 +2272,9 @@ export namespace google {
 
                     /** StorageLayout hierarchicalNamespace */
                     hierarchicalNamespace?: (google.storage.control.v2.StorageLayout.IHierarchicalNamespace|null);
+
+                    /** StorageLayout rapidCacheInfo */
+                    rapidCacheInfo?: (google.storage.control.v2.StorageLayout.IRapidCacheInfo|null);
                 }
 
                 /** Represents a StorageLayout. */
@@ -2150,6 +2300,9 @@ export namespace google {
 
                     /** StorageLayout hierarchicalNamespace. */
                     public hierarchicalNamespace?: (google.storage.control.v2.StorageLayout.IHierarchicalNamespace|null);
+
+                    /** StorageLayout rapidCacheInfo. */
+                    public rapidCacheInfo?: (google.storage.control.v2.StorageLayout.IRapidCacheInfo|null);
 
                     /**
                      * Creates a new StorageLayout instance using the specified properties.
@@ -2424,6 +2577,103 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of a RapidCacheInfo. */
+                    interface IRapidCacheInfo {
+
+                        /** RapidCacheInfo cacheType */
+                        cacheType?: (string|null);
+                    }
+
+                    /** Represents a RapidCacheInfo. */
+                    class RapidCacheInfo implements IRapidCacheInfo {
+
+                        /**
+                         * Constructs a new RapidCacheInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.storage.control.v2.StorageLayout.IRapidCacheInfo);
+
+                        /** RapidCacheInfo cacheType. */
+                        public cacheType: string;
+
+                        /**
+                         * Creates a new RapidCacheInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RapidCacheInfo instance
+                         */
+                        public static create(properties?: google.storage.control.v2.StorageLayout.IRapidCacheInfo): google.storage.control.v2.StorageLayout.RapidCacheInfo;
+
+                        /**
+                         * Encodes the specified RapidCacheInfo message. Does not implicitly {@link google.storage.control.v2.StorageLayout.RapidCacheInfo.verify|verify} messages.
+                         * @param message RapidCacheInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.storage.control.v2.StorageLayout.IRapidCacheInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RapidCacheInfo message, length delimited. Does not implicitly {@link google.storage.control.v2.StorageLayout.RapidCacheInfo.verify|verify} messages.
+                         * @param message RapidCacheInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.storage.control.v2.StorageLayout.IRapidCacheInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RapidCacheInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RapidCacheInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.StorageLayout.RapidCacheInfo;
+
+                        /**
+                         * Decodes a RapidCacheInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RapidCacheInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.StorageLayout.RapidCacheInfo;
+
+                        /**
+                         * Verifies a RapidCacheInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RapidCacheInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RapidCacheInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.storage.control.v2.StorageLayout.RapidCacheInfo;
+
+                        /**
+                         * Creates a plain object from a RapidCacheInfo message. Also converts values to other types if specified.
+                         * @param message RapidCacheInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.storage.control.v2.StorageLayout.RapidCacheInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RapidCacheInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RapidCacheInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a GetStorageLayoutRequest. */
@@ -2549,6 +2799,9 @@ export namespace google {
 
                     /** ManagedFolder updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ManagedFolder rapidCacheConfig */
+                    rapidCacheConfig?: (google.storage.control.v2.ManagedFolder.IRapidCacheConfig|null);
                 }
 
                 /** Represents a ManagedFolder. */
@@ -2571,6 +2824,9 @@ export namespace google {
 
                     /** ManagedFolder updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ManagedFolder rapidCacheConfig. */
+                    public rapidCacheConfig?: (google.storage.control.v2.ManagedFolder.IRapidCacheConfig|null);
 
                     /**
                      * Creates a new ManagedFolder instance using the specified properties.
@@ -2648,6 +2904,221 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ManagedFolder {
+
+                    /** Properties of a RapidCacheConfig. */
+                    interface IRapidCacheConfig {
+
+                        /** RapidCacheConfig policies */
+                        policies?: ({ [k: string]: google.storage.control.v2.ManagedFolder.RapidCacheConfig.IRapidCachePolicy }|null);
+                    }
+
+                    /** Represents a RapidCacheConfig. */
+                    class RapidCacheConfig implements IRapidCacheConfig {
+
+                        /**
+                         * Constructs a new RapidCacheConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.storage.control.v2.ManagedFolder.IRapidCacheConfig);
+
+                        /** RapidCacheConfig policies. */
+                        public policies: { [k: string]: google.storage.control.v2.ManagedFolder.RapidCacheConfig.IRapidCachePolicy };
+
+                        /**
+                         * Creates a new RapidCacheConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RapidCacheConfig instance
+                         */
+                        public static create(properties?: google.storage.control.v2.ManagedFolder.IRapidCacheConfig): google.storage.control.v2.ManagedFolder.RapidCacheConfig;
+
+                        /**
+                         * Encodes the specified RapidCacheConfig message. Does not implicitly {@link google.storage.control.v2.ManagedFolder.RapidCacheConfig.verify|verify} messages.
+                         * @param message RapidCacheConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.storage.control.v2.ManagedFolder.IRapidCacheConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RapidCacheConfig message, length delimited. Does not implicitly {@link google.storage.control.v2.ManagedFolder.RapidCacheConfig.verify|verify} messages.
+                         * @param message RapidCacheConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.storage.control.v2.ManagedFolder.IRapidCacheConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RapidCacheConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RapidCacheConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.ManagedFolder.RapidCacheConfig;
+
+                        /**
+                         * Decodes a RapidCacheConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RapidCacheConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.ManagedFolder.RapidCacheConfig;
+
+                        /**
+                         * Verifies a RapidCacheConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RapidCacheConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RapidCacheConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.storage.control.v2.ManagedFolder.RapidCacheConfig;
+
+                        /**
+                         * Creates a plain object from a RapidCacheConfig message. Also converts values to other types if specified.
+                         * @param message RapidCacheConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.storage.control.v2.ManagedFolder.RapidCacheConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RapidCacheConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RapidCacheConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace RapidCacheConfig {
+
+                        /** Properties of a RapidCachePolicy. */
+                        interface IRapidCachePolicy {
+
+                            /** RapidCachePolicy rapidCacheId */
+                            rapidCacheId?: (string|null);
+
+                            /** RapidCachePolicy ingestOnWrite */
+                            ingestOnWrite?: (google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy.IngestOnWrite|keyof typeof google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy.IngestOnWrite|null);
+                        }
+
+                        /** Represents a RapidCachePolicy. */
+                        class RapidCachePolicy implements IRapidCachePolicy {
+
+                            /**
+                             * Constructs a new RapidCachePolicy.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.storage.control.v2.ManagedFolder.RapidCacheConfig.IRapidCachePolicy);
+
+                            /** RapidCachePolicy rapidCacheId. */
+                            public rapidCacheId: string;
+
+                            /** RapidCachePolicy ingestOnWrite. */
+                            public ingestOnWrite: (google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy.IngestOnWrite|keyof typeof google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy.IngestOnWrite);
+
+                            /**
+                             * Creates a new RapidCachePolicy instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RapidCachePolicy instance
+                             */
+                            public static create(properties?: google.storage.control.v2.ManagedFolder.RapidCacheConfig.IRapidCachePolicy): google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy;
+
+                            /**
+                             * Encodes the specified RapidCachePolicy message. Does not implicitly {@link google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy.verify|verify} messages.
+                             * @param message RapidCachePolicy message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.storage.control.v2.ManagedFolder.RapidCacheConfig.IRapidCachePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RapidCachePolicy message, length delimited. Does not implicitly {@link google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy.verify|verify} messages.
+                             * @param message RapidCachePolicy message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.storage.control.v2.ManagedFolder.RapidCacheConfig.IRapidCachePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RapidCachePolicy message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RapidCachePolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy;
+
+                            /**
+                             * Decodes a RapidCachePolicy message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RapidCachePolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy;
+
+                            /**
+                             * Verifies a RapidCachePolicy message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RapidCachePolicy message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RapidCachePolicy
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy;
+
+                            /**
+                             * Creates a plain object from a RapidCachePolicy message. Also converts values to other types if specified.
+                             * @param message RapidCachePolicy
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.storage.control.v2.ManagedFolder.RapidCacheConfig.RapidCachePolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RapidCachePolicy to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RapidCachePolicy
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace RapidCachePolicy {
+
+                            /** IngestOnWrite enum. */
+                            enum IngestOnWrite {
+                                INGEST_ON_WRITE_UNSPECIFIED = 0,
+                                INGEST_ON_WRITE_ENABLED = 1
+                            }
+                        }
+                    }
                 }
 
                 /** Properties of a GetManagedFolderRequest. */
@@ -3225,6 +3696,127 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an UpdateManagedFolderRequest. */
+                interface IUpdateManagedFolderRequest {
+
+                    /** UpdateManagedFolderRequest managedFolder */
+                    managedFolder?: (google.storage.control.v2.IManagedFolder|null);
+
+                    /** UpdateManagedFolderRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateManagedFolderRequest ifMetagenerationMatch */
+                    ifMetagenerationMatch?: (number|Long|string|null);
+
+                    /** UpdateManagedFolderRequest ifMetagenerationNotMatch */
+                    ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                    /** UpdateManagedFolderRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateManagedFolderRequest. */
+                class UpdateManagedFolderRequest implements IUpdateManagedFolderRequest {
+
+                    /**
+                     * Constructs a new UpdateManagedFolderRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IUpdateManagedFolderRequest);
+
+                    /** UpdateManagedFolderRequest managedFolder. */
+                    public managedFolder?: (google.storage.control.v2.IManagedFolder|null);
+
+                    /** UpdateManagedFolderRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateManagedFolderRequest ifMetagenerationMatch. */
+                    public ifMetagenerationMatch?: (number|Long|string|null);
+
+                    /** UpdateManagedFolderRequest ifMetagenerationNotMatch. */
+                    public ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                    /** UpdateManagedFolderRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateManagedFolderRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateManagedFolderRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IUpdateManagedFolderRequest): google.storage.control.v2.UpdateManagedFolderRequest;
+
+                    /**
+                     * Encodes the specified UpdateManagedFolderRequest message. Does not implicitly {@link google.storage.control.v2.UpdateManagedFolderRequest.verify|verify} messages.
+                     * @param message UpdateManagedFolderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IUpdateManagedFolderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateManagedFolderRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.UpdateManagedFolderRequest.verify|verify} messages.
+                     * @param message UpdateManagedFolderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IUpdateManagedFolderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateManagedFolderRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateManagedFolderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.UpdateManagedFolderRequest;
+
+                    /**
+                     * Decodes an UpdateManagedFolderRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateManagedFolderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.UpdateManagedFolderRequest;
+
+                    /**
+                     * Verifies an UpdateManagedFolderRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateManagedFolderRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateManagedFolderRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.UpdateManagedFolderRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateManagedFolderRequest message. Also converts values to other types if specified.
+                     * @param message UpdateManagedFolderRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.UpdateManagedFolderRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateManagedFolderRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateManagedFolderRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a CreateAnywhereCacheMetadata. */
                 interface ICreateAnywhereCacheMetadata {
 
@@ -3242,6 +3834,9 @@ export namespace google {
 
                     /** CreateAnywhereCacheMetadata admissionPolicy */
                     admissionPolicy?: (string|null);
+
+                    /** CreateAnywhereCacheMetadata ingestOnWrite */
+                    ingestOnWrite?: (boolean|null);
                 }
 
                 /** Represents a CreateAnywhereCacheMetadata. */
@@ -3267,6 +3862,9 @@ export namespace google {
 
                     /** CreateAnywhereCacheMetadata admissionPolicy. */
                     public admissionPolicy?: (string|null);
+
+                    /** CreateAnywhereCacheMetadata ingestOnWrite. */
+                    public ingestOnWrite?: (boolean|null);
 
                     /**
                      * Creates a new CreateAnywhereCacheMetadata instance using the specified properties.
@@ -3346,6 +3944,139 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CreateRapidCacheMetadata. */
+                interface ICreateRapidCacheMetadata {
+
+                    /** CreateRapidCacheMetadata commonMetadata */
+                    commonMetadata?: (google.storage.control.v2.ICommonLongRunningOperationMetadata|null);
+
+                    /** CreateRapidCacheMetadata rapidCacheId */
+                    rapidCacheId?: (string|null);
+
+                    /** CreateRapidCacheMetadata zone */
+                    zone?: (string|null);
+
+                    /** CreateRapidCacheMetadata ttl */
+                    ttl?: (google.protobuf.IDuration|null);
+
+                    /** CreateRapidCacheMetadata admissionPolicy */
+                    admissionPolicy?: (string|null);
+
+                    /** CreateRapidCacheMetadata ingestOnWrite */
+                    ingestOnWrite?: (boolean|null);
+
+                    /** CreateRapidCacheMetadata cacheType */
+                    cacheType?: (string|null);
+                }
+
+                /** Represents a CreateRapidCacheMetadata. */
+                class CreateRapidCacheMetadata implements ICreateRapidCacheMetadata {
+
+                    /**
+                     * Constructs a new CreateRapidCacheMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.ICreateRapidCacheMetadata);
+
+                    /** CreateRapidCacheMetadata commonMetadata. */
+                    public commonMetadata?: (google.storage.control.v2.ICommonLongRunningOperationMetadata|null);
+
+                    /** CreateRapidCacheMetadata rapidCacheId. */
+                    public rapidCacheId?: (string|null);
+
+                    /** CreateRapidCacheMetadata zone. */
+                    public zone?: (string|null);
+
+                    /** CreateRapidCacheMetadata ttl. */
+                    public ttl?: (google.protobuf.IDuration|null);
+
+                    /** CreateRapidCacheMetadata admissionPolicy. */
+                    public admissionPolicy?: (string|null);
+
+                    /** CreateRapidCacheMetadata ingestOnWrite. */
+                    public ingestOnWrite?: (boolean|null);
+
+                    /** CreateRapidCacheMetadata cacheType. */
+                    public cacheType?: (string|null);
+
+                    /**
+                     * Creates a new CreateRapidCacheMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateRapidCacheMetadata instance
+                     */
+                    public static create(properties?: google.storage.control.v2.ICreateRapidCacheMetadata): google.storage.control.v2.CreateRapidCacheMetadata;
+
+                    /**
+                     * Encodes the specified CreateRapidCacheMetadata message. Does not implicitly {@link google.storage.control.v2.CreateRapidCacheMetadata.verify|verify} messages.
+                     * @param message CreateRapidCacheMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.ICreateRapidCacheMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateRapidCacheMetadata message, length delimited. Does not implicitly {@link google.storage.control.v2.CreateRapidCacheMetadata.verify|verify} messages.
+                     * @param message CreateRapidCacheMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.ICreateRapidCacheMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateRapidCacheMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateRapidCacheMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.CreateRapidCacheMetadata;
+
+                    /**
+                     * Decodes a CreateRapidCacheMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateRapidCacheMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.CreateRapidCacheMetadata;
+
+                    /**
+                     * Verifies a CreateRapidCacheMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateRapidCacheMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateRapidCacheMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.CreateRapidCacheMetadata;
+
+                    /**
+                     * Creates a plain object from a CreateRapidCacheMetadata message. Also converts values to other types if specified.
+                     * @param message CreateRapidCacheMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.CreateRapidCacheMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateRapidCacheMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateRapidCacheMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an UpdateAnywhereCacheMetadata. */
                 interface IUpdateAnywhereCacheMetadata {
 
@@ -3363,6 +4094,9 @@ export namespace google {
 
                     /** UpdateAnywhereCacheMetadata admissionPolicy */
                     admissionPolicy?: (string|null);
+
+                    /** UpdateAnywhereCacheMetadata ingestOnWrite */
+                    ingestOnWrite?: (boolean|null);
                 }
 
                 /** Represents an UpdateAnywhereCacheMetadata. */
@@ -3388,6 +4122,9 @@ export namespace google {
 
                     /** UpdateAnywhereCacheMetadata admissionPolicy. */
                     public admissionPolicy?: (string|null);
+
+                    /** UpdateAnywhereCacheMetadata ingestOnWrite. */
+                    public ingestOnWrite?: (boolean|null);
 
                     /**
                      * Creates a new UpdateAnywhereCacheMetadata instance using the specified properties.
@@ -3467,6 +4204,254 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an UpdateRapidCacheMetadata. */
+                interface IUpdateRapidCacheMetadata {
+
+                    /** UpdateRapidCacheMetadata commonMetadata */
+                    commonMetadata?: (google.storage.control.v2.ICommonLongRunningOperationMetadata|null);
+
+                    /** UpdateRapidCacheMetadata rapidCacheId */
+                    rapidCacheId?: (string|null);
+
+                    /** UpdateRapidCacheMetadata zone */
+                    zone?: (string|null);
+
+                    /** UpdateRapidCacheMetadata ttl */
+                    ttl?: (google.protobuf.IDuration|null);
+
+                    /** UpdateRapidCacheMetadata admissionPolicy */
+                    admissionPolicy?: (string|null);
+
+                    /** UpdateRapidCacheMetadata ingestOnWrite */
+                    ingestOnWrite?: (boolean|null);
+
+                    /** UpdateRapidCacheMetadata cacheType */
+                    cacheType?: (string|null);
+                }
+
+                /** Represents an UpdateRapidCacheMetadata. */
+                class UpdateRapidCacheMetadata implements IUpdateRapidCacheMetadata {
+
+                    /**
+                     * Constructs a new UpdateRapidCacheMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IUpdateRapidCacheMetadata);
+
+                    /** UpdateRapidCacheMetadata commonMetadata. */
+                    public commonMetadata?: (google.storage.control.v2.ICommonLongRunningOperationMetadata|null);
+
+                    /** UpdateRapidCacheMetadata rapidCacheId. */
+                    public rapidCacheId?: (string|null);
+
+                    /** UpdateRapidCacheMetadata zone. */
+                    public zone?: (string|null);
+
+                    /** UpdateRapidCacheMetadata ttl. */
+                    public ttl?: (google.protobuf.IDuration|null);
+
+                    /** UpdateRapidCacheMetadata admissionPolicy. */
+                    public admissionPolicy?: (string|null);
+
+                    /** UpdateRapidCacheMetadata ingestOnWrite. */
+                    public ingestOnWrite?: (boolean|null);
+
+                    /** UpdateRapidCacheMetadata cacheType. */
+                    public cacheType?: (string|null);
+
+                    /**
+                     * Creates a new UpdateRapidCacheMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateRapidCacheMetadata instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IUpdateRapidCacheMetadata): google.storage.control.v2.UpdateRapidCacheMetadata;
+
+                    /**
+                     * Encodes the specified UpdateRapidCacheMetadata message. Does not implicitly {@link google.storage.control.v2.UpdateRapidCacheMetadata.verify|verify} messages.
+                     * @param message UpdateRapidCacheMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IUpdateRapidCacheMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateRapidCacheMetadata message, length delimited. Does not implicitly {@link google.storage.control.v2.UpdateRapidCacheMetadata.verify|verify} messages.
+                     * @param message UpdateRapidCacheMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IUpdateRapidCacheMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateRapidCacheMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateRapidCacheMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.UpdateRapidCacheMetadata;
+
+                    /**
+                     * Decodes an UpdateRapidCacheMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateRapidCacheMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.UpdateRapidCacheMetadata;
+
+                    /**
+                     * Verifies an UpdateRapidCacheMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateRapidCacheMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateRapidCacheMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.UpdateRapidCacheMetadata;
+
+                    /**
+                     * Creates a plain object from an UpdateRapidCacheMetadata message. Also converts values to other types if specified.
+                     * @param message UpdateRapidCacheMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.UpdateRapidCacheMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateRapidCacheMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateRapidCacheMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DisableRapidCacheMetadata. */
+                interface IDisableRapidCacheMetadata {
+
+                    /** DisableRapidCacheMetadata commonMetadata */
+                    commonMetadata?: (google.storage.control.v2.ICommonLongRunningOperationMetadata|null);
+
+                    /** DisableRapidCacheMetadata rapidCacheId */
+                    rapidCacheId?: (string|null);
+
+                    /** DisableRapidCacheMetadata zone */
+                    zone?: (string|null);
+
+                    /** DisableRapidCacheMetadata cacheType */
+                    cacheType?: (string|null);
+                }
+
+                /** Represents a DisableRapidCacheMetadata. */
+                class DisableRapidCacheMetadata implements IDisableRapidCacheMetadata {
+
+                    /**
+                     * Constructs a new DisableRapidCacheMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IDisableRapidCacheMetadata);
+
+                    /** DisableRapidCacheMetadata commonMetadata. */
+                    public commonMetadata?: (google.storage.control.v2.ICommonLongRunningOperationMetadata|null);
+
+                    /** DisableRapidCacheMetadata rapidCacheId. */
+                    public rapidCacheId?: (string|null);
+
+                    /** DisableRapidCacheMetadata zone. */
+                    public zone?: (string|null);
+
+                    /** DisableRapidCacheMetadata cacheType. */
+                    public cacheType?: (string|null);
+
+                    /**
+                     * Creates a new DisableRapidCacheMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DisableRapidCacheMetadata instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IDisableRapidCacheMetadata): google.storage.control.v2.DisableRapidCacheMetadata;
+
+                    /**
+                     * Encodes the specified DisableRapidCacheMetadata message. Does not implicitly {@link google.storage.control.v2.DisableRapidCacheMetadata.verify|verify} messages.
+                     * @param message DisableRapidCacheMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IDisableRapidCacheMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DisableRapidCacheMetadata message, length delimited. Does not implicitly {@link google.storage.control.v2.DisableRapidCacheMetadata.verify|verify} messages.
+                     * @param message DisableRapidCacheMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IDisableRapidCacheMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DisableRapidCacheMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DisableRapidCacheMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.DisableRapidCacheMetadata;
+
+                    /**
+                     * Decodes a DisableRapidCacheMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DisableRapidCacheMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.DisableRapidCacheMetadata;
+
+                    /**
+                     * Verifies a DisableRapidCacheMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DisableRapidCacheMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DisableRapidCacheMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.DisableRapidCacheMetadata;
+
+                    /**
+                     * Creates a plain object from a DisableRapidCacheMetadata message. Also converts values to other types if specified.
+                     * @param message DisableRapidCacheMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.DisableRapidCacheMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DisableRapidCacheMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DisableRapidCacheMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an AnywhereCache. */
                 interface IAnywhereCache {
 
@@ -3493,6 +4478,9 @@ export namespace google {
 
                     /** AnywhereCache pendingUpdate */
                     pendingUpdate?: (boolean|null);
+
+                    /** AnywhereCache ingestOnWrite */
+                    ingestOnWrite?: (boolean|null);
                 }
 
                 /** Represents an AnywhereCache. */
@@ -3527,6 +4515,9 @@ export namespace google {
 
                     /** AnywhereCache pendingUpdate. */
                     public pendingUpdate: boolean;
+
+                    /** AnywhereCache ingestOnWrite. */
+                    public ingestOnWrite?: (boolean|null);
 
                     /**
                      * Creates a new AnywhereCache instance using the specified properties.
@@ -4454,6 +5445,793 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a RapidCache. */
+                interface IRapidCache {
+
+                    /** RapidCache name */
+                    name?: (string|null);
+
+                    /** RapidCache zone */
+                    zone?: (string|null);
+
+                    /** RapidCache cacheType */
+                    cacheType?: (string|null);
+
+                    /** RapidCache ttl */
+                    ttl?: (google.protobuf.IDuration|null);
+
+                    /** RapidCache admissionPolicy */
+                    admissionPolicy?: (string|null);
+
+                    /** RapidCache state */
+                    state?: (string|null);
+
+                    /** RapidCache createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RapidCache updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RapidCache pendingUpdate */
+                    pendingUpdate?: (boolean|null);
+                }
+
+                /** Represents a RapidCache. */
+                class RapidCache implements IRapidCache {
+
+                    /**
+                     * Constructs a new RapidCache.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IRapidCache);
+
+                    /** RapidCache name. */
+                    public name: string;
+
+                    /** RapidCache zone. */
+                    public zone: string;
+
+                    /** RapidCache cacheType. */
+                    public cacheType: string;
+
+                    /** RapidCache ttl. */
+                    public ttl?: (google.protobuf.IDuration|null);
+
+                    /** RapidCache admissionPolicy. */
+                    public admissionPolicy: string;
+
+                    /** RapidCache state. */
+                    public state: string;
+
+                    /** RapidCache createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RapidCache updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RapidCache pendingUpdate. */
+                    public pendingUpdate: boolean;
+
+                    /**
+                     * Creates a new RapidCache instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RapidCache instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IRapidCache): google.storage.control.v2.RapidCache;
+
+                    /**
+                     * Encodes the specified RapidCache message. Does not implicitly {@link google.storage.control.v2.RapidCache.verify|verify} messages.
+                     * @param message RapidCache message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IRapidCache, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RapidCache message, length delimited. Does not implicitly {@link google.storage.control.v2.RapidCache.verify|verify} messages.
+                     * @param message RapidCache message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IRapidCache, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RapidCache message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RapidCache
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.RapidCache;
+
+                    /**
+                     * Decodes a RapidCache message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RapidCache
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.RapidCache;
+
+                    /**
+                     * Verifies a RapidCache message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RapidCache message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RapidCache
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.RapidCache;
+
+                    /**
+                     * Creates a plain object from a RapidCache message. Also converts values to other types if specified.
+                     * @param message RapidCache
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.RapidCache, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RapidCache to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RapidCache
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateRapidCacheRequest. */
+                interface ICreateRapidCacheRequest {
+
+                    /** CreateRapidCacheRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateRapidCacheRequest rapidCache */
+                    rapidCache?: (google.storage.control.v2.IRapidCache|null);
+
+                    /** CreateRapidCacheRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateRapidCacheRequest. */
+                class CreateRapidCacheRequest implements ICreateRapidCacheRequest {
+
+                    /**
+                     * Constructs a new CreateRapidCacheRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.ICreateRapidCacheRequest);
+
+                    /** CreateRapidCacheRequest parent. */
+                    public parent: string;
+
+                    /** CreateRapidCacheRequest rapidCache. */
+                    public rapidCache?: (google.storage.control.v2.IRapidCache|null);
+
+                    /** CreateRapidCacheRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateRapidCacheRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateRapidCacheRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.ICreateRapidCacheRequest): google.storage.control.v2.CreateRapidCacheRequest;
+
+                    /**
+                     * Encodes the specified CreateRapidCacheRequest message. Does not implicitly {@link google.storage.control.v2.CreateRapidCacheRequest.verify|verify} messages.
+                     * @param message CreateRapidCacheRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.ICreateRapidCacheRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateRapidCacheRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.CreateRapidCacheRequest.verify|verify} messages.
+                     * @param message CreateRapidCacheRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.ICreateRapidCacheRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateRapidCacheRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateRapidCacheRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.CreateRapidCacheRequest;
+
+                    /**
+                     * Decodes a CreateRapidCacheRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateRapidCacheRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.CreateRapidCacheRequest;
+
+                    /**
+                     * Verifies a CreateRapidCacheRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateRapidCacheRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateRapidCacheRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.CreateRapidCacheRequest;
+
+                    /**
+                     * Creates a plain object from a CreateRapidCacheRequest message. Also converts values to other types if specified.
+                     * @param message CreateRapidCacheRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.CreateRapidCacheRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateRapidCacheRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateRapidCacheRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateRapidCacheRequest. */
+                interface IUpdateRapidCacheRequest {
+
+                    /** UpdateRapidCacheRequest rapidCache */
+                    rapidCache?: (google.storage.control.v2.IRapidCache|null);
+
+                    /** UpdateRapidCacheRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateRapidCacheRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateRapidCacheRequest. */
+                class UpdateRapidCacheRequest implements IUpdateRapidCacheRequest {
+
+                    /**
+                     * Constructs a new UpdateRapidCacheRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IUpdateRapidCacheRequest);
+
+                    /** UpdateRapidCacheRequest rapidCache. */
+                    public rapidCache?: (google.storage.control.v2.IRapidCache|null);
+
+                    /** UpdateRapidCacheRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateRapidCacheRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateRapidCacheRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateRapidCacheRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IUpdateRapidCacheRequest): google.storage.control.v2.UpdateRapidCacheRequest;
+
+                    /**
+                     * Encodes the specified UpdateRapidCacheRequest message. Does not implicitly {@link google.storage.control.v2.UpdateRapidCacheRequest.verify|verify} messages.
+                     * @param message UpdateRapidCacheRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IUpdateRapidCacheRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateRapidCacheRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.UpdateRapidCacheRequest.verify|verify} messages.
+                     * @param message UpdateRapidCacheRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IUpdateRapidCacheRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateRapidCacheRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateRapidCacheRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.UpdateRapidCacheRequest;
+
+                    /**
+                     * Decodes an UpdateRapidCacheRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateRapidCacheRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.UpdateRapidCacheRequest;
+
+                    /**
+                     * Verifies an UpdateRapidCacheRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateRapidCacheRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateRapidCacheRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.UpdateRapidCacheRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateRapidCacheRequest message. Also converts values to other types if specified.
+                     * @param message UpdateRapidCacheRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.UpdateRapidCacheRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateRapidCacheRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateRapidCacheRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DisableRapidCacheRequest. */
+                interface IDisableRapidCacheRequest {
+
+                    /** DisableRapidCacheRequest name */
+                    name?: (string|null);
+
+                    /** DisableRapidCacheRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DisableRapidCacheRequest. */
+                class DisableRapidCacheRequest implements IDisableRapidCacheRequest {
+
+                    /**
+                     * Constructs a new DisableRapidCacheRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IDisableRapidCacheRequest);
+
+                    /** DisableRapidCacheRequest name. */
+                    public name: string;
+
+                    /** DisableRapidCacheRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DisableRapidCacheRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DisableRapidCacheRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IDisableRapidCacheRequest): google.storage.control.v2.DisableRapidCacheRequest;
+
+                    /**
+                     * Encodes the specified DisableRapidCacheRequest message. Does not implicitly {@link google.storage.control.v2.DisableRapidCacheRequest.verify|verify} messages.
+                     * @param message DisableRapidCacheRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IDisableRapidCacheRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DisableRapidCacheRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.DisableRapidCacheRequest.verify|verify} messages.
+                     * @param message DisableRapidCacheRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IDisableRapidCacheRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DisableRapidCacheRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DisableRapidCacheRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.DisableRapidCacheRequest;
+
+                    /**
+                     * Decodes a DisableRapidCacheRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DisableRapidCacheRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.DisableRapidCacheRequest;
+
+                    /**
+                     * Verifies a DisableRapidCacheRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DisableRapidCacheRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DisableRapidCacheRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.DisableRapidCacheRequest;
+
+                    /**
+                     * Creates a plain object from a DisableRapidCacheRequest message. Also converts values to other types if specified.
+                     * @param message DisableRapidCacheRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.DisableRapidCacheRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DisableRapidCacheRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DisableRapidCacheRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetRapidCacheRequest. */
+                interface IGetRapidCacheRequest {
+
+                    /** GetRapidCacheRequest name */
+                    name?: (string|null);
+
+                    /** GetRapidCacheRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a GetRapidCacheRequest. */
+                class GetRapidCacheRequest implements IGetRapidCacheRequest {
+
+                    /**
+                     * Constructs a new GetRapidCacheRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IGetRapidCacheRequest);
+
+                    /** GetRapidCacheRequest name. */
+                    public name: string;
+
+                    /** GetRapidCacheRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new GetRapidCacheRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetRapidCacheRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IGetRapidCacheRequest): google.storage.control.v2.GetRapidCacheRequest;
+
+                    /**
+                     * Encodes the specified GetRapidCacheRequest message. Does not implicitly {@link google.storage.control.v2.GetRapidCacheRequest.verify|verify} messages.
+                     * @param message GetRapidCacheRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IGetRapidCacheRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetRapidCacheRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.GetRapidCacheRequest.verify|verify} messages.
+                     * @param message GetRapidCacheRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IGetRapidCacheRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetRapidCacheRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetRapidCacheRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.GetRapidCacheRequest;
+
+                    /**
+                     * Decodes a GetRapidCacheRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetRapidCacheRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.GetRapidCacheRequest;
+
+                    /**
+                     * Verifies a GetRapidCacheRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetRapidCacheRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetRapidCacheRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.GetRapidCacheRequest;
+
+                    /**
+                     * Creates a plain object from a GetRapidCacheRequest message. Also converts values to other types if specified.
+                     * @param message GetRapidCacheRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.GetRapidCacheRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetRapidCacheRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetRapidCacheRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRapidCachesRequest. */
+                interface IListRapidCachesRequest {
+
+                    /** ListRapidCachesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRapidCachesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListRapidCachesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListRapidCachesRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a ListRapidCachesRequest. */
+                class ListRapidCachesRequest implements IListRapidCachesRequest {
+
+                    /**
+                     * Constructs a new ListRapidCachesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IListRapidCachesRequest);
+
+                    /** ListRapidCachesRequest parent. */
+                    public parent: string;
+
+                    /** ListRapidCachesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListRapidCachesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListRapidCachesRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new ListRapidCachesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRapidCachesRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IListRapidCachesRequest): google.storage.control.v2.ListRapidCachesRequest;
+
+                    /**
+                     * Encodes the specified ListRapidCachesRequest message. Does not implicitly {@link google.storage.control.v2.ListRapidCachesRequest.verify|verify} messages.
+                     * @param message ListRapidCachesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IListRapidCachesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRapidCachesRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.ListRapidCachesRequest.verify|verify} messages.
+                     * @param message ListRapidCachesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IListRapidCachesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRapidCachesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRapidCachesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.ListRapidCachesRequest;
+
+                    /**
+                     * Decodes a ListRapidCachesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRapidCachesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.ListRapidCachesRequest;
+
+                    /**
+                     * Verifies a ListRapidCachesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRapidCachesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRapidCachesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.ListRapidCachesRequest;
+
+                    /**
+                     * Creates a plain object from a ListRapidCachesRequest message. Also converts values to other types if specified.
+                     * @param message ListRapidCachesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.ListRapidCachesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRapidCachesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRapidCachesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRapidCachesResponse. */
+                interface IListRapidCachesResponse {
+
+                    /** ListRapidCachesResponse rapidCaches */
+                    rapidCaches?: (google.storage.control.v2.IRapidCache[]|null);
+
+                    /** ListRapidCachesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListRapidCachesResponse. */
+                class ListRapidCachesResponse implements IListRapidCachesResponse {
+
+                    /**
+                     * Constructs a new ListRapidCachesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IListRapidCachesResponse);
+
+                    /** ListRapidCachesResponse rapidCaches. */
+                    public rapidCaches: google.storage.control.v2.IRapidCache[];
+
+                    /** ListRapidCachesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListRapidCachesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRapidCachesResponse instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IListRapidCachesResponse): google.storage.control.v2.ListRapidCachesResponse;
+
+                    /**
+                     * Encodes the specified ListRapidCachesResponse message. Does not implicitly {@link google.storage.control.v2.ListRapidCachesResponse.verify|verify} messages.
+                     * @param message ListRapidCachesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IListRapidCachesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRapidCachesResponse message, length delimited. Does not implicitly {@link google.storage.control.v2.ListRapidCachesResponse.verify|verify} messages.
+                     * @param message ListRapidCachesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IListRapidCachesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRapidCachesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRapidCachesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.ListRapidCachesResponse;
+
+                    /**
+                     * Decodes a ListRapidCachesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRapidCachesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.ListRapidCachesResponse;
+
+                    /**
+                     * Verifies a ListRapidCachesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRapidCachesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRapidCachesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.ListRapidCachesResponse;
+
+                    /**
+                     * Creates a plain object from a ListRapidCachesResponse message. Also converts values to other types if specified.
+                     * @param message ListRapidCachesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.ListRapidCachesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRapidCachesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRapidCachesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an IntelligenceConfig. */
                 interface IIntelligenceConfig {
 
@@ -4589,7 +6367,8 @@ export namespace google {
                         INHERIT = 1,
                         DISABLED = 2,
                         STANDARD = 3,
-                        TRIAL = 5
+                        TRIAL = 5,
+                        ESSENTIALS = 6
                     }
 
                     /** Properties of a Filter. */
@@ -8723,6 +10502,252 @@ export namespace google {
                             BUCKET = 2
                         }
                     }
+                }
+
+                /** Properties of an ObjectFullContext. */
+                interface IObjectFullContext {
+
+                    /** ObjectFullContext type */
+                    type?: (google.storage.control.v2.ObjectFullContext.Type|keyof typeof google.storage.control.v2.ObjectFullContext.Type|null);
+
+                    /** ObjectFullContext key */
+                    key?: (string|null);
+
+                    /** ObjectFullContext value */
+                    value?: (string|null);
+
+                    /** ObjectFullContext createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ObjectFullContext updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ObjectFullContext extendedData */
+                    extendedData?: (google.protobuf.IAny|null);
+                }
+
+                /** Represents an ObjectFullContext. */
+                class ObjectFullContext implements IObjectFullContext {
+
+                    /**
+                     * Constructs a new ObjectFullContext.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IObjectFullContext);
+
+                    /** ObjectFullContext type. */
+                    public type: (google.storage.control.v2.ObjectFullContext.Type|keyof typeof google.storage.control.v2.ObjectFullContext.Type);
+
+                    /** ObjectFullContext key. */
+                    public key: string;
+
+                    /** ObjectFullContext value. */
+                    public value: string;
+
+                    /** ObjectFullContext createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ObjectFullContext updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ObjectFullContext extendedData. */
+                    public extendedData?: (google.protobuf.IAny|null);
+
+                    /**
+                     * Creates a new ObjectFullContext instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ObjectFullContext instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IObjectFullContext): google.storage.control.v2.ObjectFullContext;
+
+                    /**
+                     * Encodes the specified ObjectFullContext message. Does not implicitly {@link google.storage.control.v2.ObjectFullContext.verify|verify} messages.
+                     * @param message ObjectFullContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IObjectFullContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ObjectFullContext message, length delimited. Does not implicitly {@link google.storage.control.v2.ObjectFullContext.verify|verify} messages.
+                     * @param message ObjectFullContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IObjectFullContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ObjectFullContext message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ObjectFullContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.ObjectFullContext;
+
+                    /**
+                     * Decodes an ObjectFullContext message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ObjectFullContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.ObjectFullContext;
+
+                    /**
+                     * Verifies an ObjectFullContext message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ObjectFullContext message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ObjectFullContext
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.ObjectFullContext;
+
+                    /**
+                     * Creates a plain object from an ObjectFullContext message. Also converts values to other types if specified.
+                     * @param message ObjectFullContext
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.ObjectFullContext, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ObjectFullContext to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ObjectFullContext
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ObjectFullContext {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        CUSTOM = 1,
+                        GOOGLE = 2
+                    }
+                }
+
+                /** Properties of a ViewObjectFullContextRequest. */
+                interface IViewObjectFullContextRequest {
+
+                    /** ViewObjectFullContextRequest generation */
+                    generation?: (number|Long|string|null);
+
+                    /** ViewObjectFullContextRequest contextKey */
+                    contextKey?: (string|null);
+
+                    /** ViewObjectFullContextRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a ViewObjectFullContextRequest. */
+                class ViewObjectFullContextRequest implements IViewObjectFullContextRequest {
+
+                    /**
+                     * Constructs a new ViewObjectFullContextRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IViewObjectFullContextRequest);
+
+                    /** ViewObjectFullContextRequest generation. */
+                    public generation: (number|Long|string);
+
+                    /** ViewObjectFullContextRequest contextKey. */
+                    public contextKey: string;
+
+                    /** ViewObjectFullContextRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new ViewObjectFullContextRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ViewObjectFullContextRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IViewObjectFullContextRequest): google.storage.control.v2.ViewObjectFullContextRequest;
+
+                    /**
+                     * Encodes the specified ViewObjectFullContextRequest message. Does not implicitly {@link google.storage.control.v2.ViewObjectFullContextRequest.verify|verify} messages.
+                     * @param message ViewObjectFullContextRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IViewObjectFullContextRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ViewObjectFullContextRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.ViewObjectFullContextRequest.verify|verify} messages.
+                     * @param message ViewObjectFullContextRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IViewObjectFullContextRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ViewObjectFullContextRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ViewObjectFullContextRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.ViewObjectFullContextRequest;
+
+                    /**
+                     * Decodes a ViewObjectFullContextRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ViewObjectFullContextRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.ViewObjectFullContextRequest;
+
+                    /**
+                     * Verifies a ViewObjectFullContextRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ViewObjectFullContextRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ViewObjectFullContextRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.ViewObjectFullContextRequest;
+
+                    /**
+                     * Creates a plain object from a ViewObjectFullContextRequest message. Also converts values to other types if specified.
+                     * @param message ViewObjectFullContextRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.ViewObjectFullContextRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ViewObjectFullContextRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ViewObjectFullContextRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** FindingType enum. */

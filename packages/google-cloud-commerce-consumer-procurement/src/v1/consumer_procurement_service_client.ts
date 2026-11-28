@@ -565,7 +565,7 @@ export class ConsumerProcurementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getOrder request %j', request);
+    this._log.debug('getOrder request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.commerce.consumer.procurement.v1.IOrder,
@@ -576,7 +576,7 @@ export class ConsumerProcurementServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getOrder response %j', response);
+          this._log.debug('getOrder response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -591,7 +591,7 @@ export class ConsumerProcurementServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getOrder response %j', response);
+          this._log.debug('getOrder response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -748,11 +748,11 @@ export class ConsumerProcurementServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('placeOrder response %j', rawResponse);
+          this._log.debug('placeOrder response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('placeOrder request %j', request);
+    this._log.debug('placeOrder request %j', request);
     return this.innerApiCalls
       .placeOrder(request, options, wrappedCallback)
       ?.then(
@@ -764,7 +764,7 @@ export class ConsumerProcurementServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('placeOrder response %j', rawResponse);
+          this._log.debug('placeOrder response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -929,11 +929,11 @@ export class ConsumerProcurementServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('modifyOrder response %j', rawResponse);
+          this._log.debug('modifyOrder response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('modifyOrder request %j', request);
+    this._log.debug('modifyOrder request %j', request);
     return this.innerApiCalls
       .modifyOrder(request, options, wrappedCallback)
       ?.then(
@@ -945,7 +945,7 @@ export class ConsumerProcurementServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('modifyOrder response %j', rawResponse);
+          this._log.debug('modifyOrder response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1106,11 +1106,11 @@ export class ConsumerProcurementServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('cancelOrder response %j', rawResponse);
+          this._log.debug('cancelOrder response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('cancelOrder request %j', request);
+    this._log.debug('cancelOrder request %j', request);
     return this.innerApiCalls
       .cancelOrder(request, options, wrappedCallback)
       ?.then(
@@ -1122,7 +1122,7 @@ export class ConsumerProcurementServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('cancelOrder response %j', rawResponse);
+          this._log.debug('cancelOrder response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1291,11 +1291,11 @@ export class ConsumerProcurementServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listOrders values %j', values);
+          this._log.debug('listOrders values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listOrders request %j', request);
+    this._log.debug('listOrders request %j', request);
     return this.innerApiCalls
       .listOrders(request, options, wrappedCallback)
       ?.then(
@@ -1304,7 +1304,7 @@ export class ConsumerProcurementServiceClient {
           protos.google.cloud.commerce.consumer.procurement.v1.IListOrdersRequest | null,
           protos.google.cloud.commerce.consumer.procurement.v1.IListOrdersResponse,
         ]) => {
-          this._log.info('listOrders values %j', response);
+          this._log.debug('listOrders values %j', response);
           return [response, input, output];
         },
       );
@@ -1368,7 +1368,7 @@ export class ConsumerProcurementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listOrders stream %j', request);
+    this._log.debug('listOrders stream %j', request);
     return this.descriptors.page.listOrders.createStream(
       this.innerApiCalls.listOrders as GaxCall,
       request,
@@ -1437,7 +1437,7 @@ export class ConsumerProcurementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listOrders iterate %j', request);
+    this._log.debug('listOrders iterate %j', request);
     return this.descriptors.page.listOrders.asyncIterate(
       this.innerApiCalls['listOrders'] as GaxCall,
       request as {},

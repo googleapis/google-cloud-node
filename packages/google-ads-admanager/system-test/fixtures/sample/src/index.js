@@ -27,12 +27,14 @@ function main() {
   const adSpotServiceClient = new admanager.AdSpotServiceClient();
   const adUnitServiceClient = new admanager.AdUnitServiceClient();
   const applicationServiceClient = new admanager.ApplicationServiceClient();
+  const audienceSegmentCategoryServiceClient = new admanager.AudienceSegmentCategoryServiceClient();
   const audienceSegmentServiceClient = new admanager.AudienceSegmentServiceClient();
   const bandwidthGroupServiceClient = new admanager.BandwidthGroupServiceClient();
   const breakTemplateServiceClient = new admanager.BreakTemplateServiceClient();
   const browserLanguageServiceClient = new admanager.BrowserLanguageServiceClient();
   const browserServiceClient = new admanager.BrowserServiceClient();
   const cdnConfigServiceClient = new admanager.CdnConfigServiceClient();
+  const changeEventServiceClient = new admanager.ChangeEventServiceClient();
   const childPublisherServiceClient = new admanager.ChildPublisherServiceClient();
   const cmsMetadataKeyServiceClient = new admanager.CmsMetadataKeyServiceClient();
   const cmsMetadataValueServiceClient = new admanager.CmsMetadataValueServiceClient();
@@ -55,6 +57,7 @@ function main() {
   const deviceCategoryServiceClient = new admanager.DeviceCategoryServiceClient();
   const deviceManufacturerServiceClient = new admanager.DeviceManufacturerServiceClient();
   const entitySignalsMappingServiceClient = new admanager.EntitySignalsMappingServiceClient();
+  const forecastAdjustmentServiceClient = new admanager.ForecastAdjustmentServiceClient();
   const forecastServiceClient = new admanager.ForecastServiceClient();
   const geoTargetServiceClient = new admanager.GeoTargetServiceClient();
   const labelServiceClient = new admanager.LabelServiceClient();
@@ -77,6 +80,7 @@ function main() {
   const privateAuctionDealServiceClient = new admanager.PrivateAuctionDealServiceClient();
   const privateAuctionServiceClient = new admanager.PrivateAuctionServiceClient();
   const programmaticBuyerServiceClient = new admanager.ProgrammaticBuyerServiceClient();
+  const proposalServiceClient = new admanager.ProposalServiceClient();
   const reportServiceClient = new admanager.ReportServiceClient();
   const richMediaAdsCompanyServiceClient = new admanager.RichMediaAdsCompanyServiceClient();
   const roleServiceClient = new admanager.RoleServiceClient();
@@ -87,8 +91,11 @@ function main() {
   const taxonomyCategoryServiceClient = new admanager.TaxonomyCategoryServiceClient();
   const teamServiceClient = new admanager.TeamServiceClient();
   const thirdPartyCompanyServiceClient = new admanager.ThirdPartyCompanyServiceClient();
+  const trafficForecastSegmentServiceClient = new admanager.TrafficForecastSegmentServiceClient();
   const userServiceClient = new admanager.UserServiceClient();
   const viewabilityProviderServiceClient = new admanager.ViewabilityProviderServiceClient();
+  const yieldGroupServiceClient = new admanager.YieldGroupServiceClient();
+  const yieldPartnerServiceClient = new admanager.YieldPartnerServiceClient();
 }
 
 main();

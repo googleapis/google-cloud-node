@@ -81,6 +81,12 @@ const HEDGE_TOKEN_SCALE = 1000;
  */
 export interface HedgingOptions {
   /**
+   * Whether publish hedging is enabled.
+   * Default: true when a HedgingOptions object is provided.
+   */
+  enabled?: boolean;
+
+  /**
    * Delay before sending a hedged (backup) publish RPC.
    * Default: 1000ms. Must satisfy 100ms <= hedgeDelay <= 10s.
    */
@@ -103,6 +109,7 @@ export interface HedgingOptions {
  * Validated and defaulted hedging configuration.
  */
 export interface ResolvedHedgingOptions {
+  readonly enabled: boolean;
   readonly hedgeDelay: Duration;
   readonly maxTokens: number;
   readonly refillRatio: number;
@@ -161,6 +168,11 @@ export class HedgingTokenBucket {
     gaxOpts?: CallOptions,
   ): ResolvedHedgingOptions | undefined {
     if (!hedging) {
+      return undefined;
+    }
+
+    const enabled = hedging.enabled ?? defaultOptions.publish.hedging.enabled;
+    if (!enabled) {
       return undefined;
     }
 
@@ -224,6 +236,7 @@ export class HedgingTokenBucket {
     }
 
     return {
+      enabled: true,
       hedgeDelay,
       maxTokens,
       refillRatio,
@@ -287,6 +300,7 @@ export class CancellationSharer {
 
   private readonly onSuccess: () => void;
   private readonly runningAttempts = new Map<number, AbortController>();
+  private readonly onSettledListeners: Array<() => void> = [];
   private done_ = false;
   private successfulAttempt_?: number;
   private lastError: unknown;
@@ -300,6 +314,21 @@ export class CancellationSharer {
       this.resolvePromise = resolve;
       this.rejectPromise = reject;
     });
+  }
+
+  /**
+   * Registers a callback invoked synchronously when the coordinator settles
+   * (succeeds, fails terminally, or is cancelled).
+   *
+   * @private
+   * @internal
+   */
+  onSettled(listener: () => void): void {
+    if (this.done_) {
+      listener();
+      return;
+    }
+    this.onSettledListeners.push(listener);
   }
 
   /**
@@ -352,6 +381,7 @@ export class CancellationSharer {
     }
     this.done_ = true;
     this.cancelAll();
+    this.notifySettled();
     this.rejectPromise?.(new Error('Cancelled'));
   }
 
@@ -366,6 +396,7 @@ export class CancellationSharer {
     this.successfulAttempt_ = attemptNumber;
     this.onSuccess();
     this.cancelAllExcept(attemptNumber);
+    this.notifySettled();
     this.resolvePromise?.({
       response,
       wasHedged: attemptNumber > 0,
@@ -383,7 +414,15 @@ export class CancellationSharer {
     if (attemptNumber === 0 || this.runningAttempts.size === 0) {
       this.done_ = true;
       this.cancelAll();
+      this.notifySettled();
       this.rejectPromise?.(this.lastError);
+    }
+  }
+
+  private notifySettled(): void {
+    const listeners = this.onSettledListeners.splice(0);
+    for (const listener of listeners) {
+      listener();
     }
   }
 
@@ -471,7 +510,35 @@ export class HedgingScheduler {
       startHedgedAttempt,
     );
     this.hedgingQueue.push(request);
+    coordinator.onSettled(() => {
+      this.remove(coordinator);
+    });
     this.scheduleQueueProcessing();
+  }
+
+  /**
+   * Removes any pending hedge entries for a completed coordinator and updates
+   * or clears the queue processing timer as needed.
+   *
+   * @private
+   * @internal
+   */
+  remove(coordinator: CancellationSharer): void {
+    const wasFirst = this.hedgingQueue[0]?.coordinator === coordinator;
+    let removed = false;
+    for (let i = this.hedgingQueue.length - 1; i >= 0; i--) {
+      if (this.hedgingQueue[i].coordinator === coordinator) {
+        this.hedgingQueue.splice(i, 1);
+        removed = true;
+      }
+    }
+    if (removed && (this.hedgingQueue.length === 0 || wasFirst)) {
+      if (this.queueProcessingTimer) {
+        clearTimeout(this.queueProcessingTimer);
+        this.queueProcessingTimer = undefined;
+      }
+      this.scheduleQueueProcessing();
+    }
   }
 
   /**
@@ -526,14 +593,16 @@ export class HedgingScheduler {
       );
 
       if (this.tokenBucket.tryAcquireHedgeToken()) {
-        const nextItem = new HedgedRequest(
-          item.coordinator,
-          item.attemptNumber + 1,
-          now.add(this.options.hedgeDelay),
-          item.startHedgedAttempt,
-        );
-        this.hedgingQueue.push(nextItem);
         item.startHedgedAttempt(item.attemptNumber, attemptTimeout);
+        if (!item.coordinator.isDone) {
+          const nextItem = new HedgedRequest(
+            item.coordinator,
+            item.attemptNumber + 1,
+            now.add(this.options.hedgeDelay),
+            item.startHedgedAttempt,
+          );
+          this.hedgingQueue.push(nextItem);
+        }
       } else {
         this.onRateLimited?.();
       }

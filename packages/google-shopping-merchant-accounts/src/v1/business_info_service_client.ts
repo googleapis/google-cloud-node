@@ -534,7 +534,7 @@ export class BusinessInfoServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getBusinessInfo request %j', request);
+    this._log.debug('getBusinessInfo request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1.IBusinessInfo,
@@ -545,7 +545,7 @@ export class BusinessInfoServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getBusinessInfo response %j', response);
+          this._log.debug('getBusinessInfo response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -560,7 +560,7 @@ export class BusinessInfoServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getBusinessInfo response %j', response);
+          this._log.debug('getBusinessInfo response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -687,7 +687,7 @@ export class BusinessInfoServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateBusinessInfo request %j', request);
+    this._log.debug('updateBusinessInfo request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1.IBusinessInfo,
@@ -698,7 +698,7 @@ export class BusinessInfoServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateBusinessInfo response %j', response);
+          this._log.debug('updateBusinessInfo response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -713,7 +713,7 @@ export class BusinessInfoServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateBusinessInfo response %j', response);
+          this._log.debug('updateBusinessInfo response %j', response);
           return [response, options, rawResponse];
         },
       )

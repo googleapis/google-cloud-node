@@ -548,7 +548,7 @@ export class ControlServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createControl request %j', request);
+    this._log.debug('createControl request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2.IControl,
@@ -559,7 +559,7 @@ export class ControlServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createControl response %j', response);
+          this._log.debug('createControl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -571,7 +571,7 @@ export class ControlServiceClient {
           protos.google.cloud.retail.v2.ICreateControlRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createControl response %j', response);
+          this._log.debug('createControl response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -680,7 +680,7 @@ export class ControlServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteControl request %j', request);
+    this._log.debug('deleteControl request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -691,7 +691,7 @@ export class ControlServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteControl response %j', response);
+          this._log.debug('deleteControl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -703,7 +703,7 @@ export class ControlServiceClient {
           protos.google.cloud.retail.v2.IDeleteControlRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteControl response %j', response);
+          this._log.debug('deleteControl response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -821,7 +821,7 @@ export class ControlServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateControl request %j', request);
+    this._log.debug('updateControl request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2.IControl,
@@ -832,7 +832,7 @@ export class ControlServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateControl response %j', response);
+          this._log.debug('updateControl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -844,7 +844,7 @@ export class ControlServiceClient {
           protos.google.cloud.retail.v2.IUpdateControlRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateControl response %j', response);
+          this._log.debug('updateControl response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -948,7 +948,7 @@ export class ControlServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getControl request %j', request);
+    this._log.debug('getControl request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2.IControl,
@@ -957,7 +957,7 @@ export class ControlServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getControl response %j', response);
+          this._log.debug('getControl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -969,7 +969,7 @@ export class ControlServiceClient {
           protos.google.cloud.retail.v2.IGetControlRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getControl response %j', response);
+          this._log.debug('getControl response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1103,11 +1103,11 @@ export class ControlServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listControls values %j', values);
+          this._log.debug('listControls values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listControls request %j', request);
+    this._log.debug('listControls request %j', request);
     return this.innerApiCalls
       .listControls(request, options, wrappedCallback)
       ?.then(
@@ -1116,7 +1116,7 @@ export class ControlServiceClient {
           protos.google.cloud.retail.v2.IListControlsRequest | null,
           protos.google.cloud.retail.v2.IListControlsResponse,
         ]) => {
-          this._log.info('listControls values %j', response);
+          this._log.debug('listControls values %j', response);
           return [response, input, output];
         },
       );
@@ -1170,7 +1170,7 @@ export class ControlServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listControls stream %j', request);
+    this._log.debug('listControls stream %j', request);
     return this.descriptors.page.listControls.createStream(
       this.innerApiCalls.listControls as GaxCall,
       request,
@@ -1229,7 +1229,7 @@ export class ControlServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listControls iterate %j', request);
+    this._log.debug('listControls iterate %j', request);
     return this.descriptors.page.listControls.asyncIterate(
       this.innerApiCalls['listControls'] as GaxCall,
       request as {},

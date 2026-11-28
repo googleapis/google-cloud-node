@@ -565,7 +565,7 @@ export class SnoozeServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createSnooze request %j', request);
+    this._log.debug('createSnooze request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.monitoring.v3.ISnooze,
@@ -574,7 +574,7 @@ export class SnoozeServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createSnooze response %j', response);
+          this._log.debug('createSnooze response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -586,7 +586,7 @@ export class SnoozeServiceClient {
           protos.google.monitoring.v3.ICreateSnoozeRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createSnooze response %j', response);
+          this._log.debug('createSnooze response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -691,7 +691,7 @@ export class SnoozeServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSnooze request %j', request);
+    this._log.debug('getSnooze request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.monitoring.v3.ISnooze,
@@ -700,7 +700,7 @@ export class SnoozeServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSnooze response %j', response);
+          this._log.debug('getSnooze response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -712,7 +712,7 @@ export class SnoozeServiceClient {
           protos.google.monitoring.v3.IGetSnoozeRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getSnooze response %j', response);
+          this._log.debug('getSnooze response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -839,7 +839,7 @@ export class SnoozeServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateSnooze request %j', request);
+    this._log.debug('updateSnooze request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.monitoring.v3.ISnooze,
@@ -848,7 +848,7 @@ export class SnoozeServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateSnooze response %j', response);
+          this._log.debug('updateSnooze response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -860,7 +860,7 @@ export class SnoozeServiceClient {
           protos.google.monitoring.v3.IUpdateSnoozeRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateSnooze response %j', response);
+          this._log.debug('updateSnooze response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1000,11 +1000,11 @@ export class SnoozeServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listSnoozes values %j', values);
+          this._log.debug('listSnoozes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listSnoozes request %j', request);
+    this._log.debug('listSnoozes request %j', request);
     return this.innerApiCalls
       .listSnoozes(request, options, wrappedCallback)
       ?.then(
@@ -1013,7 +1013,7 @@ export class SnoozeServiceClient {
           protos.google.monitoring.v3.IListSnoozesRequest | null,
           protos.google.monitoring.v3.IListSnoozesResponse,
         ]) => {
-          this._log.info('listSnoozes values %j', response);
+          this._log.debug('listSnoozes values %j', response);
           return [response, input, output];
         },
       );
@@ -1077,7 +1077,7 @@ export class SnoozeServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSnoozes stream %j', request);
+    this._log.debug('listSnoozes stream %j', request);
     return this.descriptors.page.listSnoozes.createStream(
       this.innerApiCalls.listSnoozes as GaxCall,
       request,
@@ -1146,7 +1146,7 @@ export class SnoozeServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSnoozes iterate %j', request);
+    this._log.debug('listSnoozes iterate %j', request);
     return this.descriptors.page.listSnoozes.asyncIterate(
       this.innerApiCalls['listSnoozes'] as GaxCall,
       request as {},

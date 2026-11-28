@@ -864,7 +864,7 @@ export class HubServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getHub request %j', request);
+    this._log.debug('getHub request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networkconnectivity.v1.IHub,
@@ -875,7 +875,7 @@ export class HubServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getHub response %j', response);
+          this._log.debug('getHub response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -887,7 +887,7 @@ export class HubServiceClient {
           protos.google.cloud.networkconnectivity.v1.IGetHubRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getHub response %j', response);
+          this._log.debug('getHub response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -998,7 +998,7 @@ export class HubServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSpoke request %j', request);
+    this._log.debug('getSpoke request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networkconnectivity.v1.ISpoke,
@@ -1009,7 +1009,7 @@ export class HubServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSpoke response %j', response);
+          this._log.debug('getSpoke response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1024,7 +1024,7 @@ export class HubServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getSpoke response %j', response);
+          this._log.debug('getSpoke response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1141,7 +1141,7 @@ export class HubServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRouteTable request %j', request);
+    this._log.debug('getRouteTable request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networkconnectivity.v1.IRouteTable,
@@ -1152,7 +1152,7 @@ export class HubServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getRouteTable response %j', response);
+          this._log.debug('getRouteTable response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1167,7 +1167,7 @@ export class HubServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getRouteTable response %j', response);
+          this._log.debug('getRouteTable response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1278,7 +1278,7 @@ export class HubServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRoute request %j', request);
+    this._log.debug('getRoute request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networkconnectivity.v1.IRoute,
@@ -1289,7 +1289,7 @@ export class HubServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getRoute response %j', response);
+          this._log.debug('getRoute response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1304,7 +1304,7 @@ export class HubServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getRoute response %j', response);
+          this._log.debug('getRoute response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1415,7 +1415,7 @@ export class HubServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getGroup request %j', request);
+    this._log.debug('getGroup request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networkconnectivity.v1.IGroup,
@@ -1426,7 +1426,7 @@ export class HubServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getGroup response %j', response);
+          this._log.debug('getGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1441,7 +1441,7 @@ export class HubServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getGroup response %j', response);
+          this._log.debug('getGroup response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1595,11 +1595,11 @@ export class HubServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createHub response %j', rawResponse);
+          this._log.debug('createHub response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createHub request %j', request);
+    this._log.debug('createHub request %j', request);
     return this.innerApiCalls
       .createHub(request, options, wrappedCallback)
       ?.then(
@@ -1611,7 +1611,7 @@ export class HubServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createHub response %j', rawResponse);
+          this._log.debug('createHub response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1786,11 +1786,11 @@ export class HubServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateHub response %j', rawResponse);
+          this._log.debug('updateHub response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateHub request %j', request);
+    this._log.debug('updateHub request %j', request);
     return this.innerApiCalls
       .updateHub(request, options, wrappedCallback)
       ?.then(
@@ -1802,7 +1802,7 @@ export class HubServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateHub response %j', rawResponse);
+          this._log.debug('updateHub response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1970,11 +1970,11 @@ export class HubServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteHub response %j', rawResponse);
+          this._log.debug('deleteHub response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteHub request %j', request);
+    this._log.debug('deleteHub request %j', request);
     return this.innerApiCalls
       .deleteHub(request, options, wrappedCallback)
       ?.then(
@@ -1986,7 +1986,7 @@ export class HubServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteHub response %j', rawResponse);
+          this._log.debug('deleteHub response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2158,11 +2158,11 @@ export class HubServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createSpoke response %j', rawResponse);
+          this._log.debug('createSpoke response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createSpoke request %j', request);
+    this._log.debug('createSpoke request %j', request);
     return this.innerApiCalls
       .createSpoke(request, options, wrappedCallback)
       ?.then(
@@ -2174,7 +2174,7 @@ export class HubServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createSpoke response %j', rawResponse);
+          this._log.debug('createSpoke response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2348,11 +2348,11 @@ export class HubServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateSpoke response %j', rawResponse);
+          this._log.debug('updateSpoke response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateSpoke request %j', request);
+    this._log.debug('updateSpoke request %j', request);
     return this.innerApiCalls
       .updateSpoke(request, options, wrappedCallback)
       ?.then(
@@ -2364,7 +2364,7 @@ export class HubServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateSpoke response %j', rawResponse);
+          this._log.debug('updateSpoke response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2539,11 +2539,11 @@ export class HubServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('rejectHubSpoke response %j', rawResponse);
+          this._log.debug('rejectHubSpoke response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('rejectHubSpoke request %j', request);
+    this._log.debug('rejectHubSpoke request %j', request);
     return this.innerApiCalls
       .rejectHubSpoke(request, options, wrappedCallback)
       ?.then(
@@ -2555,7 +2555,7 @@ export class HubServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('rejectHubSpoke response %j', rawResponse);
+          this._log.debug('rejectHubSpoke response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2726,11 +2726,11 @@ export class HubServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('acceptHubSpoke response %j', rawResponse);
+          this._log.debug('acceptHubSpoke response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('acceptHubSpoke request %j', request);
+    this._log.debug('acceptHubSpoke request %j', request);
     return this.innerApiCalls
       .acceptHubSpoke(request, options, wrappedCallback)
       ?.then(
@@ -2742,7 +2742,7 @@ export class HubServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('acceptHubSpoke response %j', rawResponse);
+          this._log.debug('acceptHubSpoke response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2914,11 +2914,11 @@ export class HubServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('acceptSpokeUpdate response %j', rawResponse);
+          this._log.debug('acceptSpokeUpdate response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('acceptSpokeUpdate request %j', request);
+    this._log.debug('acceptSpokeUpdate request %j', request);
     return this.innerApiCalls
       .acceptSpokeUpdate(request, options, wrappedCallback)
       ?.then(
@@ -2930,7 +2930,7 @@ export class HubServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('acceptSpokeUpdate response %j', rawResponse);
+          this._log.debug('acceptSpokeUpdate response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3104,11 +3104,11 @@ export class HubServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('rejectSpokeUpdate response %j', rawResponse);
+          this._log.debug('rejectSpokeUpdate response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('rejectSpokeUpdate request %j', request);
+    this._log.debug('rejectSpokeUpdate request %j', request);
     return this.innerApiCalls
       .rejectSpokeUpdate(request, options, wrappedCallback)
       ?.then(
@@ -3120,7 +3120,7 @@ export class HubServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('rejectSpokeUpdate response %j', rawResponse);
+          this._log.debug('rejectSpokeUpdate response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3288,11 +3288,11 @@ export class HubServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteSpoke response %j', rawResponse);
+          this._log.debug('deleteSpoke response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteSpoke request %j', request);
+    this._log.debug('deleteSpoke request %j', request);
     return this.innerApiCalls
       .deleteSpoke(request, options, wrappedCallback)
       ?.then(
@@ -3304,7 +3304,7 @@ export class HubServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteSpoke response %j', rawResponse);
+          this._log.debug('deleteSpoke response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3478,11 +3478,11 @@ export class HubServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateGroup response %j', rawResponse);
+          this._log.debug('updateGroup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateGroup request %j', request);
+    this._log.debug('updateGroup request %j', request);
     return this.innerApiCalls
       .updateGroup(request, options, wrappedCallback)
       ?.then(
@@ -3494,7 +3494,7 @@ export class HubServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateGroup response %j', rawResponse);
+          this._log.debug('updateGroup response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3645,11 +3645,11 @@ export class HubServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listHubs values %j', values);
+          this._log.debug('listHubs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listHubs request %j', request);
+    this._log.debug('listHubs request %j', request);
     return this.innerApiCalls
       .listHubs(request, options, wrappedCallback)
       ?.then(
@@ -3658,7 +3658,7 @@ export class HubServiceClient {
           protos.google.cloud.networkconnectivity.v1.IListHubsRequest | null,
           protos.google.cloud.networkconnectivity.v1.IListHubsResponse,
         ]) => {
-          this._log.info('listHubs values %j', response);
+          this._log.debug('listHubs values %j', response);
           return [response, input, output];
         },
       );
@@ -3706,7 +3706,7 @@ export class HubServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listHubs stream %j', request);
+    this._log.debug('listHubs stream %j', request);
     return this.descriptors.page.listHubs.createStream(
       this.innerApiCalls.listHubs as GaxCall,
       request,
@@ -3759,7 +3759,7 @@ export class HubServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listHubs iterate %j', request);
+    this._log.debug('listHubs iterate %j', request);
     return this.descriptors.page.listHubs.asyncIterate(
       this.innerApiCalls['listHubs'] as GaxCall,
       request as {},
@@ -3892,11 +3892,11 @@ export class HubServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listHubSpokes values %j', values);
+          this._log.debug('listHubSpokes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listHubSpokes request %j', request);
+    this._log.debug('listHubSpokes request %j', request);
     return this.innerApiCalls
       .listHubSpokes(request, options, wrappedCallback)
       ?.then(
@@ -3905,7 +3905,7 @@ export class HubServiceClient {
           protos.google.cloud.networkconnectivity.v1.IListHubSpokesRequest | null,
           protos.google.cloud.networkconnectivity.v1.IListHubSpokesResponse,
         ]) => {
-          this._log.info('listHubSpokes values %j', response);
+          this._log.debug('listHubSpokes values %j', response);
           return [response, input, output];
         },
       );
@@ -3966,7 +3966,7 @@ export class HubServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listHubSpokes stream %j', request);
+    this._log.debug('listHubSpokes stream %j', request);
     return this.descriptors.page.listHubSpokes.createStream(
       this.innerApiCalls.listHubSpokes as GaxCall,
       request,
@@ -4032,7 +4032,7 @@ export class HubServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listHubSpokes iterate %j', request);
+    this._log.debug('listHubSpokes iterate %j', request);
     return this.descriptors.page.listHubSpokes.asyncIterate(
       this.innerApiCalls['listHubSpokes'] as GaxCall,
       request as {},
@@ -4177,11 +4177,11 @@ export class HubServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('queryHubStatus values %j', values);
+          this._log.debug('queryHubStatus values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('queryHubStatus request %j', request);
+    this._log.debug('queryHubStatus request %j', request);
     return this.innerApiCalls
       .queryHubStatus(request, options, wrappedCallback)
       ?.then(
@@ -4190,7 +4190,7 @@ export class HubServiceClient {
           protos.google.cloud.networkconnectivity.v1.IQueryHubStatusRequest | null,
           protos.google.cloud.networkconnectivity.v1.IQueryHubStatusResponse,
         ]) => {
-          this._log.info('queryHubStatus values %j', response);
+          this._log.debug('queryHubStatus values %j', response);
           return [response, input, output];
         },
       );
@@ -4264,7 +4264,7 @@ export class HubServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryHubStatus stream %j', request);
+    this._log.debug('queryHubStatus stream %j', request);
     return this.descriptors.page.queryHubStatus.createStream(
       this.innerApiCalls.queryHubStatus as GaxCall,
       request,
@@ -4343,7 +4343,7 @@ export class HubServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryHubStatus iterate %j', request);
+    this._log.debug('queryHubStatus iterate %j', request);
     return this.descriptors.page.queryHubStatus.asyncIterate(
       this.innerApiCalls['queryHubStatus'] as GaxCall,
       request as {},
@@ -4462,11 +4462,11 @@ export class HubServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listSpokes values %j', values);
+          this._log.debug('listSpokes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listSpokes request %j', request);
+    this._log.debug('listSpokes request %j', request);
     return this.innerApiCalls
       .listSpokes(request, options, wrappedCallback)
       ?.then(
@@ -4475,7 +4475,7 @@ export class HubServiceClient {
           protos.google.cloud.networkconnectivity.v1.IListSpokesRequest | null,
           protos.google.cloud.networkconnectivity.v1.IListSpokesResponse,
         ]) => {
-          this._log.info('listSpokes values %j', response);
+          this._log.debug('listSpokes values %j', response);
           return [response, input, output];
         },
       );
@@ -4523,7 +4523,7 @@ export class HubServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSpokes stream %j', request);
+    this._log.debug('listSpokes stream %j', request);
     return this.descriptors.page.listSpokes.createStream(
       this.innerApiCalls.listSpokes as GaxCall,
       request,
@@ -4576,7 +4576,7 @@ export class HubServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSpokes iterate %j', request);
+    this._log.debug('listSpokes iterate %j', request);
     return this.descriptors.page.listSpokes.asyncIterate(
       this.innerApiCalls['listSpokes'] as GaxCall,
       request as {},
@@ -4694,11 +4694,11 @@ export class HubServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRoutes values %j', values);
+          this._log.debug('listRoutes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRoutes request %j', request);
+    this._log.debug('listRoutes request %j', request);
     return this.innerApiCalls
       .listRoutes(request, options, wrappedCallback)
       ?.then(
@@ -4707,7 +4707,7 @@ export class HubServiceClient {
           protos.google.cloud.networkconnectivity.v1.IListRoutesRequest | null,
           protos.google.cloud.networkconnectivity.v1.IListRoutesResponse,
         ]) => {
-          this._log.info('listRoutes values %j', response);
+          this._log.debug('listRoutes values %j', response);
           return [response, input, output];
         },
       );
@@ -4755,7 +4755,7 @@ export class HubServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRoutes stream %j', request);
+    this._log.debug('listRoutes stream %j', request);
     return this.descriptors.page.listRoutes.createStream(
       this.innerApiCalls.listRoutes as GaxCall,
       request,
@@ -4808,7 +4808,7 @@ export class HubServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRoutes iterate %j', request);
+    this._log.debug('listRoutes iterate %j', request);
     return this.descriptors.page.listRoutes.asyncIterate(
       this.innerApiCalls['listRoutes'] as GaxCall,
       request as {},
@@ -4926,11 +4926,11 @@ export class HubServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRouteTables values %j', values);
+          this._log.debug('listRouteTables values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRouteTables request %j', request);
+    this._log.debug('listRouteTables request %j', request);
     return this.innerApiCalls
       .listRouteTables(request, options, wrappedCallback)
       ?.then(
@@ -4939,7 +4939,7 @@ export class HubServiceClient {
           protos.google.cloud.networkconnectivity.v1.IListRouteTablesRequest | null,
           protos.google.cloud.networkconnectivity.v1.IListRouteTablesResponse,
         ]) => {
-          this._log.info('listRouteTables values %j', response);
+          this._log.debug('listRouteTables values %j', response);
           return [response, input, output];
         },
       );
@@ -4987,7 +4987,7 @@ export class HubServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRouteTables stream %j', request);
+    this._log.debug('listRouteTables stream %j', request);
     return this.descriptors.page.listRouteTables.createStream(
       this.innerApiCalls.listRouteTables as GaxCall,
       request,
@@ -5040,7 +5040,7 @@ export class HubServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRouteTables iterate %j', request);
+    this._log.debug('listRouteTables iterate %j', request);
     return this.descriptors.page.listRouteTables.asyncIterate(
       this.innerApiCalls['listRouteTables'] as GaxCall,
       request as {},
@@ -5158,11 +5158,11 @@ export class HubServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listGroups values %j', values);
+          this._log.debug('listGroups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listGroups request %j', request);
+    this._log.debug('listGroups request %j', request);
     return this.innerApiCalls
       .listGroups(request, options, wrappedCallback)
       ?.then(
@@ -5171,7 +5171,7 @@ export class HubServiceClient {
           protos.google.cloud.networkconnectivity.v1.IListGroupsRequest | null,
           protos.google.cloud.networkconnectivity.v1.IListGroupsResponse,
         ]) => {
-          this._log.info('listGroups values %j', response);
+          this._log.debug('listGroups values %j', response);
           return [response, input, output];
         },
       );
@@ -5219,7 +5219,7 @@ export class HubServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listGroups stream %j', request);
+    this._log.debug('listGroups stream %j', request);
     return this.descriptors.page.listGroups.createStream(
       this.innerApiCalls.listGroups as GaxCall,
       request,
@@ -5272,7 +5272,7 @@ export class HubServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listGroups iterate %j', request);
+    this._log.debug('listGroups iterate %j', request);
     return this.descriptors.page.listGroups.asyncIterate(
       this.innerApiCalls['listGroups'] as GaxCall,
       request as {},

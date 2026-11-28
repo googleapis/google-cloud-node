@@ -540,11 +540,11 @@ export class PrivateCatalogClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('searchCatalogs values %j', values);
+          this._log.debug('searchCatalogs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('searchCatalogs request %j', request);
+    this._log.debug('searchCatalogs request %j', request);
     return this.innerApiCalls
       .searchCatalogs(request, options, wrappedCallback)
       ?.then(
@@ -553,7 +553,7 @@ export class PrivateCatalogClient {
           protos.google.cloud.privatecatalog.v1beta1.ISearchCatalogsRequest | null,
           protos.google.cloud.privatecatalog.v1beta1.ISearchCatalogsResponse,
         ]) => {
-          this._log.info('searchCatalogs values %j', response);
+          this._log.debug('searchCatalogs values %j', response);
           return [response, input, output];
         },
       );
@@ -606,7 +606,7 @@ export class PrivateCatalogClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchCatalogs stream %j', request);
+    this._log.debug('searchCatalogs stream %j', request);
     return this.descriptors.page.searchCatalogs.createStream(
       this.innerApiCalls.searchCatalogs as GaxCall,
       request,
@@ -664,7 +664,7 @@ export class PrivateCatalogClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchCatalogs iterate %j', request);
+    this._log.debug('searchCatalogs iterate %j', request);
     return this.descriptors.page.searchCatalogs.asyncIterate(
       this.innerApiCalls['searchCatalogs'] as GaxCall,
       request as {},
@@ -789,11 +789,11 @@ export class PrivateCatalogClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('searchProducts values %j', values);
+          this._log.debug('searchProducts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('searchProducts request %j', request);
+    this._log.debug('searchProducts request %j', request);
     return this.innerApiCalls
       .searchProducts(request, options, wrappedCallback)
       ?.then(
@@ -802,7 +802,7 @@ export class PrivateCatalogClient {
           protos.google.cloud.privatecatalog.v1beta1.ISearchProductsRequest | null,
           protos.google.cloud.privatecatalog.v1beta1.ISearchProductsResponse,
         ]) => {
-          this._log.info('searchProducts values %j', response);
+          this._log.debug('searchProducts values %j', response);
           return [response, input, output];
         },
       );
@@ -856,7 +856,7 @@ export class PrivateCatalogClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchProducts stream %j', request);
+    this._log.debug('searchProducts stream %j', request);
     return this.descriptors.page.searchProducts.createStream(
       this.innerApiCalls.searchProducts as GaxCall,
       request,
@@ -915,7 +915,7 @@ export class PrivateCatalogClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchProducts iterate %j', request);
+    this._log.debug('searchProducts iterate %j', request);
     return this.descriptors.page.searchProducts.asyncIterate(
       this.innerApiCalls['searchProducts'] as GaxCall,
       request as {},
@@ -1040,11 +1040,11 @@ export class PrivateCatalogClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('searchVersions values %j', values);
+          this._log.debug('searchVersions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('searchVersions request %j', request);
+    this._log.debug('searchVersions request %j', request);
     return this.innerApiCalls
       .searchVersions(request, options, wrappedCallback)
       ?.then(
@@ -1053,7 +1053,7 @@ export class PrivateCatalogClient {
           protos.google.cloud.privatecatalog.v1beta1.ISearchVersionsRequest | null,
           protos.google.cloud.privatecatalog.v1beta1.ISearchVersionsResponse,
         ]) => {
-          this._log.info('searchVersions values %j', response);
+          this._log.debug('searchVersions values %j', response);
           return [response, input, output];
         },
       );
@@ -1107,7 +1107,7 @@ export class PrivateCatalogClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchVersions stream %j', request);
+    this._log.debug('searchVersions stream %j', request);
     return this.descriptors.page.searchVersions.createStream(
       this.innerApiCalls.searchVersions as GaxCall,
       request,
@@ -1166,7 +1166,7 @@ export class PrivateCatalogClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchVersions iterate %j', request);
+    this._log.debug('searchVersions iterate %j', request);
     return this.descriptors.page.searchVersions.asyncIterate(
       this.innerApiCalls['searchVersions'] as GaxCall,
       request as {},

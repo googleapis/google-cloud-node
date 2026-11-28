@@ -50,7 +50,7 @@ function main(rankingConfig, records) {
    */
   // const query = 'abc123'
   /**
-   *  Required. A list of records to rank. At most 200 records to rank.
+   *  Required. A list of records to rank.
    */
   // const records = [1,2,3,4]
   /**

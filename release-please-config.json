@@ -349,7 +349,6 @@
     "packages/google-shopping-merchant-quota": {},
     "packages/google-shopping-merchant-reports": {},
     "packages/google-shopping-merchant-reviews": {},
-    "packages/google-storage-control": {},
     "packages/google-storagetransfer": {},
     "packages/google-streetview-publish": {},
     "packages/grafeas": {}

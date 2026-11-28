@@ -486,7 +486,7 @@ export class AssetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createFeed request %j', request);
+    this._log.debug('createFeed request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.asset.v1p2beta1.IFeed,
@@ -497,7 +497,7 @@ export class AssetServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createFeed response %j', response);
+          this._log.debug('createFeed response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -509,7 +509,7 @@ export class AssetServiceClient {
           protos.google.cloud.asset.v1p2beta1.ICreateFeedRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createFeed response %j', response);
+          this._log.debug('createFeed response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -617,7 +617,7 @@ export class AssetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getFeed request %j', request);
+    this._log.debug('getFeed request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.asset.v1p2beta1.IFeed,
@@ -628,7 +628,7 @@ export class AssetServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getFeed response %j', response);
+          this._log.debug('getFeed response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -640,7 +640,7 @@ export class AssetServiceClient {
           protos.google.cloud.asset.v1p2beta1.IGetFeedRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getFeed response %j', response);
+          this._log.debug('getFeed response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -747,7 +747,7 @@ export class AssetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFeeds request %j', request);
+    this._log.debug('listFeeds request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.asset.v1p2beta1.IListFeedsResponse,
@@ -758,7 +758,7 @@ export class AssetServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('listFeeds response %j', response);
+          this._log.debug('listFeeds response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -770,7 +770,7 @@ export class AssetServiceClient {
           protos.google.cloud.asset.v1p2beta1.IListFeedsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('listFeeds response %j', response);
+          this._log.debug('listFeeds response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -883,7 +883,7 @@ export class AssetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateFeed request %j', request);
+    this._log.debug('updateFeed request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.asset.v1p2beta1.IFeed,
@@ -894,7 +894,7 @@ export class AssetServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateFeed response %j', response);
+          this._log.debug('updateFeed response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -906,7 +906,7 @@ export class AssetServiceClient {
           protos.google.cloud.asset.v1p2beta1.IUpdateFeedRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateFeed response %j', response);
+          this._log.debug('updateFeed response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1014,7 +1014,7 @@ export class AssetServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteFeed request %j', request);
+    this._log.debug('deleteFeed request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1025,7 +1025,7 @@ export class AssetServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteFeed response %j', response);
+          this._log.debug('deleteFeed response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1037,7 +1037,7 @@ export class AssetServiceClient {
           protos.google.cloud.asset.v1p2beta1.IDeleteFeedRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteFeed response %j', response);
+          this._log.debug('deleteFeed response %j', response);
           return [response, options, rawResponse];
         },
       )

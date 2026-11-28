@@ -21,7 +21,6 @@
 const reviews = require('@google-shopping/reviews');
 
 function main() {
-  const merchantReviewsServiceClient = new reviews.MerchantReviewsServiceClient();
   const productReviewsServiceClient = new reviews.ProductReviewsServiceClient();
 }
 

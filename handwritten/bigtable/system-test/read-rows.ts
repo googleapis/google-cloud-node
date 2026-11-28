@@ -26,7 +26,7 @@ import {EventEmitter} from 'events';
 import {Test} from './testTypes';
 import {ServiceError, GrpcClient, GoogleError, CallOptions} from 'google-gax';
 import {PassThrough} from 'stream';
-import * as proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 import {TabularApiSurface} from '../src/tabular-api-surface';
 import * as mocha from 'mocha';
 import {generateId} from './common';
@@ -141,7 +141,10 @@ describe('Bigtable/Table', () => {
             'An error should have been thrown because the client is closed',
           );
         } catch (err: any) {
-          assert.strictEqual(err.message, 'The client has already been closed.');
+          assert.strictEqual(
+            err.message,
+            'The client has already been closed.',
+          );
         }
       } finally {
         const bigtableSecondClient = new Bigtable();

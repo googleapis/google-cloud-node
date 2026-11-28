@@ -264,7 +264,15 @@ export class SqlSslCertsServiceClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const sqlSslCertsServiceStubMethods = ['delete', 'get', 'insert', 'list'];
+    const sqlSslCertsServiceStubMethods = [
+      'delete',
+      'get',
+      'insert',
+      'list',
+      'updateCustomerManagedCertificate',
+      'deleteCustomerManagedCertificate',
+      'listCustomerManagedCertificates',
+    ];
     for (const methodName of sqlSslCertsServiceStubMethods) {
       const callPromise = this.sqlSslCertsServiceStub.then(
         stub =>
@@ -472,7 +480,7 @@ export class SqlSslCertsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('delete request %j', request);
+    this._log.debug('delete request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1.IOperation,
@@ -483,7 +491,7 @@ export class SqlSslCertsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('delete response %j', response);
+          this._log.debug('delete response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -495,7 +503,7 @@ export class SqlSslCertsServiceClient {
           protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('delete response %j', response);
+          this._log.debug('delete response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -606,7 +614,7 @@ export class SqlSslCertsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('get request %j', request);
+    this._log.debug('get request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1.ISslCert,
@@ -615,7 +623,7 @@ export class SqlSslCertsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -627,7 +635,7 @@ export class SqlSslCertsServiceClient {
           protos.google.cloud.sql.v1.ISqlSslCertsGetRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -738,7 +746,7 @@ export class SqlSslCertsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('insert request %j', request);
+    this._log.debug('insert request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1.ISslCertsInsertResponse,
@@ -749,7 +757,7 @@ export class SqlSslCertsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('insert response %j', response);
+          this._log.debug('insert response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -761,7 +769,7 @@ export class SqlSslCertsServiceClient {
           protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('insert response %j', response);
+          this._log.debug('insert response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -867,7 +875,7 @@ export class SqlSslCertsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('list request %j', request);
+    this._log.debug('list request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1.ISslCertsListResponse,
@@ -876,7 +884,7 @@ export class SqlSslCertsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('list response %j', response);
+          this._log.debug('list response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -888,7 +896,485 @@ export class SqlSslCertsServiceClient {
           protos.google.cloud.sql.v1.ISqlSslCertsListRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('list response %j', response);
+          this._log.debug('list response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Upload and update customer managed certificate bundle for an existing Cloud
+   * SQL instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.instance
+   *   Required. Cloud SQL instance ID. This does not include the project ID.
+   * @param {string} request.project
+   *   Required. Project ID of the project that contains the instance.
+   * @param {google.cloud.sql.v1.CustomerManagedCertificateConfig} request.customerManagedCertificateConfig
+   *   Required. The customer managed certificate bundle SSL configuration to
+   *   update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to be updated.
+   * @param {boolean} [request.allowMissing]
+   *   Optional. If set to true, and the customer managed certificate bundle
+   *   configuration is not found, a new customer managed certificate bundle
+   *   configuration will be created. In this situation, `update_mask` is ignored.
+   * @param {string} request.certificateBundle
+   *   Required. Name tag of the customer managed certificate bundle to update. It
+   *   must start with a letter, be alphanumeric, and have a maximum length of 10
+   *   characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/sql_ssl_certs_service.update_customer_managed_certificate.js</caption>
+   * region_tag:sqladmin_v1_generated_SqlSslCertsService_UpdateCustomerManagedCertificate_async
+   */
+  updateCustomerManagedCertificate(
+    request?: protos.google.cloud.sql.v1.IUpdateCustomerManagedCertificateRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1.IOperation,
+      (
+        | protos.google.cloud.sql.v1.IUpdateCustomerManagedCertificateRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateCustomerManagedCertificate(
+    request: protos.google.cloud.sql.v1.IUpdateCustomerManagedCertificateRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.sql.v1.IOperation,
+      | protos.google.cloud.sql.v1.IUpdateCustomerManagedCertificateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateCustomerManagedCertificate(
+    request: protos.google.cloud.sql.v1.IUpdateCustomerManagedCertificateRequest,
+    callback: Callback<
+      protos.google.cloud.sql.v1.IOperation,
+      | protos.google.cloud.sql.v1.IUpdateCustomerManagedCertificateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateCustomerManagedCertificate(
+    request?: protos.google.cloud.sql.v1.IUpdateCustomerManagedCertificateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.IUpdateCustomerManagedCertificateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.sql.v1.IOperation,
+      | protos.google.cloud.sql.v1.IUpdateCustomerManagedCertificateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1.IOperation,
+      (
+        | protos.google.cloud.sql.v1.IUpdateCustomerManagedCertificateRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        instance: request.instance ?? '',
+        certificate_bundle: request.certificateBundle ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.debug('updateCustomerManagedCertificate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.IUpdateCustomerManagedCertificateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.debug(
+            'updateCustomerManagedCertificate response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateCustomerManagedCertificate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          (
+            | protos.google.cloud.sql.v1.IUpdateCustomerManagedCertificateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.debug(
+            'updateCustomerManagedCertificate response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Delete customer managed certificate bundle for an existing Cloud SQL
+   * instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.instance
+   *   Required. Cloud SQL instance ID. This does not include the project ID.
+   * @param {string} request.project
+   *   Required. Project ID of the project that contains the instance.
+   * @param {string} request.certificateBundle
+   *   Required. Name tag of the customer managed certificate bundle to delete. It
+   *   must start with a letter, be alphanumeric, and have a maximum length of 10
+   *   characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/sql_ssl_certs_service.delete_customer_managed_certificate.js</caption>
+   * region_tag:sqladmin_v1_generated_SqlSslCertsService_DeleteCustomerManagedCertificate_async
+   */
+  deleteCustomerManagedCertificate(
+    request?: protos.google.cloud.sql.v1.IDeleteCustomerManagedCertificateRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1.IOperation,
+      (
+        | protos.google.cloud.sql.v1.IDeleteCustomerManagedCertificateRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteCustomerManagedCertificate(
+    request: protos.google.cloud.sql.v1.IDeleteCustomerManagedCertificateRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.sql.v1.IOperation,
+      | protos.google.cloud.sql.v1.IDeleteCustomerManagedCertificateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteCustomerManagedCertificate(
+    request: protos.google.cloud.sql.v1.IDeleteCustomerManagedCertificateRequest,
+    callback: Callback<
+      protos.google.cloud.sql.v1.IOperation,
+      | protos.google.cloud.sql.v1.IDeleteCustomerManagedCertificateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteCustomerManagedCertificate(
+    request?: protos.google.cloud.sql.v1.IDeleteCustomerManagedCertificateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.IDeleteCustomerManagedCertificateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.sql.v1.IOperation,
+      | protos.google.cloud.sql.v1.IDeleteCustomerManagedCertificateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1.IOperation,
+      (
+        | protos.google.cloud.sql.v1.IDeleteCustomerManagedCertificateRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        instance: request.instance ?? '',
+        certificate_bundle: request.certificateBundle ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.debug('deleteCustomerManagedCertificate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          | protos.google.cloud.sql.v1.IDeleteCustomerManagedCertificateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.debug(
+            'deleteCustomerManagedCertificate response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteCustomerManagedCertificate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IOperation,
+          (
+            | protos.google.cloud.sql.v1.IDeleteCustomerManagedCertificateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.debug(
+            'deleteCustomerManagedCertificate response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * List all customer managed certificate bundles for an existing Cloud SQL
+   * instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.instance
+   *   Required. Cloud SQL instance ID. This does not include the project ID.
+   * @param {string} request.project
+   *   Required. Project ID of the project that contains the instance.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.ListCustomerManagedCertificatesResponse|ListCustomerManagedCertificatesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/sql_ssl_certs_service.list_customer_managed_certificates.js</caption>
+   * region_tag:sqladmin_v1_generated_SqlSslCertsService_ListCustomerManagedCertificates_async
+   */
+  listCustomerManagedCertificates(
+    request?: protos.google.cloud.sql.v1.IListCustomerManagedCertificatesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1.IListCustomerManagedCertificatesResponse,
+      (
+        | protos.google.cloud.sql.v1.IListCustomerManagedCertificatesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  listCustomerManagedCertificates(
+    request: protos.google.cloud.sql.v1.IListCustomerManagedCertificatesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.sql.v1.IListCustomerManagedCertificatesResponse,
+      | protos.google.cloud.sql.v1.IListCustomerManagedCertificatesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  listCustomerManagedCertificates(
+    request: protos.google.cloud.sql.v1.IListCustomerManagedCertificatesRequest,
+    callback: Callback<
+      protos.google.cloud.sql.v1.IListCustomerManagedCertificatesResponse,
+      | protos.google.cloud.sql.v1.IListCustomerManagedCertificatesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  listCustomerManagedCertificates(
+    request?: protos.google.cloud.sql.v1.IListCustomerManagedCertificatesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.sql.v1.IListCustomerManagedCertificatesResponse,
+          | protos.google.cloud.sql.v1.IListCustomerManagedCertificatesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.sql.v1.IListCustomerManagedCertificatesResponse,
+      | protos.google.cloud.sql.v1.IListCustomerManagedCertificatesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1.IListCustomerManagedCertificatesResponse,
+      (
+        | protos.google.cloud.sql.v1.IListCustomerManagedCertificatesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        instance: request.instance ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.debug('listCustomerManagedCertificates request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1.IListCustomerManagedCertificatesResponse,
+          | protos.google.cloud.sql.v1.IListCustomerManagedCertificatesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.debug(
+            'listCustomerManagedCertificates response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .listCustomerManagedCertificates(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1.IListCustomerManagedCertificatesResponse,
+          (
+            | protos.google.cloud.sql.v1.IListCustomerManagedCertificatesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.debug(
+            'listCustomerManagedCertificates response %j',
+            response,
+          );
           return [response, options, rawResponse];
         },
       )

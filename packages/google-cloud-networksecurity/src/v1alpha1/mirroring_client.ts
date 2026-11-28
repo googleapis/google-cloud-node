@@ -956,7 +956,7 @@ export class MirroringClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getMirroringEndpointGroup request %j', request);
+    this._log.debug('getMirroringEndpointGroup request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroup,
@@ -967,7 +967,7 @@ export class MirroringClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getMirroringEndpointGroup response %j', response);
+          this._log.debug('getMirroringEndpointGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -982,7 +982,7 @@ export class MirroringClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getMirroringEndpointGroup response %j', response);
+          this._log.debug('getMirroringEndpointGroup response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1102,7 +1102,7 @@ export class MirroringClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getMirroringEndpointGroupAssociation request %j', request);
+    this._log.debug('getMirroringEndpointGroupAssociation request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networksecurity.v1alpha1.IMirroringEndpointGroupAssociation,
@@ -1113,7 +1113,7 @@ export class MirroringClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'getMirroringEndpointGroupAssociation response %j',
             response,
           );
@@ -1131,7 +1131,7 @@ export class MirroringClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'getMirroringEndpointGroupAssociation response %j',
             response,
           );
@@ -1254,7 +1254,7 @@ export class MirroringClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getMirroringDeploymentGroup request %j', request);
+    this._log.debug('getMirroringDeploymentGroup request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networksecurity.v1alpha1.IMirroringDeploymentGroup,
@@ -1265,7 +1265,7 @@ export class MirroringClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getMirroringDeploymentGroup response %j', response);
+          this._log.debug('getMirroringDeploymentGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1280,7 +1280,7 @@ export class MirroringClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getMirroringDeploymentGroup response %j', response);
+          this._log.debug('getMirroringDeploymentGroup response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1400,7 +1400,7 @@ export class MirroringClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getMirroringDeployment request %j', request);
+    this._log.debug('getMirroringDeployment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networksecurity.v1alpha1.IMirroringDeployment,
@@ -1411,7 +1411,7 @@ export class MirroringClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getMirroringDeployment response %j', response);
+          this._log.debug('getMirroringDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1426,7 +1426,7 @@ export class MirroringClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getMirroringDeployment response %j', response);
+          this._log.debug('getMirroringDeployment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1572,14 +1572,14 @@ export class MirroringClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'createMirroringEndpointGroup response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createMirroringEndpointGroup request %j', request);
+    this._log.debug('createMirroringEndpointGroup request %j', request);
     return this.innerApiCalls
       .createMirroringEndpointGroup(request, options, wrappedCallback)
       ?.then(
@@ -1591,7 +1591,7 @@ export class MirroringClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'createMirroringEndpointGroup response %j',
             rawResponse,
           );
@@ -1758,14 +1758,14 @@ export class MirroringClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'updateMirroringEndpointGroup response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateMirroringEndpointGroup request %j', request);
+    this._log.debug('updateMirroringEndpointGroup request %j', request);
     return this.innerApiCalls
       .updateMirroringEndpointGroup(request, options, wrappedCallback)
       ?.then(
@@ -1777,7 +1777,7 @@ export class MirroringClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'updateMirroringEndpointGroup response %j',
             rawResponse,
           );
@@ -1938,14 +1938,14 @@ export class MirroringClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'deleteMirroringEndpointGroup response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteMirroringEndpointGroup request %j', request);
+    this._log.debug('deleteMirroringEndpointGroup request %j', request);
     return this.innerApiCalls
       .deleteMirroringEndpointGroup(request, options, wrappedCallback)
       ?.then(
@@ -1957,7 +1957,7 @@ export class MirroringClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'deleteMirroringEndpointGroup response %j',
             rawResponse,
           );
@@ -2125,14 +2125,14 @@ export class MirroringClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'createMirroringEndpointGroupAssociation response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info(
+    this._log.debug(
       'createMirroringEndpointGroupAssociation request %j',
       request,
     );
@@ -2151,7 +2151,7 @@ export class MirroringClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'createMirroringEndpointGroupAssociation response %j',
             rawResponse,
           );
@@ -2319,14 +2319,14 @@ export class MirroringClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'updateMirroringEndpointGroupAssociation response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info(
+    this._log.debug(
       'updateMirroringEndpointGroupAssociation request %j',
       request,
     );
@@ -2345,7 +2345,7 @@ export class MirroringClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'updateMirroringEndpointGroupAssociation response %j',
             rawResponse,
           );
@@ -2506,14 +2506,14 @@ export class MirroringClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'deleteMirroringEndpointGroupAssociation response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info(
+    this._log.debug(
       'deleteMirroringEndpointGroupAssociation request %j',
       request,
     );
@@ -2532,7 +2532,7 @@ export class MirroringClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'deleteMirroringEndpointGroupAssociation response %j',
             rawResponse,
           );
@@ -2699,14 +2699,14 @@ export class MirroringClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'createMirroringDeploymentGroup response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createMirroringDeploymentGroup request %j', request);
+    this._log.debug('createMirroringDeploymentGroup request %j', request);
     return this.innerApiCalls
       .createMirroringDeploymentGroup(request, options, wrappedCallback)
       ?.then(
@@ -2718,7 +2718,7 @@ export class MirroringClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'createMirroringDeploymentGroup response %j',
             rawResponse,
           );
@@ -2886,14 +2886,14 @@ export class MirroringClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'updateMirroringDeploymentGroup response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateMirroringDeploymentGroup request %j', request);
+    this._log.debug('updateMirroringDeploymentGroup request %j', request);
     return this.innerApiCalls
       .updateMirroringDeploymentGroup(request, options, wrappedCallback)
       ?.then(
@@ -2905,7 +2905,7 @@ export class MirroringClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'updateMirroringDeploymentGroup response %j',
             rawResponse,
           );
@@ -3066,14 +3066,14 @@ export class MirroringClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'deleteMirroringDeploymentGroup response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteMirroringDeploymentGroup request %j', request);
+    this._log.debug('deleteMirroringDeploymentGroup request %j', request);
     return this.innerApiCalls
       .deleteMirroringDeploymentGroup(request, options, wrappedCallback)
       ?.then(
@@ -3085,7 +3085,7 @@ export class MirroringClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'deleteMirroringDeploymentGroup response %j',
             rawResponse,
           );
@@ -3252,11 +3252,11 @@ export class MirroringClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createMirroringDeployment response %j', rawResponse);
+          this._log.debug('createMirroringDeployment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createMirroringDeployment request %j', request);
+    this._log.debug('createMirroringDeployment request %j', request);
     return this.innerApiCalls
       .createMirroringDeployment(request, options, wrappedCallback)
       ?.then(
@@ -3268,7 +3268,7 @@ export class MirroringClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createMirroringDeployment response %j', rawResponse);
+          this._log.debug('createMirroringDeployment response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3431,11 +3431,11 @@ export class MirroringClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateMirroringDeployment response %j', rawResponse);
+          this._log.debug('updateMirroringDeployment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateMirroringDeployment request %j', request);
+    this._log.debug('updateMirroringDeployment request %j', request);
     return this.innerApiCalls
       .updateMirroringDeployment(request, options, wrappedCallback)
       ?.then(
@@ -3447,7 +3447,7 @@ export class MirroringClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateMirroringDeployment response %j', rawResponse);
+          this._log.debug('updateMirroringDeployment response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3605,11 +3605,11 @@ export class MirroringClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteMirroringDeployment response %j', rawResponse);
+          this._log.debug('deleteMirroringDeployment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteMirroringDeployment request %j', request);
+    this._log.debug('deleteMirroringDeployment request %j', request);
     return this.innerApiCalls
       .deleteMirroringDeployment(request, options, wrappedCallback)
       ?.then(
@@ -3621,7 +3621,7 @@ export class MirroringClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteMirroringDeployment response %j', rawResponse);
+          this._log.debug('deleteMirroringDeployment response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3784,11 +3784,11 @@ export class MirroringClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listMirroringEndpointGroups values %j', values);
+          this._log.debug('listMirroringEndpointGroups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listMirroringEndpointGroups request %j', request);
+    this._log.debug('listMirroringEndpointGroups request %j', request);
     return this.innerApiCalls
       .listMirroringEndpointGroups(request, options, wrappedCallback)
       ?.then(
@@ -3797,7 +3797,7 @@ export class MirroringClient {
           protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsRequest | null,
           protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupsResponse,
         ]) => {
-          this._log.info('listMirroringEndpointGroups values %j', response);
+          this._log.debug('listMirroringEndpointGroups values %j', response);
           return [response, input, output];
         },
       );
@@ -3856,7 +3856,7 @@ export class MirroringClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMirroringEndpointGroups stream %j', request);
+    this._log.debug('listMirroringEndpointGroups stream %j', request);
     return this.descriptors.page.listMirroringEndpointGroups.createStream(
       this.innerApiCalls.listMirroringEndpointGroups as GaxCall,
       request,
@@ -3920,7 +3920,7 @@ export class MirroringClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMirroringEndpointGroups iterate %j', request);
+    this._log.debug('listMirroringEndpointGroups iterate %j', request);
     return this.descriptors.page.listMirroringEndpointGroups.asyncIterate(
       this.innerApiCalls['listMirroringEndpointGroups'] as GaxCall,
       request as {},
@@ -4049,14 +4049,14 @@ export class MirroringClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'listMirroringEndpointGroupAssociations values %j',
             values,
           );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info(
+    this._log.debug(
       'listMirroringEndpointGroupAssociations request %j',
       request,
     );
@@ -4068,7 +4068,7 @@ export class MirroringClient {
           protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsRequest | null,
           protos.google.cloud.networksecurity.v1alpha1.IListMirroringEndpointGroupAssociationsResponse,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'listMirroringEndpointGroupAssociations values %j',
             response,
           );
@@ -4130,7 +4130,10 @@ export class MirroringClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMirroringEndpointGroupAssociations stream %j', request);
+    this._log.debug(
+      'listMirroringEndpointGroupAssociations stream %j',
+      request,
+    );
     return this.descriptors.page.listMirroringEndpointGroupAssociations.createStream(
       this.innerApiCalls.listMirroringEndpointGroupAssociations as GaxCall,
       request,
@@ -4194,7 +4197,7 @@ export class MirroringClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'listMirroringEndpointGroupAssociations iterate %j',
       request,
     );
@@ -4326,11 +4329,11 @@ export class MirroringClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listMirroringDeploymentGroups values %j', values);
+          this._log.debug('listMirroringDeploymentGroups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listMirroringDeploymentGroups request %j', request);
+    this._log.debug('listMirroringDeploymentGroups request %j', request);
     return this.innerApiCalls
       .listMirroringDeploymentGroups(request, options, wrappedCallback)
       ?.then(
@@ -4339,7 +4342,7 @@ export class MirroringClient {
           protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsRequest | null,
           protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentGroupsResponse,
         ]) => {
-          this._log.info('listMirroringDeploymentGroups values %j', response);
+          this._log.debug('listMirroringDeploymentGroups values %j', response);
           return [response, input, output];
         },
       );
@@ -4397,7 +4400,7 @@ export class MirroringClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMirroringDeploymentGroups stream %j', request);
+    this._log.debug('listMirroringDeploymentGroups stream %j', request);
     return this.descriptors.page.listMirroringDeploymentGroups.createStream(
       this.innerApiCalls.listMirroringDeploymentGroups as GaxCall,
       request,
@@ -4460,7 +4463,7 @@ export class MirroringClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMirroringDeploymentGroups iterate %j', request);
+    this._log.debug('listMirroringDeploymentGroups iterate %j', request);
     return this.descriptors.page.listMirroringDeploymentGroups.asyncIterate(
       this.innerApiCalls['listMirroringDeploymentGroups'] as GaxCall,
       request as {},
@@ -4589,11 +4592,11 @@ export class MirroringClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listMirroringDeployments values %j', values);
+          this._log.debug('listMirroringDeployments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listMirroringDeployments request %j', request);
+    this._log.debug('listMirroringDeployments request %j', request);
     return this.innerApiCalls
       .listMirroringDeployments(request, options, wrappedCallback)
       ?.then(
@@ -4602,7 +4605,7 @@ export class MirroringClient {
           protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsRequest | null,
           protos.google.cloud.networksecurity.v1alpha1.IListMirroringDeploymentsResponse,
         ]) => {
-          this._log.info('listMirroringDeployments values %j', response);
+          this._log.debug('listMirroringDeployments values %j', response);
           return [response, input, output];
         },
       );
@@ -4660,7 +4663,7 @@ export class MirroringClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMirroringDeployments stream %j', request);
+    this._log.debug('listMirroringDeployments stream %j', request);
     return this.descriptors.page.listMirroringDeployments.createStream(
       this.innerApiCalls.listMirroringDeployments as GaxCall,
       request,
@@ -4723,7 +4726,7 @@ export class MirroringClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMirroringDeployments iterate %j', request);
+    this._log.debug('listMirroringDeployments iterate %j', request);
     return this.descriptors.page.listMirroringDeployments.asyncIterate(
       this.innerApiCalls['listMirroringDeployments'] as GaxCall,
       request as {},

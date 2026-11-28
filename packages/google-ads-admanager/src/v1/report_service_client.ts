@@ -214,6 +214,9 @@ export class ReportServiceClient {
       adBreakPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/liveStreamEventsByAssetKey/{asset_key}/adBreaks/{ad_break}',
       ),
+      adCategoryPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/adCategories/{ad_category}',
+      ),
       adReviewCenterAdPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/webProperties/{web_property_code}/adReviewCenterAds/{ad_review_center_ad}',
       ),
@@ -226,6 +229,9 @@ export class ReportServiceClient {
       adUnitPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/adUnits/{ad_unit}',
       ),
+      allocationDeliveryProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/allocationDeliveryProfiles/{allocation_delivery_profile}',
+      ),
       applicationPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/applications/{application}',
       ),
@@ -234,6 +240,9 @@ export class ReportServiceClient {
       ),
       audienceSegmentPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/audienceSegments/{audience_segment}',
+      ),
+      audienceSegmentCategoryPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/audienceSegmentCategories/{audience_segment_category}',
       ),
       bandwidthGroupPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/bandwidthGroups/{bandwidth_group}',
@@ -249,6 +258,9 @@ export class ReportServiceClient {
       ),
       cdnConfigPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/cdnConfigs/{cdn_config}',
+      ),
+      changeEventPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/changeEvents/{change_event}',
       ),
       childPublisherPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/childPublishers/{child_publisher}',
@@ -320,8 +332,14 @@ export class ReportServiceClient {
       entitySignalsMappingPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/entitySignalsMappings/{entity_signals_mapping}',
       ),
+      forecastAdjustmentPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/forecastAdjustments/{forecast_adjustment}',
+      ),
       geoTargetPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/geoTargets/{geo_target}',
+      ),
+      inventoryUrlPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/inventoryUrls/{inventory_url}',
       ),
       labelPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/labels/{label}',
@@ -383,6 +401,9 @@ export class ReportServiceClient {
       programmaticBuyerPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/programmaticBuyers/{programmatic_buyer}',
       ),
+      proposalPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/proposals/{proposal}',
+      ),
       reportPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/reports/{report}',
       ),
@@ -413,6 +434,9 @@ export class ReportServiceClient {
       thirdPartyCompanyPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/thirdPartyCompanies/{third_party_company}',
       ),
+      trafficForecastSegmentPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/trafficForecastSegments/{traffic_forecast_segment}',
+      ),
       userPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/users/{user}',
       ),
@@ -421,6 +445,12 @@ export class ReportServiceClient {
       ),
       webPropertyPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/webProperties/{web_property}',
+      ),
+      yieldGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/yieldGroups/{yield_group}',
+      ),
+      yieldPartnerPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/yieldPartners/{yield_partner}',
       ),
     };
 
@@ -738,7 +768,7 @@ export class ReportServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getReport request %j', request);
+    this._log.debug('getReport request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IReport,
@@ -747,7 +777,7 @@ export class ReportServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getReport response %j', response);
+          this._log.debug('getReport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -759,7 +789,7 @@ export class ReportServiceClient {
           protos.google.ads.admanager.v1.IGetReportRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getReport response %j', response);
+          this._log.debug('getReport response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -867,7 +897,7 @@ export class ReportServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createReport request %j', request);
+    this._log.debug('createReport request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IReport,
@@ -878,7 +908,7 @@ export class ReportServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createReport response %j', response);
+          this._log.debug('createReport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -890,7 +920,7 @@ export class ReportServiceClient {
           protos.google.ads.admanager.v1.ICreateReportRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createReport response %j', response);
+          this._log.debug('createReport response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -997,7 +1027,7 @@ export class ReportServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateReport request %j', request);
+    this._log.debug('updateReport request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IReport,
@@ -1008,7 +1038,7 @@ export class ReportServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateReport response %j', response);
+          this._log.debug('updateReport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1020,7 +1050,7 @@ export class ReportServiceClient {
           protos.google.ads.admanager.v1.IUpdateReportRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateReport response %j', response);
+          this._log.debug('updateReport response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1163,11 +1193,11 @@ export class ReportServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('runReport response %j', rawResponse);
+          this._log.debug('runReport response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('runReport request %j', request);
+    this._log.debug('runReport request %j', request);
     return this.innerApiCalls
       .runReport(request, options, wrappedCallback)
       ?.then(
@@ -1179,7 +1209,7 @@ export class ReportServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('runReport response %j', rawResponse);
+          this._log.debug('runReport response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1338,11 +1368,11 @@ export class ReportServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listReports values %j', values);
+          this._log.debug('listReports values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listReports request %j', request);
+    this._log.debug('listReports request %j', request);
     return this.innerApiCalls
       .listReports(request, options, wrappedCallback)
       ?.then(
@@ -1351,7 +1381,7 @@ export class ReportServiceClient {
           protos.google.ads.admanager.v1.IListReportsRequest | null,
           protos.google.ads.admanager.v1.IListReportsResponse,
         ]) => {
-          this._log.info('listReports values %j', response);
+          this._log.debug('listReports values %j', response);
           return [response, input, output];
         },
       );
@@ -1413,7 +1443,7 @@ export class ReportServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listReports stream %j', request);
+    this._log.debug('listReports stream %j', request);
     return this.descriptors.page.listReports.createStream(
       this.innerApiCalls.listReports as GaxCall,
       request,
@@ -1480,7 +1510,7 @@ export class ReportServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listReports iterate %j', request);
+    this._log.debug('listReports iterate %j', request);
     return this.descriptors.page.listReports.asyncIterate(
       this.innerApiCalls['listReports'] as GaxCall,
       request as {},
@@ -1603,11 +1633,11 @@ export class ReportServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('fetchReportResultRows values %j', values);
+          this._log.debug('fetchReportResultRows values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('fetchReportResultRows request %j', request);
+    this._log.debug('fetchReportResultRows request %j', request);
     return this.innerApiCalls
       .fetchReportResultRows(request, options, wrappedCallback)
       ?.then(
@@ -1616,7 +1646,7 @@ export class ReportServiceClient {
           protos.google.ads.admanager.v1.IFetchReportResultRowsRequest | null,
           protos.google.ads.admanager.v1.IFetchReportResultRowsResponse,
         ]) => {
-          this._log.info('fetchReportResultRows values %j', response);
+          this._log.debug('fetchReportResultRows values %j', response);
           return [response, input, output];
         },
       );
@@ -1666,7 +1696,7 @@ export class ReportServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchReportResultRows stream %j', request);
+    this._log.debug('fetchReportResultRows stream %j', request);
     return this.descriptors.page.fetchReportResultRows.createStream(
       this.innerApiCalls.fetchReportResultRows as GaxCall,
       request,
@@ -1721,7 +1751,7 @@ export class ReportServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchReportResultRows iterate %j', request);
+    this._log.debug('fetchReportResultRows iterate %j', request);
     return this.descriptors.page.fetchReportResultRows.asyncIterate(
       this.innerApiCalls['fetchReportResultRows'] as GaxCall,
       request as {},
@@ -2006,6 +2036,44 @@ export class ReportServiceClient {
   }
 
   /**
+   * Return a fully-qualified adCategory resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} ad_category
+   * @returns {string} Resource name string.
+   */
+  adCategoryPath(networkCode: string, adCategory: string) {
+    return this.pathTemplates.adCategoryPathTemplate.render({
+      network_code: networkCode,
+      ad_category: adCategory,
+    });
+  }
+
+  /**
+   * Parse the network_code from AdCategory resource.
+   *
+   * @param {string} adCategoryName
+   *   A fully-qualified path representing AdCategory resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAdCategoryName(adCategoryName: string) {
+    return this.pathTemplates.adCategoryPathTemplate.match(adCategoryName)
+      .network_code;
+  }
+
+  /**
+   * Parse the ad_category from AdCategory resource.
+   *
+   * @param {string} adCategoryName
+   *   A fully-qualified path representing AdCategory resource.
+   * @returns {string} A string representing the ad_category.
+   */
+  matchAdCategoryFromAdCategoryName(adCategoryName: string) {
+    return this.pathTemplates.adCategoryPathTemplate.match(adCategoryName)
+      .ad_category;
+  }
+
+  /**
    * Return a fully-qualified adReviewCenterAd resource name string.
    *
    * @param {string} network_code
@@ -2173,6 +2241,53 @@ export class ReportServiceClient {
   }
 
   /**
+   * Return a fully-qualified allocationDeliveryProfile resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} allocation_delivery_profile
+   * @returns {string} Resource name string.
+   */
+  allocationDeliveryProfilePath(
+    networkCode: string,
+    allocationDeliveryProfile: string,
+  ) {
+    return this.pathTemplates.allocationDeliveryProfilePathTemplate.render({
+      network_code: networkCode,
+      allocation_delivery_profile: allocationDeliveryProfile,
+    });
+  }
+
+  /**
+   * Parse the network_code from AllocationDeliveryProfile resource.
+   *
+   * @param {string} allocationDeliveryProfileName
+   *   A fully-qualified path representing AllocationDeliveryProfile resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAllocationDeliveryProfileName(
+    allocationDeliveryProfileName: string,
+  ) {
+    return this.pathTemplates.allocationDeliveryProfilePathTemplate.match(
+      allocationDeliveryProfileName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the allocation_delivery_profile from AllocationDeliveryProfile resource.
+   *
+   * @param {string} allocationDeliveryProfileName
+   *   A fully-qualified path representing AllocationDeliveryProfile resource.
+   * @returns {string} A string representing the allocation_delivery_profile.
+   */
+  matchAllocationDeliveryProfileFromAllocationDeliveryProfileName(
+    allocationDeliveryProfileName: string,
+  ) {
+    return this.pathTemplates.allocationDeliveryProfilePathTemplate.match(
+      allocationDeliveryProfileName,
+    ).allocation_delivery_profile;
+  }
+
+  /**
    * Return a fully-qualified application resource name string.
    *
    * @param {string} network_code
@@ -2284,6 +2399,53 @@ export class ReportServiceClient {
     return this.pathTemplates.audienceSegmentPathTemplate.match(
       audienceSegmentName,
     ).audience_segment;
+  }
+
+  /**
+   * Return a fully-qualified audienceSegmentCategory resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} audience_segment_category
+   * @returns {string} Resource name string.
+   */
+  audienceSegmentCategoryPath(
+    networkCode: string,
+    audienceSegmentCategory: string,
+  ) {
+    return this.pathTemplates.audienceSegmentCategoryPathTemplate.render({
+      network_code: networkCode,
+      audience_segment_category: audienceSegmentCategory,
+    });
+  }
+
+  /**
+   * Parse the network_code from AudienceSegmentCategory resource.
+   *
+   * @param {string} audienceSegmentCategoryName
+   *   A fully-qualified path representing AudienceSegmentCategory resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAudienceSegmentCategoryName(
+    audienceSegmentCategoryName: string,
+  ) {
+    return this.pathTemplates.audienceSegmentCategoryPathTemplate.match(
+      audienceSegmentCategoryName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the audience_segment_category from AudienceSegmentCategory resource.
+   *
+   * @param {string} audienceSegmentCategoryName
+   *   A fully-qualified path representing AudienceSegmentCategory resource.
+   * @returns {string} A string representing the audience_segment_category.
+   */
+  matchAudienceSegmentCategoryFromAudienceSegmentCategoryName(
+    audienceSegmentCategoryName: string,
+  ) {
+    return this.pathTemplates.audienceSegmentCategoryPathTemplate.match(
+      audienceSegmentCategoryName,
+    ).audience_segment_category;
   }
 
   /**
@@ -2477,6 +2639,44 @@ export class ReportServiceClient {
   matchCdnConfigFromCdnConfigName(cdnConfigName: string) {
     return this.pathTemplates.cdnConfigPathTemplate.match(cdnConfigName)
       .cdn_config;
+  }
+
+  /**
+   * Return a fully-qualified changeEvent resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} change_event
+   * @returns {string} Resource name string.
+   */
+  changeEventPath(networkCode: string, changeEvent: string) {
+    return this.pathTemplates.changeEventPathTemplate.render({
+      network_code: networkCode,
+      change_event: changeEvent,
+    });
+  }
+
+  /**
+   * Parse the network_code from ChangeEvent resource.
+   *
+   * @param {string} changeEventName
+   *   A fully-qualified path representing ChangeEvent resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromChangeEventName(changeEventName: string) {
+    return this.pathTemplates.changeEventPathTemplate.match(changeEventName)
+      .network_code;
+  }
+
+  /**
+   * Parse the change_event from ChangeEvent resource.
+   *
+   * @param {string} changeEventName
+   *   A fully-qualified path representing ChangeEvent resource.
+   * @returns {string} A string representing the change_event.
+   */
+  matchChangeEventFromChangeEventName(changeEventName: string) {
+    return this.pathTemplates.changeEventPathTemplate.match(changeEventName)
+      .change_event;
   }
 
   /**
@@ -3385,6 +3585,48 @@ export class ReportServiceClient {
   }
 
   /**
+   * Return a fully-qualified forecastAdjustment resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} forecast_adjustment
+   * @returns {string} Resource name string.
+   */
+  forecastAdjustmentPath(networkCode: string, forecastAdjustment: string) {
+    return this.pathTemplates.forecastAdjustmentPathTemplate.render({
+      network_code: networkCode,
+      forecast_adjustment: forecastAdjustment,
+    });
+  }
+
+  /**
+   * Parse the network_code from ForecastAdjustment resource.
+   *
+   * @param {string} forecastAdjustmentName
+   *   A fully-qualified path representing ForecastAdjustment resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromForecastAdjustmentName(forecastAdjustmentName: string) {
+    return this.pathTemplates.forecastAdjustmentPathTemplate.match(
+      forecastAdjustmentName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the forecast_adjustment from ForecastAdjustment resource.
+   *
+   * @param {string} forecastAdjustmentName
+   *   A fully-qualified path representing ForecastAdjustment resource.
+   * @returns {string} A string representing the forecast_adjustment.
+   */
+  matchForecastAdjustmentFromForecastAdjustmentName(
+    forecastAdjustmentName: string,
+  ) {
+    return this.pathTemplates.forecastAdjustmentPathTemplate.match(
+      forecastAdjustmentName,
+    ).forecast_adjustment;
+  }
+
+  /**
    * Return a fully-qualified geoTarget resource name string.
    *
    * @param {string} network_code
@@ -3420,6 +3662,44 @@ export class ReportServiceClient {
   matchGeoTargetFromGeoTargetName(geoTargetName: string) {
     return this.pathTemplates.geoTargetPathTemplate.match(geoTargetName)
       .geo_target;
+  }
+
+  /**
+   * Return a fully-qualified inventoryUrl resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} inventory_url
+   * @returns {string} Resource name string.
+   */
+  inventoryUrlPath(networkCode: string, inventoryUrl: string) {
+    return this.pathTemplates.inventoryUrlPathTemplate.render({
+      network_code: networkCode,
+      inventory_url: inventoryUrl,
+    });
+  }
+
+  /**
+   * Parse the network_code from InventoryUrl resource.
+   *
+   * @param {string} inventoryUrlName
+   *   A fully-qualified path representing InventoryUrl resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromInventoryUrlName(inventoryUrlName: string) {
+    return this.pathTemplates.inventoryUrlPathTemplate.match(inventoryUrlName)
+      .network_code;
+  }
+
+  /**
+   * Parse the inventory_url from InventoryUrl resource.
+   *
+   * @param {string} inventoryUrlName
+   *   A fully-qualified path representing InventoryUrl resource.
+   * @returns {string} A string representing the inventory_url.
+   */
+  matchInventoryUrlFromInventoryUrlName(inventoryUrlName: string) {
+    return this.pathTemplates.inventoryUrlPathTemplate.match(inventoryUrlName)
+      .inventory_url;
   }
 
   /**
@@ -4222,6 +4502,43 @@ export class ReportServiceClient {
   }
 
   /**
+   * Return a fully-qualified proposal resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} proposal
+   * @returns {string} Resource name string.
+   */
+  proposalPath(networkCode: string, proposal: string) {
+    return this.pathTemplates.proposalPathTemplate.render({
+      network_code: networkCode,
+      proposal: proposal,
+    });
+  }
+
+  /**
+   * Parse the network_code from Proposal resource.
+   *
+   * @param {string} proposalName
+   *   A fully-qualified path representing Proposal resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromProposalName(proposalName: string) {
+    return this.pathTemplates.proposalPathTemplate.match(proposalName)
+      .network_code;
+  }
+
+  /**
+   * Parse the proposal from Proposal resource.
+   *
+   * @param {string} proposalName
+   *   A fully-qualified path representing Proposal resource.
+   * @returns {string} A string representing the proposal.
+   */
+  matchProposalFromProposalName(proposalName: string) {
+    return this.pathTemplates.proposalPathTemplate.match(proposalName).proposal;
+  }
+
+  /**
    * Return a fully-qualified report resource name string.
    *
    * @param {string} network_code
@@ -4606,6 +4923,53 @@ export class ReportServiceClient {
   }
 
   /**
+   * Return a fully-qualified trafficForecastSegment resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} traffic_forecast_segment
+   * @returns {string} Resource name string.
+   */
+  trafficForecastSegmentPath(
+    networkCode: string,
+    trafficForecastSegment: string,
+  ) {
+    return this.pathTemplates.trafficForecastSegmentPathTemplate.render({
+      network_code: networkCode,
+      traffic_forecast_segment: trafficForecastSegment,
+    });
+  }
+
+  /**
+   * Parse the network_code from TrafficForecastSegment resource.
+   *
+   * @param {string} trafficForecastSegmentName
+   *   A fully-qualified path representing TrafficForecastSegment resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromTrafficForecastSegmentName(
+    trafficForecastSegmentName: string,
+  ) {
+    return this.pathTemplates.trafficForecastSegmentPathTemplate.match(
+      trafficForecastSegmentName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the traffic_forecast_segment from TrafficForecastSegment resource.
+   *
+   * @param {string} trafficForecastSegmentName
+   *   A fully-qualified path representing TrafficForecastSegment resource.
+   * @returns {string} A string representing the traffic_forecast_segment.
+   */
+  matchTrafficForecastSegmentFromTrafficForecastSegmentName(
+    trafficForecastSegmentName: string,
+  ) {
+    return this.pathTemplates.trafficForecastSegmentPathTemplate.match(
+      trafficForecastSegmentName,
+    ).traffic_forecast_segment;
+  }
+
+  /**
    * Return a fully-qualified user resource name string.
    *
    * @param {string} network_code
@@ -4719,6 +5083,82 @@ export class ReportServiceClient {
   matchWebPropertyFromWebPropertyName(webPropertyName: string) {
     return this.pathTemplates.webPropertyPathTemplate.match(webPropertyName)
       .web_property;
+  }
+
+  /**
+   * Return a fully-qualified yieldGroup resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} yield_group
+   * @returns {string} Resource name string.
+   */
+  yieldGroupPath(networkCode: string, yieldGroup: string) {
+    return this.pathTemplates.yieldGroupPathTemplate.render({
+      network_code: networkCode,
+      yield_group: yieldGroup,
+    });
+  }
+
+  /**
+   * Parse the network_code from YieldGroup resource.
+   *
+   * @param {string} yieldGroupName
+   *   A fully-qualified path representing YieldGroup resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromYieldGroupName(yieldGroupName: string) {
+    return this.pathTemplates.yieldGroupPathTemplate.match(yieldGroupName)
+      .network_code;
+  }
+
+  /**
+   * Parse the yield_group from YieldGroup resource.
+   *
+   * @param {string} yieldGroupName
+   *   A fully-qualified path representing YieldGroup resource.
+   * @returns {string} A string representing the yield_group.
+   */
+  matchYieldGroupFromYieldGroupName(yieldGroupName: string) {
+    return this.pathTemplates.yieldGroupPathTemplate.match(yieldGroupName)
+      .yield_group;
+  }
+
+  /**
+   * Return a fully-qualified yieldPartner resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} yield_partner
+   * @returns {string} Resource name string.
+   */
+  yieldPartnerPath(networkCode: string, yieldPartner: string) {
+    return this.pathTemplates.yieldPartnerPathTemplate.render({
+      network_code: networkCode,
+      yield_partner: yieldPartner,
+    });
+  }
+
+  /**
+   * Parse the network_code from YieldPartner resource.
+   *
+   * @param {string} yieldPartnerName
+   *   A fully-qualified path representing YieldPartner resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromYieldPartnerName(yieldPartnerName: string) {
+    return this.pathTemplates.yieldPartnerPathTemplate.match(yieldPartnerName)
+      .network_code;
+  }
+
+  /**
+   * Parse the yield_partner from YieldPartner resource.
+   *
+   * @param {string} yieldPartnerName
+   *   A fully-qualified path representing YieldPartner resource.
+   * @returns {string} A string representing the yield_partner.
+   */
+  matchYieldPartnerFromYieldPartnerName(yieldPartnerName: string) {
+    return this.pathTemplates.yieldPartnerPathTemplate.match(yieldPartnerName)
+      .yield_partner;
   }
 
   /**

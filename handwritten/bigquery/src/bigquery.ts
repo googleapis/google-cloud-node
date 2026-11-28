@@ -367,9 +367,6 @@ export const PROTOCOL_REGEX = /^(\w*):\/\//;
  * });
  *
  * ```
- * @example <caption>include:samples/quickstart.js</caption>
- * region_tag:bigquery_quickstart
- * Full quickstart example:
  */
 export class BigQuery extends Service {
   location?: string;
@@ -1176,7 +1173,7 @@ export class BigQuery extends Service {
         }),
       };
     } else if ((providedType as string).toUpperCase() === 'TIMESTAMP(12)') {
-      if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true') {
+      if (process.env.BIGQUERY_PICOSECOND_SUPPORT?.toLowerCase() !== 'false') {
         return {
           type: 'TIMESTAMP',
           timestampPrecision: '12',
@@ -2448,7 +2445,7 @@ export class BigQuery extends Service {
       : {
           useInt64Timestamp: true,
         };
-    if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true') {
+    if (process.env.BIGQUERY_PICOSECOND_SUPPORT?.toLowerCase() !== 'false') {
       defaultOpts = hasAnyFormatOpts
         ? {}
         : {
@@ -2917,16 +2914,6 @@ export class BigQueryTimestamp {
     } else if (typeof value === 'string') {
       if (/^\d{4}-\d{1,2}-\d{1,2}/.test(value)) {
         pd = new PreciseDate(value);
-        if (value.match(/\.\d{10,}/) && !Number.isNaN(pd.getTime())) {
-          /*
-          TODO:
-          When https://github.com/googleapis/nodejs-precise-date/pull/302
-          is released and we have full support for picoseconds in PreciseData
-          then we can remove this if block.
-           */
-          this.value = value;
-          return;
-        }
       } else {
         const floatValue = Number.parseFloat(value);
         if (!Number.isNaN(floatValue)) {
@@ -2938,9 +2925,13 @@ export class BigQueryTimestamp {
     } else {
       pd = this.fromFloatValue_(value);
     }
-    // to keep backward compatibility, only converts with microsecond
-    // or nanosecond precision if needed.
-    if (pd.getMicroseconds() > 0 || pd.getNanoseconds() > 0) {
+    // to keep backward compatibility, only converts with microsecond,
+    // nanosecond, or picosecond precision if needed.
+    if (
+      pd.getMicroseconds() > 0 ||
+      pd.getNanoseconds() > 0 ||
+      (typeof pd.getPicoseconds === 'function' && pd.getPicoseconds() > 0)
+    ) {
       this.value = pd.toISOString();
     } else {
       this.value = new Date(pd.getTime()).toJSON();

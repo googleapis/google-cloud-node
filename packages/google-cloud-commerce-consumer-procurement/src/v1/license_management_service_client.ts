@@ -490,7 +490,7 @@ export class LicenseManagementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getLicensePool request %j', request);
+    this._log.debug('getLicensePool request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
@@ -501,7 +501,7 @@ export class LicenseManagementServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getLicensePool response %j', response);
+          this._log.debug('getLicensePool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -516,7 +516,7 @@ export class LicenseManagementServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getLicensePool response %j', response);
+          this._log.debug('getLicensePool response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -639,7 +639,7 @@ export class LicenseManagementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateLicensePool request %j', request);
+    this._log.debug('updateLicensePool request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
@@ -650,7 +650,7 @@ export class LicenseManagementServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateLicensePool response %j', response);
+          this._log.debug('updateLicensePool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -665,7 +665,7 @@ export class LicenseManagementServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateLicensePool response %j', response);
+          this._log.debug('updateLicensePool response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -785,7 +785,7 @@ export class LicenseManagementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('assign request %j', request);
+    this._log.debug('assign request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.commerce.consumer.procurement.v1.IAssignResponse,
@@ -796,7 +796,7 @@ export class LicenseManagementServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('assign response %j', response);
+          this._log.debug('assign response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -811,7 +811,7 @@ export class LicenseManagementServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('assign response %j', response);
+          this._log.debug('assign response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -931,7 +931,7 @@ export class LicenseManagementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('unassign request %j', request);
+    this._log.debug('unassign request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.commerce.consumer.procurement.v1.IUnassignResponse,
@@ -942,7 +942,7 @@ export class LicenseManagementServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('unassign response %j', response);
+          this._log.debug('unassign response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -957,7 +957,7 @@ export class LicenseManagementServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('unassign response %j', response);
+          this._log.debug('unassign response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1088,11 +1088,11 @@ export class LicenseManagementServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('enumerateLicensedUsers values %j', values);
+          this._log.debug('enumerateLicensedUsers values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('enumerateLicensedUsers request %j', request);
+    this._log.debug('enumerateLicensedUsers request %j', request);
     return this.innerApiCalls
       .enumerateLicensedUsers(request, options, wrappedCallback)
       ?.then(
@@ -1101,7 +1101,7 @@ export class LicenseManagementServiceClient {
           protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest | null,
           protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersResponse,
         ]) => {
-          this._log.info('enumerateLicensedUsers values %j', response);
+          this._log.debug('enumerateLicensedUsers values %j', response);
           return [response, input, output];
         },
       );
@@ -1147,7 +1147,7 @@ export class LicenseManagementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('enumerateLicensedUsers stream %j', request);
+    this._log.debug('enumerateLicensedUsers stream %j', request);
     return this.descriptors.page.enumerateLicensedUsers.createStream(
       this.innerApiCalls.enumerateLicensedUsers as GaxCall,
       request,
@@ -1198,7 +1198,7 @@ export class LicenseManagementServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('enumerateLicensedUsers iterate %j', request);
+    this._log.debug('enumerateLicensedUsers iterate %j', request);
     return this.descriptors.page.enumerateLicensedUsers.asyncIterate(
       this.innerApiCalls['enumerateLicensedUsers'] as GaxCall,
       request as {},

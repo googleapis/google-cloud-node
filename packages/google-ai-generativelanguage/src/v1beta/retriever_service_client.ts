@@ -523,7 +523,7 @@ export class RetrieverServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createCorpus request %j', request);
+    this._log.debug('createCorpus request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta.ICorpus,
@@ -534,7 +534,7 @@ export class RetrieverServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createCorpus response %j', response);
+          this._log.debug('createCorpus response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -549,7 +549,7 @@ export class RetrieverServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createCorpus response %j', response);
+          this._log.debug('createCorpus response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -661,7 +661,7 @@ export class RetrieverServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCorpus request %j', request);
+    this._log.debug('getCorpus request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta.ICorpus,
@@ -672,7 +672,7 @@ export class RetrieverServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCorpus response %j', response);
+          this._log.debug('getCorpus response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -687,7 +687,7 @@ export class RetrieverServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getCorpus response %j', response);
+          this._log.debug('getCorpus response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -807,7 +807,7 @@ export class RetrieverServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateCorpus request %j', request);
+    this._log.debug('updateCorpus request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta.ICorpus,
@@ -818,7 +818,7 @@ export class RetrieverServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateCorpus response %j', response);
+          this._log.debug('updateCorpus response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -833,7 +833,7 @@ export class RetrieverServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateCorpus response %j', response);
+          this._log.debug('updateCorpus response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -957,7 +957,7 @@ export class RetrieverServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteCorpus request %j', request);
+    this._log.debug('deleteCorpus request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -968,7 +968,7 @@ export class RetrieverServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteCorpus response %j', response);
+          this._log.debug('deleteCorpus response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -983,7 +983,7 @@ export class RetrieverServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteCorpus response %j', response);
+          this._log.debug('deleteCorpus response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1141,7 +1141,7 @@ export class RetrieverServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryCorpus request %j', request);
+    this._log.debug('queryCorpus request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta.IQueryCorpusResponse,
@@ -1152,7 +1152,7 @@ export class RetrieverServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('queryCorpus response %j', response);
+          this._log.debug('queryCorpus response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1167,7 +1167,7 @@ export class RetrieverServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('queryCorpus response %j', response);
+          this._log.debug('queryCorpus response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1287,7 +1287,7 @@ export class RetrieverServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createDocument request %j', request);
+    this._log.debug('createDocument request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta.IDocument,
@@ -1298,7 +1298,7 @@ export class RetrieverServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createDocument response %j', response);
+          this._log.debug('createDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1313,7 +1313,7 @@ export class RetrieverServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createDocument response %j', response);
+          this._log.debug('createDocument response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1431,7 +1431,7 @@ export class RetrieverServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDocument request %j', request);
+    this._log.debug('getDocument request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta.IDocument,
@@ -1442,7 +1442,7 @@ export class RetrieverServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDocument response %j', response);
+          this._log.debug('getDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1457,7 +1457,7 @@ export class RetrieverServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getDocument response %j', response);
+          this._log.debug('getDocument response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1578,7 +1578,7 @@ export class RetrieverServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateDocument request %j', request);
+    this._log.debug('updateDocument request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta.IDocument,
@@ -1589,7 +1589,7 @@ export class RetrieverServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateDocument response %j', response);
+          this._log.debug('updateDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1604,7 +1604,7 @@ export class RetrieverServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateDocument response %j', response);
+          this._log.debug('updateDocument response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1728,7 +1728,7 @@ export class RetrieverServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteDocument request %j', request);
+    this._log.debug('deleteDocument request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1739,7 +1739,7 @@ export class RetrieverServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteDocument response %j', response);
+          this._log.debug('deleteDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1754,7 +1754,7 @@ export class RetrieverServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteDocument response %j', response);
+          this._log.debug('deleteDocument response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1912,7 +1912,7 @@ export class RetrieverServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryDocument request %j', request);
+    this._log.debug('queryDocument request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta.IQueryDocumentResponse,
@@ -1923,7 +1923,7 @@ export class RetrieverServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('queryDocument response %j', response);
+          this._log.debug('queryDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1938,7 +1938,7 @@ export class RetrieverServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('queryDocument response %j', response);
+          this._log.debug('queryDocument response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2058,7 +2058,7 @@ export class RetrieverServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createChunk request %j', request);
+    this._log.debug('createChunk request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta.IChunk,
@@ -2069,7 +2069,7 @@ export class RetrieverServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createChunk response %j', response);
+          this._log.debug('createChunk response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2084,7 +2084,7 @@ export class RetrieverServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createChunk response %j', response);
+          this._log.debug('createChunk response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2206,7 +2206,7 @@ export class RetrieverServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreateChunks request %j', request);
+    this._log.debug('batchCreateChunks request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta.IBatchCreateChunksResponse,
@@ -2217,7 +2217,7 @@ export class RetrieverServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchCreateChunks response %j', response);
+          this._log.debug('batchCreateChunks response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2232,7 +2232,7 @@ export class RetrieverServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchCreateChunks response %j', response);
+          this._log.debug('batchCreateChunks response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2344,7 +2344,7 @@ export class RetrieverServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getChunk request %j', request);
+    this._log.debug('getChunk request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta.IChunk,
@@ -2355,7 +2355,7 @@ export class RetrieverServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getChunk response %j', response);
+          this._log.debug('getChunk response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2370,7 +2370,7 @@ export class RetrieverServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getChunk response %j', response);
+          this._log.debug('getChunk response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2490,7 +2490,7 @@ export class RetrieverServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateChunk request %j', request);
+    this._log.debug('updateChunk request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta.IChunk,
@@ -2501,7 +2501,7 @@ export class RetrieverServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateChunk response %j', response);
+          this._log.debug('updateChunk response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2516,7 +2516,7 @@ export class RetrieverServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateChunk response %j', response);
+          this._log.debug('updateChunk response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2638,7 +2638,7 @@ export class RetrieverServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdateChunks request %j', request);
+    this._log.debug('batchUpdateChunks request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta.IBatchUpdateChunksResponse,
@@ -2649,7 +2649,7 @@ export class RetrieverServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUpdateChunks response %j', response);
+          this._log.debug('batchUpdateChunks response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2664,7 +2664,7 @@ export class RetrieverServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchUpdateChunks response %j', response);
+          this._log.debug('batchUpdateChunks response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2782,7 +2782,7 @@ export class RetrieverServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteChunk request %j', request);
+    this._log.debug('deleteChunk request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -2793,7 +2793,7 @@ export class RetrieverServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteChunk response %j', response);
+          this._log.debug('deleteChunk response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2808,7 +2808,7 @@ export class RetrieverServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteChunk response %j', response);
+          this._log.debug('deleteChunk response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2929,7 +2929,7 @@ export class RetrieverServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchDeleteChunks request %j', request);
+    this._log.debug('batchDeleteChunks request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -2940,7 +2940,7 @@ export class RetrieverServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchDeleteChunks response %j', response);
+          this._log.debug('batchDeleteChunks response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2955,7 +2955,7 @@ export class RetrieverServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchDeleteChunks response %j', response);
+          this._log.debug('batchDeleteChunks response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3088,11 +3088,11 @@ export class RetrieverServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listCorpora values %j', values);
+          this._log.debug('listCorpora values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listCorpora request %j', request);
+    this._log.debug('listCorpora request %j', request);
     return this.innerApiCalls
       .listCorpora(request, options, wrappedCallback)
       ?.then(
@@ -3101,7 +3101,7 @@ export class RetrieverServiceClient {
           protos.google.ai.generativelanguage.v1beta.IListCorporaRequest | null,
           protos.google.ai.generativelanguage.v1beta.IListCorporaResponse,
         ]) => {
-          this._log.info('listCorpora values %j', response);
+          this._log.debug('listCorpora values %j', response);
           return [response, input, output];
         },
       );
@@ -3149,7 +3149,7 @@ export class RetrieverServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCorpora stream %j', request);
+    this._log.debug('listCorpora stream %j', request);
     return this.descriptors.page.listCorpora.createStream(
       this.innerApiCalls.listCorpora as GaxCall,
       request,
@@ -3202,7 +3202,7 @@ export class RetrieverServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCorpora iterate %j', request);
+    this._log.debug('listCorpora iterate %j', request);
     return this.descriptors.page.listCorpora.asyncIterate(
       this.innerApiCalls['listCorpora'] as GaxCall,
       request as {},
@@ -3327,11 +3327,11 @@ export class RetrieverServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDocuments values %j', values);
+          this._log.debug('listDocuments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDocuments request %j', request);
+    this._log.debug('listDocuments request %j', request);
     return this.innerApiCalls
       .listDocuments(request, options, wrappedCallback)
       ?.then(
@@ -3340,7 +3340,7 @@ export class RetrieverServiceClient {
           protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest | null,
           protos.google.ai.generativelanguage.v1beta.IListDocumentsResponse,
         ]) => {
-          this._log.info('listDocuments values %j', response);
+          this._log.debug('listDocuments values %j', response);
           return [response, input, output];
         },
       );
@@ -3395,7 +3395,7 @@ export class RetrieverServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDocuments stream %j', request);
+    this._log.debug('listDocuments stream %j', request);
     return this.descriptors.page.listDocuments.createStream(
       this.innerApiCalls.listDocuments as GaxCall,
       request,
@@ -3455,7 +3455,7 @@ export class RetrieverServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDocuments iterate %j', request);
+    this._log.debug('listDocuments iterate %j', request);
     return this.descriptors.page.listDocuments.asyncIterate(
       this.innerApiCalls['listDocuments'] as GaxCall,
       request as {},
@@ -3580,11 +3580,11 @@ export class RetrieverServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listChunks values %j', values);
+          this._log.debug('listChunks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listChunks request %j', request);
+    this._log.debug('listChunks request %j', request);
     return this.innerApiCalls
       .listChunks(request, options, wrappedCallback)
       ?.then(
@@ -3593,7 +3593,7 @@ export class RetrieverServiceClient {
           protos.google.ai.generativelanguage.v1beta.IListChunksRequest | null,
           protos.google.ai.generativelanguage.v1beta.IListChunksResponse,
         ]) => {
-          this._log.info('listChunks values %j', response);
+          this._log.debug('listChunks values %j', response);
           return [response, input, output];
         },
       );
@@ -3648,7 +3648,7 @@ export class RetrieverServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listChunks stream %j', request);
+    this._log.debug('listChunks stream %j', request);
     return this.descriptors.page.listChunks.createStream(
       this.innerApiCalls.listChunks as GaxCall,
       request,
@@ -3708,7 +3708,7 @@ export class RetrieverServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listChunks iterate %j', request);
+    this._log.debug('listChunks iterate %j', request);
     return this.descriptors.page.listChunks.asyncIterate(
       this.innerApiCalls['listChunks'] as GaxCall,
       request as {},

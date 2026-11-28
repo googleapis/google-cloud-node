@@ -40,6 +40,7 @@ import * as gapicConfig from './sql_flags_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
+ *  Service to manage database flags for Cloud SQL instances.
  * @class
  * @memberof v1beta4
  */
@@ -211,6 +212,9 @@ export class SqlFlagsServiceClient {
       ),
       blueGreenDeploymentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/blueGreenDeployments/{blue_green_deployment}',
+      ),
+      networkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/global/networks/{network}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}',
@@ -474,7 +478,7 @@ export class SqlFlagsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('list request %j', request);
+    this._log.debug('list request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1beta4.IFlagsListResponse,
@@ -485,7 +489,7 @@ export class SqlFlagsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('list response %j', response);
+          this._log.debug('list response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -497,7 +501,7 @@ export class SqlFlagsServiceClient {
           protos.google.cloud.sql.v1beta4.ISqlFlagsListRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('list response %j', response);
+          this._log.debug('list response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -695,6 +699,42 @@ export class SqlFlagsServiceClient {
     return this.pathTemplates.blueGreenDeploymentPathTemplate.match(
       blueGreenDeploymentName,
     ).blue_green_deployment;
+  }
+
+  /**
+   * Return a fully-qualified network resource name string.
+   *
+   * @param {string} project
+   * @param {string} network
+   * @returns {string} Resource name string.
+   */
+  networkPath(project: string, network: string) {
+    return this.pathTemplates.networkPathTemplate.render({
+      project: project,
+      network: network,
+    });
+  }
+
+  /**
+   * Parse the project from Network resource.
+   *
+   * @param {string} networkName
+   *   A fully-qualified path representing Network resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNetworkName(networkName: string) {
+    return this.pathTemplates.networkPathTemplate.match(networkName).project;
+  }
+
+  /**
+   * Parse the network from Network resource.
+   *
+   * @param {string} networkName
+   *   A fully-qualified path representing Network resource.
+   * @returns {string} A string representing the network.
+   */
+  matchNetworkFromNetworkName(networkName: string) {
+    return this.pathTemplates.networkPathTemplate.match(networkName).network;
   }
 
   /**

@@ -501,7 +501,7 @@ export class ServiceHealthClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getEvent request %j', request);
+    this._log.debug('getEvent request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.servicehealth.v1.IEvent,
@@ -512,7 +512,7 @@ export class ServiceHealthClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getEvent response %j', response);
+          this._log.debug('getEvent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -524,7 +524,7 @@ export class ServiceHealthClient {
           protos.google.cloud.servicehealth.v1.IGetEventRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getEvent response %j', response);
+          this._log.debug('getEvent response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -650,7 +650,7 @@ export class ServiceHealthClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getOrganizationEvent request %j', request);
+    this._log.debug('getOrganizationEvent request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.servicehealth.v1.IOrganizationEvent,
@@ -661,7 +661,7 @@ export class ServiceHealthClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getOrganizationEvent response %j', response);
+          this._log.debug('getOrganizationEvent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -676,7 +676,7 @@ export class ServiceHealthClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getOrganizationEvent response %j', response);
+          this._log.debug('getOrganizationEvent response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -802,7 +802,7 @@ export class ServiceHealthClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getOrganizationImpact request %j', request);
+    this._log.debug('getOrganizationImpact request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.servicehealth.v1.IOrganizationImpact,
@@ -813,7 +813,7 @@ export class ServiceHealthClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getOrganizationImpact response %j', response);
+          this._log.debug('getOrganizationImpact response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -828,7 +828,7 @@ export class ServiceHealthClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getOrganizationImpact response %j', response);
+          this._log.debug('getOrganizationImpact response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -990,11 +990,11 @@ export class ServiceHealthClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listEvents values %j', values);
+          this._log.debug('listEvents values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listEvents request %j', request);
+    this._log.debug('listEvents request %j', request);
     return this.innerApiCalls
       .listEvents(request, options, wrappedCallback)
       ?.then(
@@ -1003,7 +1003,7 @@ export class ServiceHealthClient {
           protos.google.cloud.servicehealth.v1.IListEventsRequest | null,
           protos.google.cloud.servicehealth.v1.IListEventsResponse,
         ]) => {
-          this._log.info('listEvents values %j', response);
+          this._log.debug('listEvents values %j', response);
           return [response, input, output];
         },
       );
@@ -1080,7 +1080,7 @@ export class ServiceHealthClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEvents stream %j', request);
+    this._log.debug('listEvents stream %j', request);
     return this.descriptors.page.listEvents.createStream(
       this.innerApiCalls.listEvents as GaxCall,
       request,
@@ -1162,7 +1162,7 @@ export class ServiceHealthClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEvents iterate %j', request);
+    this._log.debug('listEvents iterate %j', request);
     return this.descriptors.page.listEvents.asyncIterate(
       this.innerApiCalls['listEvents'] as GaxCall,
       request as {},
@@ -1314,11 +1314,11 @@ export class ServiceHealthClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listOrganizationEvents values %j', values);
+          this._log.debug('listOrganizationEvents values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listOrganizationEvents request %j', request);
+    this._log.debug('listOrganizationEvents request %j', request);
     return this.innerApiCalls
       .listOrganizationEvents(request, options, wrappedCallback)
       ?.then(
@@ -1327,7 +1327,7 @@ export class ServiceHealthClient {
           protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest | null,
           protos.google.cloud.servicehealth.v1.IListOrganizationEventsResponse,
         ]) => {
-          this._log.info('listOrganizationEvents values %j', response);
+          this._log.debug('listOrganizationEvents values %j', response);
           return [response, input, output];
         },
       );
@@ -1409,7 +1409,7 @@ export class ServiceHealthClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listOrganizationEvents stream %j', request);
+    this._log.debug('listOrganizationEvents stream %j', request);
     return this.descriptors.page.listOrganizationEvents.createStream(
       this.innerApiCalls.listOrganizationEvents as GaxCall,
       request,
@@ -1496,7 +1496,7 @@ export class ServiceHealthClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listOrganizationEvents iterate %j', request);
+    this._log.debug('listOrganizationEvents iterate %j', request);
     return this.descriptors.page.listOrganizationEvents.asyncIterate(
       this.innerApiCalls['listOrganizationEvents'] as GaxCall,
       request as {},
@@ -1647,11 +1647,11 @@ export class ServiceHealthClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listOrganizationImpacts values %j', values);
+          this._log.debug('listOrganizationImpacts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listOrganizationImpacts request %j', request);
+    this._log.debug('listOrganizationImpacts request %j', request);
     return this.innerApiCalls
       .listOrganizationImpacts(request, options, wrappedCallback)
       ?.then(
@@ -1660,7 +1660,7 @@ export class ServiceHealthClient {
           protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest | null,
           protos.google.cloud.servicehealth.v1.IListOrganizationImpactsResponse,
         ]) => {
-          this._log.info('listOrganizationImpacts values %j', response);
+          this._log.debug('listOrganizationImpacts values %j', response);
           return [response, input, output];
         },
       );
@@ -1740,7 +1740,7 @@ export class ServiceHealthClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listOrganizationImpacts stream %j', request);
+    this._log.debug('listOrganizationImpacts stream %j', request);
     return this.descriptors.page.listOrganizationImpacts.createStream(
       this.innerApiCalls.listOrganizationImpacts as GaxCall,
       request,
@@ -1825,7 +1825,7 @@ export class ServiceHealthClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listOrganizationImpacts iterate %j', request);
+    this._log.debug('listOrganizationImpacts iterate %j', request);
     return this.descriptors.page.listOrganizationImpacts.asyncIterate(
       this.innerApiCalls['listOrganizationImpacts'] as GaxCall,
       request as {},

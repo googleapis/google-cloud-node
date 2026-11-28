@@ -47,6 +47,14 @@ function main(name) {
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
+  /**
+   *  Optional. This field is exclusively used by Backup and DR's auto-protection
+   *  feature. The resource name of the `AutoProtectionPolicyBinding` that
+   *  triggered the deletion of this association.
+   *  Format:
+   *  `projects/{project}/locations/{location}/autoProtectionPolicies/{policy}/bindings/{binding}`.
+   */
+  // const autoProtectionPolicyBinding = 'abc123'
 
   // Imports the Backupdr library
   const {BackupDRClient} = require('@google-cloud/backupdr').v1;

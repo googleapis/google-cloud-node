@@ -831,7 +831,7 @@ export class SchemaServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSchema request %j', request);
+    this._log.debug('getSchema request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1beta.ISchema,
@@ -842,7 +842,7 @@ export class SchemaServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSchema response %j', response);
+          this._log.debug('getSchema response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -857,7 +857,7 @@ export class SchemaServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getSchema response %j', response);
+          this._log.debug('getSchema response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1005,11 +1005,11 @@ export class SchemaServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createSchema response %j', rawResponse);
+          this._log.debug('createSchema response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createSchema request %j', request);
+    this._log.debug('createSchema request %j', request);
     return this.innerApiCalls
       .createSchema(request, options, wrappedCallback)
       ?.then(
@@ -1021,7 +1021,7 @@ export class SchemaServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createSchema response %j', rawResponse);
+          this._log.debug('createSchema response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1180,11 +1180,11 @@ export class SchemaServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateSchema response %j', rawResponse);
+          this._log.debug('updateSchema response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateSchema request %j', request);
+    this._log.debug('updateSchema request %j', request);
     return this.innerApiCalls
       .updateSchema(request, options, wrappedCallback)
       ?.then(
@@ -1196,7 +1196,7 @@ export class SchemaServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateSchema response %j', rawResponse);
+          this._log.debug('updateSchema response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1350,11 +1350,11 @@ export class SchemaServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteSchema response %j', rawResponse);
+          this._log.debug('deleteSchema response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteSchema request %j', request);
+    this._log.debug('deleteSchema request %j', request);
     return this.innerApiCalls
       .deleteSchema(request, options, wrappedCallback)
       ?.then(
@@ -1366,7 +1366,7 @@ export class SchemaServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteSchema response %j', rawResponse);
+          this._log.debug('deleteSchema response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1526,11 +1526,11 @@ export class SchemaServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listSchemas values %j', values);
+          this._log.debug('listSchemas values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listSchemas request %j', request);
+    this._log.debug('listSchemas request %j', request);
     return this.innerApiCalls
       .listSchemas(request, options, wrappedCallback)
       ?.then(
@@ -1539,7 +1539,7 @@ export class SchemaServiceClient {
           protos.google.cloud.discoveryengine.v1beta.IListSchemasRequest | null,
           protos.google.cloud.discoveryengine.v1beta.IListSchemasResponse,
         ]) => {
-          this._log.info('listSchemas values %j', response);
+          this._log.debug('listSchemas values %j', response);
           return [response, input, output];
         },
       );
@@ -1596,7 +1596,7 @@ export class SchemaServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSchemas stream %j', request);
+    this._log.debug('listSchemas stream %j', request);
     return this.descriptors.page.listSchemas.createStream(
       this.innerApiCalls.listSchemas as GaxCall,
       request,
@@ -1658,7 +1658,7 @@ export class SchemaServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSchemas iterate %j', request);
+    this._log.debug('listSchemas iterate %j', request);
     return this.descriptors.page.listSchemas.asyncIterate(
       this.innerApiCalls['listSchemas'] as GaxCall,
       request as {},

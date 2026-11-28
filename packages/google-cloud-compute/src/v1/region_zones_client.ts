@@ -559,11 +559,11 @@ export class RegionZonesClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('list values %j', values);
+          this._log.debug('list values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('list request %j', request);
+    this._log.debug('list request %j', request);
     return this.innerApiCalls
       .list(request, options, wrappedCallback)
       ?.then(
@@ -572,7 +572,7 @@ export class RegionZonesClient {
           protos.google.cloud.compute.v1.IListRegionZonesRequest | null,
           protos.google.cloud.compute.v1.IZoneList,
         ]) => {
-          this._log.info('list values %j', response);
+          this._log.debug('list values %j', response);
           return [response, input, output];
         },
       );
@@ -696,7 +696,7 @@ export class RegionZonesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('list stream %j', request);
+    this._log.debug('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
       request,
@@ -825,7 +825,7 @@ export class RegionZonesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('list iterate %j', request);
+    this._log.debug('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
       request as {},

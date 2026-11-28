@@ -637,7 +637,7 @@ export class WebhooksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getWebhook request %j', request);
+    this._log.debug('getWebhook request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.cx.v3.IWebhook,
@@ -648,7 +648,7 @@ export class WebhooksClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getWebhook response %j', response);
+          this._log.debug('getWebhook response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -660,7 +660,7 @@ export class WebhooksClient {
           protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getWebhook response %j', response);
+          this._log.debug('getWebhook response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -774,7 +774,7 @@ export class WebhooksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createWebhook request %j', request);
+    this._log.debug('createWebhook request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.cx.v3.IWebhook,
@@ -785,7 +785,7 @@ export class WebhooksClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createWebhook response %j', response);
+          this._log.debug('createWebhook response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -800,7 +800,7 @@ export class WebhooksClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createWebhook response %j', response);
+          this._log.debug('createWebhook response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -914,7 +914,7 @@ export class WebhooksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateWebhook request %j', request);
+    this._log.debug('updateWebhook request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.cx.v3.IWebhook,
@@ -925,7 +925,7 @@ export class WebhooksClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateWebhook response %j', response);
+          this._log.debug('updateWebhook response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -940,7 +940,7 @@ export class WebhooksClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateWebhook response %j', response);
+          this._log.debug('updateWebhook response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1064,7 +1064,7 @@ export class WebhooksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteWebhook request %j', request);
+    this._log.debug('deleteWebhook request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1075,7 +1075,7 @@ export class WebhooksClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteWebhook response %j', response);
+          this._log.debug('deleteWebhook response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1090,7 +1090,7 @@ export class WebhooksClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteWebhook response %j', response);
+          this._log.debug('deleteWebhook response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1221,11 +1221,11 @@ export class WebhooksClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listWebhooks values %j', values);
+          this._log.debug('listWebhooks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listWebhooks request %j', request);
+    this._log.debug('listWebhooks request %j', request);
     return this.innerApiCalls
       .listWebhooks(request, options, wrappedCallback)
       ?.then(
@@ -1234,7 +1234,7 @@ export class WebhooksClient {
           protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest | null,
           protos.google.cloud.dialogflow.cx.v3.IListWebhooksResponse,
         ]) => {
-          this._log.info('listWebhooks values %j', response);
+          this._log.debug('listWebhooks values %j', response);
           return [response, input, output];
         },
       );
@@ -1280,7 +1280,7 @@ export class WebhooksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWebhooks stream %j', request);
+    this._log.debug('listWebhooks stream %j', request);
     return this.descriptors.page.listWebhooks.createStream(
       this.innerApiCalls.listWebhooks as GaxCall,
       request,
@@ -1331,7 +1331,7 @@ export class WebhooksClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWebhooks iterate %j', request);
+    this._log.debug('listWebhooks iterate %j', request);
     return this.descriptors.page.listWebhooks.asyncIterate(
       this.innerApiCalls['listWebhooks'] as GaxCall,
       request as {},

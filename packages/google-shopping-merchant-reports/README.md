@@ -60,7 +60,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | --------------------------- | --------------------------------- |
 | search | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reports/samples/generated/v1/report_service.search.js) |
 | search | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reports/samples/generated/v1alpha/report_service.search.js) |
-| search | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reports/samples/generated/v1beta/report_service.search.js) |
 
 
 ## Supported Node.js Versions

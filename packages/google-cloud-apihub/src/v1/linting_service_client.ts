@@ -523,7 +523,7 @@ export class LintingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getStyleGuide request %j', request);
+    this._log.debug('getStyleGuide request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apihub.v1.IStyleGuide,
@@ -534,7 +534,7 @@ export class LintingServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getStyleGuide response %j', response);
+          this._log.debug('getStyleGuide response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -546,7 +546,7 @@ export class LintingServiceClient {
           protos.google.cloud.apihub.v1.IGetStyleGuideRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getStyleGuide response %j', response);
+          this._log.debug('getStyleGuide response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -653,7 +653,7 @@ export class LintingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateStyleGuide request %j', request);
+    this._log.debug('updateStyleGuide request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apihub.v1.IStyleGuide,
@@ -664,7 +664,7 @@ export class LintingServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateStyleGuide response %j', response);
+          this._log.debug('updateStyleGuide response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -676,7 +676,7 @@ export class LintingServiceClient {
           protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateStyleGuide response %j', response);
+          this._log.debug('updateStyleGuide response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -790,7 +790,7 @@ export class LintingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getStyleGuideContents request %j', request);
+    this._log.debug('getStyleGuideContents request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apihub.v1.IStyleGuideContents,
@@ -801,7 +801,7 @@ export class LintingServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getStyleGuideContents response %j', response);
+          this._log.debug('getStyleGuideContents response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -816,7 +816,7 @@ export class LintingServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getStyleGuideContents response %j', response);
+          this._log.debug('getStyleGuideContents response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -923,7 +923,7 @@ export class LintingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('lintSpec request %j', request);
+    this._log.debug('lintSpec request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -932,7 +932,7 @@ export class LintingServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('lintSpec response %j', response);
+          this._log.debug('lintSpec response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -944,7 +944,7 @@ export class LintingServiceClient {
           protos.google.cloud.apihub.v1.ILintSpecRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('lintSpec response %j', response);
+          this._log.debug('lintSpec response %j', response);
           return [response, options, rawResponse];
         },
       )

@@ -30,9 +30,49 @@
                 "fetchReadToken"
               ]
             },
+            "OpenGitRepositoryLinkPullRequest": {
+              "methods": [
+                "openGitRepositoryLinkPullRequest"
+              ]
+            },
             "FetchGitHubInstallations": {
               "methods": [
                 "fetchGitHubInstallations"
+              ]
+            },
+            "DiffGitRepositoryLinkCommit": {
+              "methods": [
+                "diffGitRepositoryLinkCommit"
+              ]
+            },
+            "FetchGitRepositoryLinkCommit": {
+              "methods": [
+                "fetchGitRepositoryLinkCommit"
+              ]
+            },
+            "FetchGitRepositoryLinkFileBlame": {
+              "methods": [
+                "fetchGitRepositoryLinkFileBlame"
+              ]
+            },
+            "FetchGitRepositoryLinkPullRequest": {
+              "methods": [
+                "fetchGitRepositoryLinkPullRequest"
+              ]
+            },
+            "AddGitRepositoryLinkPullRequestComment": {
+              "methods": [
+                "addGitRepositoryLinkPullRequestComment"
+              ]
+            },
+            "AddGitRepositoryLinkPullRequestReviewComment": {
+              "methods": [
+                "addGitRepositoryLinkPullRequestReviewComment"
+              ]
+            },
+            "ModifyGitRepositoryLinkPullRequest": {
+              "methods": [
+                "modifyGitRepositoryLinkPullRequest"
               ]
             },
             "GetAccountConnector": {
@@ -136,6 +176,20 @@
                 "fetchGitRefs",
                 "fetchGitRefsStream",
                 "fetchGitRefsAsync"
+              ]
+            },
+            "FetchGitRepositoryLinkCommitList": {
+              "methods": [
+                "fetchGitRepositoryLinkCommitList",
+                "fetchGitRepositoryLinkCommitListStream",
+                "fetchGitRepositoryLinkCommitListAsync"
+              ]
+            },
+            "FetchGitRepositoryLinkPullRequestList": {
+              "methods": [
+                "fetchGitRepositoryLinkPullRequestList",
+                "fetchGitRepositoryLinkPullRequestListStream",
+                "fetchGitRepositoryLinkPullRequestListAsync"
               ]
             },
             "ListAccountConnectors": {
@@ -177,9 +231,49 @@
                 "fetchReadToken"
               ]
             },
+            "OpenGitRepositoryLinkPullRequest": {
+              "methods": [
+                "openGitRepositoryLinkPullRequest"
+              ]
+            },
             "FetchGitHubInstallations": {
               "methods": [
                 "fetchGitHubInstallations"
+              ]
+            },
+            "DiffGitRepositoryLinkCommit": {
+              "methods": [
+                "diffGitRepositoryLinkCommit"
+              ]
+            },
+            "FetchGitRepositoryLinkCommit": {
+              "methods": [
+                "fetchGitRepositoryLinkCommit"
+              ]
+            },
+            "FetchGitRepositoryLinkFileBlame": {
+              "methods": [
+                "fetchGitRepositoryLinkFileBlame"
+              ]
+            },
+            "FetchGitRepositoryLinkPullRequest": {
+              "methods": [
+                "fetchGitRepositoryLinkPullRequest"
+              ]
+            },
+            "AddGitRepositoryLinkPullRequestComment": {
+              "methods": [
+                "addGitRepositoryLinkPullRequestComment"
+              ]
+            },
+            "AddGitRepositoryLinkPullRequestReviewComment": {
+              "methods": [
+                "addGitRepositoryLinkPullRequestReviewComment"
+              ]
+            },
+            "ModifyGitRepositoryLinkPullRequest": {
+              "methods": [
+                "modifyGitRepositoryLinkPullRequest"
               ]
             },
             "GetAccountConnector": {
@@ -283,6 +377,20 @@
                 "fetchGitRefs",
                 "fetchGitRefsStream",
                 "fetchGitRefsAsync"
+              ]
+            },
+            "FetchGitRepositoryLinkCommitList": {
+              "methods": [
+                "fetchGitRepositoryLinkCommitList",
+                "fetchGitRepositoryLinkCommitListStream",
+                "fetchGitRepositoryLinkCommitListAsync"
+              ]
+            },
+            "FetchGitRepositoryLinkPullRequestList": {
+              "methods": [
+                "fetchGitRepositoryLinkPullRequestList",
+                "fetchGitRepositoryLinkPullRequestListStream",
+                "fetchGitRepositoryLinkPullRequestListAsync"
               ]
             },
             "ListAccountConnectors": {

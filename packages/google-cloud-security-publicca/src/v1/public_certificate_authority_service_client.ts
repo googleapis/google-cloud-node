@@ -485,7 +485,7 @@ export class PublicCertificateAuthorityServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createExternalAccountKey request %j', request);
+    this._log.debug('createExternalAccountKey request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.security.publicca.v1.IExternalAccountKey,
@@ -496,7 +496,7 @@ export class PublicCertificateAuthorityServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createExternalAccountKey response %j', response);
+          this._log.debug('createExternalAccountKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -511,7 +511,7 @@ export class PublicCertificateAuthorityServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createExternalAccountKey response %j', response);
+          this._log.debug('createExternalAccountKey response %j', response);
           return [response, options, rawResponse];
         },
       )

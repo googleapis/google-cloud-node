@@ -552,7 +552,7 @@ export class GbpAccountsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('linkGbpAccount request %j', request);
+    this._log.debug('linkGbpAccount request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.accounts.v1.ILinkGbpAccountResponse,
@@ -563,7 +563,7 @@ export class GbpAccountsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('linkGbpAccount response %j', response);
+          this._log.debug('linkGbpAccount response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -578,7 +578,7 @@ export class GbpAccountsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('linkGbpAccount response %j', response);
+          this._log.debug('linkGbpAccount response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -716,11 +716,11 @@ export class GbpAccountsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listGbpAccounts values %j', values);
+          this._log.debug('listGbpAccounts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listGbpAccounts request %j', request);
+    this._log.debug('listGbpAccounts request %j', request);
     return this.innerApiCalls
       .listGbpAccounts(request, options, wrappedCallback)
       ?.then(
@@ -729,7 +729,7 @@ export class GbpAccountsServiceClient {
           protos.google.shopping.merchant.accounts.v1.IListGbpAccountsRequest | null,
           protos.google.shopping.merchant.accounts.v1.IListGbpAccountsResponse,
         ]) => {
-          this._log.info('listGbpAccounts values %j', response);
+          this._log.debug('listGbpAccounts values %j', response);
           return [response, input, output];
         },
       );
@@ -782,7 +782,7 @@ export class GbpAccountsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listGbpAccounts stream %j', request);
+    this._log.debug('listGbpAccounts stream %j', request);
     return this.descriptors.page.listGbpAccounts.createStream(
       this.innerApiCalls.listGbpAccounts as GaxCall,
       request,
@@ -840,7 +840,7 @@ export class GbpAccountsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listGbpAccounts iterate %j', request);
+    this._log.debug('listGbpAccounts iterate %j', request);
     return this.descriptors.page.listGbpAccounts.asyncIterate(
       this.innerApiCalls['listGbpAccounts'] as GaxCall,
       request as {},

@@ -26,7 +26,7 @@ import {describe, it, afterEach, beforeEach, before, after} from 'mocha';
 import * as Big from 'big.js';
 import {EventEmitter} from 'events';
 import * as extend from 'extend';
-import * as proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as sinon from 'sinon';
 import * as stream from 'stream';
 import * as crypto from 'crypto';
@@ -2042,7 +2042,7 @@ describe('BigQuery/Table', () => {
     it('should make correct API request', done => {
       const options = {a: 'b', c: 'd'};
       const formatOptions =
-        process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true'
+        process.env.BIGQUERY_PICOSECOND_SUPPORT?.toLowerCase() !== 'false'
           ? {
               'formatOptions.timestampOutputFormat': 'ISO8601_STRING',
             }
@@ -2229,7 +2229,7 @@ describe('BigQuery/Table', () => {
       table.metadata = {schema: {}};
 
       const callbackResponse =
-        process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true'
+        process.env.BIGQUERY_PICOSECOND_SUPPORT?.toLowerCase() !== 'false'
           ? {
               'formatOptions.useInt64Timestamp': true,
               pageToken,
@@ -2241,7 +2241,7 @@ describe('BigQuery/Table', () => {
         callback(null, callbackResponse);
       };
       const formatOptions =
-        process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true'
+        process.env.BIGQUERY_PICOSECOND_SUPPORT?.toLowerCase() !== 'false'
           ? {
               'formatOptions.timestampOutputFormat': 'ISO8601_STRING',
             }
@@ -2469,7 +2469,7 @@ describe('BigQuery/Table', () => {
       const options = {wrapIntegers};
       const merged = [{name: 'stephen'}];
       const formatOptions =
-        process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true'
+        process.env.BIGQUERY_PICOSECOND_SUPPORT?.toLowerCase() !== 'false'
           ? {
               'formatOptions.timestampOutputFormat': 'ISO8601_STRING',
             }
@@ -2501,7 +2501,7 @@ describe('BigQuery/Table', () => {
       };
       const merged = [{name: 'stephen'}];
       const formatOptions =
-        process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true'
+        process.env.BIGQUERY_PICOSECOND_SUPPORT?.toLowerCase() !== 'false'
           ? {
               'formatOptions.timestampOutputFormat': 'ISO8601_STRING',
             }

@@ -35,6 +35,12 @@ function main(parent, availabilityForecastOptions) {
    */
   // const existingLineItem = 'abc123'
   /**
+   *  Optional. The
+   *  ForecastingLineItem google.ads.admanager.v1.ForecastingLineItem  to be
+   *  forecasted.
+   */
+  // const forecastingLineItem = {}
+  /**
    *  Required. Format: `networks/{network_code}`
    */
   // const parent = 'abc123'

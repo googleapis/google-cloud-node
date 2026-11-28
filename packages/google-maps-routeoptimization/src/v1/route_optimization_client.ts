@@ -467,10 +467,11 @@ export class RouteOptimizationClient {
    *   Required. Target project or location to make a call.
    *
    *   Format:
-   *   * `projects/{project-id}`
-   *   * `projects/{project-id}/locations/{location-id}`
    *
-   *   If no location is specified, a region will be chosen automatically.
+   *   * `projects/{project-id}`
+   *   * `projects/{project-id}/locations/-`
+   *
+   *   Regional `{location-id}` values are not supported.
    * @param {google.protobuf.Duration} request.timeout
    *   If this timeout is set, the server returns a response before the timeout
    *   period has elapsed or the server deadline for synchronous requests is
@@ -728,7 +729,7 @@ export class RouteOptimizationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('optimizeTours request %j', request);
+    this._log.debug('optimizeTours request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
@@ -739,7 +740,7 @@ export class RouteOptimizationClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('optimizeTours response %j', response);
+          this._log.debug('optimizeTours response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -754,7 +755,7 @@ export class RouteOptimizationClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('optimizeTours response %j', response);
+          this._log.debug('optimizeTours response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -806,10 +807,11 @@ export class RouteOptimizationClient {
    *   Required. Target project and location to make a call.
    *
    *   Format:
-   *   * `projects/{project-id}`
-   *   * `projects/{project-id}/locations/{location-id}`
    *
-   *   If no location is specified, a region will be chosen automatically.
+   *   * `projects/{project-id}`
+   *   * `projects/{project-id}/locations/-`
+   *
+   *   Regional `{location-id}` values are not supported.
    * @param {number[]} request.modelConfigs
    *   Required. Input/Output information each purchase model, such as file paths
    *   and data formats.
@@ -919,11 +921,11 @@ export class RouteOptimizationClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('batchOptimizeTours response %j', rawResponse);
+          this._log.debug('batchOptimizeTours response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('batchOptimizeTours request %j', request);
+    this._log.debug('batchOptimizeTours request %j', request);
     return this.innerApiCalls
       .batchOptimizeTours(request, options, wrappedCallback)
       ?.then(
@@ -935,7 +937,7 @@ export class RouteOptimizationClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchOptimizeTours response %j', rawResponse);
+          this._log.debug('batchOptimizeTours response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -993,10 +995,6 @@ export class RouteOptimizationClient {
    * {@link protos.google.maps.routeoptimization.v1.OptimizeToursResponse|OptimizeToursResponse},
    * if successful.
    *
-   * Experimental: See
-   * https://developers.google.com/maps/tt/route-optimization/experimental/otlr/make-request
-   * for more details.
-   *
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1004,10 +1002,11 @@ export class RouteOptimizationClient {
    *   Required. Target project or location to make a call.
    *
    *   Format:
-   *   * `projects/{project-id}`
-   *   * `projects/{project-id}/locations/{location-id}`
    *
-   *   If no location is specified, a region will be chosen automatically.
+   *   * `projects/{project-id}`
+   *   * `projects/{project-id}/locations/-`
+   *
+   *   Regional `{location-id}` values are not supported.
    * @param {google.protobuf.Duration} request.timeout
    *   If this timeout is set, the server returns a response before the timeout
    *   period has elapsed or the server deadline for synchronous requests is
@@ -1288,11 +1287,11 @@ export class RouteOptimizationClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('optimizeToursLongRunning response %j', rawResponse);
+          this._log.debug('optimizeToursLongRunning response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('optimizeToursLongRunning request %j', request);
+    this._log.debug('optimizeToursLongRunning request %j', request);
     return this.innerApiCalls
       .optimizeToursLongRunning(request, options, wrappedCallback)
       ?.then(
@@ -1304,7 +1303,7 @@ export class RouteOptimizationClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('optimizeToursLongRunning response %j', rawResponse);
+          this._log.debug('optimizeToursLongRunning response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1364,14 +1363,10 @@ export class RouteOptimizationClient {
    * `<parent>/operations/<operation_id>` and can be used to track
    * progress of the computation. The
    * {@link protos.google.longrunning.Operation.metadata|metadata} field type is
-   * {@link protos.google.maps.routeoptimization.v1.OptimizeToursUriMetadata|OptimizeToursLongRunningMetadata}.
+   * {@link protos.google.maps.routeoptimization.v1.OptimizeToursUriMetadata|OptimizeToursUriMetadata}.
    * The {@link protos.google.longrunning.Operation.response|response} field type is
    * {@link protos.google.maps.routeoptimization.v1.OptimizeToursUriResponse|OptimizeToursUriResponse},
    * if successful.
-   *
-   * Experimental: See
-   * https://developers.google.com/maps/tt/route-optimization/experimental/otlr/make-request
-   * for more details.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1379,10 +1374,11 @@ export class RouteOptimizationClient {
    *   Required. Target project or location to make a call.
    *
    *   Format:
-   *   * `projects/{project-id}`
-   *   * `projects/{project-id}/locations/{location-id}`
    *
-   *   If no location is specified, a region will be chosen automatically.
+   *   * `projects/{project-id}`
+   *   * `projects/{project-id}/locations/-`
+   *
+   *   Regional `{location-id}` values are not supported.
    * @param {google.maps.routeoptimization.v1.Uri} request.input
    *   Required. The URI of the Cloud Storage object containing the
    *   `OptimizeToursRequest`.
@@ -1495,11 +1491,11 @@ export class RouteOptimizationClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('optimizeToursUri response %j', rawResponse);
+          this._log.debug('optimizeToursUri response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('optimizeToursUri request %j', request);
+    this._log.debug('optimizeToursUri request %j', request);
     return this.innerApiCalls
       .optimizeToursUri(request, options, wrappedCallback)
       ?.then(
@@ -1511,7 +1507,7 @@ export class RouteOptimizationClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('optimizeToursUri response %j', rawResponse);
+          this._log.debug('optimizeToursUri response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

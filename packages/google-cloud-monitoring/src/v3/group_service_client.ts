@@ -574,7 +574,7 @@ export class GroupServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getGroup request %j', request);
+    this._log.debug('getGroup request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.monitoring.v3.IGroup,
@@ -583,7 +583,7 @@ export class GroupServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getGroup response %j', response);
+          this._log.debug('getGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -595,7 +595,7 @@ export class GroupServiceClient {
           protos.google.monitoring.v3.IGetGroupRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getGroup response %j', response);
+          this._log.debug('getGroup response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -707,7 +707,7 @@ export class GroupServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createGroup request %j', request);
+    this._log.debug('createGroup request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.monitoring.v3.IGroup,
@@ -716,7 +716,7 @@ export class GroupServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createGroup response %j', response);
+          this._log.debug('createGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -728,7 +728,7 @@ export class GroupServiceClient {
           protos.google.monitoring.v3.ICreateGroupRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createGroup response %j', response);
+          this._log.debug('createGroup response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -836,7 +836,7 @@ export class GroupServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateGroup request %j', request);
+    this._log.debug('updateGroup request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.monitoring.v3.IGroup,
@@ -845,7 +845,7 @@ export class GroupServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateGroup response %j', response);
+          this._log.debug('updateGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -857,7 +857,7 @@ export class GroupServiceClient {
           protos.google.monitoring.v3.IUpdateGroupRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateGroup response %j', response);
+          this._log.debug('updateGroup response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -966,7 +966,7 @@ export class GroupServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteGroup request %j', request);
+    this._log.debug('deleteGroup request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -975,7 +975,7 @@ export class GroupServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteGroup response %j', response);
+          this._log.debug('deleteGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -987,7 +987,7 @@ export class GroupServiceClient {
           protos.google.monitoring.v3.IDeleteGroupRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteGroup response %j', response);
+          this._log.debug('deleteGroup response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1136,11 +1136,11 @@ export class GroupServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listGroups values %j', values);
+          this._log.debug('listGroups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listGroups request %j', request);
+    this._log.debug('listGroups request %j', request);
     return this.innerApiCalls
       .listGroups(request, options, wrappedCallback)
       ?.then(
@@ -1149,7 +1149,7 @@ export class GroupServiceClient {
           protos.google.monitoring.v3.IListGroupsRequest | null,
           protos.google.monitoring.v3.IListGroupsResponse,
         ]) => {
-          this._log.info('listGroups values %j', response);
+          this._log.debug('listGroups values %j', response);
           return [response, input, output];
         },
       );
@@ -1223,7 +1223,7 @@ export class GroupServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listGroups stream %j', request);
+    this._log.debug('listGroups stream %j', request);
     return this.descriptors.page.listGroups.createStream(
       this.innerApiCalls.listGroups as GaxCall,
       request,
@@ -1302,7 +1302,7 @@ export class GroupServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listGroups iterate %j', request);
+    this._log.debug('listGroups iterate %j', request);
     return this.descriptors.page.listGroups.asyncIterate(
       this.innerApiCalls['listGroups'] as GaxCall,
       request as {},
@@ -1428,11 +1428,11 @@ export class GroupServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listGroupMembers values %j', values);
+          this._log.debug('listGroupMembers values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listGroupMembers request %j', request);
+    this._log.debug('listGroupMembers request %j', request);
     return this.innerApiCalls
       .listGroupMembers(request, options, wrappedCallback)
       ?.then(
@@ -1441,7 +1441,7 @@ export class GroupServiceClient {
           protos.google.monitoring.v3.IListGroupMembersRequest | null,
           protos.google.monitoring.v3.IListGroupMembersResponse,
         ]) => {
-          this._log.info('listGroupMembers values %j', response);
+          this._log.debug('listGroupMembers values %j', response);
           return [response, input, output];
         },
       );
@@ -1503,7 +1503,7 @@ export class GroupServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listGroupMembers stream %j', request);
+    this._log.debug('listGroupMembers stream %j', request);
     return this.descriptors.page.listGroupMembers.createStream(
       this.innerApiCalls.listGroupMembers as GaxCall,
       request,
@@ -1570,7 +1570,7 @@ export class GroupServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listGroupMembers iterate %j', request);
+    this._log.debug('listGroupMembers iterate %j', request);
     return this.descriptors.page.listGroupMembers.asyncIterate(
       this.innerApiCalls['listGroupMembers'] as GaxCall,
       request as {},

@@ -547,6 +547,44 @@
         }
       }
     },
+    "AudienceSegmentCategoryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AudienceSegmentCategoryServiceClient",
+          "rpcs": {
+            "GetAudienceSegmentCategory": {
+              "methods": [
+                "getAudienceSegmentCategory"
+              ]
+            },
+            "ListAudienceSegmentCategories": {
+              "methods": [
+                "listAudienceSegmentCategories",
+                "listAudienceSegmentCategoriesStream",
+                "listAudienceSegmentCategoriesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AudienceSegmentCategoryServiceClient",
+          "rpcs": {
+            "GetAudienceSegmentCategory": {
+              "methods": [
+                "getAudienceSegmentCategory"
+              ]
+            },
+            "ListAudienceSegmentCategories": {
+              "methods": [
+                "listAudienceSegmentCategories",
+                "listAudienceSegmentCategoriesStream",
+                "listAudienceSegmentCategoriesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "AudienceSegmentService": {
       "clients": {
         "grpc": {
@@ -959,6 +997,44 @@
                 "listCdnConfigs",
                 "listCdnConfigsStream",
                 "listCdnConfigsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ChangeEventService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ChangeEventServiceClient",
+          "rpcs": {
+            "GetChangeEvent": {
+              "methods": [
+                "getChangeEvent"
+              ]
+            },
+            "ListChangeEvents": {
+              "methods": [
+                "listChangeEvents",
+                "listChangeEventsStream",
+                "listChangeEventsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ChangeEventServiceClient",
+          "rpcs": {
+            "GetChangeEvent": {
+              "methods": [
+                "getChangeEvent"
+              ]
+            },
+            "ListChangeEvents": {
+              "methods": [
+                "listChangeEvents",
+                "listChangeEventsStream",
+                "listChangeEventsAsync"
               ]
             }
           }
@@ -1499,6 +1575,26 @@
                 "getCreative"
               ]
             },
+            "CreateCreative": {
+              "methods": [
+                "createCreative"
+              ]
+            },
+            "UpdateCreative": {
+              "methods": [
+                "updateCreative"
+              ]
+            },
+            "BatchCreateCreatives": {
+              "methods": [
+                "batchCreateCreatives"
+              ]
+            },
+            "BatchUpdateCreatives": {
+              "methods": [
+                "batchUpdateCreatives"
+              ]
+            },
             "BatchActivateCreatives": {
               "methods": [
                 "batchActivateCreatives"
@@ -1524,6 +1620,26 @@
             "GetCreative": {
               "methods": [
                 "getCreative"
+              ]
+            },
+            "CreateCreative": {
+              "methods": [
+                "createCreative"
+              ]
+            },
+            "UpdateCreative": {
+              "methods": [
+                "updateCreative"
+              ]
+            },
+            "BatchCreateCreatives": {
+              "methods": [
+                "batchCreateCreatives"
+              ]
+            },
+            "BatchUpdateCreatives": {
+              "methods": [
+                "batchUpdateCreatives"
               ]
             },
             "BatchActivateCreatives": {
@@ -2447,6 +2563,114 @@
         }
       }
     },
+    "ForecastAdjustmentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ForecastAdjustmentServiceClient",
+          "rpcs": {
+            "GetForecastAdjustment": {
+              "methods": [
+                "getForecastAdjustment"
+              ]
+            },
+            "CreateForecastAdjustment": {
+              "methods": [
+                "createForecastAdjustment"
+              ]
+            },
+            "BatchCreateForecastAdjustments": {
+              "methods": [
+                "batchCreateForecastAdjustments"
+              ]
+            },
+            "BatchActivateForecastAdjustments": {
+              "methods": [
+                "batchActivateForecastAdjustments"
+              ]
+            },
+            "BatchDeactivateForecastAdjustments": {
+              "methods": [
+                "batchDeactivateForecastAdjustments"
+              ]
+            },
+            "UpdateForecastAdjustment": {
+              "methods": [
+                "updateForecastAdjustment"
+              ]
+            },
+            "BatchUpdateForecastAdjustments": {
+              "methods": [
+                "batchUpdateForecastAdjustments"
+              ]
+            },
+            "CalculateDailyAdOpportunityCounts": {
+              "methods": [
+                "calculateDailyAdOpportunityCounts"
+              ]
+            },
+            "ListForecastAdjustments": {
+              "methods": [
+                "listForecastAdjustments",
+                "listForecastAdjustmentsStream",
+                "listForecastAdjustmentsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ForecastAdjustmentServiceClient",
+          "rpcs": {
+            "GetForecastAdjustment": {
+              "methods": [
+                "getForecastAdjustment"
+              ]
+            },
+            "CreateForecastAdjustment": {
+              "methods": [
+                "createForecastAdjustment"
+              ]
+            },
+            "BatchCreateForecastAdjustments": {
+              "methods": [
+                "batchCreateForecastAdjustments"
+              ]
+            },
+            "BatchActivateForecastAdjustments": {
+              "methods": [
+                "batchActivateForecastAdjustments"
+              ]
+            },
+            "BatchDeactivateForecastAdjustments": {
+              "methods": [
+                "batchDeactivateForecastAdjustments"
+              ]
+            },
+            "UpdateForecastAdjustment": {
+              "methods": [
+                "updateForecastAdjustment"
+              ]
+            },
+            "BatchUpdateForecastAdjustments": {
+              "methods": [
+                "batchUpdateForecastAdjustments"
+              ]
+            },
+            "CalculateDailyAdOpportunityCounts": {
+              "methods": [
+                "calculateDailyAdOpportunityCounts"
+              ]
+            },
+            "ListForecastAdjustments": {
+              "methods": [
+                "listForecastAdjustments",
+                "listForecastAdjustmentsStream",
+                "listForecastAdjustmentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ForecastService": {
       "clients": {
         "grpc": {
@@ -2637,6 +2861,46 @@
                 "getLineItemCreativeAssociation"
               ]
             },
+            "CreateLineItemCreativeAssociation": {
+              "methods": [
+                "createLineItemCreativeAssociation"
+              ]
+            },
+            "BatchCreateLineItemCreativeAssociations": {
+              "methods": [
+                "batchCreateLineItemCreativeAssociations"
+              ]
+            },
+            "UpdateLineItemCreativeAssociation": {
+              "methods": [
+                "updateLineItemCreativeAssociation"
+              ]
+            },
+            "BatchUpdateLineItemCreativeAssociations": {
+              "methods": [
+                "batchUpdateLineItemCreativeAssociations"
+              ]
+            },
+            "BatchActivateLineItemCreativeAssociations": {
+              "methods": [
+                "batchActivateLineItemCreativeAssociations"
+              ]
+            },
+            "BatchDeactivateLineItemCreativeAssociations": {
+              "methods": [
+                "batchDeactivateLineItemCreativeAssociations"
+              ]
+            },
+            "BatchDeleteLineItemCreativeAssociations": {
+              "methods": [
+                "batchDeleteLineItemCreativeAssociations"
+              ]
+            },
+            "PreviewLineItemCreativeAssociation": {
+              "methods": [
+                "previewLineItemCreativeAssociation"
+              ]
+            },
             "ListLineItemCreativeAssociations": {
               "methods": [
                 "listLineItemCreativeAssociations",
@@ -2652,6 +2916,46 @@
             "GetLineItemCreativeAssociation": {
               "methods": [
                 "getLineItemCreativeAssociation"
+              ]
+            },
+            "CreateLineItemCreativeAssociation": {
+              "methods": [
+                "createLineItemCreativeAssociation"
+              ]
+            },
+            "BatchCreateLineItemCreativeAssociations": {
+              "methods": [
+                "batchCreateLineItemCreativeAssociations"
+              ]
+            },
+            "UpdateLineItemCreativeAssociation": {
+              "methods": [
+                "updateLineItemCreativeAssociation"
+              ]
+            },
+            "BatchUpdateLineItemCreativeAssociations": {
+              "methods": [
+                "batchUpdateLineItemCreativeAssociations"
+              ]
+            },
+            "BatchActivateLineItemCreativeAssociations": {
+              "methods": [
+                "batchActivateLineItemCreativeAssociations"
+              ]
+            },
+            "BatchDeactivateLineItemCreativeAssociations": {
+              "methods": [
+                "batchDeactivateLineItemCreativeAssociations"
+              ]
+            },
+            "BatchDeleteLineItemCreativeAssociations": {
+              "methods": [
+                "batchDeleteLineItemCreativeAssociations"
+              ]
+            },
+            "PreviewLineItemCreativeAssociation": {
+              "methods": [
+                "previewLineItemCreativeAssociation"
               ]
             },
             "ListLineItemCreativeAssociations": {
@@ -3979,6 +4283,208 @@
         }
       }
     },
+    "ProposalService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ProposalServiceClient",
+          "rpcs": {
+            "GetProposal": {
+              "methods": [
+                "getProposal"
+              ]
+            },
+            "CreateProposal": {
+              "methods": [
+                "createProposal"
+              ]
+            },
+            "BatchCreateProposals": {
+              "methods": [
+                "batchCreateProposals"
+              ]
+            },
+            "UpdateProposal": {
+              "methods": [
+                "updateProposal"
+              ]
+            },
+            "BatchUpdateProposals": {
+              "methods": [
+                "batchUpdateProposals"
+              ]
+            },
+            "BatchArchiveProposals": {
+              "methods": [
+                "batchArchiveProposals"
+              ]
+            },
+            "BatchUnarchiveProposals": {
+              "methods": [
+                "batchUnarchiveProposals"
+              ]
+            },
+            "BatchPauseProposals": {
+              "methods": [
+                "batchPauseProposals"
+              ]
+            },
+            "BatchResumeProposals": {
+              "methods": [
+                "batchResumeProposals"
+              ]
+            },
+            "BatchRequestBuyerReviewProposals": {
+              "methods": [
+                "batchRequestBuyerReviewProposals"
+              ]
+            },
+            "BatchRequestBuyerAcceptProposals": {
+              "methods": [
+                "batchRequestBuyerAcceptProposals"
+              ]
+            },
+            "BatchReserveProposals": {
+              "methods": [
+                "batchReserveProposals"
+              ]
+            },
+            "BatchRedraftProposals": {
+              "methods": [
+                "batchRedraftProposals"
+              ]
+            },
+            "BatchDiscardDraftProposals": {
+              "methods": [
+                "batchDiscardDraftProposals"
+              ]
+            },
+            "BatchTerminateProposals": {
+              "methods": [
+                "batchTerminateProposals"
+              ]
+            },
+            "BatchPushToOrderProposals": {
+              "methods": [
+                "batchPushToOrderProposals"
+              ]
+            },
+            "ListProposals": {
+              "methods": [
+                "listProposals",
+                "listProposalsStream",
+                "listProposalsAsync"
+              ]
+            },
+            "FetchMarketplaceComments": {
+              "methods": [
+                "fetchMarketplaceComments",
+                "fetchMarketplaceCommentsStream",
+                "fetchMarketplaceCommentsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ProposalServiceClient",
+          "rpcs": {
+            "GetProposal": {
+              "methods": [
+                "getProposal"
+              ]
+            },
+            "CreateProposal": {
+              "methods": [
+                "createProposal"
+              ]
+            },
+            "BatchCreateProposals": {
+              "methods": [
+                "batchCreateProposals"
+              ]
+            },
+            "UpdateProposal": {
+              "methods": [
+                "updateProposal"
+              ]
+            },
+            "BatchUpdateProposals": {
+              "methods": [
+                "batchUpdateProposals"
+              ]
+            },
+            "BatchArchiveProposals": {
+              "methods": [
+                "batchArchiveProposals"
+              ]
+            },
+            "BatchUnarchiveProposals": {
+              "methods": [
+                "batchUnarchiveProposals"
+              ]
+            },
+            "BatchPauseProposals": {
+              "methods": [
+                "batchPauseProposals"
+              ]
+            },
+            "BatchResumeProposals": {
+              "methods": [
+                "batchResumeProposals"
+              ]
+            },
+            "BatchRequestBuyerReviewProposals": {
+              "methods": [
+                "batchRequestBuyerReviewProposals"
+              ]
+            },
+            "BatchRequestBuyerAcceptProposals": {
+              "methods": [
+                "batchRequestBuyerAcceptProposals"
+              ]
+            },
+            "BatchReserveProposals": {
+              "methods": [
+                "batchReserveProposals"
+              ]
+            },
+            "BatchRedraftProposals": {
+              "methods": [
+                "batchRedraftProposals"
+              ]
+            },
+            "BatchDiscardDraftProposals": {
+              "methods": [
+                "batchDiscardDraftProposals"
+              ]
+            },
+            "BatchTerminateProposals": {
+              "methods": [
+                "batchTerminateProposals"
+              ]
+            },
+            "BatchPushToOrderProposals": {
+              "methods": [
+                "batchPushToOrderProposals"
+              ]
+            },
+            "ListProposals": {
+              "methods": [
+                "listProposals",
+                "listProposalsStream",
+                "listProposalsAsync"
+              ]
+            },
+            "FetchMarketplaceComments": {
+              "methods": [
+                "fetchMarketplaceComments",
+                "fetchMarketplaceCommentsStream",
+                "fetchMarketplaceCommentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ReportService": {
       "clients": {
         "grpc": {
@@ -4643,6 +5149,84 @@
         }
       }
     },
+    "TrafficForecastSegmentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TrafficForecastSegmentServiceClient",
+          "rpcs": {
+            "GetTrafficForecastSegment": {
+              "methods": [
+                "getTrafficForecastSegment"
+              ]
+            },
+            "CreateTrafficForecastSegment": {
+              "methods": [
+                "createTrafficForecastSegment"
+              ]
+            },
+            "BatchCreateTrafficForecastSegments": {
+              "methods": [
+                "batchCreateTrafficForecastSegments"
+              ]
+            },
+            "UpdateTrafficForecastSegment": {
+              "methods": [
+                "updateTrafficForecastSegment"
+              ]
+            },
+            "BatchUpdateTrafficForecastSegments": {
+              "methods": [
+                "batchUpdateTrafficForecastSegments"
+              ]
+            },
+            "ListTrafficForecastSegments": {
+              "methods": [
+                "listTrafficForecastSegments",
+                "listTrafficForecastSegmentsStream",
+                "listTrafficForecastSegmentsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TrafficForecastSegmentServiceClient",
+          "rpcs": {
+            "GetTrafficForecastSegment": {
+              "methods": [
+                "getTrafficForecastSegment"
+              ]
+            },
+            "CreateTrafficForecastSegment": {
+              "methods": [
+                "createTrafficForecastSegment"
+              ]
+            },
+            "BatchCreateTrafficForecastSegments": {
+              "methods": [
+                "batchCreateTrafficForecastSegments"
+              ]
+            },
+            "UpdateTrafficForecastSegment": {
+              "methods": [
+                "updateTrafficForecastSegment"
+              ]
+            },
+            "BatchUpdateTrafficForecastSegments": {
+              "methods": [
+                "batchUpdateTrafficForecastSegments"
+              ]
+            },
+            "ListTrafficForecastSegments": {
+              "methods": [
+                "listTrafficForecastSegments",
+                "listTrafficForecastSegmentsStream",
+                "listTrafficForecastSegmentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "UserService": {
       "clients": {
         "grpc": {
@@ -4813,6 +5397,152 @@
                 "listViewabilityProviders",
                 "listViewabilityProvidersStream",
                 "listViewabilityProvidersAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "YieldGroupService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "YieldGroupServiceClient",
+          "rpcs": {
+            "GetYieldGroup": {
+              "methods": [
+                "getYieldGroup"
+              ]
+            },
+            "CreateYieldGroup": {
+              "methods": [
+                "createYieldGroup"
+              ]
+            },
+            "BatchCreateYieldGroups": {
+              "methods": [
+                "batchCreateYieldGroups"
+              ]
+            },
+            "UpdateYieldGroup": {
+              "methods": [
+                "updateYieldGroup"
+              ]
+            },
+            "BatchUpdateYieldGroups": {
+              "methods": [
+                "batchUpdateYieldGroups"
+              ]
+            },
+            "BatchActivateYieldGroups": {
+              "methods": [
+                "batchActivateYieldGroups"
+              ]
+            },
+            "BatchDeactivateYieldGroups": {
+              "methods": [
+                "batchDeactivateYieldGroups"
+              ]
+            },
+            "BatchArchiveYieldGroups": {
+              "methods": [
+                "batchArchiveYieldGroups"
+              ]
+            },
+            "ListYieldGroups": {
+              "methods": [
+                "listYieldGroups",
+                "listYieldGroupsStream",
+                "listYieldGroupsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "YieldGroupServiceClient",
+          "rpcs": {
+            "GetYieldGroup": {
+              "methods": [
+                "getYieldGroup"
+              ]
+            },
+            "CreateYieldGroup": {
+              "methods": [
+                "createYieldGroup"
+              ]
+            },
+            "BatchCreateYieldGroups": {
+              "methods": [
+                "batchCreateYieldGroups"
+              ]
+            },
+            "UpdateYieldGroup": {
+              "methods": [
+                "updateYieldGroup"
+              ]
+            },
+            "BatchUpdateYieldGroups": {
+              "methods": [
+                "batchUpdateYieldGroups"
+              ]
+            },
+            "BatchActivateYieldGroups": {
+              "methods": [
+                "batchActivateYieldGroups"
+              ]
+            },
+            "BatchDeactivateYieldGroups": {
+              "methods": [
+                "batchDeactivateYieldGroups"
+              ]
+            },
+            "BatchArchiveYieldGroups": {
+              "methods": [
+                "batchArchiveYieldGroups"
+              ]
+            },
+            "ListYieldGroups": {
+              "methods": [
+                "listYieldGroups",
+                "listYieldGroupsStream",
+                "listYieldGroupsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "YieldPartnerService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "YieldPartnerServiceClient",
+          "rpcs": {
+            "GetYieldPartner": {
+              "methods": [
+                "getYieldPartner"
+              ]
+            },
+            "ListYieldPartners": {
+              "methods": [
+                "listYieldPartners",
+                "listYieldPartnersStream",
+                "listYieldPartnersAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "YieldPartnerServiceClient",
+          "rpcs": {
+            "GetYieldPartner": {
+              "methods": [
+                "getYieldPartner"
+              ]
+            },
+            "ListYieldPartners": {
+              "methods": [
+                "listYieldPartners",
+                "listYieldPartnersStream",
+                "listYieldPartnersAsync"
               ]
             }
           }

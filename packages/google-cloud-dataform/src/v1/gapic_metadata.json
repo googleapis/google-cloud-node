@@ -295,6 +295,11 @@
                 "moveRepository"
               ]
             },
+            "CreateCompilationResultLongRunning": {
+              "methods": [
+                "createCompilationResultLongRunning"
+              ]
+            },
             "QueryTeamFolderContents": {
               "methods": [
                 "queryTeamFolderContents",
@@ -695,6 +700,11 @@
             "MoveRepository": {
               "methods": [
                 "moveRepository"
+              ]
+            },
+            "CreateCompilationResultLongRunning": {
+              "methods": [
+                "createCompilationResultLongRunning"
               ]
             },
             "QueryTeamFolderContents": {

@@ -17,12 +17,11 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
-import * as v1beta from './v1beta';
 
 const NotificationsApiServiceClient = v1.NotificationsApiServiceClient;
 type NotificationsApiServiceClient = v1.NotificationsApiServiceClient;
 
-export {v1, v1beta, NotificationsApiServiceClient};
-export default {v1, v1beta, NotificationsApiServiceClient};
+export {v1, NotificationsApiServiceClient};
+export default {v1, NotificationsApiServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

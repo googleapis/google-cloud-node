@@ -690,7 +690,7 @@ export class AuditClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateFrameworkAuditScopeReport request %j', request);
+    this._log.debug('generateFrameworkAuditScopeReport request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.cloudsecuritycompliance.v1.IGenerateFrameworkAuditScopeReportResponse,
@@ -701,7 +701,7 @@ export class AuditClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'generateFrameworkAuditScopeReport response %j',
             response,
           );
@@ -719,7 +719,7 @@ export class AuditClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'generateFrameworkAuditScopeReport response %j',
             response,
           );
@@ -845,7 +845,7 @@ export class AuditClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getFrameworkAudit request %j', request);
+    this._log.debug('getFrameworkAudit request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.cloudsecuritycompliance.v1.IFrameworkAudit,
@@ -856,7 +856,7 @@ export class AuditClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getFrameworkAudit response %j', response);
+          this._log.debug('getFrameworkAudit response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -871,7 +871,7 @@ export class AuditClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getFrameworkAudit response %j', response);
+          this._log.debug('getFrameworkAudit response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1020,11 +1020,11 @@ export class AuditClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createFrameworkAudit response %j', rawResponse);
+          this._log.debug('createFrameworkAudit response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createFrameworkAudit request %j', request);
+    this._log.debug('createFrameworkAudit request %j', request);
     return this.innerApiCalls
       .createFrameworkAudit(request, options, wrappedCallback)
       ?.then(
@@ -1036,7 +1036,7 @@ export class AuditClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createFrameworkAudit response %j', rawResponse);
+          this._log.debug('createFrameworkAudit response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1199,11 +1199,11 @@ export class AuditClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listFrameworkAudits values %j', values);
+          this._log.debug('listFrameworkAudits values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listFrameworkAudits request %j', request);
+    this._log.debug('listFrameworkAudits request %j', request);
     return this.innerApiCalls
       .listFrameworkAudits(request, options, wrappedCallback)
       ?.then(
@@ -1212,7 +1212,7 @@ export class AuditClient {
           protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworkAuditsRequest | null,
           protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworkAuditsResponse,
         ]) => {
-          this._log.info('listFrameworkAudits values %j', response);
+          this._log.debug('listFrameworkAudits values %j', response);
           return [response, input, output];
         },
       );
@@ -1272,7 +1272,7 @@ export class AuditClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFrameworkAudits stream %j', request);
+    this._log.debug('listFrameworkAudits stream %j', request);
     return this.descriptors.page.listFrameworkAudits.createStream(
       this.innerApiCalls.listFrameworkAudits as GaxCall,
       request,
@@ -1337,7 +1337,7 @@ export class AuditClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFrameworkAudits iterate %j', request);
+    this._log.debug('listFrameworkAudits iterate %j', request);
     return this.descriptors.page.listFrameworkAudits.asyncIterate(
       this.innerApiCalls['listFrameworkAudits'] as GaxCall,
       request as {},

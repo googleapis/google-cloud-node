@@ -543,7 +543,7 @@ export class TextServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateText request %j', request);
+    this._log.debug('generateText request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta3.IGenerateTextResponse,
@@ -554,7 +554,7 @@ export class TextServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateText response %j', response);
+          this._log.debug('generateText response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -569,7 +569,7 @@ export class TextServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('generateText response %j', response);
+          this._log.debug('generateText response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -683,7 +683,7 @@ export class TextServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('embedText request %j', request);
+    this._log.debug('embedText request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta3.IEmbedTextResponse,
@@ -694,7 +694,7 @@ export class TextServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('embedText response %j', response);
+          this._log.debug('embedText response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -709,7 +709,7 @@ export class TextServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('embedText response %j', response);
+          this._log.debug('embedText response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -833,7 +833,7 @@ export class TextServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchEmbedText request %j', request);
+    this._log.debug('batchEmbedText request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta3.IBatchEmbedTextResponse,
@@ -844,7 +844,7 @@ export class TextServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchEmbedText response %j', response);
+          this._log.debug('batchEmbedText response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -859,7 +859,7 @@ export class TextServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchEmbedText response %j', response);
+          this._log.debug('batchEmbedText response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -983,7 +983,7 @@ export class TextServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('countTextTokens request %j', request);
+    this._log.debug('countTextTokens request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta3.ICountTextTokensResponse,
@@ -994,7 +994,7 @@ export class TextServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('countTextTokens response %j', response);
+          this._log.debug('countTextTokens response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1009,7 +1009,7 @@ export class TextServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('countTextTokens response %j', response);
+          this._log.debug('countTextTokens response %j', response);
           return [response, options, rawResponse];
         },
       )

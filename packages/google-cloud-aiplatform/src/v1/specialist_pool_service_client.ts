@@ -2373,7 +2373,7 @@ export class SpecialistPoolServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSpecialistPool request %j', request);
+    this._log.debug('getSpecialistPool request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1.ISpecialistPool,
@@ -2384,7 +2384,7 @@ export class SpecialistPoolServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSpecialistPool response %j', response);
+          this._log.debug('getSpecialistPool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2399,7 +2399,7 @@ export class SpecialistPoolServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getSpecialistPool response %j', response);
+          this._log.debug('getSpecialistPool response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2537,11 +2537,11 @@ export class SpecialistPoolServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createSpecialistPool response %j', rawResponse);
+          this._log.debug('createSpecialistPool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createSpecialistPool request %j', request);
+    this._log.debug('createSpecialistPool request %j', request);
     return this.innerApiCalls
       .createSpecialistPool(request, options, wrappedCallback)
       ?.then(
@@ -2553,7 +2553,7 @@ export class SpecialistPoolServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createSpecialistPool response %j', rawResponse);
+          this._log.debug('createSpecialistPool response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2711,11 +2711,11 @@ export class SpecialistPoolServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteSpecialistPool response %j', rawResponse);
+          this._log.debug('deleteSpecialistPool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteSpecialistPool request %j', request);
+    this._log.debug('deleteSpecialistPool request %j', request);
     return this.innerApiCalls
       .deleteSpecialistPool(request, options, wrappedCallback)
       ?.then(
@@ -2727,7 +2727,7 @@ export class SpecialistPoolServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteSpecialistPool response %j', rawResponse);
+          this._log.debug('deleteSpecialistPool response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2882,11 +2882,11 @@ export class SpecialistPoolServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateSpecialistPool response %j', rawResponse);
+          this._log.debug('updateSpecialistPool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateSpecialistPool request %j', request);
+    this._log.debug('updateSpecialistPool request %j', request);
     return this.innerApiCalls
       .updateSpecialistPool(request, options, wrappedCallback)
       ?.then(
@@ -2898,7 +2898,7 @@ export class SpecialistPoolServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateSpecialistPool response %j', rawResponse);
+          this._log.debug('updateSpecialistPool response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3053,11 +3053,11 @@ export class SpecialistPoolServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listSpecialistPools values %j', values);
+          this._log.debug('listSpecialistPools values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listSpecialistPools request %j', request);
+    this._log.debug('listSpecialistPools request %j', request);
     return this.innerApiCalls
       .listSpecialistPools(request, options, wrappedCallback)
       ?.then(
@@ -3066,7 +3066,7 @@ export class SpecialistPoolServiceClient {
           protos.google.cloud.aiplatform.v1.IListSpecialistPoolsRequest | null,
           protos.google.cloud.aiplatform.v1.IListSpecialistPoolsResponse,
         ]) => {
-          this._log.info('listSpecialistPools values %j', response);
+          this._log.debug('listSpecialistPools values %j', response);
           return [response, input, output];
         },
       );
@@ -3118,7 +3118,7 @@ export class SpecialistPoolServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSpecialistPools stream %j', request);
+    this._log.debug('listSpecialistPools stream %j', request);
     return this.descriptors.page.listSpecialistPools.createStream(
       this.innerApiCalls.listSpecialistPools as GaxCall,
       request,
@@ -3175,7 +3175,7 @@ export class SpecialistPoolServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSpecialistPools iterate %j', request);
+    this._log.debug('listSpecialistPools iterate %j', request);
     return this.descriptors.page.listSpecialistPools.asyncIterate(
       this.innerApiCalls['listSpecialistPools'] as GaxCall,
       request as {},

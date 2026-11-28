@@ -554,7 +554,7 @@ export class BranchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBranches request %j', request);
+    this._log.debug('listBranches request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2alpha.IListBranchesResponse,
@@ -565,7 +565,7 @@ export class BranchServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('listBranches response %j', response);
+          this._log.debug('listBranches response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -577,7 +577,7 @@ export class BranchServiceClient {
           protos.google.cloud.retail.v2alpha.IListBranchesRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('listBranches response %j', response);
+          this._log.debug('listBranches response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -693,7 +693,7 @@ export class BranchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getBranch request %j', request);
+    this._log.debug('getBranch request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.retail.v2alpha.IBranch,
@@ -704,7 +704,7 @@ export class BranchServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getBranch response %j', response);
+          this._log.debug('getBranch response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -716,7 +716,7 @@ export class BranchServiceClient {
           protos.google.cloud.retail.v2alpha.IGetBranchRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getBranch response %j', response);
+          this._log.debug('getBranch response %j', response);
           return [response, options, rawResponse];
         },
       )

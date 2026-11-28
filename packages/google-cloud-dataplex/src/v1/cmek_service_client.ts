@@ -931,7 +931,7 @@ export class CmekServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getEncryptionConfig request %j', request);
+    this._log.debug('getEncryptionConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataplex.v1.IEncryptionConfig,
@@ -942,7 +942,7 @@ export class CmekServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getEncryptionConfig response %j', response);
+          this._log.debug('getEncryptionConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -957,7 +957,7 @@ export class CmekServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getEncryptionConfig response %j', response);
+          this._log.debug('getEncryptionConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1098,11 +1098,11 @@ export class CmekServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createEncryptionConfig response %j', rawResponse);
+          this._log.debug('createEncryptionConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createEncryptionConfig request %j', request);
+    this._log.debug('createEncryptionConfig request %j', request);
     return this.innerApiCalls
       .createEncryptionConfig(request, options, wrappedCallback)
       ?.then(
@@ -1114,7 +1114,7 @@ export class CmekServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createEncryptionConfig response %j', rawResponse);
+          this._log.debug('createEncryptionConfig response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1271,11 +1271,11 @@ export class CmekServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateEncryptionConfig response %j', rawResponse);
+          this._log.debug('updateEncryptionConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateEncryptionConfig request %j', request);
+    this._log.debug('updateEncryptionConfig request %j', request);
     return this.innerApiCalls
       .updateEncryptionConfig(request, options, wrappedCallback)
       ?.then(
@@ -1287,7 +1287,7 @@ export class CmekServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateEncryptionConfig response %j', rawResponse);
+          this._log.debug('updateEncryptionConfig response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1442,11 +1442,11 @@ export class CmekServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteEncryptionConfig response %j', rawResponse);
+          this._log.debug('deleteEncryptionConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteEncryptionConfig request %j', request);
+    this._log.debug('deleteEncryptionConfig request %j', request);
     return this.innerApiCalls
       .deleteEncryptionConfig(request, options, wrappedCallback)
       ?.then(
@@ -1458,7 +1458,7 @@ export class CmekServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteEncryptionConfig response %j', rawResponse);
+          this._log.debug('deleteEncryptionConfig response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1629,11 +1629,11 @@ export class CmekServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listEncryptionConfigs values %j', values);
+          this._log.debug('listEncryptionConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listEncryptionConfigs request %j', request);
+    this._log.debug('listEncryptionConfigs request %j', request);
     return this.innerApiCalls
       .listEncryptionConfigs(request, options, wrappedCallback)
       ?.then(
@@ -1642,7 +1642,7 @@ export class CmekServiceClient {
           protos.google.cloud.dataplex.v1.IListEncryptionConfigsRequest | null,
           protos.google.cloud.dataplex.v1.IListEncryptionConfigsResponse,
         ]) => {
-          this._log.info('listEncryptionConfigs values %j', response);
+          this._log.debug('listEncryptionConfigs values %j', response);
           return [response, input, output];
         },
       );
@@ -1710,7 +1710,7 @@ export class CmekServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEncryptionConfigs stream %j', request);
+    this._log.debug('listEncryptionConfigs stream %j', request);
     return this.descriptors.page.listEncryptionConfigs.createStream(
       this.innerApiCalls.listEncryptionConfigs as GaxCall,
       request,
@@ -1783,7 +1783,7 @@ export class CmekServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEncryptionConfigs iterate %j', request);
+    this._log.debug('listEncryptionConfigs iterate %j', request);
     return this.descriptors.page.listEncryptionConfigs.asyncIterate(
       this.innerApiCalls['listEncryptionConfigs'] as GaxCall,
       request as {},

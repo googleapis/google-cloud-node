@@ -684,6 +684,7 @@ export class Bigtable {
    *   const apiResponse = data[2];
    * });
    * ```
+   * @deprecated Use {@link InstanceAdminClient#createInstance} from @google-cloud/bigtable instead.
    */
   createInstance(
     id: string,
@@ -834,6 +835,7 @@ export class Bigtable {
    *   }
    * });
    * ```
+   * @deprecated Use {@link InstanceAdminClient#listInstances} from @google-cloud/bigtable instead.
    */
   getInstances(
     gaxOptionsOrCallback?: CallOptions | GetInstancesCallback,
@@ -938,6 +940,7 @@ export class Bigtable {
         if (!gaxClient) {
           // Lazily instantiate client.
           const clientOptions = this.options[config.client]!;
+          // eslint-disable-next-line import/namespace
           gaxClient = new v2[config.client](clientOptions);
           this.api[config.client] = gaxClient;
         }

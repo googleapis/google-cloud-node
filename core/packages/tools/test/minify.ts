@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import * as assert from 'assert';
+import {spawnSync} from 'child_process';
 import {describe, it, beforeEach} from 'mocha';
 import * as fs from 'fs';
 import {promises as fsp} from 'fs';
@@ -59,5 +60,26 @@ describe('minify tool', () => {
     const resultAfter = require(echoProtoJs);
     assert(statBefore.size > statAfter.size);
     assert.deepEqual(resultBefore, resultAfter);
+  });
+
+  it('exits non-zero when CLI execution fails', () => {
+    const cliPath = path.join(
+      __dirname,
+      '..',
+      '..',
+      'bin',
+      'minifyProtoJson.js',
+    );
+    const missingDir = path.join(testDir, 'missing-dir');
+    const result = spawnSync(
+      process.execPath,
+      ['--unhandled-rejections=warn', cliPath, missingDir],
+      {
+        encoding: 'utf8',
+      },
+    );
+    assert.strictEqual(result.status, 1);
+    assert.match(result.stderr, /ENOENT/);
+    assert.doesNotMatch(result.stderr, /UnhandledPromiseRejection/);
   });
 });

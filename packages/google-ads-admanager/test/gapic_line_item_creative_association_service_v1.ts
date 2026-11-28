@@ -515,6 +515,1246 @@ describe('v1.LineItemCreativeAssociationServiceClient', () => {
     });
   });
 
+  describe('createLineItemCreativeAssociation', () => {
+    it('invokes createLineItemCreativeAssociation without error', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.CreateLineItemCreativeAssociationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.CreateLineItemCreativeAssociationRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.LineItemCreativeAssociation(),
+      );
+      client.innerApiCalls.createLineItemCreativeAssociation =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.createLineItemCreativeAssociation(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createLineItemCreativeAssociation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createLineItemCreativeAssociation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createLineItemCreativeAssociation without error using callback', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.CreateLineItemCreativeAssociationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.CreateLineItemCreativeAssociationRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.LineItemCreativeAssociation(),
+      );
+      client.innerApiCalls.createLineItemCreativeAssociation =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createLineItemCreativeAssociation(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.ILineItemCreativeAssociation | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createLineItemCreativeAssociation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createLineItemCreativeAssociation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createLineItemCreativeAssociation with error', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.CreateLineItemCreativeAssociationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.CreateLineItemCreativeAssociationRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createLineItemCreativeAssociation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.createLineItemCreativeAssociation(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.createLineItemCreativeAssociation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createLineItemCreativeAssociation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createLineItemCreativeAssociation with closed client', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.CreateLineItemCreativeAssociationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.CreateLineItemCreativeAssociationRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.createLineItemCreativeAssociation(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchCreateLineItemCreativeAssociations', () => {
+    it('invokes batchCreateLineItemCreativeAssociations without error', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchCreateLineItemCreativeAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchCreateLineItemCreativeAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchCreateLineItemCreativeAssociationsResponse(),
+      );
+      client.innerApiCalls.batchCreateLineItemCreativeAssociations =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.batchCreateLineItemCreativeAssociations(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .batchCreateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchCreateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchCreateLineItemCreativeAssociations without error using callback', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchCreateLineItemCreativeAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchCreateLineItemCreativeAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchCreateLineItemCreativeAssociationsResponse(),
+      );
+      client.innerApiCalls.batchCreateLineItemCreativeAssociations =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchCreateLineItemCreativeAssociations(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchCreateLineItemCreativeAssociationsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .batchCreateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchCreateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchCreateLineItemCreativeAssociations with error', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchCreateLineItemCreativeAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchCreateLineItemCreativeAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchCreateLineItemCreativeAssociations =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.batchCreateLineItemCreativeAssociations(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .batchCreateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchCreateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchCreateLineItemCreativeAssociations with closed client', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchCreateLineItemCreativeAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchCreateLineItemCreativeAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchCreateLineItemCreativeAssociations(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('updateLineItemCreativeAssociation', () => {
+    it('invokes updateLineItemCreativeAssociation without error', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.UpdateLineItemCreativeAssociationRequest(),
+      );
+      request.lineItemCreativeAssociation ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.UpdateLineItemCreativeAssociationRequest',
+        ['lineItemCreativeAssociation', 'name'],
+      );
+      request.lineItemCreativeAssociation.name = defaultValue1;
+      const expectedHeaderRequestParams = `line_item_creative_association.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.LineItemCreativeAssociation(),
+      );
+      client.innerApiCalls.updateLineItemCreativeAssociation =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.updateLineItemCreativeAssociation(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateLineItemCreativeAssociation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateLineItemCreativeAssociation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateLineItemCreativeAssociation without error using callback', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.UpdateLineItemCreativeAssociationRequest(),
+      );
+      request.lineItemCreativeAssociation ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.UpdateLineItemCreativeAssociationRequest',
+        ['lineItemCreativeAssociation', 'name'],
+      );
+      request.lineItemCreativeAssociation.name = defaultValue1;
+      const expectedHeaderRequestParams = `line_item_creative_association.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.LineItemCreativeAssociation(),
+      );
+      client.innerApiCalls.updateLineItemCreativeAssociation =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateLineItemCreativeAssociation(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.ILineItemCreativeAssociation | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateLineItemCreativeAssociation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateLineItemCreativeAssociation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateLineItemCreativeAssociation with error', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.UpdateLineItemCreativeAssociationRequest(),
+      );
+      request.lineItemCreativeAssociation ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.UpdateLineItemCreativeAssociationRequest',
+        ['lineItemCreativeAssociation', 'name'],
+      );
+      request.lineItemCreativeAssociation.name = defaultValue1;
+      const expectedHeaderRequestParams = `line_item_creative_association.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateLineItemCreativeAssociation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.updateLineItemCreativeAssociation(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateLineItemCreativeAssociation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateLineItemCreativeAssociation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateLineItemCreativeAssociation with closed client', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.UpdateLineItemCreativeAssociationRequest(),
+      );
+      request.lineItemCreativeAssociation ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.UpdateLineItemCreativeAssociationRequest',
+        ['lineItemCreativeAssociation', 'name'],
+      );
+      request.lineItemCreativeAssociation.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.updateLineItemCreativeAssociation(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchUpdateLineItemCreativeAssociations', () => {
+    it('invokes batchUpdateLineItemCreativeAssociations without error', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateLineItemCreativeAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUpdateLineItemCreativeAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateLineItemCreativeAssociationsResponse(),
+      );
+      client.innerApiCalls.batchUpdateLineItemCreativeAssociations =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.batchUpdateLineItemCreativeAssociations(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .batchUpdateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchUpdateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchUpdateLineItemCreativeAssociations without error using callback', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateLineItemCreativeAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUpdateLineItemCreativeAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateLineItemCreativeAssociationsResponse(),
+      );
+      client.innerApiCalls.batchUpdateLineItemCreativeAssociations =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchUpdateLineItemCreativeAssociations(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchUpdateLineItemCreativeAssociationsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .batchUpdateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchUpdateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchUpdateLineItemCreativeAssociations with error', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateLineItemCreativeAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUpdateLineItemCreativeAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchUpdateLineItemCreativeAssociations =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.batchUpdateLineItemCreativeAssociations(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .batchUpdateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchUpdateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchUpdateLineItemCreativeAssociations with closed client', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateLineItemCreativeAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUpdateLineItemCreativeAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchUpdateLineItemCreativeAssociations(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchActivateLineItemCreativeAssociations', () => {
+    it('invokes batchActivateLineItemCreativeAssociations without error', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchActivateLineItemCreativeAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchActivateLineItemCreativeAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchActivateLineItemCreativeAssociationsResponse(),
+      );
+      client.innerApiCalls.batchActivateLineItemCreativeAssociations =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.batchActivateLineItemCreativeAssociations(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .batchActivateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchActivateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchActivateLineItemCreativeAssociations without error using callback', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchActivateLineItemCreativeAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchActivateLineItemCreativeAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchActivateLineItemCreativeAssociationsResponse(),
+      );
+      client.innerApiCalls.batchActivateLineItemCreativeAssociations =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchActivateLineItemCreativeAssociations(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchActivateLineItemCreativeAssociationsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .batchActivateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchActivateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchActivateLineItemCreativeAssociations with error', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchActivateLineItemCreativeAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchActivateLineItemCreativeAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchActivateLineItemCreativeAssociations =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.batchActivateLineItemCreativeAssociations(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .batchActivateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchActivateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchActivateLineItemCreativeAssociations with closed client', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchActivateLineItemCreativeAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchActivateLineItemCreativeAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchActivateLineItemCreativeAssociations(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchDeactivateLineItemCreativeAssociations', () => {
+    it('invokes batchDeactivateLineItemCreativeAssociations without error', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeactivateLineItemCreativeAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDeactivateLineItemCreativeAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeactivateLineItemCreativeAssociationsResponse(),
+      );
+      client.innerApiCalls.batchDeactivateLineItemCreativeAssociations =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.batchDeactivateLineItemCreativeAssociations(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .batchDeactivateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchDeactivateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDeactivateLineItemCreativeAssociations without error using callback', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeactivateLineItemCreativeAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDeactivateLineItemCreativeAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeactivateLineItemCreativeAssociationsResponse(),
+      );
+      client.innerApiCalls.batchDeactivateLineItemCreativeAssociations =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchDeactivateLineItemCreativeAssociations(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchDeactivateLineItemCreativeAssociationsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .batchDeactivateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchDeactivateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDeactivateLineItemCreativeAssociations with error', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeactivateLineItemCreativeAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDeactivateLineItemCreativeAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchDeactivateLineItemCreativeAssociations =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.batchDeactivateLineItemCreativeAssociations(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .batchDeactivateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchDeactivateLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDeactivateLineItemCreativeAssociations with closed client', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeactivateLineItemCreativeAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDeactivateLineItemCreativeAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchDeactivateLineItemCreativeAssociations(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchDeleteLineItemCreativeAssociations', () => {
+    it('invokes batchDeleteLineItemCreativeAssociations without error', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeleteLineItemCreativeAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDeleteLineItemCreativeAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.batchDeleteLineItemCreativeAssociations =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.batchDeleteLineItemCreativeAssociations(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .batchDeleteLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchDeleteLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDeleteLineItemCreativeAssociations without error using callback', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeleteLineItemCreativeAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDeleteLineItemCreativeAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.batchDeleteLineItemCreativeAssociations =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchDeleteLineItemCreativeAssociations(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .batchDeleteLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchDeleteLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDeleteLineItemCreativeAssociations with error', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeleteLineItemCreativeAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDeleteLineItemCreativeAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchDeleteLineItemCreativeAssociations =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.batchDeleteLineItemCreativeAssociations(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .batchDeleteLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .batchDeleteLineItemCreativeAssociations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchDeleteLineItemCreativeAssociations with closed client', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchDeleteLineItemCreativeAssociationsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchDeleteLineItemCreativeAssociationsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchDeleteLineItemCreativeAssociations(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('previewLineItemCreativeAssociation', () => {
+    it('invokes previewLineItemCreativeAssociation without error', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.PreviewLineItemCreativeAssociationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.PreviewLineItemCreativeAssociationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.PreviewLineItemCreativeAssociationResponse(),
+      );
+      client.innerApiCalls.previewLineItemCreativeAssociation =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.previewLineItemCreativeAssociation(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.previewLineItemCreativeAssociation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.previewLineItemCreativeAssociation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes previewLineItemCreativeAssociation without error using callback', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.PreviewLineItemCreativeAssociationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.PreviewLineItemCreativeAssociationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.PreviewLineItemCreativeAssociationResponse(),
+      );
+      client.innerApiCalls.previewLineItemCreativeAssociation =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.previewLineItemCreativeAssociation(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IPreviewLineItemCreativeAssociationResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.previewLineItemCreativeAssociation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.previewLineItemCreativeAssociation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes previewLineItemCreativeAssociation with error', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.PreviewLineItemCreativeAssociationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.PreviewLineItemCreativeAssociationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.previewLineItemCreativeAssociation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.previewLineItemCreativeAssociation(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.previewLineItemCreativeAssociation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.previewLineItemCreativeAssociation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes previewLineItemCreativeAssociation with closed client', async () => {
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            auth: googleAuth,
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.PreviewLineItemCreativeAssociationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.PreviewLineItemCreativeAssociationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.previewLineItemCreativeAssociation(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('listLineItemCreativeAssociations', () => {
     it('invokes listLineItemCreativeAssociations without error', async () => {
       const client =
@@ -969,6 +2209,61 @@ describe('v1.LineItemCreativeAssociationServiceClient', () => {
       });
     });
 
+    describe('adCategory', async () => {
+      const fakePath = '/rendered/path/adCategory';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        ad_category: 'adCategoryValue',
+      };
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.adCategoryPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.adCategoryPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('adCategoryPath', () => {
+        const result = client.adCategoryPath(
+          'networkCodeValue',
+          'adCategoryValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.adCategoryPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromAdCategoryName', () => {
+        const result = client.matchNetworkCodeFromAdCategoryName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.adCategoryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAdCategoryFromAdCategoryName', () => {
+        const result = client.matchAdCategoryFromAdCategoryName(fakePath);
+        assert.strictEqual(result, 'adCategoryValue');
+        assert(
+          (client.pathTemplates.adCategoryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('adReviewCenterAd', async () => {
       const fakePath = '/rendered/path/adReviewCenterAd';
       const expectedParameters = {
@@ -1198,6 +2493,74 @@ describe('v1.LineItemCreativeAssociationServiceClient', () => {
       });
     });
 
+    describe('allocationDeliveryProfile', async () => {
+      const fakePath = '/rendered/path/allocationDeliveryProfile';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        allocation_delivery_profile: 'allocationDeliveryProfileValue',
+      };
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.allocationDeliveryProfilePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.allocationDeliveryProfilePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('allocationDeliveryProfilePath', () => {
+        const result = client.allocationDeliveryProfilePath(
+          'networkCodeValue',
+          'allocationDeliveryProfileValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.allocationDeliveryProfilePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromAllocationDeliveryProfileName', () => {
+        const result =
+          client.matchNetworkCodeFromAllocationDeliveryProfileName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.allocationDeliveryProfilePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAllocationDeliveryProfileFromAllocationDeliveryProfileName', () => {
+        const result =
+          client.matchAllocationDeliveryProfileFromAllocationDeliveryProfileName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'allocationDeliveryProfileValue');
+        assert(
+          (
+            client.pathTemplates.allocationDeliveryProfilePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('application', async () => {
       const fakePath = '/rendered/path/application';
       const expectedParameters = {
@@ -1355,6 +2718,74 @@ describe('v1.LineItemCreativeAssociationServiceClient', () => {
         assert.strictEqual(result, 'audienceSegmentValue');
         assert(
           (client.pathTemplates.audienceSegmentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('audienceSegmentCategory', async () => {
+      const fakePath = '/rendered/path/audienceSegmentCategory';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        audience_segment_category: 'audienceSegmentCategoryValue',
+      };
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.audienceSegmentCategoryPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.audienceSegmentCategoryPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('audienceSegmentCategoryPath', () => {
+        const result = client.audienceSegmentCategoryPath(
+          'networkCodeValue',
+          'audienceSegmentCategoryValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.audienceSegmentCategoryPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromAudienceSegmentCategoryName', () => {
+        const result =
+          client.matchNetworkCodeFromAudienceSegmentCategoryName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.audienceSegmentCategoryPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAudienceSegmentCategoryFromAudienceSegmentCategoryName', () => {
+        const result =
+          client.matchAudienceSegmentCategoryFromAudienceSegmentCategoryName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'audienceSegmentCategoryValue');
+        assert(
+          (
+            client.pathTemplates.audienceSegmentCategoryPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -1629,6 +3060,61 @@ describe('v1.LineItemCreativeAssociationServiceClient', () => {
         assert.strictEqual(result, 'cdnConfigValue');
         assert(
           (client.pathTemplates.cdnConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('changeEvent', async () => {
+      const fakePath = '/rendered/path/changeEvent';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        change_event: 'changeEventValue',
+      };
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.changeEventPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.changeEventPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('changeEventPath', () => {
+        const result = client.changeEventPath(
+          'networkCodeValue',
+          'changeEventValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.changeEventPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromChangeEventName', () => {
+        const result = client.matchNetworkCodeFromChangeEventName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.changeEventPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchChangeEventFromChangeEventName', () => {
+        const result = client.matchChangeEventFromChangeEventName(fakePath);
+        assert.strictEqual(result, 'changeEventValue');
+        assert(
+          (client.pathTemplates.changeEventPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -2973,6 +4459,72 @@ describe('v1.LineItemCreativeAssociationServiceClient', () => {
       });
     });
 
+    describe('forecastAdjustment', async () => {
+      const fakePath = '/rendered/path/forecastAdjustment';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        forecast_adjustment: 'forecastAdjustmentValue',
+      };
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.forecastAdjustmentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.forecastAdjustmentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('forecastAdjustmentPath', () => {
+        const result = client.forecastAdjustmentPath(
+          'networkCodeValue',
+          'forecastAdjustmentValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.forecastAdjustmentPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromForecastAdjustmentName', () => {
+        const result =
+          client.matchNetworkCodeFromForecastAdjustmentName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.forecastAdjustmentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchForecastAdjustmentFromForecastAdjustmentName', () => {
+        const result =
+          client.matchForecastAdjustmentFromForecastAdjustmentName(fakePath);
+        assert.strictEqual(result, 'forecastAdjustmentValue');
+        assert(
+          (
+            client.pathTemplates.forecastAdjustmentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('geoTarget', async () => {
       const fakePath = '/rendered/path/geoTarget';
       const expectedParameters = {
@@ -3022,6 +4574,61 @@ describe('v1.LineItemCreativeAssociationServiceClient', () => {
         assert.strictEqual(result, 'geoTargetValue');
         assert(
           (client.pathTemplates.geoTargetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('inventoryUrl', async () => {
+      const fakePath = '/rendered/path/inventoryUrl';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        inventory_url: 'inventoryUrlValue',
+      };
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.inventoryUrlPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.inventoryUrlPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('inventoryUrlPath', () => {
+        const result = client.inventoryUrlPath(
+          'networkCodeValue',
+          'inventoryUrlValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.inventoryUrlPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromInventoryUrlName', () => {
+        const result = client.matchNetworkCodeFromInventoryUrlName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.inventoryUrlPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInventoryUrlFromInventoryUrlName', () => {
+        const result = client.matchInventoryUrlFromInventoryUrlName(fakePath);
+        assert.strictEqual(result, 'inventoryUrlValue');
+        assert(
+          (client.pathTemplates.inventoryUrlPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -4184,6 +5791,58 @@ describe('v1.LineItemCreativeAssociationServiceClient', () => {
       });
     });
 
+    describe('proposal', async () => {
+      const fakePath = '/rendered/path/proposal';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        proposal: 'proposalValue',
+      };
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.proposalPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.proposalPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('proposalPath', () => {
+        const result = client.proposalPath('networkCodeValue', 'proposalValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.proposalPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromProposalName', () => {
+        const result = client.matchNetworkCodeFromProposalName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.proposalPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchProposalFromProposalName', () => {
+        const result = client.matchProposalFromProposalName(fakePath);
+        assert.strictEqual(result, 'proposalValue');
+        assert(
+          (client.pathTemplates.proposalPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('report', async () => {
       const fakePath = '/rendered/path/report';
       const expectedParameters = {
@@ -4748,6 +6407,74 @@ describe('v1.LineItemCreativeAssociationServiceClient', () => {
       });
     });
 
+    describe('trafficForecastSegment', async () => {
+      const fakePath = '/rendered/path/trafficForecastSegment';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        traffic_forecast_segment: 'trafficForecastSegmentValue',
+      };
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.trafficForecastSegmentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.trafficForecastSegmentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('trafficForecastSegmentPath', () => {
+        const result = client.trafficForecastSegmentPath(
+          'networkCodeValue',
+          'trafficForecastSegmentValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.trafficForecastSegmentPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromTrafficForecastSegmentName', () => {
+        const result =
+          client.matchNetworkCodeFromTrafficForecastSegmentName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.trafficForecastSegmentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchTrafficForecastSegmentFromTrafficForecastSegmentName', () => {
+        const result =
+          client.matchTrafficForecastSegmentFromTrafficForecastSegmentName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'trafficForecastSegmentValue');
+        assert(
+          (
+            client.pathTemplates.trafficForecastSegmentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('user', async () => {
       const fakePath = '/rendered/path/user';
       const expectedParameters = {
@@ -4915,6 +6642,116 @@ describe('v1.LineItemCreativeAssociationServiceClient', () => {
         assert.strictEqual(result, 'webPropertyValue');
         assert(
           (client.pathTemplates.webPropertyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('yieldGroup', async () => {
+      const fakePath = '/rendered/path/yieldGroup';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        yield_group: 'yieldGroupValue',
+      };
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.yieldGroupPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.yieldGroupPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('yieldGroupPath', () => {
+        const result = client.yieldGroupPath(
+          'networkCodeValue',
+          'yieldGroupValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.yieldGroupPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromYieldGroupName', () => {
+        const result = client.matchNetworkCodeFromYieldGroupName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.yieldGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchYieldGroupFromYieldGroupName', () => {
+        const result = client.matchYieldGroupFromYieldGroupName(fakePath);
+        assert.strictEqual(result, 'yieldGroupValue');
+        assert(
+          (client.pathTemplates.yieldGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('yieldPartner', async () => {
+      const fakePath = '/rendered/path/yieldPartner';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        yield_partner: 'yieldPartnerValue',
+      };
+      const client =
+        new lineitemcreativeassociationserviceModule.v1.LineItemCreativeAssociationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.yieldPartnerPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.yieldPartnerPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('yieldPartnerPath', () => {
+        const result = client.yieldPartnerPath(
+          'networkCodeValue',
+          'yieldPartnerValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.yieldPartnerPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromYieldPartnerName', () => {
+        const result = client.matchNetworkCodeFromYieldPartnerName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.yieldPartnerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchYieldPartnerFromYieldPartnerName', () => {
+        const result = client.matchYieldPartnerFromYieldPartnerName(fakePath);
+        assert.strictEqual(result, 'yieldPartnerValue');
+        assert(
+          (client.pathTemplates.yieldPartnerPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

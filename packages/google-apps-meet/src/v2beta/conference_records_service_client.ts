@@ -543,7 +543,7 @@ export class ConferenceRecordsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getConferenceRecord request %j', request);
+    this._log.debug('getConferenceRecord request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.apps.meet.v2beta.IConferenceRecord,
@@ -554,7 +554,7 @@ export class ConferenceRecordsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getConferenceRecord response %j', response);
+          this._log.debug('getConferenceRecord response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -569,7 +569,7 @@ export class ConferenceRecordsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getConferenceRecord response %j', response);
+          this._log.debug('getConferenceRecord response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -674,7 +674,7 @@ export class ConferenceRecordsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getParticipant request %j', request);
+    this._log.debug('getParticipant request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.apps.meet.v2beta.IParticipant,
@@ -685,7 +685,7 @@ export class ConferenceRecordsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getParticipant response %j', response);
+          this._log.debug('getParticipant response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -697,7 +697,7 @@ export class ConferenceRecordsServiceClient {
           protos.google.apps.meet.v2beta.IGetParticipantRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getParticipant response %j', response);
+          this._log.debug('getParticipant response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -808,7 +808,7 @@ export class ConferenceRecordsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getParticipantSession request %j', request);
+    this._log.debug('getParticipantSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.apps.meet.v2beta.IParticipantSession,
@@ -819,7 +819,7 @@ export class ConferenceRecordsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getParticipantSession response %j', response);
+          this._log.debug('getParticipantSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -834,7 +834,7 @@ export class ConferenceRecordsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getParticipantSession response %j', response);
+          this._log.debug('getParticipantSession response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -939,7 +939,7 @@ export class ConferenceRecordsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRecording request %j', request);
+    this._log.debug('getRecording request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.apps.meet.v2beta.IRecording,
@@ -950,7 +950,7 @@ export class ConferenceRecordsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getRecording response %j', response);
+          this._log.debug('getRecording response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -962,7 +962,7 @@ export class ConferenceRecordsServiceClient {
           protos.google.apps.meet.v2beta.IGetRecordingRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getRecording response %j', response);
+          this._log.debug('getRecording response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1067,7 +1067,7 @@ export class ConferenceRecordsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getTranscript request %j', request);
+    this._log.debug('getTranscript request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.apps.meet.v2beta.ITranscript,
@@ -1078,7 +1078,7 @@ export class ConferenceRecordsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTranscript response %j', response);
+          this._log.debug('getTranscript response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1090,7 +1090,7 @@ export class ConferenceRecordsServiceClient {
           protos.google.apps.meet.v2beta.IGetTranscriptRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getTranscript response %j', response);
+          this._log.debug('getTranscript response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1206,7 +1206,7 @@ export class ConferenceRecordsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getTranscriptEntry request %j', request);
+    this._log.debug('getTranscriptEntry request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.apps.meet.v2beta.ITranscriptEntry,
@@ -1217,7 +1217,7 @@ export class ConferenceRecordsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTranscriptEntry response %j', response);
+          this._log.debug('getTranscriptEntry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1229,7 +1229,7 @@ export class ConferenceRecordsServiceClient {
           protos.google.apps.meet.v2beta.IGetTranscriptEntryRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getTranscriptEntry response %j', response);
+          this._log.debug('getTranscriptEntry response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1335,7 +1335,7 @@ export class ConferenceRecordsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSmartNote request %j', request);
+    this._log.debug('getSmartNote request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.apps.meet.v2beta.ISmartNote,
@@ -1346,7 +1346,7 @@ export class ConferenceRecordsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSmartNote response %j', response);
+          this._log.debug('getSmartNote response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1358,7 +1358,7 @@ export class ConferenceRecordsServiceClient {
           protos.google.apps.meet.v2beta.IGetSmartNoteRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getSmartNote response %j', response);
+          this._log.debug('getSmartNote response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1502,11 +1502,11 @@ export class ConferenceRecordsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listConferenceRecords values %j', values);
+          this._log.debug('listConferenceRecords values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listConferenceRecords request %j', request);
+    this._log.debug('listConferenceRecords request %j', request);
     return this.innerApiCalls
       .listConferenceRecords(request, options, wrappedCallback)
       ?.then(
@@ -1515,7 +1515,7 @@ export class ConferenceRecordsServiceClient {
           protos.google.apps.meet.v2beta.IListConferenceRecordsRequest | null,
           protos.google.apps.meet.v2beta.IListConferenceRecordsResponse,
         ]) => {
-          this._log.info('listConferenceRecords values %j', response);
+          this._log.debug('listConferenceRecords values %j', response);
           return [response, input, output];
         },
       );
@@ -1573,7 +1573,7 @@ export class ConferenceRecordsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listConferenceRecords stream %j', request);
+    this._log.debug('listConferenceRecords stream %j', request);
     return this.descriptors.page.listConferenceRecords.createStream(
       this.innerApiCalls.listConferenceRecords as GaxCall,
       request,
@@ -1636,7 +1636,7 @@ export class ConferenceRecordsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listConferenceRecords iterate %j', request);
+    this._log.debug('listConferenceRecords iterate %j', request);
     return this.descriptors.page.listConferenceRecords.asyncIterate(
       this.innerApiCalls['listConferenceRecords'] as GaxCall,
       request as {},
@@ -1768,11 +1768,11 @@ export class ConferenceRecordsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listParticipants values %j', values);
+          this._log.debug('listParticipants values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listParticipants request %j', request);
+    this._log.debug('listParticipants request %j', request);
     return this.innerApiCalls
       .listParticipants(request, options, wrappedCallback)
       ?.then(
@@ -1781,7 +1781,7 @@ export class ConferenceRecordsServiceClient {
           protos.google.apps.meet.v2beta.IListParticipantsRequest | null,
           protos.google.apps.meet.v2beta.IListParticipantsResponse,
         ]) => {
-          this._log.info('listParticipants values %j', response);
+          this._log.debug('listParticipants values %j', response);
           return [response, input, output];
         },
       );
@@ -1839,7 +1839,7 @@ export class ConferenceRecordsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listParticipants stream %j', request);
+    this._log.debug('listParticipants stream %j', request);
     return this.descriptors.page.listParticipants.createStream(
       this.innerApiCalls.listParticipants as GaxCall,
       request,
@@ -1902,7 +1902,7 @@ export class ConferenceRecordsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listParticipants iterate %j', request);
+    this._log.debug('listParticipants iterate %j', request);
     return this.descriptors.page.listParticipants.asyncIterate(
       this.innerApiCalls['listParticipants'] as GaxCall,
       request as {},
@@ -2034,11 +2034,11 @@ export class ConferenceRecordsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listParticipantSessions values %j', values);
+          this._log.debug('listParticipantSessions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listParticipantSessions request %j', request);
+    this._log.debug('listParticipantSessions request %j', request);
     return this.innerApiCalls
       .listParticipantSessions(request, options, wrappedCallback)
       ?.then(
@@ -2047,7 +2047,7 @@ export class ConferenceRecordsServiceClient {
           protos.google.apps.meet.v2beta.IListParticipantSessionsRequest | null,
           protos.google.apps.meet.v2beta.IListParticipantSessionsResponse,
         ]) => {
-          this._log.info('listParticipantSessions values %j', response);
+          this._log.debug('listParticipantSessions values %j', response);
           return [response, input, output];
         },
       );
@@ -2105,7 +2105,7 @@ export class ConferenceRecordsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listParticipantSessions stream %j', request);
+    this._log.debug('listParticipantSessions stream %j', request);
     return this.descriptors.page.listParticipantSessions.createStream(
       this.innerApiCalls.listParticipantSessions as GaxCall,
       request,
@@ -2168,7 +2168,7 @@ export class ConferenceRecordsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listParticipantSessions iterate %j', request);
+    this._log.debug('listParticipantSessions iterate %j', request);
     return this.descriptors.page.listParticipantSessions.asyncIterate(
       this.innerApiCalls['listParticipantSessions'] as GaxCall,
       request as {},
@@ -2281,11 +2281,11 @@ export class ConferenceRecordsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRecordings values %j', values);
+          this._log.debug('listRecordings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRecordings request %j', request);
+    this._log.debug('listRecordings request %j', request);
     return this.innerApiCalls
       .listRecordings(request, options, wrappedCallback)
       ?.then(
@@ -2294,7 +2294,7 @@ export class ConferenceRecordsServiceClient {
           protos.google.apps.meet.v2beta.IListRecordingsRequest | null,
           protos.google.apps.meet.v2beta.IListRecordingsResponse,
         ]) => {
-          this._log.info('listRecordings values %j', response);
+          this._log.debug('listRecordings values %j', response);
           return [response, input, output];
         },
       );
@@ -2342,7 +2342,7 @@ export class ConferenceRecordsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRecordings stream %j', request);
+    this._log.debug('listRecordings stream %j', request);
     return this.descriptors.page.listRecordings.createStream(
       this.innerApiCalls.listRecordings as GaxCall,
       request,
@@ -2395,7 +2395,7 @@ export class ConferenceRecordsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRecordings iterate %j', request);
+    this._log.debug('listRecordings iterate %j', request);
     return this.descriptors.page.listRecordings.asyncIterate(
       this.innerApiCalls['listRecordings'] as GaxCall,
       request as {},
@@ -2514,11 +2514,11 @@ export class ConferenceRecordsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listTranscripts values %j', values);
+          this._log.debug('listTranscripts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listTranscripts request %j', request);
+    this._log.debug('listTranscripts request %j', request);
     return this.innerApiCalls
       .listTranscripts(request, options, wrappedCallback)
       ?.then(
@@ -2527,7 +2527,7 @@ export class ConferenceRecordsServiceClient {
           protos.google.apps.meet.v2beta.IListTranscriptsRequest | null,
           protos.google.apps.meet.v2beta.IListTranscriptsResponse,
         ]) => {
-          this._log.info('listTranscripts values %j', response);
+          this._log.debug('listTranscripts values %j', response);
           return [response, input, output];
         },
       );
@@ -2575,7 +2575,7 @@ export class ConferenceRecordsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTranscripts stream %j', request);
+    this._log.debug('listTranscripts stream %j', request);
     return this.descriptors.page.listTranscripts.createStream(
       this.innerApiCalls.listTranscripts as GaxCall,
       request,
@@ -2628,7 +2628,7 @@ export class ConferenceRecordsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTranscripts iterate %j', request);
+    this._log.debug('listTranscripts iterate %j', request);
     return this.descriptors.page.listTranscripts.asyncIterate(
       this.innerApiCalls['listTranscripts'] as GaxCall,
       request as {},
@@ -2753,11 +2753,11 @@ export class ConferenceRecordsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listTranscriptEntries values %j', values);
+          this._log.debug('listTranscriptEntries values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listTranscriptEntries request %j', request);
+    this._log.debug('listTranscriptEntries request %j', request);
     return this.innerApiCalls
       .listTranscriptEntries(request, options, wrappedCallback)
       ?.then(
@@ -2766,7 +2766,7 @@ export class ConferenceRecordsServiceClient {
           protos.google.apps.meet.v2beta.IListTranscriptEntriesRequest | null,
           protos.google.apps.meet.v2beta.IListTranscriptEntriesResponse,
         ]) => {
-          this._log.info('listTranscriptEntries values %j', response);
+          this._log.debug('listTranscriptEntries values %j', response);
           return [response, input, output];
         },
       );
@@ -2815,7 +2815,7 @@ export class ConferenceRecordsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTranscriptEntries stream %j', request);
+    this._log.debug('listTranscriptEntries stream %j', request);
     return this.descriptors.page.listTranscriptEntries.createStream(
       this.innerApiCalls.listTranscriptEntries as GaxCall,
       request,
@@ -2869,7 +2869,7 @@ export class ConferenceRecordsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTranscriptEntries iterate %j', request);
+    this._log.debug('listTranscriptEntries iterate %j', request);
     return this.descriptors.page.listTranscriptEntries.asyncIterate(
       this.innerApiCalls['listTranscriptEntries'] as GaxCall,
       request as {},
@@ -2981,11 +2981,11 @@ export class ConferenceRecordsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listSmartNotes values %j', values);
+          this._log.debug('listSmartNotes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listSmartNotes request %j', request);
+    this._log.debug('listSmartNotes request %j', request);
     return this.innerApiCalls
       .listSmartNotes(request, options, wrappedCallback)
       ?.then(
@@ -2994,7 +2994,7 @@ export class ConferenceRecordsServiceClient {
           protos.google.apps.meet.v2beta.IListSmartNotesRequest | null,
           protos.google.apps.meet.v2beta.IListSmartNotesResponse,
         ]) => {
-          this._log.info('listSmartNotes values %j', response);
+          this._log.debug('listSmartNotes values %j', response);
           return [response, input, output];
         },
       );
@@ -3041,7 +3041,7 @@ export class ConferenceRecordsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSmartNotes stream %j', request);
+    this._log.debug('listSmartNotes stream %j', request);
     return this.descriptors.page.listSmartNotes.createStream(
       this.innerApiCalls.listSmartNotes as GaxCall,
       request,
@@ -3093,7 +3093,7 @@ export class ConferenceRecordsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSmartNotes iterate %j', request);
+    this._log.debug('listSmartNotes iterate %j', request);
     return this.descriptors.page.listSmartNotes.asyncIterate(
       this.innerApiCalls['listSmartNotes'] as GaxCall,
       request as {},

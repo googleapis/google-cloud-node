@@ -604,7 +604,7 @@ export class NetworkServicesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getEndpointPolicy request %j', request);
+    this._log.debug('getEndpointPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
@@ -615,7 +615,7 @@ export class NetworkServicesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getEndpointPolicy response %j', response);
+          this._log.debug('getEndpointPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -630,7 +630,7 @@ export class NetworkServicesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getEndpointPolicy response %j', response);
+          this._log.debug('getEndpointPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -771,11 +771,11 @@ export class NetworkServicesClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createEndpointPolicy response %j', rawResponse);
+          this._log.debug('createEndpointPolicy response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createEndpointPolicy request %j', request);
+    this._log.debug('createEndpointPolicy request %j', request);
     return this.innerApiCalls
       .createEndpointPolicy(request, options, wrappedCallback)
       ?.then(
@@ -787,7 +787,7 @@ export class NetworkServicesClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createEndpointPolicy response %j', rawResponse);
+          this._log.debug('createEndpointPolicy response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -946,11 +946,11 @@ export class NetworkServicesClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateEndpointPolicy response %j', rawResponse);
+          this._log.debug('updateEndpointPolicy response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateEndpointPolicy request %j', request);
+    this._log.debug('updateEndpointPolicy request %j', request);
     return this.innerApiCalls
       .updateEndpointPolicy(request, options, wrappedCallback)
       ?.then(
@@ -962,7 +962,7 @@ export class NetworkServicesClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateEndpointPolicy response %j', rawResponse);
+          this._log.debug('updateEndpointPolicy response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1116,11 +1116,11 @@ export class NetworkServicesClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteEndpointPolicy response %j', rawResponse);
+          this._log.debug('deleteEndpointPolicy response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteEndpointPolicy request %j', request);
+    this._log.debug('deleteEndpointPolicy request %j', request);
     return this.innerApiCalls
       .deleteEndpointPolicy(request, options, wrappedCallback)
       ?.then(
@@ -1132,7 +1132,7 @@ export class NetworkServicesClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteEndpointPolicy response %j', rawResponse);
+          this._log.debug('deleteEndpointPolicy response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1283,11 +1283,11 @@ export class NetworkServicesClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listEndpointPolicies values %j', values);
+          this._log.debug('listEndpointPolicies values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listEndpointPolicies request %j', request);
+    this._log.debug('listEndpointPolicies request %j', request);
     return this.innerApiCalls
       .listEndpointPolicies(request, options, wrappedCallback)
       ?.then(
@@ -1296,7 +1296,7 @@ export class NetworkServicesClient {
           protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest | null,
           protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesResponse,
         ]) => {
-          this._log.info('listEndpointPolicies values %j', response);
+          this._log.debug('listEndpointPolicies values %j', response);
           return [response, input, output];
         },
       );
@@ -1344,7 +1344,7 @@ export class NetworkServicesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEndpointPolicies stream %j', request);
+    this._log.debug('listEndpointPolicies stream %j', request);
     return this.descriptors.page.listEndpointPolicies.createStream(
       this.innerApiCalls.listEndpointPolicies as GaxCall,
       request,
@@ -1397,7 +1397,7 @@ export class NetworkServicesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEndpointPolicies iterate %j', request);
+    this._log.debug('listEndpointPolicies iterate %j', request);
     return this.descriptors.page.listEndpointPolicies.asyncIterate(
       this.innerApiCalls['listEndpointPolicies'] as GaxCall,
       request as {},

@@ -2179,6 +2179,103 @@ export namespace google {
                     CONSENT_DENIED = 2
                 }
 
+                /** Properties of a CallInfo. */
+                interface ICallInfo {
+
+                    /** CallInfo startTimestamp */
+                    startTimestamp?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a CallInfo. */
+                class CallInfo implements ICallInfo {
+
+                    /**
+                     * Constructs a new CallInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.ICallInfo);
+
+                    /** CallInfo startTimestamp. */
+                    public startTimestamp?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new CallInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CallInfo instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.ICallInfo): google.ads.datamanager.v1.CallInfo;
+
+                    /**
+                     * Encodes the specified CallInfo message. Does not implicitly {@link google.ads.datamanager.v1.CallInfo.verify|verify} messages.
+                     * @param message CallInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.ICallInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CallInfo message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.CallInfo.verify|verify} messages.
+                     * @param message CallInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.ICallInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CallInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CallInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.CallInfo;
+
+                    /**
+                     * Decodes a CallInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CallInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.CallInfo;
+
+                    /**
+                     * Verifies a CallInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CallInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CallInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.CallInfo;
+
+                    /**
+                     * Creates a plain object from a CallInfo message. Also converts values to other types if specified.
+                     * @param message CallInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.CallInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CallInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CallInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a CartData. */
                 interface ICartData {
 
@@ -3549,6 +3646,7 @@ export namespace google {
                     INVALID_NUMBER_FORMAT = 27,
                     INVALID_CONVERSION_ACTION_ID = 28,
                     INVALID_CONVERSION_ACTION_TYPE = 29,
+                    ENCRYPTION_NOT_SUPPORTED = 132,
                     INVALID_CURRENCY_CODE = 30,
                     INVALID_EVENT = 31,
                     TOO_MANY_EVENTS = 32,
@@ -3647,7 +3745,12 @@ export namespace google {
                     INVALID_REMOVE_AS_OF_TIME = 125,
                     REQUEST_TOO_OLD = 126,
                     CONVERSION_ACTION_TOO_RECENTLY_CREATED = 127,
-                    INVALID_AD_IDENTIFIER_FOR_ACCOUNT = 128
+                    INVALID_AD_IDENTIFIER_FOR_ACCOUNT = 128,
+                    UNSUPPORTED_ACCOUNT_TYPE_FOR_USER_LIST_DIRECT_LICENSE = 129,
+                    DUPLICATE_ELEMENTS = 130,
+                    UNSUPPORTED_BASELINE_LOCATION = 131,
+                    CONVERSION_PRECEDES_CALL = 133,
+                    INVALID_DATE = 134
                 }
 
                 /** Properties of an Event. */
@@ -3721,6 +3824,9 @@ export namespace google {
 
                     /** Event appInstanceId */
                     appInstanceId?: (string|null);
+
+                    /** Event callInfo */
+                    callInfo?: (google.ads.datamanager.v1.ICallInfo|null);
                 }
 
                 /** Represents an Event. */
@@ -3800,6 +3906,9 @@ export namespace google {
 
                     /** Event appInstanceId. */
                     public appInstanceId: string;
+
+                    /** Event callInfo. */
+                    public callInfo?: (google.ads.datamanager.v1.ICallInfo|null);
 
                     /**
                      * Creates a new Event instance using the specified properties.
@@ -3917,6 +4026,9 @@ export namespace google {
 
                     /** AdIdentifiers visitorPpid */
                     visitorPpid?: (string|null);
+
+                    /** AdIdentifiers leadId */
+                    leadId?: (string|null);
                 }
 
                 /** Represents an AdIdentifiers. */
@@ -3963,6 +4075,9 @@ export namespace google {
 
                     /** AdIdentifiers visitorPpid. */
                     public visitorPpid: string;
+
+                    /** AdIdentifiers leadId. */
+                    public leadId: string;
 
                     /**
                      * Creates a new AdIdentifiers instance using the specified properties.
@@ -6755,6 +6870,9 @@ export namespace google {
 
                     /** ErrorCount reason */
                     reason?: (google.ads.datamanager.v1.ProcessingErrorReason|keyof typeof google.ads.datamanager.v1.ProcessingErrorReason|null);
+
+                    /** ErrorCount recordIndices */
+                    recordIndices?: (number[]|null);
                 }
 
                 /** Represents an ErrorCount. */
@@ -6771,6 +6889,9 @@ export namespace google {
 
                     /** ErrorCount reason. */
                     public reason: (google.ads.datamanager.v1.ProcessingErrorReason|keyof typeof google.ads.datamanager.v1.ProcessingErrorReason);
+
+                    /** ErrorCount recordIndices. */
+                    public recordIndices: number[];
 
                     /**
                      * Creates a new ErrorCount instance using the specified properties.
@@ -6955,6 +7076,9 @@ export namespace google {
 
                     /** WarningCount reason */
                     reason?: (google.ads.datamanager.v1.ProcessingWarningReason|keyof typeof google.ads.datamanager.v1.ProcessingWarningReason|null);
+
+                    /** WarningCount recordIndices */
+                    recordIndices?: (number[]|null);
                 }
 
                 /** Represents a WarningCount. */
@@ -6971,6 +7095,9 @@ export namespace google {
 
                     /** WarningCount reason. */
                     public reason: (google.ads.datamanager.v1.ProcessingWarningReason|keyof typeof google.ads.datamanager.v1.ProcessingWarningReason);
+
+                    /** WarningCount recordIndices. */
+                    public recordIndices: number[];
 
                     /**
                      * Creates a new WarningCount instance using the specified properties.
@@ -7096,7 +7223,12 @@ export namespace google {
                     PROCESSING_ERROR_REASON_INVALID_CLICK = 41,
                     PROCESSING_ERROR_REASON_INVALID_OPERATING_ACCOUNT_FOR_CLICK = 42,
                     PROCESSING_ERROR_REASON_CLICK_NOT_FOUND = 43,
-                    PROCESSING_ERROR_REASON_EXTERNAL_ATTRIBUTION_DATA_MISSING = 44
+                    PROCESSING_ERROR_REASON_EXTERNAL_ATTRIBUTION_DATA_MISSING = 44,
+                    PROCESSING_ERROR_REASON_DESTINATION_TOO_RECENTLY_CREATED = 45,
+                    PROCESSING_ERROR_REASON_EXPIRED_CLICK = 46,
+                    PROCESSING_ERROR_REASON_TOO_RECENT_CALL = 47,
+                    PROCESSING_ERROR_REASON_EXPIRED_CALL = 48,
+                    PROCESSING_ERROR_REASON_INVALID_CALL = 49
                 }
 
                 /** ProcessingWarningReason enum. */
@@ -7110,7 +7242,9 @@ export namespace google {
                     PROCESSING_WARNING_REASON_INVALID_KEK = 6,
                     PROCESSING_WARNING_REASON_USER_IDENTIFIER_DECRYPTION_ERROR = 7,
                     PROCESSING_WARNING_REASON_INTERNAL_ERROR = 8,
-                    PROCESSING_WARNING_REASON_AWS_AUTH_FAILED = 9
+                    PROCESSING_WARNING_REASON_AWS_AUTH_FAILED = 9,
+                    PROCESSING_WARNING_REASON_CUSTOM_VARIABLE_NOT_ENABLED = 10,
+                    PROCESSING_WARNING_REASON_CUSTOM_VARIABLE_NOT_PREDEFINED = 11
                 }
 
                 /** Properties of a FieldWarning. */
@@ -7238,7 +7372,8 @@ export namespace google {
                     WARNING_REASON_INVALID_CONTINENT_CODE = 11,
                     WARNING_REASON_INVALID_DEVICE_CATEGORY = 12,
                     WARNING_REASON_INVALID_DEVICE_SCREEN_RESOLUTION = 13,
-                    WARNING_REASON_INVALID_MERCHANT_ID = 14
+                    WARNING_REASON_INVALID_MERCHANT_ID = 14,
+                    WARNING_REASON_INVALID_NUMBER_FORMAT = 15
                 }
 
                 /** Properties of a RequestStatusPerDestination. */
@@ -11401,6 +11536,947 @@ export namespace google {
                     FEATURE_SET_UNSPECIFIED = 0,
                     FEATURE_SET_AUDIENCE_AND_EVENT_MANAGEMENT = 1,
                     FEATURE_SET_AD_EVENT_MANAGEMENT = 2
+                }
+
+                /** Properties of a PartnerMatchReportEntry. */
+                interface IPartnerMatchReportEntry {
+
+                    /** PartnerMatchReportEntry advertiserAccount */
+                    advertiserAccount?: (google.ads.datamanager.v1.IPartnerMatchAdvertiserAccount|null);
+
+                    /** PartnerMatchReportEntry campaign */
+                    campaign?: (google.ads.datamanager.v1.IPartnerMatchCampaign|null);
+
+                    /** PartnerMatchReportEntry adGroup */
+                    adGroup?: (google.ads.datamanager.v1.IPartnerMatchAdGroup|null);
+
+                    /** PartnerMatchReportEntry userList */
+                    userList?: (google.ads.datamanager.v1.IPartnerMatchUserList|null);
+
+                    /** PartnerMatchReportEntry impressionCount */
+                    impressionCount?: (number|Long|string|null);
+
+                    /** PartnerMatchReportEntry mediaCost */
+                    mediaCost?: (google.type.IMoney|null);
+
+                    /** PartnerMatchReportEntry lineItem */
+                    lineItem?: (google.ads.datamanager.v1.IPartnerMatchLineItem|null);
+
+                    /** PartnerMatchReportEntry dataFees */
+                    dataFees?: (google.type.IMoney|null);
+                }
+
+                /** Represents a PartnerMatchReportEntry. */
+                class PartnerMatchReportEntry implements IPartnerMatchReportEntry {
+
+                    /**
+                     * Constructs a new PartnerMatchReportEntry.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IPartnerMatchReportEntry);
+
+                    /** PartnerMatchReportEntry advertiserAccount. */
+                    public advertiserAccount?: (google.ads.datamanager.v1.IPartnerMatchAdvertiserAccount|null);
+
+                    /** PartnerMatchReportEntry campaign. */
+                    public campaign?: (google.ads.datamanager.v1.IPartnerMatchCampaign|null);
+
+                    /** PartnerMatchReportEntry adGroup. */
+                    public adGroup?: (google.ads.datamanager.v1.IPartnerMatchAdGroup|null);
+
+                    /** PartnerMatchReportEntry userList. */
+                    public userList?: (google.ads.datamanager.v1.IPartnerMatchUserList|null);
+
+                    /** PartnerMatchReportEntry impressionCount. */
+                    public impressionCount: (number|Long|string);
+
+                    /** PartnerMatchReportEntry mediaCost. */
+                    public mediaCost?: (google.type.IMoney|null);
+
+                    /** PartnerMatchReportEntry lineItem. */
+                    public lineItem?: (google.ads.datamanager.v1.IPartnerMatchLineItem|null);
+
+                    /** PartnerMatchReportEntry dataFees. */
+                    public dataFees?: (google.type.IMoney|null);
+
+                    /**
+                     * Creates a new PartnerMatchReportEntry instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PartnerMatchReportEntry instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IPartnerMatchReportEntry): google.ads.datamanager.v1.PartnerMatchReportEntry;
+
+                    /**
+                     * Encodes the specified PartnerMatchReportEntry message. Does not implicitly {@link google.ads.datamanager.v1.PartnerMatchReportEntry.verify|verify} messages.
+                     * @param message PartnerMatchReportEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IPartnerMatchReportEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PartnerMatchReportEntry message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.PartnerMatchReportEntry.verify|verify} messages.
+                     * @param message PartnerMatchReportEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IPartnerMatchReportEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PartnerMatchReportEntry message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PartnerMatchReportEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.PartnerMatchReportEntry;
+
+                    /**
+                     * Decodes a PartnerMatchReportEntry message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PartnerMatchReportEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.PartnerMatchReportEntry;
+
+                    /**
+                     * Verifies a PartnerMatchReportEntry message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PartnerMatchReportEntry message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PartnerMatchReportEntry
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.PartnerMatchReportEntry;
+
+                    /**
+                     * Creates a plain object from a PartnerMatchReportEntry message. Also converts values to other types if specified.
+                     * @param message PartnerMatchReportEntry
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.PartnerMatchReportEntry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PartnerMatchReportEntry to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PartnerMatchReportEntry
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PartnerMatchAdvertiserAccount. */
+                interface IPartnerMatchAdvertiserAccount {
+
+                    /** PartnerMatchAdvertiserAccount accountType */
+                    accountType?: (string|null);
+
+                    /** PartnerMatchAdvertiserAccount accountId */
+                    accountId?: (string|null);
+
+                    /** PartnerMatchAdvertiserAccount displayName */
+                    displayName?: (string|null);
+                }
+
+                /** Represents a PartnerMatchAdvertiserAccount. */
+                class PartnerMatchAdvertiserAccount implements IPartnerMatchAdvertiserAccount {
+
+                    /**
+                     * Constructs a new PartnerMatchAdvertiserAccount.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IPartnerMatchAdvertiserAccount);
+
+                    /** PartnerMatchAdvertiserAccount accountType. */
+                    public accountType: string;
+
+                    /** PartnerMatchAdvertiserAccount accountId. */
+                    public accountId: string;
+
+                    /** PartnerMatchAdvertiserAccount displayName. */
+                    public displayName: string;
+
+                    /**
+                     * Creates a new PartnerMatchAdvertiserAccount instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PartnerMatchAdvertiserAccount instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IPartnerMatchAdvertiserAccount): google.ads.datamanager.v1.PartnerMatchAdvertiserAccount;
+
+                    /**
+                     * Encodes the specified PartnerMatchAdvertiserAccount message. Does not implicitly {@link google.ads.datamanager.v1.PartnerMatchAdvertiserAccount.verify|verify} messages.
+                     * @param message PartnerMatchAdvertiserAccount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IPartnerMatchAdvertiserAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PartnerMatchAdvertiserAccount message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.PartnerMatchAdvertiserAccount.verify|verify} messages.
+                     * @param message PartnerMatchAdvertiserAccount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IPartnerMatchAdvertiserAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PartnerMatchAdvertiserAccount message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PartnerMatchAdvertiserAccount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.PartnerMatchAdvertiserAccount;
+
+                    /**
+                     * Decodes a PartnerMatchAdvertiserAccount message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PartnerMatchAdvertiserAccount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.PartnerMatchAdvertiserAccount;
+
+                    /**
+                     * Verifies a PartnerMatchAdvertiserAccount message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PartnerMatchAdvertiserAccount message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PartnerMatchAdvertiserAccount
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.PartnerMatchAdvertiserAccount;
+
+                    /**
+                     * Creates a plain object from a PartnerMatchAdvertiserAccount message. Also converts values to other types if specified.
+                     * @param message PartnerMatchAdvertiserAccount
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.PartnerMatchAdvertiserAccount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PartnerMatchAdvertiserAccount to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PartnerMatchAdvertiserAccount
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PartnerMatchCampaign. */
+                interface IPartnerMatchCampaign {
+
+                    /** PartnerMatchCampaign campaignId */
+                    campaignId?: (number|Long|string|null);
+
+                    /** PartnerMatchCampaign displayName */
+                    displayName?: (string|null);
+                }
+
+                /** Represents a PartnerMatchCampaign. */
+                class PartnerMatchCampaign implements IPartnerMatchCampaign {
+
+                    /**
+                     * Constructs a new PartnerMatchCampaign.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IPartnerMatchCampaign);
+
+                    /** PartnerMatchCampaign campaignId. */
+                    public campaignId: (number|Long|string);
+
+                    /** PartnerMatchCampaign displayName. */
+                    public displayName: string;
+
+                    /**
+                     * Creates a new PartnerMatchCampaign instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PartnerMatchCampaign instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IPartnerMatchCampaign): google.ads.datamanager.v1.PartnerMatchCampaign;
+
+                    /**
+                     * Encodes the specified PartnerMatchCampaign message. Does not implicitly {@link google.ads.datamanager.v1.PartnerMatchCampaign.verify|verify} messages.
+                     * @param message PartnerMatchCampaign message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IPartnerMatchCampaign, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PartnerMatchCampaign message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.PartnerMatchCampaign.verify|verify} messages.
+                     * @param message PartnerMatchCampaign message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IPartnerMatchCampaign, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PartnerMatchCampaign message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PartnerMatchCampaign
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.PartnerMatchCampaign;
+
+                    /**
+                     * Decodes a PartnerMatchCampaign message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PartnerMatchCampaign
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.PartnerMatchCampaign;
+
+                    /**
+                     * Verifies a PartnerMatchCampaign message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PartnerMatchCampaign message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PartnerMatchCampaign
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.PartnerMatchCampaign;
+
+                    /**
+                     * Creates a plain object from a PartnerMatchCampaign message. Also converts values to other types if specified.
+                     * @param message PartnerMatchCampaign
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.PartnerMatchCampaign, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PartnerMatchCampaign to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PartnerMatchCampaign
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PartnerMatchAdGroup. */
+                interface IPartnerMatchAdGroup {
+
+                    /** PartnerMatchAdGroup adGroupId */
+                    adGroupId?: (number|Long|string|null);
+
+                    /** PartnerMatchAdGroup displayName */
+                    displayName?: (string|null);
+                }
+
+                /** Represents a PartnerMatchAdGroup. */
+                class PartnerMatchAdGroup implements IPartnerMatchAdGroup {
+
+                    /**
+                     * Constructs a new PartnerMatchAdGroup.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IPartnerMatchAdGroup);
+
+                    /** PartnerMatchAdGroup adGroupId. */
+                    public adGroupId: (number|Long|string);
+
+                    /** PartnerMatchAdGroup displayName. */
+                    public displayName: string;
+
+                    /**
+                     * Creates a new PartnerMatchAdGroup instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PartnerMatchAdGroup instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IPartnerMatchAdGroup): google.ads.datamanager.v1.PartnerMatchAdGroup;
+
+                    /**
+                     * Encodes the specified PartnerMatchAdGroup message. Does not implicitly {@link google.ads.datamanager.v1.PartnerMatchAdGroup.verify|verify} messages.
+                     * @param message PartnerMatchAdGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IPartnerMatchAdGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PartnerMatchAdGroup message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.PartnerMatchAdGroup.verify|verify} messages.
+                     * @param message PartnerMatchAdGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IPartnerMatchAdGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PartnerMatchAdGroup message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PartnerMatchAdGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.PartnerMatchAdGroup;
+
+                    /**
+                     * Decodes a PartnerMatchAdGroup message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PartnerMatchAdGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.PartnerMatchAdGroup;
+
+                    /**
+                     * Verifies a PartnerMatchAdGroup message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PartnerMatchAdGroup message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PartnerMatchAdGroup
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.PartnerMatchAdGroup;
+
+                    /**
+                     * Creates a plain object from a PartnerMatchAdGroup message. Also converts values to other types if specified.
+                     * @param message PartnerMatchAdGroup
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.PartnerMatchAdGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PartnerMatchAdGroup to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PartnerMatchAdGroup
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PartnerMatchUserList. */
+                interface IPartnerMatchUserList {
+
+                    /** PartnerMatchUserList userListId */
+                    userListId?: (number|Long|string|null);
+
+                    /** PartnerMatchUserList displayName */
+                    displayName?: (string|null);
+                }
+
+                /** Represents a PartnerMatchUserList. */
+                class PartnerMatchUserList implements IPartnerMatchUserList {
+
+                    /**
+                     * Constructs a new PartnerMatchUserList.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IPartnerMatchUserList);
+
+                    /** PartnerMatchUserList userListId. */
+                    public userListId: (number|Long|string);
+
+                    /** PartnerMatchUserList displayName. */
+                    public displayName: string;
+
+                    /**
+                     * Creates a new PartnerMatchUserList instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PartnerMatchUserList instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IPartnerMatchUserList): google.ads.datamanager.v1.PartnerMatchUserList;
+
+                    /**
+                     * Encodes the specified PartnerMatchUserList message. Does not implicitly {@link google.ads.datamanager.v1.PartnerMatchUserList.verify|verify} messages.
+                     * @param message PartnerMatchUserList message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IPartnerMatchUserList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PartnerMatchUserList message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.PartnerMatchUserList.verify|verify} messages.
+                     * @param message PartnerMatchUserList message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IPartnerMatchUserList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PartnerMatchUserList message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PartnerMatchUserList
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.PartnerMatchUserList;
+
+                    /**
+                     * Decodes a PartnerMatchUserList message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PartnerMatchUserList
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.PartnerMatchUserList;
+
+                    /**
+                     * Verifies a PartnerMatchUserList message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PartnerMatchUserList message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PartnerMatchUserList
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.PartnerMatchUserList;
+
+                    /**
+                     * Creates a plain object from a PartnerMatchUserList message. Also converts values to other types if specified.
+                     * @param message PartnerMatchUserList
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.PartnerMatchUserList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PartnerMatchUserList to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PartnerMatchUserList
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PartnerMatchLineItem. */
+                interface IPartnerMatchLineItem {
+
+                    /** PartnerMatchLineItem lineItemId */
+                    lineItemId?: (number|Long|string|null);
+
+                    /** PartnerMatchLineItem displayName */
+                    displayName?: (string|null);
+                }
+
+                /** Represents a PartnerMatchLineItem. */
+                class PartnerMatchLineItem implements IPartnerMatchLineItem {
+
+                    /**
+                     * Constructs a new PartnerMatchLineItem.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IPartnerMatchLineItem);
+
+                    /** PartnerMatchLineItem lineItemId. */
+                    public lineItemId: (number|Long|string);
+
+                    /** PartnerMatchLineItem displayName. */
+                    public displayName: string;
+
+                    /**
+                     * Creates a new PartnerMatchLineItem instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PartnerMatchLineItem instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IPartnerMatchLineItem): google.ads.datamanager.v1.PartnerMatchLineItem;
+
+                    /**
+                     * Encodes the specified PartnerMatchLineItem message. Does not implicitly {@link google.ads.datamanager.v1.PartnerMatchLineItem.verify|verify} messages.
+                     * @param message PartnerMatchLineItem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IPartnerMatchLineItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PartnerMatchLineItem message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.PartnerMatchLineItem.verify|verify} messages.
+                     * @param message PartnerMatchLineItem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IPartnerMatchLineItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PartnerMatchLineItem message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PartnerMatchLineItem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.PartnerMatchLineItem;
+
+                    /**
+                     * Decodes a PartnerMatchLineItem message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PartnerMatchLineItem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.PartnerMatchLineItem;
+
+                    /**
+                     * Verifies a PartnerMatchLineItem message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PartnerMatchLineItem message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PartnerMatchLineItem
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.PartnerMatchLineItem;
+
+                    /**
+                     * Creates a plain object from a PartnerMatchLineItem message. Also converts values to other types if specified.
+                     * @param message PartnerMatchLineItem
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.PartnerMatchLineItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PartnerMatchLineItem to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PartnerMatchLineItem
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a ReportingService */
+                class ReportingService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new ReportingService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new ReportingService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ReportingService;
+
+                    /**
+                     * Calls RetrievePartnerMatchReport.
+                     * @param request RetrievePartnerMatchReportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RetrievePartnerMatchReportResponse
+                     */
+                    public retrievePartnerMatchReport(request: google.ads.datamanager.v1.IRetrievePartnerMatchReportRequest, callback: google.ads.datamanager.v1.ReportingService.RetrievePartnerMatchReportCallback): void;
+
+                    /**
+                     * Calls RetrievePartnerMatchReport.
+                     * @param request RetrievePartnerMatchReportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public retrievePartnerMatchReport(request: google.ads.datamanager.v1.IRetrievePartnerMatchReportRequest): Promise<google.ads.datamanager.v1.RetrievePartnerMatchReportResponse>;
+                }
+
+                namespace ReportingService {
+
+                    /**
+                     * Callback as used by {@link google.ads.datamanager.v1.ReportingService|retrievePartnerMatchReport}.
+                     * @param error Error, if any
+                     * @param [response] RetrievePartnerMatchReportResponse
+                     */
+                    type RetrievePartnerMatchReportCallback = (error: (Error|null), response?: google.ads.datamanager.v1.RetrievePartnerMatchReportResponse) => void;
+                }
+
+                /** Properties of a RetrievePartnerMatchReportRequest. */
+                interface IRetrievePartnerMatchReportRequest {
+
+                    /** RetrievePartnerMatchReportRequest parent */
+                    parent?: (string|null);
+
+                    /** RetrievePartnerMatchReportRequest currencyCode */
+                    currencyCode?: (string|null);
+
+                    /** RetrievePartnerMatchReportRequest filter */
+                    filter?: (string|null);
+
+                    /** RetrievePartnerMatchReportRequest startDate */
+                    startDate?: (number|Long|string|null);
+
+                    /** RetrievePartnerMatchReportRequest endDate */
+                    endDate?: (number|Long|string|null);
+
+                    /** RetrievePartnerMatchReportRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** RetrievePartnerMatchReportRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a RetrievePartnerMatchReportRequest. */
+                class RetrievePartnerMatchReportRequest implements IRetrievePartnerMatchReportRequest {
+
+                    /**
+                     * Constructs a new RetrievePartnerMatchReportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IRetrievePartnerMatchReportRequest);
+
+                    /** RetrievePartnerMatchReportRequest parent. */
+                    public parent: string;
+
+                    /** RetrievePartnerMatchReportRequest currencyCode. */
+                    public currencyCode: string;
+
+                    /** RetrievePartnerMatchReportRequest filter. */
+                    public filter: string;
+
+                    /** RetrievePartnerMatchReportRequest startDate. */
+                    public startDate: (number|Long|string);
+
+                    /** RetrievePartnerMatchReportRequest endDate. */
+                    public endDate: (number|Long|string);
+
+                    /** RetrievePartnerMatchReportRequest pageSize. */
+                    public pageSize: number;
+
+                    /** RetrievePartnerMatchReportRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new RetrievePartnerMatchReportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetrievePartnerMatchReportRequest instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IRetrievePartnerMatchReportRequest): google.ads.datamanager.v1.RetrievePartnerMatchReportRequest;
+
+                    /**
+                     * Encodes the specified RetrievePartnerMatchReportRequest message. Does not implicitly {@link google.ads.datamanager.v1.RetrievePartnerMatchReportRequest.verify|verify} messages.
+                     * @param message RetrievePartnerMatchReportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IRetrievePartnerMatchReportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetrievePartnerMatchReportRequest message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.RetrievePartnerMatchReportRequest.verify|verify} messages.
+                     * @param message RetrievePartnerMatchReportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IRetrievePartnerMatchReportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetrievePartnerMatchReportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetrievePartnerMatchReportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.RetrievePartnerMatchReportRequest;
+
+                    /**
+                     * Decodes a RetrievePartnerMatchReportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetrievePartnerMatchReportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.RetrievePartnerMatchReportRequest;
+
+                    /**
+                     * Verifies a RetrievePartnerMatchReportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetrievePartnerMatchReportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetrievePartnerMatchReportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.RetrievePartnerMatchReportRequest;
+
+                    /**
+                     * Creates a plain object from a RetrievePartnerMatchReportRequest message. Also converts values to other types if specified.
+                     * @param message RetrievePartnerMatchReportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.RetrievePartnerMatchReportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetrievePartnerMatchReportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrievePartnerMatchReportRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RetrievePartnerMatchReportResponse. */
+                interface IRetrievePartnerMatchReportResponse {
+
+                    /** RetrievePartnerMatchReportResponse partnerMatchReportEntries */
+                    partnerMatchReportEntries?: (google.ads.datamanager.v1.IPartnerMatchReportEntry[]|null);
+
+                    /** RetrievePartnerMatchReportResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a RetrievePartnerMatchReportResponse. */
+                class RetrievePartnerMatchReportResponse implements IRetrievePartnerMatchReportResponse {
+
+                    /**
+                     * Constructs a new RetrievePartnerMatchReportResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IRetrievePartnerMatchReportResponse);
+
+                    /** RetrievePartnerMatchReportResponse partnerMatchReportEntries. */
+                    public partnerMatchReportEntries: google.ads.datamanager.v1.IPartnerMatchReportEntry[];
+
+                    /** RetrievePartnerMatchReportResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new RetrievePartnerMatchReportResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetrievePartnerMatchReportResponse instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IRetrievePartnerMatchReportResponse): google.ads.datamanager.v1.RetrievePartnerMatchReportResponse;
+
+                    /**
+                     * Encodes the specified RetrievePartnerMatchReportResponse message. Does not implicitly {@link google.ads.datamanager.v1.RetrievePartnerMatchReportResponse.verify|verify} messages.
+                     * @param message RetrievePartnerMatchReportResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IRetrievePartnerMatchReportResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetrievePartnerMatchReportResponse message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.RetrievePartnerMatchReportResponse.verify|verify} messages.
+                     * @param message RetrievePartnerMatchReportResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IRetrievePartnerMatchReportResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetrievePartnerMatchReportResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetrievePartnerMatchReportResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.RetrievePartnerMatchReportResponse;
+
+                    /**
+                     * Decodes a RetrievePartnerMatchReportResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetrievePartnerMatchReportResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.RetrievePartnerMatchReportResponse;
+
+                    /**
+                     * Verifies a RetrievePartnerMatchReportResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetrievePartnerMatchReportResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetrievePartnerMatchReportResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.RetrievePartnerMatchReportResponse;
+
+                    /**
+                     * Creates a plain object from a RetrievePartnerMatchReportResponse message. Also converts values to other types if specified.
+                     * @param message RetrievePartnerMatchReportResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.RetrievePartnerMatchReportResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetrievePartnerMatchReportResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrievePartnerMatchReportResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a UserList. */
@@ -23510,6 +24586,119 @@ export namespace google {
 
             /**
              * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace type. */
+    namespace type {
+
+        /** Properties of a Money. */
+        interface IMoney {
+
+            /** Money currencyCode */
+            currencyCode?: (string|null);
+
+            /** Money units */
+            units?: (number|Long|string|null);
+
+            /** Money nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Money. */
+        class Money implements IMoney {
+
+            /**
+             * Constructs a new Money.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IMoney);
+
+            /** Money currencyCode. */
+            public currencyCode: string;
+
+            /** Money units. */
+            public units: (number|Long|string);
+
+            /** Money nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Money instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Money instance
+             */
+            public static create(properties?: google.type.IMoney): google.type.Money;
+
+            /**
+             * Encodes the specified Money message. Does not implicitly {@link google.type.Money.verify|verify} messages.
+             * @param message Money message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IMoney, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Money message, length delimited. Does not implicitly {@link google.type.Money.verify|verify} messages.
+             * @param message Money message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IMoney, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Money message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Money
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Money;
+
+            /**
+             * Decodes a Money message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Money
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Money;
+
+            /**
+             * Verifies a Money message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Money message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Money
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Money;
+
+            /**
+             * Creates a plain object from a Money message. Also converts values to other types if specified.
+             * @param message Money
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Money, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Money to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Money
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

@@ -17,16 +17,20 @@
 // ** All changes to this file may be overwritten. **
 
 import {
+  AclConfigServiceClient,
   AssistantServiceClient,
   CmekConfigServiceClient,
+  CollectionServiceClient,
   CompletionServiceClient,
   ControlServiceClient,
   ConversationalSearchServiceClient,
+  DataConnectorServiceClient,
   DataStoreServiceClient,
   DocumentServiceClient,
   EngineServiceClient,
   GroundedGenerationServiceClient,
   IdentityMappingStoreServiceClient,
+  LicenseConfigServiceClient,
   ProjectServiceClient,
   RankServiceClient,
   RecommendationServiceClient,
@@ -38,13 +42,21 @@ import {
   SiteSearchEngineServiceClient,
   UserEventServiceClient,
   UserLicenseServiceClient,
+  UserStoreServiceClient,
+  WidgetConfigServiceClient,
 } from '@google-cloud/discoveryengine';
 
 // check that the client class type name can be used
+function doStuffWithAclConfigServiceClient(client: AclConfigServiceClient) {
+  client.close();
+}
 function doStuffWithAssistantServiceClient(client: AssistantServiceClient) {
   client.close();
 }
 function doStuffWithCmekConfigServiceClient(client: CmekConfigServiceClient) {
+  client.close();
+}
+function doStuffWithCollectionServiceClient(client: CollectionServiceClient) {
   client.close();
 }
 function doStuffWithCompletionServiceClient(client: CompletionServiceClient) {
@@ -55,6 +67,11 @@ function doStuffWithControlServiceClient(client: ControlServiceClient) {
 }
 function doStuffWithConversationalSearchServiceClient(
   client: ConversationalSearchServiceClient,
+) {
+  client.close();
+}
+function doStuffWithDataConnectorServiceClient(
+  client: DataConnectorServiceClient,
 ) {
   client.close();
 }
@@ -74,6 +91,11 @@ function doStuffWithGroundedGenerationServiceClient(
 }
 function doStuffWithIdentityMappingStoreServiceClient(
   client: IdentityMappingStoreServiceClient,
+) {
+  client.close();
+}
+function doStuffWithLicenseConfigServiceClient(
+  client: LicenseConfigServiceClient,
 ) {
   client.close();
 }
@@ -118,14 +140,28 @@ function doStuffWithUserEventServiceClient(client: UserEventServiceClient) {
 function doStuffWithUserLicenseServiceClient(client: UserLicenseServiceClient) {
   client.close();
 }
+function doStuffWithUserStoreServiceClient(client: UserStoreServiceClient) {
+  client.close();
+}
+function doStuffWithWidgetConfigServiceClient(
+  client: WidgetConfigServiceClient,
+) {
+  client.close();
+}
 
 function main() {
+  // check that the client instance can be created
+  const aclConfigServiceClient = new AclConfigServiceClient();
+  doStuffWithAclConfigServiceClient(aclConfigServiceClient);
   // check that the client instance can be created
   const assistantServiceClient = new AssistantServiceClient();
   doStuffWithAssistantServiceClient(assistantServiceClient);
   // check that the client instance can be created
   const cmekConfigServiceClient = new CmekConfigServiceClient();
   doStuffWithCmekConfigServiceClient(cmekConfigServiceClient);
+  // check that the client instance can be created
+  const collectionServiceClient = new CollectionServiceClient();
+  doStuffWithCollectionServiceClient(collectionServiceClient);
   // check that the client instance can be created
   const completionServiceClient = new CompletionServiceClient();
   doStuffWithCompletionServiceClient(completionServiceClient);
@@ -138,6 +174,9 @@ function main() {
   doStuffWithConversationalSearchServiceClient(
     conversationalSearchServiceClient,
   );
+  // check that the client instance can be created
+  const dataConnectorServiceClient = new DataConnectorServiceClient();
+  doStuffWithDataConnectorServiceClient(dataConnectorServiceClient);
   // check that the client instance can be created
   const dataStoreServiceClient = new DataStoreServiceClient();
   doStuffWithDataStoreServiceClient(dataStoreServiceClient);
@@ -156,6 +195,9 @@ function main() {
   doStuffWithIdentityMappingStoreServiceClient(
     identityMappingStoreServiceClient,
   );
+  // check that the client instance can be created
+  const licenseConfigServiceClient = new LicenseConfigServiceClient();
+  doStuffWithLicenseConfigServiceClient(licenseConfigServiceClient);
   // check that the client instance can be created
   const projectServiceClient = new ProjectServiceClient();
   doStuffWithProjectServiceClient(projectServiceClient);
@@ -189,6 +231,12 @@ function main() {
   // check that the client instance can be created
   const userLicenseServiceClient = new UserLicenseServiceClient();
   doStuffWithUserLicenseServiceClient(userLicenseServiceClient);
+  // check that the client instance can be created
+  const userStoreServiceClient = new UserStoreServiceClient();
+  doStuffWithUserStoreServiceClient(userStoreServiceClient);
+  // check that the client instance can be created
+  const widgetConfigServiceClient = new WidgetConfigServiceClient();
+  doStuffWithWidgetConfigServiceClient(widgetConfigServiceClient);
 }
 
 main();

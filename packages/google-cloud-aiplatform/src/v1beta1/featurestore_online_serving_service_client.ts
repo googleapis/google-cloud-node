@@ -735,7 +735,7 @@ export class FeaturestoreOnlineServingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('readFeatureValues request %j', request);
+    this._log.debug('readFeatureValues request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesResponse,
@@ -746,7 +746,7 @@ export class FeaturestoreOnlineServingServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('readFeatureValues response %j', response);
+          this._log.debug('readFeatureValues response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -761,7 +761,7 @@ export class FeaturestoreOnlineServingServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('readFeatureValues response %j', response);
+          this._log.debug('readFeatureValues response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -890,7 +890,7 @@ export class FeaturestoreOnlineServingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('writeFeatureValues request %j', request);
+    this._log.debug('writeFeatureValues request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IWriteFeatureValuesResponse,
@@ -901,7 +901,7 @@ export class FeaturestoreOnlineServingServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('writeFeatureValues response %j', response);
+          this._log.debug('writeFeatureValues response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -916,7 +916,7 @@ export class FeaturestoreOnlineServingServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('writeFeatureValues response %j', response);
+          this._log.debug('writeFeatureValues response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -983,7 +983,7 @@ export class FeaturestoreOnlineServingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('streamingReadFeatureValues stream %j', options);
+    this._log.debug('streamingReadFeatureValues stream %j', options);
     return this.innerApiCalls.streamingReadFeatureValues(request, options);
   }
 

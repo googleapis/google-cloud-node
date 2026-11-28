@@ -552,7 +552,7 @@ export class AssistantServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAssistantSession request %j', request);
+    this._log.debug('getAssistantSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.ces.v1beta.IAssistantSession,
@@ -563,7 +563,7 @@ export class AssistantServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAssistantSession response %j', response);
+          this._log.debug('getAssistantSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -578,7 +578,7 @@ export class AssistantServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAssistantSession response %j', response);
+          this._log.debug('getAssistantSession response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -697,7 +697,7 @@ export class AssistantServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createAssistantSession request %j', request);
+    this._log.debug('createAssistantSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.ces.v1beta.IAssistantSession,
@@ -708,7 +708,7 @@ export class AssistantServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createAssistantSession response %j', response);
+          this._log.debug('createAssistantSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -723,7 +723,7 @@ export class AssistantServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createAssistantSession response %j', response);
+          this._log.debug('createAssistantSession response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -836,7 +836,7 @@ export class AssistantServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteAssistantSession request %j', request);
+    this._log.debug('deleteAssistantSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -847,7 +847,7 @@ export class AssistantServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteAssistantSession response %j', response);
+          this._log.debug('deleteAssistantSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -862,7 +862,7 @@ export class AssistantServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteAssistantSession response %j', response);
+          this._log.debug('deleteAssistantSession response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -977,7 +977,7 @@ export class AssistantServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('runAssistant request %j', request);
+    this._log.debug('runAssistant request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.ces.v1beta.IRunAssistantResponse,
@@ -988,7 +988,7 @@ export class AssistantServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('runAssistant response %j', response);
+          this._log.debug('runAssistant response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1000,7 +1000,7 @@ export class AssistantServiceClient {
           protos.google.cloud.ces.v1beta.IRunAssistantRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('runAssistant response %j', response);
+          this._log.debug('runAssistant response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1122,7 +1122,7 @@ export class AssistantServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('chatAiAssistant request %j', request);
+    this._log.debug('chatAiAssistant request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.ces.v1beta.IChatAiAssistantResponse,
@@ -1133,7 +1133,7 @@ export class AssistantServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('chatAiAssistant response %j', response);
+          this._log.debug('chatAiAssistant response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1145,7 +1145,7 @@ export class AssistantServiceClient {
           protos.google.cloud.ces.v1beta.IChatAiAssistantRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('chatAiAssistant response %j', response);
+          this._log.debug('chatAiAssistant response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1284,11 +1284,11 @@ export class AssistantServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAssistantSessions values %j', values);
+          this._log.debug('listAssistantSessions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAssistantSessions request %j', request);
+    this._log.debug('listAssistantSessions request %j', request);
     return this.innerApiCalls
       .listAssistantSessions(request, options, wrappedCallback)
       ?.then(
@@ -1297,7 +1297,7 @@ export class AssistantServiceClient {
           protos.google.cloud.ces.v1beta.IListAssistantSessionsRequest | null,
           protos.google.cloud.ces.v1beta.IListAssistantSessionsResponse,
         ]) => {
-          this._log.info('listAssistantSessions values %j', response);
+          this._log.debug('listAssistantSessions values %j', response);
           return [response, input, output];
         },
       );
@@ -1351,7 +1351,7 @@ export class AssistantServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAssistantSessions stream %j', request);
+    this._log.debug('listAssistantSessions stream %j', request);
     return this.descriptors.page.listAssistantSessions.createStream(
       this.innerApiCalls.listAssistantSessions as GaxCall,
       request,
@@ -1410,7 +1410,7 @@ export class AssistantServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAssistantSessions iterate %j', request);
+    this._log.debug('listAssistantSessions iterate %j', request);
     return this.descriptors.page.listAssistantSessions.asyncIterate(
       this.innerApiCalls['listAssistantSessions'] as GaxCall,
       request as {},

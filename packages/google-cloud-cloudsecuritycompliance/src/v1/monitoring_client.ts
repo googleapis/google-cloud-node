@@ -617,7 +617,7 @@ export class MonitoringClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchFrameworkComplianceReport request %j', request);
+    this._log.debug('fetchFrameworkComplianceReport request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.cloudsecuritycompliance.v1.IFrameworkComplianceReport,
@@ -628,7 +628,7 @@ export class MonitoringClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'fetchFrameworkComplianceReport response %j',
             response,
           );
@@ -646,7 +646,7 @@ export class MonitoringClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'fetchFrameworkComplianceReport response %j',
             response,
           );
@@ -775,7 +775,7 @@ export class MonitoringClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('aggregateFrameworkComplianceReport request %j', request);
+    this._log.debug('aggregateFrameworkComplianceReport request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.cloudsecuritycompliance.v1.IAggregateFrameworkComplianceReportResponse,
@@ -786,7 +786,7 @@ export class MonitoringClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'aggregateFrameworkComplianceReport response %j',
             response,
           );
@@ -804,7 +804,7 @@ export class MonitoringClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'aggregateFrameworkComplianceReport response %j',
             response,
           );
@@ -942,11 +942,11 @@ export class MonitoringClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listFrameworkComplianceSummaries values %j', values);
+          this._log.debug('listFrameworkComplianceSummaries values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listFrameworkComplianceSummaries request %j', request);
+    this._log.debug('listFrameworkComplianceSummaries request %j', request);
     return this.innerApiCalls
       .listFrameworkComplianceSummaries(request, options, wrappedCallback)
       ?.then(
@@ -955,7 +955,7 @@ export class MonitoringClient {
           protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworkComplianceSummariesRequest | null,
           protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworkComplianceSummariesResponse,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'listFrameworkComplianceSummaries values %j',
             response,
           );
@@ -1009,7 +1009,7 @@ export class MonitoringClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFrameworkComplianceSummaries stream %j', request);
+    this._log.debug('listFrameworkComplianceSummaries stream %j', request);
     return this.descriptors.page.listFrameworkComplianceSummaries.createStream(
       this.innerApiCalls.listFrameworkComplianceSummaries as GaxCall,
       request,
@@ -1065,7 +1065,7 @@ export class MonitoringClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFrameworkComplianceSummaries iterate %j', request);
+    this._log.debug('listFrameworkComplianceSummaries iterate %j', request);
     return this.descriptors.page.listFrameworkComplianceSummaries.asyncIterate(
       this.innerApiCalls['listFrameworkComplianceSummaries'] as GaxCall,
       request as {},
@@ -1185,11 +1185,11 @@ export class MonitoringClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listFindingSummaries values %j', values);
+          this._log.debug('listFindingSummaries values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listFindingSummaries request %j', request);
+    this._log.debug('listFindingSummaries request %j', request);
     return this.innerApiCalls
       .listFindingSummaries(request, options, wrappedCallback)
       ?.then(
@@ -1198,7 +1198,7 @@ export class MonitoringClient {
           protos.google.cloud.cloudsecuritycompliance.v1.IListFindingSummariesRequest | null,
           protos.google.cloud.cloudsecuritycompliance.v1.IListFindingSummariesResponse,
         ]) => {
-          this._log.info('listFindingSummaries values %j', response);
+          this._log.debug('listFindingSummaries values %j', response);
           return [response, input, output];
         },
       );
@@ -1248,7 +1248,7 @@ export class MonitoringClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFindingSummaries stream %j', request);
+    this._log.debug('listFindingSummaries stream %j', request);
     return this.descriptors.page.listFindingSummaries.createStream(
       this.innerApiCalls.listFindingSummaries as GaxCall,
       request,
@@ -1303,7 +1303,7 @@ export class MonitoringClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFindingSummaries iterate %j', request);
+    this._log.debug('listFindingSummaries iterate %j', request);
     return this.descriptors.page.listFindingSummaries.asyncIterate(
       this.innerApiCalls['listFindingSummaries'] as GaxCall,
       request as {},
@@ -1423,11 +1423,11 @@ export class MonitoringClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listControlComplianceSummaries values %j', values);
+          this._log.debug('listControlComplianceSummaries values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listControlComplianceSummaries request %j', request);
+    this._log.debug('listControlComplianceSummaries request %j', request);
     return this.innerApiCalls
       .listControlComplianceSummaries(request, options, wrappedCallback)
       ?.then(
@@ -1436,7 +1436,7 @@ export class MonitoringClient {
           protos.google.cloud.cloudsecuritycompliance.v1.IListControlComplianceSummariesRequest | null,
           protos.google.cloud.cloudsecuritycompliance.v1.IListControlComplianceSummariesResponse,
         ]) => {
-          this._log.info('listControlComplianceSummaries values %j', response);
+          this._log.debug('listControlComplianceSummaries values %j', response);
           return [response, input, output];
         },
       );
@@ -1487,7 +1487,7 @@ export class MonitoringClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listControlComplianceSummaries stream %j', request);
+    this._log.debug('listControlComplianceSummaries stream %j', request);
     return this.descriptors.page.listControlComplianceSummaries.createStream(
       this.innerApiCalls.listControlComplianceSummaries as GaxCall,
       request,
@@ -1543,7 +1543,7 @@ export class MonitoringClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listControlComplianceSummaries iterate %j', request);
+    this._log.debug('listControlComplianceSummaries iterate %j', request);
     return this.descriptors.page.listControlComplianceSummaries.asyncIterate(
       this.innerApiCalls['listControlComplianceSummaries'] as GaxCall,
       request as {},

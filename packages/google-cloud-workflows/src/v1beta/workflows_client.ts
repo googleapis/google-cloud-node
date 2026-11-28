@@ -569,7 +569,7 @@ export class WorkflowsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getWorkflow request %j', request);
+    this._log.debug('getWorkflow request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.workflows.v1beta.IWorkflow,
@@ -580,7 +580,7 @@ export class WorkflowsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getWorkflow response %j', response);
+          this._log.debug('getWorkflow response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -592,7 +592,7 @@ export class WorkflowsClient {
           protos.google.cloud.workflows.v1beta.IGetWorkflowRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getWorkflow response %j', response);
+          this._log.debug('getWorkflow response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -741,11 +741,11 @@ export class WorkflowsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createWorkflow response %j', rawResponse);
+          this._log.debug('createWorkflow response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createWorkflow request %j', request);
+    this._log.debug('createWorkflow request %j', request);
     return this.innerApiCalls
       .createWorkflow(request, options, wrappedCallback)
       ?.then(
@@ -757,7 +757,7 @@ export class WorkflowsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createWorkflow response %j', rawResponse);
+          this._log.debug('createWorkflow response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -913,11 +913,11 @@ export class WorkflowsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteWorkflow response %j', rawResponse);
+          this._log.debug('deleteWorkflow response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteWorkflow request %j', request);
+    this._log.debug('deleteWorkflow request %j', request);
     return this.innerApiCalls
       .deleteWorkflow(request, options, wrappedCallback)
       ?.then(
@@ -929,7 +929,7 @@ export class WorkflowsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteWorkflow response %j', rawResponse);
+          this._log.debug('deleteWorkflow response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1089,11 +1089,11 @@ export class WorkflowsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateWorkflow response %j', rawResponse);
+          this._log.debug('updateWorkflow response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateWorkflow request %j', request);
+    this._log.debug('updateWorkflow request %j', request);
     return this.innerApiCalls
       .updateWorkflow(request, options, wrappedCallback)
       ?.then(
@@ -1105,7 +1105,7 @@ export class WorkflowsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateWorkflow response %j', rawResponse);
+          this._log.debug('updateWorkflow response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1268,11 +1268,11 @@ export class WorkflowsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listWorkflows values %j', values);
+          this._log.debug('listWorkflows values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listWorkflows request %j', request);
+    this._log.debug('listWorkflows request %j', request);
     return this.innerApiCalls
       .listWorkflows(request, options, wrappedCallback)
       ?.then(
@@ -1281,7 +1281,7 @@ export class WorkflowsClient {
           protos.google.cloud.workflows.v1beta.IListWorkflowsRequest | null,
           protos.google.cloud.workflows.v1beta.IListWorkflowsResponse,
         ]) => {
-          this._log.info('listWorkflows values %j', response);
+          this._log.debug('listWorkflows values %j', response);
           return [response, input, output];
         },
       );
@@ -1340,7 +1340,7 @@ export class WorkflowsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkflows stream %j', request);
+    this._log.debug('listWorkflows stream %j', request);
     return this.descriptors.page.listWorkflows.createStream(
       this.innerApiCalls.listWorkflows as GaxCall,
       request,
@@ -1404,7 +1404,7 @@ export class WorkflowsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkflows iterate %j', request);
+    this._log.debug('listWorkflows iterate %j', request);
     return this.descriptors.page.listWorkflows.asyncIterate(
       this.innerApiCalls['listWorkflows'] as GaxCall,
       request as {},

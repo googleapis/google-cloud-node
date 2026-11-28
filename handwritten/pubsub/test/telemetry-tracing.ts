@@ -20,7 +20,12 @@ import {describe, it, beforeEach} from 'mocha';
 import * as trace from '@opentelemetry/sdk-trace-base';
 import * as otel from '../src/telemetry-tracing';
 import {exporter} from './tracing';
-import {SpanKind} from '@opentelemetry/api';
+import {
+  SpanKind,
+  context as otelContext,
+  trace as otelTrace,
+  ROOT_CONTEXT,
+} from '@opentelemetry/api';
 import sinon = require('sinon');
 import {PubsubMessage} from '../src/publisher';
 import {Duration} from '../src/temporal';
@@ -190,6 +195,56 @@ describe('OpenTelemetryTracer', () => {
         childSpan!.spanContext().traceId,
         'd4cda95b652f4a1592b449d5929fda1b',
       );
+    });
+
+    it('uses ROOT_CONTEXT instead of active context when message has no trace context', () => {
+      const streamSpan = otelTrace
+        .getTracer('grpc-test')
+        .startSpan('grpc.google.pubsub.v1.Subscriber/StreamingPull');
+      const streamContext = otelTrace.setSpan(ROOT_CONTEXT, streamSpan);
+      const activeStub = sinon
+        .stub(otelContext, 'active')
+        .returns(streamContext);
+
+      try {
+        const message1: otel.MessageWithAttributes = {attributes: {}};
+        const message2: otel.MessageWithAttributes = {attributes: {}};
+
+        const span1 = otel.extractSpan(
+          message1,
+          'projects/test/subscriptions/subfoo',
+        );
+        const span2 = otel.extractSpan(
+          message2,
+          'projects/test/subscriptions/subfoo',
+        );
+
+        assert.ok(span1);
+        assert.ok(span2);
+        assert.notStrictEqual(
+          span1.spanContext().traceId,
+          streamSpan.spanContext().traceId,
+        );
+        assert.notStrictEqual(
+          span2.spanContext().traceId,
+          streamSpan.spanContext().traceId,
+        );
+        assert.notStrictEqual(
+          span1.spanContext().traceId,
+          span2.spanContext().traceId,
+        );
+
+        span1.end();
+        span2.end();
+
+        const finishedSpans = exporter.getFinishedSpans();
+        assert.strictEqual(finishedSpans.length, 2);
+        assert.strictEqual(finishedSpans[0].parentSpanContext, undefined);
+        assert.strictEqual(finishedSpans[1].parentSpanContext, undefined);
+      } finally {
+        activeStub.restore();
+        streamSpan.end();
+      }
     });
   });
 

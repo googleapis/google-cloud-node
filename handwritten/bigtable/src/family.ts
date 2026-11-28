@@ -80,6 +80,7 @@ export type SetFamilyMetadataCallback = InstanceCallback<IColumnFamily, ITable>;
 
 /**
  * @private
+ * @deprecated Use {@link TableAdminClient} from @google-cloud/bigtable instead.
  */
 export class FamilyError extends Error {
   code: number;
@@ -106,6 +107,7 @@ export class FamilyError extends Error {
  * const table = instance.table('prezzy');
  * const family = table.family('follows');
  * ```
+ * @deprecated Use {@link TableAdminClient} and {@link GcRuleBuilder} from @google-cloud/bigtable instead.
  */
 export class Family {
   bigtable: Bigtable;
@@ -224,6 +226,7 @@ Please use the format 'follows' or '${table.name}/columnFamilies/my-family'.`);
    *
    * @example <caption>include:samples/api-reference-doc-snippets/family.js</caption>
    * region_tag:bigtable_api_create_family
+   * @deprecated Use {@link TableAdminClient#modifyColumnFamilies} from @google-cloud/bigtable instead.
    */
   create(
     options?: CreateFamilyOptions | CreateFamilyCallback,
@@ -250,6 +253,7 @@ Please use the format 'follows' or '${table.name}/columnFamilies/my-family'.`);
    *
    * @example <caption>include:samples/api-reference-doc-snippets/family.js</caption>
    * region_tag:bigtable_api_del_family
+   * @deprecated Use {@link TableAdminClient#modifyColumnFamilies} from @google-cloud/bigtable instead.
    */
   delete(
     gaxOptions?: CallOptions | DeleteFamilyCallback,
@@ -292,6 +296,7 @@ Please use the format 'follows' or '${table.name}/columnFamilies/my-family'.`);
    *
    * @example <caption>include:samples/api-reference-doc-snippets/family.js</caption>
    * region_tag:bigtable_api_exists_family
+   * @deprecated Use {@link TableAdminClient#getTable} from @google-cloud/bigtable instead.
    */
   exists(
     opts?: CallOptions | FamilyExistsCallback,
@@ -337,6 +342,7 @@ Please use the format 'follows' or '${table.name}/columnFamilies/my-family'.`);
    *
    * @example <caption>include:samples/api-reference-doc-snippets/family.js</caption>
    * region_tag:bigtable_api_get_family
+   * @deprecated Use {@link TableAdminClient#getTable} from @google-cloud/bigtable instead.
    */
   get(
     opts?: GetFamilyOptions | GetFamilyCallback,
@@ -381,6 +387,7 @@ Please use the format 'follows' or '${table.name}/columnFamilies/my-family'.`);
    *
    * @example <caption>include:samples/api-reference-doc-snippets/family.js</caption>
    * region_tag:bigtable_api_get_family_meta
+   * @deprecated Use {@link TableAdminClient#getTable} from @google-cloud/bigtable instead.
    */
   getMetadata(
     opts?: CallOptions | GetFamilyMetadataCallback,
@@ -440,6 +447,7 @@ Please use the format 'follows' or '${table.name}/columnFamilies/my-family'.`);
    *
    * @example <caption>include:samples/api-reference-doc-snippets/family.js</caption>
    * region_tag:bigtable_api_set_family_meta
+   * @deprecated Use {@link TableAdminClient#modifyColumnFamilies} from @google-cloud/bigtable instead.
    */
   setMetadata(
     metadata: SetFamilyMetadataOptions,

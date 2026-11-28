@@ -761,7 +761,7 @@ export class WorkstationsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getWorkstationCluster request %j', request);
+    this._log.debug('getWorkstationCluster request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.workstations.v1.IWorkstationCluster,
@@ -772,7 +772,7 @@ export class WorkstationsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getWorkstationCluster response %j', response);
+          this._log.debug('getWorkstationCluster response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -787,7 +787,7 @@ export class WorkstationsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getWorkstationCluster response %j', response);
+          this._log.debug('getWorkstationCluster response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -904,7 +904,7 @@ export class WorkstationsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getWorkstationConfig request %j', request);
+    this._log.debug('getWorkstationConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.workstations.v1.IWorkstationConfig,
@@ -915,7 +915,7 @@ export class WorkstationsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getWorkstationConfig response %j', response);
+          this._log.debug('getWorkstationConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -930,7 +930,7 @@ export class WorkstationsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getWorkstationConfig response %j', response);
+          this._log.debug('getWorkstationConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1041,7 +1041,7 @@ export class WorkstationsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getWorkstation request %j', request);
+    this._log.debug('getWorkstation request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.workstations.v1.IWorkstation,
@@ -1052,7 +1052,7 @@ export class WorkstationsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getWorkstation response %j', response);
+          this._log.debug('getWorkstation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1067,7 +1067,7 @@ export class WorkstationsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getWorkstation response %j', response);
+          this._log.debug('getWorkstation response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1203,7 +1203,7 @@ export class WorkstationsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateAccessToken request %j', request);
+    this._log.debug('generateAccessToken request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.workstations.v1.IGenerateAccessTokenResponse,
@@ -1214,7 +1214,7 @@ export class WorkstationsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateAccessToken response %j', response);
+          this._log.debug('generateAccessToken response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1229,7 +1229,7 @@ export class WorkstationsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('generateAccessToken response %j', response);
+          this._log.debug('generateAccessToken response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1371,11 +1371,11 @@ export class WorkstationsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createWorkstationCluster response %j', rawResponse);
+          this._log.debug('createWorkstationCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createWorkstationCluster request %j', request);
+    this._log.debug('createWorkstationCluster request %j', request);
     return this.innerApiCalls
       .createWorkstationCluster(request, options, wrappedCallback)
       ?.then(
@@ -1387,7 +1387,7 @@ export class WorkstationsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createWorkstationCluster response %j', rawResponse);
+          this._log.debug('createWorkstationCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1550,11 +1550,11 @@ export class WorkstationsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateWorkstationCluster response %j', rawResponse);
+          this._log.debug('updateWorkstationCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateWorkstationCluster request %j', request);
+    this._log.debug('updateWorkstationCluster request %j', request);
     return this.innerApiCalls
       .updateWorkstationCluster(request, options, wrappedCallback)
       ?.then(
@@ -1566,7 +1566,7 @@ export class WorkstationsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateWorkstationCluster response %j', rawResponse);
+          this._log.debug('updateWorkstationCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1729,11 +1729,11 @@ export class WorkstationsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteWorkstationCluster response %j', rawResponse);
+          this._log.debug('deleteWorkstationCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteWorkstationCluster request %j', request);
+    this._log.debug('deleteWorkstationCluster request %j', request);
     return this.innerApiCalls
       .deleteWorkstationCluster(request, options, wrappedCallback)
       ?.then(
@@ -1745,7 +1745,7 @@ export class WorkstationsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteWorkstationCluster response %j', rawResponse);
+          this._log.debug('deleteWorkstationCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1905,11 +1905,11 @@ export class WorkstationsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createWorkstationConfig response %j', rawResponse);
+          this._log.debug('createWorkstationConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createWorkstationConfig request %j', request);
+    this._log.debug('createWorkstationConfig request %j', request);
     return this.innerApiCalls
       .createWorkstationConfig(request, options, wrappedCallback)
       ?.then(
@@ -1921,7 +1921,7 @@ export class WorkstationsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createWorkstationConfig response %j', rawResponse);
+          this._log.debug('createWorkstationConfig response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2084,11 +2084,11 @@ export class WorkstationsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateWorkstationConfig response %j', rawResponse);
+          this._log.debug('updateWorkstationConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateWorkstationConfig request %j', request);
+    this._log.debug('updateWorkstationConfig request %j', request);
     return this.innerApiCalls
       .updateWorkstationConfig(request, options, wrappedCallback)
       ?.then(
@@ -2100,7 +2100,7 @@ export class WorkstationsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateWorkstationConfig response %j', rawResponse);
+          this._log.debug('updateWorkstationConfig response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2263,11 +2263,11 @@ export class WorkstationsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteWorkstationConfig response %j', rawResponse);
+          this._log.debug('deleteWorkstationConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteWorkstationConfig request %j', request);
+    this._log.debug('deleteWorkstationConfig request %j', request);
     return this.innerApiCalls
       .deleteWorkstationConfig(request, options, wrappedCallback)
       ?.then(
@@ -2279,7 +2279,7 @@ export class WorkstationsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteWorkstationConfig response %j', rawResponse);
+          this._log.debug('deleteWorkstationConfig response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2443,11 +2443,11 @@ export class WorkstationsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createWorkstation response %j', rawResponse);
+          this._log.debug('createWorkstation response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createWorkstation request %j', request);
+    this._log.debug('createWorkstation request %j', request);
     return this.innerApiCalls
       .createWorkstation(request, options, wrappedCallback)
       ?.then(
@@ -2459,7 +2459,7 @@ export class WorkstationsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createWorkstation response %j', rawResponse);
+          this._log.debug('createWorkstation response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2621,11 +2621,11 @@ export class WorkstationsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateWorkstation response %j', rawResponse);
+          this._log.debug('updateWorkstation response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateWorkstation request %j', request);
+    this._log.debug('updateWorkstation request %j', request);
     return this.innerApiCalls
       .updateWorkstation(request, options, wrappedCallback)
       ?.then(
@@ -2637,7 +2637,7 @@ export class WorkstationsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateWorkstation response %j', rawResponse);
+          this._log.debug('updateWorkstation response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2796,11 +2796,11 @@ export class WorkstationsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteWorkstation response %j', rawResponse);
+          this._log.debug('deleteWorkstation response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteWorkstation request %j', request);
+    this._log.debug('deleteWorkstation request %j', request);
     return this.innerApiCalls
       .deleteWorkstation(request, options, wrappedCallback)
       ?.then(
@@ -2812,7 +2812,7 @@ export class WorkstationsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteWorkstation response %j', rawResponse);
+          this._log.debug('deleteWorkstation response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2974,11 +2974,11 @@ export class WorkstationsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('startWorkstation response %j', rawResponse);
+          this._log.debug('startWorkstation response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('startWorkstation request %j', request);
+    this._log.debug('startWorkstation request %j', request);
     return this.innerApiCalls
       .startWorkstation(request, options, wrappedCallback)
       ?.then(
@@ -2990,7 +2990,7 @@ export class WorkstationsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('startWorkstation response %j', rawResponse);
+          this._log.debug('startWorkstation response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3149,11 +3149,11 @@ export class WorkstationsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('stopWorkstation response %j', rawResponse);
+          this._log.debug('stopWorkstation response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('stopWorkstation request %j', request);
+    this._log.debug('stopWorkstation request %j', request);
     return this.innerApiCalls
       .stopWorkstation(request, options, wrappedCallback)
       ?.then(
@@ -3165,7 +3165,7 @@ export class WorkstationsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('stopWorkstation response %j', rawResponse);
+          this._log.debug('stopWorkstation response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3316,11 +3316,11 @@ export class WorkstationsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listWorkstationClusters values %j', values);
+          this._log.debug('listWorkstationClusters values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listWorkstationClusters request %j', request);
+    this._log.debug('listWorkstationClusters request %j', request);
     return this.innerApiCalls
       .listWorkstationClusters(request, options, wrappedCallback)
       ?.then(
@@ -3329,7 +3329,7 @@ export class WorkstationsClient {
           protos.google.cloud.workstations.v1.IListWorkstationClustersRequest | null,
           protos.google.cloud.workstations.v1.IListWorkstationClustersResponse,
         ]) => {
-          this._log.info('listWorkstationClusters values %j', response);
+          this._log.debug('listWorkstationClusters values %j', response);
           return [response, input, output];
         },
       );
@@ -3377,7 +3377,7 @@ export class WorkstationsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkstationClusters stream %j', request);
+    this._log.debug('listWorkstationClusters stream %j', request);
     return this.descriptors.page.listWorkstationClusters.createStream(
       this.innerApiCalls.listWorkstationClusters as GaxCall,
       request,
@@ -3430,7 +3430,7 @@ export class WorkstationsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkstationClusters iterate %j', request);
+    this._log.debug('listWorkstationClusters iterate %j', request);
     return this.descriptors.page.listWorkstationClusters.asyncIterate(
       this.innerApiCalls['listWorkstationClusters'] as GaxCall,
       request as {},
@@ -3548,11 +3548,11 @@ export class WorkstationsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listWorkstationConfigs values %j', values);
+          this._log.debug('listWorkstationConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listWorkstationConfigs request %j', request);
+    this._log.debug('listWorkstationConfigs request %j', request);
     return this.innerApiCalls
       .listWorkstationConfigs(request, options, wrappedCallback)
       ?.then(
@@ -3561,7 +3561,7 @@ export class WorkstationsClient {
           protos.google.cloud.workstations.v1.IListWorkstationConfigsRequest | null,
           protos.google.cloud.workstations.v1.IListWorkstationConfigsResponse,
         ]) => {
-          this._log.info('listWorkstationConfigs values %j', response);
+          this._log.debug('listWorkstationConfigs values %j', response);
           return [response, input, output];
         },
       );
@@ -3609,7 +3609,7 @@ export class WorkstationsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkstationConfigs stream %j', request);
+    this._log.debug('listWorkstationConfigs stream %j', request);
     return this.descriptors.page.listWorkstationConfigs.createStream(
       this.innerApiCalls.listWorkstationConfigs as GaxCall,
       request,
@@ -3662,7 +3662,7 @@ export class WorkstationsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkstationConfigs iterate %j', request);
+    this._log.debug('listWorkstationConfigs iterate %j', request);
     return this.descriptors.page.listWorkstationConfigs.asyncIterate(
       this.innerApiCalls['listWorkstationConfigs'] as GaxCall,
       request as {},
@@ -3778,11 +3778,11 @@ export class WorkstationsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listUsableWorkstationConfigs values %j', values);
+          this._log.debug('listUsableWorkstationConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listUsableWorkstationConfigs request %j', request);
+    this._log.debug('listUsableWorkstationConfigs request %j', request);
     return this.innerApiCalls
       .listUsableWorkstationConfigs(request, options, wrappedCallback)
       ?.then(
@@ -3791,7 +3791,7 @@ export class WorkstationsClient {
           protos.google.cloud.workstations.v1.IListUsableWorkstationConfigsRequest | null,
           protos.google.cloud.workstations.v1.IListUsableWorkstationConfigsResponse,
         ]) => {
-          this._log.info('listUsableWorkstationConfigs values %j', response);
+          this._log.debug('listUsableWorkstationConfigs values %j', response);
           return [response, input, output];
         },
       );
@@ -3836,7 +3836,7 @@ export class WorkstationsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listUsableWorkstationConfigs stream %j', request);
+    this._log.debug('listUsableWorkstationConfigs stream %j', request);
     return this.descriptors.page.listUsableWorkstationConfigs.createStream(
       this.innerApiCalls.listUsableWorkstationConfigs as GaxCall,
       request,
@@ -3886,7 +3886,7 @@ export class WorkstationsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listUsableWorkstationConfigs iterate %j', request);
+    this._log.debug('listUsableWorkstationConfigs iterate %j', request);
     return this.descriptors.page.listUsableWorkstationConfigs.asyncIterate(
       this.innerApiCalls['listUsableWorkstationConfigs'] as GaxCall,
       request as {},
@@ -4004,11 +4004,11 @@ export class WorkstationsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listWorkstations values %j', values);
+          this._log.debug('listWorkstations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listWorkstations request %j', request);
+    this._log.debug('listWorkstations request %j', request);
     return this.innerApiCalls
       .listWorkstations(request, options, wrappedCallback)
       ?.then(
@@ -4017,7 +4017,7 @@ export class WorkstationsClient {
           protos.google.cloud.workstations.v1.IListWorkstationsRequest | null,
           protos.google.cloud.workstations.v1.IListWorkstationsResponse,
         ]) => {
-          this._log.info('listWorkstations values %j', response);
+          this._log.debug('listWorkstations values %j', response);
           return [response, input, output];
         },
       );
@@ -4065,7 +4065,7 @@ export class WorkstationsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkstations stream %j', request);
+    this._log.debug('listWorkstations stream %j', request);
     return this.descriptors.page.listWorkstations.createStream(
       this.innerApiCalls.listWorkstations as GaxCall,
       request,
@@ -4118,7 +4118,7 @@ export class WorkstationsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkstations iterate %j', request);
+    this._log.debug('listWorkstations iterate %j', request);
     return this.descriptors.page.listWorkstations.asyncIterate(
       this.innerApiCalls['listWorkstations'] as GaxCall,
       request as {},
@@ -4234,11 +4234,11 @@ export class WorkstationsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listUsableWorkstations values %j', values);
+          this._log.debug('listUsableWorkstations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listUsableWorkstations request %j', request);
+    this._log.debug('listUsableWorkstations request %j', request);
     return this.innerApiCalls
       .listUsableWorkstations(request, options, wrappedCallback)
       ?.then(
@@ -4247,7 +4247,7 @@ export class WorkstationsClient {
           protos.google.cloud.workstations.v1.IListUsableWorkstationsRequest | null,
           protos.google.cloud.workstations.v1.IListUsableWorkstationsResponse,
         ]) => {
-          this._log.info('listUsableWorkstations values %j', response);
+          this._log.debug('listUsableWorkstations values %j', response);
           return [response, input, output];
         },
       );
@@ -4292,7 +4292,7 @@ export class WorkstationsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listUsableWorkstations stream %j', request);
+    this._log.debug('listUsableWorkstations stream %j', request);
     return this.descriptors.page.listUsableWorkstations.createStream(
       this.innerApiCalls.listUsableWorkstations as GaxCall,
       request,
@@ -4342,7 +4342,7 @@ export class WorkstationsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listUsableWorkstations iterate %j', request);
+    this._log.debug('listUsableWorkstations iterate %j', request);
     return this.descriptors.page.listUsableWorkstations.asyncIterate(
       this.innerApiCalls['listUsableWorkstations'] as GaxCall,
       request as {},

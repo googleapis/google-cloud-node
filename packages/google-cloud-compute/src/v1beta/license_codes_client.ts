@@ -463,7 +463,7 @@ export class LicenseCodesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('get request %j', request);
+    this._log.debug('get request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1beta.ILicenseCode,
@@ -474,7 +474,7 @@ export class LicenseCodesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -486,7 +486,7 @@ export class LicenseCodesClient {
           protos.google.cloud.compute.v1beta.IGetLicenseCodeRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -612,7 +612,7 @@ export class LicenseCodesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getIamPolicy request %j', request);
+    this._log.debug('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1beta.IPolicy,
@@ -623,7 +623,7 @@ export class LicenseCodesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -638,7 +638,7 @@ export class LicenseCodesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -764,7 +764,7 @@ export class LicenseCodesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('setIamPolicy request %j', request);
+    this._log.debug('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1beta.IPolicy,
@@ -775,7 +775,7 @@ export class LicenseCodesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('setIamPolicy response %j', response);
+          this._log.debug('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -790,7 +790,7 @@ export class LicenseCodesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('setIamPolicy response %j', response);
+          this._log.debug('setIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -915,7 +915,7 @@ export class LicenseCodesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('testIamPermissions request %j', request);
+    this._log.debug('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1beta.ITestPermissionsResponse,
@@ -926,7 +926,7 @@ export class LicenseCodesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('testIamPermissions response %j', response);
+          this._log.debug('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -941,7 +941,7 @@ export class LicenseCodesClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('testIamPermissions response %j', response);
+          this._log.debug('testIamPermissions response %j', response);
           return [response, options, rawResponse];
         },
       )

@@ -34,6 +34,21 @@ function main(name) {
    *  projects/{project}/locations/{location}/autoProtectionPolicies/{auto_protection_policy}/bindings/{binding}
    */
   // const name = 'abc123'
+  /**
+   *  Optional. The current etag of the AutoProtectionPolicyBinding.
+   *  If an etag is provided and does not match the current etag of the
+   *  binding, deletion will be blocked and an ABORTED error will be returned.
+   */
+  // const etag = 'abc123'
+  /**
+   *  Optional. An optional request ID to identify requests. Specify a unique
+   *  request ID so that if you must retry your request, the server will know to
+   *  ignore the request if it has already been completed. The server will
+   *  guarantee that for at least 60 minutes since the first request.
+   *  The request ID must be a valid UUID with the exception that zero UUID is
+   *  not supported (00000000-0000-0000-0000-000000000000).
+   */
+  // const requestId = 'abc123'
 
   // Imports the Backupdr library
   const {BackupDRClient} = require('@google-cloud/backupdr').v1beta;

@@ -481,7 +481,7 @@ export class TextToSpeechClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listVoices request %j', request);
+    this._log.debug('listVoices request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.texttospeech.v1.IListVoicesResponse,
@@ -492,7 +492,7 @@ export class TextToSpeechClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('listVoices response %j', response);
+          this._log.debug('listVoices response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -504,7 +504,7 @@ export class TextToSpeechClient {
           protos.google.cloud.texttospeech.v1.IListVoicesRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('listVoices response %j', response);
+          this._log.debug('listVoices response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -618,7 +618,7 @@ export class TextToSpeechClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('synthesizeSpeech request %j', request);
+    this._log.debug('synthesizeSpeech request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.texttospeech.v1.ISynthesizeSpeechResponse,
@@ -629,7 +629,7 @@ export class TextToSpeechClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('synthesizeSpeech response %j', response);
+          this._log.debug('synthesizeSpeech response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -644,7 +644,7 @@ export class TextToSpeechClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('synthesizeSpeech response %j', response);
+          this._log.debug('synthesizeSpeech response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -685,7 +685,7 @@ export class TextToSpeechClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('streamingSynthesize stream %j', options);
+    this._log.debug('streamingSynthesize stream %j', options);
     return this.innerApiCalls.streamingSynthesize(null, options);
   }
 

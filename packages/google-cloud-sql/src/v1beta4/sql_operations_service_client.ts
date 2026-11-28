@@ -40,6 +40,7 @@ import * as gapicConfig from './sql_operations_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
+ *  Service to fetch operations for database instances.
  * @class
  * @memberof v1beta4
  */
@@ -211,6 +212,9 @@ export class SqlOperationsServiceClient {
       ),
       blueGreenDeploymentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/blueGreenDeployments/{blue_green_deployment}',
+      ),
+      networkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/global/networks/{network}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}',
@@ -485,7 +489,7 @@ export class SqlOperationsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('get request %j', request);
+    this._log.debug('get request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
@@ -496,7 +500,7 @@ export class SqlOperationsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -508,7 +512,7 @@ export class SqlOperationsServiceClient {
           protos.google.cloud.sql.v1beta4.ISqlOperationsGetRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -629,7 +633,7 @@ export class SqlOperationsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('list request %j', request);
+    this._log.debug('list request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1beta4.IOperationsListResponse,
@@ -640,7 +644,7 @@ export class SqlOperationsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('list response %j', response);
+          this._log.debug('list response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -652,7 +656,7 @@ export class SqlOperationsServiceClient {
           protos.google.cloud.sql.v1beta4.ISqlOperationsListRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('list response %j', response);
+          this._log.debug('list response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -769,7 +773,7 @@ export class SqlOperationsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('cancel request %j', request);
+    this._log.debug('cancel request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -780,7 +784,7 @@ export class SqlOperationsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('cancel response %j', response);
+          this._log.debug('cancel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -795,7 +799,7 @@ export class SqlOperationsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('cancel response %j', response);
+          this._log.debug('cancel response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -993,6 +997,42 @@ export class SqlOperationsServiceClient {
     return this.pathTemplates.blueGreenDeploymentPathTemplate.match(
       blueGreenDeploymentName,
     ).blue_green_deployment;
+  }
+
+  /**
+   * Return a fully-qualified network resource name string.
+   *
+   * @param {string} project
+   * @param {string} network
+   * @returns {string} Resource name string.
+   */
+  networkPath(project: string, network: string) {
+    return this.pathTemplates.networkPathTemplate.render({
+      project: project,
+      network: network,
+    });
+  }
+
+  /**
+   * Parse the project from Network resource.
+   *
+   * @param {string} networkName
+   *   A fully-qualified path representing Network resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNetworkName(networkName: string) {
+    return this.pathTemplates.networkPathTemplate.match(networkName).project;
+  }
+
+  /**
+   * Parse the network from Network resource.
+   *
+   * @param {string} networkName
+   *   A fully-qualified path representing Network resource.
+   * @returns {string} A string representing the network.
+   */
+  matchNetworkFromNetworkName(networkName: string) {
+    return this.pathTemplates.networkPathTemplate.match(networkName).network;
   }
 
   /**

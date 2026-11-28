@@ -914,6 +914,40 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "csamFilterSettings": {
+                          "type": "CsamFilterSettings",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CsamFilterSettings": {
+                      "fields": {
+                        "filterEnforcement": {
+                          "type": "CsamFilterEnforcement",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "confidenceLevel": {
+                          "type": "DetectionConfidenceLevel",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CsamFilterEnforcement": {
+                          "values": {
+                            "CSAM_FILTER_ENFORCEMENT_UNSPECIFIED": 0,
+                            "ENABLED": 1,
+                            "DISABLED": 2
+                          }
                         }
                       }
                     },
@@ -5589,8 +5623,8 @@
                     "retention": "RETENTION_SOURCE",
                     "targets": "TARGET_TYPE_FILE",
                     "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "STRICT"
                   }
                 },
                 "enforceProtoLimits": {

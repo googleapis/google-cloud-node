@@ -23,6 +23,7 @@ import {
   JobsClient,
   RevisionsClient,
   ServicesClient,
+  SourceUploadClient,
   TasksClient,
   WorkerPoolsClient,
 } from '@google-cloud/run';
@@ -44,6 +45,9 @@ function doStuffWithRevisionsClient(client: RevisionsClient) {
   client.close();
 }
 function doStuffWithServicesClient(client: ServicesClient) {
+  client.close();
+}
+function doStuffWithSourceUploadClient(client: SourceUploadClient) {
   client.close();
 }
 function doStuffWithTasksClient(client: TasksClient) {
@@ -72,6 +76,9 @@ function main() {
   // check that the client instance can be created
   const servicesClient = new ServicesClient();
   doStuffWithServicesClient(servicesClient);
+  // check that the client instance can be created
+  const sourceUploadClient = new SourceUploadClient();
+  doStuffWithSourceUploadClient(sourceUploadClient);
   // check that the client instance can be created
   const tasksClient = new TasksClient();
   doStuffWithTasksClient(tasksClient);

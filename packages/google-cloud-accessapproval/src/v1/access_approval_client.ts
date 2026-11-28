@@ -551,7 +551,7 @@ export class AccessApprovalClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getApprovalRequest request %j', request);
+    this._log.debug('getApprovalRequest request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.accessapproval.v1.IApprovalRequest,
@@ -562,7 +562,7 @@ export class AccessApprovalClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getApprovalRequest response %j', response);
+          this._log.debug('getApprovalRequest response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -577,7 +577,7 @@ export class AccessApprovalClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getApprovalRequest response %j', response);
+          this._log.debug('getApprovalRequest response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -699,7 +699,7 @@ export class AccessApprovalClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('approveApprovalRequest request %j', request);
+    this._log.debug('approveApprovalRequest request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.accessapproval.v1.IApprovalRequest,
@@ -710,7 +710,7 @@ export class AccessApprovalClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('approveApprovalRequest response %j', response);
+          this._log.debug('approveApprovalRequest response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -725,7 +725,7 @@ export class AccessApprovalClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('approveApprovalRequest response %j', response);
+          this._log.debug('approveApprovalRequest response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -851,7 +851,7 @@ export class AccessApprovalClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('dismissApprovalRequest request %j', request);
+    this._log.debug('dismissApprovalRequest request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.accessapproval.v1.IApprovalRequest,
@@ -862,7 +862,7 @@ export class AccessApprovalClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('dismissApprovalRequest response %j', response);
+          this._log.debug('dismissApprovalRequest response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -877,7 +877,7 @@ export class AccessApprovalClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('dismissApprovalRequest response %j', response);
+          this._log.debug('dismissApprovalRequest response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1001,7 +1001,7 @@ export class AccessApprovalClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('invalidateApprovalRequest request %j', request);
+    this._log.debug('invalidateApprovalRequest request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.accessapproval.v1.IApprovalRequest,
@@ -1012,7 +1012,7 @@ export class AccessApprovalClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('invalidateApprovalRequest response %j', response);
+          this._log.debug('invalidateApprovalRequest response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1027,7 +1027,7 @@ export class AccessApprovalClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('invalidateApprovalRequest response %j', response);
+          this._log.debug('invalidateApprovalRequest response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1145,7 +1145,7 @@ export class AccessApprovalClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAccessApprovalSettings request %j', request);
+    this._log.debug('getAccessApprovalSettings request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.accessapproval.v1.IAccessApprovalSettings,
@@ -1156,7 +1156,7 @@ export class AccessApprovalClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAccessApprovalSettings response %j', response);
+          this._log.debug('getAccessApprovalSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1171,7 +1171,7 @@ export class AccessApprovalClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAccessApprovalSettings response %j', response);
+          this._log.debug('getAccessApprovalSettings response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1300,7 +1300,7 @@ export class AccessApprovalClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateAccessApprovalSettings request %j', request);
+    this._log.debug('updateAccessApprovalSettings request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.accessapproval.v1.IAccessApprovalSettings,
@@ -1311,7 +1311,7 @@ export class AccessApprovalClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateAccessApprovalSettings response %j', response);
+          this._log.debug('updateAccessApprovalSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1326,7 +1326,7 @@ export class AccessApprovalClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateAccessApprovalSettings response %j', response);
+          this._log.debug('updateAccessApprovalSettings response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1448,7 +1448,7 @@ export class AccessApprovalClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteAccessApprovalSettings request %j', request);
+    this._log.debug('deleteAccessApprovalSettings request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1459,7 +1459,7 @@ export class AccessApprovalClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteAccessApprovalSettings response %j', response);
+          this._log.debug('deleteAccessApprovalSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1474,7 +1474,7 @@ export class AccessApprovalClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteAccessApprovalSettings response %j', response);
+          this._log.debug('deleteAccessApprovalSettings response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1592,7 +1592,7 @@ export class AccessApprovalClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAccessApprovalServiceAccount request %j', request);
+    this._log.debug('getAccessApprovalServiceAccount request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.accessapproval.v1.IAccessApprovalServiceAccount,
@@ -1603,7 +1603,7 @@ export class AccessApprovalClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'getAccessApprovalServiceAccount response %j',
             response,
           );
@@ -1621,7 +1621,7 @@ export class AccessApprovalClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'getAccessApprovalServiceAccount response %j',
             response,
           );
@@ -1769,11 +1769,11 @@ export class AccessApprovalClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listApprovalRequests values %j', values);
+          this._log.debug('listApprovalRequests values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listApprovalRequests request %j', request);
+    this._log.debug('listApprovalRequests request %j', request);
     return this.innerApiCalls
       .listApprovalRequests(request, options, wrappedCallback)
       ?.then(
@@ -1782,7 +1782,7 @@ export class AccessApprovalClient {
           protos.google.cloud.accessapproval.v1.IListApprovalRequestsMessage | null,
           protos.google.cloud.accessapproval.v1.IListApprovalRequestsResponse,
         ]) => {
-          this._log.info('listApprovalRequests values %j', response);
+          this._log.debug('listApprovalRequests values %j', response);
           return [response, input, output];
         },
       );
@@ -1840,7 +1840,7 @@ export class AccessApprovalClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listApprovalRequests stream %j', request);
+    this._log.debug('listApprovalRequests stream %j', request);
     return this.descriptors.page.listApprovalRequests.createStream(
       this.innerApiCalls.listApprovalRequests as GaxCall,
       request,
@@ -1903,7 +1903,7 @@ export class AccessApprovalClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listApprovalRequests iterate %j', request);
+    this._log.debug('listApprovalRequests iterate %j', request);
     return this.descriptors.page.listApprovalRequests.asyncIterate(
       this.innerApiCalls['listApprovalRequests'] as GaxCall,
       request as {},

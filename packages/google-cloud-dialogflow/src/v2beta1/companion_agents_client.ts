@@ -646,7 +646,7 @@ export class CompanionAgentsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createCompanionAgent request %j', request);
+    this._log.debug('createCompanionAgent request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2beta1.ICompanionAgent,
@@ -657,7 +657,7 @@ export class CompanionAgentsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createCompanionAgent response %j', response);
+          this._log.debug('createCompanionAgent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -672,7 +672,7 @@ export class CompanionAgentsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createCompanionAgent response %j', response);
+          this._log.debug('createCompanionAgent response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -793,7 +793,7 @@ export class CompanionAgentsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCompanionAgent request %j', request);
+    this._log.debug('getCompanionAgent request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2beta1.ICompanionAgent,
@@ -804,7 +804,7 @@ export class CompanionAgentsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCompanionAgent response %j', response);
+          this._log.debug('getCompanionAgent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -819,7 +819,7 @@ export class CompanionAgentsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getCompanionAgent response %j', response);
+          this._log.debug('getCompanionAgent response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -938,7 +938,7 @@ export class CompanionAgentsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateCompanionAgent request %j', request);
+    this._log.debug('updateCompanionAgent request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2beta1.ICompanionAgent,
@@ -949,7 +949,7 @@ export class CompanionAgentsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateCompanionAgent response %j', response);
+          this._log.debug('updateCompanionAgent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -964,7 +964,7 @@ export class CompanionAgentsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateCompanionAgent response %j', response);
+          this._log.debug('updateCompanionAgent response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1083,7 +1083,7 @@ export class CompanionAgentsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteCompanionAgent request %j', request);
+    this._log.debug('deleteCompanionAgent request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1094,7 +1094,7 @@ export class CompanionAgentsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteCompanionAgent response %j', response);
+          this._log.debug('deleteCompanionAgent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1109,7 +1109,7 @@ export class CompanionAgentsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteCompanionAgent response %j', response);
+          this._log.debug('deleteCompanionAgent response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1240,11 +1240,11 @@ export class CompanionAgentsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listCompanionAgents values %j', values);
+          this._log.debug('listCompanionAgents values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listCompanionAgents request %j', request);
+    this._log.debug('listCompanionAgents request %j', request);
     return this.innerApiCalls
       .listCompanionAgents(request, options, wrappedCallback)
       ?.then(
@@ -1253,7 +1253,7 @@ export class CompanionAgentsClient {
           protos.google.cloud.dialogflow.v2beta1.IListCompanionAgentsRequest | null,
           protos.google.cloud.dialogflow.v2beta1.IListCompanionAgentsResponse,
         ]) => {
-          this._log.info('listCompanionAgents values %j', response);
+          this._log.debug('listCompanionAgents values %j', response);
           return [response, input, output];
         },
       );
@@ -1299,7 +1299,7 @@ export class CompanionAgentsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCompanionAgents stream %j', request);
+    this._log.debug('listCompanionAgents stream %j', request);
     return this.descriptors.page.listCompanionAgents.createStream(
       this.innerApiCalls.listCompanionAgents as GaxCall,
       request,
@@ -1350,7 +1350,7 @@ export class CompanionAgentsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCompanionAgents iterate %j', request);
+    this._log.debug('listCompanionAgents iterate %j', request);
     return this.descriptors.page.listCompanionAgents.asyncIterate(
       this.innerApiCalls['listCompanionAgents'] as GaxCall,
       request as {},

@@ -171,6 +171,34 @@
         }
       }
     },
+    "ReportingService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ReportingServiceClient",
+          "rpcs": {
+            "RetrievePartnerMatchReport": {
+              "methods": [
+                "retrievePartnerMatchReport",
+                "retrievePartnerMatchReportStream",
+                "retrievePartnerMatchReportAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ReportingServiceClient",
+          "rpcs": {
+            "RetrievePartnerMatchReport": {
+              "methods": [
+                "retrievePartnerMatchReport",
+                "retrievePartnerMatchReportStream",
+                "retrievePartnerMatchReportAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "UserListDirectLicenseService": {
       "clients": {
         "grpc": {

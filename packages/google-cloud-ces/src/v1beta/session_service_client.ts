@@ -558,7 +558,7 @@ export class SessionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('runSession request %j', request);
+    this._log.debug('runSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.ces.v1beta.IRunSessionResponse,
@@ -567,7 +567,7 @@ export class SessionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('runSession response %j', response);
+          this._log.debug('runSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -579,7 +579,7 @@ export class SessionServiceClient {
           protos.google.cloud.ces.v1beta.IRunSessionRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('runSession response %j', response);
+          this._log.debug('runSession response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -696,7 +696,7 @@ export class SessionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('cancelAssistantTurn request %j', request);
+    this._log.debug('cancelAssistantTurn request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.ces.v1beta.ICancelAssistantTurnResponse,
@@ -707,7 +707,7 @@ export class SessionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('cancelAssistantTurn response %j', response);
+          this._log.debug('cancelAssistantTurn response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -722,7 +722,7 @@ export class SessionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('cancelAssistantTurn response %j', response);
+          this._log.debug('cancelAssistantTurn response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -847,7 +847,7 @@ export class SessionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateOnboardingSuggestions request %j', request);
+    this._log.debug('generateOnboardingSuggestions request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.ces.v1beta.IGenerateOnboardingSuggestionsResponse,
@@ -858,7 +858,10 @@ export class SessionServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateOnboardingSuggestions response %j', response);
+          this._log.debug(
+            'generateOnboardingSuggestions response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -873,7 +876,10 @@ export class SessionServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('generateOnboardingSuggestions response %j', response);
+          this._log.debug(
+            'generateOnboardingSuggestions response %j',
+            response,
+          );
           return [response, options, rawResponse];
         },
       )
@@ -936,7 +942,7 @@ export class SessionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('streamRunSession stream %j', options);
+    this._log.debug('streamRunSession stream %j', options);
     return this.innerApiCalls.streamRunSession(request, options);
   }
 
@@ -1021,7 +1027,7 @@ export class SessionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('bidiRunSession stream %j', options);
+    this._log.debug('bidiRunSession stream %j', options);
     return this.innerApiCalls.bidiRunSession(null, options);
   }
 
@@ -1091,7 +1097,7 @@ export class SessionServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('streamChatAiAssistant stream %j', options);
+    this._log.debug('streamChatAiAssistant stream %j', options);
     return this.innerApiCalls.streamChatAiAssistant(request, options);
   }
 

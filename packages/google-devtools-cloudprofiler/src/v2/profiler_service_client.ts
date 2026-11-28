@@ -496,7 +496,7 @@ export class ProfilerServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createProfile request %j', request);
+    this._log.debug('createProfile request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devtools.cloudprofiler.v2.IProfile,
@@ -507,7 +507,7 @@ export class ProfilerServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createProfile response %j', response);
+          this._log.debug('createProfile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -522,7 +522,7 @@ export class ProfilerServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createProfile response %j', response);
+          this._log.debug('createProfile response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -648,7 +648,7 @@ export class ProfilerServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createOfflineProfile request %j', request);
+    this._log.debug('createOfflineProfile request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devtools.cloudprofiler.v2.IProfile,
@@ -659,7 +659,7 @@ export class ProfilerServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createOfflineProfile response %j', response);
+          this._log.debug('createOfflineProfile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -674,7 +674,7 @@ export class ProfilerServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createOfflineProfile response %j', response);
+          this._log.debug('createOfflineProfile response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -798,7 +798,7 @@ export class ProfilerServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateProfile request %j', request);
+    this._log.debug('updateProfile request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devtools.cloudprofiler.v2.IProfile,
@@ -809,7 +809,7 @@ export class ProfilerServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateProfile response %j', response);
+          this._log.debug('updateProfile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -824,7 +824,7 @@ export class ProfilerServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateProfile response %j', response);
+          this._log.debug('updateProfile response %j', response);
           return [response, options, rawResponse];
         },
       )

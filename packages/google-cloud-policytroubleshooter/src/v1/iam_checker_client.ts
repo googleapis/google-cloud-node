@@ -455,7 +455,7 @@ export class IamCheckerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('troubleshootIamPolicy request %j', request);
+    this._log.debug('troubleshootIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.policytroubleshooter.v1.ITroubleshootIamPolicyResponse,
@@ -466,7 +466,7 @@ export class IamCheckerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('troubleshootIamPolicy response %j', response);
+          this._log.debug('troubleshootIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -481,7 +481,7 @@ export class IamCheckerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('troubleshootIamPolicy response %j', response);
+          this._log.debug('troubleshootIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )

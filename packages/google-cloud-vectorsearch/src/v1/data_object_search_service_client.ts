@@ -384,7 +384,11 @@ export class DataObjectSearchServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/vectorsearch',
+      'https://www.googleapis.com/auth/vectorsearch.readonly',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -415,8 +419,22 @@ export class DataObjectSearchServiceClient {
    *   Required. The resource name of the Collection for which to query.
    *   Format: `projects/{project}/locations/{location}/collections/{collection}`
    * @param {google.protobuf.Struct} [request.filter]
-   *   Optional. A JSON filter expression, e.g. {"genre": {"$eq": "sci-fi"}},
-   *   represented as a google.protobuf.Struct.
+   *   Optional. A JSON filter expression, e.g. `{"genre": {"$eq": "sci-fi"}}`,
+   *   represented as a `google.protobuf.Struct`.
+   *
+   *   An empty filter (`{}`) matches all data objects. Otherwise, each JSON
+   *   object in the filter must have exactly one key: either a field name mapped
+   *   to one operator (`{"price": {"$lt": 100}}`), or a logical operator: `$and`
+   *   or `$or` with a list of filters, or `$not` with one filter. Field
+   *   operators and their values: `$eq` and `$ne` take a string, number or bool;
+   *   `$lt`, `$lte`, `$gt` and `$gte` take a number; `$in`, `$nin` and `$all`
+   *   take a list of strings; `$exists` takes a bool. Several keys in one object
+   *   (implicit AND) and implicit equality (`{"genre": "sci-fi"}`) are rejected;
+   *   use `$and` and `$eq` instead.
+   *
+   *   Logical operators can be nested at most 2 levels deep, e.g.
+   *   `{"$and": [{"$or": [{"a": {"$eq": 1}}, {"b": {"$eq": 2}}]}]}`. Deeper
+   *   filters are rejected with `INVALID_ARGUMENT`.
    * @param {google.cloud.vectorsearch.v1.AggregationMethod} request.aggregate
    *   Required. The aggregation method to apply to the query.
    * @param {object} [options]
@@ -508,7 +526,7 @@ export class DataObjectSearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('aggregateDataObjects request %j', request);
+    this._log.debug('aggregateDataObjects request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsResponse,
@@ -519,7 +537,7 @@ export class DataObjectSearchServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('aggregateDataObjects response %j', response);
+          this._log.debug('aggregateDataObjects response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -534,7 +552,7 @@ export class DataObjectSearchServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('aggregateDataObjects response %j', response);
+          this._log.debug('aggregateDataObjects response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -656,7 +674,7 @@ export class DataObjectSearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchSearchDataObjects request %j', request);
+    this._log.debug('batchSearchDataObjects request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsResponse,
@@ -667,7 +685,7 @@ export class DataObjectSearchServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchSearchDataObjects response %j', response);
+          this._log.debug('batchSearchDataObjects response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -682,7 +700,7 @@ export class DataObjectSearchServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchSearchDataObjects response %j', response);
+          this._log.debug('batchSearchDataObjects response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -825,11 +843,11 @@ export class DataObjectSearchServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('searchDataObjects values %j', values);
+          this._log.debug('searchDataObjects values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('searchDataObjects request %j', request);
+    this._log.debug('searchDataObjects request %j', request);
     return this.innerApiCalls
       .searchDataObjects(request, options, wrappedCallback)
       ?.then(
@@ -838,7 +856,7 @@ export class DataObjectSearchServiceClient {
           protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest | null,
           protos.google.cloud.vectorsearch.v1.ISearchDataObjectsResponse,
         ]) => {
-          this._log.info('searchDataObjects values %j', response);
+          this._log.debug('searchDataObjects values %j', response);
           return [response, input, output];
         },
       );
@@ -896,7 +914,7 @@ export class DataObjectSearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchDataObjects stream %j', request);
+    this._log.debug('searchDataObjects stream %j', request);
     return this.descriptors.page.searchDataObjects.createStream(
       this.innerApiCalls.searchDataObjects as GaxCall,
       request,
@@ -959,7 +977,7 @@ export class DataObjectSearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchDataObjects iterate %j', request);
+    this._log.debug('searchDataObjects iterate %j', request);
     return this.descriptors.page.searchDataObjects.asyncIterate(
       this.innerApiCalls['searchDataObjects'] as GaxCall,
       request as {},
@@ -975,8 +993,22 @@ export class DataObjectSearchServiceClient {
    *   Required. The resource name of the Collection for which to query.
    *   Format: `projects/{project}/locations/{location}/collections/{collection}`
    * @param {google.protobuf.Struct} [request.filter]
-   *   Optional. A JSON filter expression, e.g. {"genre": {"$eq": "sci-fi"}},
-   *   represented as a google.protobuf.Struct.
+   *   Optional. A JSON filter expression, e.g. `{"genre": {"$eq": "sci-fi"}}`,
+   *   represented as a `google.protobuf.Struct`.
+   *
+   *   An empty filter (`{}`) matches all data objects. Otherwise, each JSON
+   *   object in the filter must have exactly one key: either a field name mapped
+   *   to one operator (`{"price": {"$lt": 100}}`), or a logical operator: `$and`
+   *   or `$or` with a list of filters, or `$not` with one filter. Field
+   *   operators and their values: `$eq` and `$ne` take a string, number or bool;
+   *   `$lt`, `$lte`, `$gt` and `$gte` take a number; `$in`, `$nin` and `$all`
+   *   take a list of strings; `$exists` takes a bool. Several keys in one object
+   *   (implicit AND) and implicit equality (`{"genre": "sci-fi"}`) are rejected;
+   *   use `$and` and `$eq` instead.
+   *
+   *   Logical operators can be nested at most 2 levels deep, e.g.
+   *   `{"$and": [{"$or": [{"a": {"$eq": 1}}, {"b": {"$eq": 2}}]}]}`. Deeper
+   *   filters are rejected with `INVALID_ARGUMENT`.
    * @param {google.cloud.vectorsearch.v1.OutputFields} [request.outputFields]
    *   Optional. Mask specifying which fields to return.
    * @param {number} [request.pageSize]
@@ -1085,11 +1117,11 @@ export class DataObjectSearchServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('queryDataObjects values %j', values);
+          this._log.debug('queryDataObjects values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('queryDataObjects request %j', request);
+    this._log.debug('queryDataObjects request %j', request);
     return this.innerApiCalls
       .queryDataObjects(request, options, wrappedCallback)
       ?.then(
@@ -1098,7 +1130,7 @@ export class DataObjectSearchServiceClient {
           protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest | null,
           protos.google.cloud.vectorsearch.v1.IQueryDataObjectsResponse,
         ]) => {
-          this._log.info('queryDataObjects values %j', response);
+          this._log.debug('queryDataObjects values %j', response);
           return [response, input, output];
         },
       );
@@ -1112,8 +1144,22 @@ export class DataObjectSearchServiceClient {
    *   Required. The resource name of the Collection for which to query.
    *   Format: `projects/{project}/locations/{location}/collections/{collection}`
    * @param {google.protobuf.Struct} [request.filter]
-   *   Optional. A JSON filter expression, e.g. {"genre": {"$eq": "sci-fi"}},
-   *   represented as a google.protobuf.Struct.
+   *   Optional. A JSON filter expression, e.g. `{"genre": {"$eq": "sci-fi"}}`,
+   *   represented as a `google.protobuf.Struct`.
+   *
+   *   An empty filter (`{}`) matches all data objects. Otherwise, each JSON
+   *   object in the filter must have exactly one key: either a field name mapped
+   *   to one operator (`{"price": {"$lt": 100}}`), or a logical operator: `$and`
+   *   or `$or` with a list of filters, or `$not` with one filter. Field
+   *   operators and their values: `$eq` and `$ne` take a string, number or bool;
+   *   `$lt`, `$lte`, `$gt` and `$gte` take a number; `$in`, `$nin` and `$all`
+   *   take a list of strings; `$exists` takes a bool. Several keys in one object
+   *   (implicit AND) and implicit equality (`{"genre": "sci-fi"}`) are rejected;
+   *   use `$and` and `$eq` instead.
+   *
+   *   Logical operators can be nested at most 2 levels deep, e.g.
+   *   `{"$and": [{"$or": [{"a": {"$eq": 1}}, {"b": {"$eq": 2}}]}]}`. Deeper
+   *   filters are rejected with `INVALID_ARGUMENT`.
    * @param {google.cloud.vectorsearch.v1.OutputFields} [request.outputFields]
    *   Optional. Mask specifying which fields to return.
    * @param {number} [request.pageSize]
@@ -1154,7 +1200,7 @@ export class DataObjectSearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryDataObjects stream %j', request);
+    this._log.debug('queryDataObjects stream %j', request);
     return this.descriptors.page.queryDataObjects.createStream(
       this.innerApiCalls.queryDataObjects as GaxCall,
       request,
@@ -1172,8 +1218,22 @@ export class DataObjectSearchServiceClient {
    *   Required. The resource name of the Collection for which to query.
    *   Format: `projects/{project}/locations/{location}/collections/{collection}`
    * @param {google.protobuf.Struct} [request.filter]
-   *   Optional. A JSON filter expression, e.g. {"genre": {"$eq": "sci-fi"}},
-   *   represented as a google.protobuf.Struct.
+   *   Optional. A JSON filter expression, e.g. `{"genre": {"$eq": "sci-fi"}}`,
+   *   represented as a `google.protobuf.Struct`.
+   *
+   *   An empty filter (`{}`) matches all data objects. Otherwise, each JSON
+   *   object in the filter must have exactly one key: either a field name mapped
+   *   to one operator (`{"price": {"$lt": 100}}`), or a logical operator: `$and`
+   *   or `$or` with a list of filters, or `$not` with one filter. Field
+   *   operators and their values: `$eq` and `$ne` take a string, number or bool;
+   *   `$lt`, `$lte`, `$gt` and `$gte` take a number; `$in`, `$nin` and `$all`
+   *   take a list of strings; `$exists` takes a bool. Several keys in one object
+   *   (implicit AND) and implicit equality (`{"genre": "sci-fi"}`) are rejected;
+   *   use `$and` and `$eq` instead.
+   *
+   *   Logical operators can be nested at most 2 levels deep, e.g.
+   *   `{"$and": [{"$or": [{"a": {"$eq": 1}}, {"b": {"$eq": 2}}]}]}`. Deeper
+   *   filters are rejected with `INVALID_ARGUMENT`.
    * @param {google.cloud.vectorsearch.v1.OutputFields} [request.outputFields]
    *   Optional. Mask specifying which fields to return.
    * @param {number} [request.pageSize]
@@ -1215,7 +1275,7 @@ export class DataObjectSearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('queryDataObjects iterate %j', request);
+    this._log.debug('queryDataObjects iterate %j', request);
     return this.descriptors.page.queryDataObjects.asyncIterate(
       this.innerApiCalls['queryDataObjects'] as GaxCall,
       request as {},

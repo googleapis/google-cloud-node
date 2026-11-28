@@ -648,6 +648,7 @@
                           "type": "double",
                           "id": 4,
                           "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
                         },
@@ -972,7 +973,8 @@
                           "values": {
                             "TRAVEL_MODE_UNSPECIFIED": 0,
                             "DRIVING": 1,
-                            "WALKING": 2
+                            "WALKING": 2,
+                            "TWO_WHEELER": 5
                           }
                         },
                         "UnloadingPolicy": {
@@ -1505,6 +1507,22 @@
                               "id": 13,
                               "options": {
                                 "proto3_optional": true
+                              }
+                            },
+                            "visitType": {
+                              "type": "VisitType",
+                              "id": 14,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "VisitType": {
+                              "values": {
+                                "VISIT_TYPE_UNSPECIFIED": 0,
+                                "PICKUP_SHIPMENT": 1,
+                                "DELIVER_SHIPMENT": 2
                               }
                             }
                           }
@@ -3811,8 +3829,8 @@
                     "retention": "RETENTION_SOURCE",
                     "targets": "TARGET_TYPE_FILE",
                     "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "STRICT"
                   }
                 },
                 "enforceProtoLimits": {

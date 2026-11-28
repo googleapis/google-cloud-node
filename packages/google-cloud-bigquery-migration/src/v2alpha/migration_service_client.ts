@@ -497,7 +497,7 @@ export class MigrationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createMigrationWorkflow request %j', request);
+    this._log.debug('createMigrationWorkflow request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.bigquery.migration.v2alpha.IMigrationWorkflow,
@@ -508,7 +508,7 @@ export class MigrationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createMigrationWorkflow response %j', response);
+          this._log.debug('createMigrationWorkflow response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -523,7 +523,7 @@ export class MigrationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createMigrationWorkflow response %j', response);
+          this._log.debug('createMigrationWorkflow response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -643,7 +643,7 @@ export class MigrationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getMigrationWorkflow request %j', request);
+    this._log.debug('getMigrationWorkflow request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.bigquery.migration.v2alpha.IMigrationWorkflow,
@@ -654,7 +654,7 @@ export class MigrationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getMigrationWorkflow response %j', response);
+          this._log.debug('getMigrationWorkflow response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -669,7 +669,7 @@ export class MigrationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getMigrationWorkflow response %j', response);
+          this._log.debug('getMigrationWorkflow response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -787,7 +787,7 @@ export class MigrationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteMigrationWorkflow request %j', request);
+    this._log.debug('deleteMigrationWorkflow request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -798,7 +798,7 @@ export class MigrationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteMigrationWorkflow response %j', response);
+          this._log.debug('deleteMigrationWorkflow response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -813,7 +813,7 @@ export class MigrationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteMigrationWorkflow response %j', response);
+          this._log.debug('deleteMigrationWorkflow response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -934,7 +934,7 @@ export class MigrationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('startMigrationWorkflow request %j', request);
+    this._log.debug('startMigrationWorkflow request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -945,7 +945,7 @@ export class MigrationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('startMigrationWorkflow response %j', response);
+          this._log.debug('startMigrationWorkflow response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -960,7 +960,7 @@ export class MigrationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('startMigrationWorkflow response %j', response);
+          this._log.debug('startMigrationWorkflow response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1080,7 +1080,7 @@ export class MigrationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getMigrationSubtask request %j', request);
+    this._log.debug('getMigrationSubtask request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.bigquery.migration.v2alpha.IMigrationSubtask,
@@ -1091,7 +1091,7 @@ export class MigrationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getMigrationSubtask response %j', response);
+          this._log.debug('getMigrationSubtask response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1106,7 +1106,7 @@ export class MigrationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getMigrationSubtask response %j', response);
+          this._log.debug('getMigrationSubtask response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1243,11 +1243,11 @@ export class MigrationServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listMigrationWorkflows values %j', values);
+          this._log.debug('listMigrationWorkflows values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listMigrationWorkflows request %j', request);
+    this._log.debug('listMigrationWorkflows request %j', request);
     return this.innerApiCalls
       .listMigrationWorkflows(request, options, wrappedCallback)
       ?.then(
@@ -1256,7 +1256,7 @@ export class MigrationServiceClient {
           protos.google.cloud.bigquery.migration.v2alpha.IListMigrationWorkflowsRequest | null,
           protos.google.cloud.bigquery.migration.v2alpha.IListMigrationWorkflowsResponse,
         ]) => {
-          this._log.info('listMigrationWorkflows values %j', response);
+          this._log.debug('listMigrationWorkflows values %j', response);
           return [response, input, output];
         },
       );
@@ -1308,7 +1308,7 @@ export class MigrationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMigrationWorkflows stream %j', request);
+    this._log.debug('listMigrationWorkflows stream %j', request);
     return this.descriptors.page.listMigrationWorkflows.createStream(
       this.innerApiCalls.listMigrationWorkflows as GaxCall,
       request,
@@ -1365,7 +1365,7 @@ export class MigrationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMigrationWorkflows iterate %j', request);
+    this._log.debug('listMigrationWorkflows iterate %j', request);
     return this.descriptors.page.listMigrationWorkflows.asyncIterate(
       this.innerApiCalls['listMigrationWorkflows'] as GaxCall,
       request as {},
@@ -1491,11 +1491,11 @@ export class MigrationServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listMigrationSubtasks values %j', values);
+          this._log.debug('listMigrationSubtasks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listMigrationSubtasks request %j', request);
+    this._log.debug('listMigrationSubtasks request %j', request);
     return this.innerApiCalls
       .listMigrationSubtasks(request, options, wrappedCallback)
       ?.then(
@@ -1504,7 +1504,7 @@ export class MigrationServiceClient {
           protos.google.cloud.bigquery.migration.v2alpha.IListMigrationSubtasksRequest | null,
           protos.google.cloud.bigquery.migration.v2alpha.IListMigrationSubtasksResponse,
         ]) => {
-          this._log.info('listMigrationSubtasks values %j', response);
+          this._log.debug('listMigrationSubtasks values %j', response);
           return [response, input, output];
         },
       );
@@ -1560,7 +1560,7 @@ export class MigrationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMigrationSubtasks stream %j', request);
+    this._log.debug('listMigrationSubtasks stream %j', request);
     return this.descriptors.page.listMigrationSubtasks.createStream(
       this.innerApiCalls.listMigrationSubtasks as GaxCall,
       request,
@@ -1621,7 +1621,7 @@ export class MigrationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listMigrationSubtasks iterate %j', request);
+    this._log.debug('listMigrationSubtasks iterate %j', request);
     return this.descriptors.page.listMigrationSubtasks.asyncIterate(
       this.innerApiCalls['listMigrationSubtasks'] as GaxCall,
       request as {},

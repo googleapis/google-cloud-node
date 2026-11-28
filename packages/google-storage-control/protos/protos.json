@@ -15,8 +15,8 @@
                     "java_package": "com.google.storage.control.v2",
                     "php_namespace": "Google\\Cloud\\Storage\\Control\\V2",
                     "ruby_package": "Google::Cloud::Storage::Control::V2",
-                    "(google.api.resource_definition).type": "storage.googleapis.com/Bucket",
-                    "(google.api.resource_definition).pattern": "projects/{project}/buckets/{bucket}"
+                    "(google.api.resource_definition).type": "storage.googleapis.com/Object",
+                    "(google.api.resource_definition).pattern": "projects/{project}/buckets/{bucket}/objects/{object}"
                   },
                   "nested": {
                     "StorageControl": {
@@ -29,11 +29,19 @@
                           "requestType": "CreateFolderRequest",
                           "responseType": "Folder",
                           "options": {
+                            "(google.api.http).post": "/v2/{parent=projects/*/buckets/*}/folders",
+                            "(google.api.http).body": "folder",
                             "(google.api.routing).routing_parameters.field": "parent",
                             "(google.api.routing).routing_parameters.path_template": "{bucket=**}",
                             "(google.api.method_signature)": "parent,folder,folder_id"
                           },
                           "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*/buckets/*}/folders",
+                                "body": "folder"
+                              }
+                            },
                             {
                               "(google.api.routing)": {
                                 "routing_parameters": {
@@ -51,11 +59,17 @@
                           "requestType": "DeleteFolderRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
+                            "(google.api.http).delete": "/v2/{name=projects/*/buckets/*/folders/**}",
                             "(google.api.routing).routing_parameters.field": "name",
                             "(google.api.routing).routing_parameters.path_template": "{bucket=projects/*/buckets/*}/**",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2/{name=projects/*/buckets/*/folders/**}"
+                              }
+                            },
                             {
                               "(google.api.routing)": {
                                 "routing_parameters": {
@@ -73,11 +87,17 @@
                           "requestType": "GetFolderRequest",
                           "responseType": "Folder",
                           "options": {
+                            "(google.api.http).get": "/v2/{name=projects/*/buckets/*/folders/**}",
                             "(google.api.routing).routing_parameters.field": "name",
                             "(google.api.routing).routing_parameters.path_template": "{bucket=projects/*/buckets/*}/**",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/buckets/*/folders/**}"
+                              }
+                            },
                             {
                               "(google.api.routing)": {
                                 "routing_parameters": {
@@ -95,11 +115,17 @@
                           "requestType": "ListFoldersRequest",
                           "responseType": "ListFoldersResponse",
                           "options": {
+                            "(google.api.http).get": "/v2/{parent=projects/*/buckets/*}/folders",
                             "(google.api.routing).routing_parameters.field": "parent",
                             "(google.api.routing).routing_parameters.path_template": "{bucket=**}",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*/buckets/*}/folders"
+                              }
+                            },
                             {
                               "(google.api.routing)": {
                                 "routing_parameters": {
@@ -117,6 +143,8 @@
                           "requestType": "RenameFolderRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
+                            "(google.api.http).post": "/v2/{name=projects/*/buckets/*/folders/**}:rename",
+                            "(google.api.http).body": "*",
                             "(google.api.routing).routing_parameters.field": "name",
                             "(google.api.routing).routing_parameters.path_template": "{bucket=projects/*/buckets/*}/**",
                             "(google.api.method_signature)": "name,destination_folder_id",
@@ -124,6 +152,12 @@
                             "(google.longrunning.operation_info).metadata_type": "RenameFolderMetadata"
                           },
                           "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/buckets/*/folders/**}:rename",
+                                "body": "*"
+                              }
+                            },
                             {
                               "(google.api.routing)": {
                                 "routing_parameters": {
@@ -147,6 +181,8 @@
                           "requestType": "DeleteFolderRecursiveRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
+                            "(google.api.http).post": "/v2/{name=projects/*/buckets/*/folders/**}:deleteRecursive",
+                            "(google.api.http).body": "*",
                             "(google.api.routing).routing_parameters.field": "name",
                             "(google.api.routing).routing_parameters.path_template": "{bucket=projects/*/buckets/*}/**",
                             "(google.api.method_signature)": "name",
@@ -154,6 +190,12 @@
                             "(google.longrunning.operation_info).metadata_type": "DeleteFolderRecursiveMetadata"
                           },
                           "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/buckets/*/folders/**}:deleteRecursive",
+                                "body": "*"
+                              }
+                            },
                             {
                               "(google.api.routing)": {
                                 "routing_parameters": {
@@ -177,11 +219,17 @@
                           "requestType": "GetStorageLayoutRequest",
                           "responseType": "StorageLayout",
                           "options": {
+                            "(google.api.http).get": "/v2/{name=projects/*/buckets/*/storageLayout}",
                             "(google.api.routing).routing_parameters.field": "name",
                             "(google.api.routing).routing_parameters.path_template": "{bucket=projects/*/buckets/*}/**",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/buckets/*/storageLayout}"
+                              }
+                            },
                             {
                               "(google.api.routing)": {
                                 "routing_parameters": {
@@ -280,6 +328,28 @@
                             },
                             {
                               "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateManagedFolder": {
+                          "requestType": "UpdateManagedFolderRequest",
+                          "responseType": "ManagedFolder",
+                          "options": {
+                            "(google.api.routing).routing_parameters.field": "managed_folder.name",
+                            "(google.api.routing).routing_parameters.path_template": "{bucket=projects/*/buckets/*}/**",
+                            "(google.api.method_signature)": "managed_folder,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "managed_folder.name",
+                                  "path_template": "{bucket=projects/*/buckets/*}/**"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "managed_folder,update_mask"
                             }
                           ]
                         },
@@ -434,6 +504,140 @@
                         "ListAnywhereCaches": {
                           "requestType": "ListAnywhereCachesRequest",
                           "responseType": "ListAnywhereCachesResponse",
+                          "options": {
+                            "(google.api.routing).routing_parameters.field": "parent",
+                            "(google.api.routing).routing_parameters.path_template": "{bucket=**}",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "parent",
+                                  "path_template": "{bucket=**}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateRapidCache": {
+                          "requestType": "CreateRapidCacheRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.routing).routing_parameters.field": "parent",
+                            "(google.api.routing).routing_parameters.path_template": "{bucket=**}",
+                            "(google.api.method_signature)": "parent,rapid_cache",
+                            "(google.longrunning.operation_info).response_type": "RapidCache",
+                            "(google.longrunning.operation_info).metadata_type": "CreateRapidCacheMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "parent",
+                                  "path_template": "{bucket=**}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,rapid_cache"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "RapidCache",
+                                "metadata_type": "CreateRapidCacheMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateRapidCache": {
+                          "requestType": "UpdateRapidCacheRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.routing).routing_parameters.field": "rapid_cache.name",
+                            "(google.api.routing).routing_parameters.path_template": "{bucket=projects/*/buckets/*}/**",
+                            "(google.api.method_signature)": "rapid_cache,update_mask",
+                            "(google.longrunning.operation_info).response_type": "RapidCache",
+                            "(google.longrunning.operation_info).metadata_type": "UpdateRapidCacheMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "rapid_cache.name",
+                                  "path_template": "{bucket=projects/*/buckets/*}/**"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "rapid_cache,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "RapidCache",
+                                "metadata_type": "UpdateRapidCacheMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DisableRapidCache": {
+                          "requestType": "DisableRapidCacheRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.routing).routing_parameters.field": "name",
+                            "(google.api.routing).routing_parameters.path_template": "{bucket=projects/*/buckets/*}/**",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "RapidCache",
+                            "(google.longrunning.operation_info).metadata_type": "DisableRapidCacheMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "name",
+                                  "path_template": "{bucket=projects/*/buckets/*}/**"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "RapidCache",
+                                "metadata_type": "DisableRapidCacheMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetRapidCache": {
+                          "requestType": "GetRapidCacheRequest",
+                          "responseType": "RapidCache",
+                          "options": {
+                            "(google.api.routing).routing_parameters.field": "name",
+                            "(google.api.routing).routing_parameters.path_template": "{bucket=projects/*/buckets/*}/**",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "name",
+                                  "path_template": "{bucket=projects/*/buckets/*}/**"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListRapidCaches": {
+                          "requestType": "ListRapidCachesRequest",
+                          "responseType": "ListRapidCachesResponse",
                           "options": {
                             "(google.api.routing).routing_parameters.field": "parent",
                             "(google.api.routing).routing_parameters.path_template": "{bucket=**}",
@@ -751,6 +955,37 @@
                             },
                             {
                               "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "ViewObjectFullContext": {
+                          "requestType": "ViewObjectFullContextRequest",
+                          "responseType": "ObjectFullContext",
+                          "options": {
+                            "(google.api.http).get": "/v2/{name=projects/*/buckets/*/objects/**}:viewFullContext",
+                            "(google.api.routing).routing_parameters.field": "name",
+                            "(google.api.routing).routing_parameters.path_template": "{bucket=projects/*/buckets/*}/**",
+                            "(google.api.method_signature)": "name,generation,context_key"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/buckets/*/objects/**}:viewFullContext"
+                              }
+                            },
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "name",
+                                  "path_template": "{bucket=projects/*/buckets/*}/**"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,context_key"
+                            },
+                            {
+                              "(google.api.method_signature)": "name,generation,context_key"
                             }
                           ]
                         }
@@ -1237,6 +1472,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "rapidCacheInfo": {
+                          "type": "RapidCacheInfo",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1254,6 +1496,17 @@
                             "enabled": {
                               "type": "bool",
                               "id": 1
+                            }
+                          }
+                        },
+                        "RapidCacheInfo": {
+                          "fields": {
+                            "cacheType": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         }
@@ -1290,6 +1543,13 @@
                         "(google.api.resource).plural": "managedFolders",
                         "(google.api.resource).singular": "managedFolder"
                       },
+                      "oneofs": {
+                        "_rapidCacheConfig": {
+                          "oneof": [
+                            "rapidCacheConfig"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -1317,6 +1577,55 @@
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "rapidCacheConfig": {
+                          "type": "RapidCacheConfig",
+                          "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RapidCacheConfig": {
+                          "fields": {
+                            "policies": {
+                              "keyType": "string",
+                              "type": "RapidCachePolicy",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "RapidCachePolicy": {
+                              "fields": {
+                                "rapidCacheId": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "ingestOnWrite": {
+                                  "type": "IngestOnWrite",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "IngestOnWrite": {
+                                  "values": {
+                                    "INGEST_ON_WRITE_UNSPECIFIED": 0,
+                                    "INGEST_ON_WRITE_ENABLED": 1
+                                  }
+                                }
+                              }
+                            }
                           }
                         }
                       }
@@ -1505,6 +1814,60 @@
                         }
                       }
                     },
+                    "UpdateManagedFolderRequest": {
+                      "oneofs": {
+                        "_ifMetagenerationMatch": {
+                          "oneof": [
+                            "ifMetagenerationMatch"
+                          ]
+                        },
+                        "_ifMetagenerationNotMatch": {
+                          "oneof": [
+                            "ifMetagenerationNotMatch"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "managedFolder": {
+                          "type": "ManagedFolder",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ifMetagenerationMatch": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "ifMetagenerationNotMatch": {
+                          "type": "int64",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "CreateAnywhereCacheMetadata": {
                       "oneofs": {
                         "_anywhereCacheId": {
@@ -1525,6 +1888,11 @@
                         "_admissionPolicy": {
                           "oneof": [
                             "admissionPolicy"
+                          ]
+                        },
+                        "_ingestOnWrite": {
+                          "oneof": [
+                            "ingestOnWrite"
                           ]
                         }
                       },
@@ -1560,6 +1928,98 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "ingestOnWrite": {
+                          "type": "bool",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "CreateRapidCacheMetadata": {
+                      "oneofs": {
+                        "_rapidCacheId": {
+                          "oneof": [
+                            "rapidCacheId"
+                          ]
+                        },
+                        "_zone": {
+                          "oneof": [
+                            "zone"
+                          ]
+                        },
+                        "_ttl": {
+                          "oneof": [
+                            "ttl"
+                          ]
+                        },
+                        "_admissionPolicy": {
+                          "oneof": [
+                            "admissionPolicy"
+                          ]
+                        },
+                        "_ingestOnWrite": {
+                          "oneof": [
+                            "ingestOnWrite"
+                          ]
+                        },
+                        "_cacheType": {
+                          "oneof": [
+                            "cacheType"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "commonMetadata": {
+                          "type": "CommonLongRunningOperationMetadata",
+                          "id": 1
+                        },
+                        "rapidCacheId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "ttl": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "admissionPolicy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "ingestOnWrite": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "cacheType": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -1583,6 +2043,11 @@
                         "_admissionPolicy": {
                           "oneof": [
                             "admissionPolicy"
+                          ]
+                        },
+                        "_ingestOnWrite": {
+                          "oneof": [
+                            "ingestOnWrite"
                           ]
                         }
                       },
@@ -1616,6 +2081,145 @@
                           "type": "string",
                           "id": 4,
                           "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "ingestOnWrite": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "UpdateRapidCacheMetadata": {
+                      "oneofs": {
+                        "_rapidCacheId": {
+                          "oneof": [
+                            "rapidCacheId"
+                          ]
+                        },
+                        "_zone": {
+                          "oneof": [
+                            "zone"
+                          ]
+                        },
+                        "_ttl": {
+                          "oneof": [
+                            "ttl"
+                          ]
+                        },
+                        "_admissionPolicy": {
+                          "oneof": [
+                            "admissionPolicy"
+                          ]
+                        },
+                        "_ingestOnWrite": {
+                          "oneof": [
+                            "ingestOnWrite"
+                          ]
+                        },
+                        "_cacheType": {
+                          "oneof": [
+                            "cacheType"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "commonMetadata": {
+                          "type": "CommonLongRunningOperationMetadata",
+                          "id": 1
+                        },
+                        "rapidCacheId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "ttl": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "admissionPolicy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "ingestOnWrite": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "cacheType": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "DisableRapidCacheMetadata": {
+                      "oneofs": {
+                        "_rapidCacheId": {
+                          "oneof": [
+                            "rapidCacheId"
+                          ]
+                        },
+                        "_zone": {
+                          "oneof": [
+                            "zone"
+                          ]
+                        },
+                        "_cacheType": {
+                          "oneof": [
+                            "cacheType"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "commonMetadata": {
+                          "type": "CommonLongRunningOperationMetadata",
+                          "id": 1
+                        },
+                        "rapidCacheId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "cacheType": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
                         }
@@ -1627,6 +2231,13 @@
                         "(google.api.resource).pattern": "projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}",
                         "(google.api.resource).plural": "anywhereCaches",
                         "(google.api.resource).singular": "anywhereCache"
+                      },
+                      "oneofs": {
+                        "_ingestOnWrite": {
+                          "oneof": [
+                            "ingestOnWrite"
+                          ]
+                        }
                       },
                       "fields": {
                         "name": {
@@ -1677,6 +2288,14 @@
                           "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "ingestOnWrite": {
+                          "type": "bool",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -1855,6 +2474,207 @@
                         }
                       }
                     },
+                    "RapidCache": {
+                      "options": {
+                        "(google.api.resource).type": "storage.googleapis.com/RapidCache",
+                        "(google.api.resource).pattern": "projects/{project}/buckets/{bucket}/rapidCaches/{rapid_cache}",
+                        "(google.api.resource).plural": "rapidCaches",
+                        "(google.api.resource).singular": "rapidCache"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "cacheType": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "ttl": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4
+                        },
+                        "admissionPolicy": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "state": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "pendingUpdate": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "CreateRapidCacheRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "storage.googleapis.com/RapidCache"
+                          }
+                        },
+                        "rapidCache": {
+                          "type": "RapidCache",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateRapidCacheRequest": {
+                      "fields": {
+                        "rapidCache": {
+                          "type": "RapidCache",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DisableRapidCacheRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "storage.googleapis.com/RapidCache"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetRapidCacheRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "storage.googleapis.com/RapidCache"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListRapidCachesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "storage.googleapis.com/RapidCache"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListRapidCachesResponse": {
+                      "fields": {
+                        "rapidCaches": {
+                          "rule": "repeated",
+                          "type": "RapidCache",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "IntelligenceConfig": {
                       "options": {
                         "(google.api.resource).type": "storage.googleapis.com/IntelligenceConfig",
@@ -1910,7 +2730,8 @@
                             "INHERIT": 1,
                             "DISABLED": 2,
                             "STANDARD": 3,
-                            "TRIAL": 5
+                            "TRIAL": 5,
+                            "ESSENTIALS": 6
                           }
                         },
                         "Filter": {
@@ -2679,7 +3500,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "IDENTIFIER"
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
                         "snapshot": {
@@ -2907,10 +3728,7 @@
                         },
                         "severity": {
                           "type": "FindingSeverity",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
+                          "id": 7
                         },
                         "summaryDetails": {
                           "rule": "repeated",
@@ -2963,6 +3781,69 @@
                                 "BUCKET": 2
                               }
                             }
+                          }
+                        }
+                      }
+                    },
+                    "ObjectFullContext": {
+                      "fields": {
+                        "type": {
+                          "type": "Type",
+                          "id": 1
+                        },
+                        "key": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "value": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5
+                        },
+                        "extendedData": {
+                          "type": "google.protobuf.Any",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "CUSTOM": 1,
+                            "GOOGLE": 2
+                          }
+                        }
+                      }
+                    },
+                    "ViewObjectFullContextRequest": {
+                      "fields": {
+                        "generation": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "contextKey": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "storage.googleapis.com/Object"
                           }
                         }
                       }

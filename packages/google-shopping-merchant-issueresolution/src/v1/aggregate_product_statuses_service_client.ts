@@ -513,11 +513,11 @@ export class AggregateProductStatusesServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAggregateProductStatuses values %j', values);
+          this._log.debug('listAggregateProductStatuses values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAggregateProductStatuses request %j', request);
+    this._log.debug('listAggregateProductStatuses request %j', request);
     return this.innerApiCalls
       .listAggregateProductStatuses(request, options, wrappedCallback)
       ?.then(
@@ -526,7 +526,7 @@ export class AggregateProductStatusesServiceClient {
           protos.google.shopping.merchant.issueresolution.v1.IListAggregateProductStatusesRequest | null,
           protos.google.shopping.merchant.issueresolution.v1.IListAggregateProductStatusesResponse,
         ]) => {
-          this._log.info('listAggregateProductStatuses values %j', response);
+          this._log.debug('listAggregateProductStatuses values %j', response);
           return [response, input, output];
         },
       );
@@ -584,7 +584,7 @@ export class AggregateProductStatusesServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAggregateProductStatuses stream %j', request);
+    this._log.debug('listAggregateProductStatuses stream %j', request);
     return this.descriptors.page.listAggregateProductStatuses.createStream(
       this.innerApiCalls.listAggregateProductStatuses as GaxCall,
       request,
@@ -647,7 +647,7 @@ export class AggregateProductStatusesServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAggregateProductStatuses iterate %j', request);
+    this._log.debug('listAggregateProductStatuses iterate %j', request);
     return this.descriptors.page.listAggregateProductStatuses.asyncIterate(
       this.innerApiCalls['listAggregateProductStatuses'] as GaxCall,
       request as {},

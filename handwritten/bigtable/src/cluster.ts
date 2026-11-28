@@ -132,6 +132,7 @@ export type GetClusterMetadataCallback = (
  * const instance = bigtable.instance('my-instance');
  * const cluster = instance.cluster('my-cluster');
  * ```
+ * @deprecated Use {@link InstanceAdminClient} from @google-cloud/bigtable instead.
  */
 export class Cluster {
   bigtable: Bigtable;
@@ -220,6 +221,7 @@ Please use the format 'my-cluster' or '${instance.name}/clusters/my-cluster'.`);
    *
    * @param {string} id The backup name or id.
    * @returns {Backup}
+   * @deprecated Use {@link TableAdminClient} from @google-cloud/bigtable instead.
    */
   backup(id: string): Backup {
     return new Backup(this, id);
@@ -240,6 +242,7 @@ Please use the format 'my-cluster' or '${instance.name}/clusters/my-cluster'.`);
    *
    * @example <caption>include:samples/api-reference-doc-snippets/cluster.js</caption>
    * region_tag:bigtable_api_create_cluster
+   * @deprecated Use {@link InstanceAdminClient#createCluster} from @google-cloud/bigtable instead.
    */
   create(
     optionsOrCallback?: CreateClusterOptions | CreateClusterCallback,
@@ -285,6 +288,7 @@ Please use the format 'my-cluster' or '${instance.name}/clusters/my-cluster'.`);
    *
    * @example <caption>include:samples/api-reference-doc-snippets/backups.create.js</caption>
    * region_tag:bigtable_api_create_backup
+   * @deprecated Use {@link TableAdminClient#createBackup} from @google-cloud/bigtable instead.
    */
   createBackup(
     id: string,
@@ -355,6 +359,7 @@ Please use the format 'my-cluster' or '${instance.name}/clusters/my-cluster'.`);
    *
    * @example <caption>include:samples/api-reference-doc-snippets/cluster.js</caption>
    * region_tag:bigtable_api_delete_cluster
+   * @deprecated Use {@link InstanceAdminClient#deleteCluster} from @google-cloud/bigtable instead.
    */
   delete(
     gaxOptionsOrCallback?: CallOptions | DeleteClusterCallback,
@@ -396,6 +401,7 @@ Please use the format 'my-cluster' or '${instance.name}/clusters/my-cluster'.`);
    *
    * @example <caption>include:samples/api-reference-doc-snippets/cluster.js</caption>
    * region_tag:bigtable_api_exists_cluster
+   * @deprecated Use {@link InstanceAdminClient#getCluster} from @google-cloud/bigtable instead.
    */
   exists(
     gaxOptionsOrCallback?: CallOptions | ExistsClusterCallback,
@@ -439,6 +445,7 @@ Please use the format 'my-cluster' or '${instance.name}/clusters/my-cluster'.`);
    *
    * @example <caption>include:samples/api-reference-doc-snippets/cluster.js</caption>
    * region_tag:bigtable_api_get_cluster
+   * @deprecated Use {@link InstanceAdminClient#getCluster} from @google-cloud/bigtable instead.
    */
   get(
     gaxOptionsOrCallback?: CallOptions | GetClusterCallback,
@@ -475,6 +482,7 @@ Please use the format 'my-cluster' or '${instance.name}/clusters/my-cluster'.`);
    *
    * @example <caption>include:samples/api-reference-doc-snippets/backups.list.js</caption>
    * region_tag:bigtable_api_list_backups
+   * @deprecated Use {@link TableAdminClient#listBackups} from @google-cloud/bigtable instead.
    */
   getBackups(
     optionsOrCallback?: GetBackupsOptions | GetBackupsCallback,
@@ -576,6 +584,7 @@ Please use the format 'my-cluster' or '${instance.name}/clusters/my-cluster'.`);
    *     this.end();
    *   });
    * ```
+   * @deprecated Use {@link TableAdminClient#listBackupsStream} from @google-cloud/bigtable instead.
    */
   getBackupsStream(options?: GetBackupsOptions): NodeJS.ReadableStream {
     const {gaxOptions, ...restOptions} = options || {};
@@ -630,6 +639,7 @@ Please use the format 'my-cluster' or '${instance.name}/clusters/my-cluster'.`);
    *
    * @example <caption>include:samples/api-reference-doc-snippets/cluster.js</caption>
    * region_tag:bigtable_api_cluster_get_meta
+   * @deprecated Use {@link InstanceAdminClient#getCluster} from @google-cloud/bigtable instead.
    */
   getMetadata(
     gaxOptionsOrCallback?: CallOptions | GetClusterMetadataCallback,
@@ -688,6 +698,7 @@ Please use the format 'my-cluster' or '${instance.name}/clusters/my-cluster'.`);
    *
    * @example <caption>include:samples/api-reference-doc-snippets/cluster.js</caption>
    * region_tag:bigtable_api_cluster_set_meta
+   * @deprecated Use {@link InstanceAdminClient#partialUpdateCluster} from @google-cloud/bigtable instead.
    */
   setMetadata(
     metadata: SetClusterMetadataOptions,

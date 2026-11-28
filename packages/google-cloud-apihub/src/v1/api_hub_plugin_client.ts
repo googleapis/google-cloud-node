@@ -683,7 +683,7 @@ export class ApiHubPluginClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPlugin request %j', request);
+    this._log.debug('getPlugin request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apihub.v1.IPlugin,
@@ -692,7 +692,7 @@ export class ApiHubPluginClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPlugin response %j', response);
+          this._log.debug('getPlugin response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -704,7 +704,7 @@ export class ApiHubPluginClient {
           protos.google.cloud.apihub.v1.IGetPluginRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getPlugin response %j', response);
+          this._log.debug('getPlugin response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -809,7 +809,7 @@ export class ApiHubPluginClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('enablePlugin request %j', request);
+    this._log.debug('enablePlugin request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apihub.v1.IPlugin,
@@ -818,7 +818,7 @@ export class ApiHubPluginClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('enablePlugin response %j', response);
+          this._log.debug('enablePlugin response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -830,7 +830,7 @@ export class ApiHubPluginClient {
           protos.google.cloud.apihub.v1.IEnablePluginRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('enablePlugin response %j', response);
+          this._log.debug('enablePlugin response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -937,7 +937,7 @@ export class ApiHubPluginClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('disablePlugin request %j', request);
+    this._log.debug('disablePlugin request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apihub.v1.IPlugin,
@@ -948,7 +948,7 @@ export class ApiHubPluginClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('disablePlugin response %j', response);
+          this._log.debug('disablePlugin response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -960,7 +960,7 @@ export class ApiHubPluginClient {
           protos.google.cloud.apihub.v1.IDisablePluginRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('disablePlugin response %j', response);
+          this._log.debug('disablePlugin response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1081,7 +1081,7 @@ export class ApiHubPluginClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createPlugin request %j', request);
+    this._log.debug('createPlugin request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apihub.v1.IPlugin,
@@ -1090,7 +1090,7 @@ export class ApiHubPluginClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createPlugin response %j', response);
+          this._log.debug('createPlugin response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1102,7 +1102,7 @@ export class ApiHubPluginClient {
           protos.google.cloud.apihub.v1.ICreatePluginRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createPlugin response %j', response);
+          this._log.debug('createPlugin response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1215,7 +1215,7 @@ export class ApiHubPluginClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPluginInstance request %j', request);
+    this._log.debug('getPluginInstance request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apihub.v1.IPluginInstance,
@@ -1226,7 +1226,7 @@ export class ApiHubPluginClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPluginInstance response %j', response);
+          this._log.debug('getPluginInstance response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1238,7 +1238,7 @@ export class ApiHubPluginClient {
           protos.google.cloud.apihub.v1.IGetPluginInstanceRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getPluginInstance response %j', response);
+          this._log.debug('getPluginInstance response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1368,7 +1368,7 @@ export class ApiHubPluginClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updatePluginInstance request %j', request);
+    this._log.debug('updatePluginInstance request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.apihub.v1.IPluginInstance,
@@ -1379,7 +1379,7 @@ export class ApiHubPluginClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updatePluginInstance response %j', response);
+          this._log.debug('updatePluginInstance response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1394,7 +1394,7 @@ export class ApiHubPluginClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updatePluginInstance response %j', response);
+          this._log.debug('updatePluginInstance response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1531,11 +1531,11 @@ export class ApiHubPluginClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deletePlugin response %j', rawResponse);
+          this._log.debug('deletePlugin response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deletePlugin request %j', request);
+    this._log.debug('deletePlugin request %j', request);
     return this.innerApiCalls
       .deletePlugin(request, options, wrappedCallback)
       ?.then(
@@ -1547,7 +1547,7 @@ export class ApiHubPluginClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deletePlugin response %j', rawResponse);
+          this._log.debug('deletePlugin response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1715,11 +1715,11 @@ export class ApiHubPluginClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createPluginInstance response %j', rawResponse);
+          this._log.debug('createPluginInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createPluginInstance request %j', request);
+    this._log.debug('createPluginInstance request %j', request);
     return this.innerApiCalls
       .createPluginInstance(request, options, wrappedCallback)
       ?.then(
@@ -1731,7 +1731,7 @@ export class ApiHubPluginClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createPluginInstance response %j', rawResponse);
+          this._log.debug('createPluginInstance response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1888,14 +1888,14 @@ export class ApiHubPluginClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'executePluginInstanceAction response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('executePluginInstanceAction request %j', request);
+    this._log.debug('executePluginInstanceAction request %j', request);
     return this.innerApiCalls
       .executePluginInstanceAction(request, options, wrappedCallback)
       ?.then(
@@ -1907,7 +1907,7 @@ export class ApiHubPluginClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'executePluginInstanceAction response %j',
             rawResponse,
           );
@@ -2067,11 +2067,14 @@ export class ApiHubPluginClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('enablePluginInstanceAction response %j', rawResponse);
+          this._log.debug(
+            'enablePluginInstanceAction response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('enablePluginInstanceAction request %j', request);
+    this._log.debug('enablePluginInstanceAction request %j', request);
     return this.innerApiCalls
       .enablePluginInstanceAction(request, options, wrappedCallback)
       ?.then(
@@ -2083,7 +2086,10 @@ export class ApiHubPluginClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('enablePluginInstanceAction response %j', rawResponse);
+          this._log.debug(
+            'enablePluginInstanceAction response %j',
+            rawResponse,
+          );
           return [response, rawResponse, _];
         },
       );
@@ -2240,14 +2246,14 @@ export class ApiHubPluginClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'disablePluginInstanceAction response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('disablePluginInstanceAction request %j', request);
+    this._log.debug('disablePluginInstanceAction request %j', request);
     return this.innerApiCalls
       .disablePluginInstanceAction(request, options, wrappedCallback)
       ?.then(
@@ -2259,7 +2265,7 @@ export class ApiHubPluginClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'disablePluginInstanceAction response %j',
             rawResponse,
           );
@@ -2417,11 +2423,11 @@ export class ApiHubPluginClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deletePluginInstance response %j', rawResponse);
+          this._log.debug('deletePluginInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deletePluginInstance request %j', request);
+    this._log.debug('deletePluginInstance request %j', request);
     return this.innerApiCalls
       .deletePluginInstance(request, options, wrappedCallback)
       ?.then(
@@ -2433,7 +2439,7 @@ export class ApiHubPluginClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deletePluginInstance response %j', rawResponse);
+          this._log.debug('deletePluginInstance response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2602,11 +2608,11 @@ export class ApiHubPluginClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listPlugins values %j', values);
+          this._log.debug('listPlugins values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listPlugins request %j', request);
+    this._log.debug('listPlugins request %j', request);
     return this.innerApiCalls
       .listPlugins(request, options, wrappedCallback)
       ?.then(
@@ -2615,7 +2621,7 @@ export class ApiHubPluginClient {
           protos.google.cloud.apihub.v1.IListPluginsRequest | null,
           protos.google.cloud.apihub.v1.IListPluginsResponse,
         ]) => {
-          this._log.info('listPlugins values %j', response);
+          this._log.debug('listPlugins values %j', response);
           return [response, input, output];
         },
       );
@@ -2691,7 +2697,7 @@ export class ApiHubPluginClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPlugins stream %j', request);
+    this._log.debug('listPlugins stream %j', request);
     return this.descriptors.page.listPlugins.createStream(
       this.innerApiCalls.listPlugins as GaxCall,
       request,
@@ -2772,7 +2778,7 @@ export class ApiHubPluginClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPlugins iterate %j', request);
+    this._log.debug('listPlugins iterate %j', request);
     return this.descriptors.page.listPlugins.asyncIterate(
       this.innerApiCalls['listPlugins'] as GaxCall,
       request as {},
@@ -2928,11 +2934,11 @@ export class ApiHubPluginClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listPluginInstances values %j', values);
+          this._log.debug('listPluginInstances values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listPluginInstances request %j', request);
+    this._log.debug('listPluginInstances request %j', request);
     return this.innerApiCalls
       .listPluginInstances(request, options, wrappedCallback)
       ?.then(
@@ -2941,7 +2947,7 @@ export class ApiHubPluginClient {
           protos.google.cloud.apihub.v1.IListPluginInstancesRequest | null,
           protos.google.cloud.apihub.v1.IListPluginInstancesResponse,
         ]) => {
-          this._log.info('listPluginInstances values %j', response);
+          this._log.debug('listPluginInstances values %j', response);
           return [response, input, output];
         },
       );
@@ -3026,7 +3032,7 @@ export class ApiHubPluginClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPluginInstances stream %j', request);
+    this._log.debug('listPluginInstances stream %j', request);
     return this.descriptors.page.listPluginInstances.createStream(
       this.innerApiCalls.listPluginInstances as GaxCall,
       request,
@@ -3116,7 +3122,7 @@ export class ApiHubPluginClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPluginInstances iterate %j', request);
+    this._log.debug('listPluginInstances iterate %j', request);
     return this.descriptors.page.listPluginInstances.asyncIterate(
       this.innerApiCalls['listPluginInstances'] as GaxCall,
       request as {},

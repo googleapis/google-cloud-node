@@ -671,7 +671,7 @@ export class AwsClustersClient {
       'GetAwsCluster is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('getAwsCluster request %j', request);
+    this._log.debug('getAwsCluster request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.gkemulticloud.v1.IAwsCluster,
@@ -682,7 +682,7 @@ export class AwsClustersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAwsCluster response %j', response);
+          this._log.debug('getAwsCluster response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -697,7 +697,7 @@ export class AwsClustersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAwsCluster response %j', response);
+          this._log.debug('getAwsCluster response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -838,7 +838,7 @@ export class AwsClustersClient {
       'GenerateAwsClusterAgentToken is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('generateAwsClusterAgentToken request %j', request);
+    this._log.debug('generateAwsClusterAgentToken request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenResponse,
@@ -849,7 +849,7 @@ export class AwsClustersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateAwsClusterAgentToken response %j', response);
+          this._log.debug('generateAwsClusterAgentToken response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -864,7 +864,7 @@ export class AwsClustersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('generateAwsClusterAgentToken response %j', response);
+          this._log.debug('generateAwsClusterAgentToken response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -996,7 +996,7 @@ export class AwsClustersClient {
       'GenerateAwsAccessToken is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('generateAwsAccessToken request %j', request);
+    this._log.debug('generateAwsAccessToken request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenResponse,
@@ -1007,7 +1007,7 @@ export class AwsClustersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateAwsAccessToken response %j', response);
+          this._log.debug('generateAwsAccessToken response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1022,7 +1022,7 @@ export class AwsClustersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('generateAwsAccessToken response %j', response);
+          this._log.debug('generateAwsAccessToken response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1148,7 +1148,7 @@ export class AwsClustersClient {
       'GetAwsNodePool is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('getAwsNodePool request %j', request);
+    this._log.debug('getAwsNodePool request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
@@ -1159,7 +1159,7 @@ export class AwsClustersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAwsNodePool response %j', response);
+          this._log.debug('getAwsNodePool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1174,7 +1174,7 @@ export class AwsClustersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAwsNodePool response %j', response);
+          this._log.debug('getAwsNodePool response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1303,7 +1303,7 @@ export class AwsClustersClient {
       'GetAwsOpenIdConfig is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('getAwsOpenIdConfig request %j', request);
+    this._log.debug('getAwsOpenIdConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.gkemulticloud.v1.IAwsOpenIdConfig,
@@ -1314,7 +1314,7 @@ export class AwsClustersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAwsOpenIdConfig response %j', response);
+          this._log.debug('getAwsOpenIdConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1329,7 +1329,7 @@ export class AwsClustersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAwsOpenIdConfig response %j', response);
+          this._log.debug('getAwsOpenIdConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1455,7 +1455,7 @@ export class AwsClustersClient {
       'GetAwsJsonWebKeys is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('getAwsJsonWebKeys request %j', request);
+    this._log.debug('getAwsJsonWebKeys request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.gkemulticloud.v1.IAwsJsonWebKeys,
@@ -1466,7 +1466,7 @@ export class AwsClustersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAwsJsonWebKeys response %j', response);
+          this._log.debug('getAwsJsonWebKeys response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1481,7 +1481,7 @@ export class AwsClustersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAwsJsonWebKeys response %j', response);
+          this._log.debug('getAwsJsonWebKeys response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1613,7 +1613,7 @@ export class AwsClustersClient {
       'GetAwsServerConfig is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('getAwsServerConfig request %j', request);
+    this._log.debug('getAwsServerConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.gkemulticloud.v1.IAwsServerConfig,
@@ -1624,7 +1624,7 @@ export class AwsClustersClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAwsServerConfig response %j', response);
+          this._log.debug('getAwsServerConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1639,7 +1639,7 @@ export class AwsClustersClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAwsServerConfig response %j', response);
+          this._log.debug('getAwsServerConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1807,11 +1807,11 @@ export class AwsClustersClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createAwsCluster response %j', rawResponse);
+          this._log.debug('createAwsCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createAwsCluster request %j', request);
+    this._log.debug('createAwsCluster request %j', request);
     return this.innerApiCalls
       .createAwsCluster(request, options, wrappedCallback)
       ?.then(
@@ -1823,7 +1823,7 @@ export class AwsClustersClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createAwsCluster response %j', rawResponse);
+          this._log.debug('createAwsCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2023,11 +2023,11 @@ export class AwsClustersClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateAwsCluster response %j', rawResponse);
+          this._log.debug('updateAwsCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateAwsCluster request %j', request);
+    this._log.debug('updateAwsCluster request %j', request);
     return this.innerApiCalls
       .updateAwsCluster(request, options, wrappedCallback)
       ?.then(
@@ -2039,7 +2039,7 @@ export class AwsClustersClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateAwsCluster response %j', rawResponse);
+          this._log.debug('updateAwsCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2241,11 +2241,11 @@ export class AwsClustersClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteAwsCluster response %j', rawResponse);
+          this._log.debug('deleteAwsCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteAwsCluster request %j', request);
+    this._log.debug('deleteAwsCluster request %j', request);
     return this.innerApiCalls
       .deleteAwsCluster(request, options, wrappedCallback)
       ?.then(
@@ -2257,7 +2257,7 @@ export class AwsClustersClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteAwsCluster response %j', rawResponse);
+          this._log.debug('deleteAwsCluster response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2450,11 +2450,11 @@ export class AwsClustersClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createAwsNodePool response %j', rawResponse);
+          this._log.debug('createAwsNodePool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createAwsNodePool request %j', request);
+    this._log.debug('createAwsNodePool request %j', request);
     return this.innerApiCalls
       .createAwsNodePool(request, options, wrappedCallback)
       ?.then(
@@ -2466,7 +2466,7 @@ export class AwsClustersClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createAwsNodePool response %j', rawResponse);
+          this._log.debug('createAwsNodePool response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2669,11 +2669,11 @@ export class AwsClustersClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateAwsNodePool response %j', rawResponse);
+          this._log.debug('updateAwsNodePool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateAwsNodePool request %j', request);
+    this._log.debug('updateAwsNodePool request %j', request);
     return this.innerApiCalls
       .updateAwsNodePool(request, options, wrappedCallback)
       ?.then(
@@ -2685,7 +2685,7 @@ export class AwsClustersClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateAwsNodePool response %j', rawResponse);
+          this._log.debug('updateAwsNodePool response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2866,11 +2866,11 @@ export class AwsClustersClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('rollbackAwsNodePoolUpdate response %j', rawResponse);
+          this._log.debug('rollbackAwsNodePoolUpdate response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('rollbackAwsNodePoolUpdate request %j', request);
+    this._log.debug('rollbackAwsNodePoolUpdate request %j', request);
     return this.innerApiCalls
       .rollbackAwsNodePoolUpdate(request, options, wrappedCallback)
       ?.then(
@@ -2882,7 +2882,7 @@ export class AwsClustersClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('rollbackAwsNodePoolUpdate response %j', rawResponse);
+          this._log.debug('rollbackAwsNodePoolUpdate response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3082,11 +3082,11 @@ export class AwsClustersClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteAwsNodePool response %j', rawResponse);
+          this._log.debug('deleteAwsNodePool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteAwsNodePool request %j', request);
+    this._log.debug('deleteAwsNodePool request %j', request);
     return this.innerApiCalls
       .deleteAwsNodePool(request, options, wrappedCallback)
       ?.then(
@@ -3098,7 +3098,7 @@ export class AwsClustersClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteAwsNodePool response %j', rawResponse);
+          this._log.debug('deleteAwsNodePool response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3272,11 +3272,11 @@ export class AwsClustersClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAwsClusters values %j', values);
+          this._log.debug('listAwsClusters values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAwsClusters request %j', request);
+    this._log.debug('listAwsClusters request %j', request);
     return this.innerApiCalls
       .listAwsClusters(request, options, wrappedCallback)
       ?.then(
@@ -3285,7 +3285,7 @@ export class AwsClustersClient {
           protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest | null,
           protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse,
         ]) => {
-          this._log.info('listAwsClusters values %j', response);
+          this._log.debug('listAwsClusters values %j', response);
           return [response, input, output];
         },
       );
@@ -3349,7 +3349,7 @@ export class AwsClustersClient {
       'ListAwsClusters is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('listAwsClusters stream %j', request);
+    this._log.debug('listAwsClusters stream %j', request);
     return this.descriptors.page.listAwsClusters.createStream(
       this.innerApiCalls.listAwsClusters as GaxCall,
       request,
@@ -3418,7 +3418,7 @@ export class AwsClustersClient {
       'ListAwsClusters is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('listAwsClusters iterate %j', request);
+    this._log.debug('listAwsClusters iterate %j', request);
     return this.descriptors.page.listAwsClusters.asyncIterate(
       this.innerApiCalls['listAwsClusters'] as GaxCall,
       request as {},
@@ -3555,11 +3555,11 @@ export class AwsClustersClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAwsNodePools values %j', values);
+          this._log.debug('listAwsNodePools values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAwsNodePools request %j', request);
+    this._log.debug('listAwsNodePools request %j', request);
     return this.innerApiCalls
       .listAwsNodePools(request, options, wrappedCallback)
       ?.then(
@@ -3568,7 +3568,7 @@ export class AwsClustersClient {
           protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest | null,
           protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse,
         ]) => {
-          this._log.info('listAwsNodePools values %j', response);
+          this._log.debug('listAwsNodePools values %j', response);
           return [response, input, output];
         },
       );
@@ -3633,7 +3633,7 @@ export class AwsClustersClient {
       'ListAwsNodePools is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('listAwsNodePools stream %j', request);
+    this._log.debug('listAwsNodePools stream %j', request);
     return this.descriptors.page.listAwsNodePools.createStream(
       this.innerApiCalls.listAwsNodePools as GaxCall,
       request,
@@ -3703,7 +3703,7 @@ export class AwsClustersClient {
       'ListAwsNodePools is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('listAwsNodePools iterate %j', request);
+    this._log.debug('listAwsNodePools iterate %j', request);
     return this.descriptors.page.listAwsNodePools.asyncIterate(
       this.innerApiCalls['listAwsNodePools'] as GaxCall,
       request as {},

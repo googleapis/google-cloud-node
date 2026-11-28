@@ -272,6 +272,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
    *
    * @param {string} name The name of the app profile.
    * @returns {AppProfile}
+   * @deprecated Use {@link InstanceAdminClient} from @google-cloud/bigtable instead.
    */
   appProfile(name: string): AppProfile {
     return new AppProfile(this, name);
@@ -296,6 +297,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
    *
    * @example <caption>include:samples/api-reference-doc-snippets/instance.js</caption>
    * region_tag:bigtable_api_create_instance
+   * @deprecated Use {@link InstanceAdminClient#createInstance} from @google-cloud/bigtable instead.
    */
   create(
     options: InstanceOptions,
@@ -341,6 +343,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
    *
    * @example <caption>include:samples/api-reference-doc-snippets/instance.js</caption>
    * region_tag:bigtable_api_create_app_profile
+   * @deprecated Use {@link InstanceAdminClient#createAppProfile} from @google-cloud/bigtable instead.
    */
   createAppProfile(
     id: string,
@@ -423,6 +426,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
    *
    * @example <caption>include:samples/api-reference-doc-snippets/instance.js</caption>
    * region_tag:bigtable_api_create_cluster
+   * @deprecated Use {@link InstanceAdminClient#createCluster} from @google-cloud/bigtable instead.
    */
   createCluster(
     id: string,
@@ -523,6 +527,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
    *
    * @example <caption>include:samples/api-reference-doc-snippets/instance.js</caption>
    * region_tag:bigtable_api_create_table
+   * @deprecated Use {@link TableAdminClient#createTable} from @google-cloud/bigtable instead.
    */
   createTable(
     id: string,
@@ -601,6 +606,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
    *
    * @param {string} id The id of the cluster.
    * @returns {Cluster}
+   * @deprecated Use {@link InstanceAdminClient} from @google-cloud/bigtable instead.
    */
   cluster(id: string): Cluster {
     return new Cluster(this, id);
@@ -621,6 +627,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
    *
    * @example <caption>include:samples/api-reference-doc-snippets/instance.js</caption>
    * region_tag:bigtable_api_del_instance
+   * @deprecated Use {@link InstanceAdminClient#deleteInstance} from @google-cloud/bigtable instead.
    */
   delete(
     optionsOrCallback?: CallOptions | DeleteInstanceCallback,
@@ -659,6 +666,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
    *
    * @example <caption>include:samples/api-reference-doc-snippets/instance.js</caption>
    * region_tag:bigtable_api_exists_instance
+   * @deprecated Use {@link InstanceAdminClient#getInstance} from @google-cloud/bigtable instead.
    */
   exists(
     optionsOrCallback?: CallOptions | InstanceExistsCallback,
@@ -696,6 +704,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
    *
    * @example <caption>include:samples/api-reference-doc-snippets/instance.js</caption>
    * region_tag:bigtable_api_get_instance
+   * @deprecated Use {@link InstanceAdminClient#getInstance} from @google-cloud/bigtable instead.
    */
   get(
     optionsOrCallback?: CallOptions | GetInstanceCallback,
@@ -729,6 +738,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
    *
    * @example <caption>include:samples/api-reference-doc-snippets/instance.js</caption>
    * region_tag:bigtable_api_get_app_profiles
+   * @deprecated Use {@link InstanceAdminClient#listAppProfiles} from @google-cloud/bigtable instead.
    */
   getAppProfiles(
     optionsOrCallback?: CallOptions | GetAppProfilesCallback,
@@ -812,6 +822,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
    *     this.end();
    *   });
    * ```
+   * @deprecated Use {@link InstanceAdminClient#listAppProfilesStream} from @google-cloud/bigtable instead.
    */
   getAppProfilesStream(gaxOptions: CallOptions = {}): NodeJS.ReadableStream {
     const reqOpts: google.bigtable.admin.v2.IListAppProfilesRequest = {
@@ -891,6 +902,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
    *
    * @example <caption>include:samples/api-reference-doc-snippets/backups.list.js</caption>
    * region_tag:bigtable_api_list_backups
+   * @deprecated Use {@link TableAdminClient#listBackups} from @google-cloud/bigtable instead.
    */
   getBackups(
     optionsOrCallback?: GetBackupsOptions | GetBackupsCallback,
@@ -935,6 +947,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
    *     this.end();
    *   });
    * ```
+   * @deprecated Use {@link TableAdminClient#listBackupsStream} from @google-cloud/bigtable instead.
    */
   getBackupsStream(options?: GetBackupsOptions): NodeJS.ReadableStream {
     return this.cluster('-').getBackupsStream(options);
@@ -956,6 +969,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
    *
    * @example <caption>include:samples/api-reference-doc-snippets/instance.js</caption>
    * region_tag:bigtable_api_get_clusters
+   * @deprecated Use {@link InstanceAdminClient#listClusters} from @google-cloud/bigtable instead.
    */
   getClusters(
     optionsOrCallback?: CallOptions | GetClustersCallback,
@@ -1012,6 +1026,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
    *
    * @example <caption>include:samples/api-reference-doc-snippets/instance.js</caption>
    * region_tag:bigtable_api_get_instance_Iam_policy
+   * @deprecated Use {@link InstanceAdminClient#getIamPolicy} from @google-cloud/bigtable instead.
    */
   getIamPolicy(
     optionsOrCallback?: GetIamPolicyOptions | GetIamPolicyCallback,
@@ -1070,6 +1085,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
    *
    * @example <caption>include:samples/api-reference-doc-snippets/instance.js</caption>
    * region_tag:bigtable_api_get_instance_metadata
+   * @deprecated Use {@link InstanceAdminClient#getInstance} from @google-cloud/bigtable instead.
    */
   getMetadata(
     optionsOrCallback?: CallOptions | GetInstanceMetadataCallback,
@@ -1123,6 +1139,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
    *
    * @example <caption>include:samples/api-reference-doc-snippets/instance.js</caption>
    * region_tag:bigtable_api_get_tables
+   * @deprecated Use {@link TableAdminClient#listTables} from @google-cloud/bigtable instead.
    */
   getTables(
     optionsOrCallback?: GetTablesOptions | GetTablesCallback,
@@ -1209,6 +1226,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
    *     this.end();
    *   });
    * ```
+   * @deprecated Use {@link TableAdminClient#listTablesStream} from @google-cloud/bigtable instead.
    */
   getTablesStream(options: GetTablesOptions = {}): NodeJS.ReadableStream {
     const gaxOpts = extend(true, {}, options.gaxOptions);
@@ -1286,6 +1304,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
    *
    * @example <caption>include:samples/api-reference-doc-snippets/backups.restore.js</caption>
    * region_tag:bigtable_api_restore_backup
+   * @deprecated Use {@link TableAdminClient#restoreTable} from @google-cloud/bigtable instead.
    */
   createTableFromBackup(
     config: CreateTableFromBackupConfig,
@@ -1343,6 +1362,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
    *
    * @example <caption>include:samples/api-reference-doc-snippets/instance.js</caption>
    * region_tag:bigtable_api_set_instance_Iam_policy
+   * @deprecated Use {@link InstanceAdminClient#setIamPolicy} from @google-cloud/bigtable instead.
    */
   setIamPolicy(
     policy: Policy,
@@ -1406,6 +1426,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
    *
    * @example <caption>include:samples/api-reference-doc-snippets/instance.js</caption>
    * region_tag:bigtable_api_set_meta_data
+   * @deprecated Use {@link InstanceAdminClient#partialUpdateInstance} from @google-cloud/bigtable instead.
    */
   setMetadata(
     metadata: IInstance,
@@ -1489,6 +1510,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
    *
    * @example <caption>include:samples/api-reference-doc-snippets/instance.js</caption>
    * region_tag:bigtable_api_test_instance_Iam_permissions
+   * @deprecated Use {@link InstanceAdminClient#testIamPermissions} from @google-cloud/bigtable instead.
    */
   testIamPermissions(
     permissions: string | string[],

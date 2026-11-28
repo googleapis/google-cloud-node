@@ -688,7 +688,7 @@ export class SessionControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSession request %j', request);
+    this._log.debug('getSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataproc.v1.ISession,
@@ -697,7 +697,7 @@ export class SessionControllerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSession response %j', response);
+          this._log.debug('getSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -709,7 +709,7 @@ export class SessionControllerClient {
           protos.google.cloud.dataproc.v1.IGetSessionRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getSession response %j', response);
+          this._log.debug('getSession response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -865,11 +865,11 @@ export class SessionControllerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createSession response %j', rawResponse);
+          this._log.debug('createSession response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createSession request %j', request);
+    this._log.debug('createSession request %j', request);
     return this.innerApiCalls
       .createSession(request, options, wrappedCallback)
       ?.then(
@@ -881,7 +881,7 @@ export class SessionControllerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createSession response %j', rawResponse);
+          this._log.debug('createSession response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1045,11 +1045,11 @@ export class SessionControllerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('terminateSession response %j', rawResponse);
+          this._log.debug('terminateSession response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('terminateSession request %j', request);
+    this._log.debug('terminateSession request %j', request);
     return this.innerApiCalls
       .terminateSession(request, options, wrappedCallback)
       ?.then(
@@ -1061,7 +1061,7 @@ export class SessionControllerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('terminateSession response %j', rawResponse);
+          this._log.debug('terminateSession response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1226,11 +1226,11 @@ export class SessionControllerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteSession response %j', rawResponse);
+          this._log.debug('deleteSession response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteSession request %j', request);
+    this._log.debug('deleteSession request %j', request);
     return this.innerApiCalls
       .deleteSession(request, options, wrappedCallback)
       ?.then(
@@ -1242,7 +1242,7 @@ export class SessionControllerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteSession response %j', rawResponse);
+          this._log.debug('deleteSession response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1401,11 +1401,11 @@ export class SessionControllerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listSessions values %j', values);
+          this._log.debug('listSessions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listSessions request %j', request);
+    this._log.debug('listSessions request %j', request);
     return this.innerApiCalls
       .listSessions(request, options, wrappedCallback)
       ?.then(
@@ -1414,7 +1414,7 @@ export class SessionControllerClient {
           protos.google.cloud.dataproc.v1.IListSessionsRequest | null,
           protos.google.cloud.dataproc.v1.IListSessionsResponse,
         ]) => {
-          this._log.info('listSessions values %j', response);
+          this._log.debug('listSessions values %j', response);
           return [response, input, output];
         },
       );
@@ -1476,7 +1476,7 @@ export class SessionControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSessions stream %j', request);
+    this._log.debug('listSessions stream %j', request);
     return this.descriptors.page.listSessions.createStream(
       this.innerApiCalls.listSessions as GaxCall,
       request,
@@ -1543,7 +1543,7 @@ export class SessionControllerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSessions iterate %j', request);
+    this._log.debug('listSessions iterate %j', request);
     return this.descriptors.page.listSessions.asyncIterate(
       this.innerApiCalls['listSessions'] as GaxCall,
       request as {},

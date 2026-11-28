@@ -625,7 +625,7 @@ export class DataPointsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDataPoint request %j', request);
+    this._log.debug('getDataPoint request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devicesandservices.health.v4beta.IDataPoint,
@@ -636,7 +636,7 @@ export class DataPointsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDataPoint response %j', response);
+          this._log.debug('getDataPoint response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -651,7 +651,7 @@ export class DataPointsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getDataPoint response %j', response);
+          this._log.debug('getDataPoint response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -803,7 +803,7 @@ export class DataPointsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('exportExerciseTcx request %j', request);
+    this._log.debug('exportExerciseTcx request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devicesandservices.health.v4beta.IExportExerciseTcxResponse,
@@ -814,7 +814,7 @@ export class DataPointsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('exportExerciseTcx response %j', response);
+          this._log.debug('exportExerciseTcx response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -829,7 +829,7 @@ export class DataPointsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('exportExerciseTcx response %j', response);
+          this._log.debug('exportExerciseTcx response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -975,11 +975,11 @@ export class DataPointsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createDataPoint response %j', rawResponse);
+          this._log.debug('createDataPoint response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createDataPoint request %j', request);
+    this._log.debug('createDataPoint request %j', request);
     return this.innerApiCalls
       .createDataPoint(request, options, wrappedCallback)
       ?.then(
@@ -991,7 +991,7 @@ export class DataPointsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createDataPoint response %j', rawResponse);
+          this._log.debug('createDataPoint response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1160,11 +1160,11 @@ export class DataPointsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateDataPoint response %j', rawResponse);
+          this._log.debug('updateDataPoint response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateDataPoint request %j', request);
+    this._log.debug('updateDataPoint request %j', request);
     return this.innerApiCalls
       .updateDataPoint(request, options, wrappedCallback)
       ?.then(
@@ -1176,7 +1176,7 @@ export class DataPointsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateDataPoint response %j', rawResponse);
+          this._log.debug('updateDataPoint response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1354,11 +1354,11 @@ export class DataPointsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('batchDeleteDataPoints response %j', rawResponse);
+          this._log.debug('batchDeleteDataPoints response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('batchDeleteDataPoints request %j', request);
+    this._log.debug('batchDeleteDataPoints request %j', request);
     return this.innerApiCalls
       .batchDeleteDataPoints(request, options, wrappedCallback)
       ?.then(
@@ -1370,7 +1370,7 @@ export class DataPointsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchDeleteDataPoints response %j', rawResponse);
+          this._log.debug('batchDeleteDataPoints response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1685,11 +1685,11 @@ export class DataPointsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDataPoints values %j', values);
+          this._log.debug('listDataPoints values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDataPoints request %j', request);
+    this._log.debug('listDataPoints request %j', request);
     return this.innerApiCalls
       .listDataPoints(request, options, wrappedCallback)
       ?.then(
@@ -1698,7 +1698,7 @@ export class DataPointsServiceClient {
           protos.google.devicesandservices.health.v4beta.IListDataPointsRequest | null,
           protos.google.devicesandservices.health.v4beta.IListDataPointsResponse,
         ]) => {
-          this._log.info('listDataPoints values %j', response);
+          this._log.debug('listDataPoints values %j', response);
           return [response, input, output];
         },
       );
@@ -1910,7 +1910,7 @@ export class DataPointsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDataPoints stream %j', request);
+    this._log.debug('listDataPoints stream %j', request);
     return this.descriptors.page.listDataPoints.createStream(
       this.innerApiCalls.listDataPoints as GaxCall,
       request,
@@ -2127,7 +2127,7 @@ export class DataPointsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDataPoints iterate %j', request);
+    this._log.debug('listDataPoints iterate %j', request);
     return this.descriptors.page.listDataPoints.asyncIterate(
       this.innerApiCalls['listDataPoints'] as GaxCall,
       request as {},
@@ -2304,11 +2304,11 @@ export class DataPointsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('reconcileDataPoints values %j', values);
+          this._log.debug('reconcileDataPoints values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('reconcileDataPoints request %j', request);
+    this._log.debug('reconcileDataPoints request %j', request);
     return this.innerApiCalls
       .reconcileDataPoints(request, options, wrappedCallback)
       ?.then(
@@ -2317,7 +2317,7 @@ export class DataPointsServiceClient {
           protos.google.devicesandservices.health.v4beta.IReconcileDataPointsRequest | null,
           protos.google.devicesandservices.health.v4beta.IReconcileDataPointsResponse,
         ]) => {
-          this._log.info('reconcileDataPoints values %j', response);
+          this._log.debug('reconcileDataPoints values %j', response);
           return [response, input, output];
         },
       );
@@ -2424,7 +2424,7 @@ export class DataPointsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('reconcileDataPoints stream %j', request);
+    this._log.debug('reconcileDataPoints stream %j', request);
     return this.descriptors.page.reconcileDataPoints.createStream(
       this.innerApiCalls.reconcileDataPoints as GaxCall,
       request,
@@ -2536,7 +2536,7 @@ export class DataPointsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('reconcileDataPoints iterate %j', request);
+    this._log.debug('reconcileDataPoints iterate %j', request);
     return this.descriptors.page.reconcileDataPoints.asyncIterate(
       this.innerApiCalls['reconcileDataPoints'] as GaxCall,
       request as {},
@@ -2717,11 +2717,11 @@ export class DataPointsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('rollUpDataPoints values %j', values);
+          this._log.debug('rollUpDataPoints values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('rollUpDataPoints request %j', request);
+    this._log.debug('rollUpDataPoints request %j', request);
     return this.innerApiCalls
       .rollUpDataPoints(request, options, wrappedCallback)
       ?.then(
@@ -2730,7 +2730,7 @@ export class DataPointsServiceClient {
           protos.google.devicesandservices.health.v4beta.IRollUpDataPointsRequest | null,
           protos.google.devicesandservices.health.v4beta.IRollUpDataPointsResponse,
         ]) => {
-          this._log.info('rollUpDataPoints values %j', response);
+          this._log.debug('rollUpDataPoints values %j', response);
           return [response, input, output];
         },
       );
@@ -2841,7 +2841,7 @@ export class DataPointsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('rollUpDataPoints stream %j', request);
+    this._log.debug('rollUpDataPoints stream %j', request);
     return this.descriptors.page.rollUpDataPoints.createStream(
       this.innerApiCalls.rollUpDataPoints as GaxCall,
       request,
@@ -2957,7 +2957,7 @@ export class DataPointsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('rollUpDataPoints iterate %j', request);
+    this._log.debug('rollUpDataPoints iterate %j', request);
     return this.descriptors.page.rollUpDataPoints.asyncIterate(
       this.innerApiCalls['rollUpDataPoints'] as GaxCall,
       request as {},
@@ -3138,11 +3138,11 @@ export class DataPointsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('dailyRollUpDataPoints values %j', values);
+          this._log.debug('dailyRollUpDataPoints values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('dailyRollUpDataPoints request %j', request);
+    this._log.debug('dailyRollUpDataPoints request %j', request);
     return this.innerApiCalls
       .dailyRollUpDataPoints(request, options, wrappedCallback)
       ?.then(
@@ -3151,7 +3151,7 @@ export class DataPointsServiceClient {
           protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsRequest | null,
           protos.google.devicesandservices.health.v4beta.IDailyRollUpDataPointsResponse,
         ]) => {
-          this._log.info('dailyRollUpDataPoints values %j', response);
+          this._log.debug('dailyRollUpDataPoints values %j', response);
           return [response, input, output];
         },
       );
@@ -3262,7 +3262,7 @@ export class DataPointsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('dailyRollUpDataPoints stream %j', request);
+    this._log.debug('dailyRollUpDataPoints stream %j', request);
     return this.descriptors.page.dailyRollUpDataPoints.createStream(
       this.innerApiCalls.dailyRollUpDataPoints as GaxCall,
       request,
@@ -3378,7 +3378,7 @@ export class DataPointsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('dailyRollUpDataPoints iterate %j', request);
+    this._log.debug('dailyRollUpDataPoints iterate %j', request);
     return this.descriptors.page.dailyRollUpDataPoints.asyncIterate(
       this.innerApiCalls['dailyRollUpDataPoints'] as GaxCall,
       request as {},
