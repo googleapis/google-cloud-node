@@ -236,6 +236,12 @@ Samples are located in the [`storage/`](https://github.com/GoogleCloudPlatform/n
 The [Google Cloud Storage Node.js Client API Reference][client-docs] documentation
 also contains samples.
 
+## Troubleshooting: Timeouts and 401 Invalid Credentials
+
+* In constrained environments like Kubernetes, severe CPU starvation can block the Node.js event loop for extended periods.
+* This can cause in-flight authentication tokens to expire (resulting in intermittent `401 Invalid Credentials` errors) or cause TLS handshake timeouts (`fetch failed`).
+* **Recommended solution:** Ensure your pods have adequate CPU limits allocated and ensure exponential backoff is configured for retryable requests.
+
 ## Supported Node.js Versions
 
 Our client libraries follow the [Node.js release schedule](https://github.com/nodejs/release#release-schedule).

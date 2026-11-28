@@ -29,7 +29,7 @@ import AsyncRetry from 'async-retry';
 import {RetryOptions, PreconditionOptions} from './storage.js';
 import * as crypto from 'crypto';
 import {GCCL_GCS_CMD_KEY, decorateHeaders} from './nodejs-common/util.js';
-import {assertUniverseDomain} from './util.js';
+import {assertUniverseDomain, augmentError} from './util.js';
 import {FileExceptionMessages, FileMetadata, RequestError} from './file.js';
 import {HashStreamValidator} from './hash-stream-validator.js';
 
@@ -1129,7 +1129,7 @@ export class Upload extends Writable {
   // the response body.
   private async responseHandler(resp: GaxiosResponse) {
     if (resp.data.error) {
-      this.destroy(resp.data.error);
+      this.destroy(augmentError(resp.data.error));
       return;
     }
 
@@ -1365,13 +1365,17 @@ export class Upload extends Writable {
     }
 
     await assertUniverseDomain(this.authClient, this.universeDomain);
-    const res = await this.authClient.request<{error?: object}>(
-      combinedReqOpts,
-    );
-    if (res.data && res.data.error) {
-      throw res.data.error;
+    try {
+      const res = await this.authClient.request<{error?: object}>(
+        combinedReqOpts,
+      );
+      if (res.data && res.data.error) {
+        throw res.data.error;
+      }
+      return res;
+    } catch (e) {
+      throw augmentError(e);
     }
-    return res;
   }
 
   private async makeRequestStream(reqOpts: GaxiosOptions) {
@@ -1409,7 +1413,9 @@ export class Upload extends Writable {
     }
 
     await assertUniverseDomain(this.authClient, this.universeDomain);
-    const res = await this.authClient.request(combinedReqOpts);
+    const res = await this.authClient.request(combinedReqOpts).catch(e => {
+      throw augmentError(e);
+    });
     const successfulRequest = await this.onResponse(res);
     this.removeListener('error', errorCallback);
 

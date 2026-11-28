@@ -388,6 +388,146 @@ export function getPLimit(): Promise<PLimit> {
   return pLimitPromise;
 }
 
+const FETCH_TIMEOUT_HINT =
+  ' (Hint: This may be caused by severe CPU starvation or network throttling in constrained environments like Kubernetes.)';
+const INVALID_CREDENTIALS_HINT =
+  ' (Hint: If this occurs intermittently under heavy load, check your container for CPU starvation which can cause tokens to expire in flight.)';
+
+/**
+ * Safely assigns a property on an error object in place when writable/configurable,
+ * or reconstructs a descriptor-preserving clone (retaining prototype, stack, and cause)
+ * if the error object is frozen or non-configurable.
+ *
+ * @internal
+ */
+export function setErrorProperty<T extends object>(
+  err: T,
+  key: string,
+  value: unknown,
+  defaultEnumerable = true,
+): T {
+  const record = err as Record<string, unknown>;
+  try {
+    record[key] = value;
+    if (Object.is(record[key], value)) {
+      return err;
+    }
+  } catch {
+    // Property may be read-only or object may be frozen; fall through.
+  }
+
+  try {
+    const desc = Object.getOwnPropertyDescriptor(err, key);
+    Object.defineProperty(err, key, {
+      value,
+      writable: true,
+      enumerable: desc?.enumerable ?? defaultEnumerable,
+      configurable: true,
+    });
+    return err;
+  } catch {
+    // Object may be frozen or property may be non-configurable; reconstruct below.
+  }
+
+  const originalStack = (err as {stack?: string}).stack;
+  const rawDescriptors = Object.getOwnPropertyDescriptors(err);
+  const descriptors: PropertyDescriptorMap = {};
+  for (const propKey of Reflect.ownKeys(rawDescriptors)) {
+    const desc = (rawDescriptors as Record<PropertyKey, PropertyDescriptor>)[
+      propKey
+    ];
+    (descriptors as Record<PropertyKey, PropertyDescriptor>)[propKey] =
+      'value' in desc
+        ? {...desc, writable: true, configurable: true}
+        : {...desc, configurable: true};
+  }
+  descriptors[key] = {
+    value,
+    writable: true,
+    enumerable: rawDescriptors[key]?.enumerable ?? defaultEnumerable,
+    configurable: true,
+  };
+  if (originalStack !== undefined) {
+    descriptors.stack = {
+      value: originalStack,
+      writable: true,
+      enumerable: false,
+      configurable: true,
+    };
+  }
+  if (!descriptors.cause && 'cause' in err) {
+    descriptors.cause = {
+      value: (err as {cause?: unknown}).cause,
+      writable: true,
+      enumerable: false,
+      configurable: true,
+    };
+  }
+  return Object.create(Object.getPrototypeOf(err), descriptors) as T;
+}
+
+function appendErrorHint<T extends Error>(err: T, hint: string): T {
+  const currentMessage = typeof err.message === 'string' ? err.message : '';
+  if (currentMessage.includes(hint)) {
+    return err;
+  }
+  return setErrorProperty(err, 'message', `${currentMessage}${hint}`, false);
+}
+
+/**
+ * Appends troubleshooting hints to native fetch/TLS timeout errors and 401
+ * Invalid Credentials errors without rewrapping or losing prototype, stack, or cause.
+ *
+ * @internal
+ */
+export function augmentError<T>(err: T): T {
+  if (!err || typeof err !== 'object') {
+    return err;
+  }
+
+  const errObj = err as unknown as Error & {
+    code?: unknown;
+    status?: unknown;
+    cause?: unknown;
+  };
+
+  // Check if the error is a native fetch/undici timeout (either directly a TypeError
+  // or a GaxiosError wrapping the native fetch TypeError as its cause).
+  const wrappedFetchErr =
+    errObj instanceof Error &&
+    errObj.cause instanceof TypeError &&
+    errObj.cause.message === 'fetch failed'
+      ? (errObj.cause as TypeError & {cause?: unknown})
+      : undefined;
+
+  const fetchErr: (TypeError & {cause?: unknown}) | undefined =
+    errObj instanceof TypeError &&
+    errObj.message === 'fetch failed' &&
+    errObj.cause
+      ? errObj
+      : wrappedFetchErr?.cause
+        ? wrappedFetchErr
+        : undefined;
+
+  if (fetchErr) {
+    const cause = fetchErr.cause as {code?: unknown; message?: unknown};
+    if (
+      cause &&
+      typeof cause === 'object' &&
+      (cause.code === 'UND_ERR_CONNECT_TIMEOUT' ||
+        (typeof cause.message === 'string' && cause.message.includes('TLS')))
+    ) {
+      return appendErrorHint(errObj, FETCH_TIMEOUT_HINT) as unknown as T;
+    }
+  }
+
+  // Check if the error is a 401 Invalid Credentials.
+  if (errObj.code === 401 || errObj.status === 401) {
+    return appendErrorHint(errObj, INVALID_CREDENTIALS_HINT) as unknown as T;
+  }
+
+  return err;
+}
 interface CredentialFile {
   type?: string;
   universe_domain?: string;
