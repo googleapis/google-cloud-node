@@ -479,7 +479,7 @@ export class EventServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createClientEvent request %j', request);
+    this._log.debug('createClientEvent request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.talent.v4.IClientEvent,
@@ -490,7 +490,7 @@ export class EventServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createClientEvent response %j', response);
+          this._log.debug('createClientEvent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -502,7 +502,7 @@ export class EventServiceClient {
           protos.google.cloud.talent.v4.ICreateClientEventRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createClientEvent response %j', response);
+          this._log.debug('createClientEvent response %j', response);
           return [response, options, rawResponse];
         },
       )

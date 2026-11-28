@@ -23,7 +23,7 @@ import {
 import {grpc} from 'google-gax';
 import {expectedRequestsHandled} from '../../test-common/metrics-handler-fixture';
 import * as gax from 'google-gax';
-import * as proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 import {GCPMetricsHandler} from '../../src/client-side-metrics/gcp-metrics-handler';
 import {getProtoPath} from '../../src/utils/protos';
 const protoPath = getProtoPath('google/bigtable/v2/response_params.proto');

@@ -509,7 +509,7 @@ export class AdaptationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createPhraseSet request %j', request);
+    this._log.debug('createPhraseSet request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.speech.v1.IPhraseSet,
@@ -520,7 +520,7 @@ export class AdaptationClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createPhraseSet response %j', response);
+          this._log.debug('createPhraseSet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -532,7 +532,7 @@ export class AdaptationClient {
           protos.google.cloud.speech.v1.ICreatePhraseSetRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createPhraseSet response %j', response);
+          this._log.debug('createPhraseSet response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -643,7 +643,7 @@ export class AdaptationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPhraseSet request %j', request);
+    this._log.debug('getPhraseSet request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.speech.v1.IPhraseSet,
@@ -652,7 +652,7 @@ export class AdaptationClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPhraseSet response %j', response);
+          this._log.debug('getPhraseSet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -664,7 +664,7 @@ export class AdaptationClient {
           protos.google.cloud.speech.v1.IGetPhraseSetRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getPhraseSet response %j', response);
+          this._log.debug('getPhraseSet response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -782,7 +782,7 @@ export class AdaptationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updatePhraseSet request %j', request);
+    this._log.debug('updatePhraseSet request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.speech.v1.IPhraseSet,
@@ -793,7 +793,7 @@ export class AdaptationClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updatePhraseSet response %j', response);
+          this._log.debug('updatePhraseSet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -805,7 +805,7 @@ export class AdaptationClient {
           protos.google.cloud.speech.v1.IUpdatePhraseSetRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updatePhraseSet response %j', response);
+          this._log.debug('updatePhraseSet response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -912,7 +912,7 @@ export class AdaptationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deletePhraseSet request %j', request);
+    this._log.debug('deletePhraseSet request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -923,7 +923,7 @@ export class AdaptationClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deletePhraseSet response %j', response);
+          this._log.debug('deletePhraseSet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -935,7 +935,7 @@ export class AdaptationClient {
           protos.google.cloud.speech.v1.IDeletePhraseSetRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deletePhraseSet response %j', response);
+          this._log.debug('deletePhraseSet response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1063,7 +1063,7 @@ export class AdaptationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createCustomClass request %j', request);
+    this._log.debug('createCustomClass request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.speech.v1.ICustomClass,
@@ -1074,7 +1074,7 @@ export class AdaptationClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createCustomClass response %j', response);
+          this._log.debug('createCustomClass response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1086,7 +1086,7 @@ export class AdaptationClient {
           protos.google.cloud.speech.v1.ICreateCustomClassRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createCustomClass response %j', response);
+          this._log.debug('createCustomClass response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1193,7 +1193,7 @@ export class AdaptationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getCustomClass request %j', request);
+    this._log.debug('getCustomClass request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.speech.v1.ICustomClass,
@@ -1204,7 +1204,7 @@ export class AdaptationClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCustomClass response %j', response);
+          this._log.debug('getCustomClass response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1216,7 +1216,7 @@ export class AdaptationClient {
           protos.google.cloud.speech.v1.IGetCustomClassRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getCustomClass response %j', response);
+          this._log.debug('getCustomClass response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1340,7 +1340,7 @@ export class AdaptationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateCustomClass request %j', request);
+    this._log.debug('updateCustomClass request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.speech.v1.ICustomClass,
@@ -1351,7 +1351,7 @@ export class AdaptationClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateCustomClass response %j', response);
+          this._log.debug('updateCustomClass response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1363,7 +1363,7 @@ export class AdaptationClient {
           protos.google.cloud.speech.v1.IUpdateCustomClassRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateCustomClass response %j', response);
+          this._log.debug('updateCustomClass response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1482,7 +1482,7 @@ export class AdaptationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteCustomClass request %j', request);
+    this._log.debug('deleteCustomClass request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1493,7 +1493,7 @@ export class AdaptationClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteCustomClass response %j', response);
+          this._log.debug('deleteCustomClass response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1505,7 +1505,7 @@ export class AdaptationClient {
           protos.google.cloud.speech.v1.IDeleteCustomClassRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteCustomClass response %j', response);
+          this._log.debug('deleteCustomClass response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1643,11 +1643,11 @@ export class AdaptationClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listPhraseSet values %j', values);
+          this._log.debug('listPhraseSet values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listPhraseSet request %j', request);
+    this._log.debug('listPhraseSet request %j', request);
     return this.innerApiCalls
       .listPhraseSet(request, options, wrappedCallback)
       ?.then(
@@ -1656,7 +1656,7 @@ export class AdaptationClient {
           protos.google.cloud.speech.v1.IListPhraseSetRequest | null,
           protos.google.cloud.speech.v1.IListPhraseSetResponse,
         ]) => {
-          this._log.info('listPhraseSet values %j', response);
+          this._log.debug('listPhraseSet values %j', response);
           return [response, input, output];
         },
       );
@@ -1715,7 +1715,7 @@ export class AdaptationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPhraseSet stream %j', request);
+    this._log.debug('listPhraseSet stream %j', request);
     return this.descriptors.page.listPhraseSet.createStream(
       this.innerApiCalls.listPhraseSet as GaxCall,
       request,
@@ -1779,7 +1779,7 @@ export class AdaptationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPhraseSet iterate %j', request);
+    this._log.debug('listPhraseSet iterate %j', request);
     return this.descriptors.page.listPhraseSet.asyncIterate(
       this.innerApiCalls['listPhraseSet'] as GaxCall,
       request as {},
@@ -1908,11 +1908,11 @@ export class AdaptationClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listCustomClasses values %j', values);
+          this._log.debug('listCustomClasses values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listCustomClasses request %j', request);
+    this._log.debug('listCustomClasses request %j', request);
     return this.innerApiCalls
       .listCustomClasses(request, options, wrappedCallback)
       ?.then(
@@ -1921,7 +1921,7 @@ export class AdaptationClient {
           protos.google.cloud.speech.v1.IListCustomClassesRequest | null,
           protos.google.cloud.speech.v1.IListCustomClassesResponse,
         ]) => {
-          this._log.info('listCustomClasses values %j', response);
+          this._log.debug('listCustomClasses values %j', response);
           return [response, input, output];
         },
       );
@@ -1980,7 +1980,7 @@ export class AdaptationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCustomClasses stream %j', request);
+    this._log.debug('listCustomClasses stream %j', request);
     return this.descriptors.page.listCustomClasses.createStream(
       this.innerApiCalls.listCustomClasses as GaxCall,
       request,
@@ -2044,7 +2044,7 @@ export class AdaptationClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listCustomClasses iterate %j', request);
+    this._log.debug('listCustomClasses iterate %j', request);
     return this.descriptors.page.listCustomClasses.asyncIterate(
       this.innerApiCalls['listCustomClasses'] as GaxCall,
       request as {},

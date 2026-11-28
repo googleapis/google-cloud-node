@@ -16,7 +16,13 @@ import * as crypto from 'crypto';
 import * as http from 'http';
 import * as url from 'url';
 import {ExceptionMessages, Storage} from './storage.js';
-import {encodeURI, qsStringify, objectEntries, formatAsUTCISO} from './util.js';
+import {
+  encodeURI,
+  qsStringify,
+  objectEntries,
+  formatAsUTCISO,
+  signBlob,
+} from './util.js';
 import {GoogleAuth} from 'google-auth-library';
 
 type GoogleAuthLike = Pick<GoogleAuth, 'getCredentials' | 'sign'>;
@@ -152,11 +158,11 @@ export class URLSigner {
      * move it before optional properties. In the next major we should refactor the
      * constructor of this class to only accept a config object.
      */
-    private storage: Storage = new Storage()
+    private storage: Storage = new Storage(),
   ) {}
 
   getSignedUrl(
-    cfg: SignerGetSignedUrlConfig
+    cfg: SignerGetSignedUrlConfig,
   ): Promise<SignerGetSignedUrlResponse> {
     const expiresInSeconds = this.parseExpires(cfg.expires);
     const method = cfg.method;
@@ -164,7 +170,7 @@ export class URLSigner {
 
     if (expiresInSeconds < accessibleAtInSeconds) {
       throw new Error(
-        SignerExceptionMessages.EXPIRATION_BEFORE_ACCESSIBLE_DATE
+        SignerExceptionMessages.EXPIRATION_BEFORE_ACCESSIBLE_DATE,
       );
     }
 
@@ -200,7 +206,7 @@ export class URLSigner {
       promise = this.getSignedUrlV4(config);
     } else {
       throw new Error(
-        `Invalid signed URL version: ${version}. Supported versions are 'v2' and 'v4'.`
+        `Invalid signed URL version: ${version}. Supported versions are 'v2' and 'v4'.`,
       );
     }
 
@@ -208,13 +214,13 @@ export class URLSigner {
       query = Object.assign(query, cfg.queryParams);
 
       const signedUrl = new url.URL(
-        cfg.host?.toString() || config.cname || this.storage.apiEndpoint
+        cfg.host?.toString() || config.cname || this.storage.apiEndpoint,
       );
 
       signedUrl.pathname = this.getResourcePath(
         !!config.cname,
         this.bucket.name,
-        config.file
+        config.file,
       );
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       signedUrl.search = qsStringify(query as any);
@@ -223,15 +229,15 @@ export class URLSigner {
   }
 
   private getSignedUrlV2(
-    config: GetSignedUrlConfigInternal
+    config: GetSignedUrlConfigInternal,
   ): Promise<SignedUrlQuery> {
     const canonicalHeadersString = this.getCanonicalHeaders(
-      config.extensionHeaders || {}
+      config.extensionHeaders || {},
     );
     const resourcePath = this.getResourcePath(
       false,
       config.bucket,
-      config.file
+      config.file,
     );
 
     const blobToSign = [
@@ -245,9 +251,11 @@ export class URLSigner {
     const sign = async () => {
       const auth = this.auth;
       try {
-        const signature = await auth.sign(
+        const signature = await signBlob(
+          auth,
+          this.storage.universeDomain,
           blobToSign,
-          config.signingEndpoint?.toString()
+          config.signingEndpoint?.toString(),
         );
         const credentials = await auth.getCredentials();
 
@@ -267,7 +275,7 @@ export class URLSigner {
   }
 
   private getSignedUrlV4(
-    config: GetSignedUrlConfigInternal
+    config: GetSignedUrlConfigInternal,
   ): Promise<SignedUrlQuery> {
     config.accessibleAt = config.accessibleAt
       ? config.accessibleAt
@@ -279,13 +287,13 @@ export class URLSigner {
     // v4 limit expiration to be 7 days maximum
     if (expiresPeriodInSeconds > SEVEN_DAYS) {
       throw new Error(
-        `Max allowed expiration is seven days (${SEVEN_DAYS} seconds).`
+        `Max allowed expiration is seven days (${SEVEN_DAYS} seconds).`,
       );
     }
 
     const extensionHeaders = Object.assign({}, config.extensionHeaders);
     const fqdn = new url.URL(
-      config.host?.toString() || config.cname || this.storage.apiEndpoint
+      config.host?.toString() || config.cname || this.storage.apiEndpoint,
     );
     extensionHeaders.host = fqdn.hostname;
     if (config.contentMd5) {
@@ -322,7 +330,7 @@ export class URLSigner {
       const credential = `${credentials.client_email}/${credentialScope}`;
       const dateISO = formatAsUTCISO(
         config.accessibleAt ? config.accessibleAt : new Date(),
-        true
+        true,
       );
       const queryParams: Query = {
         'X-Goog-Algorithm': 'GOOG4-RSA-SHA256',
@@ -333,7 +341,6 @@ export class URLSigner {
         ...(config.queryParams || {}),
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const canonicalQueryParams = this.getCanonicalQueryParams(queryParams);
 
       const canonicalRequest = this.getCanonicalRequest(
@@ -342,7 +349,7 @@ export class URLSigner {
         canonicalQueryParams,
         extensionHeadersString,
         signedHeaders,
-        contentSha256
+        contentSha256,
       );
 
       const hash = crypto
@@ -358,9 +365,11 @@ export class URLSigner {
       ].join('\n');
 
       try {
-        const signature = await this.auth.sign(
+        const signature = await signBlob(
+          this.auth,
+          this.storage.universeDomain,
           blobToSign,
-          config.signingEndpoint?.toString()
+          config.signingEndpoint?.toString(),
         );
         const signatureHex = Buffer.from(signature, 'base64').toString('hex');
         const signedQuery: Query = Object.assign({}, queryParams, {
@@ -421,7 +430,7 @@ export class URLSigner {
     query: string,
     headers: string,
     signedHeaders: string,
-    contentSha256?: string
+    contentSha256?: string,
   ) {
     return [
       method,
@@ -453,7 +462,7 @@ export class URLSigner {
 
   parseExpires(
     expires: string | number | Date,
-    current: Date = new Date()
+    current: Date = new Date(),
   ): number {
     const expiresInMSeconds = new Date(expires).valueOf();
 
@@ -470,7 +479,7 @@ export class URLSigner {
 
   parseAccessibleAt(accessibleAt?: string | number | Date): number {
     const accessibleAtInMSeconds = new Date(
-      accessibleAt || new Date()
+      accessibleAt || new Date(),
     ).valueOf();
 
     if (isNaN(accessibleAtInMSeconds)) {

@@ -643,7 +643,7 @@ export class RepositoryManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getConnection request %j', request);
+    this._log.debug('getConnection request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devtools.cloudbuild.v2.IConnection,
@@ -654,7 +654,7 @@ export class RepositoryManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getConnection response %j', response);
+          this._log.debug('getConnection response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -669,7 +669,7 @@ export class RepositoryManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getConnection response %j', response);
+          this._log.debug('getConnection response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -781,7 +781,7 @@ export class RepositoryManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRepository request %j', request);
+    this._log.debug('getRepository request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devtools.cloudbuild.v2.IRepository,
@@ -792,7 +792,7 @@ export class RepositoryManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getRepository response %j', response);
+          this._log.debug('getRepository response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -807,7 +807,7 @@ export class RepositoryManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getRepository response %j', response);
+          this._log.debug('getRepository response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -925,7 +925,7 @@ export class RepositoryManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchReadWriteToken request %j', request);
+    this._log.debug('fetchReadWriteToken request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenResponse,
@@ -936,7 +936,7 @@ export class RepositoryManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('fetchReadWriteToken response %j', response);
+          this._log.debug('fetchReadWriteToken response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -951,7 +951,7 @@ export class RepositoryManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('fetchReadWriteToken response %j', response);
+          this._log.debug('fetchReadWriteToken response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1063,7 +1063,7 @@ export class RepositoryManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchReadToken request %j', request);
+    this._log.debug('fetchReadToken request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devtools.cloudbuild.v2.IFetchReadTokenResponse,
@@ -1074,7 +1074,7 @@ export class RepositoryManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('fetchReadToken response %j', response);
+          this._log.debug('fetchReadToken response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1089,7 +1089,7 @@ export class RepositoryManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('fetchReadToken response %j', response);
+          this._log.debug('fetchReadToken response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1203,7 +1203,7 @@ export class RepositoryManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchGitRefs request %j', request);
+    this._log.debug('fetchGitRefs request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
@@ -1214,7 +1214,7 @@ export class RepositoryManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('fetchGitRefs response %j', response);
+          this._log.debug('fetchGitRefs response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1226,7 +1226,7 @@ export class RepositoryManagerClient {
           protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('fetchGitRefs response %j', response);
+          this._log.debug('fetchGitRefs response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1369,11 +1369,11 @@ export class RepositoryManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createConnection response %j', rawResponse);
+          this._log.debug('createConnection response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createConnection request %j', request);
+    this._log.debug('createConnection request %j', request);
     return this.innerApiCalls
       .createConnection(request, options, wrappedCallback)
       ?.then(
@@ -1385,7 +1385,7 @@ export class RepositoryManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createConnection response %j', rawResponse);
+          this._log.debug('createConnection response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1550,11 +1550,11 @@ export class RepositoryManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateConnection response %j', rawResponse);
+          this._log.debug('updateConnection response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateConnection request %j', request);
+    this._log.debug('updateConnection request %j', request);
     return this.innerApiCalls
       .updateConnection(request, options, wrappedCallback)
       ?.then(
@@ -1566,7 +1566,7 @@ export class RepositoryManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateConnection response %j', rawResponse);
+          this._log.debug('updateConnection response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1726,11 +1726,11 @@ export class RepositoryManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteConnection response %j', rawResponse);
+          this._log.debug('deleteConnection response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteConnection request %j', request);
+    this._log.debug('deleteConnection request %j', request);
     return this.innerApiCalls
       .deleteConnection(request, options, wrappedCallback)
       ?.then(
@@ -1742,7 +1742,7 @@ export class RepositoryManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteConnection response %j', rawResponse);
+          this._log.debug('deleteConnection response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1904,11 +1904,11 @@ export class RepositoryManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createRepository response %j', rawResponse);
+          this._log.debug('createRepository response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createRepository request %j', request);
+    this._log.debug('createRepository request %j', request);
     return this.innerApiCalls
       .createRepository(request, options, wrappedCallback)
       ?.then(
@@ -1920,7 +1920,7 @@ export class RepositoryManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createRepository response %j', rawResponse);
+          this._log.debug('createRepository response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2078,11 +2078,11 @@ export class RepositoryManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('batchCreateRepositories response %j', rawResponse);
+          this._log.debug('batchCreateRepositories response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('batchCreateRepositories request %j', request);
+    this._log.debug('batchCreateRepositories request %j', request);
     return this.innerApiCalls
       .batchCreateRepositories(request, options, wrappedCallback)
       ?.then(
@@ -2094,7 +2094,7 @@ export class RepositoryManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchCreateRepositories response %j', rawResponse);
+          this._log.debug('batchCreateRepositories response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2254,11 +2254,11 @@ export class RepositoryManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteRepository response %j', rawResponse);
+          this._log.debug('deleteRepository response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteRepository request %j', request);
+    this._log.debug('deleteRepository request %j', request);
     return this.innerApiCalls
       .deleteRepository(request, options, wrappedCallback)
       ?.then(
@@ -2270,7 +2270,7 @@ export class RepositoryManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteRepository response %j', rawResponse);
+          this._log.debug('deleteRepository response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2418,11 +2418,11 @@ export class RepositoryManagerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listConnections values %j', values);
+          this._log.debug('listConnections values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listConnections request %j', request);
+    this._log.debug('listConnections request %j', request);
     return this.innerApiCalls
       .listConnections(request, options, wrappedCallback)
       ?.then(
@@ -2431,7 +2431,7 @@ export class RepositoryManagerClient {
           protos.google.devtools.cloudbuild.v2.IListConnectionsRequest | null,
           protos.google.devtools.cloudbuild.v2.IListConnectionsResponse,
         ]) => {
-          this._log.info('listConnections values %j', response);
+          this._log.debug('listConnections values %j', response);
           return [response, input, output];
         },
       );
@@ -2476,7 +2476,7 @@ export class RepositoryManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listConnections stream %j', request);
+    this._log.debug('listConnections stream %j', request);
     return this.descriptors.page.listConnections.createStream(
       this.innerApiCalls.listConnections as GaxCall,
       request,
@@ -2526,7 +2526,7 @@ export class RepositoryManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listConnections iterate %j', request);
+    this._log.debug('listConnections iterate %j', request);
     return this.descriptors.page.listConnections.asyncIterate(
       this.innerApiCalls['listConnections'] as GaxCall,
       request as {},
@@ -2646,11 +2646,11 @@ export class RepositoryManagerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRepositories values %j', values);
+          this._log.debug('listRepositories values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRepositories request %j', request);
+    this._log.debug('listRepositories request %j', request);
     return this.innerApiCalls
       .listRepositories(request, options, wrappedCallback)
       ?.then(
@@ -2659,7 +2659,7 @@ export class RepositoryManagerClient {
           protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest | null,
           protos.google.devtools.cloudbuild.v2.IListRepositoriesResponse,
         ]) => {
-          this._log.info('listRepositories values %j', response);
+          this._log.debug('listRepositories values %j', response);
           return [response, input, output];
         },
       );
@@ -2709,7 +2709,7 @@ export class RepositoryManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRepositories stream %j', request);
+    this._log.debug('listRepositories stream %j', request);
     return this.descriptors.page.listRepositories.createStream(
       this.innerApiCalls.listRepositories as GaxCall,
       request,
@@ -2764,7 +2764,7 @@ export class RepositoryManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRepositories iterate %j', request);
+    this._log.debug('listRepositories iterate %j', request);
     return this.descriptors.page.listRepositories.asyncIterate(
       this.innerApiCalls['listRepositories'] as GaxCall,
       request as {},
@@ -2880,11 +2880,11 @@ export class RepositoryManagerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('fetchLinkableRepositories values %j', values);
+          this._log.debug('fetchLinkableRepositories values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('fetchLinkableRepositories request %j', request);
+    this._log.debug('fetchLinkableRepositories request %j', request);
     return this.innerApiCalls
       .fetchLinkableRepositories(request, options, wrappedCallback)
       ?.then(
@@ -2893,7 +2893,7 @@ export class RepositoryManagerClient {
           protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest | null,
           protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesResponse,
         ]) => {
-          this._log.info('fetchLinkableRepositories values %j', response);
+          this._log.debug('fetchLinkableRepositories values %j', response);
           return [response, input, output];
         },
       );
@@ -2938,7 +2938,7 @@ export class RepositoryManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchLinkableRepositories stream %j', request);
+    this._log.debug('fetchLinkableRepositories stream %j', request);
     return this.descriptors.page.fetchLinkableRepositories.createStream(
       this.innerApiCalls.fetchLinkableRepositories as GaxCall,
       request,
@@ -2988,7 +2988,7 @@ export class RepositoryManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchLinkableRepositories iterate %j', request);
+    this._log.debug('fetchLinkableRepositories iterate %j', request);
     return this.descriptors.page.fetchLinkableRepositories.asyncIterate(
       this.innerApiCalls['fetchLinkableRepositories'] as GaxCall,
       request as {},

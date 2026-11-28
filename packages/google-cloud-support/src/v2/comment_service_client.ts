@@ -492,7 +492,7 @@ export class CommentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createComment request %j', request);
+    this._log.debug('createComment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.support.v2.IComment,
@@ -503,7 +503,7 @@ export class CommentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createComment response %j', response);
+          this._log.debug('createComment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -515,7 +515,7 @@ export class CommentServiceClient {
           protos.google.cloud.support.v2.ICreateCommentRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createComment response %j', response);
+          this._log.debug('createComment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -647,7 +647,7 @@ export class CommentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getComment request %j', request);
+    this._log.debug('getComment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.support.v2.IComment,
@@ -656,7 +656,7 @@ export class CommentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getComment response %j', response);
+          this._log.debug('getComment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -668,7 +668,7 @@ export class CommentServiceClient {
           protos.google.cloud.support.v2.IGetCommentRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getComment response %j', response);
+          this._log.debug('getComment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -792,11 +792,11 @@ export class CommentServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listComments values %j', values);
+          this._log.debug('listComments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listComments request %j', request);
+    this._log.debug('listComments request %j', request);
     return this.innerApiCalls
       .listComments(request, options, wrappedCallback)
       ?.then(
@@ -805,7 +805,7 @@ export class CommentServiceClient {
           protos.google.cloud.support.v2.IListCommentsRequest | null,
           protos.google.cloud.support.v2.IListCommentsResponse,
         ]) => {
-          this._log.info('listComments values %j', response);
+          this._log.debug('listComments values %j', response);
           return [response, input, output];
         },
       );
@@ -850,7 +850,7 @@ export class CommentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listComments stream %j', request);
+    this._log.debug('listComments stream %j', request);
     return this.descriptors.page.listComments.createStream(
       this.innerApiCalls.listComments as GaxCall,
       request,
@@ -900,7 +900,7 @@ export class CommentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listComments iterate %j', request);
+    this._log.debug('listComments iterate %j', request);
     return this.descriptors.page.listComments.asyncIterate(
       this.innerApiCalls['listComments'] as GaxCall,
       request as {},

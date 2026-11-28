@@ -488,7 +488,7 @@ export class ConfidentialComputingClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createChallenge request %j', request);
+    this._log.debug('createChallenge request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.confidentialcomputing.v1.IChallenge,
@@ -499,7 +499,7 @@ export class ConfidentialComputingClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createChallenge response %j', response);
+          this._log.debug('createChallenge response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -514,7 +514,7 @@ export class ConfidentialComputingClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createChallenge response %j', response);
+          this._log.debug('createChallenge response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -658,7 +658,7 @@ export class ConfidentialComputingClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('verifyAttestation request %j', request);
+    this._log.debug('verifyAttestation request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.confidentialcomputing.v1.IVerifyAttestationResponse,
@@ -669,7 +669,7 @@ export class ConfidentialComputingClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('verifyAttestation response %j', response);
+          this._log.debug('verifyAttestation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -684,7 +684,7 @@ export class ConfidentialComputingClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('verifyAttestation response %j', response);
+          this._log.debug('verifyAttestation response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -824,7 +824,7 @@ export class ConfidentialComputingClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('verifyConfidentialSpace request %j', request);
+    this._log.debug('verifyConfidentialSpace request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialSpaceResponse,
@@ -835,7 +835,7 @@ export class ConfidentialComputingClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('verifyConfidentialSpace response %j', response);
+          this._log.debug('verifyConfidentialSpace response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -850,7 +850,7 @@ export class ConfidentialComputingClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('verifyConfidentialSpace response %j', response);
+          this._log.debug('verifyConfidentialSpace response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -978,7 +978,7 @@ export class ConfidentialComputingClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('verifyConfidentialGke request %j', request);
+    this._log.debug('verifyConfidentialGke request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.confidentialcomputing.v1.IVerifyConfidentialGkeResponse,
@@ -989,7 +989,7 @@ export class ConfidentialComputingClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('verifyConfidentialGke response %j', response);
+          this._log.debug('verifyConfidentialGke response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1004,7 +1004,7 @@ export class ConfidentialComputingClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('verifyConfidentialGke response %j', response);
+          this._log.debug('verifyConfidentialGke response %j', response);
           return [response, options, rawResponse];
         },
       )

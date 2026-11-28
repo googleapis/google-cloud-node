@@ -320,6 +320,11 @@
                 "moveRepository"
               ]
             },
+            "CreateCompilationResultLongRunning": {
+              "methods": [
+                "createCompilationResultLongRunning"
+              ]
+            },
             "QueryTeamFolderContents": {
               "methods": [
                 "queryTeamFolderContents",
@@ -381,6 +386,13 @@
                 "fetchWorkspaceBranches",
                 "fetchWorkspaceBranchesStream",
                 "fetchWorkspaceBranchesAsync"
+              ]
+            },
+            "FetchWorkspaceHistory": {
+              "methods": [
+                "fetchWorkspaceHistory",
+                "fetchWorkspaceHistoryStream",
+                "fetchWorkspaceHistoryAsync"
               ]
             },
             "QueryDirectoryContents": {
@@ -754,6 +766,11 @@
                 "moveRepository"
               ]
             },
+            "CreateCompilationResultLongRunning": {
+              "methods": [
+                "createCompilationResultLongRunning"
+              ]
+            },
             "QueryTeamFolderContents": {
               "methods": [
                 "queryTeamFolderContents",
@@ -815,6 +832,13 @@
                 "fetchWorkspaceBranches",
                 "fetchWorkspaceBranchesStream",
                 "fetchWorkspaceBranchesAsync"
+              ]
+            },
+            "FetchWorkspaceHistory": {
+              "methods": [
+                "fetchWorkspaceHistory",
+                "fetchWorkspaceHistoryStream",
+                "fetchWorkspaceHistoryAsync"
               ]
             },
             "QueryDirectoryContents": {

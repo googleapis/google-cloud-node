@@ -461,7 +461,7 @@ export class NavConnectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createTrip request %j', request);
+    this._log.debug('createTrip request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.maps.navconnect.v1.ITrip,
@@ -472,7 +472,7 @@ export class NavConnectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createTrip response %j', response);
+          this._log.debug('createTrip response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -484,7 +484,7 @@ export class NavConnectServiceClient {
           protos.google.maps.navconnect.v1.ICreateTripRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createTrip response %j', response);
+          this._log.debug('createTrip response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -513,6 +513,9 @@ export class NavConnectServiceClient {
    * @param {string} request.name
    *   Required. The resource name of the trip to get.
    *   Format: projects/{project}/trips/{trip_id}
+   * @param {google.maps.navconnect.v1.GetTripRequest.RoutePolylineFormat} [request.routePolylineFormat]
+   *   Optional. The format of the route polyline to return.
+   *   If not set, `SIMPLE` route polyline will be returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -588,7 +591,7 @@ export class NavConnectServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getTrip request %j', request);
+    this._log.debug('getTrip request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.maps.navconnect.v1.ITrip,
@@ -597,7 +600,7 @@ export class NavConnectServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTrip response %j', response);
+          this._log.debug('getTrip response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -609,7 +612,7 @@ export class NavConnectServiceClient {
           protos.google.maps.navconnect.v1.IGetTripRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getTrip response %j', response);
+          this._log.debug('getTrip response %j', response);
           return [response, options, rawResponse];
         },
       )

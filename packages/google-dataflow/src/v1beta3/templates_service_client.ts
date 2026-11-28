@@ -477,7 +477,7 @@ export class TemplatesServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createJobFromTemplate request %j', request);
+    this._log.debug('createJobFromTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.dataflow.v1beta3.IJob,
@@ -488,7 +488,7 @@ export class TemplatesServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createJobFromTemplate response %j', response);
+          this._log.debug('createJobFromTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -503,7 +503,7 @@ export class TemplatesServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createJobFromTemplate response %j', response);
+          this._log.debug('createJobFromTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -631,7 +631,7 @@ export class TemplatesServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('launchTemplate request %j', request);
+    this._log.debug('launchTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.dataflow.v1beta3.ILaunchTemplateResponse,
@@ -642,7 +642,7 @@ export class TemplatesServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('launchTemplate response %j', response);
+          this._log.debug('launchTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -654,7 +654,7 @@ export class TemplatesServiceClient {
           protos.google.dataflow.v1beta3.ILaunchTemplateRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('launchTemplate response %j', response);
+          this._log.debug('launchTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -774,7 +774,7 @@ export class TemplatesServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getTemplate request %j', request);
+    this._log.debug('getTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.dataflow.v1beta3.IGetTemplateResponse,
@@ -783,7 +783,7 @@ export class TemplatesServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTemplate response %j', response);
+          this._log.debug('getTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -795,7 +795,7 @@ export class TemplatesServiceClient {
           protos.google.dataflow.v1beta3.IGetTemplateRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getTemplate response %j', response);
+          this._log.debug('getTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )

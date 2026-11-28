@@ -507,7 +507,7 @@ export class PartnerLinkServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createPartnerLink request %j', request);
+    this._log.debug('createPartnerLink request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.datamanager.v1.IPartnerLink,
@@ -518,7 +518,7 @@ export class PartnerLinkServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createPartnerLink response %j', response);
+          this._log.debug('createPartnerLink response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -533,7 +533,7 @@ export class PartnerLinkServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createPartnerLink response %j', response);
+          this._log.debug('createPartnerLink response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -656,7 +656,7 @@ export class PartnerLinkServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deletePartnerLink request %j', request);
+    this._log.debug('deletePartnerLink request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -667,7 +667,7 @@ export class PartnerLinkServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deletePartnerLink response %j', response);
+          this._log.debug('deletePartnerLink response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -682,7 +682,7 @@ export class PartnerLinkServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deletePartnerLink response %j', response);
+          this._log.debug('deletePartnerLink response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -865,11 +865,11 @@ export class PartnerLinkServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('searchPartnerLinks values %j', values);
+          this._log.debug('searchPartnerLinks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('searchPartnerLinks request %j', request);
+    this._log.debug('searchPartnerLinks request %j', request);
     return this.innerApiCalls
       .searchPartnerLinks(request, options, wrappedCallback)
       ?.then(
@@ -878,7 +878,7 @@ export class PartnerLinkServiceClient {
           protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest | null,
           protos.google.ads.datamanager.v1.ISearchPartnerLinksResponse,
         ]) => {
-          this._log.info('searchPartnerLinks values %j', response);
+          this._log.debug('searchPartnerLinks values %j', response);
           return [response, input, output];
         },
       );
@@ -966,7 +966,7 @@ export class PartnerLinkServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchPartnerLinks stream %j', request);
+    this._log.debug('searchPartnerLinks stream %j', request);
     return this.descriptors.page.searchPartnerLinks.createStream(
       this.innerApiCalls.searchPartnerLinks as GaxCall,
       request,
@@ -1059,7 +1059,7 @@ export class PartnerLinkServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchPartnerLinks iterate %j', request);
+    this._log.debug('searchPartnerLinks iterate %j', request);
     return this.descriptors.page.searchPartnerLinks.asyncIterate(
       this.innerApiCalls['searchPartnerLinks'] as GaxCall,
       request as {},

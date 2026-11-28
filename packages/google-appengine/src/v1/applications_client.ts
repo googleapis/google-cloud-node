@@ -531,7 +531,7 @@ export class ApplicationsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getApplication request %j', request);
+    this._log.debug('getApplication request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.appengine.v1.IApplication,
@@ -540,7 +540,7 @@ export class ApplicationsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getApplication response %j', response);
+          this._log.debug('getApplication response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -552,7 +552,7 @@ export class ApplicationsClient {
           protos.google.appengine.v1.IGetApplicationRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getApplication response %j', response);
+          this._log.debug('getApplication response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -689,11 +689,11 @@ export class ApplicationsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createApplication response %j', rawResponse);
+          this._log.debug('createApplication response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createApplication request %j', request);
+    this._log.debug('createApplication request %j', request);
     return this.innerApiCalls
       .createApplication(request, options, wrappedCallback)
       ?.then(
@@ -705,7 +705,7 @@ export class ApplicationsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createApplication response %j', rawResponse);
+          this._log.debug('createApplication response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -867,11 +867,11 @@ export class ApplicationsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateApplication response %j', rawResponse);
+          this._log.debug('updateApplication response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateApplication request %j', request);
+    this._log.debug('updateApplication request %j', request);
     return this.innerApiCalls
       .updateApplication(request, options, wrappedCallback)
       ?.then(
@@ -883,7 +883,7 @@ export class ApplicationsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateApplication response %j', rawResponse);
+          this._log.debug('updateApplication response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1045,11 +1045,11 @@ export class ApplicationsClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('repairApplication response %j', rawResponse);
+          this._log.debug('repairApplication response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('repairApplication request %j', request);
+    this._log.debug('repairApplication request %j', request);
     return this.innerApiCalls
       .repairApplication(request, options, wrappedCallback)
       ?.then(
@@ -1061,7 +1061,7 @@ export class ApplicationsClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('repairApplication response %j', rawResponse);
+          this._log.debug('repairApplication response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

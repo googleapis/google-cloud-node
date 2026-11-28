@@ -581,7 +581,7 @@ export class MetricsServiceV2Client {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getLogMetric request %j', request);
+    this._log.debug('getLogMetric request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.logging.v2.ILogMetric,
@@ -590,7 +590,7 @@ export class MetricsServiceV2Client {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getLogMetric response %j', response);
+          this._log.debug('getLogMetric response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -602,7 +602,7 @@ export class MetricsServiceV2Client {
           protos.google.logging.v2.IGetLogMetricRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getLogMetric response %j', response);
+          this._log.debug('getLogMetric response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -712,7 +712,7 @@ export class MetricsServiceV2Client {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createLogMetric request %j', request);
+    this._log.debug('createLogMetric request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.logging.v2.ILogMetric,
@@ -721,7 +721,7 @@ export class MetricsServiceV2Client {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createLogMetric response %j', response);
+          this._log.debug('createLogMetric response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -733,7 +733,7 @@ export class MetricsServiceV2Client {
           protos.google.logging.v2.ICreateLogMetricRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createLogMetric response %j', response);
+          this._log.debug('createLogMetric response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -844,7 +844,7 @@ export class MetricsServiceV2Client {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateLogMetric request %j', request);
+    this._log.debug('updateLogMetric request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.logging.v2.ILogMetric,
@@ -853,7 +853,7 @@ export class MetricsServiceV2Client {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateLogMetric response %j', response);
+          this._log.debug('updateLogMetric response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -865,7 +865,7 @@ export class MetricsServiceV2Client {
           protos.google.logging.v2.IUpdateLogMetricRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateLogMetric response %j', response);
+          this._log.debug('updateLogMetric response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -970,7 +970,7 @@ export class MetricsServiceV2Client {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteLogMetric request %j', request);
+    this._log.debug('deleteLogMetric request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -979,7 +979,7 @@ export class MetricsServiceV2Client {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteLogMetric response %j', response);
+          this._log.debug('deleteLogMetric response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -991,7 +991,7 @@ export class MetricsServiceV2Client {
           protos.google.logging.v2.IDeleteLogMetricRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteLogMetric response %j', response);
+          this._log.debug('deleteLogMetric response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1117,11 +1117,11 @@ export class MetricsServiceV2Client {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listLogMetrics values %j', values);
+          this._log.debug('listLogMetrics values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listLogMetrics request %j', request);
+    this._log.debug('listLogMetrics request %j', request);
     return this.innerApiCalls
       .listLogMetrics(request, options, wrappedCallback)
       ?.then(
@@ -1130,7 +1130,7 @@ export class MetricsServiceV2Client {
           protos.google.logging.v2.IListLogMetricsRequest | null,
           protos.google.logging.v2.IListLogMetricsResponse,
         ]) => {
-          this._log.info('listLogMetrics values %j', response);
+          this._log.debug('listLogMetrics values %j', response);
           return [response, input, output];
         },
       );
@@ -1181,7 +1181,7 @@ export class MetricsServiceV2Client {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLogMetrics stream %j', request);
+    this._log.debug('listLogMetrics stream %j', request);
     return this.descriptors.page.listLogMetrics.createStream(
       this.innerApiCalls.listLogMetrics as GaxCall,
       request,
@@ -1237,7 +1237,7 @@ export class MetricsServiceV2Client {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLogMetrics iterate %j', request);
+    this._log.debug('listLogMetrics iterate %j', request);
     return this.descriptors.page.listLogMetrics.asyncIterate(
       this.innerApiCalls['listLogMetrics'] as GaxCall,
       request as {},

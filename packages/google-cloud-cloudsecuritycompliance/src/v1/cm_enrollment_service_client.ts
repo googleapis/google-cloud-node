@@ -588,7 +588,7 @@ export class CmEnrollmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateCmEnrollment request %j', request);
+    this._log.debug('updateCmEnrollment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.cloudsecuritycompliance.v1.ICmEnrollment,
@@ -599,7 +599,7 @@ export class CmEnrollmentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateCmEnrollment response %j', response);
+          this._log.debug('updateCmEnrollment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -614,7 +614,7 @@ export class CmEnrollmentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateCmEnrollment response %j', response);
+          this._log.debug('updateCmEnrollment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -740,7 +740,7 @@ export class CmEnrollmentServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('calculateEffectiveCmEnrollment request %j', request);
+    this._log.debug('calculateEffectiveCmEnrollment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentResponse,
@@ -751,7 +751,7 @@ export class CmEnrollmentServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'calculateEffectiveCmEnrollment response %j',
             response,
           );
@@ -769,7 +769,7 @@ export class CmEnrollmentServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'calculateEffectiveCmEnrollment response %j',
             response,
           );

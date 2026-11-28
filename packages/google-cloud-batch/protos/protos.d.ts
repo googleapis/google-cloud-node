@@ -10479,6 +10479,12 @@ export namespace google {
 
                         /** InstanceSelection rank */
                         rank?: (number|null);
+
+                        /** InstanceSelection disks */
+                        disks?: (google.cloud.batch.v1alpha.AllocationPolicy.IAttachedDisk[]|null);
+
+                        /** InstanceSelection bootDisk */
+                        bootDisk?: (google.cloud.batch.v1alpha.AllocationPolicy.IDisk|null);
                     }
 
                     /** Represents an InstanceSelection. */
@@ -10495,6 +10501,12 @@ export namespace google {
 
                         /** InstanceSelection rank. */
                         public rank?: (number|null);
+
+                        /** InstanceSelection disks. */
+                        public disks: google.cloud.batch.v1alpha.AllocationPolicy.IAttachedDisk[];
+
+                        /** InstanceSelection bootDisk. */
+                        public bootDisk?: (google.cloud.batch.v1alpha.AllocationPolicy.IDisk|null);
 
                         /**
                          * Creates a new InstanceSelection instance using the specified properties.

@@ -455,7 +455,7 @@ export class ImageAnnotatorClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchAnnotateImages request %j', request);
+    this._log.debug('batchAnnotateImages request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.vision.v1p1beta1.IBatchAnnotateImagesResponse,
@@ -466,7 +466,7 @@ export class ImageAnnotatorClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchAnnotateImages response %j', response);
+          this._log.debug('batchAnnotateImages response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -481,7 +481,7 @@ export class ImageAnnotatorClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchAnnotateImages response %j', response);
+          this._log.debug('batchAnnotateImages response %j', response);
           return [response, options, rawResponse];
         },
       )

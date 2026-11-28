@@ -40,6 +40,7 @@ import * as gapicConfig from './sql_backup_runs_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
+ *  Service for managing database backups.
  * @class
  * @memberof v1beta4
  */
@@ -211,6 +212,9 @@ export class SqlBackupRunsServiceClient {
       ),
       blueGreenDeploymentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/blueGreenDeployments/{blue_green_deployment}',
+      ),
+      networkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/global/networks/{network}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}',
@@ -488,7 +492,7 @@ export class SqlBackupRunsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('delete request %j', request);
+    this._log.debug('delete request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
@@ -499,7 +503,7 @@ export class SqlBackupRunsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('delete response %j', response);
+          this._log.debug('delete response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -514,7 +518,7 @@ export class SqlBackupRunsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('delete response %j', response);
+          this._log.debug('delete response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -631,7 +635,7 @@ export class SqlBackupRunsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('get request %j', request);
+    this._log.debug('get request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1beta4.IBackupRun,
@@ -642,7 +646,7 @@ export class SqlBackupRunsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -654,7 +658,7 @@ export class SqlBackupRunsServiceClient {
           protos.google.cloud.sql.v1beta4.ISqlBackupRunsGetRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -769,7 +773,7 @@ export class SqlBackupRunsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('insert request %j', request);
+    this._log.debug('insert request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1beta4.IOperation,
@@ -780,7 +784,7 @@ export class SqlBackupRunsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('insert response %j', response);
+          this._log.debug('insert response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -795,7 +799,7 @@ export class SqlBackupRunsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('insert response %j', response);
+          this._log.debug('insert response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -917,7 +921,7 @@ export class SqlBackupRunsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('list request %j', request);
+    this._log.debug('list request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1beta4.IBackupRunsListResponse,
@@ -928,7 +932,7 @@ export class SqlBackupRunsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('list response %j', response);
+          this._log.debug('list response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -940,7 +944,7 @@ export class SqlBackupRunsServiceClient {
           protos.google.cloud.sql.v1beta4.ISqlBackupRunsListRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('list response %j', response);
+          this._log.debug('list response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1138,6 +1142,42 @@ export class SqlBackupRunsServiceClient {
     return this.pathTemplates.blueGreenDeploymentPathTemplate.match(
       blueGreenDeploymentName,
     ).blue_green_deployment;
+  }
+
+  /**
+   * Return a fully-qualified network resource name string.
+   *
+   * @param {string} project
+   * @param {string} network
+   * @returns {string} Resource name string.
+   */
+  networkPath(project: string, network: string) {
+    return this.pathTemplates.networkPathTemplate.render({
+      project: project,
+      network: network,
+    });
+  }
+
+  /**
+   * Parse the project from Network resource.
+   *
+   * @param {string} networkName
+   *   A fully-qualified path representing Network resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNetworkName(networkName: string) {
+    return this.pathTemplates.networkPathTemplate.match(networkName).project;
+  }
+
+  /**
+   * Parse the network from Network resource.
+   *
+   * @param {string} networkName
+   *   A fully-qualified path representing Network resource.
+   * @returns {string} A string representing the network.
+   */
+  matchNetworkFromNetworkName(networkName: string) {
+    return this.pathTemplates.networkPathTemplate.match(networkName).network;
   }
 
   /**

@@ -686,7 +686,7 @@ export class TransportManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRemoteTransportProfile request %j', request);
+    this._log.debug('getRemoteTransportProfile request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networkconnectivity.v1beta.IRemoteTransportProfile,
@@ -697,7 +697,7 @@ export class TransportManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getRemoteTransportProfile response %j', response);
+          this._log.debug('getRemoteTransportProfile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -712,7 +712,7 @@ export class TransportManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getRemoteTransportProfile response %j', response);
+          this._log.debug('getRemoteTransportProfile response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -831,7 +831,7 @@ export class TransportManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('parseFromActivationKey request %j', request);
+    this._log.debug('parseFromActivationKey request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networkconnectivity.v1beta.IParseFromActivationKeyResponse,
@@ -842,7 +842,7 @@ export class TransportManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('parseFromActivationKey response %j', response);
+          this._log.debug('parseFromActivationKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -857,7 +857,7 @@ export class TransportManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('parseFromActivationKey response %j', response);
+          this._log.debug('parseFromActivationKey response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -974,7 +974,7 @@ export class TransportManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getTransport request %j', request);
+    this._log.debug('getTransport request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networkconnectivity.v1beta.ITransport,
@@ -985,7 +985,7 @@ export class TransportManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTransport response %j', response);
+          this._log.debug('getTransport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1000,7 +1000,7 @@ export class TransportManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getTransport response %j', response);
+          this._log.debug('getTransport response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1120,7 +1120,7 @@ export class TransportManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getStatus request %j', request);
+    this._log.debug('getStatus request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networkconnectivity.v1beta.IGetStatusResponse,
@@ -1131,7 +1131,7 @@ export class TransportManagerClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getStatus response %j', response);
+          this._log.debug('getStatus response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1146,7 +1146,7 @@ export class TransportManagerClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getStatus response %j', response);
+          this._log.debug('getStatus response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1299,11 +1299,11 @@ export class TransportManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createTransport response %j', rawResponse);
+          this._log.debug('createTransport response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createTransport request %j', request);
+    this._log.debug('createTransport request %j', request);
     return this.innerApiCalls
       .createTransport(request, options, wrappedCallback)
       ?.then(
@@ -1315,7 +1315,7 @@ export class TransportManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createTransport response %j', rawResponse);
+          this._log.debug('createTransport response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1489,11 +1489,11 @@ export class TransportManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateTransport response %j', rawResponse);
+          this._log.debug('updateTransport response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateTransport request %j', request);
+    this._log.debug('updateTransport request %j', request);
     return this.innerApiCalls
       .updateTransport(request, options, wrappedCallback)
       ?.then(
@@ -1505,7 +1505,7 @@ export class TransportManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateTransport response %j', rawResponse);
+          this._log.debug('updateTransport response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1672,11 +1672,11 @@ export class TransportManagerClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteTransport response %j', rawResponse);
+          this._log.debug('deleteTransport response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteTransport request %j', request);
+    this._log.debug('deleteTransport request %j', request);
     return this.innerApiCalls
       .deleteTransport(request, options, wrappedCallback)
       ?.then(
@@ -1688,7 +1688,7 @@ export class TransportManagerClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteTransport response %j', rawResponse);
+          this._log.debug('deleteTransport response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1840,11 +1840,11 @@ export class TransportManagerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRemoteTransportProfiles values %j', values);
+          this._log.debug('listRemoteTransportProfiles values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRemoteTransportProfiles request %j', request);
+    this._log.debug('listRemoteTransportProfiles request %j', request);
     return this.innerApiCalls
       .listRemoteTransportProfiles(request, options, wrappedCallback)
       ?.then(
@@ -1853,7 +1853,7 @@ export class TransportManagerClient {
           protos.google.cloud.networkconnectivity.v1beta.IListRemoteTransportProfilesRequest | null,
           protos.google.cloud.networkconnectivity.v1beta.IListRemoteTransportProfilesResponse,
         ]) => {
-          this._log.info('listRemoteTransportProfiles values %j', response);
+          this._log.debug('listRemoteTransportProfiles values %j', response);
           return [response, input, output];
         },
       );
@@ -1902,7 +1902,7 @@ export class TransportManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRemoteTransportProfiles stream %j', request);
+    this._log.debug('listRemoteTransportProfiles stream %j', request);
     return this.descriptors.page.listRemoteTransportProfiles.createStream(
       this.innerApiCalls.listRemoteTransportProfiles as GaxCall,
       request,
@@ -1956,7 +1956,7 @@ export class TransportManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRemoteTransportProfiles iterate %j', request);
+    this._log.debug('listRemoteTransportProfiles iterate %j', request);
     return this.descriptors.page.listRemoteTransportProfiles.asyncIterate(
       this.innerApiCalls['listRemoteTransportProfiles'] as GaxCall,
       request as {},
@@ -2075,11 +2075,11 @@ export class TransportManagerClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listTransports values %j', values);
+          this._log.debug('listTransports values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listTransports request %j', request);
+    this._log.debug('listTransports request %j', request);
     return this.innerApiCalls
       .listTransports(request, options, wrappedCallback)
       ?.then(
@@ -2088,7 +2088,7 @@ export class TransportManagerClient {
           protos.google.cloud.networkconnectivity.v1beta.IListTransportsRequest | null,
           protos.google.cloud.networkconnectivity.v1beta.IListTransportsResponse,
         ]) => {
-          this._log.info('listTransports values %j', response);
+          this._log.debug('listTransports values %j', response);
           return [response, input, output];
         },
       );
@@ -2137,7 +2137,7 @@ export class TransportManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTransports stream %j', request);
+    this._log.debug('listTransports stream %j', request);
     return this.descriptors.page.listTransports.createStream(
       this.innerApiCalls.listTransports as GaxCall,
       request,
@@ -2191,7 +2191,7 @@ export class TransportManagerClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTransports iterate %j', request);
+    this._log.debug('listTransports iterate %j', request);
     return this.descriptors.page.listTransports.asyncIterate(
       this.innerApiCalls['listTransports'] as GaxCall,
       request as {},

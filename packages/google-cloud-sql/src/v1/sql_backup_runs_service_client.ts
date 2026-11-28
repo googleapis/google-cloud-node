@@ -473,7 +473,7 @@ export class SqlBackupRunsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('delete request %j', request);
+    this._log.debug('delete request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1.IOperation,
@@ -484,7 +484,7 @@ export class SqlBackupRunsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('delete response %j', response);
+          this._log.debug('delete response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -496,7 +496,7 @@ export class SqlBackupRunsServiceClient {
           protos.google.cloud.sql.v1.ISqlBackupRunsDeleteRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('delete response %j', response);
+          this._log.debug('delete response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -607,7 +607,7 @@ export class SqlBackupRunsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('get request %j', request);
+    this._log.debug('get request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1.IBackupRun,
@@ -618,7 +618,7 @@ export class SqlBackupRunsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -630,7 +630,7 @@ export class SqlBackupRunsServiceClient {
           protos.google.cloud.sql.v1.ISqlBackupRunsGetRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -739,7 +739,7 @@ export class SqlBackupRunsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('insert request %j', request);
+    this._log.debug('insert request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1.IOperation,
@@ -750,7 +750,7 @@ export class SqlBackupRunsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('insert response %j', response);
+          this._log.debug('insert response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -762,7 +762,7 @@ export class SqlBackupRunsServiceClient {
           protos.google.cloud.sql.v1.ISqlBackupRunsInsertRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('insert response %j', response);
+          this._log.debug('insert response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -878,7 +878,7 @@ export class SqlBackupRunsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('list request %j', request);
+    this._log.debug('list request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.sql.v1.IBackupRunsListResponse,
@@ -889,7 +889,7 @@ export class SqlBackupRunsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('list response %j', response);
+          this._log.debug('list response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -901,7 +901,7 @@ export class SqlBackupRunsServiceClient {
           protos.google.cloud.sql.v1.ISqlBackupRunsListRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('list response %j', response);
+          this._log.debug('list response %j', response);
           return [response, options, rawResponse];
         },
       )

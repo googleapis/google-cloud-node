@@ -612,11 +612,11 @@ export class WorkloadIdentityClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('generateServiceAgents response %j', rawResponse);
+          this._log.debug('generateServiceAgents response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('generateServiceAgents request %j', request);
+    this._log.debug('generateServiceAgents request %j', request);
     return this.innerApiCalls
       .generateServiceAgents(request, options, wrappedCallback)
       ?.then(
@@ -628,7 +628,7 @@ export class WorkloadIdentityClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('generateServiceAgents response %j', rawResponse);
+          this._log.debug('generateServiceAgents response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

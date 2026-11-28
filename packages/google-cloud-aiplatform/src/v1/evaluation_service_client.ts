@@ -703,7 +703,7 @@ export class EvaluationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('evaluateInstances request %j', request);
+    this._log.debug('evaluateInstances request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1.IEvaluateInstancesResponse,
@@ -714,7 +714,7 @@ export class EvaluationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('evaluateInstances response %j', response);
+          this._log.debug('evaluateInstances response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -729,7 +729,7 @@ export class EvaluationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('evaluateInstances response %j', response);
+          this._log.debug('evaluateInstances response %j', response);
           return [response, options, rawResponse];
         },
       )

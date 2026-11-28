@@ -90,6 +90,7 @@ let globallyEnabled = false;
  */
 export function setGloballyEnabled(enabled: boolean) {
   globallyEnabled = enabled;
+  cachedTracer = undefined;
 }
 
 /**
@@ -422,7 +423,7 @@ export class PubsubSpans {
       attributes['messaging.destination.name'] = subInfo.subId;
     }
 
-    if (context) {
+    if (parent) {
       return getTracer().startSpan(
         name,
         {
@@ -432,10 +433,14 @@ export class PubsubSpans {
         parent,
       );
     } else {
-      return getTracer().startSpan(name, {
-        kind: SpanKind.CONSUMER,
-        attributes,
-      });
+      return getTracer().startSpan(
+        name,
+        {
+          kind: SpanKind.CONSUMER,
+          attributes,
+        },
+        ROOT_CONTEXT,
+      );
     }
   }
 

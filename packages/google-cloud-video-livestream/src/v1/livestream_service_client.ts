@@ -817,7 +817,7 @@ export class LivestreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getChannel request %j', request);
+    this._log.debug('getChannel request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.video.livestream.v1.IChannel,
@@ -828,7 +828,7 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getChannel response %j', response);
+          this._log.debug('getChannel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -843,7 +843,7 @@ export class LivestreamServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getChannel response %j', response);
+          this._log.debug('getChannel response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -955,7 +955,7 @@ export class LivestreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getInput request %j', request);
+    this._log.debug('getInput request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.video.livestream.v1.IInput,
@@ -966,7 +966,7 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getInput response %j', response);
+          this._log.debug('getInput response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -978,7 +978,7 @@ export class LivestreamServiceClient {
           protos.google.cloud.video.livestream.v1.IGetInputRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getInput response %j', response);
+          this._log.debug('getInput response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1090,7 +1090,7 @@ export class LivestreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('previewInput request %j', request);
+    this._log.debug('previewInput request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.video.livestream.v1.IPreviewInputResponse,
@@ -1101,7 +1101,7 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('previewInput response %j', response);
+          this._log.debug('previewInput response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1116,7 +1116,7 @@ export class LivestreamServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('previewInput response %j', response);
+          this._log.debug('previewInput response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1251,7 +1251,7 @@ export class LivestreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createEvent request %j', request);
+    this._log.debug('createEvent request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.video.livestream.v1.IEvent,
@@ -1262,7 +1262,7 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createEvent response %j', response);
+          this._log.debug('createEvent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1277,7 +1277,7 @@ export class LivestreamServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createEvent response %j', response);
+          this._log.debug('createEvent response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1389,7 +1389,7 @@ export class LivestreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getEvent request %j', request);
+    this._log.debug('getEvent request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.video.livestream.v1.IEvent,
@@ -1400,7 +1400,7 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getEvent response %j', response);
+          this._log.debug('getEvent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1412,7 +1412,7 @@ export class LivestreamServiceClient {
           protos.google.cloud.video.livestream.v1.IGetEventRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getEvent response %j', response);
+          this._log.debug('getEvent response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1538,7 +1538,7 @@ export class LivestreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteEvent request %j', request);
+    this._log.debug('deleteEvent request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1549,7 +1549,7 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteEvent response %j', response);
+          this._log.debug('deleteEvent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1564,7 +1564,7 @@ export class LivestreamServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteEvent response %j', response);
+          this._log.debug('deleteEvent response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1676,7 +1676,7 @@ export class LivestreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getClip request %j', request);
+    this._log.debug('getClip request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.video.livestream.v1.IClip,
@@ -1687,7 +1687,7 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getClip response %j', response);
+          this._log.debug('getClip response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1699,7 +1699,7 @@ export class LivestreamServiceClient {
           protos.google.cloud.video.livestream.v1.IGetClipRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getClip response %j', response);
+          this._log.debug('getClip response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1811,7 +1811,7 @@ export class LivestreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDvrSession request %j', request);
+    this._log.debug('getDvrSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.video.livestream.v1.IDvrSession,
@@ -1822,7 +1822,7 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDvrSession response %j', response);
+          this._log.debug('getDvrSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1837,7 +1837,7 @@ export class LivestreamServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getDvrSession response %j', response);
+          this._log.debug('getDvrSession response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1949,7 +1949,7 @@ export class LivestreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getAsset request %j', request);
+    this._log.debug('getAsset request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.video.livestream.v1.IAsset,
@@ -1960,7 +1960,7 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAsset response %j', response);
+          this._log.debug('getAsset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1972,7 +1972,7 @@ export class LivestreamServiceClient {
           protos.google.cloud.video.livestream.v1.IGetAssetRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getAsset response %j', response);
+          this._log.debug('getAsset response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2084,7 +2084,7 @@ export class LivestreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPool request %j', request);
+    this._log.debug('getPool request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.video.livestream.v1.IPool,
@@ -2095,7 +2095,7 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPool response %j', response);
+          this._log.debug('getPool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2107,7 +2107,7 @@ export class LivestreamServiceClient {
           protos.google.cloud.video.livestream.v1.IGetPoolRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getPool response %j', response);
+          this._log.debug('getPool response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2267,11 +2267,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createChannel response %j', rawResponse);
+          this._log.debug('createChannel response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createChannel request %j', request);
+    this._log.debug('createChannel request %j', request);
     return this.innerApiCalls
       .createChannel(request, options, wrappedCallback)
       ?.then(
@@ -2283,7 +2283,7 @@ export class LivestreamServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createChannel response %j', rawResponse);
+          this._log.debug('createChannel response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2456,11 +2456,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteChannel response %j', rawResponse);
+          this._log.debug('deleteChannel response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteChannel request %j', request);
+    this._log.debug('deleteChannel request %j', request);
     return this.innerApiCalls
       .deleteChannel(request, options, wrappedCallback)
       ?.then(
@@ -2472,7 +2472,7 @@ export class LivestreamServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteChannel response %j', rawResponse);
+          this._log.debug('deleteChannel response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2660,11 +2660,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateChannel response %j', rawResponse);
+          this._log.debug('updateChannel response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateChannel request %j', request);
+    this._log.debug('updateChannel request %j', request);
     return this.innerApiCalls
       .updateChannel(request, options, wrappedCallback)
       ?.then(
@@ -2676,7 +2676,7 @@ export class LivestreamServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateChannel response %j', rawResponse);
+          this._log.debug('updateChannel response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2845,11 +2845,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('startChannel response %j', rawResponse);
+          this._log.debug('startChannel response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('startChannel request %j', request);
+    this._log.debug('startChannel request %j', request);
     return this.innerApiCalls
       .startChannel(request, options, wrappedCallback)
       ?.then(
@@ -2861,7 +2861,7 @@ export class LivestreamServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('startChannel response %j', rawResponse);
+          this._log.debug('startChannel response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3030,11 +3030,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('stopChannel response %j', rawResponse);
+          this._log.debug('stopChannel response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('stopChannel request %j', request);
+    this._log.debug('stopChannel request %j', request);
     return this.innerApiCalls
       .stopChannel(request, options, wrappedCallback)
       ?.then(
@@ -3046,7 +3046,7 @@ export class LivestreamServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('stopChannel response %j', rawResponse);
+          this._log.debug('stopChannel response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3219,11 +3219,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('startDistribution response %j', rawResponse);
+          this._log.debug('startDistribution response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('startDistribution request %j', request);
+    this._log.debug('startDistribution request %j', request);
     return this.innerApiCalls
       .startDistribution(request, options, wrappedCallback)
       ?.then(
@@ -3235,7 +3235,7 @@ export class LivestreamServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('startDistribution response %j', rawResponse);
+          this._log.debug('startDistribution response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3407,11 +3407,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('stopDistribution response %j', rawResponse);
+          this._log.debug('stopDistribution response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('stopDistribution request %j', request);
+    this._log.debug('stopDistribution request %j', request);
     return this.innerApiCalls
       .stopDistribution(request, options, wrappedCallback)
       ?.then(
@@ -3423,7 +3423,7 @@ export class LivestreamServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('stopDistribution response %j', rawResponse);
+          this._log.debug('stopDistribution response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3600,11 +3600,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createInput response %j', rawResponse);
+          this._log.debug('createInput response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createInput request %j', request);
+    this._log.debug('createInput request %j', request);
     return this.innerApiCalls
       .createInput(request, options, wrappedCallback)
       ?.then(
@@ -3616,7 +3616,7 @@ export class LivestreamServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createInput response %j', rawResponse);
+          this._log.debug('createInput response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3784,11 +3784,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteInput response %j', rawResponse);
+          this._log.debug('deleteInput response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteInput request %j', request);
+    this._log.debug('deleteInput request %j', request);
     return this.innerApiCalls
       .deleteInput(request, options, wrappedCallback)
       ?.then(
@@ -3800,7 +3800,7 @@ export class LivestreamServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteInput response %j', rawResponse);
+          this._log.debug('deleteInput response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3981,11 +3981,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateInput response %j', rawResponse);
+          this._log.debug('updateInput response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateInput request %j', request);
+    this._log.debug('updateInput request %j', request);
     return this.innerApiCalls
       .updateInput(request, options, wrappedCallback)
       ?.then(
@@ -3997,7 +3997,7 @@ export class LivestreamServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateInput response %j', rawResponse);
+          this._log.debug('updateInput response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -4174,11 +4174,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createClip response %j', rawResponse);
+          this._log.debug('createClip response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createClip request %j', request);
+    this._log.debug('createClip request %j', request);
     return this.innerApiCalls
       .createClip(request, options, wrappedCallback)
       ?.then(
@@ -4190,7 +4190,7 @@ export class LivestreamServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createClip response %j', rawResponse);
+          this._log.debug('createClip response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -4359,11 +4359,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteClip response %j', rawResponse);
+          this._log.debug('deleteClip response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteClip request %j', request);
+    this._log.debug('deleteClip request %j', request);
     return this.innerApiCalls
       .deleteClip(request, options, wrappedCallback)
       ?.then(
@@ -4375,7 +4375,7 @@ export class LivestreamServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteClip response %j', rawResponse);
+          this._log.debug('deleteClip response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -4552,11 +4552,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createDvrSession response %j', rawResponse);
+          this._log.debug('createDvrSession response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createDvrSession request %j', request);
+    this._log.debug('createDvrSession request %j', request);
     return this.innerApiCalls
       .createDvrSession(request, options, wrappedCallback)
       ?.then(
@@ -4568,7 +4568,7 @@ export class LivestreamServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createDvrSession response %j', rawResponse);
+          this._log.debug('createDvrSession response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -4736,11 +4736,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteDvrSession response %j', rawResponse);
+          this._log.debug('deleteDvrSession response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteDvrSession request %j', request);
+    this._log.debug('deleteDvrSession request %j', request);
     return this.innerApiCalls
       .deleteDvrSession(request, options, wrappedCallback)
       ?.then(
@@ -4752,7 +4752,7 @@ export class LivestreamServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteDvrSession response %j', rawResponse);
+          this._log.debug('deleteDvrSession response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -4928,11 +4928,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateDvrSession response %j', rawResponse);
+          this._log.debug('updateDvrSession response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateDvrSession request %j', request);
+    this._log.debug('updateDvrSession request %j', request);
     return this.innerApiCalls
       .updateDvrSession(request, options, wrappedCallback)
       ?.then(
@@ -4944,7 +4944,7 @@ export class LivestreamServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateDvrSession response %j', rawResponse);
+          this._log.debug('updateDvrSession response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -5122,11 +5122,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createAsset response %j', rawResponse);
+          this._log.debug('createAsset response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createAsset request %j', request);
+    this._log.debug('createAsset request %j', request);
     return this.innerApiCalls
       .createAsset(request, options, wrappedCallback)
       ?.then(
@@ -5138,7 +5138,7 @@ export class LivestreamServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createAsset response %j', rawResponse);
+          this._log.debug('createAsset response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -5306,11 +5306,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteAsset response %j', rawResponse);
+          this._log.debug('deleteAsset response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteAsset request %j', request);
+    this._log.debug('deleteAsset request %j', request);
     return this.innerApiCalls
       .deleteAsset(request, options, wrappedCallback)
       ?.then(
@@ -5322,7 +5322,7 @@ export class LivestreamServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteAsset response %j', rawResponse);
+          this._log.debug('deleteAsset response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -5497,11 +5497,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updatePool response %j', rawResponse);
+          this._log.debug('updatePool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updatePool request %j', request);
+    this._log.debug('updatePool request %j', request);
     return this.innerApiCalls
       .updatePool(request, options, wrappedCallback)
       ?.then(
@@ -5513,7 +5513,7 @@ export class LivestreamServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updatePool response %j', rawResponse);
+          this._log.debug('updatePool response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -5670,11 +5670,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listChannels values %j', values);
+          this._log.debug('listChannels values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listChannels request %j', request);
+    this._log.debug('listChannels request %j', request);
     return this.innerApiCalls
       .listChannels(request, options, wrappedCallback)
       ?.then(
@@ -5683,7 +5683,7 @@ export class LivestreamServiceClient {
           protos.google.cloud.video.livestream.v1.IListChannelsRequest | null,
           protos.google.cloud.video.livestream.v1.IListChannelsResponse,
         ]) => {
-          this._log.info('listChannels values %j', response);
+          this._log.debug('listChannels values %j', response);
           return [response, input, output];
         },
       );
@@ -5737,7 +5737,7 @@ export class LivestreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listChannels stream %j', request);
+    this._log.debug('listChannels stream %j', request);
     return this.descriptors.page.listChannels.createStream(
       this.innerApiCalls.listChannels as GaxCall,
       request,
@@ -5796,7 +5796,7 @@ export class LivestreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listChannels iterate %j', request);
+    this._log.debug('listChannels iterate %j', request);
     return this.descriptors.page.listChannels.asyncIterate(
       this.innerApiCalls['listChannels'] as GaxCall,
       request as {},
@@ -5920,11 +5920,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listInputs values %j', values);
+          this._log.debug('listInputs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listInputs request %j', request);
+    this._log.debug('listInputs request %j', request);
     return this.innerApiCalls
       .listInputs(request, options, wrappedCallback)
       ?.then(
@@ -5933,7 +5933,7 @@ export class LivestreamServiceClient {
           protos.google.cloud.video.livestream.v1.IListInputsRequest | null,
           protos.google.cloud.video.livestream.v1.IListInputsResponse,
         ]) => {
-          this._log.info('listInputs values %j', response);
+          this._log.debug('listInputs values %j', response);
           return [response, input, output];
         },
       );
@@ -5987,7 +5987,7 @@ export class LivestreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listInputs stream %j', request);
+    this._log.debug('listInputs stream %j', request);
     return this.descriptors.page.listInputs.createStream(
       this.innerApiCalls.listInputs as GaxCall,
       request,
@@ -6046,7 +6046,7 @@ export class LivestreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listInputs iterate %j', request);
+    this._log.debug('listInputs iterate %j', request);
     return this.descriptors.page.listInputs.asyncIterate(
       this.innerApiCalls['listInputs'] as GaxCall,
       request as {},
@@ -6170,11 +6170,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listEvents values %j', values);
+          this._log.debug('listEvents values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listEvents request %j', request);
+    this._log.debug('listEvents request %j', request);
     return this.innerApiCalls
       .listEvents(request, options, wrappedCallback)
       ?.then(
@@ -6183,7 +6183,7 @@ export class LivestreamServiceClient {
           protos.google.cloud.video.livestream.v1.IListEventsRequest | null,
           protos.google.cloud.video.livestream.v1.IListEventsResponse,
         ]) => {
-          this._log.info('listEvents values %j', response);
+          this._log.debug('listEvents values %j', response);
           return [response, input, output];
         },
       );
@@ -6237,7 +6237,7 @@ export class LivestreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEvents stream %j', request);
+    this._log.debug('listEvents stream %j', request);
     return this.descriptors.page.listEvents.createStream(
       this.innerApiCalls.listEvents as GaxCall,
       request,
@@ -6296,7 +6296,7 @@ export class LivestreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEvents iterate %j', request);
+    this._log.debug('listEvents iterate %j', request);
     return this.descriptors.page.listEvents.asyncIterate(
       this.innerApiCalls['listEvents'] as GaxCall,
       request as {},
@@ -6415,11 +6415,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listClips values %j', values);
+          this._log.debug('listClips values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listClips request %j', request);
+    this._log.debug('listClips request %j', request);
     return this.innerApiCalls
       .listClips(request, options, wrappedCallback)
       ?.then(
@@ -6428,7 +6428,7 @@ export class LivestreamServiceClient {
           protos.google.cloud.video.livestream.v1.IListClipsRequest | null,
           protos.google.cloud.video.livestream.v1.IListClipsResponse,
         ]) => {
-          this._log.info('listClips values %j', response);
+          this._log.debug('listClips values %j', response);
           return [response, input, output];
         },
       );
@@ -6477,7 +6477,7 @@ export class LivestreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listClips stream %j', request);
+    this._log.debug('listClips stream %j', request);
     return this.descriptors.page.listClips.createStream(
       this.innerApiCalls.listClips as GaxCall,
       request,
@@ -6531,7 +6531,7 @@ export class LivestreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listClips iterate %j', request);
+    this._log.debug('listClips iterate %j', request);
     return this.descriptors.page.listClips.asyncIterate(
       this.innerApiCalls['listClips'] as GaxCall,
       request as {},
@@ -6650,11 +6650,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDvrSessions values %j', values);
+          this._log.debug('listDvrSessions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDvrSessions request %j', request);
+    this._log.debug('listDvrSessions request %j', request);
     return this.innerApiCalls
       .listDvrSessions(request, options, wrappedCallback)
       ?.then(
@@ -6663,7 +6663,7 @@ export class LivestreamServiceClient {
           protos.google.cloud.video.livestream.v1.IListDvrSessionsRequest | null,
           protos.google.cloud.video.livestream.v1.IListDvrSessionsResponse,
         ]) => {
-          this._log.info('listDvrSessions values %j', response);
+          this._log.debug('listDvrSessions values %j', response);
           return [response, input, output];
         },
       );
@@ -6712,7 +6712,7 @@ export class LivestreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDvrSessions stream %j', request);
+    this._log.debug('listDvrSessions stream %j', request);
     return this.descriptors.page.listDvrSessions.createStream(
       this.innerApiCalls.listDvrSessions as GaxCall,
       request,
@@ -6766,7 +6766,7 @@ export class LivestreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDvrSessions iterate %j', request);
+    this._log.debug('listDvrSessions iterate %j', request);
     return this.descriptors.page.listDvrSessions.asyncIterate(
       this.innerApiCalls['listDvrSessions'] as GaxCall,
       request as {},
@@ -6886,11 +6886,11 @@ export class LivestreamServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAssets values %j', values);
+          this._log.debug('listAssets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAssets request %j', request);
+    this._log.debug('listAssets request %j', request);
     return this.innerApiCalls
       .listAssets(request, options, wrappedCallback)
       ?.then(
@@ -6899,7 +6899,7 @@ export class LivestreamServiceClient {
           protos.google.cloud.video.livestream.v1.IListAssetsRequest | null,
           protos.google.cloud.video.livestream.v1.IListAssetsResponse,
         ]) => {
-          this._log.info('listAssets values %j', response);
+          this._log.debug('listAssets values %j', response);
           return [response, input, output];
         },
       );
@@ -6949,7 +6949,7 @@ export class LivestreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAssets stream %j', request);
+    this._log.debug('listAssets stream %j', request);
     return this.descriptors.page.listAssets.createStream(
       this.innerApiCalls.listAssets as GaxCall,
       request,
@@ -7004,7 +7004,7 @@ export class LivestreamServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAssets iterate %j', request);
+    this._log.debug('listAssets iterate %j', request);
     return this.descriptors.page.listAssets.asyncIterate(
       this.innerApiCalls['listAssets'] as GaxCall,
       request as {},

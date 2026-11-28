@@ -60,7 +60,11 @@ describe('retry-request', () => {
 
   after(done => {
     server.closeAllConnections();
-    server.close(done);
+    if (server.listening) {
+      server.close(done);
+    } else {
+      done();
+    }
   });
 
   describe('streams', () => {

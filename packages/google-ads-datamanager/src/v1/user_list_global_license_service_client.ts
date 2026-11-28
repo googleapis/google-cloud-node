@@ -516,7 +516,7 @@ export class UserListGlobalLicenseServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createUserListGlobalLicense request %j', request);
+    this._log.debug('createUserListGlobalLicense request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.datamanager.v1.IUserListGlobalLicense,
@@ -527,7 +527,7 @@ export class UserListGlobalLicenseServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createUserListGlobalLicense response %j', response);
+          this._log.debug('createUserListGlobalLicense response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -542,7 +542,7 @@ export class UserListGlobalLicenseServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createUserListGlobalLicense response %j', response);
+          this._log.debug('createUserListGlobalLicense response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -666,7 +666,7 @@ export class UserListGlobalLicenseServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateUserListGlobalLicense request %j', request);
+    this._log.debug('updateUserListGlobalLicense request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.datamanager.v1.IUserListGlobalLicense,
@@ -677,7 +677,7 @@ export class UserListGlobalLicenseServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateUserListGlobalLicense response %j', response);
+          this._log.debug('updateUserListGlobalLicense response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -692,7 +692,7 @@ export class UserListGlobalLicenseServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateUserListGlobalLicense response %j', response);
+          this._log.debug('updateUserListGlobalLicense response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -811,7 +811,7 @@ export class UserListGlobalLicenseServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getUserListGlobalLicense request %j', request);
+    this._log.debug('getUserListGlobalLicense request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.datamanager.v1.IUserListGlobalLicense,
@@ -822,7 +822,7 @@ export class UserListGlobalLicenseServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getUserListGlobalLicense response %j', response);
+          this._log.debug('getUserListGlobalLicense response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -837,7 +837,7 @@ export class UserListGlobalLicenseServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getUserListGlobalLicense response %j', response);
+          this._log.debug('getUserListGlobalLicense response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1006,11 +1006,11 @@ export class UserListGlobalLicenseServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listUserListGlobalLicenses values %j', values);
+          this._log.debug('listUserListGlobalLicenses values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listUserListGlobalLicenses request %j', request);
+    this._log.debug('listUserListGlobalLicenses request %j', request);
     return this.innerApiCalls
       .listUserListGlobalLicenses(request, options, wrappedCallback)
       ?.then(
@@ -1019,7 +1019,7 @@ export class UserListGlobalLicenseServiceClient {
           protos.google.ads.datamanager.v1.IListUserListGlobalLicensesRequest | null,
           protos.google.ads.datamanager.v1.IListUserListGlobalLicensesResponse,
         ]) => {
-          this._log.info('listUserListGlobalLicenses values %j', response);
+          this._log.debug('listUserListGlobalLicenses values %j', response);
           return [response, input, output];
         },
       );
@@ -1101,7 +1101,7 @@ export class UserListGlobalLicenseServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listUserListGlobalLicenses stream %j', request);
+    this._log.debug('listUserListGlobalLicenses stream %j', request);
     return this.descriptors.page.listUserListGlobalLicenses.createStream(
       this.innerApiCalls.listUserListGlobalLicenses as GaxCall,
       request,
@@ -1188,7 +1188,7 @@ export class UserListGlobalLicenseServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listUserListGlobalLicenses iterate %j', request);
+    this._log.debug('listUserListGlobalLicenses iterate %j', request);
     return this.descriptors.page.listUserListGlobalLicenses.asyncIterate(
       this.innerApiCalls['listUserListGlobalLicenses'] as GaxCall,
       request as {},
@@ -1346,14 +1346,14 @@ export class UserListGlobalLicenseServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'listUserListGlobalLicenseCustomerInfos values %j',
             values,
           );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info(
+    this._log.debug(
       'listUserListGlobalLicenseCustomerInfos request %j',
       request,
     );
@@ -1365,7 +1365,7 @@ export class UserListGlobalLicenseServiceClient {
           protos.google.ads.datamanager.v1.IListUserListGlobalLicenseCustomerInfosRequest | null,
           protos.google.ads.datamanager.v1.IListUserListGlobalLicenseCustomerInfosResponse,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'listUserListGlobalLicenseCustomerInfos values %j',
             response,
           );
@@ -1455,7 +1455,10 @@ export class UserListGlobalLicenseServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listUserListGlobalLicenseCustomerInfos stream %j', request);
+    this._log.debug(
+      'listUserListGlobalLicenseCustomerInfos stream %j',
+      request,
+    );
     return this.descriptors.page.listUserListGlobalLicenseCustomerInfos.createStream(
       this.innerApiCalls.listUserListGlobalLicenseCustomerInfos as GaxCall,
       request,
@@ -1547,7 +1550,7 @@ export class UserListGlobalLicenseServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'listUserListGlobalLicenseCustomerInfos iterate %j',
       request,
     );

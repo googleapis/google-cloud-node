@@ -529,7 +529,7 @@ export class ModelServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getModel request %j', request);
+    this._log.debug('getModel request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta3.IModel,
@@ -540,7 +540,7 @@ export class ModelServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getModel response %j', response);
+          this._log.debug('getModel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -555,7 +555,7 @@ export class ModelServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getModel response %j', response);
+          this._log.debug('getModel response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -674,7 +674,7 @@ export class ModelServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getTunedModel request %j', request);
+    this._log.debug('getTunedModel request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta3.ITunedModel,
@@ -685,7 +685,7 @@ export class ModelServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTunedModel response %j', response);
+          this._log.debug('getTunedModel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -700,7 +700,7 @@ export class ModelServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getTunedModel response %j', response);
+          this._log.debug('getTunedModel response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -819,7 +819,7 @@ export class ModelServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateTunedModel request %j', request);
+    this._log.debug('updateTunedModel request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ai.generativelanguage.v1beta3.ITunedModel,
@@ -830,7 +830,7 @@ export class ModelServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateTunedModel response %j', response);
+          this._log.debug('updateTunedModel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -845,7 +845,7 @@ export class ModelServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateTunedModel response %j', response);
+          this._log.debug('updateTunedModel response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -963,7 +963,7 @@ export class ModelServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteTunedModel request %j', request);
+    this._log.debug('deleteTunedModel request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -974,7 +974,7 @@ export class ModelServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteTunedModel response %j', response);
+          this._log.debug('deleteTunedModel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -989,7 +989,7 @@ export class ModelServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteTunedModel response %j', response);
+          this._log.debug('deleteTunedModel response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1131,11 +1131,11 @@ export class ModelServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createTunedModel response %j', rawResponse);
+          this._log.debug('createTunedModel response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createTunedModel request %j', request);
+    this._log.debug('createTunedModel request %j', request);
     return this.innerApiCalls
       .createTunedModel(request, options, wrappedCallback)
       ?.then(
@@ -1147,7 +1147,7 @@ export class ModelServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createTunedModel response %j', rawResponse);
+          this._log.debug('createTunedModel response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1299,11 +1299,11 @@ export class ModelServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listModels values %j', values);
+          this._log.debug('listModels values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listModels request %j', request);
+    this._log.debug('listModels request %j', request);
     return this.innerApiCalls
       .listModels(request, options, wrappedCallback)
       ?.then(
@@ -1312,7 +1312,7 @@ export class ModelServiceClient {
           protos.google.ai.generativelanguage.v1beta3.IListModelsRequest | null,
           protos.google.ai.generativelanguage.v1beta3.IListModelsResponse,
         ]) => {
-          this._log.info('listModels values %j', response);
+          this._log.debug('listModels values %j', response);
           return [response, input, output];
         },
       );
@@ -1361,7 +1361,7 @@ export class ModelServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listModels stream %j', request);
+    this._log.debug('listModels stream %j', request);
     return this.descriptors.page.listModels.createStream(
       this.innerApiCalls.listModels as GaxCall,
       request,
@@ -1415,7 +1415,7 @@ export class ModelServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listModels iterate %j', request);
+    this._log.debug('listModels iterate %j', request);
     return this.descriptors.page.listModels.asyncIterate(
       this.innerApiCalls['listModels'] as GaxCall,
       request as {},
@@ -1534,11 +1534,11 @@ export class ModelServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listTunedModels values %j', values);
+          this._log.debug('listTunedModels values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listTunedModels request %j', request);
+    this._log.debug('listTunedModels request %j', request);
     return this.innerApiCalls
       .listTunedModels(request, options, wrappedCallback)
       ?.then(
@@ -1547,7 +1547,7 @@ export class ModelServiceClient {
           protos.google.ai.generativelanguage.v1beta3.IListTunedModelsRequest | null,
           protos.google.ai.generativelanguage.v1beta3.IListTunedModelsResponse,
         ]) => {
-          this._log.info('listTunedModels values %j', response);
+          this._log.debug('listTunedModels values %j', response);
           return [response, input, output];
         },
       );
@@ -1596,7 +1596,7 @@ export class ModelServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTunedModels stream %j', request);
+    this._log.debug('listTunedModels stream %j', request);
     return this.descriptors.page.listTunedModels.createStream(
       this.innerApiCalls.listTunedModels as GaxCall,
       request,
@@ -1650,7 +1650,7 @@ export class ModelServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTunedModels iterate %j', request);
+    this._log.debug('listTunedModels iterate %j', request);
     return this.descriptors.page.listTunedModels.asyncIterate(
       this.innerApiCalls['listTunedModels'] as GaxCall,
       request as {},

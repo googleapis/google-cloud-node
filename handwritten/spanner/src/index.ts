@@ -104,7 +104,12 @@ import {
 } from './request_id_header';
 import {PeriodicExportingMetricReader} from '@opentelemetry/sdk-metrics';
 import {MetricInterceptor} from './metrics/interceptor';
-import {CloudMonitoringMetricsExporter} from './metrics/spanner-metrics-exporter';
+import {
+  CloudMonitoringMetricsExporter,
+  ResolvedExporterConfig,
+  resolveExporterConfig,
+} from './metrics/spanner-metrics-exporter';
+import {ExporterOptions} from './metrics/external-types';
 import {MetricsTracerFactory} from './metrics/metrics-tracer-factory';
 import {MetricsTracer} from './metrics/metrics-tracer';
 import {RequestStreamCoordinator} from './request-stream-coordinator';
@@ -268,19 +273,27 @@ function getUniverseDomain(options: SpannerOptions): string {
     typeof process === 'object' && typeof process.env === 'object'
       ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
       : undefined;
-  const universeDomain =
+  const rawUniverseDomain =
     options?.universeDomain ??
     options?.universe_domain ??
     universeDomainEnvVar ??
     'googleapis.com';
-  // if the options.universe_domain/GOOGLE_CLOUD_UNIVERSE_DOMAIN env variable is set,
-  // set its value to the Spanner `universeDomain` options
-  // to match it with the universe from Auth Client
+  const universeDomain =
+    typeof rawUniverseDomain === 'string'
+      ? rawUniverseDomain.trim()
+      : rawUniverseDomain;
+  // Sync the trimmed universe domain onto options whenever configured explicitly
+  // (via universeDomain, universe_domain, or GOOGLE_CLOUD_UNIVERSE_DOMAIN) so
+  // Spanner, GAX clients, and GoogleAuth observe the same normalized value.
   if (
-    !options?.universeDomain &&
-    (options?.universe_domain || process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN)
+    options?.universeDomain !== undefined ||
+    options?.universe_domain !== undefined ||
+    universeDomainEnvVar
   ) {
     options.universeDomain = universeDomain;
+  }
+  if (options?.universe_domain !== undefined) {
+    options.universe_domain = universeDomain;
   }
   return universeDomain;
 }
@@ -341,6 +354,8 @@ class Spanner extends GrpcService {
   _observabilityOptions: ObservabilityOptions | undefined;
   sessionLabels: {[key: string]: string} | null;
   private _universeDomain: string;
+  private _metricsUniverseDomain?: string;
+  private _monitoringTargetKey?: string;
   private _isInSecureCredentials: boolean;
   private _metricsEnabled = false;
   readonly _nthClientId: number;
@@ -457,10 +472,18 @@ class Spanner extends GrpcService {
         };
     delete options.defaultTransactionOptions;
 
+    const trimmedSnakeUniverse =
+      typeof options?.universe_domain === 'string'
+        ? options.universe_domain.trim()
+        : options?.universe_domain;
+    const trimmedCamelUniverse =
+      typeof options?.universeDomain === 'string'
+        ? options.universeDomain.trim()
+        : options?.universeDomain;
     if (
-      options?.universe_domain &&
-      options?.universeDomain &&
-      options?.universe_domain !== options?.universeDomain
+      trimmedSnakeUniverse &&
+      trimmedCamelUniverse &&
+      trimmedSnakeUniverse !== trimmedCamelUniverse
     ) {
       throw new Error(
         'Please set either universe_domain or universeDomain, but not both.',
@@ -501,7 +524,10 @@ class Spanner extends GrpcService {
 
     this._isInSecureCredentials = options.sslCreds?._isSecure() === false;
     this.options = options;
-    this.auth = new GoogleAuth(this.options);
+    this.auth =
+      options.auth instanceof GoogleAuth
+        ? options.auth
+        : new GoogleAuth(this.options);
     this.clients_ = new Map();
     this.instances_ = new Map();
     this.instanceConfigs_ = new Map();
@@ -1677,56 +1703,153 @@ class Spanner extends GrpcService {
    * Setup the OpenTelemetry metrics capturing for service metrics to Google Cloud Monitoring.
    */
   configureMetrics_(disableBuiltInMetrics?: boolean) {
-    // Only enable metrics if not explicitly disabled and we are not using
-    // insecure credentials.
+    // Only enable metrics if not explicitly disabled, using secure credentials,
+    // and not confined to a custom Spanner endpoint without an explicit monitoring host.
     const metricsExplicitlyDisabled =
       process.env.SPANNER_DISABLE_BUILTIN_METRICS === 'true' ||
       !!disableBuiltInMetrics;
+    const spannerOptions = this.options as SpannerOptions;
+    const hasCustomEndpoint = Boolean(
+      spannerOptions.apiEndpoint ||
+      spannerOptions.servicePath ||
+      spannerOptions.port,
+    );
+    const monitoringHost =
+      process.env.SPANNER_MONITORING_HOST?.trim() || undefined;
+    const disabledByCustomEndpoint = hasCustomEndpoint && !monitoringHost;
+
     this._metricsEnabled =
-      !metricsExplicitlyDisabled && !this._isInSecureCredentials;
-    MetricsTracerFactory.enabled = this._metricsEnabled;
+      !metricsExplicitlyDisabled &&
+      !this._isInSecureCredentials &&
+      !disabledByCustomEndpoint;
+
+    // Only enable the process-wide flag when this client has metrics enabled;
+    // never clear it from a disabled client constructor because each Spanner
+    // instance checks its own `this._metricsEnabled` and clearing the global
+    // flag would break sibling clients with active metrics.
     if (this._metricsEnabled) {
-      const initializeMetrics = (projectId: string) => {
-        this.projectId_ = projectId;
-        const factory = MetricsTracerFactory.getInstance(projectId);
-        if (factory && !factory.hasMetricReaders()) {
-          context.with(ROOT_CONTEXT, () => {
-            const periodicReader = new PeriodicExportingMetricReader({
-              exporter: new CloudMonitoringMetricsExporter(
-                {auth: this.auth},
-                projectId,
-              ),
-              exportIntervalMillis: 60000,
-            });
-            factory.getMeterProvider([periodicReader]);
-          });
-        }
-      };
+      MetricsTracerFactory.enabled = true;
+    }
 
-      if (this.projectId_ && this.projectId_ !== '{{projectId}}') {
-        initializeMetrics(this.projectId_);
-      } else {
-        try {
-          this.auth.getProjectId((err, projectId) => {
-            if (err || !projectId) {
-              console.error(
-                'Unable to get Project Id for client side metrics, will skip exporting client' +
-                  ' side metrics' +
-                  err,
-              );
-              return;
-            }
+    if (!this._metricsEnabled) {
+      return;
+    }
 
-            initializeMetrics(projectId);
-          });
-        } catch (err) {
+    // Validate universeDomain and SPANNER_MONITORING_HOST synchronously before
+    // any async getProjectId lookup so invalid configs fail closed at construction.
+    const exporterConfig = this._buildMetricsExporterConfig(monitoringHost);
+    this._metricsUniverseDomain = exporterConfig.universeDomain;
+    this._monitoringTargetKey = exporterConfig.monitoringTargetKey;
+
+    if (this.projectId_ && this.projectId_ !== '{{projectId}}') {
+      this._initializeMetricsForProject(this.projectId_, exporterConfig);
+      return;
+    }
+
+    try {
+      this.auth.getProjectId((err, projectId) => {
+        if (err || !projectId) {
+          this._metricsEnabled = false;
+          const errMsg = err
+            ? ((err as Error)?.message ?? String(err))
+            : 'empty project ID';
           console.error(
-            'Unable to configure client side metrics, will skip exporting client' +
-              ' side metrics' +
-              err,
+            'Unable to get Project Id for client side metrics, will skip exporting client' +
+              ' side metrics: ' +
+              errMsg,
           );
+          return;
         }
+        this._initializeMetricsForProject(projectId, exporterConfig);
+      });
+    } catch (err) {
+      this._metricsEnabled = false;
+      const errMsg = (err as Error)?.message ?? String(err);
+      console.error(
+        'Unable to configure client side metrics, will skip exporting client' +
+          ' side metrics: ' +
+          errMsg,
+      );
+    }
+  }
+
+  /**
+   * Synchronously validates and builds the exporter configuration for built-in metrics.
+   *
+   * @param monitoringHost Optional trimmed `SPANNER_MONITORING_HOST` override.
+   * @returns Validated exporter options, pre-resolved client config, and normalized target key.
+   */
+  private _buildMetricsExporterConfig(monitoringHost?: string): {
+    exporterOptions: ExporterOptions;
+    resolvedConfig: ResolvedExporterConfig;
+    universeDomain: string;
+    monitoringTargetKey?: string;
+  } {
+    const exporterOptions: ExporterOptions = {
+      auth: this.auth,
+      universeDomain: this._universeDomain,
+      // Explicitly pass apiEndpoint (even when undefined) so delayed async
+      // initialization cannot drift if SPANNER_MONITORING_HOST changes later.
+      apiEndpoint: monitoringHost,
+    };
+    const resolvedConfig = resolveExporterConfig(exporterOptions);
+
+    return {
+      exporterOptions,
+      resolvedConfig,
+      universeDomain: resolvedConfig.universeDomain!,
+      monitoringTargetKey: resolvedConfig.monitoringEndpoint,
+    };
+  }
+
+  /**
+   * Attaches the Cloud Monitoring exporter to the `MetricsTracerFactory`
+   * scoped to the resolved `(universeDomain, monitoringTargetKey)`.
+   *
+   * @param projectId Resolved GCP project ID.
+   * @param config Validated exporter configuration and target key.
+   */
+  private _initializeMetricsForProject(
+    projectId: string,
+    config: {
+      exporterOptions: ExporterOptions;
+      resolvedConfig: ResolvedExporterConfig;
+      universeDomain: string;
+      monitoringTargetKey?: string;
+    },
+  ): void {
+    try {
+      const factory = MetricsTracerFactory.getInstance(
+        projectId,
+        config.universeDomain,
+        config.monitoringTargetKey,
+      );
+      if (!factory) {
+        return;
       }
+
+      if (!factory.hasMetricReaders()) {
+        context.with(ROOT_CONTEXT, () => {
+          const periodicReader = new PeriodicExportingMetricReader({
+            exporter: new CloudMonitoringMetricsExporter(
+              config.exporterOptions,
+              projectId,
+              config.resolvedConfig,
+            ),
+            exportIntervalMillis: 60000,
+          });
+          factory.getMeterProvider([periodicReader]);
+        });
+      }
+      this.projectId_ = projectId;
+    } catch (err) {
+      this._metricsEnabled = false;
+      const errMsg = (err as Error)?.message ?? String(err);
+      console.error(
+        'Unable to configure client side metrics, will skip exporting client' +
+          ' side metrics: ' +
+          errMsg,
+      );
     }
   }
 
@@ -2024,7 +2147,11 @@ class Spanner extends GrpcService {
       this.projectId_ !== '{{projectId}}'
     ) {
       metricsTracer =
-        MetricsTracerFactory?.getInstance(this.projectId_)?.createMetricsTracer(
+        MetricsTracerFactory?.getInstance(
+          this.projectId_,
+          this._metricsUniverseDomain ?? this._universeDomain,
+          this._monitoringTargetKey,
+        )?.createMetricsTracer(
           config.method,
           this._getResourceName(config),
           config.headers?.['x-goog-spanner-request-id'],
@@ -2135,9 +2262,19 @@ class Spanner extends GrpcService {
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   requestStream(config): any {
-    const metricsTracer = this._initMetricsTracer(config);
+    const isExternalTracer =
+      config !== null &&
+      config !== undefined &&
+      Object.prototype.hasOwnProperty.call(config, 'metricsTracer');
+    const metricsTracer = isExternalTracer
+      ? (config.metricsTracer ?? null)
+      : this._initMetricsTracer(config);
     const stream = streamEvents(through.obj());
-    const coordinator = new RequestStreamCoordinator(stream, metricsTracer);
+    const coordinator = new RequestStreamCoordinator(
+      stream,
+      metricsTracer,
+      isExternalTracer,
+    );
     coordinator.setup();
 
     stream.once('reading', () => {

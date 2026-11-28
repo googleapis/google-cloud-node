@@ -515,7 +515,7 @@ export class RegionNetworkEndpointGroupsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('attachNetworkEndpoints request %j', request);
+    this._log.debug('attachNetworkEndpoints request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -526,7 +526,7 @@ export class RegionNetworkEndpointGroupsClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('attachNetworkEndpoints response %j', rawResponse);
+          this._log.debug('attachNetworkEndpoints response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -686,7 +686,7 @@ export class RegionNetworkEndpointGroupsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('delete request %j', request);
+    this._log.debug('delete request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -697,7 +697,7 @@ export class RegionNetworkEndpointGroupsClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('delete response %j', rawResponse);
+          this._log.debug('delete response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -860,7 +860,7 @@ export class RegionNetworkEndpointGroupsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('detachNetworkEndpoints request %j', request);
+    this._log.debug('detachNetworkEndpoints request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -871,7 +871,7 @@ export class RegionNetworkEndpointGroupsClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('detachNetworkEndpoints response %j', rawResponse);
+          this._log.debug('detachNetworkEndpoints response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -1016,7 +1016,7 @@ export class RegionNetworkEndpointGroupsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('get request %j', request);
+    this._log.debug('get request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.INetworkEndpointGroup,
@@ -1027,7 +1027,7 @@ export class RegionNetworkEndpointGroupsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1042,7 +1042,7 @@ export class RegionNetworkEndpointGroupsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1194,7 +1194,7 @@ export class RegionNetworkEndpointGroupsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('insert request %j', request);
+    this._log.debug('insert request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -1205,7 +1205,7 @@ export class RegionNetworkEndpointGroupsClient {
         >
       | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
-          this._log.info('insert response %j', rawResponse);
+          this._log.debug('insert response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
@@ -1437,11 +1437,11 @@ export class RegionNetworkEndpointGroupsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('list values %j', values);
+          this._log.debug('list values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('list request %j', request);
+    this._log.debug('list request %j', request);
     return this.innerApiCalls
       .list(request, options, wrappedCallback)
       ?.then(
@@ -1450,7 +1450,7 @@ export class RegionNetworkEndpointGroupsClient {
           protos.google.cloud.compute.v1.IListRegionNetworkEndpointGroupsRequest | null,
           protos.google.cloud.compute.v1.INetworkEndpointGroupList,
         ]) => {
-          this._log.info('list values %j', response);
+          this._log.debug('list values %j', response);
           return [response, input, output];
         },
       );
@@ -1575,7 +1575,7 @@ export class RegionNetworkEndpointGroupsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('list stream %j', request);
+    this._log.debug('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
       request,
@@ -1705,7 +1705,7 @@ export class RegionNetworkEndpointGroupsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('list iterate %j', request);
+    this._log.debug('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
       request as {},
@@ -1904,11 +1904,11 @@ export class RegionNetworkEndpointGroupsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listNetworkEndpoints values %j', values);
+          this._log.debug('listNetworkEndpoints values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listNetworkEndpoints request %j', request);
+    this._log.debug('listNetworkEndpoints request %j', request);
     return this.innerApiCalls
       .listNetworkEndpoints(request, options, wrappedCallback)
       ?.then(
@@ -1917,7 +1917,7 @@ export class RegionNetworkEndpointGroupsClient {
           protos.google.cloud.compute.v1.IListNetworkEndpointsRegionNetworkEndpointGroupsRequest | null,
           protos.google.cloud.compute.v1.INetworkEndpointGroupsListNetworkEndpoints,
         ]) => {
-          this._log.info('listNetworkEndpoints values %j', response);
+          this._log.debug('listNetworkEndpoints values %j', response);
           return [response, input, output];
         },
       );
@@ -2046,7 +2046,7 @@ export class RegionNetworkEndpointGroupsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listNetworkEndpoints stream %j', request);
+    this._log.debug('listNetworkEndpoints stream %j', request);
     return this.descriptors.page.listNetworkEndpoints.createStream(
       this.innerApiCalls.listNetworkEndpoints as GaxCall,
       request,
@@ -2180,7 +2180,7 @@ export class RegionNetworkEndpointGroupsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listNetworkEndpoints iterate %j', request);
+    this._log.debug('listNetworkEndpoints iterate %j', request);
     return this.descriptors.page.listNetworkEndpoints.asyncIterate(
       this.innerApiCalls['listNetworkEndpoints'] as GaxCall,
       request as {},

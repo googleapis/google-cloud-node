@@ -503,11 +503,11 @@ export class ExportServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listProfiles values %j', values);
+          this._log.debug('listProfiles values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listProfiles request %j', request);
+    this._log.debug('listProfiles request %j', request);
     return this.innerApiCalls
       .listProfiles(request, options, wrappedCallback)
       ?.then(
@@ -516,7 +516,7 @@ export class ExportServiceClient {
           protos.google.devtools.cloudprofiler.v2.IListProfilesRequest | null,
           protos.google.devtools.cloudprofiler.v2.IListProfilesResponse,
         ]) => {
-          this._log.info('listProfiles values %j', response);
+          this._log.debug('listProfiles values %j', response);
           return [response, input, output];
         },
       );
@@ -565,7 +565,7 @@ export class ExportServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listProfiles stream %j', request);
+    this._log.debug('listProfiles stream %j', request);
     return this.descriptors.page.listProfiles.createStream(
       this.innerApiCalls.listProfiles as GaxCall,
       request,
@@ -619,7 +619,7 @@ export class ExportServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listProfiles iterate %j', request);
+    this._log.debug('listProfiles iterate %j', request);
     return this.descriptors.page.listProfiles.asyncIterate(
       this.innerApiCalls['listProfiles'] as GaxCall,
       request as {},

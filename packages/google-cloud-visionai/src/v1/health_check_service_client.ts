@@ -525,7 +525,7 @@ export class HealthCheckServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('healthCheck request %j', request);
+    this._log.debug('healthCheck request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.visionai.v1.IHealthCheckResponse,
@@ -536,7 +536,7 @@ export class HealthCheckServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('healthCheck response %j', response);
+          this._log.debug('healthCheck response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -548,7 +548,7 @@ export class HealthCheckServiceClient {
           protos.google.cloud.visionai.v1.IHealthCheckRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('healthCheck response %j', response);
+          this._log.debug('healthCheck response %j', response);
           return [response, options, rawResponse];
         },
       )

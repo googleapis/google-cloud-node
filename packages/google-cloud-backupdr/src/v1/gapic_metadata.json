@@ -50,6 +50,36 @@
                 "getDataSourceReference"
               ]
             },
+            "GetAutoProtectionPolicy": {
+              "methods": [
+                "getAutoProtectionPolicy"
+              ]
+            },
+            "GetAutoProtectionPolicyBinding": {
+              "methods": [
+                "getAutoProtectionPolicyBinding"
+              ]
+            },
+            "GetRestoreTemplate": {
+              "methods": [
+                "getRestoreTemplate"
+              ]
+            },
+            "GetRestoreTemplateExecution": {
+              "methods": [
+                "getRestoreTemplateExecution"
+              ]
+            },
+            "GetRestoreVerificationPlanAssociation": {
+              "methods": [
+                "getRestoreVerificationPlanAssociation"
+              ]
+            },
+            "GetRestoreVerificationPlan": {
+              "methods": [
+                "getRestoreVerificationPlan"
+              ]
+            },
             "CreateManagementServer": {
               "methods": [
                 "createManagementServer"
@@ -135,6 +165,81 @@
                 "initializeService"
               ]
             },
+            "CreateAutoProtectionPolicy": {
+              "methods": [
+                "createAutoProtectionPolicy"
+              ]
+            },
+            "UpdateAutoProtectionPolicy": {
+              "methods": [
+                "updateAutoProtectionPolicy"
+              ]
+            },
+            "DeleteAutoProtectionPolicy": {
+              "methods": [
+                "deleteAutoProtectionPolicy"
+              ]
+            },
+            "CreateAutoProtectionPolicyBinding": {
+              "methods": [
+                "createAutoProtectionPolicyBinding"
+              ]
+            },
+            "InitiateDeleteAutoProtectionPolicyBinding": {
+              "methods": [
+                "initiateDeleteAutoProtectionPolicyBinding"
+              ]
+            },
+            "CreateRestoreTemplate": {
+              "methods": [
+                "createRestoreTemplate"
+              ]
+            },
+            "UpdateRestoreTemplate": {
+              "methods": [
+                "updateRestoreTemplate"
+              ]
+            },
+            "DeleteRestoreTemplate": {
+              "methods": [
+                "deleteRestoreTemplate"
+              ]
+            },
+            "RunRestoreTemplate": {
+              "methods": [
+                "runRestoreTemplate"
+              ]
+            },
+            "TriggerRestoreCleanup": {
+              "methods": [
+                "triggerRestoreCleanup"
+              ]
+            },
+            "CreateRestoreVerificationPlan": {
+              "methods": [
+                "createRestoreVerificationPlan"
+              ]
+            },
+            "CreateRestoreVerificationPlanAssociation": {
+              "methods": [
+                "createRestoreVerificationPlanAssociation"
+              ]
+            },
+            "DeleteRestoreVerificationPlanAssociation": {
+              "methods": [
+                "deleteRestoreVerificationPlanAssociation"
+              ]
+            },
+            "TriggerRestoreVerification": {
+              "methods": [
+                "triggerRestoreVerification"
+              ]
+            },
+            "DeleteRestoreVerificationPlan": {
+              "methods": [
+                "deleteRestoreVerificationPlan"
+              ]
+            },
             "ListManagementServers": {
               "methods": [
                 "listManagementServers",
@@ -217,6 +322,62 @@
                 "fetchDataSourceReferencesForResourceType",
                 "fetchDataSourceReferencesForResourceTypeStream",
                 "fetchDataSourceReferencesForResourceTypeAsync"
+              ]
+            },
+            "ListAutoProtectionPolicies": {
+              "methods": [
+                "listAutoProtectionPolicies",
+                "listAutoProtectionPoliciesStream",
+                "listAutoProtectionPoliciesAsync"
+              ]
+            },
+            "ListAutoProtectionPolicyBindings": {
+              "methods": [
+                "listAutoProtectionPolicyBindings",
+                "listAutoProtectionPolicyBindingsStream",
+                "listAutoProtectionPolicyBindingsAsync"
+              ]
+            },
+            "ListAppliedAutoProtectionPolicies": {
+              "methods": [
+                "listAppliedAutoProtectionPolicies",
+                "listAppliedAutoProtectionPoliciesStream",
+                "listAppliedAutoProtectionPoliciesAsync"
+              ]
+            },
+            "ListBindingMatchingResources": {
+              "methods": [
+                "listBindingMatchingResources",
+                "listBindingMatchingResourcesStream",
+                "listBindingMatchingResourcesAsync"
+              ]
+            },
+            "ListRestoreTemplates": {
+              "methods": [
+                "listRestoreTemplates",
+                "listRestoreTemplatesStream",
+                "listRestoreTemplatesAsync"
+              ]
+            },
+            "ListRestoreTemplateExecutions": {
+              "methods": [
+                "listRestoreTemplateExecutions",
+                "listRestoreTemplateExecutionsStream",
+                "listRestoreTemplateExecutionsAsync"
+              ]
+            },
+            "ListRestoreVerificationPlanAssociations": {
+              "methods": [
+                "listRestoreVerificationPlanAssociations",
+                "listRestoreVerificationPlanAssociationsStream",
+                "listRestoreVerificationPlanAssociationsAsync"
+              ]
+            },
+            "ListRestoreVerificationPlans": {
+              "methods": [
+                "listRestoreVerificationPlans",
+                "listRestoreVerificationPlansStream",
+                "listRestoreVerificationPlansAsync"
               ]
             }
           }
@@ -264,6 +425,36 @@
                 "getDataSourceReference"
               ]
             },
+            "GetAutoProtectionPolicy": {
+              "methods": [
+                "getAutoProtectionPolicy"
+              ]
+            },
+            "GetAutoProtectionPolicyBinding": {
+              "methods": [
+                "getAutoProtectionPolicyBinding"
+              ]
+            },
+            "GetRestoreTemplate": {
+              "methods": [
+                "getRestoreTemplate"
+              ]
+            },
+            "GetRestoreTemplateExecution": {
+              "methods": [
+                "getRestoreTemplateExecution"
+              ]
+            },
+            "GetRestoreVerificationPlanAssociation": {
+              "methods": [
+                "getRestoreVerificationPlanAssociation"
+              ]
+            },
+            "GetRestoreVerificationPlan": {
+              "methods": [
+                "getRestoreVerificationPlan"
+              ]
+            },
             "CreateManagementServer": {
               "methods": [
                 "createManagementServer"
@@ -349,6 +540,81 @@
                 "initializeService"
               ]
             },
+            "CreateAutoProtectionPolicy": {
+              "methods": [
+                "createAutoProtectionPolicy"
+              ]
+            },
+            "UpdateAutoProtectionPolicy": {
+              "methods": [
+                "updateAutoProtectionPolicy"
+              ]
+            },
+            "DeleteAutoProtectionPolicy": {
+              "methods": [
+                "deleteAutoProtectionPolicy"
+              ]
+            },
+            "CreateAutoProtectionPolicyBinding": {
+              "methods": [
+                "createAutoProtectionPolicyBinding"
+              ]
+            },
+            "InitiateDeleteAutoProtectionPolicyBinding": {
+              "methods": [
+                "initiateDeleteAutoProtectionPolicyBinding"
+              ]
+            },
+            "CreateRestoreTemplate": {
+              "methods": [
+                "createRestoreTemplate"
+              ]
+            },
+            "UpdateRestoreTemplate": {
+              "methods": [
+                "updateRestoreTemplate"
+              ]
+            },
+            "DeleteRestoreTemplate": {
+              "methods": [
+                "deleteRestoreTemplate"
+              ]
+            },
+            "RunRestoreTemplate": {
+              "methods": [
+                "runRestoreTemplate"
+              ]
+            },
+            "TriggerRestoreCleanup": {
+              "methods": [
+                "triggerRestoreCleanup"
+              ]
+            },
+            "CreateRestoreVerificationPlan": {
+              "methods": [
+                "createRestoreVerificationPlan"
+              ]
+            },
+            "CreateRestoreVerificationPlanAssociation": {
+              "methods": [
+                "createRestoreVerificationPlanAssociation"
+              ]
+            },
+            "DeleteRestoreVerificationPlanAssociation": {
+              "methods": [
+                "deleteRestoreVerificationPlanAssociation"
+              ]
+            },
+            "TriggerRestoreVerification": {
+              "methods": [
+                "triggerRestoreVerification"
+              ]
+            },
+            "DeleteRestoreVerificationPlan": {
+              "methods": [
+                "deleteRestoreVerificationPlan"
+              ]
+            },
             "ListManagementServers": {
               "methods": [
                 "listManagementServers",
@@ -431,6 +697,62 @@
                 "fetchDataSourceReferencesForResourceType",
                 "fetchDataSourceReferencesForResourceTypeStream",
                 "fetchDataSourceReferencesForResourceTypeAsync"
+              ]
+            },
+            "ListAutoProtectionPolicies": {
+              "methods": [
+                "listAutoProtectionPolicies",
+                "listAutoProtectionPoliciesStream",
+                "listAutoProtectionPoliciesAsync"
+              ]
+            },
+            "ListAutoProtectionPolicyBindings": {
+              "methods": [
+                "listAutoProtectionPolicyBindings",
+                "listAutoProtectionPolicyBindingsStream",
+                "listAutoProtectionPolicyBindingsAsync"
+              ]
+            },
+            "ListAppliedAutoProtectionPolicies": {
+              "methods": [
+                "listAppliedAutoProtectionPolicies",
+                "listAppliedAutoProtectionPoliciesStream",
+                "listAppliedAutoProtectionPoliciesAsync"
+              ]
+            },
+            "ListBindingMatchingResources": {
+              "methods": [
+                "listBindingMatchingResources",
+                "listBindingMatchingResourcesStream",
+                "listBindingMatchingResourcesAsync"
+              ]
+            },
+            "ListRestoreTemplates": {
+              "methods": [
+                "listRestoreTemplates",
+                "listRestoreTemplatesStream",
+                "listRestoreTemplatesAsync"
+              ]
+            },
+            "ListRestoreTemplateExecutions": {
+              "methods": [
+                "listRestoreTemplateExecutions",
+                "listRestoreTemplateExecutionsStream",
+                "listRestoreTemplateExecutionsAsync"
+              ]
+            },
+            "ListRestoreVerificationPlanAssociations": {
+              "methods": [
+                "listRestoreVerificationPlanAssociations",
+                "listRestoreVerificationPlanAssociationsStream",
+                "listRestoreVerificationPlanAssociationsAsync"
+              ]
+            },
+            "ListRestoreVerificationPlans": {
+              "methods": [
+                "listRestoreVerificationPlans",
+                "listRestoreVerificationPlansStream",
+                "listRestoreVerificationPlansAsync"
               ]
             }
           }

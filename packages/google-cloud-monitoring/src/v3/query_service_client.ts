@@ -587,11 +587,11 @@ export class QueryServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('queryTimeSeries values %j', values);
+          this._log.debug('queryTimeSeries values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('queryTimeSeries request %j', request);
+    this._log.debug('queryTimeSeries request %j', request);
     return this.innerApiCalls
       .queryTimeSeries(request, options, wrappedCallback)
       ?.then(
@@ -600,7 +600,7 @@ export class QueryServiceClient {
           protos.google.monitoring.v3.IQueryTimeSeriesRequest | null,
           protos.google.monitoring.v3.IQueryTimeSeriesResponse,
         ]) => {
-          this._log.info('queryTimeSeries values %j', response);
+          this._log.debug('queryTimeSeries values %j', response);
           return [response, input, output];
         },
       );
@@ -660,7 +660,7 @@ export class QueryServiceClient {
       'QueryTimeSeries is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('queryTimeSeries stream %j', request);
+    this._log.debug('queryTimeSeries stream %j', request);
     return this.descriptors.page.queryTimeSeries.createStream(
       this.innerApiCalls.queryTimeSeries as GaxCall,
       request,
@@ -725,7 +725,7 @@ export class QueryServiceClient {
       'QueryTimeSeries is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('queryTimeSeries iterate %j', request);
+    this._log.debug('queryTimeSeries iterate %j', request);
     return this.descriptors.page.queryTimeSeries.asyncIterate(
       this.innerApiCalls['queryTimeSeries'] as GaxCall,
       request as {},

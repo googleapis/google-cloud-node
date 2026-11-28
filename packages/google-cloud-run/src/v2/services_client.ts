@@ -475,7 +475,11 @@ export class ServicesClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/run',
+      'https://www.googleapis.com/auth/run.readonly',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -592,7 +596,7 @@ export class ServicesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getService request %j', request);
+    this._log.debug('getService request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.run.v2.IService,
@@ -601,7 +605,7 @@ export class ServicesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getService response %j', response);
+          this._log.debug('getService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -613,7 +617,7 @@ export class ServicesClient {
           protos.google.cloud.run.v2.IGetServiceRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getService response %j', response);
+          this._log.debug('getService response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -721,7 +725,7 @@ export class ServicesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getIamPolicy request %j', request);
+    this._log.debug('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.IPolicy,
@@ -730,7 +734,7 @@ export class ServicesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -742,7 +746,7 @@ export class ServicesClient {
           protos.google.iam.v1.IGetIamPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -858,7 +862,7 @@ export class ServicesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('setIamPolicy request %j', request);
+    this._log.debug('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.IPolicy,
@@ -867,7 +871,7 @@ export class ServicesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('setIamPolicy response %j', response);
+          this._log.debug('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -879,7 +883,7 @@ export class ServicesClient {
           protos.google.iam.v1.ISetIamPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('setIamPolicy response %j', response);
+          this._log.debug('setIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -990,7 +994,7 @@ export class ServicesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('testIamPermissions request %j', request);
+    this._log.debug('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
@@ -999,7 +1003,7 @@ export class ServicesClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('testIamPermissions response %j', response);
+          this._log.debug('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1011,7 +1015,7 @@ export class ServicesClient {
           protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('testIamPermissions response %j', response);
+          this._log.debug('testIamPermissions response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1044,10 +1048,11 @@ export class ServicesClient {
    *   project id or number. Only lowercase characters, digits, and hyphens.
    * @param {google.cloud.run.v2.Service} request.service
    *   Required. The Service instance to create.
-   * @param {string} request.serviceId
-   *   Required. The unique identifier for the Service. It must begin with letter,
+   * @param {string} [request.serviceId]
+   *   Optional. The unique identifier for the Service. It must begin with letter,
    *   and cannot end with hyphen; must contain fewer than 50 characters.
    *   The name of the service becomes {parent}/services/{service_id}.
+   *   If not provided, the server will generate a unique `service_id`.
    * @param {boolean} request.validateOnly
    *   Indicates that the request should be validated and default values
    *   populated, without persisting the request or creating any resources.
@@ -1168,11 +1173,11 @@ export class ServicesClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createService response %j', rawResponse);
+          this._log.debug('createService response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createService request %j', request);
+    this._log.debug('createService request %j', request);
     return this.innerApiCalls
       .createService(request, options, wrappedCallback)
       ?.then(
@@ -1184,7 +1189,7 @@ export class ServicesClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createService response %j', rawResponse);
+          this._log.debug('createService response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1240,6 +1245,15 @@ export class ServicesClient {
    *   Optional. If set to true, and if the Service does not exist, it will create
    *   a new one. The caller must have 'run.services.create' permissions if this
    *   is set to true and the Service does not exist.
+   * @param {boolean} [request.forceNewRevision]
+   *   Optional. If set to true, a new revision will be created from the template
+   *   even if the system doesn't detect any changes from the previously deployed
+   *   revision.
+   *
+   *   This may be useful for cases where the underlying resources need to be
+   *   recreated or reinitialized. For example if the image is specified by label,
+   *   but the underlying image digest has changed) or if the container performs
+   *   deployment initialization work that needs to be performed again.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1357,11 +1371,11 @@ export class ServicesClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateService response %j', rawResponse);
+          this._log.debug('updateService response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateService request %j', request);
+    this._log.debug('updateService request %j', request);
     return this.innerApiCalls
       .updateService(request, options, wrappedCallback)
       ?.then(
@@ -1373,7 +1387,7 @@ export class ServicesClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateService response %j', rawResponse);
+          this._log.debug('updateService response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1547,11 +1561,11 @@ export class ServicesClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteService response %j', rawResponse);
+          this._log.debug('deleteService response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteService request %j', request);
+    this._log.debug('deleteService request %j', request);
     return this.innerApiCalls
       .deleteService(request, options, wrappedCallback)
       ?.then(
@@ -1563,7 +1577,7 @@ export class ServicesClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteService response %j', rawResponse);
+          this._log.debug('deleteService response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1717,11 +1731,11 @@ export class ServicesClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listServices values %j', values);
+          this._log.debug('listServices values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listServices request %j', request);
+    this._log.debug('listServices request %j', request);
     return this.innerApiCalls
       .listServices(request, options, wrappedCallback)
       ?.then(
@@ -1730,7 +1744,7 @@ export class ServicesClient {
           protos.google.cloud.run.v2.IListServicesRequest | null,
           protos.google.cloud.run.v2.IListServicesResponse,
         ]) => {
-          this._log.info('listServices values %j', response);
+          this._log.debug('listServices values %j', response);
           return [response, input, output];
         },
       );
@@ -1791,7 +1805,7 @@ export class ServicesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listServices stream %j', request);
+    this._log.debug('listServices stream %j', request);
     return this.descriptors.page.listServices.createStream(
       this.innerApiCalls.listServices as GaxCall,
       request,
@@ -1857,7 +1871,7 @@ export class ServicesClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listServices iterate %j', request);
+    this._log.debug('listServices iterate %j', request);
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
       request as {},

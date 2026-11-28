@@ -29,14 +29,15 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent UserStore   resource name, format:
+   *  Required. The parent UserStore google.cloud.discoveryengine.v1.UserStore 
+   *  resource name, format:
    *  `projects/{project}/locations/{location}/userStores/{user_store_id}`.
    */
   // const parent = 'abc123'
   /**
    *  Optional. Requested page size. Server may return fewer items than
-   *  requested. If unspecified, defaults to 10. The maximum value is 50; values
-   *  above 50 will be coerced to 50.
+   *  requested. If unspecified, defaults to 100. The maximum value is 1000;
+   *  values above 1000 will be coerced to 1000.
    *  If this field is negative, an INVALID_ARGUMENT error is returned.
    */
   // const pageSize = 1234
@@ -51,6 +52,8 @@ function main(parent) {
    *  Optional. Filter for the list request.
    *  Supported fields:
    *  * `license_assignment_state`
+   *  * `user_principal`
+   *  *
    *  Examples:
    *  * `license_assignment_state = ASSIGNED` to list assigned user licenses.
    *  * `license_assignment_state = NO_LICENSE` to list not licensed users.
@@ -58,8 +61,24 @@ function main(parent) {
    *  who attempted login but no license assigned.
    *  * `license_assignment_state != NO_LICENSE_ATTEMPTED_LOGIN` to filter
    *  out users who attempted login but no license assigned.
+   *  * `user_principal = user1@example.com` to list user license for
+   *  `user1@example.com`.
    */
   // const filter = 'abc123'
+  /**
+   *  Optional. The order in which the
+   *  UserLicense google.cloud.discoveryengine.v1.UserLicense s are listed. The
+   *  value must be a comma-separated list of fields. Default sorting order is
+   *  ascending. To specify descending order for a field, append a " desc"
+   *  suffix. Redundant space characters in the syntax are insignificant.
+   *  Supported fields (only `user_principal` is supported for now):
+   *  * `user_principal`
+   *  If not set, the default ordering is by `user_principal`.
+   *  Examples:
+   *  * `user_principal` to order by `user_principal` in ascending order.
+   *  * `user_principal desc` to order by `user_principal` in descending order.
+   */
+  // const orderBy = 'abc123'
 
   // Imports the Discoveryengine library
   const {UserLicenseServiceClient} = require('@google-cloud/discoveryengine').v1;

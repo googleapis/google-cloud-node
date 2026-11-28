@@ -483,6 +483,31 @@
                         }
                       }
                     },
+                    "CloudSqlSingleUserCredentials": {
+                      "fields": {
+                        "instanceId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "username": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "password": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "SecretManagerService": {
                       "options": {
                         "(google.api.default_host)": "secretmanager.googleapis.com",
@@ -990,7 +1015,7 @@
                     },
                     "EnableManagedRotationRequest": {
                       "oneofs": {
-                        "credentials": {
+                        "credential": {
                           "oneof": [
                             "cloudSqlSingleUserCredentials"
                           ]
@@ -1006,35 +1031,8 @@
                           }
                         },
                         "cloudSqlSingleUserCredentials": {
-                          "type": "CloudSQLSingleUserCredentials",
+                          "type": "CloudSqlSingleUserCredentials",
                           "id": 2
-                        }
-                      },
-                      "nested": {
-                        "CloudSQLSingleUserCredentials": {
-                          "fields": {
-                            "instanceId": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "username": {
-                              "type": "string",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "password": {
-                              "type": "string",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
                         }
                       }
                     },
@@ -4168,8 +4166,8 @@
                     "retention": "RETENTION_SOURCE",
                     "targets": "TARGET_TYPE_FILE",
                     "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "STRICT"
                   }
                 },
                 "enforceProtoLimits": {

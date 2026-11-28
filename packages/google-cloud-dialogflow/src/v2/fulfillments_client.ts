@@ -622,7 +622,7 @@ export class FulfillmentsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getFulfillment request %j', request);
+    this._log.debug('getFulfillment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2.IFulfillment,
@@ -633,7 +633,7 @@ export class FulfillmentsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getFulfillment response %j', response);
+          this._log.debug('getFulfillment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -645,7 +645,7 @@ export class FulfillmentsClient {
           protos.google.cloud.dialogflow.v2.IGetFulfillmentRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getFulfillment response %j', response);
+          this._log.debug('getFulfillment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -759,7 +759,7 @@ export class FulfillmentsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateFulfillment request %j', request);
+    this._log.debug('updateFulfillment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2.IFulfillment,
@@ -770,7 +770,7 @@ export class FulfillmentsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateFulfillment response %j', response);
+          this._log.debug('updateFulfillment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -785,7 +785,7 @@ export class FulfillmentsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateFulfillment response %j', response);
+          this._log.debug('updateFulfillment response %j', response);
           return [response, options, rawResponse];
         },
       )

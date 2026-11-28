@@ -76,9 +76,10 @@ export function retryable(
     let timeoutId: ReturnType<typeof setTimeout> | null;
     let cancelled = false;
     let now = new Date();
-    let deadline: number;
-    if (retry.backoffSettings.totalTimeoutMillis) {
-      deadline = now.getTime() + retry.backoffSettings.totalTimeoutMillis;
+    let deadline: number | undefined;
+    const totalTimeoutMillis = retry.backoffSettings.totalTimeoutMillis;
+    if (totalTimeoutMillis !== undefined && totalTimeoutMillis !== null) {
+      deadline = now.getTime() + totalTimeoutMillis;
     }
     let retries = 0;
     const maxRetries = retry.backoffSettings.maxRetries!;
@@ -122,7 +123,11 @@ export function retryable(
         errorsEncountered.push(err);
       }
       timeoutId = null;
-      if (deadline && now.getTime() >= deadline) {
+      if (
+        deadline !== undefined &&
+        (retries > 0 || totalTimeoutMillis! > 0) &&
+        now.getTime() >= deadline
+      ) {
         const error = new GoogleError(
           `Total timeout of API ${apiName} exceeded ${
             retry.backoffSettings.totalTimeoutMillis
@@ -175,6 +180,11 @@ export function retryable(
             'not classified as transient';
           callback(err);
         } else {
+          now = new Date();
+          if (deadline !== undefined && now.getTime() >= deadline) {
+            repeat(lastError);
+            return;
+          }
           const toSleep = Math.random() * delay;
           timeoutId = setTimeout(() => {
             now = new Date();
@@ -182,7 +192,8 @@ export function retryable(
             const timeoutCal =
               timeout && timeoutMult ? timeout * timeoutMult : 0;
             const rpcTimeout = maxTimeout ? maxTimeout : 0;
-            const newDeadline = deadline ? deadline - now.getTime() : Infinity;
+            const newDeadline =
+              deadline !== undefined ? deadline - now.getTime() : Infinity;
             timeout = Math.min(timeoutCal, rpcTimeout, newDeadline);
             repeat(lastError);
           }, toSleep);
@@ -195,7 +206,7 @@ export function retryable(
       }
     }
 
-    if (maxRetries && deadline!) {
+    if (maxRetries && deadline !== undefined) {
       const error = new GoogleError(
         'Cannot set both totalTimeoutMillis and maxRetries ' +
           'in backoffSettings.',

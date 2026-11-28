@@ -487,7 +487,7 @@ export class ExecutionsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createExecution request %j', request);
+    this._log.debug('createExecution request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.workflows.executions.v1.IExecution,
@@ -498,7 +498,7 @@ export class ExecutionsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createExecution response %j', response);
+          this._log.debug('createExecution response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -513,7 +513,7 @@ export class ExecutionsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createExecution response %j', response);
+          this._log.debug('createExecution response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -635,7 +635,7 @@ export class ExecutionsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getExecution request %j', request);
+    this._log.debug('getExecution request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.workflows.executions.v1.IExecution,
@@ -646,7 +646,7 @@ export class ExecutionsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getExecution response %j', response);
+          this._log.debug('getExecution response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -661,7 +661,7 @@ export class ExecutionsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getExecution response %j', response);
+          this._log.debug('getExecution response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -780,7 +780,7 @@ export class ExecutionsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('cancelExecution request %j', request);
+    this._log.debug('cancelExecution request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.workflows.executions.v1.IExecution,
@@ -791,7 +791,7 @@ export class ExecutionsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('cancelExecution response %j', response);
+          this._log.debug('cancelExecution response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -806,7 +806,7 @@ export class ExecutionsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('cancelExecution response %j', response);
+          this._log.debug('cancelExecution response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -963,11 +963,11 @@ export class ExecutionsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listExecutions values %j', values);
+          this._log.debug('listExecutions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listExecutions request %j', request);
+    this._log.debug('listExecutions request %j', request);
     return this.innerApiCalls
       .listExecutions(request, options, wrappedCallback)
       ?.then(
@@ -976,7 +976,7 @@ export class ExecutionsClient {
           protos.google.cloud.workflows.executions.v1.IListExecutionsRequest | null,
           protos.google.cloud.workflows.executions.v1.IListExecutionsResponse,
         ]) => {
-          this._log.info('listExecutions values %j', response);
+          this._log.debug('listExecutions values %j', response);
           return [response, input, output];
         },
       );
@@ -1045,7 +1045,7 @@ export class ExecutionsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listExecutions stream %j', request);
+    this._log.debug('listExecutions stream %j', request);
     return this.descriptors.page.listExecutions.createStream(
       this.innerApiCalls.listExecutions as GaxCall,
       request,
@@ -1119,7 +1119,7 @@ export class ExecutionsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listExecutions iterate %j', request);
+    this._log.debug('listExecutions iterate %j', request);
     return this.descriptors.page.listExecutions.asyncIterate(
       this.innerApiCalls['listExecutions'] as GaxCall,
       request as {},

@@ -926,7 +926,7 @@ export class DataScanServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDataScan request %j', request);
+    this._log.debug('getDataScan request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataplex.v1.IDataScan,
@@ -937,7 +937,7 @@ export class DataScanServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDataScan response %j', response);
+          this._log.debug('getDataScan response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -949,7 +949,7 @@ export class DataScanServiceClient {
           protos.google.cloud.dataplex.v1.IGetDataScanRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getDataScan response %j', response);
+          this._log.debug('getDataScan response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1059,7 +1059,7 @@ export class DataScanServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('runDataScan request %j', request);
+    this._log.debug('runDataScan request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataplex.v1.IRunDataScanResponse,
@@ -1070,7 +1070,7 @@ export class DataScanServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('runDataScan response %j', response);
+          this._log.debug('runDataScan response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1082,7 +1082,7 @@ export class DataScanServiceClient {
           protos.google.cloud.dataplex.v1.IRunDataScanRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('runDataScan response %j', response);
+          this._log.debug('runDataScan response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1192,7 +1192,7 @@ export class DataScanServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDataScanJob request %j', request);
+    this._log.debug('getDataScanJob request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataplex.v1.IDataScanJob,
@@ -1203,7 +1203,7 @@ export class DataScanServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDataScanJob response %j', response);
+          this._log.debug('getDataScanJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1215,7 +1215,7 @@ export class DataScanServiceClient {
           protos.google.cloud.dataplex.v1.IGetDataScanJobRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getDataScanJob response %j', response);
+          this._log.debug('getDataScanJob response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1329,7 +1329,7 @@ export class DataScanServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('cancelDataScanJob request %j', request);
+    this._log.debug('cancelDataScanJob request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataplex.v1.ICancelDataScanJobResponse,
@@ -1340,7 +1340,7 @@ export class DataScanServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('cancelDataScanJob response %j', response);
+          this._log.debug('cancelDataScanJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1352,7 +1352,7 @@ export class DataScanServiceClient {
           protos.google.cloud.dataplex.v1.ICancelDataScanJobRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('cancelDataScanJob response %j', response);
+          this._log.debug('cancelDataScanJob response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1477,7 +1477,7 @@ export class DataScanServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateDataQualityRules request %j', request);
+    this._log.debug('generateDataQualityRules request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
@@ -1488,7 +1488,7 @@ export class DataScanServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateDataQualityRules response %j', response);
+          this._log.debug('generateDataQualityRules response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1503,7 +1503,7 @@ export class DataScanServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('generateDataQualityRules response %j', response);
+          this._log.debug('generateDataQualityRules response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1655,11 +1655,11 @@ export class DataScanServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createDataScan response %j', rawResponse);
+          this._log.debug('createDataScan response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createDataScan request %j', request);
+    this._log.debug('createDataScan request %j', request);
     return this.innerApiCalls
       .createDataScan(request, options, wrappedCallback)
       ?.then(
@@ -1671,7 +1671,7 @@ export class DataScanServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createDataScan response %j', rawResponse);
+          this._log.debug('createDataScan response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1831,11 +1831,11 @@ export class DataScanServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateDataScan response %j', rawResponse);
+          this._log.debug('updateDataScan response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateDataScan request %j', request);
+    this._log.debug('updateDataScan request %j', request);
     return this.innerApiCalls
       .updateDataScan(request, options, wrappedCallback)
       ?.then(
@@ -1847,7 +1847,7 @@ export class DataScanServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateDataScan response %j', rawResponse);
+          this._log.debug('updateDataScan response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2007,11 +2007,11 @@ export class DataScanServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteDataScan response %j', rawResponse);
+          this._log.debug('deleteDataScan response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteDataScan request %j', request);
+    this._log.debug('deleteDataScan request %j', request);
     return this.innerApiCalls
       .deleteDataScan(request, options, wrappedCallback)
       ?.then(
@@ -2023,7 +2023,7 @@ export class DataScanServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteDataScan response %j', rawResponse);
+          this._log.debug('deleteDataScan response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2177,11 +2177,11 @@ export class DataScanServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDataScans values %j', values);
+          this._log.debug('listDataScans values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDataScans request %j', request);
+    this._log.debug('listDataScans request %j', request);
     return this.innerApiCalls
       .listDataScans(request, options, wrappedCallback)
       ?.then(
@@ -2190,7 +2190,7 @@ export class DataScanServiceClient {
           protos.google.cloud.dataplex.v1.IListDataScansRequest | null,
           protos.google.cloud.dataplex.v1.IListDataScansResponse,
         ]) => {
-          this._log.info('listDataScans values %j', response);
+          this._log.debug('listDataScans values %j', response);
           return [response, input, output];
         },
       );
@@ -2247,7 +2247,7 @@ export class DataScanServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDataScans stream %j', request);
+    this._log.debug('listDataScans stream %j', request);
     return this.descriptors.page.listDataScans.createStream(
       this.innerApiCalls.listDataScans as GaxCall,
       request,
@@ -2309,7 +2309,7 @@ export class DataScanServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDataScans iterate %j', request);
+    this._log.debug('listDataScans iterate %j', request);
     return this.descriptors.page.listDataScans.asyncIterate(
       this.innerApiCalls['listDataScans'] as GaxCall,
       request as {},
@@ -2450,11 +2450,11 @@ export class DataScanServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listDataScanJobs values %j', values);
+          this._log.debug('listDataScanJobs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listDataScanJobs request %j', request);
+    this._log.debug('listDataScanJobs request %j', request);
     return this.innerApiCalls
       .listDataScanJobs(request, options, wrappedCallback)
       ?.then(
@@ -2463,7 +2463,7 @@ export class DataScanServiceClient {
           protos.google.cloud.dataplex.v1.IListDataScanJobsRequest | null,
           protos.google.cloud.dataplex.v1.IListDataScanJobsResponse,
         ]) => {
-          this._log.info('listDataScanJobs values %j', response);
+          this._log.debug('listDataScanJobs values %j', response);
           return [response, input, output];
         },
       );
@@ -2534,7 +2534,7 @@ export class DataScanServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDataScanJobs stream %j', request);
+    this._log.debug('listDataScanJobs stream %j', request);
     return this.descriptors.page.listDataScanJobs.createStream(
       this.innerApiCalls.listDataScanJobs as GaxCall,
       request,
@@ -2610,7 +2610,7 @@ export class DataScanServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listDataScanJobs iterate %j', request);
+    this._log.debug('listDataScanJobs iterate %j', request);
     return this.descriptors.page.listDataScanJobs.asyncIterate(
       this.innerApiCalls['listDataScanJobs'] as GaxCall,
       request as {},

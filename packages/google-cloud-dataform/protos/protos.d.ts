@@ -831,6 +831,20 @@ export namespace google {
                     public createCompilationResult(request: google.cloud.dataform.v1.ICreateCompilationResultRequest): Promise<google.cloud.dataform.v1.CompilationResult>;
 
                     /**
+                     * Calls CreateCompilationResultLongRunning.
+                     * @param request CreateCompilationResultRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createCompilationResultLongRunning(request: google.cloud.dataform.v1.ICreateCompilationResultRequest, callback: google.cloud.dataform.v1.Dataform.CreateCompilationResultLongRunningCallback): void;
+
+                    /**
+                     * Calls CreateCompilationResultLongRunning.
+                     * @param request CreateCompilationResultRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createCompilationResultLongRunning(request: google.cloud.dataform.v1.ICreateCompilationResultRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls QueryCompilationResultActions.
                      * @param request QueryCompilationResultActionsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and QueryCompilationResultActionsResponse
@@ -1462,6 +1476,13 @@ export namespace google {
                      * @param [response] CompilationResult
                      */
                     type CreateCompilationResultCallback = (error: (Error|null), response?: google.cloud.dataform.v1.CompilationResult) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataform.v1.Dataform|createCompilationResultLongRunning}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateCompilationResultLongRunningCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.dataform.v1.Dataform|queryCompilationResultActions}.
@@ -12057,6 +12078,134 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CreateCompilationResultMetadata. */
+                interface ICreateCompilationResultMetadata {
+
+                    /** CreateCompilationResultMetadata id */
+                    id?: (string|null);
+
+                    /** CreateCompilationResultMetadata target */
+                    target?: (string|null);
+
+                    /** CreateCompilationResultMetadata state */
+                    state?: (google.cloud.dataform.v1.CreateCompilationResultMetadata.State|keyof typeof google.cloud.dataform.v1.CreateCompilationResultMetadata.State|null);
+
+                    /** CreateCompilationResultMetadata createCompilationResultRequest */
+                    createCompilationResultRequest?: (google.cloud.dataform.v1.ICreateCompilationResultRequest|null);
+                }
+
+                /** Represents a CreateCompilationResultMetadata. */
+                class CreateCompilationResultMetadata implements ICreateCompilationResultMetadata {
+
+                    /**
+                     * Constructs a new CreateCompilationResultMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataform.v1.ICreateCompilationResultMetadata);
+
+                    /** CreateCompilationResultMetadata id. */
+                    public id: string;
+
+                    /** CreateCompilationResultMetadata target. */
+                    public target: string;
+
+                    /** CreateCompilationResultMetadata state. */
+                    public state: (google.cloud.dataform.v1.CreateCompilationResultMetadata.State|keyof typeof google.cloud.dataform.v1.CreateCompilationResultMetadata.State);
+
+                    /** CreateCompilationResultMetadata createCompilationResultRequest. */
+                    public createCompilationResultRequest?: (google.cloud.dataform.v1.ICreateCompilationResultRequest|null);
+
+                    /**
+                     * Creates a new CreateCompilationResultMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateCompilationResultMetadata instance
+                     */
+                    public static create(properties?: google.cloud.dataform.v1.ICreateCompilationResultMetadata): google.cloud.dataform.v1.CreateCompilationResultMetadata;
+
+                    /**
+                     * Encodes the specified CreateCompilationResultMetadata message. Does not implicitly {@link google.cloud.dataform.v1.CreateCompilationResultMetadata.verify|verify} messages.
+                     * @param message CreateCompilationResultMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataform.v1.ICreateCompilationResultMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateCompilationResultMetadata message, length delimited. Does not implicitly {@link google.cloud.dataform.v1.CreateCompilationResultMetadata.verify|verify} messages.
+                     * @param message CreateCompilationResultMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataform.v1.ICreateCompilationResultMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateCompilationResultMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateCompilationResultMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1.CreateCompilationResultMetadata;
+
+                    /**
+                     * Decodes a CreateCompilationResultMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateCompilationResultMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1.CreateCompilationResultMetadata;
+
+                    /**
+                     * Verifies a CreateCompilationResultMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateCompilationResultMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateCompilationResultMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1.CreateCompilationResultMetadata;
+
+                    /**
+                     * Creates a plain object from a CreateCompilationResultMetadata message. Also converts values to other types if specified.
+                     * @param message CreateCompilationResultMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataform.v1.CreateCompilationResultMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateCompilationResultMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateCompilationResultMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CreateCompilationResultMetadata {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATED = 1,
+                        RUNNING = 2,
+                        FINISHED = 3,
+                        SUCCEEDED = 4,
+                        FAILED = 5
+                    }
+                }
+
                 /** Properties of a Target. */
                 interface ITarget {
 
@@ -12408,6 +12557,9 @@ export namespace google {
                     /** CompilationResultAction dataPreparation */
                     dataPreparation?: (google.cloud.dataform.v1.CompilationResultAction.IDataPreparation|null);
 
+                    /** CompilationResultAction bigqueryUnitTest */
+                    bigqueryUnitTest?: (google.cloud.dataform.v1.CompilationResultAction.IBigQueryUnitTest|null);
+
                     /** CompilationResultAction target */
                     target?: (google.cloud.dataform.v1.ITarget|null);
 
@@ -12448,6 +12600,9 @@ export namespace google {
                     /** CompilationResultAction dataPreparation. */
                     public dataPreparation?: (google.cloud.dataform.v1.CompilationResultAction.IDataPreparation|null);
 
+                    /** CompilationResultAction bigqueryUnitTest. */
+                    public bigqueryUnitTest?: (google.cloud.dataform.v1.CompilationResultAction.IBigQueryUnitTest|null);
+
                     /** CompilationResultAction target. */
                     public target?: (google.cloud.dataform.v1.ITarget|null);
 
@@ -12461,7 +12616,7 @@ export namespace google {
                     public internalMetadata?: (string|null);
 
                     /** CompilationResultAction compiledObject. */
-                    public compiledObject?: ("relation"|"operations"|"assertion"|"declaration"|"notebook"|"dataPreparation");
+                    public compiledObject?: ("relation"|"operations"|"assertion"|"declaration"|"notebook"|"dataPreparation"|"bigqueryUnitTest");
 
                     /**
                      * Creates a new CompilationResultAction instance using the specified properties.
@@ -13698,6 +13853,133 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of a BigQueryUnitTest. */
+                    interface IBigQueryUnitTest {
+
+                        /** BigQueryUnitTest dependencyTargets */
+                        dependencyTargets?: (google.cloud.dataform.v1.ITarget[]|null);
+
+                        /** BigQueryUnitTest disabled */
+                        disabled?: (boolean|null);
+
+                        /** BigQueryUnitTest tags */
+                        tags?: (string[]|null);
+
+                        /** BigQueryUnitTest displayName */
+                        displayName?: (string|null);
+
+                        /** BigQueryUnitTest testQuery */
+                        testQuery?: (string|null);
+
+                        /** BigQueryUnitTest expectedOutputQuery */
+                        expectedOutputQuery?: (string|null);
+                    }
+
+                    /** Represents a BigQueryUnitTest. */
+                    class BigQueryUnitTest implements IBigQueryUnitTest {
+
+                        /**
+                         * Constructs a new BigQueryUnitTest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataform.v1.CompilationResultAction.IBigQueryUnitTest);
+
+                        /** BigQueryUnitTest dependencyTargets. */
+                        public dependencyTargets: google.cloud.dataform.v1.ITarget[];
+
+                        /** BigQueryUnitTest disabled. */
+                        public disabled: boolean;
+
+                        /** BigQueryUnitTest tags. */
+                        public tags: string[];
+
+                        /** BigQueryUnitTest displayName. */
+                        public displayName: string;
+
+                        /** BigQueryUnitTest testQuery. */
+                        public testQuery: string;
+
+                        /** BigQueryUnitTest expectedOutputQuery. */
+                        public expectedOutputQuery: string;
+
+                        /**
+                         * Creates a new BigQueryUnitTest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BigQueryUnitTest instance
+                         */
+                        public static create(properties?: google.cloud.dataform.v1.CompilationResultAction.IBigQueryUnitTest): google.cloud.dataform.v1.CompilationResultAction.BigQueryUnitTest;
+
+                        /**
+                         * Encodes the specified BigQueryUnitTest message. Does not implicitly {@link google.cloud.dataform.v1.CompilationResultAction.BigQueryUnitTest.verify|verify} messages.
+                         * @param message BigQueryUnitTest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataform.v1.CompilationResultAction.IBigQueryUnitTest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BigQueryUnitTest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1.CompilationResultAction.BigQueryUnitTest.verify|verify} messages.
+                         * @param message BigQueryUnitTest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataform.v1.CompilationResultAction.IBigQueryUnitTest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BigQueryUnitTest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BigQueryUnitTest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1.CompilationResultAction.BigQueryUnitTest;
+
+                        /**
+                         * Decodes a BigQueryUnitTest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BigQueryUnitTest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1.CompilationResultAction.BigQueryUnitTest;
+
+                        /**
+                         * Verifies a BigQueryUnitTest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BigQueryUnitTest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BigQueryUnitTest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1.CompilationResultAction.BigQueryUnitTest;
+
+                        /**
+                         * Creates a plain object from a BigQueryUnitTest message. Also converts values to other types if specified.
+                         * @param message BigQueryUnitTest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataform.v1.CompilationResultAction.BigQueryUnitTest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BigQueryUnitTest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BigQueryUnitTest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a LoadConfig. */
                     interface ILoadConfig {
 
@@ -14515,6 +14797,12 @@ export namespace google {
 
                     /** InvocationConfig queryPriority */
                     queryPriority?: (google.cloud.dataform.v1.InvocationConfig.QueryPriority|keyof typeof google.cloud.dataform.v1.InvocationConfig.QueryPriority|null);
+
+                    /** InvocationConfig concurrentActionsLimit */
+                    concurrentActionsLimit?: (number|null);
+
+                    /** InvocationConfig executionMode */
+                    executionMode?: (google.cloud.dataform.v1.InvocationConfig.ExecutionMode|keyof typeof google.cloud.dataform.v1.InvocationConfig.ExecutionMode|null);
                 }
 
                 /** Represents an InvocationConfig. */
@@ -14549,6 +14837,12 @@ export namespace google {
 
                     /** InvocationConfig queryPriority. */
                     public queryPriority?: (google.cloud.dataform.v1.InvocationConfig.QueryPriority|keyof typeof google.cloud.dataform.v1.InvocationConfig.QueryPriority|null);
+
+                    /** InvocationConfig concurrentActionsLimit. */
+                    public concurrentActionsLimit?: (number|null);
+
+                    /** InvocationConfig executionMode. */
+                    public executionMode: (google.cloud.dataform.v1.InvocationConfig.ExecutionMode|keyof typeof google.cloud.dataform.v1.InvocationConfig.ExecutionMode);
 
                     /**
                      * Creates a new InvocationConfig instance using the specified properties.
@@ -14738,6 +15032,14 @@ export namespace google {
                         QUERY_PRIORITY_UNSPECIFIED = 0,
                         INTERACTIVE = 1,
                         BATCH = 2
+                    }
+
+                    /** ExecutionMode enum. */
+                    enum ExecutionMode {
+                        EXECUTION_MODE_UNSPECIFIED = 0,
+                        DEFAULT = 1,
+                        ALL_EXCEPT_UNIT_TESTS = 2,
+                        UNIT_TESTS_ONLY = 3
                     }
                 }
 
@@ -16265,6 +16567,9 @@ export namespace google {
                     /** WorkflowInvocationAction dataPreparationAction */
                     dataPreparationAction?: (google.cloud.dataform.v1.WorkflowInvocationAction.IDataPreparationAction|null);
 
+                    /** WorkflowInvocationAction bigqueryUnitTestAction */
+                    bigqueryUnitTestAction?: (google.cloud.dataform.v1.WorkflowInvocationAction.IBigQueryUnitTestAction|null);
+
                     /** WorkflowInvocationAction target */
                     target?: (google.cloud.dataform.v1.ITarget|null);
 
@@ -16302,6 +16607,9 @@ export namespace google {
                     /** WorkflowInvocationAction dataPreparationAction. */
                     public dataPreparationAction?: (google.cloud.dataform.v1.WorkflowInvocationAction.IDataPreparationAction|null);
 
+                    /** WorkflowInvocationAction bigqueryUnitTestAction. */
+                    public bigqueryUnitTestAction?: (google.cloud.dataform.v1.WorkflowInvocationAction.IBigQueryUnitTestAction|null);
+
                     /** WorkflowInvocationAction target. */
                     public target?: (google.cloud.dataform.v1.ITarget|null);
 
@@ -16321,7 +16629,7 @@ export namespace google {
                     public internalMetadata?: (string|null);
 
                     /** WorkflowInvocationAction action. */
-                    public action?: ("bigqueryAction"|"notebookAction"|"dataPreparationAction");
+                    public action?: ("bigqueryAction"|"notebookAction"|"dataPreparationAction"|"bigqueryUnitTestAction");
 
                     /**
                      * Creates a new WorkflowInvocationAction instance using the specified properties.
@@ -17254,6 +17562,133 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of a BigQueryUnitTestAction. */
+                    interface IBigQueryUnitTestAction {
+
+                        /** BigQueryUnitTestAction actualResultsJobId */
+                        actualResultsJobId?: (string|null);
+
+                        /** BigQueryUnitTestAction actualResultsSqlScript */
+                        actualResultsSqlScript?: (string|null);
+
+                        /** BigQueryUnitTestAction expectedResultsJobId */
+                        expectedResultsJobId?: (string|null);
+
+                        /** BigQueryUnitTestAction expectedResultsSqlScript */
+                        expectedResultsSqlScript?: (string|null);
+
+                        /** BigQueryUnitTestAction totalProcessedBytes */
+                        totalProcessedBytes?: (number|Long|string|null);
+
+                        /** BigQueryUnitTestAction totalBilledBytes */
+                        totalBilledBytes?: (number|Long|string|null);
+                    }
+
+                    /** Represents a BigQueryUnitTestAction. */
+                    class BigQueryUnitTestAction implements IBigQueryUnitTestAction {
+
+                        /**
+                         * Constructs a new BigQueryUnitTestAction.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataform.v1.WorkflowInvocationAction.IBigQueryUnitTestAction);
+
+                        /** BigQueryUnitTestAction actualResultsJobId. */
+                        public actualResultsJobId: string;
+
+                        /** BigQueryUnitTestAction actualResultsSqlScript. */
+                        public actualResultsSqlScript: string;
+
+                        /** BigQueryUnitTestAction expectedResultsJobId. */
+                        public expectedResultsJobId: string;
+
+                        /** BigQueryUnitTestAction expectedResultsSqlScript. */
+                        public expectedResultsSqlScript: string;
+
+                        /** BigQueryUnitTestAction totalProcessedBytes. */
+                        public totalProcessedBytes: (number|Long|string);
+
+                        /** BigQueryUnitTestAction totalBilledBytes. */
+                        public totalBilledBytes: (number|Long|string);
+
+                        /**
+                         * Creates a new BigQueryUnitTestAction instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BigQueryUnitTestAction instance
+                         */
+                        public static create(properties?: google.cloud.dataform.v1.WorkflowInvocationAction.IBigQueryUnitTestAction): google.cloud.dataform.v1.WorkflowInvocationAction.BigQueryUnitTestAction;
+
+                        /**
+                         * Encodes the specified BigQueryUnitTestAction message. Does not implicitly {@link google.cloud.dataform.v1.WorkflowInvocationAction.BigQueryUnitTestAction.verify|verify} messages.
+                         * @param message BigQueryUnitTestAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataform.v1.WorkflowInvocationAction.IBigQueryUnitTestAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BigQueryUnitTestAction message, length delimited. Does not implicitly {@link google.cloud.dataform.v1.WorkflowInvocationAction.BigQueryUnitTestAction.verify|verify} messages.
+                         * @param message BigQueryUnitTestAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataform.v1.WorkflowInvocationAction.IBigQueryUnitTestAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BigQueryUnitTestAction message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BigQueryUnitTestAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1.WorkflowInvocationAction.BigQueryUnitTestAction;
+
+                        /**
+                         * Decodes a BigQueryUnitTestAction message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BigQueryUnitTestAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1.WorkflowInvocationAction.BigQueryUnitTestAction;
+
+                        /**
+                         * Verifies a BigQueryUnitTestAction message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BigQueryUnitTestAction message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BigQueryUnitTestAction
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1.WorkflowInvocationAction.BigQueryUnitTestAction;
+
+                        /**
+                         * Creates a plain object from a BigQueryUnitTestAction message. Also converts values to other types if specified.
+                         * @param message BigQueryUnitTestAction
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataform.v1.WorkflowInvocationAction.BigQueryUnitTestAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BigQueryUnitTestAction to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BigQueryUnitTestAction
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** State enum. */
                     enum State {
                         PENDING = 0,
@@ -17262,7 +17697,8 @@ export namespace google {
                         DISABLED = 3,
                         SUCCEEDED = 4,
                         CANCELLED = 5,
-                        FAILED = 6
+                        FAILED = 6,
+                        QUEUED = 7
                     }
                 }
 
@@ -21500,6 +21936,20 @@ export namespace google {
                     public fetchGitAheadBehind(request: google.cloud.dataform.v1beta1.IFetchGitAheadBehindRequest): Promise<google.cloud.dataform.v1beta1.FetchGitAheadBehindResponse>;
 
                     /**
+                     * Calls FetchWorkspaceHistory.
+                     * @param request FetchWorkspaceHistoryRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FetchWorkspaceHistoryResponse
+                     */
+                    public fetchWorkspaceHistory(request: google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest, callback: google.cloud.dataform.v1beta1.Dataform.FetchWorkspaceHistoryCallback): void;
+
+                    /**
+                     * Calls FetchWorkspaceHistory.
+                     * @param request FetchWorkspaceHistoryRequest message or plain object
+                     * @returns Promise
+                     */
+                    public fetchWorkspaceHistory(request: google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest): Promise<google.cloud.dataform.v1beta1.FetchWorkspaceHistoryResponse>;
+
+                    /**
                      * Calls CommitWorkspaceChanges.
                      * @param request CommitWorkspaceChangesRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and CommitWorkspaceChangesResponse
@@ -21778,6 +22228,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public createCompilationResult(request: google.cloud.dataform.v1beta1.ICreateCompilationResultRequest): Promise<google.cloud.dataform.v1beta1.CompilationResult>;
+
+                    /**
+                     * Calls CreateCompilationResultLongRunning.
+                     * @param request CreateCompilationResultRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createCompilationResultLongRunning(request: google.cloud.dataform.v1beta1.ICreateCompilationResultRequest, callback: google.cloud.dataform.v1beta1.Dataform.CreateCompilationResultLongRunningCallback): void;
+
+                    /**
+                     * Calls CreateCompilationResultLongRunning.
+                     * @param request CreateCompilationResultRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createCompilationResultLongRunning(request: google.cloud.dataform.v1beta1.ICreateCompilationResultRequest): Promise<google.longrunning.Operation>;
 
                     /**
                      * Calls QueryCompilationResultActions.
@@ -22315,6 +22779,13 @@ export namespace google {
                     type FetchGitAheadBehindCallback = (error: (Error|null), response?: google.cloud.dataform.v1beta1.FetchGitAheadBehindResponse) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|fetchWorkspaceHistory}.
+                     * @param error Error, if any
+                     * @param [response] FetchWorkspaceHistoryResponse
+                     */
+                    type FetchWorkspaceHistoryCallback = (error: (Error|null), response?: google.cloud.dataform.v1beta1.FetchWorkspaceHistoryResponse) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|commitWorkspaceChanges}.
                      * @param error Error, if any
                      * @param [response] CommitWorkspaceChangesResponse
@@ -22453,6 +22924,13 @@ export namespace google {
                      * @param [response] CompilationResult
                      */
                     type CreateCompilationResultCallback = (error: (Error|null), response?: google.cloud.dataform.v1beta1.CompilationResult) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|createCompilationResultLongRunning}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateCompilationResultLongRunningCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.dataform.v1beta1.Dataform|queryCompilationResultActions}.
@@ -22879,6 +23357,9 @@ export namespace google {
                         /** GitRemoteSettings sshAuthenticationConfig */
                         sshAuthenticationConfig?: (google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.ISshAuthenticationConfig|null);
 
+                        /** GitRemoteSettings accountConnector */
+                        accountConnector?: (string|null);
+
                         /** GitRemoteSettings gitRepositoryLink */
                         gitRepositoryLink?: (string|null);
 
@@ -22909,6 +23390,9 @@ export namespace google {
 
                         /** GitRemoteSettings sshAuthenticationConfig. */
                         public sshAuthenticationConfig?: (google.cloud.dataform.v1beta1.Repository.GitRemoteSettings.ISshAuthenticationConfig|null);
+
+                        /** GitRemoteSettings accountConnector. */
+                        public accountConnector?: (string|null);
 
                         /** GitRemoteSettings gitRepositoryLink. */
                         public gitRepositoryLink?: (string|null);
@@ -28428,6 +28912,224 @@ export namespace google {
 
                     /**
                      * Gets the default type url for FetchGitAheadBehindResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchWorkspaceHistoryRequest. */
+                interface IFetchWorkspaceHistoryRequest {
+
+                    /** FetchWorkspaceHistoryRequest name */
+                    name?: (string|null);
+
+                    /** FetchWorkspaceHistoryRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** FetchWorkspaceHistoryRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a FetchWorkspaceHistoryRequest. */
+                class FetchWorkspaceHistoryRequest implements IFetchWorkspaceHistoryRequest {
+
+                    /**
+                     * Constructs a new FetchWorkspaceHistoryRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest);
+
+                    /** FetchWorkspaceHistoryRequest name. */
+                    public name: string;
+
+                    /** FetchWorkspaceHistoryRequest pageSize. */
+                    public pageSize: number;
+
+                    /** FetchWorkspaceHistoryRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new FetchWorkspaceHistoryRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchWorkspaceHistoryRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest): google.cloud.dataform.v1beta1.FetchWorkspaceHistoryRequest;
+
+                    /**
+                     * Encodes the specified FetchWorkspaceHistoryRequest message. Does not implicitly {@link google.cloud.dataform.v1beta1.FetchWorkspaceHistoryRequest.verify|verify} messages.
+                     * @param message FetchWorkspaceHistoryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchWorkspaceHistoryRequest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.FetchWorkspaceHistoryRequest.verify|verify} messages.
+                     * @param message FetchWorkspaceHistoryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchWorkspaceHistoryRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchWorkspaceHistoryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1beta1.FetchWorkspaceHistoryRequest;
+
+                    /**
+                     * Decodes a FetchWorkspaceHistoryRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchWorkspaceHistoryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1beta1.FetchWorkspaceHistoryRequest;
+
+                    /**
+                     * Verifies a FetchWorkspaceHistoryRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchWorkspaceHistoryRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchWorkspaceHistoryRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1beta1.FetchWorkspaceHistoryRequest;
+
+                    /**
+                     * Creates a plain object from a FetchWorkspaceHistoryRequest message. Also converts values to other types if specified.
+                     * @param message FetchWorkspaceHistoryRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataform.v1beta1.FetchWorkspaceHistoryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchWorkspaceHistoryRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchWorkspaceHistoryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchWorkspaceHistoryResponse. */
+                interface IFetchWorkspaceHistoryResponse {
+
+                    /** FetchWorkspaceHistoryResponse commits */
+                    commits?: (google.cloud.dataform.v1beta1.ICommitLogEntry[]|null);
+
+                    /** FetchWorkspaceHistoryResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** FetchWorkspaceHistoryResponse reachesShallowBoundary */
+                    reachesShallowBoundary?: (boolean|null);
+                }
+
+                /** Represents a FetchWorkspaceHistoryResponse. */
+                class FetchWorkspaceHistoryResponse implements IFetchWorkspaceHistoryResponse {
+
+                    /**
+                     * Constructs a new FetchWorkspaceHistoryResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryResponse);
+
+                    /** FetchWorkspaceHistoryResponse commits. */
+                    public commits: google.cloud.dataform.v1beta1.ICommitLogEntry[];
+
+                    /** FetchWorkspaceHistoryResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** FetchWorkspaceHistoryResponse reachesShallowBoundary. */
+                    public reachesShallowBoundary: boolean;
+
+                    /**
+                     * Creates a new FetchWorkspaceHistoryResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchWorkspaceHistoryResponse instance
+                     */
+                    public static create(properties?: google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryResponse): google.cloud.dataform.v1beta1.FetchWorkspaceHistoryResponse;
+
+                    /**
+                     * Encodes the specified FetchWorkspaceHistoryResponse message. Does not implicitly {@link google.cloud.dataform.v1beta1.FetchWorkspaceHistoryResponse.verify|verify} messages.
+                     * @param message FetchWorkspaceHistoryResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchWorkspaceHistoryResponse message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.FetchWorkspaceHistoryResponse.verify|verify} messages.
+                     * @param message FetchWorkspaceHistoryResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataform.v1beta1.IFetchWorkspaceHistoryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchWorkspaceHistoryResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchWorkspaceHistoryResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1beta1.FetchWorkspaceHistoryResponse;
+
+                    /**
+                     * Decodes a FetchWorkspaceHistoryResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchWorkspaceHistoryResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1beta1.FetchWorkspaceHistoryResponse;
+
+                    /**
+                     * Verifies a FetchWorkspaceHistoryResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchWorkspaceHistoryResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchWorkspaceHistoryResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1beta1.FetchWorkspaceHistoryResponse;
+
+                    /**
+                     * Creates a plain object from a FetchWorkspaceHistoryResponse message. Also converts values to other types if specified.
+                     * @param message FetchWorkspaceHistoryResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataform.v1beta1.FetchWorkspaceHistoryResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchWorkspaceHistoryResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchWorkspaceHistoryResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -34224,6 +34926,134 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CreateCompilationResultMetadata. */
+                interface ICreateCompilationResultMetadata {
+
+                    /** CreateCompilationResultMetadata id */
+                    id?: (string|null);
+
+                    /** CreateCompilationResultMetadata target */
+                    target?: (string|null);
+
+                    /** CreateCompilationResultMetadata state */
+                    state?: (google.cloud.dataform.v1beta1.CreateCompilationResultMetadata.State|keyof typeof google.cloud.dataform.v1beta1.CreateCompilationResultMetadata.State|null);
+
+                    /** CreateCompilationResultMetadata createCompilationResultRequest */
+                    createCompilationResultRequest?: (google.cloud.dataform.v1beta1.ICreateCompilationResultRequest|null);
+                }
+
+                /** Represents a CreateCompilationResultMetadata. */
+                class CreateCompilationResultMetadata implements ICreateCompilationResultMetadata {
+
+                    /**
+                     * Constructs a new CreateCompilationResultMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataform.v1beta1.ICreateCompilationResultMetadata);
+
+                    /** CreateCompilationResultMetadata id. */
+                    public id: string;
+
+                    /** CreateCompilationResultMetadata target. */
+                    public target: string;
+
+                    /** CreateCompilationResultMetadata state. */
+                    public state: (google.cloud.dataform.v1beta1.CreateCompilationResultMetadata.State|keyof typeof google.cloud.dataform.v1beta1.CreateCompilationResultMetadata.State);
+
+                    /** CreateCompilationResultMetadata createCompilationResultRequest. */
+                    public createCompilationResultRequest?: (google.cloud.dataform.v1beta1.ICreateCompilationResultRequest|null);
+
+                    /**
+                     * Creates a new CreateCompilationResultMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateCompilationResultMetadata instance
+                     */
+                    public static create(properties?: google.cloud.dataform.v1beta1.ICreateCompilationResultMetadata): google.cloud.dataform.v1beta1.CreateCompilationResultMetadata;
+
+                    /**
+                     * Encodes the specified CreateCompilationResultMetadata message. Does not implicitly {@link google.cloud.dataform.v1beta1.CreateCompilationResultMetadata.verify|verify} messages.
+                     * @param message CreateCompilationResultMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataform.v1beta1.ICreateCompilationResultMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateCompilationResultMetadata message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.CreateCompilationResultMetadata.verify|verify} messages.
+                     * @param message CreateCompilationResultMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataform.v1beta1.ICreateCompilationResultMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateCompilationResultMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateCompilationResultMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1beta1.CreateCompilationResultMetadata;
+
+                    /**
+                     * Decodes a CreateCompilationResultMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateCompilationResultMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1beta1.CreateCompilationResultMetadata;
+
+                    /**
+                     * Verifies a CreateCompilationResultMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateCompilationResultMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateCompilationResultMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1beta1.CreateCompilationResultMetadata;
+
+                    /**
+                     * Creates a plain object from a CreateCompilationResultMetadata message. Also converts values to other types if specified.
+                     * @param message CreateCompilationResultMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataform.v1beta1.CreateCompilationResultMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateCompilationResultMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateCompilationResultMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CreateCompilationResultMetadata {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATED = 1,
+                        RUNNING = 2,
+                        FINISHED = 3,
+                        SUCCEEDED = 4,
+                        FAILED = 5
+                    }
+                }
+
                 /** Properties of a Target. */
                 interface ITarget {
 
@@ -34575,6 +35405,9 @@ export namespace google {
                     /** CompilationResultAction dataPreparation */
                     dataPreparation?: (google.cloud.dataform.v1beta1.CompilationResultAction.IDataPreparation|null);
 
+                    /** CompilationResultAction bigqueryUnitTest */
+                    bigqueryUnitTest?: (google.cloud.dataform.v1beta1.CompilationResultAction.IBigQueryUnitTest|null);
+
                     /** CompilationResultAction target */
                     target?: (google.cloud.dataform.v1beta1.ITarget|null);
 
@@ -34615,6 +35448,9 @@ export namespace google {
                     /** CompilationResultAction dataPreparation. */
                     public dataPreparation?: (google.cloud.dataform.v1beta1.CompilationResultAction.IDataPreparation|null);
 
+                    /** CompilationResultAction bigqueryUnitTest. */
+                    public bigqueryUnitTest?: (google.cloud.dataform.v1beta1.CompilationResultAction.IBigQueryUnitTest|null);
+
                     /** CompilationResultAction target. */
                     public target?: (google.cloud.dataform.v1beta1.ITarget|null);
 
@@ -34628,7 +35464,7 @@ export namespace google {
                     public internalMetadata?: (string|null);
 
                     /** CompilationResultAction compiledObject. */
-                    public compiledObject?: ("relation"|"operations"|"assertion"|"declaration"|"notebook"|"dataPreparation");
+                    public compiledObject?: ("relation"|"operations"|"assertion"|"declaration"|"notebook"|"dataPreparation"|"bigqueryUnitTest");
 
                     /**
                      * Creates a new CompilationResultAction instance using the specified properties.
@@ -35865,6 +36701,133 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of a BigQueryUnitTest. */
+                    interface IBigQueryUnitTest {
+
+                        /** BigQueryUnitTest dependencyTargets */
+                        dependencyTargets?: (google.cloud.dataform.v1beta1.ITarget[]|null);
+
+                        /** BigQueryUnitTest disabled */
+                        disabled?: (boolean|null);
+
+                        /** BigQueryUnitTest tags */
+                        tags?: (string[]|null);
+
+                        /** BigQueryUnitTest displayName */
+                        displayName?: (string|null);
+
+                        /** BigQueryUnitTest testQuery */
+                        testQuery?: (string|null);
+
+                        /** BigQueryUnitTest expectedOutputQuery */
+                        expectedOutputQuery?: (string|null);
+                    }
+
+                    /** Represents a BigQueryUnitTest. */
+                    class BigQueryUnitTest implements IBigQueryUnitTest {
+
+                        /**
+                         * Constructs a new BigQueryUnitTest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataform.v1beta1.CompilationResultAction.IBigQueryUnitTest);
+
+                        /** BigQueryUnitTest dependencyTargets. */
+                        public dependencyTargets: google.cloud.dataform.v1beta1.ITarget[];
+
+                        /** BigQueryUnitTest disabled. */
+                        public disabled: boolean;
+
+                        /** BigQueryUnitTest tags. */
+                        public tags: string[];
+
+                        /** BigQueryUnitTest displayName. */
+                        public displayName: string;
+
+                        /** BigQueryUnitTest testQuery. */
+                        public testQuery: string;
+
+                        /** BigQueryUnitTest expectedOutputQuery. */
+                        public expectedOutputQuery: string;
+
+                        /**
+                         * Creates a new BigQueryUnitTest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BigQueryUnitTest instance
+                         */
+                        public static create(properties?: google.cloud.dataform.v1beta1.CompilationResultAction.IBigQueryUnitTest): google.cloud.dataform.v1beta1.CompilationResultAction.BigQueryUnitTest;
+
+                        /**
+                         * Encodes the specified BigQueryUnitTest message. Does not implicitly {@link google.cloud.dataform.v1beta1.CompilationResultAction.BigQueryUnitTest.verify|verify} messages.
+                         * @param message BigQueryUnitTest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataform.v1beta1.CompilationResultAction.IBigQueryUnitTest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BigQueryUnitTest message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.CompilationResultAction.BigQueryUnitTest.verify|verify} messages.
+                         * @param message BigQueryUnitTest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataform.v1beta1.CompilationResultAction.IBigQueryUnitTest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BigQueryUnitTest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BigQueryUnitTest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1beta1.CompilationResultAction.BigQueryUnitTest;
+
+                        /**
+                         * Decodes a BigQueryUnitTest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BigQueryUnitTest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1beta1.CompilationResultAction.BigQueryUnitTest;
+
+                        /**
+                         * Verifies a BigQueryUnitTest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BigQueryUnitTest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BigQueryUnitTest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1beta1.CompilationResultAction.BigQueryUnitTest;
+
+                        /**
+                         * Creates a plain object from a BigQueryUnitTest message. Also converts values to other types if specified.
+                         * @param message BigQueryUnitTest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataform.v1beta1.CompilationResultAction.BigQueryUnitTest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BigQueryUnitTest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BigQueryUnitTest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a LoadConfig. */
                     interface ILoadConfig {
 
@@ -36688,6 +37651,12 @@ export namespace google {
 
                     /** InvocationConfig queryPriority */
                     queryPriority?: (google.cloud.dataform.v1beta1.InvocationConfig.QueryPriority|keyof typeof google.cloud.dataform.v1beta1.InvocationConfig.QueryPriority|null);
+
+                    /** InvocationConfig concurrentActionsLimit */
+                    concurrentActionsLimit?: (number|null);
+
+                    /** InvocationConfig executionMode */
+                    executionMode?: (google.cloud.dataform.v1beta1.InvocationConfig.ExecutionMode|keyof typeof google.cloud.dataform.v1beta1.InvocationConfig.ExecutionMode|null);
                 }
 
                 /** Represents an InvocationConfig. */
@@ -36722,6 +37691,12 @@ export namespace google {
 
                     /** InvocationConfig queryPriority. */
                     public queryPriority?: (google.cloud.dataform.v1beta1.InvocationConfig.QueryPriority|keyof typeof google.cloud.dataform.v1beta1.InvocationConfig.QueryPriority|null);
+
+                    /** InvocationConfig concurrentActionsLimit. */
+                    public concurrentActionsLimit?: (number|null);
+
+                    /** InvocationConfig executionMode. */
+                    public executionMode: (google.cloud.dataform.v1beta1.InvocationConfig.ExecutionMode|keyof typeof google.cloud.dataform.v1beta1.InvocationConfig.ExecutionMode);
 
                     /**
                      * Creates a new InvocationConfig instance using the specified properties.
@@ -36911,6 +37886,14 @@ export namespace google {
                         QUERY_PRIORITY_UNSPECIFIED = 0,
                         INTERACTIVE = 1,
                         BATCH = 2
+                    }
+
+                    /** ExecutionMode enum. */
+                    enum ExecutionMode {
+                        EXECUTION_MODE_UNSPECIFIED = 0,
+                        DEFAULT = 1,
+                        ALL_EXCEPT_UNIT_TESTS = 2,
+                        UNIT_TESTS_ONLY = 3
                     }
                 }
 
@@ -38438,6 +39421,9 @@ export namespace google {
                     /** WorkflowInvocationAction dataPreparationAction */
                     dataPreparationAction?: (google.cloud.dataform.v1beta1.WorkflowInvocationAction.IDataPreparationAction|null);
 
+                    /** WorkflowInvocationAction bigqueryUnitTestAction */
+                    bigqueryUnitTestAction?: (google.cloud.dataform.v1beta1.WorkflowInvocationAction.IBigQueryUnitTestAction|null);
+
                     /** WorkflowInvocationAction target */
                     target?: (google.cloud.dataform.v1beta1.ITarget|null);
 
@@ -38475,6 +39461,9 @@ export namespace google {
                     /** WorkflowInvocationAction dataPreparationAction. */
                     public dataPreparationAction?: (google.cloud.dataform.v1beta1.WorkflowInvocationAction.IDataPreparationAction|null);
 
+                    /** WorkflowInvocationAction bigqueryUnitTestAction. */
+                    public bigqueryUnitTestAction?: (google.cloud.dataform.v1beta1.WorkflowInvocationAction.IBigQueryUnitTestAction|null);
+
                     /** WorkflowInvocationAction target. */
                     public target?: (google.cloud.dataform.v1beta1.ITarget|null);
 
@@ -38494,7 +39483,7 @@ export namespace google {
                     public internalMetadata?: (string|null);
 
                     /** WorkflowInvocationAction action. */
-                    public action?: ("bigqueryAction"|"notebookAction"|"dataPreparationAction");
+                    public action?: ("bigqueryAction"|"notebookAction"|"dataPreparationAction"|"bigqueryUnitTestAction");
 
                     /**
                      * Creates a new WorkflowInvocationAction instance using the specified properties.
@@ -39427,6 +40416,133 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of a BigQueryUnitTestAction. */
+                    interface IBigQueryUnitTestAction {
+
+                        /** BigQueryUnitTestAction actualResultsJobId */
+                        actualResultsJobId?: (string|null);
+
+                        /** BigQueryUnitTestAction actualResultsSqlScript */
+                        actualResultsSqlScript?: (string|null);
+
+                        /** BigQueryUnitTestAction expectedResultsJobId */
+                        expectedResultsJobId?: (string|null);
+
+                        /** BigQueryUnitTestAction expectedResultsSqlScript */
+                        expectedResultsSqlScript?: (string|null);
+
+                        /** BigQueryUnitTestAction totalProcessedBytes */
+                        totalProcessedBytes?: (number|Long|string|null);
+
+                        /** BigQueryUnitTestAction totalBilledBytes */
+                        totalBilledBytes?: (number|Long|string|null);
+                    }
+
+                    /** Represents a BigQueryUnitTestAction. */
+                    class BigQueryUnitTestAction implements IBigQueryUnitTestAction {
+
+                        /**
+                         * Constructs a new BigQueryUnitTestAction.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataform.v1beta1.WorkflowInvocationAction.IBigQueryUnitTestAction);
+
+                        /** BigQueryUnitTestAction actualResultsJobId. */
+                        public actualResultsJobId: string;
+
+                        /** BigQueryUnitTestAction actualResultsSqlScript. */
+                        public actualResultsSqlScript: string;
+
+                        /** BigQueryUnitTestAction expectedResultsJobId. */
+                        public expectedResultsJobId: string;
+
+                        /** BigQueryUnitTestAction expectedResultsSqlScript. */
+                        public expectedResultsSqlScript: string;
+
+                        /** BigQueryUnitTestAction totalProcessedBytes. */
+                        public totalProcessedBytes: (number|Long|string);
+
+                        /** BigQueryUnitTestAction totalBilledBytes. */
+                        public totalBilledBytes: (number|Long|string);
+
+                        /**
+                         * Creates a new BigQueryUnitTestAction instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BigQueryUnitTestAction instance
+                         */
+                        public static create(properties?: google.cloud.dataform.v1beta1.WorkflowInvocationAction.IBigQueryUnitTestAction): google.cloud.dataform.v1beta1.WorkflowInvocationAction.BigQueryUnitTestAction;
+
+                        /**
+                         * Encodes the specified BigQueryUnitTestAction message. Does not implicitly {@link google.cloud.dataform.v1beta1.WorkflowInvocationAction.BigQueryUnitTestAction.verify|verify} messages.
+                         * @param message BigQueryUnitTestAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataform.v1beta1.WorkflowInvocationAction.IBigQueryUnitTestAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BigQueryUnitTestAction message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.WorkflowInvocationAction.BigQueryUnitTestAction.verify|verify} messages.
+                         * @param message BigQueryUnitTestAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataform.v1beta1.WorkflowInvocationAction.IBigQueryUnitTestAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BigQueryUnitTestAction message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BigQueryUnitTestAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1beta1.WorkflowInvocationAction.BigQueryUnitTestAction;
+
+                        /**
+                         * Decodes a BigQueryUnitTestAction message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BigQueryUnitTestAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1beta1.WorkflowInvocationAction.BigQueryUnitTestAction;
+
+                        /**
+                         * Verifies a BigQueryUnitTestAction message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BigQueryUnitTestAction message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BigQueryUnitTestAction
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1beta1.WorkflowInvocationAction.BigQueryUnitTestAction;
+
+                        /**
+                         * Creates a plain object from a BigQueryUnitTestAction message. Also converts values to other types if specified.
+                         * @param message BigQueryUnitTestAction
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataform.v1beta1.WorkflowInvocationAction.BigQueryUnitTestAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BigQueryUnitTestAction to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BigQueryUnitTestAction
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** State enum. */
                     enum State {
                         PENDING = 0,
@@ -39435,7 +40551,8 @@ export namespace google {
                         DISABLED = 3,
                         SUCCEEDED = 4,
                         CANCELLED = 5,
-                        FAILED = 6
+                        FAILED = 6,
+                        QUEUED = 7
                     }
                 }
 
@@ -46218,6 +47335,218 @@ export namespace google {
             IDENTIFIER = 8
         }
 
+        /** Properties of a FieldInfo. */
+        interface IFieldInfo {
+
+            /** FieldInfo format */
+            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+
+            /** FieldInfo referencedTypes */
+            referencedTypes?: (google.api.ITypeReference[]|null);
+        }
+
+        /** Represents a FieldInfo. */
+        class FieldInfo implements IFieldInfo {
+
+            /**
+             * Constructs a new FieldInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IFieldInfo);
+
+            /** FieldInfo format. */
+            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /** FieldInfo referencedTypes. */
+            public referencedTypes: google.api.ITypeReference[];
+
+            /**
+             * Creates a new FieldInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldInfo instance
+             */
+            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
+
+            /**
+             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
+
+            /**
+             * Verifies a FieldInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
+
+            /**
+             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+             * @param message FieldInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FieldInfo {
+
+            /** Format enum. */
+            enum Format {
+                FORMAT_UNSPECIFIED = 0,
+                UUID4 = 1,
+                IPV4 = 2,
+                IPV6 = 3,
+                IPV4_OR_IPV6 = 4
+            }
+        }
+
+        /** Properties of a TypeReference. */
+        interface ITypeReference {
+
+            /** TypeReference typeName */
+            typeName?: (string|null);
+        }
+
+        /** Represents a TypeReference. */
+        class TypeReference implements ITypeReference {
+
+            /**
+             * Constructs a new TypeReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ITypeReference);
+
+            /** TypeReference typeName. */
+            public typeName: string;
+
+            /**
+             * Creates a new TypeReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TypeReference instance
+             */
+            public static create(properties?: google.api.ITypeReference): google.api.TypeReference;
+
+            /**
+             * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.TypeReference;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.TypeReference;
+
+            /**
+             * Verifies a TypeReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TypeReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.TypeReference;
+
+            /**
+             * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+             * @param message TypeReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.TypeReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TypeReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TypeReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a ResourceDescriptor. */
         interface IResourceDescriptor {
 
@@ -48664,6 +49993,9 @@ export namespace google {
 
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
+
+            /** FieldOptions .google.api.fieldInfo */
+            ".google.api.fieldInfo"?: (google.api.IFieldInfo|null);
 
             /** FieldOptions .google.api.resourceReference */
             ".google.api.resourceReference"?: (google.api.IResourceReference|null);

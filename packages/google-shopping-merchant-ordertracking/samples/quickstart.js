@@ -19,7 +19,7 @@
 'use strict';
 
 function main(parent, orderTrackingSignalId, orderTrackingSignal) {
-  // [START merchantapi_v1beta_generated_OrderTrackingSignalsService_CreateOrderTrackingSignal_async]
+  // [START merchantapi_v1_generated_OrderTrackingSignalsService_CreateOrderTrackingSignal_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -42,7 +42,7 @@ function main(parent, orderTrackingSignalId, orderTrackingSignal) {
 
   // Imports the Ordertracking library
   const {OrderTrackingSignalsServiceClient} =
-    require('@google-shopping/ordertracking').v1beta;
+    require('@google-shopping/ordertracking').v1;
 
   // Instantiates a client
   const ordertrackingClient = new OrderTrackingSignalsServiceClient();
@@ -62,7 +62,7 @@ function main(parent, orderTrackingSignalId, orderTrackingSignal) {
   }
 
   callCreateOrderTrackingSignal();
-  // [END merchantapi_v1beta_generated_OrderTrackingSignalsService_CreateOrderTrackingSignal_async]
+  // [END merchantapi_v1_generated_OrderTrackingSignalsService_CreateOrderTrackingSignal_async]
 }
 
 process.on('unhandledRejection', err => {

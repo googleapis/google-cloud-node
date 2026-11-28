@@ -506,7 +506,7 @@ export class DeveloperKnowledgeClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getDocument request %j', request);
+    this._log.debug('getDocument request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.developers.knowledge.v1.IDocument,
@@ -517,7 +517,7 @@ export class DeveloperKnowledgeClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getDocument response %j', response);
+          this._log.debug('getDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -529,7 +529,7 @@ export class DeveloperKnowledgeClient {
           protos.google.developers.knowledge.v1.IGetDocumentRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getDocument response %j', response);
+          this._log.debug('getDocument response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -657,7 +657,7 @@ export class DeveloperKnowledgeClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchGetDocuments request %j', request);
+    this._log.debug('batchGetDocuments request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.developers.knowledge.v1.IBatchGetDocumentsResponse,
@@ -668,7 +668,7 @@ export class DeveloperKnowledgeClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchGetDocuments response %j', response);
+          this._log.debug('batchGetDocuments response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -683,7 +683,7 @@ export class DeveloperKnowledgeClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchGetDocuments response %j', response);
+          this._log.debug('batchGetDocuments response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -836,7 +836,7 @@ export class DeveloperKnowledgeClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('answerQuery request %j', request);
+    this._log.debug('answerQuery request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.developers.knowledge.v1.IAnswerQueryResponse,
@@ -847,7 +847,7 @@ export class DeveloperKnowledgeClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('answerQuery response %j', response);
+          this._log.debug('answerQuery response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -859,7 +859,7 @@ export class DeveloperKnowledgeClient {
           protos.google.developers.knowledge.v1.IAnswerQueryRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('answerQuery response %j', response);
+          this._log.debug('answerQuery response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1057,11 +1057,11 @@ export class DeveloperKnowledgeClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('searchDocumentChunks values %j', values);
+          this._log.debug('searchDocumentChunks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('searchDocumentChunks request %j', request);
+    this._log.debug('searchDocumentChunks request %j', request);
     return this.innerApiCalls
       .searchDocumentChunks(request, options, wrappedCallback)
       ?.then(
@@ -1070,7 +1070,7 @@ export class DeveloperKnowledgeClient {
           protos.google.developers.knowledge.v1.ISearchDocumentChunksRequest | null,
           protos.google.developers.knowledge.v1.ISearchDocumentChunksResponse,
         ]) => {
-          this._log.info('searchDocumentChunks values %j', response);
+          this._log.debug('searchDocumentChunks values %j', response);
           return [response, input, output];
         },
       );
@@ -1172,7 +1172,7 @@ export class DeveloperKnowledgeClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchDocumentChunks stream %j', request);
+    this._log.debug('searchDocumentChunks stream %j', request);
     return this.descriptors.page.searchDocumentChunks.createStream(
       this.innerApiCalls.searchDocumentChunks as GaxCall,
       request,
@@ -1279,7 +1279,7 @@ export class DeveloperKnowledgeClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('searchDocumentChunks iterate %j', request);
+    this._log.debug('searchDocumentChunks iterate %j', request);
     return this.descriptors.page.searchDocumentChunks.asyncIterate(
       this.innerApiCalls['searchDocumentChunks'] as GaxCall,
       request as {},

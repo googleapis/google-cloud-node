@@ -31,6 +31,7 @@ import {
   ReferenceListServiceClient,
   RuleExecutionErrorServiceClient,
   RuleServiceClient,
+  SearchServiceClient,
 } from '@google-cloud/chronicle';
 
 // check that the client class type name can be used
@@ -94,6 +95,9 @@ function doStuffWithRuleExecutionErrorServiceClient(
 function doStuffWithRuleServiceClient(client: RuleServiceClient) {
   client.close();
 }
+function doStuffWithSearchServiceClient(client: SearchServiceClient) {
+  client.close();
+}
 
 function main() {
   // check that the client instance can be created
@@ -141,6 +145,9 @@ function main() {
   // check that the client instance can be created
   const ruleServiceClient = new RuleServiceClient();
   doStuffWithRuleServiceClient(ruleServiceClient);
+  // check that the client instance can be created
+  const searchServiceClient = new SearchServiceClient();
+  doStuffWithSearchServiceClient(searchServiceClient);
 }
 
 main();

@@ -645,7 +645,7 @@ export class AnswerRecordsClient {
       'GetAnswerRecord is deprecated and may be removed in a future version.',
       'DeprecationWarning',
     );
-    this._log.info('getAnswerRecord request %j', request);
+    this._log.debug('getAnswerRecord request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2beta1.IAnswerRecord,
@@ -656,7 +656,7 @@ export class AnswerRecordsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAnswerRecord response %j', response);
+          this._log.debug('getAnswerRecord response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -671,7 +671,7 @@ export class AnswerRecordsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAnswerRecord response %j', response);
+          this._log.debug('getAnswerRecord response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -790,7 +790,7 @@ export class AnswerRecordsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateAnswerRecord request %j', request);
+    this._log.debug('updateAnswerRecord request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dialogflow.v2beta1.IAnswerRecord,
@@ -801,7 +801,7 @@ export class AnswerRecordsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateAnswerRecord response %j', response);
+          this._log.debug('updateAnswerRecord response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -816,7 +816,7 @@ export class AnswerRecordsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateAnswerRecord response %j', response);
+          this._log.debug('updateAnswerRecord response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -970,11 +970,11 @@ export class AnswerRecordsClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAnswerRecords values %j', values);
+          this._log.debug('listAnswerRecords values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAnswerRecords request %j', request);
+    this._log.debug('listAnswerRecords request %j', request);
     return this.innerApiCalls
       .listAnswerRecords(request, options, wrappedCallback)
       ?.then(
@@ -983,7 +983,7 @@ export class AnswerRecordsClient {
           protos.google.cloud.dialogflow.v2beta1.IListAnswerRecordsRequest | null,
           protos.google.cloud.dialogflow.v2beta1.IListAnswerRecordsResponse,
         ]) => {
-          this._log.info('listAnswerRecords values %j', response);
+          this._log.debug('listAnswerRecords values %j', response);
           return [response, input, output];
         },
       );
@@ -1051,7 +1051,7 @@ export class AnswerRecordsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAnswerRecords stream %j', request);
+    this._log.debug('listAnswerRecords stream %j', request);
     return this.descriptors.page.listAnswerRecords.createStream(
       this.innerApiCalls.listAnswerRecords as GaxCall,
       request,
@@ -1124,7 +1124,7 @@ export class AnswerRecordsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAnswerRecords iterate %j', request);
+    this._log.debug('listAnswerRecords iterate %j', request);
     return this.descriptors.page.listAnswerRecords.asyncIterate(
       this.innerApiCalls['listAnswerRecords'] as GaxCall,
       request as {},

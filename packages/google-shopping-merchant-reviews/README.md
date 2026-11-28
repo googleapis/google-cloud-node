@@ -57,14 +57,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| delete merchant review | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reviews/samples/generated/v1beta/merchant_reviews_service.delete_merchant_review.js) |
-| get merchant review | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reviews/samples/generated/v1beta/merchant_reviews_service.get_merchant_review.js) |
-| insert merchant review | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reviews/samples/generated/v1beta/merchant_reviews_service.insert_merchant_review.js) |
-| list merchant reviews | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reviews/samples/generated/v1beta/merchant_reviews_service.list_merchant_reviews.js) |
-| delete product review | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reviews/samples/generated/v1beta/product_reviews_service.delete_product_review.js) |
-| get product review | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reviews/samples/generated/v1beta/product_reviews_service.get_product_review.js) |
-| insert product review | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reviews/samples/generated/v1beta/product_reviews_service.insert_product_review.js) |
-| list product reviews | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reviews/samples/generated/v1beta/product_reviews_service.list_product_reviews.js) |
 
 
 ## Supported Node.js Versions

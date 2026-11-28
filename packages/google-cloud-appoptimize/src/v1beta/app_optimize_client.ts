@@ -562,7 +562,7 @@ export class AppOptimizeClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getReport request %j', request);
+    this._log.debug('getReport request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.appoptimize.v1beta.IReport,
@@ -573,7 +573,7 @@ export class AppOptimizeClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getReport response %j', response);
+          this._log.debug('getReport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -585,7 +585,7 @@ export class AppOptimizeClient {
           protos.google.cloud.appoptimize.v1beta.IGetReportRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getReport response %j', response);
+          this._log.debug('getReport response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -701,7 +701,7 @@ export class AppOptimizeClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteReport request %j', request);
+    this._log.debug('deleteReport request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -712,7 +712,7 @@ export class AppOptimizeClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteReport response %j', response);
+          this._log.debug('deleteReport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -727,7 +727,7 @@ export class AppOptimizeClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteReport response %j', response);
+          this._log.debug('deleteReport response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -878,11 +878,11 @@ export class AppOptimizeClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createReport response %j', rawResponse);
+          this._log.debug('createReport response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createReport request %j', request);
+    this._log.debug('createReport request %j', request);
     return this.innerApiCalls
       .createReport(request, options, wrappedCallback)
       ?.then(
@@ -894,7 +894,7 @@ export class AppOptimizeClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createReport response %j', rawResponse);
+          this._log.debug('createReport response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1049,11 +1049,11 @@ export class AppOptimizeClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listReports values %j', values);
+          this._log.debug('listReports values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listReports request %j', request);
+    this._log.debug('listReports request %j', request);
     return this.innerApiCalls
       .listReports(request, options, wrappedCallback)
       ?.then(
@@ -1062,7 +1062,7 @@ export class AppOptimizeClient {
           protos.google.cloud.appoptimize.v1beta.IListReportsRequest | null,
           protos.google.cloud.appoptimize.v1beta.IListReportsResponse,
         ]) => {
-          this._log.info('listReports values %j', response);
+          this._log.debug('listReports values %j', response);
           return [response, input, output];
         },
       );
@@ -1114,7 +1114,7 @@ export class AppOptimizeClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listReports stream %j', request);
+    this._log.debug('listReports stream %j', request);
     return this.descriptors.page.listReports.createStream(
       this.innerApiCalls.listReports as GaxCall,
       request,
@@ -1171,7 +1171,7 @@ export class AppOptimizeClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listReports iterate %j', request);
+    this._log.debug('listReports iterate %j', request);
     return this.descriptors.page.listReports.asyncIterate(
       this.innerApiCalls['listReports'] as GaxCall,
       request as {},
@@ -1293,11 +1293,11 @@ export class AppOptimizeClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('readReport values %j', values);
+          this._log.debug('readReport values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('readReport request %j', request);
+    this._log.debug('readReport request %j', request);
     return this.innerApiCalls
       .readReport(request, options, wrappedCallback)
       ?.then(
@@ -1306,7 +1306,7 @@ export class AppOptimizeClient {
           protos.google.cloud.appoptimize.v1beta.IReadReportRequest | null,
           protos.google.cloud.appoptimize.v1beta.IReadReportResponse,
         ]) => {
-          this._log.info('readReport values %j', response);
+          this._log.debug('readReport values %j', response);
           return [response, input, output];
         },
       );
@@ -1358,7 +1358,7 @@ export class AppOptimizeClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('readReport stream %j', request);
+    this._log.debug('readReport stream %j', request);
     return this.descriptors.page.readReport.createStream(
       this.innerApiCalls.readReport as GaxCall,
       request,
@@ -1415,7 +1415,7 @@ export class AppOptimizeClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('readReport iterate %j', request);
+    this._log.debug('readReport iterate %j', request);
     return this.descriptors.page.readReport.asyncIterate(
       this.innerApiCalls['readReport'] as GaxCall,
       request as {},

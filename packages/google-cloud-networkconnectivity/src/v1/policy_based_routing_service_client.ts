@@ -722,7 +722,7 @@ export class PolicyBasedRoutingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getPolicyBasedRoute request %j', request);
+    this._log.debug('getPolicyBasedRoute request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.networkconnectivity.v1.IPolicyBasedRoute,
@@ -733,7 +733,7 @@ export class PolicyBasedRoutingServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getPolicyBasedRoute response %j', response);
+          this._log.debug('getPolicyBasedRoute response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -748,7 +748,7 @@ export class PolicyBasedRoutingServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getPolicyBasedRoute response %j', response);
+          this._log.debug('getPolicyBasedRoute response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -908,11 +908,11 @@ export class PolicyBasedRoutingServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createPolicyBasedRoute response %j', rawResponse);
+          this._log.debug('createPolicyBasedRoute response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createPolicyBasedRoute request %j', request);
+    this._log.debug('createPolicyBasedRoute request %j', request);
     return this.innerApiCalls
       .createPolicyBasedRoute(request, options, wrappedCallback)
       ?.then(
@@ -924,7 +924,7 @@ export class PolicyBasedRoutingServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createPolicyBasedRoute response %j', rawResponse);
+          this._log.debug('createPolicyBasedRoute response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1091,11 +1091,11 @@ export class PolicyBasedRoutingServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deletePolicyBasedRoute response %j', rawResponse);
+          this._log.debug('deletePolicyBasedRoute response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deletePolicyBasedRoute request %j', request);
+    this._log.debug('deletePolicyBasedRoute request %j', request);
     return this.innerApiCalls
       .deletePolicyBasedRoute(request, options, wrappedCallback)
       ?.then(
@@ -1107,7 +1107,7 @@ export class PolicyBasedRoutingServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deletePolicyBasedRoute response %j', rawResponse);
+          this._log.debug('deletePolicyBasedRoute response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1258,11 +1258,11 @@ export class PolicyBasedRoutingServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listPolicyBasedRoutes values %j', values);
+          this._log.debug('listPolicyBasedRoutes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listPolicyBasedRoutes request %j', request);
+    this._log.debug('listPolicyBasedRoutes request %j', request);
     return this.innerApiCalls
       .listPolicyBasedRoutes(request, options, wrappedCallback)
       ?.then(
@@ -1271,7 +1271,7 @@ export class PolicyBasedRoutingServiceClient {
           protos.google.cloud.networkconnectivity.v1.IListPolicyBasedRoutesRequest | null,
           protos.google.cloud.networkconnectivity.v1.IListPolicyBasedRoutesResponse,
         ]) => {
-          this._log.info('listPolicyBasedRoutes values %j', response);
+          this._log.debug('listPolicyBasedRoutes values %j', response);
           return [response, input, output];
         },
       );
@@ -1319,7 +1319,7 @@ export class PolicyBasedRoutingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPolicyBasedRoutes stream %j', request);
+    this._log.debug('listPolicyBasedRoutes stream %j', request);
     return this.descriptors.page.listPolicyBasedRoutes.createStream(
       this.innerApiCalls.listPolicyBasedRoutes as GaxCall,
       request,
@@ -1372,7 +1372,7 @@ export class PolicyBasedRoutingServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listPolicyBasedRoutes iterate %j', request);
+    this._log.debug('listPolicyBasedRoutes iterate %j', request);
     return this.descriptors.page.listPolicyBasedRoutes.asyncIterate(
       this.innerApiCalls['listPolicyBasedRoutes'] as GaxCall,
       request as {},

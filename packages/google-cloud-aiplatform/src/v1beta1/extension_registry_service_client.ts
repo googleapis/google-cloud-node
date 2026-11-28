@@ -2641,7 +2641,7 @@ export class ExtensionRegistryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getExtension request %j', request);
+    this._log.debug('getExtension request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IExtension,
@@ -2652,7 +2652,7 @@ export class ExtensionRegistryServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getExtension response %j', response);
+          this._log.debug('getExtension response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2667,7 +2667,7 @@ export class ExtensionRegistryServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getExtension response %j', response);
+          this._log.debug('getExtension response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2793,7 +2793,7 @@ export class ExtensionRegistryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateExtension request %j', request);
+    this._log.debug('updateExtension request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.aiplatform.v1beta1.IExtension,
@@ -2804,7 +2804,7 @@ export class ExtensionRegistryServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateExtension response %j', response);
+          this._log.debug('updateExtension response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2819,7 +2819,7 @@ export class ExtensionRegistryServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateExtension response %j', response);
+          this._log.debug('updateExtension response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2957,11 +2957,11 @@ export class ExtensionRegistryServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('importExtension response %j', rawResponse);
+          this._log.debug('importExtension response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('importExtension request %j', request);
+    this._log.debug('importExtension request %j', request);
     return this.innerApiCalls
       .importExtension(request, options, wrappedCallback)
       ?.then(
@@ -2973,7 +2973,7 @@ export class ExtensionRegistryServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('importExtension response %j', rawResponse);
+          this._log.debug('importExtension response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3128,11 +3128,11 @@ export class ExtensionRegistryServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteExtension response %j', rawResponse);
+          this._log.debug('deleteExtension response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteExtension request %j', request);
+    this._log.debug('deleteExtension request %j', request);
     return this.innerApiCalls
       .deleteExtension(request, options, wrappedCallback)
       ?.then(
@@ -3144,7 +3144,7 @@ export class ExtensionRegistryServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteExtension response %j', rawResponse);
+          this._log.debug('deleteExtension response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -3308,11 +3308,11 @@ export class ExtensionRegistryServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listExtensions values %j', values);
+          this._log.debug('listExtensions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listExtensions request %j', request);
+    this._log.debug('listExtensions request %j', request);
     return this.innerApiCalls
       .listExtensions(request, options, wrappedCallback)
       ?.then(
@@ -3321,7 +3321,7 @@ export class ExtensionRegistryServiceClient {
           protos.google.cloud.aiplatform.v1beta1.IListExtensionsRequest | null,
           protos.google.cloud.aiplatform.v1beta1.IListExtensionsResponse,
         ]) => {
-          this._log.info('listExtensions values %j', response);
+          this._log.debug('listExtensions values %j', response);
           return [response, input, output];
         },
       );
@@ -3382,7 +3382,7 @@ export class ExtensionRegistryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listExtensions stream %j', request);
+    this._log.debug('listExtensions stream %j', request);
     return this.descriptors.page.listExtensions.createStream(
       this.innerApiCalls.listExtensions as GaxCall,
       request,
@@ -3448,7 +3448,7 @@ export class ExtensionRegistryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listExtensions iterate %j', request);
+    this._log.debug('listExtensions iterate %j', request);
     return this.descriptors.page.listExtensions.asyncIterate(
       this.innerApiCalls['listExtensions'] as GaxCall,
       request as {},

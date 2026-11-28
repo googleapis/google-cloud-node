@@ -226,6 +226,9 @@ export class FeedsServiceClient {
       dataTableRowPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/dataTables/{data_table}/dataTableRows/{data_table_row}',
       ),
+      eventPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/events/{event}',
+      ),
       featuredContentNativeDashboardPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/instances/{instance}/contentHub/featuredContentNativeDashboards/{featured_content_native_dashboard}',
@@ -267,6 +270,18 @@ export class FeedsServiceClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}',
       ),
+      projectLocationInstanceAnalyticEntitiesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/instances/{instance}/analytics/{analytic}/entities/{entity}',
+        ),
+      projectLocationInstanceEntitiesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/instances/{instance}/entities/{entity}',
+        ),
+      projectLocationInstanceWatchlistEntitiesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/instances/{instance}/watchlists/{watchlist}/entities/{entity}',
+        ),
       referenceListPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/referenceLists/{reference_list}',
       ),
@@ -281,6 +296,12 @@ export class FeedsServiceClient {
       ),
       ruleExecutionErrorPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/ruleExecutionErrors/{rule_execution_error}',
+      ),
+      searchSessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/searchSessions/{search_session}',
+      ),
+      searchedResultPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/searchSessions/{search_session}/searchedResults/{searched_result}',
       ),
       watchlistPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/watchlists/{watchlist}',
@@ -594,7 +615,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('fetchServiceAccountForCustomer request %j', request);
+    this._log.debug('fetchServiceAccountForCustomer request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IFeedServiceAccount,
@@ -605,7 +626,7 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'fetchServiceAccountForCustomer response %j',
             response,
           );
@@ -623,7 +644,7 @@ export class FeedsServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'fetchServiceAccountForCustomer response %j',
             response,
           );
@@ -734,7 +755,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createFeed request %j', request);
+    this._log.debug('createFeed request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IFeed,
@@ -745,7 +766,7 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createFeed response %j', response);
+          this._log.debug('createFeed response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -757,7 +778,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.ICreateFeedRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createFeed response %j', response);
+          this._log.debug('createFeed response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -862,7 +883,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getFeed request %j', request);
+    this._log.debug('getFeed request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IFeed,
@@ -871,7 +892,7 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getFeed response %j', response);
+          this._log.debug('getFeed response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -883,7 +904,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IGetFeedRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getFeed response %j', response);
+          this._log.debug('getFeed response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -993,7 +1014,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteFeed request %j', request);
+    this._log.debug('deleteFeed request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1004,7 +1025,7 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteFeed response %j', response);
+          this._log.debug('deleteFeed response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1016,7 +1037,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IDeleteFeedRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteFeed response %j', response);
+          this._log.debug('deleteFeed response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1123,7 +1144,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('enableFeed request %j', request);
+    this._log.debug('enableFeed request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IFeed,
@@ -1134,7 +1155,7 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('enableFeed response %j', response);
+          this._log.debug('enableFeed response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1146,7 +1167,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IEnableFeedRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('enableFeed response %j', response);
+          this._log.debug('enableFeed response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1253,7 +1274,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('disableFeed request %j', request);
+    this._log.debug('disableFeed request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IFeed,
@@ -1264,7 +1285,7 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('disableFeed response %j', response);
+          this._log.debug('disableFeed response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1276,7 +1297,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IDisableFeedRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('disableFeed response %j', response);
+          this._log.debug('disableFeed response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1383,7 +1404,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getFeedPack request %j', request);
+    this._log.debug('getFeedPack request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IFeedPack,
@@ -1394,7 +1415,7 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getFeedPack response %j', response);
+          this._log.debug('getFeedPack response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1406,7 +1427,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IGetFeedPackRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getFeedPack response %j', response);
+          this._log.debug('getFeedPack response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1517,7 +1538,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateFeed request %j', request);
+    this._log.debug('updateFeed request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IFeed,
@@ -1528,7 +1549,7 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateFeed response %j', response);
+          this._log.debug('updateFeed response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1540,7 +1561,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IUpdateFeedRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateFeed response %j', response);
+          this._log.debug('updateFeed response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1661,7 +1682,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('importPushLogs request %j', request);
+    this._log.debug('importPushLogs request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.api.IHttpBody,
@@ -1672,7 +1693,7 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('importPushLogs response %j', response);
+          this._log.debug('importPushLogs response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1684,7 +1705,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IImportPushLogsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('importPushLogs response %j', response);
+          this._log.debug('importPushLogs response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1801,7 +1822,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('generateSecret request %j', request);
+    this._log.debug('generateSecret request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IGenerateSecretResponse,
@@ -1812,7 +1833,7 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateSecret response %j', response);
+          this._log.debug('generateSecret response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1824,7 +1845,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IGenerateSecretRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('generateSecret response %j', response);
+          this._log.debug('generateSecret response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1952,11 +1973,11 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listFeeds values %j', values);
+          this._log.debug('listFeeds values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listFeeds request %j', request);
+    this._log.debug('listFeeds request %j', request);
     return this.innerApiCalls
       .listFeeds(request, options, wrappedCallback)
       ?.then(
@@ -1965,7 +1986,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IListFeedsRequest | null,
           protos.google.cloud.chronicle.v1.IListFeedsResponse,
         ]) => {
-          this._log.info('listFeeds values %j', response);
+          this._log.debug('listFeeds values %j', response);
           return [response, input, output];
         },
       );
@@ -2014,7 +2035,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFeeds stream %j', request);
+    this._log.debug('listFeeds stream %j', request);
     return this.descriptors.page.listFeeds.createStream(
       this.innerApiCalls.listFeeds as GaxCall,
       request,
@@ -2068,7 +2089,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFeeds iterate %j', request);
+    this._log.debug('listFeeds iterate %j', request);
     return this.descriptors.page.listFeeds.asyncIterate(
       this.innerApiCalls['listFeeds'] as GaxCall,
       request as {},
@@ -2189,11 +2210,11 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listFeedPacks values %j', values);
+          this._log.debug('listFeedPacks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listFeedPacks request %j', request);
+    this._log.debug('listFeedPacks request %j', request);
     return this.innerApiCalls
       .listFeedPacks(request, options, wrappedCallback)
       ?.then(
@@ -2202,7 +2223,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IListFeedPacksRequest | null,
           protos.google.cloud.chronicle.v1.IListFeedPacksResponse,
         ]) => {
-          this._log.info('listFeedPacks values %j', response);
+          this._log.debug('listFeedPacks values %j', response);
           return [response, input, output];
         },
       );
@@ -2253,7 +2274,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFeedPacks stream %j', request);
+    this._log.debug('listFeedPacks stream %j', request);
     return this.descriptors.page.listFeedPacks.createStream(
       this.innerApiCalls.listFeedPacks as GaxCall,
       request,
@@ -2309,7 +2330,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFeedPacks iterate %j', request);
+    this._log.debug('listFeedPacks iterate %j', request);
     return this.descriptors.page.listFeedPacks.asyncIterate(
       this.innerApiCalls['listFeedPacks'] as GaxCall,
       request as {},
@@ -2429,11 +2450,11 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listFeedSourceTypeSchemas values %j', values);
+          this._log.debug('listFeedSourceTypeSchemas values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listFeedSourceTypeSchemas request %j', request);
+    this._log.debug('listFeedSourceTypeSchemas request %j', request);
     return this.innerApiCalls
       .listFeedSourceTypeSchemas(request, options, wrappedCallback)
       ?.then(
@@ -2442,7 +2463,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IListFeedSourceTypeSchemasRequest | null,
           protos.google.cloud.chronicle.v1.IListFeedSourceTypeSchemasResponse,
         ]) => {
-          this._log.info('listFeedSourceTypeSchemas values %j', response);
+          this._log.debug('listFeedSourceTypeSchemas values %j', response);
           return [response, input, output];
         },
       );
@@ -2492,7 +2513,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFeedSourceTypeSchemas stream %j', request);
+    this._log.debug('listFeedSourceTypeSchemas stream %j', request);
     return this.descriptors.page.listFeedSourceTypeSchemas.createStream(
       this.innerApiCalls.listFeedSourceTypeSchemas as GaxCall,
       request,
@@ -2547,7 +2568,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listFeedSourceTypeSchemas iterate %j', request);
+    this._log.debug('listFeedSourceTypeSchemas iterate %j', request);
     return this.descriptors.page.listFeedSourceTypeSchemas.asyncIterate(
       this.innerApiCalls['listFeedSourceTypeSchemas'] as GaxCall,
       request as {},
@@ -2668,11 +2689,11 @@ export class FeedsServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listLogTypeSchemas values %j', values);
+          this._log.debug('listLogTypeSchemas values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listLogTypeSchemas request %j', request);
+    this._log.debug('listLogTypeSchemas request %j', request);
     return this.innerApiCalls
       .listLogTypeSchemas(request, options, wrappedCallback)
       ?.then(
@@ -2681,7 +2702,7 @@ export class FeedsServiceClient {
           protos.google.cloud.chronicle.v1.IListLogTypeSchemasRequest | null,
           protos.google.cloud.chronicle.v1.IListLogTypeSchemasResponse,
         ]) => {
-          this._log.info('listLogTypeSchemas values %j', response);
+          this._log.debug('listLogTypeSchemas values %j', response);
           return [response, input, output];
         },
       );
@@ -2731,7 +2752,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLogTypeSchemas stream %j', request);
+    this._log.debug('listLogTypeSchemas stream %j', request);
     return this.descriptors.page.listLogTypeSchemas.createStream(
       this.innerApiCalls.listLogTypeSchemas as GaxCall,
       request,
@@ -2786,7 +2807,7 @@ export class FeedsServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listLogTypeSchemas iterate %j', request);
+    this._log.debug('listLogTypeSchemas iterate %j', request);
     return this.descriptors.page.listLogTypeSchemas.asyncIterate(
       this.innerApiCalls['listLogTypeSchemas'] as GaxCall,
       request as {},
@@ -3390,6 +3411,73 @@ export class FeedsServiceClient {
   matchDataTableRowFromDataTableRowName(dataTableRowName: string) {
     return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName)
       .data_table_row;
+  }
+
+  /**
+   * Return a fully-qualified event resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} event
+   * @returns {string} Resource name string.
+   */
+  eventPath(
+    project: string,
+    location: string,
+    instance: string,
+    event: string,
+  ) {
+    return this.pathTemplates.eventPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      event: event,
+    });
+  }
+
+  /**
+   * Parse the project from Event resource.
+   *
+   * @param {string} eventName
+   *   A fully-qualified path representing Event resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEventName(eventName: string) {
+    return this.pathTemplates.eventPathTemplate.match(eventName).project;
+  }
+
+  /**
+   * Parse the location from Event resource.
+   *
+   * @param {string} eventName
+   *   A fully-qualified path representing Event resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEventName(eventName: string) {
+    return this.pathTemplates.eventPathTemplate.match(eventName).location;
+  }
+
+  /**
+   * Parse the instance from Event resource.
+   *
+   * @param {string} eventName
+   *   A fully-qualified path representing Event resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromEventName(eventName: string) {
+    return this.pathTemplates.eventPathTemplate.match(eventName).instance;
+  }
+
+  /**
+   * Parse the event from Event resource.
+   *
+   * @param {string} eventName
+   *   A fully-qualified path representing Event resource.
+   * @returns {string} A string representing the event.
+   */
+  matchEventFromEventName(eventName: string) {
+    return this.pathTemplates.eventPathTemplate.match(eventName).event;
   }
 
   /**
@@ -4258,6 +4346,297 @@ export class FeedsServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationInstanceAnalyticEntities resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} analytic
+   * @param {string} entity
+   * @returns {string} Resource name string.
+   */
+  projectLocationInstanceAnalyticEntitiesPath(
+    project: string,
+    location: string,
+    instance: string,
+    analytic: string,
+    entity: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        instance: instance,
+        analytic: analytic,
+        entity: entity,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationInstanceAnalyticEntities resource.
+   *
+   * @param {string} projectLocationInstanceAnalyticEntitiesName
+   *   A fully-qualified path representing project_location_instance_analytic_entities resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationInstanceAnalyticEntitiesName(
+    projectLocationInstanceAnalyticEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.match(
+      projectLocationInstanceAnalyticEntitiesName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationInstanceAnalyticEntities resource.
+   *
+   * @param {string} projectLocationInstanceAnalyticEntitiesName
+   *   A fully-qualified path representing project_location_instance_analytic_entities resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationInstanceAnalyticEntitiesName(
+    projectLocationInstanceAnalyticEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.match(
+      projectLocationInstanceAnalyticEntitiesName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from ProjectLocationInstanceAnalyticEntities resource.
+   *
+   * @param {string} projectLocationInstanceAnalyticEntitiesName
+   *   A fully-qualified path representing project_location_instance_analytic_entities resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromProjectLocationInstanceAnalyticEntitiesName(
+    projectLocationInstanceAnalyticEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.match(
+      projectLocationInstanceAnalyticEntitiesName,
+    ).instance;
+  }
+
+  /**
+   * Parse the analytic from ProjectLocationInstanceAnalyticEntities resource.
+   *
+   * @param {string} projectLocationInstanceAnalyticEntitiesName
+   *   A fully-qualified path representing project_location_instance_analytic_entities resource.
+   * @returns {string} A string representing the analytic.
+   */
+  matchAnalyticFromProjectLocationInstanceAnalyticEntitiesName(
+    projectLocationInstanceAnalyticEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.match(
+      projectLocationInstanceAnalyticEntitiesName,
+    ).analytic;
+  }
+
+  /**
+   * Parse the entity from ProjectLocationInstanceAnalyticEntities resource.
+   *
+   * @param {string} projectLocationInstanceAnalyticEntitiesName
+   *   A fully-qualified path representing project_location_instance_analytic_entities resource.
+   * @returns {string} A string representing the entity.
+   */
+  matchEntityFromProjectLocationInstanceAnalyticEntitiesName(
+    projectLocationInstanceAnalyticEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.match(
+      projectLocationInstanceAnalyticEntitiesName,
+    ).entity;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationInstanceEntities resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} entity
+   * @returns {string} Resource name string.
+   */
+  projectLocationInstanceEntitiesPath(
+    project: string,
+    location: string,
+    instance: string,
+    entity: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceEntitiesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        instance: instance,
+        entity: entity,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationInstanceEntities resource.
+   *
+   * @param {string} projectLocationInstanceEntitiesName
+   *   A fully-qualified path representing project_location_instance_entities resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationInstanceEntitiesName(
+    projectLocationInstanceEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceEntitiesPathTemplate.match(
+      projectLocationInstanceEntitiesName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationInstanceEntities resource.
+   *
+   * @param {string} projectLocationInstanceEntitiesName
+   *   A fully-qualified path representing project_location_instance_entities resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationInstanceEntitiesName(
+    projectLocationInstanceEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceEntitiesPathTemplate.match(
+      projectLocationInstanceEntitiesName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from ProjectLocationInstanceEntities resource.
+   *
+   * @param {string} projectLocationInstanceEntitiesName
+   *   A fully-qualified path representing project_location_instance_entities resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromProjectLocationInstanceEntitiesName(
+    projectLocationInstanceEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceEntitiesPathTemplate.match(
+      projectLocationInstanceEntitiesName,
+    ).instance;
+  }
+
+  /**
+   * Parse the entity from ProjectLocationInstanceEntities resource.
+   *
+   * @param {string} projectLocationInstanceEntitiesName
+   *   A fully-qualified path representing project_location_instance_entities resource.
+   * @returns {string} A string representing the entity.
+   */
+  matchEntityFromProjectLocationInstanceEntitiesName(
+    projectLocationInstanceEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceEntitiesPathTemplate.match(
+      projectLocationInstanceEntitiesName,
+    ).entity;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationInstanceWatchlistEntities resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} watchlist
+   * @param {string} entity
+   * @returns {string} Resource name string.
+   */
+  projectLocationInstanceWatchlistEntitiesPath(
+    project: string,
+    location: string,
+    instance: string,
+    watchlist: string,
+    entity: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        instance: instance,
+        watchlist: watchlist,
+        entity: entity,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationInstanceWatchlistEntities resource.
+   *
+   * @param {string} projectLocationInstanceWatchlistEntitiesName
+   *   A fully-qualified path representing project_location_instance_watchlist_entities resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationInstanceWatchlistEntitiesName(
+    projectLocationInstanceWatchlistEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.match(
+      projectLocationInstanceWatchlistEntitiesName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationInstanceWatchlistEntities resource.
+   *
+   * @param {string} projectLocationInstanceWatchlistEntitiesName
+   *   A fully-qualified path representing project_location_instance_watchlist_entities resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationInstanceWatchlistEntitiesName(
+    projectLocationInstanceWatchlistEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.match(
+      projectLocationInstanceWatchlistEntitiesName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from ProjectLocationInstanceWatchlistEntities resource.
+   *
+   * @param {string} projectLocationInstanceWatchlistEntitiesName
+   *   A fully-qualified path representing project_location_instance_watchlist_entities resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromProjectLocationInstanceWatchlistEntitiesName(
+    projectLocationInstanceWatchlistEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.match(
+      projectLocationInstanceWatchlistEntitiesName,
+    ).instance;
+  }
+
+  /**
+   * Parse the watchlist from ProjectLocationInstanceWatchlistEntities resource.
+   *
+   * @param {string} projectLocationInstanceWatchlistEntitiesName
+   *   A fully-qualified path representing project_location_instance_watchlist_entities resource.
+   * @returns {string} A string representing the watchlist.
+   */
+  matchWatchlistFromProjectLocationInstanceWatchlistEntitiesName(
+    projectLocationInstanceWatchlistEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.match(
+      projectLocationInstanceWatchlistEntitiesName,
+    ).watchlist;
+  }
+
+  /**
+   * Parse the entity from ProjectLocationInstanceWatchlistEntities resource.
+   *
+   * @param {string} projectLocationInstanceWatchlistEntitiesName
+   *   A fully-qualified path representing project_location_instance_watchlist_entities resource.
+   * @returns {string} A string representing the entity.
+   */
+  matchEntityFromProjectLocationInstanceWatchlistEntitiesName(
+    projectLocationInstanceWatchlistEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.match(
+      projectLocationInstanceWatchlistEntitiesName,
+    ).entity;
+  }
+
+  /**
    * Return a fully-qualified referenceList resource name string.
    *
    * @param {string} project
@@ -4625,6 +5004,168 @@ export class FeedsServiceClient {
     return this.pathTemplates.ruleExecutionErrorPathTemplate.match(
       ruleExecutionErrorName,
     ).rule_execution_error;
+  }
+
+  /**
+   * Return a fully-qualified searchSession resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} search_session
+   * @returns {string} Resource name string.
+   */
+  searchSessionPath(
+    project: string,
+    location: string,
+    instance: string,
+    searchSession: string,
+  ) {
+    return this.pathTemplates.searchSessionPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      search_session: searchSession,
+    });
+  }
+
+  /**
+   * Parse the project from SearchSession resource.
+   *
+   * @param {string} searchSessionName
+   *   A fully-qualified path representing SearchSession resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSearchSessionName(searchSessionName: string) {
+    return this.pathTemplates.searchSessionPathTemplate.match(searchSessionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from SearchSession resource.
+   *
+   * @param {string} searchSessionName
+   *   A fully-qualified path representing SearchSession resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSearchSessionName(searchSessionName: string) {
+    return this.pathTemplates.searchSessionPathTemplate.match(searchSessionName)
+      .location;
+  }
+
+  /**
+   * Parse the instance from SearchSession resource.
+   *
+   * @param {string} searchSessionName
+   *   A fully-qualified path representing SearchSession resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromSearchSessionName(searchSessionName: string) {
+    return this.pathTemplates.searchSessionPathTemplate.match(searchSessionName)
+      .instance;
+  }
+
+  /**
+   * Parse the search_session from SearchSession resource.
+   *
+   * @param {string} searchSessionName
+   *   A fully-qualified path representing SearchSession resource.
+   * @returns {string} A string representing the search_session.
+   */
+  matchSearchSessionFromSearchSessionName(searchSessionName: string) {
+    return this.pathTemplates.searchSessionPathTemplate.match(searchSessionName)
+      .search_session;
+  }
+
+  /**
+   * Return a fully-qualified searchedResult resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} search_session
+   * @param {string} searched_result
+   * @returns {string} Resource name string.
+   */
+  searchedResultPath(
+    project: string,
+    location: string,
+    instance: string,
+    searchSession: string,
+    searchedResult: string,
+  ) {
+    return this.pathTemplates.searchedResultPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      search_session: searchSession,
+      searched_result: searchedResult,
+    });
+  }
+
+  /**
+   * Parse the project from SearchedResult resource.
+   *
+   * @param {string} searchedResultName
+   *   A fully-qualified path representing SearchedResult resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSearchedResultName(searchedResultName: string) {
+    return this.pathTemplates.searchedResultPathTemplate.match(
+      searchedResultName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from SearchedResult resource.
+   *
+   * @param {string} searchedResultName
+   *   A fully-qualified path representing SearchedResult resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSearchedResultName(searchedResultName: string) {
+    return this.pathTemplates.searchedResultPathTemplate.match(
+      searchedResultName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from SearchedResult resource.
+   *
+   * @param {string} searchedResultName
+   *   A fully-qualified path representing SearchedResult resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromSearchedResultName(searchedResultName: string) {
+    return this.pathTemplates.searchedResultPathTemplate.match(
+      searchedResultName,
+    ).instance;
+  }
+
+  /**
+   * Parse the search_session from SearchedResult resource.
+   *
+   * @param {string} searchedResultName
+   *   A fully-qualified path representing SearchedResult resource.
+   * @returns {string} A string representing the search_session.
+   */
+  matchSearchSessionFromSearchedResultName(searchedResultName: string) {
+    return this.pathTemplates.searchedResultPathTemplate.match(
+      searchedResultName,
+    ).search_session;
+  }
+
+  /**
+   * Parse the searched_result from SearchedResult resource.
+   *
+   * @param {string} searchedResultName
+   *   A fully-qualified path representing SearchedResult resource.
+   * @returns {string} A string representing the searched_result.
+   */
+  matchSearchedResultFromSearchedResultName(searchedResultName: string) {
+    return this.pathTemplates.searchedResultPathTemplate.match(
+      searchedResultName,
+    ).searched_result;
   }
 
   /**

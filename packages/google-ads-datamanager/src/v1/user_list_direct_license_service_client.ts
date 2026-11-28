@@ -509,7 +509,7 @@ export class UserListDirectLicenseServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createUserListDirectLicense request %j', request);
+    this._log.debug('createUserListDirectLicense request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.datamanager.v1.IUserListDirectLicense,
@@ -520,7 +520,7 @@ export class UserListDirectLicenseServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createUserListDirectLicense response %j', response);
+          this._log.debug('createUserListDirectLicense response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -535,7 +535,7 @@ export class UserListDirectLicenseServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createUserListDirectLicense response %j', response);
+          this._log.debug('createUserListDirectLicense response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -654,7 +654,7 @@ export class UserListDirectLicenseServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getUserListDirectLicense request %j', request);
+    this._log.debug('getUserListDirectLicense request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.datamanager.v1.IUserListDirectLicense,
@@ -665,7 +665,7 @@ export class UserListDirectLicenseServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getUserListDirectLicense response %j', response);
+          this._log.debug('getUserListDirectLicense response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -680,7 +680,7 @@ export class UserListDirectLicenseServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getUserListDirectLicense response %j', response);
+          this._log.debug('getUserListDirectLicense response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -804,7 +804,7 @@ export class UserListDirectLicenseServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateUserListDirectLicense request %j', request);
+    this._log.debug('updateUserListDirectLicense request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.datamanager.v1.IUserListDirectLicense,
@@ -815,7 +815,7 @@ export class UserListDirectLicenseServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateUserListDirectLicense response %j', response);
+          this._log.debug('updateUserListDirectLicense response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -830,7 +830,7 @@ export class UserListDirectLicenseServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateUserListDirectLicense response %j', response);
+          this._log.debug('updateUserListDirectLicense response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -999,11 +999,11 @@ export class UserListDirectLicenseServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listUserListDirectLicenses values %j', values);
+          this._log.debug('listUserListDirectLicenses values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listUserListDirectLicenses request %j', request);
+    this._log.debug('listUserListDirectLicenses request %j', request);
     return this.innerApiCalls
       .listUserListDirectLicenses(request, options, wrappedCallback)
       ?.then(
@@ -1012,7 +1012,7 @@ export class UserListDirectLicenseServiceClient {
           protos.google.ads.datamanager.v1.IListUserListDirectLicensesRequest | null,
           protos.google.ads.datamanager.v1.IListUserListDirectLicensesResponse,
         ]) => {
-          this._log.info('listUserListDirectLicenses values %j', response);
+          this._log.debug('listUserListDirectLicenses values %j', response);
           return [response, input, output];
         },
       );
@@ -1094,7 +1094,7 @@ export class UserListDirectLicenseServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listUserListDirectLicenses stream %j', request);
+    this._log.debug('listUserListDirectLicenses stream %j', request);
     return this.descriptors.page.listUserListDirectLicenses.createStream(
       this.innerApiCalls.listUserListDirectLicenses as GaxCall,
       request,
@@ -1181,7 +1181,7 @@ export class UserListDirectLicenseServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listUserListDirectLicenses iterate %j', request);
+    this._log.debug('listUserListDirectLicenses iterate %j', request);
     return this.descriptors.page.listUserListDirectLicenses.asyncIterate(
       this.innerApiCalls['listUserListDirectLicenses'] as GaxCall,
       request as {},

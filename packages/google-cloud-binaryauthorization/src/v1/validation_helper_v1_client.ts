@@ -493,7 +493,7 @@ export class ValidationHelperV1Client {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('validateAttestationOccurrence request %j', request);
+    this._log.debug('validateAttestationOccurrence request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.binaryauthorization.v1.IValidateAttestationOccurrenceResponse,
@@ -504,7 +504,10 @@ export class ValidationHelperV1Client {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('validateAttestationOccurrence response %j', response);
+          this._log.debug(
+            'validateAttestationOccurrence response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -519,7 +522,10 @@ export class ValidationHelperV1Client {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('validateAttestationOccurrence response %j', response);
+          this._log.debug(
+            'validateAttestationOccurrence response %j',
+            response,
+          );
           return [response, options, rawResponse];
         },
       )

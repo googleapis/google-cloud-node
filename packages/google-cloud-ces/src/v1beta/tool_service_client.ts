@@ -539,7 +539,7 @@ export class ToolServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('executeTool request %j', request);
+    this._log.debug('executeTool request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.ces.v1beta.IExecuteToolResponse,
@@ -548,7 +548,7 @@ export class ToolServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('executeTool response %j', response);
+          this._log.debug('executeTool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -560,7 +560,7 @@ export class ToolServiceClient {
           protos.google.cloud.ces.v1beta.IExecuteToolRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('executeTool response %j', response);
+          this._log.debug('executeTool response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -681,7 +681,7 @@ export class ToolServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('retrieveToolSchema request %j', request);
+    this._log.debug('retrieveToolSchema request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.ces.v1beta.IRetrieveToolSchemaResponse,
@@ -692,7 +692,7 @@ export class ToolServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('retrieveToolSchema response %j', response);
+          this._log.debug('retrieveToolSchema response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -704,7 +704,7 @@ export class ToolServiceClient {
           protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('retrieveToolSchema response %j', response);
+          this._log.debug('retrieveToolSchema response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -818,7 +818,7 @@ export class ToolServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('retrieveTools request %j', request);
+    this._log.debug('retrieveTools request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.ces.v1beta.IRetrieveToolsResponse,
@@ -829,7 +829,7 @@ export class ToolServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('retrieveTools response %j', response);
+          this._log.debug('retrieveTools response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -841,7 +841,7 @@ export class ToolServiceClient {
           protos.google.cloud.ces.v1beta.IRetrieveToolsRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('retrieveTools response %j', response);
+          this._log.debug('retrieveTools response %j', response);
           return [response, options, rawResponse];
         },
       )

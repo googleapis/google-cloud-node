@@ -50,16 +50,15 @@ export const TRACE_SAMPLED_KEY = 'logging.googleapis.com/trace_sampled';
 export type Timestamp = google.protobuf.ITimestamp | Date | string;
 export type LogSeverity = google.logging.type.LogSeverity | string;
 export type HttpRequest =
-  | google.logging.type.IHttpRequest
-  | CloudLoggingHttpRequest
-  | RawHttpRequest;
+  google.logging.type.IHttpRequest | CloudLoggingHttpRequest | RawHttpRequest;
 export type LogEntry = Omit<
   google.logging.v2.ILogEntry,
-  'timestamp' | 'severity' | 'httpRequest'
+  'timestamp' | 'severity' | 'httpRequest' | 'insertId'
 > & {
   timestamp?: Timestamp | null;
   severity?: LogSeverity | null;
   httpRequest?: HttpRequest | null;
+  insertId?: string | number | null;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -69,7 +68,7 @@ export type Data = any;
 // LoggingService API.
 export interface EntryJson {
   timestamp: Timestamp;
-  insertId: number;
+  insertId: string | number | null;
   jsonPayload?: google.protobuf.IStruct;
   textPayload?: string;
   httpRequest?: google.logging.type.IHttpRequest;
@@ -178,13 +177,13 @@ class Entry {
      * @name Entry#metadata
      * @type {object}
      * @property {Date} timestamp
-     * @property {number} insertId
+     * @property {string|number|null} insertId
      */
     this.metadata = extend(
       {
         timestamp: new Date(),
       },
-      metadata,
+      metadata
     );
     // JavaScript date has a very coarse granularity (millisecond), which makes
     // it quite likely that multiple log entries would have the same timestamp.
@@ -195,7 +194,9 @@ class Entry {
     //
     // We use a globally unique monotonically increasing EventId as the
     // insertId.
-    this.metadata.insertId = this.metadata.insertId || eventId.new();
+    this.metadata.insertId = this.metadata.insertId
+      ? String(this.metadata.insertId)
+      : eventId.new();
     /**
      * @name Entry#data
      * @type {object}
@@ -214,6 +215,9 @@ class Entry {
    */
   toJSON(options: ToJsonOptions = {}, projectId = '') {
     const entry: EntryJson = extend(true, {}, this.metadata) as {} as EntryJson;
+    if (entry.insertId !== undefined && entry.insertId !== null) {
+      entry.insertId = String(entry.insertId);
+    }
     // Format log message
     if (this.isObject(this.data)) {
       entry.jsonPayload = objToStruct(this.data, {
@@ -274,7 +278,7 @@ class Entry {
     entry[LABELS_KEY] = meta.labels
       ? Object.assign({}, meta.labels)
       : undefined;
-    entry[INSERT_ID_KEY] = meta.insertId || undefined;
+    entry[INSERT_ID_KEY] = meta.insertId ? String(meta.insertId) : undefined;
     entry[TRACE_KEY] = meta.trace || undefined;
     entry[SPAN_ID_KEY] = meta.spanId || undefined;
     entry[TRACE_SAMPLED_KEY] =

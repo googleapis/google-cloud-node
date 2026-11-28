@@ -407,7 +407,7 @@ export class TetherClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('egress stream %j', options);
+    this._log.debug('egress stream %j', options);
     return this.innerApiCalls.egress(null, options);
   }
 

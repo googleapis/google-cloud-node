@@ -712,7 +712,7 @@ export class WorkflowTemplateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createWorkflowTemplate request %j', request);
+    this._log.debug('createWorkflowTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataproc.v1.IWorkflowTemplate,
@@ -723,7 +723,7 @@ export class WorkflowTemplateServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createWorkflowTemplate response %j', response);
+          this._log.debug('createWorkflowTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -738,7 +738,7 @@ export class WorkflowTemplateServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createWorkflowTemplate response %j', response);
+          this._log.debug('createWorkflowTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -866,7 +866,7 @@ export class WorkflowTemplateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getWorkflowTemplate request %j', request);
+    this._log.debug('getWorkflowTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataproc.v1.IWorkflowTemplate,
@@ -877,7 +877,7 @@ export class WorkflowTemplateServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getWorkflowTemplate response %j', response);
+          this._log.debug('getWorkflowTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -892,7 +892,7 @@ export class WorkflowTemplateServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getWorkflowTemplate response %j', response);
+          this._log.debug('getWorkflowTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1012,7 +1012,7 @@ export class WorkflowTemplateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateWorkflowTemplate request %j', request);
+    this._log.debug('updateWorkflowTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.dataproc.v1.IWorkflowTemplate,
@@ -1023,7 +1023,7 @@ export class WorkflowTemplateServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateWorkflowTemplate response %j', response);
+          this._log.debug('updateWorkflowTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1038,7 +1038,7 @@ export class WorkflowTemplateServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateWorkflowTemplate response %j', response);
+          this._log.debug('updateWorkflowTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1168,7 +1168,7 @@ export class WorkflowTemplateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteWorkflowTemplate request %j', request);
+    this._log.debug('deleteWorkflowTemplate request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1179,7 +1179,7 @@ export class WorkflowTemplateServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteWorkflowTemplate response %j', response);
+          this._log.debug('deleteWorkflowTemplate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1194,7 +1194,7 @@ export class WorkflowTemplateServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('deleteWorkflowTemplate response %j', response);
+          this._log.debug('deleteWorkflowTemplate response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1377,14 +1377,14 @@ export class WorkflowTemplateServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'instantiateWorkflowTemplate response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('instantiateWorkflowTemplate request %j', request);
+    this._log.debug('instantiateWorkflowTemplate request %j', request);
     return this.innerApiCalls
       .instantiateWorkflowTemplate(request, options, wrappedCallback)
       ?.then(
@@ -1396,7 +1396,7 @@ export class WorkflowTemplateServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'instantiateWorkflowTemplate response %j',
             rawResponse,
           );
@@ -1597,14 +1597,14 @@ export class WorkflowTemplateServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
+          this._log.debug(
             'instantiateInlineWorkflowTemplate response %j',
             rawResponse,
           );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('instantiateInlineWorkflowTemplate request %j', request);
+    this._log.debug('instantiateInlineWorkflowTemplate request %j', request);
     return this.innerApiCalls
       .instantiateInlineWorkflowTemplate(request, options, wrappedCallback)
       ?.then(
@@ -1616,7 +1616,7 @@ export class WorkflowTemplateServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'instantiateInlineWorkflowTemplate response %j',
             rawResponse,
           );
@@ -1776,11 +1776,11 @@ export class WorkflowTemplateServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listWorkflowTemplates values %j', values);
+          this._log.debug('listWorkflowTemplates values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listWorkflowTemplates request %j', request);
+    this._log.debug('listWorkflowTemplates request %j', request);
     return this.innerApiCalls
       .listWorkflowTemplates(request, options, wrappedCallback)
       ?.then(
@@ -1789,7 +1789,7 @@ export class WorkflowTemplateServiceClient {
           protos.google.cloud.dataproc.v1.IListWorkflowTemplatesRequest | null,
           protos.google.cloud.dataproc.v1.IListWorkflowTemplatesResponse,
         ]) => {
-          this._log.info('listWorkflowTemplates values %j', response);
+          this._log.debug('listWorkflowTemplates values %j', response);
           return [response, input, output];
         },
       );
@@ -1843,7 +1843,7 @@ export class WorkflowTemplateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkflowTemplates stream %j', request);
+    this._log.debug('listWorkflowTemplates stream %j', request);
     return this.descriptors.page.listWorkflowTemplates.createStream(
       this.innerApiCalls.listWorkflowTemplates as GaxCall,
       request,
@@ -1902,7 +1902,7 @@ export class WorkflowTemplateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listWorkflowTemplates iterate %j', request);
+    this._log.debug('listWorkflowTemplates iterate %j', request);
     return this.descriptors.page.listWorkflowTemplates.asyncIterate(
       this.innerApiCalls['listWorkflowTemplates'] as GaxCall,
       request as {},

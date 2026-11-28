@@ -521,7 +521,7 @@ export class LookupServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('resolveService request %j', request);
+    this._log.debug('resolveService request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.servicedirectory.v1beta1.IResolveServiceResponse,
@@ -532,7 +532,7 @@ export class LookupServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('resolveService response %j', response);
+          this._log.debug('resolveService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -547,7 +547,7 @@ export class LookupServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('resolveService response %j', response);
+          this._log.debug('resolveService response %j', response);
           return [response, options, rawResponse];
         },
       )

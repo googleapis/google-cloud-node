@@ -2320,6 +2320,9 @@ export namespace google {
 
                     /** FilterConfig filterRuleSettings */
                     filterRuleSettings?: (google.cloud.modelarmor.v1.IFilterRuleSettings|null);
+
+                    /** FilterConfig csamFilterSettings */
+                    csamFilterSettings?: (google.cloud.modelarmor.v1.ICsamFilterSettings|null);
                 }
 
                 /** Represents a FilterConfig. */
@@ -2345,6 +2348,9 @@ export namespace google {
 
                     /** FilterConfig filterRuleSettings. */
                     public filterRuleSettings?: (google.cloud.modelarmor.v1.IFilterRuleSettings|null);
+
+                    /** FilterConfig csamFilterSettings. */
+                    public csamFilterSettings?: (google.cloud.modelarmor.v1.ICsamFilterSettings|null);
 
                     /**
                      * Creates a new FilterConfig instance using the specified properties.
@@ -2422,6 +2428,119 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CsamFilterSettings. */
+                interface ICsamFilterSettings {
+
+                    /** CsamFilterSettings filterEnforcement */
+                    filterEnforcement?: (google.cloud.modelarmor.v1.CsamFilterSettings.CsamFilterEnforcement|keyof typeof google.cloud.modelarmor.v1.CsamFilterSettings.CsamFilterEnforcement|null);
+
+                    /** CsamFilterSettings confidenceLevel */
+                    confidenceLevel?: (google.cloud.modelarmor.v1.DetectionConfidenceLevel|keyof typeof google.cloud.modelarmor.v1.DetectionConfidenceLevel|null);
+                }
+
+                /** Represents a CsamFilterSettings. */
+                class CsamFilterSettings implements ICsamFilterSettings {
+
+                    /**
+                     * Constructs a new CsamFilterSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1.ICsamFilterSettings);
+
+                    /** CsamFilterSettings filterEnforcement. */
+                    public filterEnforcement: (google.cloud.modelarmor.v1.CsamFilterSettings.CsamFilterEnforcement|keyof typeof google.cloud.modelarmor.v1.CsamFilterSettings.CsamFilterEnforcement);
+
+                    /** CsamFilterSettings confidenceLevel. */
+                    public confidenceLevel: (google.cloud.modelarmor.v1.DetectionConfidenceLevel|keyof typeof google.cloud.modelarmor.v1.DetectionConfidenceLevel);
+
+                    /**
+                     * Creates a new CsamFilterSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CsamFilterSettings instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1.ICsamFilterSettings): google.cloud.modelarmor.v1.CsamFilterSettings;
+
+                    /**
+                     * Encodes the specified CsamFilterSettings message. Does not implicitly {@link google.cloud.modelarmor.v1.CsamFilterSettings.verify|verify} messages.
+                     * @param message CsamFilterSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1.ICsamFilterSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CsamFilterSettings message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.CsamFilterSettings.verify|verify} messages.
+                     * @param message CsamFilterSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1.ICsamFilterSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CsamFilterSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CsamFilterSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1.CsamFilterSettings;
+
+                    /**
+                     * Decodes a CsamFilterSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CsamFilterSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1.CsamFilterSettings;
+
+                    /**
+                     * Verifies a CsamFilterSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CsamFilterSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CsamFilterSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1.CsamFilterSettings;
+
+                    /**
+                     * Creates a plain object from a CsamFilterSettings message. Also converts values to other types if specified.
+                     * @param message CsamFilterSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1.CsamFilterSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CsamFilterSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CsamFilterSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CsamFilterSettings {
+
+                    /** CsamFilterEnforcement enum. */
+                    enum CsamFilterEnforcement {
+                        CSAM_FILTER_ENFORCEMENT_UNSPECIFIED = 0,
+                        ENABLED = 1,
+                        DISABLED = 2
+                    }
                 }
 
                 /** Properties of a PiAndJailbreakFilterSettings. */

@@ -3081,7 +3081,8 @@ export namespace google {
                 /** CompressionAlgorithm enum. */
                 enum CompressionAlgorithm {
                     COMPRESSION_ALGORITHM_UNSPECIFIED = 0,
-                    ZLIB = 1
+                    ZLIB = 1,
+                    ZSTD = 3
                 }
 
                 /** CompressionMode enum. */

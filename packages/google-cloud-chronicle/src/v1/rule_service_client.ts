@@ -229,6 +229,9 @@ export class RuleServiceClient {
       dataTableRowPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/dataTables/{data_table}/dataTableRows/{data_table_row}',
       ),
+      eventPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/events/{event}',
+      ),
       featuredContentNativeDashboardPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/instances/{instance}/contentHub/featuredContentNativeDashboards/{featured_content_native_dashboard}',
@@ -267,6 +270,18 @@ export class RuleServiceClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}',
       ),
+      projectLocationInstanceAnalyticEntitiesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/instances/{instance}/analytics/{analytic}/entities/{entity}',
+        ),
+      projectLocationInstanceEntitiesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/instances/{instance}/entities/{entity}',
+        ),
+      projectLocationInstanceWatchlistEntitiesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/instances/{instance}/watchlists/{watchlist}/entities/{entity}',
+        ),
       referenceListPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/referenceLists/{reference_list}',
       ),
@@ -281,6 +296,12 @@ export class RuleServiceClient {
       ),
       ruleExecutionErrorPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/ruleExecutionErrors/{rule_execution_error}',
+      ),
+      searchSessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/searchSessions/{search_session}',
+      ),
+      searchedResultPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/searchSessions/{search_session}/searchedResults/{searched_result}',
       ),
       watchlistPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/watchlists/{watchlist}',
@@ -632,7 +653,7 @@ export class RuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createRule request %j', request);
+    this._log.debug('createRule request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IRule,
@@ -643,7 +664,7 @@ export class RuleServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createRule response %j', response);
+          this._log.debug('createRule response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -655,7 +676,7 @@ export class RuleServiceClient {
           protos.google.cloud.chronicle.v1.ICreateRuleRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createRule response %j', response);
+          this._log.debug('createRule response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -763,7 +784,7 @@ export class RuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRule request %j', request);
+    this._log.debug('getRule request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IRule,
@@ -772,7 +793,7 @@ export class RuleServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getRule response %j', response);
+          this._log.debug('getRule response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -784,7 +805,7 @@ export class RuleServiceClient {
           protos.google.cloud.chronicle.v1.IGetRuleRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getRule response %j', response);
+          this._log.debug('getRule response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -896,7 +917,7 @@ export class RuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateRule request %j', request);
+    this._log.debug('updateRule request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IRule,
@@ -907,7 +928,7 @@ export class RuleServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateRule response %j', response);
+          this._log.debug('updateRule response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -919,7 +940,7 @@ export class RuleServiceClient {
           protos.google.cloud.chronicle.v1.IUpdateRuleRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateRule response %j', response);
+          this._log.debug('updateRule response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1034,7 +1055,7 @@ export class RuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteRule request %j', request);
+    this._log.debug('deleteRule request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1045,7 +1066,7 @@ export class RuleServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteRule response %j', response);
+          this._log.debug('deleteRule response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1057,7 +1078,7 @@ export class RuleServiceClient {
           protos.google.cloud.chronicle.v1.IDeleteRuleRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteRule response %j', response);
+          this._log.debug('deleteRule response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1172,7 +1193,7 @@ export class RuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('verifyRuleText request %j', request);
+    this._log.debug('verifyRuleText request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IVerifyRuleTextResponse,
@@ -1183,7 +1204,7 @@ export class RuleServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('verifyRuleText response %j', response);
+          this._log.debug('verifyRuleText response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1195,7 +1216,7 @@ export class RuleServiceClient {
           protos.google.cloud.chronicle.v1.IVerifyRuleTextRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('verifyRuleText response %j', response);
+          this._log.debug('verifyRuleText response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1302,7 +1323,7 @@ export class RuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRetrohunt request %j', request);
+    this._log.debug('getRetrohunt request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IRetrohunt,
@@ -1313,7 +1334,7 @@ export class RuleServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getRetrohunt response %j', response);
+          this._log.debug('getRetrohunt response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1325,7 +1346,7 @@ export class RuleServiceClient {
           protos.google.cloud.chronicle.v1.IGetRetrohuntRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getRetrohunt response %j', response);
+          this._log.debug('getRetrohunt response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1438,7 +1459,7 @@ export class RuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getRuleDeployment request %j', request);
+    this._log.debug('getRuleDeployment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IRuleDeployment,
@@ -1449,7 +1470,7 @@ export class RuleServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getRuleDeployment response %j', response);
+          this._log.debug('getRuleDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1464,7 +1485,7 @@ export class RuleServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getRuleDeployment response %j', response);
+          this._log.debug('getRuleDeployment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1584,7 +1605,7 @@ export class RuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateRuleDeployment request %j', request);
+    this._log.debug('updateRuleDeployment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.chronicle.v1.IRuleDeployment,
@@ -1595,7 +1616,7 @@ export class RuleServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateRuleDeployment response %j', response);
+          this._log.debug('updateRuleDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1610,7 +1631,7 @@ export class RuleServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateRuleDeployment response %j', response);
+          this._log.debug('updateRuleDeployment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1749,11 +1770,11 @@ export class RuleServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createRetrohunt response %j', rawResponse);
+          this._log.debug('createRetrohunt response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createRetrohunt request %j', request);
+    this._log.debug('createRetrohunt request %j', request);
     return this.innerApiCalls
       .createRetrohunt(request, options, wrappedCallback)
       ?.then(
@@ -1765,7 +1786,7 @@ export class RuleServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createRetrohunt response %j', rawResponse);
+          this._log.debug('createRetrohunt response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1922,11 +1943,11 @@ export class RuleServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRules values %j', values);
+          this._log.debug('listRules values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRules request %j', request);
+    this._log.debug('listRules request %j', request);
     return this.innerApiCalls
       .listRules(request, options, wrappedCallback)
       ?.then(
@@ -1935,7 +1956,7 @@ export class RuleServiceClient {
           protos.google.cloud.chronicle.v1.IListRulesRequest | null,
           protos.google.cloud.chronicle.v1.IListRulesResponse,
         ]) => {
-          this._log.info('listRules values %j', response);
+          this._log.debug('listRules values %j', response);
           return [response, input, output];
         },
       );
@@ -1995,7 +2016,7 @@ export class RuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRules stream %j', request);
+    this._log.debug('listRules stream %j', request);
     return this.descriptors.page.listRules.createStream(
       this.innerApiCalls.listRules as GaxCall,
       request,
@@ -2060,7 +2081,7 @@ export class RuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRules iterate %j', request);
+    this._log.debug('listRules iterate %j', request);
     return this.descriptors.page.listRules.asyncIterate(
       this.innerApiCalls['listRules'] as GaxCall,
       request as {},
@@ -2186,11 +2207,11 @@ export class RuleServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRuleRevisions values %j', values);
+          this._log.debug('listRuleRevisions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRuleRevisions request %j', request);
+    this._log.debug('listRuleRevisions request %j', request);
     return this.innerApiCalls
       .listRuleRevisions(request, options, wrappedCallback)
       ?.then(
@@ -2199,7 +2220,7 @@ export class RuleServiceClient {
           protos.google.cloud.chronicle.v1.IListRuleRevisionsRequest | null,
           protos.google.cloud.chronicle.v1.IListRuleRevisionsResponse,
         ]) => {
-          this._log.info('listRuleRevisions values %j', response);
+          this._log.debug('listRuleRevisions values %j', response);
           return [response, input, output];
         },
       );
@@ -2255,7 +2276,7 @@ export class RuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRuleRevisions stream %j', request);
+    this._log.debug('listRuleRevisions stream %j', request);
     return this.descriptors.page.listRuleRevisions.createStream(
       this.innerApiCalls.listRuleRevisions as GaxCall,
       request,
@@ -2316,7 +2337,7 @@ export class RuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRuleRevisions iterate %j', request);
+    this._log.debug('listRuleRevisions iterate %j', request);
     return this.descriptors.page.listRuleRevisions.asyncIterate(
       this.innerApiCalls['listRuleRevisions'] as GaxCall,
       request as {},
@@ -2443,11 +2464,11 @@ export class RuleServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRetrohunts values %j', values);
+          this._log.debug('listRetrohunts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRetrohunts request %j', request);
+    this._log.debug('listRetrohunts request %j', request);
     return this.innerApiCalls
       .listRetrohunts(request, options, wrappedCallback)
       ?.then(
@@ -2456,7 +2477,7 @@ export class RuleServiceClient {
           protos.google.cloud.chronicle.v1.IListRetrohuntsRequest | null,
           protos.google.cloud.chronicle.v1.IListRetrohuntsResponse,
         ]) => {
-          this._log.info('listRetrohunts values %j', response);
+          this._log.debug('listRetrohunts values %j', response);
           return [response, input, output];
         },
       );
@@ -2513,7 +2534,7 @@ export class RuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRetrohunts stream %j', request);
+    this._log.debug('listRetrohunts stream %j', request);
     return this.descriptors.page.listRetrohunts.createStream(
       this.innerApiCalls.listRetrohunts as GaxCall,
       request,
@@ -2575,7 +2596,7 @@ export class RuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRetrohunts iterate %j', request);
+    this._log.debug('listRetrohunts iterate %j', request);
     return this.descriptors.page.listRetrohunts.asyncIterate(
       this.innerApiCalls['listRetrohunts'] as GaxCall,
       request as {},
@@ -2703,11 +2724,11 @@ export class RuleServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRuleDeployments values %j', values);
+          this._log.debug('listRuleDeployments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listRuleDeployments request %j', request);
+    this._log.debug('listRuleDeployments request %j', request);
     return this.innerApiCalls
       .listRuleDeployments(request, options, wrappedCallback)
       ?.then(
@@ -2716,7 +2737,7 @@ export class RuleServiceClient {
           protos.google.cloud.chronicle.v1.IListRuleDeploymentsRequest | null,
           protos.google.cloud.chronicle.v1.IListRuleDeploymentsResponse,
         ]) => {
-          this._log.info('listRuleDeployments values %j', response);
+          this._log.debug('listRuleDeployments values %j', response);
           return [response, input, output];
         },
       );
@@ -2774,7 +2795,7 @@ export class RuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRuleDeployments stream %j', request);
+    this._log.debug('listRuleDeployments stream %j', request);
     return this.descriptors.page.listRuleDeployments.createStream(
       this.innerApiCalls.listRuleDeployments as GaxCall,
       request,
@@ -2837,7 +2858,7 @@ export class RuleServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRuleDeployments iterate %j', request);
+    this._log.debug('listRuleDeployments iterate %j', request);
     return this.descriptors.page.listRuleDeployments.asyncIterate(
       this.innerApiCalls['listRuleDeployments'] as GaxCall,
       request as {},
@@ -3667,6 +3688,73 @@ export class RuleServiceClient {
   }
 
   /**
+   * Return a fully-qualified event resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} event
+   * @returns {string} Resource name string.
+   */
+  eventPath(
+    project: string,
+    location: string,
+    instance: string,
+    event: string,
+  ) {
+    return this.pathTemplates.eventPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      event: event,
+    });
+  }
+
+  /**
+   * Parse the project from Event resource.
+   *
+   * @param {string} eventName
+   *   A fully-qualified path representing Event resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEventName(eventName: string) {
+    return this.pathTemplates.eventPathTemplate.match(eventName).project;
+  }
+
+  /**
+   * Parse the location from Event resource.
+   *
+   * @param {string} eventName
+   *   A fully-qualified path representing Event resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEventName(eventName: string) {
+    return this.pathTemplates.eventPathTemplate.match(eventName).location;
+  }
+
+  /**
+   * Parse the instance from Event resource.
+   *
+   * @param {string} eventName
+   *   A fully-qualified path representing Event resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromEventName(eventName: string) {
+    return this.pathTemplates.eventPathTemplate.match(eventName).instance;
+  }
+
+  /**
+   * Parse the event from Event resource.
+   *
+   * @param {string} eventName
+   *   A fully-qualified path representing Event resource.
+   * @returns {string} A string representing the event.
+   */
+  matchEventFromEventName(eventName: string) {
+    return this.pathTemplates.eventPathTemplate.match(eventName).event;
+  }
+
+  /**
    * Return a fully-qualified featuredContentNativeDashboard resource name string.
    *
    * @param {string} project
@@ -4465,6 +4553,297 @@ export class RuleServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationInstanceAnalyticEntities resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} analytic
+   * @param {string} entity
+   * @returns {string} Resource name string.
+   */
+  projectLocationInstanceAnalyticEntitiesPath(
+    project: string,
+    location: string,
+    instance: string,
+    analytic: string,
+    entity: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        instance: instance,
+        analytic: analytic,
+        entity: entity,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationInstanceAnalyticEntities resource.
+   *
+   * @param {string} projectLocationInstanceAnalyticEntitiesName
+   *   A fully-qualified path representing project_location_instance_analytic_entities resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationInstanceAnalyticEntitiesName(
+    projectLocationInstanceAnalyticEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.match(
+      projectLocationInstanceAnalyticEntitiesName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationInstanceAnalyticEntities resource.
+   *
+   * @param {string} projectLocationInstanceAnalyticEntitiesName
+   *   A fully-qualified path representing project_location_instance_analytic_entities resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationInstanceAnalyticEntitiesName(
+    projectLocationInstanceAnalyticEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.match(
+      projectLocationInstanceAnalyticEntitiesName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from ProjectLocationInstanceAnalyticEntities resource.
+   *
+   * @param {string} projectLocationInstanceAnalyticEntitiesName
+   *   A fully-qualified path representing project_location_instance_analytic_entities resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromProjectLocationInstanceAnalyticEntitiesName(
+    projectLocationInstanceAnalyticEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.match(
+      projectLocationInstanceAnalyticEntitiesName,
+    ).instance;
+  }
+
+  /**
+   * Parse the analytic from ProjectLocationInstanceAnalyticEntities resource.
+   *
+   * @param {string} projectLocationInstanceAnalyticEntitiesName
+   *   A fully-qualified path representing project_location_instance_analytic_entities resource.
+   * @returns {string} A string representing the analytic.
+   */
+  matchAnalyticFromProjectLocationInstanceAnalyticEntitiesName(
+    projectLocationInstanceAnalyticEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.match(
+      projectLocationInstanceAnalyticEntitiesName,
+    ).analytic;
+  }
+
+  /**
+   * Parse the entity from ProjectLocationInstanceAnalyticEntities resource.
+   *
+   * @param {string} projectLocationInstanceAnalyticEntitiesName
+   *   A fully-qualified path representing project_location_instance_analytic_entities resource.
+   * @returns {string} A string representing the entity.
+   */
+  matchEntityFromProjectLocationInstanceAnalyticEntitiesName(
+    projectLocationInstanceAnalyticEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceAnalyticEntitiesPathTemplate.match(
+      projectLocationInstanceAnalyticEntitiesName,
+    ).entity;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationInstanceEntities resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} entity
+   * @returns {string} Resource name string.
+   */
+  projectLocationInstanceEntitiesPath(
+    project: string,
+    location: string,
+    instance: string,
+    entity: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceEntitiesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        instance: instance,
+        entity: entity,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationInstanceEntities resource.
+   *
+   * @param {string} projectLocationInstanceEntitiesName
+   *   A fully-qualified path representing project_location_instance_entities resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationInstanceEntitiesName(
+    projectLocationInstanceEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceEntitiesPathTemplate.match(
+      projectLocationInstanceEntitiesName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationInstanceEntities resource.
+   *
+   * @param {string} projectLocationInstanceEntitiesName
+   *   A fully-qualified path representing project_location_instance_entities resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationInstanceEntitiesName(
+    projectLocationInstanceEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceEntitiesPathTemplate.match(
+      projectLocationInstanceEntitiesName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from ProjectLocationInstanceEntities resource.
+   *
+   * @param {string} projectLocationInstanceEntitiesName
+   *   A fully-qualified path representing project_location_instance_entities resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromProjectLocationInstanceEntitiesName(
+    projectLocationInstanceEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceEntitiesPathTemplate.match(
+      projectLocationInstanceEntitiesName,
+    ).instance;
+  }
+
+  /**
+   * Parse the entity from ProjectLocationInstanceEntities resource.
+   *
+   * @param {string} projectLocationInstanceEntitiesName
+   *   A fully-qualified path representing project_location_instance_entities resource.
+   * @returns {string} A string representing the entity.
+   */
+  matchEntityFromProjectLocationInstanceEntitiesName(
+    projectLocationInstanceEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceEntitiesPathTemplate.match(
+      projectLocationInstanceEntitiesName,
+    ).entity;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationInstanceWatchlistEntities resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} watchlist
+   * @param {string} entity
+   * @returns {string} Resource name string.
+   */
+  projectLocationInstanceWatchlistEntitiesPath(
+    project: string,
+    location: string,
+    instance: string,
+    watchlist: string,
+    entity: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        instance: instance,
+        watchlist: watchlist,
+        entity: entity,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationInstanceWatchlistEntities resource.
+   *
+   * @param {string} projectLocationInstanceWatchlistEntitiesName
+   *   A fully-qualified path representing project_location_instance_watchlist_entities resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationInstanceWatchlistEntitiesName(
+    projectLocationInstanceWatchlistEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.match(
+      projectLocationInstanceWatchlistEntitiesName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationInstanceWatchlistEntities resource.
+   *
+   * @param {string} projectLocationInstanceWatchlistEntitiesName
+   *   A fully-qualified path representing project_location_instance_watchlist_entities resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationInstanceWatchlistEntitiesName(
+    projectLocationInstanceWatchlistEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.match(
+      projectLocationInstanceWatchlistEntitiesName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from ProjectLocationInstanceWatchlistEntities resource.
+   *
+   * @param {string} projectLocationInstanceWatchlistEntitiesName
+   *   A fully-qualified path representing project_location_instance_watchlist_entities resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromProjectLocationInstanceWatchlistEntitiesName(
+    projectLocationInstanceWatchlistEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.match(
+      projectLocationInstanceWatchlistEntitiesName,
+    ).instance;
+  }
+
+  /**
+   * Parse the watchlist from ProjectLocationInstanceWatchlistEntities resource.
+   *
+   * @param {string} projectLocationInstanceWatchlistEntitiesName
+   *   A fully-qualified path representing project_location_instance_watchlist_entities resource.
+   * @returns {string} A string representing the watchlist.
+   */
+  matchWatchlistFromProjectLocationInstanceWatchlistEntitiesName(
+    projectLocationInstanceWatchlistEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.match(
+      projectLocationInstanceWatchlistEntitiesName,
+    ).watchlist;
+  }
+
+  /**
+   * Parse the entity from ProjectLocationInstanceWatchlistEntities resource.
+   *
+   * @param {string} projectLocationInstanceWatchlistEntitiesName
+   *   A fully-qualified path representing project_location_instance_watchlist_entities resource.
+   * @returns {string} A string representing the entity.
+   */
+  matchEntityFromProjectLocationInstanceWatchlistEntitiesName(
+    projectLocationInstanceWatchlistEntitiesName: string,
+  ) {
+    return this.pathTemplates.projectLocationInstanceWatchlistEntitiesPathTemplate.match(
+      projectLocationInstanceWatchlistEntitiesName,
+    ).entity;
+  }
+
+  /**
    * Return a fully-qualified referenceList resource name string.
    *
    * @param {string} project
@@ -4832,6 +5211,168 @@ export class RuleServiceClient {
     return this.pathTemplates.ruleExecutionErrorPathTemplate.match(
       ruleExecutionErrorName,
     ).rule_execution_error;
+  }
+
+  /**
+   * Return a fully-qualified searchSession resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} search_session
+   * @returns {string} Resource name string.
+   */
+  searchSessionPath(
+    project: string,
+    location: string,
+    instance: string,
+    searchSession: string,
+  ) {
+    return this.pathTemplates.searchSessionPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      search_session: searchSession,
+    });
+  }
+
+  /**
+   * Parse the project from SearchSession resource.
+   *
+   * @param {string} searchSessionName
+   *   A fully-qualified path representing SearchSession resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSearchSessionName(searchSessionName: string) {
+    return this.pathTemplates.searchSessionPathTemplate.match(searchSessionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from SearchSession resource.
+   *
+   * @param {string} searchSessionName
+   *   A fully-qualified path representing SearchSession resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSearchSessionName(searchSessionName: string) {
+    return this.pathTemplates.searchSessionPathTemplate.match(searchSessionName)
+      .location;
+  }
+
+  /**
+   * Parse the instance from SearchSession resource.
+   *
+   * @param {string} searchSessionName
+   *   A fully-qualified path representing SearchSession resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromSearchSessionName(searchSessionName: string) {
+    return this.pathTemplates.searchSessionPathTemplate.match(searchSessionName)
+      .instance;
+  }
+
+  /**
+   * Parse the search_session from SearchSession resource.
+   *
+   * @param {string} searchSessionName
+   *   A fully-qualified path representing SearchSession resource.
+   * @returns {string} A string representing the search_session.
+   */
+  matchSearchSessionFromSearchSessionName(searchSessionName: string) {
+    return this.pathTemplates.searchSessionPathTemplate.match(searchSessionName)
+      .search_session;
+  }
+
+  /**
+   * Return a fully-qualified searchedResult resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} search_session
+   * @param {string} searched_result
+   * @returns {string} Resource name string.
+   */
+  searchedResultPath(
+    project: string,
+    location: string,
+    instance: string,
+    searchSession: string,
+    searchedResult: string,
+  ) {
+    return this.pathTemplates.searchedResultPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      search_session: searchSession,
+      searched_result: searchedResult,
+    });
+  }
+
+  /**
+   * Parse the project from SearchedResult resource.
+   *
+   * @param {string} searchedResultName
+   *   A fully-qualified path representing SearchedResult resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSearchedResultName(searchedResultName: string) {
+    return this.pathTemplates.searchedResultPathTemplate.match(
+      searchedResultName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from SearchedResult resource.
+   *
+   * @param {string} searchedResultName
+   *   A fully-qualified path representing SearchedResult resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSearchedResultName(searchedResultName: string) {
+    return this.pathTemplates.searchedResultPathTemplate.match(
+      searchedResultName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from SearchedResult resource.
+   *
+   * @param {string} searchedResultName
+   *   A fully-qualified path representing SearchedResult resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromSearchedResultName(searchedResultName: string) {
+    return this.pathTemplates.searchedResultPathTemplate.match(
+      searchedResultName,
+    ).instance;
+  }
+
+  /**
+   * Parse the search_session from SearchedResult resource.
+   *
+   * @param {string} searchedResultName
+   *   A fully-qualified path representing SearchedResult resource.
+   * @returns {string} A string representing the search_session.
+   */
+  matchSearchSessionFromSearchedResultName(searchedResultName: string) {
+    return this.pathTemplates.searchedResultPathTemplate.match(
+      searchedResultName,
+    ).search_session;
+  }
+
+  /**
+   * Parse the searched_result from SearchedResult resource.
+   *
+   * @param {string} searchedResultName
+   *   A fully-qualified path representing SearchedResult resource.
+   * @returns {string} A string representing the searched_result.
+   */
+  matchSearchedResultFromSearchedResultName(searchedResultName: string) {
+    return this.pathTemplates.searchedResultPathTemplate.match(
+      searchedResultName,
+    ).searched_result;
   }
 
   /**

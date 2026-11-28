@@ -475,7 +475,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createAssessment request %j', request);
+    this._log.debug('createAssessment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.recaptchaenterprise.v1beta1.IAssessment,
@@ -486,7 +486,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createAssessment response %j', response);
+          this._log.debug('createAssessment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -501,7 +501,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('createAssessment response %j', response);
+          this._log.debug('createAssessment response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -635,7 +635,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('annotateAssessment request %j', request);
+    this._log.debug('annotateAssessment request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.recaptchaenterprise.v1beta1.IAnnotateAssessmentResponse,
@@ -646,7 +646,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('annotateAssessment response %j', response);
+          this._log.debug('annotateAssessment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -661,7 +661,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('annotateAssessment response %j', response);
+          this._log.debug('annotateAssessment response %j', response);
           return [response, options, rawResponse];
         },
       )

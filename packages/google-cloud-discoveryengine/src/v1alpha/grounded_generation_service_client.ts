@@ -640,7 +640,7 @@ export class GroundedGenerationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('checkGrounding request %j', request);
+    this._log.debug('checkGrounding request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1alpha.ICheckGroundingResponse,
@@ -651,7 +651,7 @@ export class GroundedGenerationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('checkGrounding response %j', response);
+          this._log.debug('checkGrounding response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -666,7 +666,7 @@ export class GroundedGenerationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('checkGrounding response %j', response);
+          this._log.debug('checkGrounding response %j', response);
           return [response, options, rawResponse];
         },
       )

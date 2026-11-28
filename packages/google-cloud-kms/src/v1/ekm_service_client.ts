@@ -534,7 +534,7 @@ export class EkmServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getEkmConnection request %j', request);
+    this._log.debug('getEkmConnection request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.kms.v1.IEkmConnection,
@@ -545,7 +545,7 @@ export class EkmServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getEkmConnection response %j', response);
+          this._log.debug('getEkmConnection response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -557,7 +557,7 @@ export class EkmServiceClient {
           protos.google.cloud.kms.v1.IGetEkmConnectionRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getEkmConnection response %j', response);
+          this._log.debug('getEkmConnection response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -671,7 +671,7 @@ export class EkmServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createEkmConnection request %j', request);
+    this._log.debug('createEkmConnection request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.kms.v1.IEkmConnection,
@@ -682,7 +682,7 @@ export class EkmServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createEkmConnection response %j', response);
+          this._log.debug('createEkmConnection response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -694,7 +694,7 @@ export class EkmServiceClient {
           protos.google.cloud.kms.v1.ICreateEkmConnectionRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createEkmConnection response %j', response);
+          this._log.debug('createEkmConnection response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -802,7 +802,7 @@ export class EkmServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateEkmConnection request %j', request);
+    this._log.debug('updateEkmConnection request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.kms.v1.IEkmConnection,
@@ -813,7 +813,7 @@ export class EkmServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateEkmConnection response %j', response);
+          this._log.debug('updateEkmConnection response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -825,7 +825,7 @@ export class EkmServiceClient {
           protos.google.cloud.kms.v1.IUpdateEkmConnectionRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateEkmConnection response %j', response);
+          this._log.debug('updateEkmConnection response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -930,7 +930,7 @@ export class EkmServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getEkmConfig request %j', request);
+    this._log.debug('getEkmConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.kms.v1.IEkmConfig,
@@ -939,7 +939,7 @@ export class EkmServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getEkmConfig response %j', response);
+          this._log.debug('getEkmConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -951,7 +951,7 @@ export class EkmServiceClient {
           protos.google.cloud.kms.v1.IGetEkmConfigRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getEkmConfig response %j', response);
+          this._log.debug('getEkmConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1057,7 +1057,7 @@ export class EkmServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateEkmConfig request %j', request);
+    this._log.debug('updateEkmConfig request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.kms.v1.IEkmConfig,
@@ -1066,7 +1066,7 @@ export class EkmServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateEkmConfig response %j', response);
+          this._log.debug('updateEkmConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1078,7 +1078,7 @@ export class EkmServiceClient {
           protos.google.cloud.kms.v1.IUpdateEkmConfigRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateEkmConfig response %j', response);
+          this._log.debug('updateEkmConfig response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1188,7 +1188,7 @@ export class EkmServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('verifyConnectivity request %j', request);
+    this._log.debug('verifyConnectivity request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.kms.v1.IVerifyConnectivityResponse,
@@ -1199,7 +1199,7 @@ export class EkmServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('verifyConnectivity response %j', response);
+          this._log.debug('verifyConnectivity response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1211,7 +1211,7 @@ export class EkmServiceClient {
           protos.google.cloud.kms.v1.IVerifyConnectivityRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('verifyConnectivity response %j', response);
+          this._log.debug('verifyConnectivity response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1353,11 +1353,11 @@ export class EkmServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listEkmConnections values %j', values);
+          this._log.debug('listEkmConnections values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listEkmConnections request %j', request);
+    this._log.debug('listEkmConnections request %j', request);
     return this.innerApiCalls
       .listEkmConnections(request, options, wrappedCallback)
       ?.then(
@@ -1366,7 +1366,7 @@ export class EkmServiceClient {
           protos.google.cloud.kms.v1.IListEkmConnectionsRequest | null,
           protos.google.cloud.kms.v1.IListEkmConnectionsResponse,
         ]) => {
-          this._log.info('listEkmConnections values %j', response);
+          this._log.debug('listEkmConnections values %j', response);
           return [response, input, output];
         },
       );
@@ -1429,7 +1429,7 @@ export class EkmServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEkmConnections stream %j', request);
+    this._log.debug('listEkmConnections stream %j', request);
     return this.descriptors.page.listEkmConnections.createStream(
       this.innerApiCalls.listEkmConnections as GaxCall,
       request,
@@ -1497,7 +1497,7 @@ export class EkmServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEkmConnections iterate %j', request);
+    this._log.debug('listEkmConnections iterate %j', request);
     return this.descriptors.page.listEkmConnections.asyncIterate(
       this.innerApiCalls['listEkmConnections'] as GaxCall,
       request as {},

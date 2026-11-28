@@ -668,7 +668,7 @@ export class TranslationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('translateText request %j', request);
+    this._log.debug('translateText request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.translation.v3beta1.ITranslateTextResponse,
@@ -679,7 +679,7 @@ export class TranslationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('translateText response %j', response);
+          this._log.debug('translateText response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -694,7 +694,7 @@ export class TranslationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('translateText response %j', response);
+          this._log.debug('translateText response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -845,7 +845,7 @@ export class TranslationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('detectLanguage request %j', request);
+    this._log.debug('detectLanguage request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.translation.v3beta1.IDetectLanguageResponse,
@@ -856,7 +856,7 @@ export class TranslationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('detectLanguage response %j', response);
+          this._log.debug('detectLanguage response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -871,7 +871,7 @@ export class TranslationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('detectLanguage response %j', response);
+          this._log.debug('detectLanguage response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1018,7 +1018,7 @@ export class TranslationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSupportedLanguages request %j', request);
+    this._log.debug('getSupportedLanguages request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.translation.v3beta1.ISupportedLanguages,
@@ -1029,7 +1029,7 @@ export class TranslationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSupportedLanguages response %j', response);
+          this._log.debug('getSupportedLanguages response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1044,7 +1044,7 @@ export class TranslationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getSupportedLanguages response %j', response);
+          this._log.debug('getSupportedLanguages response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1235,7 +1235,7 @@ export class TranslationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('translateDocument request %j', request);
+    this._log.debug('translateDocument request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.translation.v3beta1.ITranslateDocumentResponse,
@@ -1246,7 +1246,7 @@ export class TranslationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('translateDocument response %j', response);
+          this._log.debug('translateDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1261,7 +1261,7 @@ export class TranslationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('translateDocument response %j', response);
+          this._log.debug('translateDocument response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1373,7 +1373,7 @@ export class TranslationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getGlossary request %j', request);
+    this._log.debug('getGlossary request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.translation.v3beta1.IGlossary,
@@ -1384,7 +1384,7 @@ export class TranslationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getGlossary response %j', response);
+          this._log.debug('getGlossary response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1399,7 +1399,7 @@ export class TranslationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getGlossary response %j', response);
+          this._log.debug('getGlossary response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1525,7 +1525,7 @@ export class TranslationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('refineText request %j', request);
+    this._log.debug('refineText request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.translation.v3beta1.IRefineTextResponse,
@@ -1536,7 +1536,7 @@ export class TranslationServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('refineText response %j', response);
+          this._log.debug('refineText response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1551,7 +1551,7 @@ export class TranslationServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('refineText response %j', response);
+          this._log.debug('refineText response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1745,11 +1745,11 @@ export class TranslationServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('batchTranslateText response %j', rawResponse);
+          this._log.debug('batchTranslateText response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('batchTranslateText request %j', request);
+    this._log.debug('batchTranslateText request %j', request);
     return this.innerApiCalls
       .batchTranslateText(request, options, wrappedCallback)
       ?.then(
@@ -1761,7 +1761,7 @@ export class TranslationServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchTranslateText response %j', rawResponse);
+          this._log.debug('batchTranslateText response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1989,11 +1989,11 @@ export class TranslationServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('batchTranslateDocument response %j', rawResponse);
+          this._log.debug('batchTranslateDocument response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('batchTranslateDocument request %j', request);
+    this._log.debug('batchTranslateDocument request %j', request);
     return this.innerApiCalls
       .batchTranslateDocument(request, options, wrappedCallback)
       ?.then(
@@ -2005,7 +2005,7 @@ export class TranslationServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchTranslateDocument response %j', rawResponse);
+          this._log.debug('batchTranslateDocument response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2161,11 +2161,11 @@ export class TranslationServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createGlossary response %j', rawResponse);
+          this._log.debug('createGlossary response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createGlossary request %j', request);
+    this._log.debug('createGlossary request %j', request);
     return this.innerApiCalls
       .createGlossary(request, options, wrappedCallback)
       ?.then(
@@ -2177,7 +2177,7 @@ export class TranslationServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createGlossary response %j', rawResponse);
+          this._log.debug('createGlossary response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2332,11 +2332,11 @@ export class TranslationServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteGlossary response %j', rawResponse);
+          this._log.debug('deleteGlossary response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteGlossary request %j', request);
+    this._log.debug('deleteGlossary request %j', request);
     return this.innerApiCalls
       .deleteGlossary(request, options, wrappedCallback)
       ?.then(
@@ -2348,7 +2348,7 @@ export class TranslationServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteGlossary response %j', rawResponse);
+          this._log.debug('deleteGlossary response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2517,11 +2517,11 @@ export class TranslationServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listGlossaries values %j', values);
+          this._log.debug('listGlossaries values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listGlossaries request %j', request);
+    this._log.debug('listGlossaries request %j', request);
     return this.innerApiCalls
       .listGlossaries(request, options, wrappedCallback)
       ?.then(
@@ -2530,7 +2530,7 @@ export class TranslationServiceClient {
           protos.google.cloud.translation.v3beta1.IListGlossariesRequest | null,
           protos.google.cloud.translation.v3beta1.IListGlossariesResponse,
         ]) => {
-          this._log.info('listGlossaries values %j', response);
+          this._log.debug('listGlossaries values %j', response);
           return [response, input, output];
         },
       );
@@ -2595,7 +2595,7 @@ export class TranslationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listGlossaries stream %j', request);
+    this._log.debug('listGlossaries stream %j', request);
     return this.descriptors.page.listGlossaries.createStream(
       this.innerApiCalls.listGlossaries as GaxCall,
       request,
@@ -2665,7 +2665,7 @@ export class TranslationServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listGlossaries iterate %j', request);
+    this._log.debug('listGlossaries iterate %j', request);
     return this.descriptors.page.listGlossaries.asyncIterate(
       this.innerApiCalls['listGlossaries'] as GaxCall,
       request as {},

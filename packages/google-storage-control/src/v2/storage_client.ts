@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -77,7 +77,7 @@ export class StorageClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('storage-control');
@@ -90,9 +90,9 @@ export class StorageClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  storageStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  storageStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of StorageClient.
@@ -168,7 +168,7 @@ export class StorageClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -255,7 +255,7 @@ export class StorageClient {
       'google.storage.v2.Storage',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -295,7 +295,7 @@ export class StorageClient {
           (this._protos as any).google.storage.v2.Storage,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -309,7 +309,7 @@ export class StorageClient {
     ];
     for (const methodName of storageStubMethods) {
       const callPromise = this.storageStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -536,16 +536,16 @@ export class StorageClient {
         const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteBucket request %j', request);
+    this._log.debug('deleteBucket request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -554,7 +554,7 @@ export class StorageClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteBucket response %j', response);
+          this._log.debug('deleteBucket response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -566,7 +566,7 @@ export class StorageClient {
           protos.google.storage.v2.IDeleteBucketRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteBucket response %j', response);
+          this._log.debug('deleteBucket response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -689,16 +689,16 @@ export class StorageClient {
         const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getBucket request %j', request);
+    this._log.debug('getBucket request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.storage.v2.IBucket,
@@ -707,7 +707,7 @@ export class StorageClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getBucket response %j', response);
+          this._log.debug('getBucket response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -719,7 +719,7 @@ export class StorageClient {
           protos.google.storage.v2.IGetBucketRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getBucket response %j', response);
+          this._log.debug('getBucket response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -858,7 +858,7 @@ export class StorageClient {
           .match(RegExp('(?<project>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['project'] ?? fieldValue;
-          Object.assign(routingParameter, { project: parameterValue });
+          Object.assign(routingParameter, {project: parameterValue});
         }
       }
     }
@@ -870,16 +870,16 @@ export class StorageClient {
           .match(RegExp('(?<project>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['project'] ?? fieldValue;
-          Object.assign(routingParameter, { project: parameterValue });
+          Object.assign(routingParameter, {project: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createBucket request %j', request);
+    this._log.debug('createBucket request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.storage.v2.IBucket,
@@ -888,7 +888,7 @@ export class StorageClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createBucket response %j', response);
+          this._log.debug('createBucket response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -900,7 +900,7 @@ export class StorageClient {
           protos.google.storage.v2.ICreateBucketRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createBucket response %j', response);
+          this._log.debug('createBucket response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1032,16 +1032,16 @@ export class StorageClient {
         const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('lockBucketRetentionPolicy request %j', request);
+    this._log.debug('lockBucketRetentionPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.storage.v2.IBucket,
@@ -1052,7 +1052,7 @@ export class StorageClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('lockBucketRetentionPolicy response %j', response);
+          this._log.debug('lockBucketRetentionPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1067,7 +1067,7 @@ export class StorageClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('lockBucketRetentionPolicy response %j', response);
+          this._log.debug('lockBucketRetentionPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1206,16 +1206,16 @@ export class StorageClient {
         const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateBucket request %j', request);
+    this._log.debug('updateBucket request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.storage.v2.IBucket,
@@ -1224,7 +1224,7 @@ export class StorageClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateBucket response %j', response);
+          this._log.debug('updateBucket response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1236,7 +1236,7 @@ export class StorageClient {
           protos.google.storage.v2.IUpdateBucketRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateBucket response %j', response);
+          this._log.debug('updateBucket response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1373,13 +1373,13 @@ export class StorageClient {
           .match(RegExp('(?<project>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['project'] ?? fieldValue;
-          Object.assign(routingParameter, { project: parameterValue });
+          Object.assign(routingParameter, {project: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1390,11 +1390,11 @@ export class StorageClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listBuckets values %j', values);
+          this._log.debug('listBuckets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listBuckets request %j', request);
+    this._log.debug('listBuckets request %j', request);
     return this.innerApiCalls
       .listBuckets(request, options, wrappedCallback)
       ?.then(
@@ -1403,7 +1403,7 @@ export class StorageClient {
           protos.google.storage.v2.IListBucketsRequest | null,
           protos.google.storage.v2.IListBucketsResponse,
         ]) => {
-          this._log.info('listBuckets values %j', response);
+          this._log.debug('listBuckets values %j', response);
           return [response, input, output];
         },
       );
@@ -1461,7 +1461,7 @@ export class StorageClient {
           .match(RegExp('(?<project>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['project'] ?? fieldValue;
-          Object.assign(routingParameter, { project: parameterValue });
+          Object.assign(routingParameter, {project: parameterValue});
         }
       }
     }
@@ -1469,10 +1469,10 @@ export class StorageClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listBuckets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBuckets stream %j', request);
+    this._log.debug('listBuckets stream %j', request);
     return this.descriptors.page.listBuckets.createStream(
       this.innerApiCalls.listBuckets as GaxCall,
       request,
@@ -1535,7 +1535,7 @@ export class StorageClient {
           .match(RegExp('(?<project>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['project'] ?? fieldValue;
-          Object.assign(routingParameter, { project: parameterValue });
+          Object.assign(routingParameter, {project: parameterValue});
         }
       }
     }
@@ -1543,10 +1543,10 @@ export class StorageClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listBuckets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listBuckets iterate %j', request);
+    this._log.debug('listBuckets iterate %j', request);
     return this.descriptors.page.listBuckets.asyncIterate(
       this.innerApiCalls['listBuckets'] as GaxCall,
       request as {},
@@ -1695,7 +1695,7 @@ export class StorageClient {
    */
   close(): Promise<void> {
     if (this.storageStub && !this._terminated) {
-      return this.storageStub.then((stub) => {
+      return this.storageStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

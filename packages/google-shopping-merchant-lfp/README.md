@@ -65,13 +65,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get lfp store | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1/lfp_store_service.get_lfp_store.js) |
 | insert lfp store | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1/lfp_store_service.insert_lfp_store.js) |
 | list lfp stores | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1/lfp_store_service.list_lfp_stores.js) |
-| insert lfp inventory | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_inventory_service.insert_lfp_inventory.js) |
-| get lfp merchant state | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_merchant_state_service.get_lfp_merchant_state.js) |
-| insert lfp sale | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_sale_service.insert_lfp_sale.js) |
-| delete lfp store | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_store_service.delete_lfp_store.js) |
-| get lfp store | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_store_service.get_lfp_store.js) |
-| insert lfp store | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_store_service.insert_lfp_store.js) |
-| list lfp stores | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_store_service.list_lfp_stores.js) |
 
 
 ## Supported Node.js Versions

@@ -649,7 +649,7 @@ export class ClientGatewaysServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getClientGateway request %j', request);
+    this._log.debug('getClientGateway request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.beyondcorp.clientgateways.v1.IClientGateway,
@@ -660,7 +660,7 @@ export class ClientGatewaysServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getClientGateway response %j', response);
+          this._log.debug('getClientGateway response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -675,7 +675,7 @@ export class ClientGatewaysServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getClientGateway response %j', response);
+          this._log.debug('getClientGateway response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -834,11 +834,11 @@ export class ClientGatewaysServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createClientGateway response %j', rawResponse);
+          this._log.debug('createClientGateway response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createClientGateway request %j', request);
+    this._log.debug('createClientGateway request %j', request);
     return this.innerApiCalls
       .createClientGateway(request, options, wrappedCallback)
       ?.then(
@@ -850,7 +850,7 @@ export class ClientGatewaysServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createClientGateway response %j', rawResponse);
+          this._log.debug('createClientGateway response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1020,11 +1020,11 @@ export class ClientGatewaysServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteClientGateway response %j', rawResponse);
+          this._log.debug('deleteClientGateway response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteClientGateway request %j', request);
+    this._log.debug('deleteClientGateway request %j', request);
     return this.innerApiCalls
       .deleteClientGateway(request, options, wrappedCallback)
       ?.then(
@@ -1036,7 +1036,7 @@ export class ClientGatewaysServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteClientGateway response %j', rawResponse);
+          this._log.debug('deleteClientGateway response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1188,11 +1188,11 @@ export class ClientGatewaysServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listClientGateways values %j', values);
+          this._log.debug('listClientGateways values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listClientGateways request %j', request);
+    this._log.debug('listClientGateways request %j', request);
     return this.innerApiCalls
       .listClientGateways(request, options, wrappedCallback)
       ?.then(
@@ -1201,7 +1201,7 @@ export class ClientGatewaysServiceClient {
           protos.google.cloud.beyondcorp.clientgateways.v1.IListClientGatewaysRequest | null,
           protos.google.cloud.beyondcorp.clientgateways.v1.IListClientGatewaysResponse,
         ]) => {
-          this._log.info('listClientGateways values %j', response);
+          this._log.debug('listClientGateways values %j', response);
           return [response, input, output];
         },
       );
@@ -1250,7 +1250,7 @@ export class ClientGatewaysServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listClientGateways stream %j', request);
+    this._log.debug('listClientGateways stream %j', request);
     return this.descriptors.page.listClientGateways.createStream(
       this.innerApiCalls.listClientGateways as GaxCall,
       request,
@@ -1304,7 +1304,7 @@ export class ClientGatewaysServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listClientGateways iterate %j', request);
+    this._log.debug('listClientGateways iterate %j', request);
     return this.descriptors.page.listClientGateways.asyncIterate(
       this.innerApiCalls['listClientGateways'] as GaxCall,
       request as {},

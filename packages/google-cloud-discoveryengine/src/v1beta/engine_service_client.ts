@@ -859,7 +859,7 @@ export class EngineServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateEngine request %j', request);
+    this._log.debug('updateEngine request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1beta.IEngine,
@@ -870,7 +870,7 @@ export class EngineServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateEngine response %j', response);
+          this._log.debug('updateEngine response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -885,7 +885,7 @@ export class EngineServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateEngine response %j', response);
+          this._log.debug('updateEngine response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -998,7 +998,7 @@ export class EngineServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getEngine request %j', request);
+    this._log.debug('getEngine request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1beta.IEngine,
@@ -1009,7 +1009,7 @@ export class EngineServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getEngine response %j', response);
+          this._log.debug('getEngine response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1024,7 +1024,7 @@ export class EngineServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getEngine response %j', response);
+          this._log.debug('getEngine response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1146,7 +1146,7 @@ export class EngineServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('pauseEngine request %j', request);
+    this._log.debug('pauseEngine request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1beta.IEngine,
@@ -1157,7 +1157,7 @@ export class EngineServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('pauseEngine response %j', response);
+          this._log.debug('pauseEngine response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1172,7 +1172,7 @@ export class EngineServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('pauseEngine response %j', response);
+          this._log.debug('pauseEngine response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1294,7 +1294,7 @@ export class EngineServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('resumeEngine request %j', request);
+    this._log.debug('resumeEngine request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.discoveryengine.v1beta.IEngine,
@@ -1305,7 +1305,7 @@ export class EngineServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('resumeEngine response %j', response);
+          this._log.debug('resumeEngine response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1320,7 +1320,7 @@ export class EngineServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('resumeEngine response %j', response);
+          this._log.debug('resumeEngine response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1430,7 +1430,7 @@ export class EngineServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getIamPolicy request %j', request);
+    this._log.debug('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.IPolicy,
@@ -1439,7 +1439,7 @@ export class EngineServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1451,7 +1451,7 @@ export class EngineServiceClient {
           protos.google.iam.v1.IGetIamPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getIamPolicy response %j', response);
+          this._log.debug('getIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1578,7 +1578,7 @@ export class EngineServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('setIamPolicy request %j', request);
+    this._log.debug('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.iam.v1.IPolicy,
@@ -1587,7 +1587,7 @@ export class EngineServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('setIamPolicy response %j', response);
+          this._log.debug('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1599,7 +1599,7 @@ export class EngineServiceClient {
           protos.google.iam.v1.ISetIamPolicyRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('setIamPolicy response %j', response);
+          this._log.debug('setIamPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1747,11 +1747,11 @@ export class EngineServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createEngine response %j', rawResponse);
+          this._log.debug('createEngine response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createEngine request %j', request);
+    this._log.debug('createEngine request %j', request);
     return this.innerApiCalls
       .createEngine(request, options, wrappedCallback)
       ?.then(
@@ -1763,7 +1763,7 @@ export class EngineServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createEngine response %j', rawResponse);
+          this._log.debug('createEngine response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -1925,11 +1925,11 @@ export class EngineServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteEngine response %j', rawResponse);
+          this._log.debug('deleteEngine response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteEngine request %j', request);
+    this._log.debug('deleteEngine request %j', request);
     return this.innerApiCalls
       .deleteEngine(request, options, wrappedCallback)
       ?.then(
@@ -1941,7 +1941,7 @@ export class EngineServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteEngine response %j', rawResponse);
+          this._log.debug('deleteEngine response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2099,11 +2099,11 @@ export class EngineServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('tuneEngine response %j', rawResponse);
+          this._log.debug('tuneEngine response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('tuneEngine request %j', request);
+    this._log.debug('tuneEngine request %j', request);
     return this.innerApiCalls
       .tuneEngine(request, options, wrappedCallback)
       ?.then(
@@ -2115,7 +2115,7 @@ export class EngineServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('tuneEngine response %j', rawResponse);
+          this._log.debug('tuneEngine response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
@@ -2267,11 +2267,11 @@ export class EngineServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listEngines values %j', values);
+          this._log.debug('listEngines values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listEngines request %j', request);
+    this._log.debug('listEngines request %j', request);
     return this.innerApiCalls
       .listEngines(request, options, wrappedCallback)
       ?.then(
@@ -2280,7 +2280,7 @@ export class EngineServiceClient {
           protos.google.cloud.discoveryengine.v1beta.IListEnginesRequest | null,
           protos.google.cloud.discoveryengine.v1beta.IListEnginesResponse,
         ]) => {
-          this._log.info('listEngines values %j', response);
+          this._log.debug('listEngines values %j', response);
           return [response, input, output];
         },
       );
@@ -2328,7 +2328,7 @@ export class EngineServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEngines stream %j', request);
+    this._log.debug('listEngines stream %j', request);
     return this.descriptors.page.listEngines.createStream(
       this.innerApiCalls.listEngines as GaxCall,
       request,
@@ -2381,7 +2381,7 @@ export class EngineServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listEngines iterate %j', request);
+    this._log.debug('listEngines iterate %j', request);
     return this.descriptors.page.listEngines.asyncIterate(
       this.innerApiCalls['listEngines'] as GaxCall,
       request as {},

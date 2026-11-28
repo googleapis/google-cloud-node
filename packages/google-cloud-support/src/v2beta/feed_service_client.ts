@@ -519,11 +519,11 @@ export class FeedServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('showFeed values %j', values);
+          this._log.debug('showFeed values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('showFeed request %j', request);
+    this._log.debug('showFeed request %j', request);
     return this.innerApiCalls
       .showFeed(request, options, wrappedCallback)
       ?.then(
@@ -532,7 +532,7 @@ export class FeedServiceClient {
           protos.google.cloud.support.v2beta.IShowFeedRequest | null,
           protos.google.cloud.support.v2beta.IShowFeedResponse,
         ]) => {
-          this._log.info('showFeed values %j', response);
+          this._log.debug('showFeed values %j', response);
           return [response, input, output];
         },
       );
@@ -585,7 +585,7 @@ export class FeedServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('showFeed stream %j', request);
+    this._log.debug('showFeed stream %j', request);
     return this.descriptors.page.showFeed.createStream(
       this.innerApiCalls.showFeed as GaxCall,
       request,
@@ -643,7 +643,7 @@ export class FeedServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('showFeed iterate %j', request);
+    this._log.debug('showFeed iterate %j', request);
     return this.descriptors.page.showFeed.asyncIterate(
       this.innerApiCalls['showFeed'] as GaxCall,
       request as {},

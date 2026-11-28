@@ -20,7 +20,23 @@
         }
       },
       "methods": {
+        "CreateServingConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteServingConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "UpdateServingConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetServingConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListServingConfigs": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

@@ -482,7 +482,7 @@ export class LfpMerchantStateServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getLfpMerchantState request %j', request);
+    this._log.debug('getLfpMerchantState request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.shopping.merchant.lfp.v1.ILfpMerchantState,
@@ -493,7 +493,7 @@ export class LfpMerchantStateServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getLfpMerchantState response %j', response);
+          this._log.debug('getLfpMerchantState response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -508,7 +508,7 @@ export class LfpMerchantStateServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getLfpMerchantState response %j', response);
+          this._log.debug('getLfpMerchantState response %j', response);
           return [response, options, rawResponse];
         },
       )

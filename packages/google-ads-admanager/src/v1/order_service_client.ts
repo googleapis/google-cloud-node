@@ -211,6 +211,9 @@ export class OrderServiceClient {
       adBreakPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/liveStreamEventsByAssetKey/{asset_key}/adBreaks/{ad_break}',
       ),
+      adCategoryPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/adCategories/{ad_category}',
+      ),
       adReviewCenterAdPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/webProperties/{web_property_code}/adReviewCenterAds/{ad_review_center_ad}',
       ),
@@ -223,6 +226,9 @@ export class OrderServiceClient {
       adUnitPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/adUnits/{ad_unit}',
       ),
+      allocationDeliveryProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/allocationDeliveryProfiles/{allocation_delivery_profile}',
+      ),
       applicationPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/applications/{application}',
       ),
@@ -231,6 +237,9 @@ export class OrderServiceClient {
       ),
       audienceSegmentPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/audienceSegments/{audience_segment}',
+      ),
+      audienceSegmentCategoryPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/audienceSegmentCategories/{audience_segment_category}',
       ),
       bandwidthGroupPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/bandwidthGroups/{bandwidth_group}',
@@ -246,6 +255,9 @@ export class OrderServiceClient {
       ),
       cdnConfigPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/cdnConfigs/{cdn_config}',
+      ),
+      changeEventPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/changeEvents/{change_event}',
       ),
       childPublisherPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/childPublishers/{child_publisher}',
@@ -317,8 +329,14 @@ export class OrderServiceClient {
       entitySignalsMappingPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/entitySignalsMappings/{entity_signals_mapping}',
       ),
+      forecastAdjustmentPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/forecastAdjustments/{forecast_adjustment}',
+      ),
       geoTargetPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/geoTargets/{geo_target}',
+      ),
+      inventoryUrlPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/inventoryUrls/{inventory_url}',
       ),
       labelPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/labels/{label}',
@@ -380,6 +398,9 @@ export class OrderServiceClient {
       programmaticBuyerPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/programmaticBuyers/{programmatic_buyer}',
       ),
+      proposalPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/proposals/{proposal}',
+      ),
       reportPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/reports/{report}',
       ),
@@ -410,6 +431,9 @@ export class OrderServiceClient {
       thirdPartyCompanyPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/thirdPartyCompanies/{third_party_company}',
       ),
+      trafficForecastSegmentPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/trafficForecastSegments/{traffic_forecast_segment}',
+      ),
       userPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/users/{user}',
       ),
@@ -418,6 +442,12 @@ export class OrderServiceClient {
       ),
       webPropertyPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/webProperties/{web_property}',
+      ),
+      yieldGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/yieldGroups/{yield_group}',
+      ),
+      yieldPartnerPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/yieldPartners/{yield_partner}',
       ),
     };
 
@@ -702,7 +732,7 @@ export class OrderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getOrder request %j', request);
+    this._log.debug('getOrder request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IOrder,
@@ -711,7 +741,7 @@ export class OrderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getOrder response %j', response);
+          this._log.debug('getOrder response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -723,7 +753,7 @@ export class OrderServiceClient {
           protos.google.ads.admanager.v1.IGetOrderRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getOrder response %j', response);
+          this._log.debug('getOrder response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -840,7 +870,7 @@ export class OrderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchCreateOrders request %j', request);
+    this._log.debug('batchCreateOrders request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchCreateOrdersResponse,
@@ -851,7 +881,7 @@ export class OrderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchCreateOrders response %j', response);
+          this._log.debug('batchCreateOrders response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -863,7 +893,7 @@ export class OrderServiceClient {
           protos.google.ads.admanager.v1.IBatchCreateOrdersRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchCreateOrders response %j', response);
+          this._log.debug('batchCreateOrders response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -980,7 +1010,7 @@ export class OrderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUpdateOrders request %j', request);
+    this._log.debug('batchUpdateOrders request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUpdateOrdersResponse,
@@ -991,7 +1021,7 @@ export class OrderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUpdateOrders response %j', response);
+          this._log.debug('batchUpdateOrders response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1003,7 +1033,7 @@ export class OrderServiceClient {
           protos.google.ads.admanager.v1.IBatchUpdateOrdersRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchUpdateOrders response %j', response);
+          this._log.debug('batchUpdateOrders response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1121,7 +1151,7 @@ export class OrderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchApproveOrders request %j', request);
+    this._log.debug('batchApproveOrders request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchApproveOrdersResponse,
@@ -1132,7 +1162,7 @@ export class OrderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchApproveOrders response %j', response);
+          this._log.debug('batchApproveOrders response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1144,7 +1174,7 @@ export class OrderServiceClient {
           protos.google.ads.admanager.v1.IBatchApproveOrdersRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchApproveOrders response %j', response);
+          this._log.debug('batchApproveOrders response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1268,7 +1298,7 @@ export class OrderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchApproveAndOverbookOrders request %j', request);
+    this._log.debug('batchApproveAndOverbookOrders request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchApproveAndOverbookOrdersResponse,
@@ -1279,7 +1309,10 @@ export class OrderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchApproveAndOverbookOrders response %j', response);
+          this._log.debug(
+            'batchApproveAndOverbookOrders response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1294,7 +1327,10 @@ export class OrderServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchApproveAndOverbookOrders response %j', response);
+          this._log.debug(
+            'batchApproveAndOverbookOrders response %j',
+            response,
+          );
           return [response, options, rawResponse];
         },
       )
@@ -1418,7 +1454,7 @@ export class OrderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchSubmitOrdersForApproval request %j', request);
+    this._log.debug('batchSubmitOrdersForApproval request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchSubmitOrdersForApprovalResponse,
@@ -1429,7 +1465,7 @@ export class OrderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchSubmitOrdersForApproval response %j', response);
+          this._log.debug('batchSubmitOrdersForApproval response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1444,7 +1480,7 @@ export class OrderServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchSubmitOrdersForApproval response %j', response);
+          this._log.debug('batchSubmitOrdersForApproval response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1564,7 +1600,7 @@ export class OrderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'batchSubmitOrdersForApprovalAndOverbook request %j',
       request,
     );
@@ -1578,7 +1614,7 @@ export class OrderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchSubmitOrdersForApprovalAndOverbook response %j',
             response,
           );
@@ -1600,7 +1636,7 @@ export class OrderServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchSubmitOrdersForApprovalAndOverbook response %j',
             response,
           );
@@ -1725,7 +1761,7 @@ export class OrderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'batchSubmitOrdersForApprovalWithoutReservationChanges request %j',
       request,
     );
@@ -1739,7 +1775,7 @@ export class OrderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchSubmitOrdersForApprovalWithoutReservationChanges response %j',
             response,
           );
@@ -1761,7 +1797,7 @@ export class OrderServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchSubmitOrdersForApprovalWithoutReservationChanges response %j',
             response,
           );
@@ -1879,7 +1915,7 @@ export class OrderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchPauseOrders request %j', request);
+    this._log.debug('batchPauseOrders request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchPauseOrdersResponse,
@@ -1890,7 +1926,7 @@ export class OrderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchPauseOrders response %j', response);
+          this._log.debug('batchPauseOrders response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -1902,7 +1938,7 @@ export class OrderServiceClient {
           protos.google.ads.admanager.v1.IBatchPauseOrdersRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchPauseOrders response %j', response);
+          this._log.debug('batchPauseOrders response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2020,7 +2056,7 @@ export class OrderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchResumeOrders request %j', request);
+    this._log.debug('batchResumeOrders request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchResumeOrdersResponse,
@@ -2031,7 +2067,7 @@ export class OrderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchResumeOrders response %j', response);
+          this._log.debug('batchResumeOrders response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2043,7 +2079,7 @@ export class OrderServiceClient {
           protos.google.ads.admanager.v1.IBatchResumeOrdersRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchResumeOrders response %j', response);
+          this._log.debug('batchResumeOrders response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2164,7 +2200,7 @@ export class OrderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchResumeAndOverbookOrders request %j', request);
+    this._log.debug('batchResumeAndOverbookOrders request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchResumeAndOverbookOrdersResponse,
@@ -2175,7 +2211,7 @@ export class OrderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchResumeAndOverbookOrders response %j', response);
+          this._log.debug('batchResumeAndOverbookOrders response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2190,7 +2226,7 @@ export class OrderServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchResumeAndOverbookOrders response %j', response);
+          this._log.debug('batchResumeAndOverbookOrders response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2311,7 +2347,7 @@ export class OrderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchApproveOrdersWithoutReservation request %j', request);
+    this._log.debug('batchApproveOrdersWithoutReservation request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchApproveOrdersWithoutReservationResponse,
@@ -2322,7 +2358,7 @@ export class OrderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchApproveOrdersWithoutReservation response %j',
             response,
           );
@@ -2340,7 +2376,7 @@ export class OrderServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchApproveOrdersWithoutReservation response %j',
             response,
           );
@@ -2458,7 +2494,7 @@ export class OrderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchArchiveOrders request %j', request);
+    this._log.debug('batchArchiveOrders request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchArchiveOrdersResponse,
@@ -2469,7 +2505,7 @@ export class OrderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchArchiveOrders response %j', response);
+          this._log.debug('batchArchiveOrders response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2481,7 +2517,7 @@ export class OrderServiceClient {
           protos.google.ads.admanager.v1.IBatchArchiveOrdersRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchArchiveOrders response %j', response);
+          this._log.debug('batchArchiveOrders response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2596,7 +2632,7 @@ export class OrderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchUnarchiveOrders request %j', request);
+    this._log.debug('batchUnarchiveOrders request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchUnarchiveOrdersResponse,
@@ -2607,7 +2643,7 @@ export class OrderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchUnarchiveOrders response %j', response);
+          this._log.debug('batchUnarchiveOrders response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2622,7 +2658,7 @@ export class OrderServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchUnarchiveOrders response %j', response);
+          this._log.debug('batchUnarchiveOrders response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2737,7 +2773,7 @@ export class OrderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchDeleteOrders request %j', request);
+    this._log.debug('batchDeleteOrders request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchDeleteOrdersResponse,
@@ -2748,7 +2784,7 @@ export class OrderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchDeleteOrders response %j', response);
+          this._log.debug('batchDeleteOrders response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2760,7 +2796,7 @@ export class OrderServiceClient {
           protos.google.ads.admanager.v1.IBatchDeleteOrdersRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchDeleteOrders response %j', response);
+          this._log.debug('batchDeleteOrders response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2875,7 +2911,7 @@ export class OrderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchDisapproveOrders request %j', request);
+    this._log.debug('batchDisapproveOrders request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchDisapproveOrdersResponse,
@@ -2886,7 +2922,7 @@ export class OrderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchDisapproveOrders response %j', response);
+          this._log.debug('batchDisapproveOrders response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -2901,7 +2937,7 @@ export class OrderServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('batchDisapproveOrders response %j', response);
+          this._log.debug('batchDisapproveOrders response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3022,7 +3058,7 @@ export class OrderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'batchDisapproveOrdersWithoutReservationChanges request %j',
       request,
     );
@@ -3036,7 +3072,7 @@ export class OrderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchDisapproveOrdersWithoutReservationChanges response %j',
             response,
           );
@@ -3058,7 +3094,7 @@ export class OrderServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchDisapproveOrdersWithoutReservationChanges response %j',
             response,
           );
@@ -3176,7 +3212,7 @@ export class OrderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('batchRetractOrders request %j', request);
+    this._log.debug('batchRetractOrders request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.ads.admanager.v1.IBatchRetractOrdersResponse,
@@ -3187,7 +3223,7 @@ export class OrderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('batchRetractOrders response %j', response);
+          this._log.debug('batchRetractOrders response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -3199,7 +3235,7 @@ export class OrderServiceClient {
           protos.google.ads.admanager.v1.IBatchRetractOrdersRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('batchRetractOrders response %j', response);
+          this._log.debug('batchRetractOrders response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3320,7 +3356,7 @@ export class OrderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info(
+    this._log.debug(
       'batchRetractOrdersWithoutReservationChanges request %j',
       request,
     );
@@ -3334,7 +3370,7 @@ export class OrderServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
+          this._log.debug(
             'batchRetractOrdersWithoutReservationChanges response %j',
             response,
           );
@@ -3356,7 +3392,7 @@ export class OrderServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info(
+          this._log.debug(
             'batchRetractOrdersWithoutReservationChanges response %j',
             response,
           );
@@ -3409,6 +3445,14 @@ export class OrderServiceClient {
    *   Optional. Expression to filter the response.
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
+   *
+   *   Syntax summary: double-quoted `"..."` (never `'...'`) strings and RFC 3339
+   *   timestamps, full resource names on reference fields (for example, `order =
+   *   "networks/123/orders/456"`, not `*Id` or bare IDs), prefix or suffix `*`
+   *   wildcards with `=` (`displayName = "foo*"`), `:` for substring or
+   *   repeated-field matching, unquoted enums and booleans, uppercase
+   *   `AND`/`OR`/`NOT`, and standalone `IN(field, SET(v1, v2))` (not `field IN
+   *   (...)`).
    *
    *   **Filterable fields:**
    *
@@ -3526,11 +3570,11 @@ export class OrderServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listOrders values %j', values);
+          this._log.debug('listOrders values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listOrders request %j', request);
+    this._log.debug('listOrders request %j', request);
     return this.innerApiCalls
       .listOrders(request, options, wrappedCallback)
       ?.then(
@@ -3539,7 +3583,7 @@ export class OrderServiceClient {
           protos.google.ads.admanager.v1.IListOrdersRequest | null,
           protos.google.ads.admanager.v1.IListOrdersResponse,
         ]) => {
-          this._log.info('listOrders values %j', response);
+          this._log.debug('listOrders values %j', response);
           return [response, input, output];
         },
       );
@@ -3567,6 +3611,14 @@ export class OrderServiceClient {
    *   Optional. Expression to filter the response.
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
+   *
+   *   Syntax summary: double-quoted `"..."` (never `'...'`) strings and RFC 3339
+   *   timestamps, full resource names on reference fields (for example, `order =
+   *   "networks/123/orders/456"`, not `*Id` or bare IDs), prefix or suffix `*`
+   *   wildcards with `=` (`displayName = "foo*"`), `:` for substring or
+   *   repeated-field matching, unquoted enums and booleans, uppercase
+   *   `AND`/`OR`/`NOT`, and standalone `IN(field, SET(v1, v2))` (not `field IN
+   *   (...)`).
    *
    *   **Filterable fields:**
    *
@@ -3626,7 +3678,7 @@ export class OrderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listOrders stream %j', request);
+    this._log.debug('listOrders stream %j', request);
     return this.descriptors.page.listOrders.createStream(
       this.innerApiCalls.listOrders as GaxCall,
       request,
@@ -3658,6 +3710,14 @@ export class OrderServiceClient {
    *   Optional. Expression to filter the response.
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
+   *
+   *   Syntax summary: double-quoted `"..."` (never `'...'`) strings and RFC 3339
+   *   timestamps, full resource names on reference fields (for example, `order =
+   *   "networks/123/orders/456"`, not `*Id` or bare IDs), prefix or suffix `*`
+   *   wildcards with `=` (`displayName = "foo*"`), `:` for substring or
+   *   repeated-field matching, unquoted enums and booleans, uppercase
+   *   `AND`/`OR`/`NOT`, and standalone `IN(field, SET(v1, v2))` (not `field IN
+   *   (...)`).
    *
    *   **Filterable fields:**
    *
@@ -3718,7 +3778,7 @@ export class OrderServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listOrders iterate %j', request);
+    this._log.debug('listOrders iterate %j', request);
     return this.descriptors.page.listOrders.asyncIterate(
       this.innerApiCalls['listOrders'] as GaxCall,
       request as {},
@@ -3777,6 +3837,44 @@ export class OrderServiceClient {
    */
   matchAdBreakFromAdBreakName(adBreakName: string) {
     return this.pathTemplates.adBreakPathTemplate.match(adBreakName).ad_break;
+  }
+
+  /**
+   * Return a fully-qualified adCategory resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} ad_category
+   * @returns {string} Resource name string.
+   */
+  adCategoryPath(networkCode: string, adCategory: string) {
+    return this.pathTemplates.adCategoryPathTemplate.render({
+      network_code: networkCode,
+      ad_category: adCategory,
+    });
+  }
+
+  /**
+   * Parse the network_code from AdCategory resource.
+   *
+   * @param {string} adCategoryName
+   *   A fully-qualified path representing AdCategory resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAdCategoryName(adCategoryName: string) {
+    return this.pathTemplates.adCategoryPathTemplate.match(adCategoryName)
+      .network_code;
+  }
+
+  /**
+   * Parse the ad_category from AdCategory resource.
+   *
+   * @param {string} adCategoryName
+   *   A fully-qualified path representing AdCategory resource.
+   * @returns {string} A string representing the ad_category.
+   */
+  matchAdCategoryFromAdCategoryName(adCategoryName: string) {
+    return this.pathTemplates.adCategoryPathTemplate.match(adCategoryName)
+      .ad_category;
   }
 
   /**
@@ -3947,6 +4045,53 @@ export class OrderServiceClient {
   }
 
   /**
+   * Return a fully-qualified allocationDeliveryProfile resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} allocation_delivery_profile
+   * @returns {string} Resource name string.
+   */
+  allocationDeliveryProfilePath(
+    networkCode: string,
+    allocationDeliveryProfile: string,
+  ) {
+    return this.pathTemplates.allocationDeliveryProfilePathTemplate.render({
+      network_code: networkCode,
+      allocation_delivery_profile: allocationDeliveryProfile,
+    });
+  }
+
+  /**
+   * Parse the network_code from AllocationDeliveryProfile resource.
+   *
+   * @param {string} allocationDeliveryProfileName
+   *   A fully-qualified path representing AllocationDeliveryProfile resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAllocationDeliveryProfileName(
+    allocationDeliveryProfileName: string,
+  ) {
+    return this.pathTemplates.allocationDeliveryProfilePathTemplate.match(
+      allocationDeliveryProfileName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the allocation_delivery_profile from AllocationDeliveryProfile resource.
+   *
+   * @param {string} allocationDeliveryProfileName
+   *   A fully-qualified path representing AllocationDeliveryProfile resource.
+   * @returns {string} A string representing the allocation_delivery_profile.
+   */
+  matchAllocationDeliveryProfileFromAllocationDeliveryProfileName(
+    allocationDeliveryProfileName: string,
+  ) {
+    return this.pathTemplates.allocationDeliveryProfilePathTemplate.match(
+      allocationDeliveryProfileName,
+    ).allocation_delivery_profile;
+  }
+
+  /**
    * Return a fully-qualified application resource name string.
    *
    * @param {string} network_code
@@ -4058,6 +4203,53 @@ export class OrderServiceClient {
     return this.pathTemplates.audienceSegmentPathTemplate.match(
       audienceSegmentName,
     ).audience_segment;
+  }
+
+  /**
+   * Return a fully-qualified audienceSegmentCategory resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} audience_segment_category
+   * @returns {string} Resource name string.
+   */
+  audienceSegmentCategoryPath(
+    networkCode: string,
+    audienceSegmentCategory: string,
+  ) {
+    return this.pathTemplates.audienceSegmentCategoryPathTemplate.render({
+      network_code: networkCode,
+      audience_segment_category: audienceSegmentCategory,
+    });
+  }
+
+  /**
+   * Parse the network_code from AudienceSegmentCategory resource.
+   *
+   * @param {string} audienceSegmentCategoryName
+   *   A fully-qualified path representing AudienceSegmentCategory resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAudienceSegmentCategoryName(
+    audienceSegmentCategoryName: string,
+  ) {
+    return this.pathTemplates.audienceSegmentCategoryPathTemplate.match(
+      audienceSegmentCategoryName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the audience_segment_category from AudienceSegmentCategory resource.
+   *
+   * @param {string} audienceSegmentCategoryName
+   *   A fully-qualified path representing AudienceSegmentCategory resource.
+   * @returns {string} A string representing the audience_segment_category.
+   */
+  matchAudienceSegmentCategoryFromAudienceSegmentCategoryName(
+    audienceSegmentCategoryName: string,
+  ) {
+    return this.pathTemplates.audienceSegmentCategoryPathTemplate.match(
+      audienceSegmentCategoryName,
+    ).audience_segment_category;
   }
 
   /**
@@ -4251,6 +4443,44 @@ export class OrderServiceClient {
   matchCdnConfigFromCdnConfigName(cdnConfigName: string) {
     return this.pathTemplates.cdnConfigPathTemplate.match(cdnConfigName)
       .cdn_config;
+  }
+
+  /**
+   * Return a fully-qualified changeEvent resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} change_event
+   * @returns {string} Resource name string.
+   */
+  changeEventPath(networkCode: string, changeEvent: string) {
+    return this.pathTemplates.changeEventPathTemplate.render({
+      network_code: networkCode,
+      change_event: changeEvent,
+    });
+  }
+
+  /**
+   * Parse the network_code from ChangeEvent resource.
+   *
+   * @param {string} changeEventName
+   *   A fully-qualified path representing ChangeEvent resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromChangeEventName(changeEventName: string) {
+    return this.pathTemplates.changeEventPathTemplate.match(changeEventName)
+      .network_code;
+  }
+
+  /**
+   * Parse the change_event from ChangeEvent resource.
+   *
+   * @param {string} changeEventName
+   *   A fully-qualified path representing ChangeEvent resource.
+   * @returns {string} A string representing the change_event.
+   */
+  matchChangeEventFromChangeEventName(changeEventName: string) {
+    return this.pathTemplates.changeEventPathTemplate.match(changeEventName)
+      .change_event;
   }
 
   /**
@@ -5159,6 +5389,48 @@ export class OrderServiceClient {
   }
 
   /**
+   * Return a fully-qualified forecastAdjustment resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} forecast_adjustment
+   * @returns {string} Resource name string.
+   */
+  forecastAdjustmentPath(networkCode: string, forecastAdjustment: string) {
+    return this.pathTemplates.forecastAdjustmentPathTemplate.render({
+      network_code: networkCode,
+      forecast_adjustment: forecastAdjustment,
+    });
+  }
+
+  /**
+   * Parse the network_code from ForecastAdjustment resource.
+   *
+   * @param {string} forecastAdjustmentName
+   *   A fully-qualified path representing ForecastAdjustment resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromForecastAdjustmentName(forecastAdjustmentName: string) {
+    return this.pathTemplates.forecastAdjustmentPathTemplate.match(
+      forecastAdjustmentName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the forecast_adjustment from ForecastAdjustment resource.
+   *
+   * @param {string} forecastAdjustmentName
+   *   A fully-qualified path representing ForecastAdjustment resource.
+   * @returns {string} A string representing the forecast_adjustment.
+   */
+  matchForecastAdjustmentFromForecastAdjustmentName(
+    forecastAdjustmentName: string,
+  ) {
+    return this.pathTemplates.forecastAdjustmentPathTemplate.match(
+      forecastAdjustmentName,
+    ).forecast_adjustment;
+  }
+
+  /**
    * Return a fully-qualified geoTarget resource name string.
    *
    * @param {string} network_code
@@ -5194,6 +5466,44 @@ export class OrderServiceClient {
   matchGeoTargetFromGeoTargetName(geoTargetName: string) {
     return this.pathTemplates.geoTargetPathTemplate.match(geoTargetName)
       .geo_target;
+  }
+
+  /**
+   * Return a fully-qualified inventoryUrl resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} inventory_url
+   * @returns {string} Resource name string.
+   */
+  inventoryUrlPath(networkCode: string, inventoryUrl: string) {
+    return this.pathTemplates.inventoryUrlPathTemplate.render({
+      network_code: networkCode,
+      inventory_url: inventoryUrl,
+    });
+  }
+
+  /**
+   * Parse the network_code from InventoryUrl resource.
+   *
+   * @param {string} inventoryUrlName
+   *   A fully-qualified path representing InventoryUrl resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromInventoryUrlName(inventoryUrlName: string) {
+    return this.pathTemplates.inventoryUrlPathTemplate.match(inventoryUrlName)
+      .network_code;
+  }
+
+  /**
+   * Parse the inventory_url from InventoryUrl resource.
+   *
+   * @param {string} inventoryUrlName
+   *   A fully-qualified path representing InventoryUrl resource.
+   * @returns {string} A string representing the inventory_url.
+   */
+  matchInventoryUrlFromInventoryUrlName(inventoryUrlName: string) {
+    return this.pathTemplates.inventoryUrlPathTemplate.match(inventoryUrlName)
+      .inventory_url;
   }
 
   /**
@@ -5996,6 +6306,43 @@ export class OrderServiceClient {
   }
 
   /**
+   * Return a fully-qualified proposal resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} proposal
+   * @returns {string} Resource name string.
+   */
+  proposalPath(networkCode: string, proposal: string) {
+    return this.pathTemplates.proposalPathTemplate.render({
+      network_code: networkCode,
+      proposal: proposal,
+    });
+  }
+
+  /**
+   * Parse the network_code from Proposal resource.
+   *
+   * @param {string} proposalName
+   *   A fully-qualified path representing Proposal resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromProposalName(proposalName: string) {
+    return this.pathTemplates.proposalPathTemplate.match(proposalName)
+      .network_code;
+  }
+
+  /**
+   * Parse the proposal from Proposal resource.
+   *
+   * @param {string} proposalName
+   *   A fully-qualified path representing Proposal resource.
+   * @returns {string} A string representing the proposal.
+   */
+  matchProposalFromProposalName(proposalName: string) {
+    return this.pathTemplates.proposalPathTemplate.match(proposalName).proposal;
+  }
+
+  /**
    * Return a fully-qualified report resource name string.
    *
    * @param {string} network_code
@@ -6380,6 +6727,53 @@ export class OrderServiceClient {
   }
 
   /**
+   * Return a fully-qualified trafficForecastSegment resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} traffic_forecast_segment
+   * @returns {string} Resource name string.
+   */
+  trafficForecastSegmentPath(
+    networkCode: string,
+    trafficForecastSegment: string,
+  ) {
+    return this.pathTemplates.trafficForecastSegmentPathTemplate.render({
+      network_code: networkCode,
+      traffic_forecast_segment: trafficForecastSegment,
+    });
+  }
+
+  /**
+   * Parse the network_code from TrafficForecastSegment resource.
+   *
+   * @param {string} trafficForecastSegmentName
+   *   A fully-qualified path representing TrafficForecastSegment resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromTrafficForecastSegmentName(
+    trafficForecastSegmentName: string,
+  ) {
+    return this.pathTemplates.trafficForecastSegmentPathTemplate.match(
+      trafficForecastSegmentName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the traffic_forecast_segment from TrafficForecastSegment resource.
+   *
+   * @param {string} trafficForecastSegmentName
+   *   A fully-qualified path representing TrafficForecastSegment resource.
+   * @returns {string} A string representing the traffic_forecast_segment.
+   */
+  matchTrafficForecastSegmentFromTrafficForecastSegmentName(
+    trafficForecastSegmentName: string,
+  ) {
+    return this.pathTemplates.trafficForecastSegmentPathTemplate.match(
+      trafficForecastSegmentName,
+    ).traffic_forecast_segment;
+  }
+
+  /**
    * Return a fully-qualified user resource name string.
    *
    * @param {string} network_code
@@ -6493,6 +6887,82 @@ export class OrderServiceClient {
   matchWebPropertyFromWebPropertyName(webPropertyName: string) {
     return this.pathTemplates.webPropertyPathTemplate.match(webPropertyName)
       .web_property;
+  }
+
+  /**
+   * Return a fully-qualified yieldGroup resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} yield_group
+   * @returns {string} Resource name string.
+   */
+  yieldGroupPath(networkCode: string, yieldGroup: string) {
+    return this.pathTemplates.yieldGroupPathTemplate.render({
+      network_code: networkCode,
+      yield_group: yieldGroup,
+    });
+  }
+
+  /**
+   * Parse the network_code from YieldGroup resource.
+   *
+   * @param {string} yieldGroupName
+   *   A fully-qualified path representing YieldGroup resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromYieldGroupName(yieldGroupName: string) {
+    return this.pathTemplates.yieldGroupPathTemplate.match(yieldGroupName)
+      .network_code;
+  }
+
+  /**
+   * Parse the yield_group from YieldGroup resource.
+   *
+   * @param {string} yieldGroupName
+   *   A fully-qualified path representing YieldGroup resource.
+   * @returns {string} A string representing the yield_group.
+   */
+  matchYieldGroupFromYieldGroupName(yieldGroupName: string) {
+    return this.pathTemplates.yieldGroupPathTemplate.match(yieldGroupName)
+      .yield_group;
+  }
+
+  /**
+   * Return a fully-qualified yieldPartner resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} yield_partner
+   * @returns {string} Resource name string.
+   */
+  yieldPartnerPath(networkCode: string, yieldPartner: string) {
+    return this.pathTemplates.yieldPartnerPathTemplate.render({
+      network_code: networkCode,
+      yield_partner: yieldPartner,
+    });
+  }
+
+  /**
+   * Parse the network_code from YieldPartner resource.
+   *
+   * @param {string} yieldPartnerName
+   *   A fully-qualified path representing YieldPartner resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromYieldPartnerName(yieldPartnerName: string) {
+    return this.pathTemplates.yieldPartnerPathTemplate.match(yieldPartnerName)
+      .network_code;
+  }
+
+  /**
+   * Parse the yield_partner from YieldPartner resource.
+   *
+   * @param {string} yieldPartnerName
+   *   A fully-qualified path representing YieldPartner resource.
+   * @returns {string} A string representing the yield_partner.
+   */
+  matchYieldPartnerFromYieldPartnerName(yieldPartnerName: string) {
+    return this.pathTemplates.yieldPartnerPathTemplate.match(yieldPartnerName)
+      .yield_partner;
   }
 
   /**

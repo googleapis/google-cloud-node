@@ -1243,6 +1243,266 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('appliedAutoProtectionPolicy', async () => {
+      const fakePath = '/rendered/path/appliedAutoProtectionPolicy';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        applied_auto_protection_policy: 'appliedAutoProtectionPolicyValue',
+      };
+      const client =
+        new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.appliedAutoProtectionPolicyPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.appliedAutoProtectionPolicyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('appliedAutoProtectionPolicyPath', () => {
+        const result = client.appliedAutoProtectionPolicyPath(
+          'projectValue',
+          'locationValue',
+          'appliedAutoProtectionPolicyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.appliedAutoProtectionPolicyPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromAppliedAutoProtectionPolicyName', () => {
+        const result =
+          client.matchProjectFromAppliedAutoProtectionPolicyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.appliedAutoProtectionPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromAppliedAutoProtectionPolicyName', () => {
+        const result =
+          client.matchLocationFromAppliedAutoProtectionPolicyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.appliedAutoProtectionPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAppliedAutoProtectionPolicyFromAppliedAutoProtectionPolicyName', () => {
+        const result =
+          client.matchAppliedAutoProtectionPolicyFromAppliedAutoProtectionPolicyName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'appliedAutoProtectionPolicyValue');
+        assert(
+          (
+            client.pathTemplates.appliedAutoProtectionPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('autoProtectionPolicy', async () => {
+      const fakePath = '/rendered/path/autoProtectionPolicy';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        auto_protection_policy: 'autoProtectionPolicyValue',
+      };
+      const client =
+        new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.autoProtectionPolicyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.autoProtectionPolicyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('autoProtectionPolicyPath', () => {
+        const result = client.autoProtectionPolicyPath(
+          'projectValue',
+          'locationValue',
+          'autoProtectionPolicyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.autoProtectionPolicyPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromAutoProtectionPolicyName', () => {
+        const result =
+          client.matchProjectFromAutoProtectionPolicyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.autoProtectionPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromAutoProtectionPolicyName', () => {
+        const result =
+          client.matchLocationFromAutoProtectionPolicyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.autoProtectionPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAutoProtectionPolicyFromAutoProtectionPolicyName', () => {
+        const result =
+          client.matchAutoProtectionPolicyFromAutoProtectionPolicyName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'autoProtectionPolicyValue');
+        assert(
+          (
+            client.pathTemplates.autoProtectionPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('autoProtectionPolicyBinding', async () => {
+      const fakePath = '/rendered/path/autoProtectionPolicyBinding';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        auto_protection_policy: 'autoProtectionPolicyValue',
+        binding: 'bindingValue',
+      };
+      const client =
+        new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.autoProtectionPolicyBindingPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.autoProtectionPolicyBindingPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('autoProtectionPolicyBindingPath', () => {
+        const result = client.autoProtectionPolicyBindingPath(
+          'projectValue',
+          'locationValue',
+          'autoProtectionPolicyValue',
+          'bindingValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.autoProtectionPolicyBindingPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromAutoProtectionPolicyBindingName', () => {
+        const result =
+          client.matchProjectFromAutoProtectionPolicyBindingName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.autoProtectionPolicyBindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromAutoProtectionPolicyBindingName', () => {
+        const result =
+          client.matchLocationFromAutoProtectionPolicyBindingName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.autoProtectionPolicyBindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAutoProtectionPolicyFromAutoProtectionPolicyBindingName', () => {
+        const result =
+          client.matchAutoProtectionPolicyFromAutoProtectionPolicyBindingName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'autoProtectionPolicyValue');
+        assert(
+          (
+            client.pathTemplates.autoProtectionPolicyBindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchBindingFromAutoProtectionPolicyBindingName', () => {
+        const result =
+          client.matchBindingFromAutoProtectionPolicyBindingName(fakePath);
+        assert.strictEqual(result, 'bindingValue');
+        assert(
+          (
+            client.pathTemplates.autoProtectionPolicyBindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('backup', async () => {
       const fakePath = '/rendered/path/backup';
       const expectedParameters = {
@@ -1637,6 +1897,120 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
       });
     });
 
+    describe('bindingMatchingResource', async () => {
+      const fakePath = '/rendered/path/bindingMatchingResource';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        auto_protection_policy: 'autoProtectionPolicyValue',
+        binding: 'bindingValue',
+        matching_resource: 'matchingResourceValue',
+      };
+      const client =
+        new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.bindingMatchingResourcePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.bindingMatchingResourcePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('bindingMatchingResourcePath', () => {
+        const result = client.bindingMatchingResourcePath(
+          'projectValue',
+          'locationValue',
+          'autoProtectionPolicyValue',
+          'bindingValue',
+          'matchingResourceValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.bindingMatchingResourcePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromBindingMatchingResourceName', () => {
+        const result =
+          client.matchProjectFromBindingMatchingResourceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.bindingMatchingResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromBindingMatchingResourceName', () => {
+        const result =
+          client.matchLocationFromBindingMatchingResourceName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.bindingMatchingResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAutoProtectionPolicyFromBindingMatchingResourceName', () => {
+        const result =
+          client.matchAutoProtectionPolicyFromBindingMatchingResourceName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'autoProtectionPolicyValue');
+        assert(
+          (
+            client.pathTemplates.bindingMatchingResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchBindingFromBindingMatchingResourceName', () => {
+        const result =
+          client.matchBindingFromBindingMatchingResourceName(fakePath);
+        assert.strictEqual(result, 'bindingValue');
+        assert(
+          (
+            client.pathTemplates.bindingMatchingResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchMatchingResourceFromBindingMatchingResourceName', () => {
+        const result =
+          client.matchMatchingResourceFromBindingMatchingResourceName(fakePath);
+        assert.strictEqual(result, 'matchingResourceValue');
+        assert(
+          (
+            client.pathTemplates.bindingMatchingResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('dataSource', async () => {
       const fakePath = '/rendered/path/dataSource';
       const expectedParameters = {
@@ -1986,6 +2360,352 @@ describe('v1.BackupDrProtectionSummaryClient', () => {
         assert(
           (
             client.pathTemplates.resourceBackupConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('restoreTemplate', async () => {
+      const fakePath = '/rendered/path/restoreTemplate';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        restore_template: 'restoreTemplateValue',
+      };
+      const client =
+        new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.restoreTemplatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.restoreTemplatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('restoreTemplatePath', () => {
+        const result = client.restoreTemplatePath(
+          'projectValue',
+          'locationValue',
+          'restoreTemplateValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.restoreTemplatePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromRestoreTemplateName', () => {
+        const result = client.matchProjectFromRestoreTemplateName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.restoreTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromRestoreTemplateName', () => {
+        const result = client.matchLocationFromRestoreTemplateName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.restoreTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRestoreTemplateFromRestoreTemplateName', () => {
+        const result =
+          client.matchRestoreTemplateFromRestoreTemplateName(fakePath);
+        assert.strictEqual(result, 'restoreTemplateValue');
+        assert(
+          (client.pathTemplates.restoreTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('restoreTemplateExecution', async () => {
+      const fakePath = '/rendered/path/restoreTemplateExecution';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        restore_template: 'restoreTemplateValue',
+        execution: 'executionValue',
+      };
+      const client =
+        new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.restoreTemplateExecutionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.restoreTemplateExecutionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('restoreTemplateExecutionPath', () => {
+        const result = client.restoreTemplateExecutionPath(
+          'projectValue',
+          'locationValue',
+          'restoreTemplateValue',
+          'executionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.restoreTemplateExecutionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromRestoreTemplateExecutionName', () => {
+        const result =
+          client.matchProjectFromRestoreTemplateExecutionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.restoreTemplateExecutionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromRestoreTemplateExecutionName', () => {
+        const result =
+          client.matchLocationFromRestoreTemplateExecutionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.restoreTemplateExecutionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRestoreTemplateFromRestoreTemplateExecutionName', () => {
+        const result =
+          client.matchRestoreTemplateFromRestoreTemplateExecutionName(fakePath);
+        assert.strictEqual(result, 'restoreTemplateValue');
+        assert(
+          (
+            client.pathTemplates.restoreTemplateExecutionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchExecutionFromRestoreTemplateExecutionName', () => {
+        const result =
+          client.matchExecutionFromRestoreTemplateExecutionName(fakePath);
+        assert.strictEqual(result, 'executionValue');
+        assert(
+          (
+            client.pathTemplates.restoreTemplateExecutionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('restoreVerificationPlan', async () => {
+      const fakePath = '/rendered/path/restoreVerificationPlan';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        restoreVerificationPlan: 'restoreVerificationPlanValue',
+      };
+      const client =
+        new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.restoreVerificationPlanPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.restoreVerificationPlanPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('restoreVerificationPlanPath', () => {
+        const result = client.restoreVerificationPlanPath(
+          'projectValue',
+          'locationValue',
+          'restoreVerificationPlanValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.restoreVerificationPlanPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromRestoreVerificationPlanName', () => {
+        const result =
+          client.matchProjectFromRestoreVerificationPlanName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.restoreVerificationPlanPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromRestoreVerificationPlanName', () => {
+        const result =
+          client.matchLocationFromRestoreVerificationPlanName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.restoreVerificationPlanPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRestoreVerificationPlanFromRestoreVerificationPlanName', () => {
+        const result =
+          client.matchRestoreVerificationPlanFromRestoreVerificationPlanName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'restoreVerificationPlanValue');
+        assert(
+          (
+            client.pathTemplates.restoreVerificationPlanPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('restoreVerificationPlanAssociation', async () => {
+      const fakePath = '/rendered/path/restoreVerificationPlanAssociation';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        restore_verification_plan: 'restoreVerificationPlanValue',
+        association: 'associationValue',
+      };
+      const client =
+        new backupdrprotectionsummaryModule.v1.BackupDrProtectionSummaryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.restoreVerificationPlanAssociationPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.restoreVerificationPlanAssociationPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('restoreVerificationPlanAssociationPath', () => {
+        const result = client.restoreVerificationPlanAssociationPath(
+          'projectValue',
+          'locationValue',
+          'restoreVerificationPlanValue',
+          'associationValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.restoreVerificationPlanAssociationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromRestoreVerificationPlanAssociationName', () => {
+        const result =
+          client.matchProjectFromRestoreVerificationPlanAssociationName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.restoreVerificationPlanAssociationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromRestoreVerificationPlanAssociationName', () => {
+        const result =
+          client.matchLocationFromRestoreVerificationPlanAssociationName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.restoreVerificationPlanAssociationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRestoreVerificationPlanFromRestoreVerificationPlanAssociationName', () => {
+        const result =
+          client.matchRestoreVerificationPlanFromRestoreVerificationPlanAssociationName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'restoreVerificationPlanValue');
+        assert(
+          (
+            client.pathTemplates.restoreVerificationPlanAssociationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAssociationFromRestoreVerificationPlanAssociationName', () => {
+        const result =
+          client.matchAssociationFromRestoreVerificationPlanAssociationName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'associationValue');
+        assert(
+          (
+            client.pathTemplates.restoreVerificationPlanAssociationPathTemplate
               .match as SinonStub
           )
             .getCall(-1)

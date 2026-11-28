@@ -37,9 +37,27 @@ describe('Publisher Hedging', () => {
       );
     });
 
+    it('returns undefined when hedging.enabled is false', () => {
+      assert.strictEqual(
+        HedgingTokenBucket.validateAndResolveHedgingOptions({enabled: false}),
+        undefined,
+      );
+      assert.strictEqual(
+        HedgingTokenBucket.validateAndResolveHedgingOptions(
+          {enabled: false},
+          true,
+        ),
+        undefined,
+      );
+    });
+
     it('applies default settings when an empty hedging object is provided', () => {
       const resolved = HedgingTokenBucket.validateAndResolveHedgingOptions({});
       assert.ok(resolved);
+      assert.strictEqual(
+        resolved.enabled,
+        defaultOptions.publish.hedging.enabled,
+      );
       assert.strictEqual(
         resolved.hedgeDelay.milliseconds,
         defaultOptions.publish.hedging.hedgeDelay.milliseconds,
@@ -531,6 +549,107 @@ describe('Publisher Hedging', () => {
       clock.tick(500);
       assert.strictEqual(hedgeFired, false);
       assert.strictEqual(bucket.getTokenBalance(), 1.0);
+    });
+
+    it('immediately removes completed HedgedRequest and clears timer when coordinator settles before hedgeDelay', async () => {
+      const options = HedgingTokenBucket.validateAndResolveHedgingOptions({
+        hedgeDelay: Duration.from({seconds: 10}),
+        maxTokens: 10,
+        refillRatio: 0.2,
+      });
+      assert.ok(options);
+      const bucket = new HedgingTokenBucket(options);
+      const scheduler = new HedgingScheduler(options, bucket);
+      const internalScheduler = scheduler as unknown as {
+        hedgingQueue: unknown[];
+        queueProcessingTimer?: NodeJS.Timeout;
+      };
+
+      const absoluteDeadline = Duration.from({milliseconds: Date.now()}).add(
+        Duration.from({seconds: 60}),
+      );
+      const coordinator = new CancellationSharer(absoluteDeadline, () => {
+        bucket.refillTokenBucket();
+      });
+
+      const attempt0 = defer<google.pubsub.v1.IPublishResponse>();
+      const controller0 = new AbortController();
+      coordinator.addAttempt(0, controller0, attempt0.promise);
+
+      scheduler.scheduleFirstHedge(coordinator, () => {});
+      assert.strictEqual(internalScheduler.hedgingQueue.length, 1);
+      assert.ok(internalScheduler.queueProcessingTimer);
+
+      // Complete attempt 0 after 20ms (well before 10s hedgeDelay)
+      clock.tick(20);
+      attempt0.resolve({messageIds: ['fast-msg']});
+      await coordinator.promise;
+
+      assert.strictEqual(internalScheduler.hedgingQueue.length, 0);
+      assert.strictEqual(internalScheduler.queueProcessingTimer, undefined);
+    });
+
+    it('reschedules timer for remaining batch when head coordinator settles early', async () => {
+      const options = HedgingTokenBucket.validateAndResolveHedgingOptions({
+        hedgeDelay: Duration.from({milliseconds: 500}),
+        maxTokens: 10,
+        refillRatio: 0.2,
+      });
+      assert.ok(options);
+      const bucket = new HedgingTokenBucket(options);
+      for (let i = 0; i < 5; i++) {
+        bucket.refillTokenBucket();
+      }
+      const scheduler = new HedgingScheduler(options, bucket);
+      const internalScheduler = scheduler as unknown as {
+        hedgingQueue: unknown[];
+        queueProcessingTimer?: NodeJS.Timeout;
+      };
+
+      const absoluteDeadline = Duration.from({milliseconds: Date.now()}).add(
+        Duration.from({seconds: 60}),
+      );
+      const coordinator1 = new CancellationSharer(absoluteDeadline, () => {});
+      const attempt1 = defer<google.pubsub.v1.IPublishResponse>();
+      coordinator1.addAttempt(0, new AbortController(), attempt1.promise);
+
+      let hedge1Fired = false;
+      scheduler.scheduleFirstHedge(coordinator1, () => {
+        hedge1Fired = true;
+      });
+
+      clock.tick(100);
+      const coordinator2 = new CancellationSharer(absoluteDeadline, () => {});
+      const attempt2 = defer<google.pubsub.v1.IPublishResponse>();
+      coordinator2.addAttempt(0, new AbortController(), attempt2.promise);
+
+      let hedge2Fired = false;
+      scheduler.scheduleFirstHedge(coordinator2, () => {
+        hedge2Fired = true;
+      });
+      assert.strictEqual(internalScheduler.hedgingQueue.length, 2);
+
+      // Head coordinator1 completes at t+150ms -> removed, timer rescheduled for coordinator2 (due at t+600ms)
+      clock.tick(50);
+      attempt1.resolve({messageIds: ['msg-1']});
+      await coordinator1.promise;
+
+      assert.strictEqual(internalScheduler.hedgingQueue.length, 1);
+      assert.ok(internalScheduler.queueProcessingTimer);
+
+      // At t+500ms (when coordinator1 would have fired), hedge2 has not fired yet
+      clock.tick(350);
+      assert.strictEqual(hedge1Fired, false);
+      assert.strictEqual(hedge2Fired, false);
+
+      // At t+600ms, hedge2 fires
+      clock.tick(100);
+      assert.strictEqual(hedge2Fired, true);
+
+      attempt2.resolve({messageIds: ['msg-2']});
+      await coordinator2.promise;
+      assert.strictEqual(internalScheduler.hedgingQueue.length, 0);
+      assert.strictEqual(internalScheduler.queueProcessingTimer, undefined);
     });
   });
 });
