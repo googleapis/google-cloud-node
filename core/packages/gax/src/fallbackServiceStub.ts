@@ -27,7 +27,7 @@ import {defaultToObjectOptions} from './fallback';
 import {GoogleError, setRawHttpResponsePayload} from './googleError';
 import {setAttemptHttpMethod} from './observability/TracerHelper';
 import {rpcCodeFromHttpStatusCode, Status} from './status';
-import {pipeline, PipelineSource} from 'stream';
+import {PassThrough, pipeline, PipelineSource} from 'stream';
 import type {Agent as HttpAgent} from 'http';
 import type {Agent as HttpsAgent} from 'https';
 
@@ -574,9 +574,51 @@ export function generateServiceStub(
             response204Ok = true;
           }
           if (response.ok && rpc.responseStream) {
+            const bodyPassThrough = new PassThrough();
+            const resumeBody = () => {
+              if (!bodyPassThrough.destroyed) {
+                bodyPassThrough.resume();
+              }
+            };
+            const tearDownBody = () => {
+              streamArrayParser.off('drain', resumeBody);
+              streamArrayParser.off('finish', tearDownBody);
+              streamArrayParser.off('close', tearDownBody);
+              if (!bodyPassThrough.destroyed) {
+                bodyPassThrough.destroy();
+              }
+            };
+            bodyPassThrough.on(
+              'data',
+              (chunk: Buffer | Uint8Array | string) => {
+                if (
+                  !streamArrayParser.writableEnded &&
+                  !streamArrayParser.destroyed
+                ) {
+                  if (
+                    !streamArrayParser.write(chunk) &&
+                    !bodyPassThrough.destroyed
+                  ) {
+                    bodyPassThrough.pause();
+                    streamArrayParser.off('drain', resumeBody);
+                    streamArrayParser.once('drain', resumeBody);
+                  }
+                }
+              },
+            );
+            bodyPassThrough.on('end', () => {
+              if (
+                !streamArrayParser.writableEnded &&
+                !streamArrayParser.destroyed
+              ) {
+                streamArrayParser.end();
+              }
+            });
+            streamArrayParser.once('finish', tearDownBody);
+            streamArrayParser.once('close', tearDownBody);
             pipeline(
               response.body as PipelineSource<unknown>,
-              streamArrayParser,
+              bodyPassThrough,
               (err: unknown) => {
                 // A caller that cancelled has already torn this stream down
                 // and is not waiting to be told about the consequences. The
@@ -589,6 +631,7 @@ export function generateServiceStub(
                 if (
                   err &&
                   !streamArrayParser.readableEnded &&
+                  !streamArrayParser.destroyed &&
                   (timedOut || !cancelRequested)
                 ) {
                   const callErr = _toGoogleError(err, {
@@ -603,6 +646,10 @@ export function generateServiceStub(
                   if (!streamArrayParser.errored) {
                     streamArrayParser.emit('error', callErr);
                   }
+                  streamArrayParser.destroy();
+                }
+                if (err) {
+                  tearDownBody();
                 }
               },
             );
