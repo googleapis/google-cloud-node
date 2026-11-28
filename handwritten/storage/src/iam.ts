@@ -29,7 +29,8 @@ export type GetPolicyResponse = [Policy, unknown];
  * @callback GetPolicyCallback
  * @param {?Error} err Request error, if any.
  * @param {object} acl The policy.
- * @param {object} apiResponse The full API response.
+ * @param {object} apiResponse The full HTTP API response, with payload
+ *     properties nested under `apiResponse.data`.
  */
 export interface GetPolicyCallback {
   (err?: Error | null, acl?: Policy, apiResponse?: unknown): void;
@@ -47,7 +48,8 @@ export interface SetPolicyOptions {
 /**
  * @typedef {array} SetPolicyResponse
  * @property {object} 0 The policy.
- * @property {object} 1 The full API response.
+ * @property {object} 1 The full HTTP API response, with payload properties
+ *     nested under `apiResponse.data`.
  */
 export type SetPolicyResponse = [Policy, unknown];
 
@@ -55,7 +57,8 @@ export type SetPolicyResponse = [Policy, unknown];
  * @callback SetPolicyCallback
  * @param {?Error} err Request error, if any.
  * @param {object} acl The policy.
- * @param {object} apiResponse The full API response.
+ * @param {object} apiResponse The full HTTP API response, with payload
+ *     properties nested under `apiResponse.data`.
  */
 export interface SetPolicyCallback {
   (err?: Error | null, acl?: Policy, apiResponse?: object): void;
@@ -82,7 +85,8 @@ export interface Expr {
 /**
  * @typedef {array} TestIamPermissionsResponse
  * @property {object} 0 A subset of permissions that the caller is allowed.
- * @property {object} 1 The full API response.
+ * @property {object} 1 The full HTTP API response, with payload properties
+ *     nested under `apiResponse.data`.
  */
 export type TestIamPermissionsResponse = [{[key: string]: boolean}, unknown];
 
@@ -90,7 +94,8 @@ export type TestIamPermissionsResponse = [{[key: string]: boolean}, unknown];
  * @callback TestIamPermissionsCallback
  * @param {?Error} err Request error, if any.
  * @param {object} acl A subset of permissions that the caller is allowed.
- * @param {object} apiResponse The full API response.
+ * @param {object} apiResponse The full HTTP API response, with payload
+ *     properties nested under `apiResponse.data`.
  */
 export interface TestIamPermissionsCallback {
   (
@@ -169,7 +174,8 @@ class Iam {
   /**
    * @typedef {array} GetPolicyResponse
    * @property {Policy} 0 The policy.
-   * @property {object} 1 The full API response.
+   * @property {object} 1 The full HTTP API response, with payload properties
+   *     nested under `apiResponse.data`.
    */
   /**
    * @typedef {object} Policy
@@ -206,7 +212,8 @@ class Iam {
    *
    * @param {GetPolicyOptions} [options] Request options.
    * @param {GetPolicyCallback} [callback] Callback function.
-   * @returns {Promise<GetPolicyResponse>}
+   * @returns {Promise<GetPolicyResponse>} Resolves with `[policy, apiResponse]`,
+   *     where payload properties are nested under `apiResponse.data`.
    *
    * See {@link https://cloud.google.com/storage/docs/json_api/v1/buckets/getIamPolicy| Buckets: setIamPolicy API Documentation}
    *
@@ -296,7 +303,8 @@ class Iam {
    * @param {Policy} policy The policy.
    * @param {SetPolicyOptions} [options] Configuration options.
    * @param {SetPolicyCallback} callback Callback function.
-   * @returns {Promise<SetPolicyResponse>}
+   * @returns {Promise<SetPolicyResponse>} Resolves with `[policy, apiResponse]`,
+   *     where payload properties are nested under `apiResponse.data`.
    *
    * See {@link https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy| Buckets: setIamPolicy API Documentation}
    * See {@link https://cloud.google.com/iam/docs/understanding-roles| IAM Roles}
@@ -398,7 +406,8 @@ class Iam {
    * @param {string|string[]} permissions The permission(s) to test for.
    * @param {TestIamPermissionsOptions} [options] Configuration object.
    * @param {TestIamPermissionsCallback} [callback] Callback function.
-   * @returns {Promise<TestIamPermissionsResponse>}
+   * @returns {Promise<TestIamPermissionsResponse>} Resolves with `[permissions, apiResponse]`,
+   *     where payload properties are nested under `apiResponse.data`.
    *
    * See {@link https://cloud.google.com/storage/docs/json_api/v1/buckets/testIamPermissions| Buckets: testIamPermissions API Documentation}
    *
