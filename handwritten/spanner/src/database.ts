@@ -400,12 +400,12 @@ class Database extends common.GrpcServiceObject {
     this._updateRequestIdPrefix();
   }
 
-  private _channelIdValue = 1;
+  private _channelIdValue = 0;
   public get _channelId(): number {
     return this._channelIdValue;
   }
   public set _channelId(value: number) {
-    this._channelIdValue = value ?? 1;
+    this._channelIdValue = value ?? 0;
     this._updateRequestIdPrefix();
   }
 
@@ -416,7 +416,7 @@ class Database extends common.GrpcServiceObject {
     );
   }
 
-  public _requestIdPrefix: string = getRequestIdPrefix(1, 1);
+  public _requestIdPrefix: string = getRequestIdPrefix(1, 0);
   constructor(
     instance: Instance,
     name: string,
@@ -2038,12 +2038,18 @@ class Database extends common.GrpcServiceObject {
       }
     }
 
+    const headers = this._metadataWithRequestId(
+      this._nextNthRequest(),
+      1,
+      this.commonHeaders_,
+    );
+
     return this.requestStream({
       client: 'SpannerClient',
       method: 'listSessionsStream',
       reqOpts,
       gaxOpts,
-      headers: this.commonHeaders_,
+      headers,
     });
   }
 
